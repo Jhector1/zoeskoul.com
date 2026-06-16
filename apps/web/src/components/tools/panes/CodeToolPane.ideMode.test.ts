@@ -18,7 +18,7 @@ describe("resolveCodeToolPaneFullIdeMode", () => {
         expect(resolved.usesWorkspaceShell).toBe(true);
         expect(resolved.forceDesktopLayout).toBe(true);
         expect(resolved.fullIdeTitle).toBe("Linux terminal");
-        expect(resolved.ideShell.services.explorer?.enabled).toBe(true);
+        expect(resolved.ideShell.services.explorer?.enabled).toBe(false);
         expect(resolved.ideShell.services.editor?.showEditor).toBe(false);
         expect(resolved.ideShell.services.runner?.showTerminal).toBe(true);
         expect(resolved.ideShell.services.runner?.allowRun).toBe(false);

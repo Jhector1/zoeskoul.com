@@ -27,3 +27,9 @@ export {
     isIdentifierChar,
     type FillBlankReplacement,
 } from "./fillBlank/fillBlankText.js";
+
+export type {
+    HiddenShellCheck,
+    SemanticCheck,
+    TerminalExpectations,
+} from "@zoeskoul/practice-checks";

@@ -5,7 +5,7 @@
     "dev": "turbo run dev --parallel",
     "build": "turbo run build",
     "build:web": "turbo run build --filter=@zoeskoul/web",
-    "lint": "turbo run lint",
+    "lint": "eslint .",
     "lint:web": "pnpm --filter @zoeskoul/web lint",
     "typecheck": "turbo run typecheck",
     "typecheck:web": "pnpm --filter @zoeskoul/web typecheck",

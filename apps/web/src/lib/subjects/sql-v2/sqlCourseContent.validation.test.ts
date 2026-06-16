@@ -83,13 +83,13 @@ function getCodeInputs(topicId: string) {
 }
 
 describe("sql-v2 course content", () => {
-    it("keeps the expected 82 topic bundles wired through the manifest", () => {
+    it("keeps the expected 88 topic bundles wired through the manifest", () => {
         const manifest = readJson(SUBJECT_MANIFEST_PATH);
         const topicIds = (manifest.modules ?? []).flatMap((module: JsonObject) =>
             (module.sections ?? []).flatMap((section: JsonObject) => section.topics ?? []),
         );
 
-        expect(topicIds).toHaveLength(82);
+        expect(topicIds).toHaveLength(88);
 
         for (const topicId of topicIds) {
             expect(fs.existsSync(topicBundlePath(topicId)), `Missing bundle for ${topicId}`).toBe(true);

@@ -37,6 +37,7 @@ type Props = {
         meta: { dirtyUiPaths: Set<string> },
     ) => void | Promise<void>;
     onTerminalEvidenceChange?: (evidence: import("@/lib/practice/types").TerminalEvidence) => void;
+    onTerminalSyncReady?: (sync: (() => Promise<boolean>) | null) => void;
     onChangeLanguage: (language: any) => void;
     onChangeFileCode: (fileId: string, code: string) => void;
     onChangeSqlDialect: (dialect: any) => void;
@@ -115,7 +116,8 @@ export default function IdeEditorPane({
                                           sqlSeedSql,
                                           sqlSetupSql,
                                           sqlInitialTableSnapshots,
-                                          onTerminalEvidenceChange
+                                          onTerminalEvidenceChange,
+                                          onTerminalSyncReady
                                       }: Props) {
     const isWeb = language === "web";
 
@@ -258,6 +260,7 @@ export default function IdeEditorPane({
                                     : undefined
                             }
                             onTerminalEvidenceChange={onTerminalEvidenceChange}
+                            onTerminalSyncReady={onTerminalSyncReady}
 
                         />
                     </div>

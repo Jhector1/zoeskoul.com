@@ -19,8 +19,8 @@ function fmtMeta(r: RunResult) {
     return `${r.status}${time}${mem}`;
 }
 
-function statusLabel(busy: boolean, inputEnabled: boolean) {
-    if (inputEnabled) return "Interactive";
+function statusLabel(busy: boolean, interactiveReady: boolean) {
+    if (interactiveReady) return "Interactive";
     if (busy) return "Running";
     return "Idle";
 }
@@ -105,13 +105,26 @@ function splitInputByEnter(data: string) {
     return parts;
 }
 
+function isTypingKey(ev: KeyboardEvent) {
+    if (ev.metaKey || ev.ctrlKey || ev.altKey) return false;
+    if (ev.key.length === 1) return true;
+
+    return (
+        ev.key === "Enter" ||
+        ev.key === "Backspace" ||
+        ev.key === "Delete" ||
+        ev.key === "Tab" ||
+        ev.key.startsWith("Arrow")
+    );
+}
+
 function terminalRecoveryText(state: TerminalRecoverState, message?: string | null) {
     if (state === "none") return null;
     if (state === "starting") return message ?? "Terminal is starting…";
     if (state === "blocked_too_many_sessions") {
         return (
             message ??
-            "Too many active terminal sessions. Close another terminal or wait a moment, then restart."
+            "Too many terminal starts. Wait about one minute, then click Restart terminal once."
         );
     }
     return message ?? "Terminal session stopped. Restart the terminal to continue.";
@@ -131,7 +144,10 @@ export default function XtermTerminal(props: {
     recoverState?: TerminalRecoverState;
     recoverMessage?: string | null;
     restarting?: boolean;
+    interactiveReady?: boolean;
+    captureInactiveInput?: boolean;
     onRestart?: () => void | Promise<void>;
+    onInactiveInputAttempt?: () => void | Promise<void>;
 }) {
     const {
         terminalFeed,
@@ -145,7 +161,10 @@ export default function XtermTerminal(props: {
     const recoverState = props.recoverState ?? "none";
     const recoverMessage = props.recoverMessage ?? null;
     const restarting = props.restarting === true;
+    const interactiveReady = props.interactiveReady ?? (inputEnabled && !disabled);
+    const captureInactiveInput = props.captureInactiveInput === true;
     const onRestart = props.onRestart;
+    const onInactiveInputAttempt = props.onInactiveInputAttempt;
     const recoveryText = terminalRecoveryText(recoverState, recoverMessage);
     const canRestart =
         recoverState === "restart_available" ||
@@ -167,6 +186,7 @@ export default function XtermTerminal(props: {
 
     const termRef = useRef<XTerm | null>(null);
     const openedRef = useRef(false);
+    const disposedRef = useRef(false);
     const inputReadyRef = useRef(false);
 
     const resizeObserverRef = useRef<ResizeObserver | null>(null);
@@ -186,9 +206,25 @@ export default function XtermTerminal(props: {
     const onResizeRef = useRef(onResize);
     const onBeforeSubmitEnterRef = useRef(props.onBeforeSubmitEnter);
     const onAfterSubmitEnterRef = useRef(props.onAfterSubmitEnter);
+    const onInactiveInputAttemptRef = useRef(onInactiveInputAttempt);
     const inputQueueRef = useRef<Promise<void>>(Promise.resolve());
 
-    inputReadyRef.current = inputEnabled && !disabled;
+    const isCurrentTerminalUsable = useCallback((term: XTerm | null): term is XTerm => {
+        if (!term) return false;
+        if (disposedRef.current) return false;
+        if (!openedRef.current) return false;
+        if (termRef.current !== term) return false;
+        if (!term.element || !term.textarea) return false;
+        if (!isHostReady(hostRef.current)) return false;
+        return true;
+    }, []);
+
+    const reportInactiveInputAttempt = useCallback(() => {
+        if (!captureInactiveInput) return;
+        void onInactiveInputAttemptRef.current?.();
+    }, [captureInactiveInput]);
+
+    inputReadyRef.current = interactiveReady && !disabled;
 
     useEffect(() => {
         onSendDataRef.current = onSendData;
@@ -206,33 +242,41 @@ export default function XtermTerminal(props: {
         onAfterSubmitEnterRef.current = props.onAfterSubmitEnter;
     }, [props.onAfterSubmitEnter]);
 
+    useEffect(() => {
+        onInactiveInputAttemptRef.current = onInactiveInputAttempt;
+    }, [onInactiveInputAttempt]);
+
     const statusText = useMemo(
         () =>
-            `${statusLabel(busy, inputEnabled)}${
+            `${statusLabel(busy, interactiveReady)}${
                 lastResult && !inputEnabled ? ` • ${fmtMeta(lastResult)}` : ""
             }`,
-        [busy, inputEnabled, lastResult],
+        [busy, inputEnabled, interactiveReady, lastResult],
     );
 
     const scrollTerminalToBottom = useCallback(() => {
         const term = termRef.current;
-        if (!term || !openedRef.current) return;
+        if (!isCurrentTerminalUsable(term)) return;
 
         try {
             term.scrollToBottom();
-        } catch {}
-    }, []);
+        } catch (err) {
+            console.warn("xterm scroll skipped after stale terminal instance", err);
+        }
+    }, [isCurrentTerminalUsable]);
 
     const focusTerminal = useCallback(() => {
         requestAnimationFrame(() => {
             const term = termRef.current;
-            if (!term || !openedRef.current) return;
+            if (!isCurrentTerminalUsable(term)) return;
 
             try {
                 term.focus();
-            } catch {}
+            } catch (err) {
+                console.warn("xterm focus skipped after stale terminal instance", err);
+            }
         });
-    }, []);
+    }, [isCurrentTerminalUsable]);
 
     useEffect(() => {
         let cancelled = false;
@@ -261,10 +305,18 @@ export default function XtermTerminal(props: {
             lastSizeRef.current = { cols, rows };
 
             try {
-                term.resize(cols, rows);
+                const current = termRef.current;
+                if (!isCurrentTerminalUsable(current) || current !== term) return;
+
+                current.resize(cols, rows);
                 onResizeRef.current(cols, rows);
-                term.scrollToBottom();
-            } catch {}
+
+                if (isCurrentTerminalUsable(current)) {
+                    current.scrollToBottom();
+                }
+            } catch (err) {
+                console.warn("xterm resize skipped after stale terminal instance", err);
+            }
         };
 
         const scheduleResize = () => {
@@ -330,9 +382,22 @@ export default function XtermTerminal(props: {
 
                         termRef.current = term;
                         openedRef.current = true;
+                        disposedRef.current = false;
 
                         term.attachCustomKeyEventHandler((ev: KeyboardEvent) => {
-                            if (!inputReadyRef.current) return true;
+                            if (!inputReadyRef.current) {
+                                if (
+                                    captureInactiveInput &&
+                                    ev.type === "keydown" &&
+                                    isTypingKey(ev)
+                                ) {
+                                    ev.preventDefault();
+                                    ev.stopPropagation();
+                                    reportInactiveInputAttempt();
+                                    return false;
+                                }
+                                return true;
+                            }
                             if (ev.type === "keydown") {
                                 ev.stopPropagation();
                             }
@@ -340,7 +405,10 @@ export default function XtermTerminal(props: {
                         });
 
                         dataDisposableRef.current = term.onData((data) => {
-                            if (!inputReadyRef.current) return;
+                            if (!inputReadyRef.current) {
+                                reportInactiveInputAttempt();
+                                return;
+                            }
 
                             const run = async () => {
                                 const parts = splitInputByEnter(data);
@@ -365,7 +433,10 @@ export default function XtermTerminal(props: {
                         });
 
                         binaryDisposableRef.current = term.onBinary((data) => {
-                            if (!inputReadyRef.current) return;
+                            if (!inputReadyRef.current) {
+                                reportInactiveInputAttempt();
+                                return;
+                            }
                             onSendDataRef.current(data);
                         });
 
@@ -376,7 +447,7 @@ export default function XtermTerminal(props: {
 
                         mutationObserverRef.current = new MutationObserver(() => {
                             const current = termRef.current;
-                            if (!current) return;
+                            if (!isCurrentTerminalUsable(current)) return;
 
                             current.options.theme = {
                                 ...getTheme(document.documentElement.classList.contains("dark")),
@@ -438,23 +509,37 @@ export default function XtermTerminal(props: {
             }
 
             openedRef.current = false;
+            disposedRef.current = true;
             lastSizeRef.current = null;
             prevFeedRef.current = [];
 
-            try {
-                termRef.current?.dispose();
-            } catch {}
-
+            const termToDispose = termRef.current;
             termRef.current = null;
+
+            /**
+             * xterm may have an internal viewport refresh queued. Disposing in the
+             * same turn as a React unmount/hide can leave that refresh touching
+             * disposed render dimensions. Delay disposal one frame so queued xterm
+             * work can settle before we tear down its renderer.
+             */
+            if (termToDispose) {
+                window.setTimeout(() => {
+                    try {
+                        termToDispose.dispose();
+                    } catch (err) {
+                        console.warn("xterm dispose skipped after stale terminal instance", err);
+                    }
+                }, 0);
+            }
         };
-    }, [focusTerminal]);
+    }, [captureInactiveInput, focusTerminal, isCurrentTerminalUsable, reportInactiveInputAttempt]);
 
     useEffect(() => {
         const term = termRef.current;
-        const ready = inputEnabled && !disabled;
+        const ready = interactiveReady && !disabled;
         inputReadyRef.current = ready;
 
-        if (!term || !openedRef.current) return;
+        if (!isCurrentTerminalUsable(term)) return;
 
         term.options.cursorBlink = ready;
         term.options.disableStdin = !ready;
@@ -463,21 +548,23 @@ export default function XtermTerminal(props: {
             scrollTerminalToBottom();
             focusTerminal();
         }
-    }, [inputEnabled, disabled, focusTerminal, scrollTerminalToBottom]);
+    }, [interactiveReady, disabled, focusTerminal, scrollTerminalToBottom, isCurrentTerminalUsable]);
 
     useEffect(() => {
         const term = termRef.current;
-        if (!term || !openedRef.current) return;
 
+        if (!isCurrentTerminalUsable(term)) {
+            prevFeedRef.current = terminalFeed;
+            return;
+        }
+
+        /**
+         * Avoid term.reset()/term.clear() here. xterm can still have a viewport
+         * refresh queued while React is hiding/remounting this panel; reset/clear
+         * during that window is what commonly causes the internal
+         * "Cannot read properties of undefined (reading 'dimensions')" crash.
+         */
         if (terminalFeed.length === 0) {
-            try {
-                term.reset();
-            } catch {
-                try {
-                    term.clear();
-                } catch {}
-            }
-
             prevFeedRef.current = [];
             return;
         }
@@ -496,27 +583,32 @@ export default function XtermTerminal(props: {
                 );
             });
 
-        if (isAppendOnly) {
-            for (let i = prev.length; i < terminalFeed.length; i++) {
-                writeChunk(term, terminalFeed[i]);
-            }
-        } else {
-            try {
-                term.reset();
-            } catch {
-                try {
-                    term.clear();
-                } catch {}
+        try {
+            if (isAppendOnly) {
+                for (let i = prev.length; i < terminalFeed.length; i++) {
+                    const current = termRef.current;
+                    if (!isCurrentTerminalUsable(current) || current !== term) return;
+                    writeChunk(current, terminalFeed[i]);
+                }
+            } else {
+                term.write("\r\n");
+
+                for (const chunk of terminalFeed) {
+                    const current = termRef.current;
+                    if (!isCurrentTerminalUsable(current) || current !== term) return;
+                    writeChunk(current, chunk);
+                }
             }
 
-            for (const chunk of terminalFeed) {
-                writeChunk(term, chunk);
+            if (isCurrentTerminalUsable(term)) {
+                scrollTerminalToBottom();
             }
+
+            prevFeedRef.current = terminalFeed;
+        } catch (err) {
+            console.warn("xterm feed write skipped after stale terminal instance", err);
         }
-
-        scrollTerminalToBottom();
-        prevFeedRef.current = terminalFeed;
-    }, [terminalFeed, scrollTerminalToBottom]);
+    }, [terminalFeed, scrollTerminalToBottom, isCurrentTerminalUsable]);
 
     return (
         <div

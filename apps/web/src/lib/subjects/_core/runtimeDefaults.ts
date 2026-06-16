@@ -1,5 +1,21 @@
 import type { ManifestRuntimeDefaults } from "@/lib/subjects/_core/manifestTypes";
 
+type ManifestRuntimeFileActions = NonNullable<
+    ManifestRuntimeDefaults["fileActions"]
+>;
+
+function mergeFileActions(
+    previous?: ManifestRuntimeDefaults["fileActions"] | null,
+    current?: ManifestRuntimeDefaults["fileActions"] | null,
+): ManifestRuntimeFileActions | undefined {
+    if (!previous && !current) return undefined;
+
+    return {
+        ...(previous ?? {}),
+        ...(current ?? {}),
+    };
+}
+
 export function mergeManifestRuntimeDefaults(
     ...defaults: Array<ManifestRuntimeDefaults | null | undefined>
 ): ManifestRuntimeDefaults | null {
@@ -13,19 +29,15 @@ export function mergeManifestRuntimeDefaults(
             continue;
         }
 
-        const previousFileActions = merged.fileActions ?? {};
+        const fileActions = mergeFileActions(
+            merged.fileActions ?? null,
+            current.fileActions ?? null,
+        );
 
         merged = {
             ...merged,
             ...current,
-            ...(current.fileActions
-                ? {
-                    fileActions: {
-                        ...previousFileActions,
-                        ...current.fileActions,
-                    },
-                }
-                : {}),
+            ...(fileActions ? { fileActions } : {}),
         };
     }
 

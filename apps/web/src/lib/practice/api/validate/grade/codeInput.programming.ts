@@ -323,8 +323,8 @@ function validateTerminalExpectations(args: {
 
     const commands = Array.isArray(args.terminalEvidence?.commands)
         ? args.terminalEvidence?.commands
-            .filter((entry): entry is string => typeof entry === "string")
-            .map((entry) => entry.trim())
+            .filter((entry: any): entry is string => typeof entry === "string")
+            .map((entry:string) => entry.trim())
             .filter(Boolean)
         : [];
     const outputText = String(args.terminalEvidence?.outputText ?? "");

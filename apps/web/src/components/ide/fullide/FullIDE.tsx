@@ -26,10 +26,11 @@ import IdeExplorerPane from "@/components/ide/fullide/panes/IdeExplorerPane";
 import type {FullIDEProps, WorkspaceStateV2} from "../types";
 import { CodeRunnerRuntime, ExecutionBackend } from "@/components/code/runner/runtime";
 import { mergeTerminalSnapshotIntoWorkspace } from "@/lib/projects/mergeTerminalSnapshotIntoWorkspace";
-import {
-    FullIDEServices,
-    resolveFullIDEServices,
-} from "@/components/ide/fullide/services";
+import {FullIDEServices, resolveFullIDEServices} from "./services";
+// import {
+//     FullIDEServices,
+//     resolveFullIDEServices,
+// } from "@/components/ide/fullide/services";
 
 type WorkspaceHookResult = ReturnType<typeof useIdeWorkspace>;
 
@@ -66,6 +67,7 @@ type FullIDEInnerProps = {
     sqlSetupSql?: FullIDEProps["sqlSetupSql"];
     onWorkspaceChange?: FullIDEProps["onWorkspaceChange"];
     onTerminalEvidenceChange?: FullIDEProps["onTerminalEvidenceChange"];
+    onTerminalSyncReady?: FullIDEProps["onTerminalSyncReady"];
     sqlInitialTableSnapshots?: FullIDEProps["sqlInitialTableSnapshots"];
     sqlDialect: any;
     setSqlDialect: React.Dispatch<React.SetStateAction<any>>;
@@ -173,6 +175,7 @@ function FullIDEInner({
                           actions,
                           onWorkspaceChange,
                           onTerminalEvidenceChange,
+                          onTerminalSyncReady,
                       }: FullIDEInnerProps) {
     const {
         language,
@@ -499,6 +502,7 @@ function FullIDEInner({
             exerciseStateKey={exerciseStateKey}
             terminalHistoryScopeKey={terminalHistoryScopeKey}
             onApplyTerminalSnapshotFiles={applyTerminalSnapshotFiles}
+            onTerminalSyncReady={onTerminalSyncReady}
             onTerminalEvidenceChange={onTerminalEvidenceChange}
             sqlDatasetId={sqlDatasetId}
             sqlResultShape={sqlResultShape}
@@ -745,6 +749,7 @@ export default function FullIDE(props: FullIDEProps) {
         externalWorkspace,
         onWorkspaceChange,
         onTerminalEvidenceChange,
+        onTerminalSyncReady,
         onBeforeRun,
         onRunResult,
         initialSqlDialect = DEFAULT_SQL_DIALECT,
@@ -827,7 +832,6 @@ export default function FullIDE(props: FullIDEProps) {
         forcedLanguage,
         resetOnForcedLanguageChange,
         access,
-        fileActions: services.explorer.fileActions,
         initialWorkspace,
         actorKey,
         projectId: effectiveDraftStorageMode === "local" ? null : initialProjectId,
@@ -835,6 +839,7 @@ export default function FullIDE(props: FullIDEProps) {
         exerciseStateKey: props.exerciseStateKey,
         draftStorageMode: effectiveDraftStorageMode,
         localWorkspaceId,
+        fileActions: services.explorer.fileActions,
     });
 
     const externalWorkspaceControlKey = useMemo(
@@ -1053,6 +1058,7 @@ export default function FullIDE(props: FullIDEProps) {
                 actions={workspace.actions}
                 onWorkspaceChange={onWorkspaceChange}
                 onTerminalEvidenceChange={onTerminalEvidenceChange}
+                onTerminalSyncReady={onTerminalSyncReady}
             />
         </div>
     );

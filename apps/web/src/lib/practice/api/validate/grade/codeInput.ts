@@ -158,7 +158,7 @@ export async function gradeCodeInput(args: {
         ? {
             commands: Array.isArray(ans.terminalEvidence.commands)
                 ? ans.terminalEvidence.commands
-                    .filter((entry): entry is string => typeof entry === "string")
+                    .filter((entry:any): entry is string => typeof entry === "string")
                 : [],
             outputText: String(ans.terminalEvidence.outputText ?? ""),
             cwd:

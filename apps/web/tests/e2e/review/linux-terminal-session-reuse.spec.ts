@@ -1,4 +1,4 @@
-import { expect, test, type Page } from "@playwright/test";
+import { expect, test, type Page, type Route } from "@playwright/test";
 import {
     expectExplorerHasPath,
     expectTerminalContains,
@@ -8,6 +8,36 @@ import {
     sendTerminal,
 } from "../utils/mockTerminalWorkspace";
 
+function practiceKeyFromRequest(route: Route): string | null {
+    const request = route.request();
+    const url = new URL(request.url());
+
+    const directKey =
+        url.searchParams.get("exerciseStateKey") ??
+        url.searchParams.get("practiceKey") ??
+        url.searchParams.get("key");
+
+    if (directKey) {
+        return directKey;
+    }
+
+    const referer = request.headers()["referer"] ?? "";
+
+    if (!referer) {
+        return null;
+    }
+
+    try {
+        const refererUrl = new URL(referer);
+        return (
+            refererUrl.searchParams.get("exerciseStateKey") ??
+            refererUrl.searchParams.get("practiceKey") ??
+            refererUrl.searchParams.get("key")
+        );
+    } catch {
+        return null;
+    }
+}
 test.use({
     viewport: {
         width: 1440,
@@ -136,33 +166,13 @@ function collectSubmittedEntries(value: unknown): SubmittedEntry[] {
     return visit(value);
 }
 
-function practiceKeyFromRequest(route: Parameters<Page["route"]>[1] extends (
-    route: infer T,
-) => unknown
-    ? T
-    : never) {
-    const url = new URL(route.request().url());
-    const queryExerciseKey = url.searchParams.get("exerciseKey");
-    if (queryExerciseKey) {
-        return queryExerciseKey;
-    }
 
-    const referer = route.request().headers()["referer"] ?? "";
-    if (referer.includes("ci-make-command-practice")) {
-        return "ci-make-command-practice";
-    }
-    if (referer.includes("ci-create-linux-start")) {
-        return "ci-create-linux-start";
-    }
-
-    return "ci-create-linux-start";
-}
 
 async function installLinuxPracticeMocks(page: Page) {
     await page.route(
         (url) => url.pathname === "/api/practice",
         async (route) => {
-            const exerciseKey = practiceKeyFromRequest(route as any);
+            const exerciseKey = practiceKeyFromRequest(route );
             const fixture =
                 LINUX_TOPIC_SHELL_TASKS[
                     exerciseKey as keyof typeof LINUX_TOPIC_SHELL_TASKS

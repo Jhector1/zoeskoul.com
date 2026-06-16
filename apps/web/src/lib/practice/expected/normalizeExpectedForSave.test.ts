@@ -36,6 +36,7 @@ describe("normalizeExpectedForSave", () => {
             language: "bash",
             recipeType: "shell_task",
             shellTaskMode: "terminal_workspace",
+            semanticChecks: [],
             workspaceExpectations: {
                 requiredFiles: ["linux-lab/notes/today.txt"],
             },
@@ -57,6 +58,7 @@ describe("normalizeExpectedForSave", () => {
             checkMode: "stdout",
             recipeType: "shell_task",
             shellTaskMode: "terminal_workspace",
+            semanticChecks: [],
             workspaceExpectations: {
                 requiredFiles: ["linux-lab/notes/today.txt"],
             },
@@ -84,6 +86,7 @@ describe("normalizeExpectedForSave", () => {
             language: "bash",
             recipeType: "shell_task",
             shellTaskMode: "terminal_workspace",
+            semanticChecks: [],
             workspaceExpectations: {
                 requiredFolders: ["linux-lab"],
                 requiredFiles: ["linux-lab/notes/today.txt"],
@@ -97,6 +100,7 @@ describe("normalizeExpectedForSave", () => {
             checkMode: "stdout",
             recipeType: "shell_task",
             shellTaskMode: "terminal_workspace",
+            semanticChecks: [],
             workspaceExpectations: {
                 requiredFolders: ["linux-lab"],
                 requiredFiles: ["linux-lab/notes/today.txt"],

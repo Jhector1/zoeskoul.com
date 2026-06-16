@@ -3,8 +3,12 @@ import {
     appendTerminalEvidenceCommand,
     appendTerminalEvidenceOutput,
     buildTerminalAutoOpenKey,
+    createDisconnectedTerminalRecovery,
     createTerminalEvidence,
+    isTerminalActuallyInteractive,
+    reuseInFlightPromise,
     resolveTerminalWorkspaceKey,
+    shouldProbeTerminalOnVisibilityRestore,
 } from "@/components/code/runner/runtime";
 
 describe("resolveTerminalWorkspaceKey", () => {
@@ -146,5 +150,87 @@ describe("terminal evidence helpers", () => {
         expect(evidence.commands).toHaveLength(50);
         expect(evidence.commands[0]).toBe("cmd-10");
         expect(evidence.outputText).toHaveLength(20_000);
+    });
+});
+
+describe("terminal connection helpers", () => {
+    it("keeps terminal interactive while socket bookkeeping is briefly stale", () => {
+        expect(
+            isTerminalActuallyInteractive({
+                inputEnabled: true,
+                sessionId: "sess_123",
+                socketReadyState: 3,
+                connectionState: "disconnected",
+                restarting: false,
+                stopping: false,
+                recoverState: "none",
+            }),
+        ).toBe(true);
+    });
+
+    it("does not report interactive during recovery", () => {
+        expect(
+            isTerminalActuallyInteractive({
+                inputEnabled: true,
+                sessionId: "sess_123",
+                socketReadyState: 1,
+                connectionState: "connected",
+                restarting: false,
+                stopping: false,
+                recoverState: "restart_available",
+            }),
+        ).toBe(false);
+    });
+
+    it("builds the disconnected recovery prompt copy", () => {
+        expect(createDisconnectedTerminalRecovery()).toEqual({
+            state: "restart_available",
+            message: "Terminal session is disconnected.",
+        });
+    });
+
+    it("marks a hidden-tab terminal for probing when the socket is stale", () => {
+        expect(
+            shouldProbeTerminalOnVisibilityRestore({
+                sessionId: "session-1",
+                socketReadyState: 1,
+                lastSocketMessageAt: 1_000,
+                started: true,
+                starting: false,
+                now: 47_000,
+            }),
+        ).toBe(true);
+    });
+
+    it("marks a hidden-tab terminal as disconnected when the socket is no longer open", () => {
+        expect(
+            shouldProbeTerminalOnVisibilityRestore({
+                sessionId: "session-1",
+                socketReadyState: 3,
+                lastSocketMessageAt: 46_000,
+                started: true,
+                starting: false,
+                now: 47_000,
+            }),
+        ).toBe(true);
+    });
+
+    it("reuses the same in-flight restart promise for double clicks", async () => {
+        const ref: { current: Promise<string> | null } = { current: null };
+        let runs = 0;
+
+        const factory = async () => {
+            runs += 1;
+            await Promise.resolve();
+            return "ok";
+        };
+
+        const first = reuseInFlightPromise(ref, factory);
+        const second = reuseInFlightPromise(ref, factory);
+
+        expect(first).toBe(second);
+        await expect(first).resolves.toBe("ok");
+        expect(runs).toBe(1);
+        expect(ref.current).toBeNull();
     });
 });

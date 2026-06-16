@@ -125,6 +125,7 @@ export type FullIDEProps = {
     sqlResultShape?: "table";
     sqlPaneOptions?: SqlPaneOptions;
     sqlSchemaSql?: string;
+    onTerminalSyncReady?: (sync: (() => Promise<boolean>) | null) => void;
     sqlSeedSql?: string;
     sqlSetupSql?: string;
     sqlInitialTableSnapshots?: Record<

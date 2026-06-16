@@ -42,6 +42,14 @@ export type TerminalRecoverState =
     | "starting"
     | "blocked_too_many_sessions";
 
+export type TerminalConnectionState =
+    | "idle"
+    | "connecting"
+    | "connected"
+    | "disconnected";
+
+export const TERMINAL_SOCKET_STALE_MS = 45_000;
+
 const MAX_TERMINAL_EVIDENCE_COMMANDS = 50;
 const MAX_TERMINAL_EVIDENCE_OUTPUT_CHARS = 20_000;
 
@@ -123,8 +131,11 @@ export type WorkspaceTerminalController = {
     available: boolean;
     started: boolean;
     starting: boolean;
+    stopping: boolean;
     busy: boolean;
     inputEnabled: boolean;
+    interactiveReady: boolean;
+    disconnectedInputGuardActive: boolean;
     sessionId: string | null;
     state: RunSessionState | "idle";
     terminalFeed: TerminalChunk[];
@@ -133,17 +144,22 @@ export type WorkspaceTerminalController = {
     recoverState: TerminalRecoverState;
     recoverMessage: string | null;
     restarting: boolean;
+    connectionState: TerminalConnectionState;
+    socketReadyState: number | null;
+    lastSocketMessageAt: number | null;
 
-    open: () => Promise<void>;
+    open: (options?: { userInitiated?: boolean }) => Promise<void>;
     stop: () => Promise<void>;
     reset: () => void;
     restart: () => Promise<void>;
+    handleDisconnectedInputAttempt: () => Promise<void>;
 
     sendData: (data: string) => void;
     resize: (cols: number, rows: number) => void;
 
     replaceFiles: (files: WorkspaceSyncEntry[]) => Promise<boolean>;
     snapshotFiles: () => Promise<WorkspaceSyncEntry[]>;
+    syncWorkspaceNow: () => Promise<boolean>;
     beforeSubmitEnter: () => Promise<void>;
     afterSubmitEnter: () => Promise<void>;
 };
@@ -191,6 +207,86 @@ export function appendTerminalEvidenceOutput(
         ...evidence,
         outputText,
     };
+}
+
+export function createDisconnectedTerminalRecovery(
+    message = "Terminal session is disconnected.",
+): {
+    state: TerminalRecoverState;
+    message: string;
+} {
+    return {
+        state: "restart_available",
+        message,
+    };
+}
+export function isTerminalActuallyInteractive(args: {
+    inputEnabled: boolean;
+    sessionId: string | null;
+    socketReadyState?: number | null;
+    connectionState?: TerminalConnectionState;
+    restarting?: boolean;
+    stopping?: boolean;
+    recoverState?: TerminalRecoverState;
+}) {
+    /**
+     * Do not require socketReadyState === OPEN here.
+     *
+     * In practice the PTY can already be running and accepting input while
+     * React/useRunSession socket bookkeeping is briefly stale. If we require
+     * socket OPEN, the UI shows a live prompt but blocks typing forever.
+     *
+     * Real disconnects are handled by:
+     * - start failure events
+     * - timeout/final session events
+     * - exit/error events
+     * - sendInput() failure
+     */
+    return Boolean(
+        args.inputEnabled &&
+        args.sessionId &&
+        !args.restarting &&
+        !args.stopping &&
+        args.recoverState === "none",
+    );
+}
+
+export function shouldProbeTerminalOnVisibilityRestore(args: {
+    sessionId: string | null;
+    socketReadyState: number | null;
+    lastSocketMessageAt: number | null;
+    started?: boolean;
+    starting?: boolean;
+    now: number;
+}) {
+    const hasActiveTerminal =
+        Boolean(args.sessionId) || args.started === true || args.starting === true;
+
+    if (!hasActiveTerminal) return false;
+    if (args.socketReadyState !== 1) return true;
+    if (args.lastSocketMessageAt == null) return false;
+
+    return args.now - args.lastSocketMessageAt > TERMINAL_SOCKET_STALE_MS;
+}
+
+export function reuseInFlightPromise<T>(
+    ref: { current: Promise<T> | null },
+    factory: () => Promise<T>,
+) {
+    if (ref.current) {
+        return ref.current;
+    }
+
+    const run = (async () => {
+        try {
+            return await factory();
+        } finally {
+            ref.current = null;
+        }
+    })();
+
+    ref.current = run;
+    return run;
 }
 
 export type CodeRunnerController = {

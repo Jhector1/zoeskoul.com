@@ -6,6 +6,7 @@ import type {
     RunEvent,
     RunSessionState,
 } from "@zoeskoul/code-contracts";
+import { TERMINAL_SOCKET_STALE_MS, type TerminalConnectionState } from "../runtime";
 import {toWebSocketUrl} from "@/utils";
 
 type StartBrowserSessionResult =
@@ -60,25 +61,96 @@ function isFinalSessionState(state: string) {
     );
 }
 
+const SOCKET_PING_INTERVAL_MS = 20_000;
+const SOCKET_PROBE_TIMEOUT_MS = 4_000;
+
 export function useRunSession() {
     const [sessionId, setSessionId] = React.useState<string | null>(null);
     const [state, setState] = React.useState<RunSessionState>("queued");
     const [events, setEvents] = React.useState<RunEvent[]>([]);
+    const [connectionState, setConnectionState] =
+        React.useState<TerminalConnectionState>("idle");
+    const [socketReadyState, setSocketReadyState] = React.useState<number | null>(null);
+    const [lastMessageAt, setLastMessageAt] = React.useState<number | null>(null);
+    const [disconnectReason, setDisconnectReason] = React.useState<string | null>(null);
 
     const wsRef = React.useRef<WebSocket | null>(null);
     const expectedSocketClosuresRef = React.useRef(new Set<WebSocket>());
     const pendingRef = React.useRef<string[]>([]);
     const sessionIdRef = React.useRef<string | null>(null);
     const stateRef = React.useRef<RunSessionState>("queued");
+    const connectionStateRef = React.useRef<TerminalConnectionState>("idle");
+    const lastMessageAtRef = React.useRef<number | null>(null);
+    const probeInFlightRef = React.useRef<Promise<boolean> | null>(null);
+    const probeTimerRef = React.useRef<number | null>(null);
+
+    const clearProbeTimer = React.useCallback(() => {
+        if (probeTimerRef.current != null) {
+            window.clearTimeout(probeTimerRef.current);
+            probeTimerRef.current = null;
+        }
+    }, []);
+
+    const setSocketHealth = React.useCallback(
+        (next: {
+            connectionState?: TerminalConnectionState;
+            socketReadyState?: number | null;
+            lastMessageAt?: number | null;
+            disconnectReason?: string | null;
+        }) => {
+            if (next.connectionState !== undefined) {
+                setConnectionState(next.connectionState);
+                connectionStateRef.current = next.connectionState;
+            }
+
+            if (next.socketReadyState !== undefined) {
+                setSocketReadyState(next.socketReadyState);
+            }
+
+            if (next.lastMessageAt !== undefined) {
+                setLastMessageAt(next.lastMessageAt);
+                lastMessageAtRef.current = next.lastMessageAt;
+            }
+
+            if (next.disconnectReason !== undefined) {
+                setDisconnectReason(next.disconnectReason);
+            }
+        },
+        [],
+    );
+
+    const markDisconnected = React.useCallback(
+        (message = "Terminal session is disconnected.") => {
+            clearProbeTimer();
+            probeInFlightRef.current = null;
+            setSocketHealth({
+                connectionState: "disconnected",
+                socketReadyState: wsRef.current?.readyState ?? WebSocket.CLOSED,
+                disconnectReason: message,
+            });
+        },
+        [clearProbeTimer, setSocketHealth],
+    );
 
     const closeSocket = React.useCallback(() => {
+        clearProbeTimer();
+        probeInFlightRef.current = null;
+
         if (wsRef.current) {
-            expectedSocketClosuresRef.current.add(wsRef.current);
+            wsRef.current.onopen = null;
+            wsRef.current.onmessage = null;
+            wsRef.current.onerror = null;
+            wsRef.current.onclose = null;
             wsRef.current.close();
         }
         wsRef.current = null;
         pendingRef.current = [];
-    }, []);
+        setSocketHealth({
+            connectionState: "idle",
+            socketReadyState: null,
+            disconnectReason: null,
+        });
+    }, [clearProbeTimer, setSocketHealth]);
 
     const cancelServerSession = React.useCallback(async (targetSessionId: string) => {
         const res = await fetch(
@@ -123,6 +195,56 @@ export function useRunSession() {
         ws.send(encoded);
     }, []);
 
+    const probeConnection = React.useCallback(async () => {
+        const ws = wsRef.current;
+
+        if (!sessionIdRef.current || !ws || ws.readyState !== WebSocket.OPEN) {
+            markDisconnected();
+            return false;
+        }
+
+        if (probeInFlightRef.current) {
+            return await probeInFlightRef.current;
+        }
+
+        const baseline = lastMessageAtRef.current ?? 0;
+
+        const run = new Promise<boolean>((resolve) => {
+            let settled = false;
+
+            const finish = (ok: boolean) => {
+                if (settled) return;
+                settled = true;
+                clearProbeTimer();
+                if (probeInFlightRef.current === run) {
+                    probeInFlightRef.current = null;
+                }
+                resolve(ok);
+            };
+
+            probeTimerRef.current = window.setTimeout(() => {
+                const latest = lastMessageAtRef.current ?? 0;
+                if (latest <= baseline) {
+                    markDisconnected();
+                    finish(false);
+                    return;
+                }
+
+                finish(true);
+            }, SOCKET_PROBE_TIMEOUT_MS);
+
+            try {
+                ws.send(JSON.stringify({ type: "ping" }));
+            } catch {
+                markDisconnected();
+                finish(false);
+            }
+        });
+
+        probeInFlightRef.current = run;
+        return await run;
+    }, [clearProbeTimer, markDisconnected]);
+
     const connect = React.useCallback(
         (nextSessionId: string, nextState: RunSessionState, rawWsUrl: string) => {
             closeSocket();
@@ -132,15 +254,26 @@ export function useRunSession() {
             sessionIdRef.current = nextSessionId;
             setState(nextState);
             stateRef.current = nextState;
+            setSocketHealth({
+                connectionState: "connecting",
+                socketReadyState: WebSocket.CONNECTING,
+                lastMessageAt: null,
+                disconnectReason: null,
+            });
 
             const finalWsUrl = toWebSocketUrl(rawWsUrl);
             const ws = new WebSocket(finalWsUrl);
             let socketOpened = false;
 
-
-
             ws.onopen = () => {
                 socketOpened = true;
+                const now = Date.now();
+                setSocketHealth({
+                    connectionState: "connected",
+                    socketReadyState: ws.readyState,
+                    lastMessageAt: now,
+                    disconnectReason: null,
+                });
                 for (const msg of pendingRef.current.splice(0)) {
                     if (ws.readyState === WebSocket.OPEN) {
                         ws.send(msg);
@@ -149,10 +282,18 @@ export function useRunSession() {
             };
 
             ws.onmessage = (ev) => {
+                const now = Date.now();
+                setSocketHealth({
+                    connectionState: "connected",
+                    socketReadyState: ws.readyState,
+                    lastMessageAt: now,
+                    disconnectReason: null,
+                });
                 const msg = JSON.parse(ev.data) as ServerToClientMessage;
 
                 if (msg.type === "ready") {
                     setState(msg.state);
+                    stateRef.current = msg.state;
                     return;
                 }
 
@@ -178,6 +319,7 @@ export function useRunSession() {
                 if (msg.type === "error") {
                     setState("failed");
                     stateRef.current = "failed";
+                    markDisconnected(msg.message || "Terminal session is disconnected.");
                     console.error("PTY WS error:", msg.message);
                 }
             };
@@ -189,6 +331,11 @@ export function useRunSession() {
                 ) {
                     return;
                 }
+
+                setSocketHealth({
+                    socketReadyState: ws.readyState,
+                });
+                markDisconnected();
             };
 
             ws.onclose = () => {
@@ -200,11 +347,19 @@ export function useRunSession() {
                 }
 
                 if (expected || isFinalSessionState(stateRef.current)) {
+                    setSocketHealth({
+                        connectionState: "idle",
+                        socketReadyState: null,
+                    });
                     return;
                 }
 
                 setState("failed");
                 stateRef.current = "failed";
+                setSocketHealth({
+                    socketReadyState: ws.readyState,
+                });
+                markDisconnected();
 
                 console.warn("PTY WS closed unexpectedly:", finalWsUrl, {
                     opened: socketOpened,
@@ -215,7 +370,7 @@ export function useRunSession() {
 
             wsRef.current = ws;
         },
-        [closeSocket],
+        [closeSocket, markDisconnected, setSocketHealth],
     );
 
     const start = React.useCallback(
@@ -307,6 +462,39 @@ export function useRunSession() {
         };
     }, [sessionId, state]);
 
+    React.useEffect(() => {
+        if (!sessionId) return;
+        if (isFinalSessionState(state)) return;
+        if (connectionState !== "connected") return;
+
+        const beat = () => {
+            const ws = wsRef.current;
+            if (!ws || ws.readyState !== WebSocket.OPEN) {
+                markDisconnected();
+                return;
+            }
+
+            if (
+                lastMessageAtRef.current != null &&
+                Date.now() - lastMessageAtRef.current > TERMINAL_SOCKET_STALE_MS
+            ) {
+                void probeConnection();
+                return;
+            }
+
+            try {
+                ws.send(JSON.stringify({ type: "ping" }));
+            } catch {
+                markDisconnected();
+            }
+        };
+
+        const timer = window.setInterval(beat, SOCKET_PING_INTERVAL_MS);
+        return () => {
+            window.clearInterval(timer);
+        };
+    }, [connectionState, markDisconnected, probeConnection, sessionId, state]);
+
 
 
     React.useEffect(() => {
@@ -360,26 +548,48 @@ export function useRunSession() {
 
     React.useEffect(() => {
         return () => {
+            clearProbeTimer();
+            probeInFlightRef.current = null;
             const currentSessionId = sessionIdRef.current;
             if (currentSessionId && !isFinalSessionState(stateRef.current)) {
                 void cancelServerSession(currentSessionId).catch(() => {});
             }
             closeSocket();
         };
-    }, [cancelServerSession, closeSocket]);
+    }, [cancelServerSession, clearProbeTimer, closeSocket]);
 
     return React.useMemo(
         () => ({
             sessionId,
             state,
             events,
+            connectionState,
+            socketReadyState,
+            lastMessageAt,
+            disconnectReason,
             start,
             connect,
             sendInput,
             resize,
             cancel,
             closeSocket,
+            probeConnection,
         }),
-        [sessionId, state, events, start, connect, sendInput, resize, cancel, closeSocket],
+        [
+            sessionId,
+            state,
+            events,
+            connectionState,
+            socketReadyState,
+            lastMessageAt,
+            disconnectReason,
+            start,
+            connect,
+            sendInput,
+            resize,
+            cancel,
+            closeSocket,
+            probeConnection,
+        ],
     );
 }

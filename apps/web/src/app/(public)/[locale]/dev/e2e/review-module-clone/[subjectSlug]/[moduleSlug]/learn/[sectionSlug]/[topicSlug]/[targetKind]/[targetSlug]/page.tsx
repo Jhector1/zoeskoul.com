@@ -146,6 +146,8 @@ const sqlReviewCloneSection = {
 
 const sqlReviewCloneModule: ReviewModule = {
     id: "e2e-sql-review-clone",
+    profileId: "sql",
+    versionFamily: "sql",
     title: "E2E SQL Review Module Clone",
     subtitle:
         "Dev-only SQL clone that verifies module runtimeDefaults reach the real Tools rail.",
@@ -562,6 +564,8 @@ const reviewCloneSection = {
 
 const reviewCloneModule: ReviewModule = {
     id: "e2e-review-clone",
+    profileId: "python",
+    versionFamily: "python",
     title: "E2E Real Review Module Clone",
     subtitle:
         "Dev-only clone that uses the real ReviewModulePageClient and review runtime path.",

@@ -5,14 +5,15 @@ vi.mock("server-only", () => ({}));
 import { SUBJECT_MANIFESTS } from "@/lib/subjects/subjects.generated";
 import { selectVisibleSubjectsForActor } from "./subjectVisibilityCore";
 
+type SubjectManifestMeta = NonNullable<
+    (typeof SUBJECT_MANIFESTS)[string]["subject"]["meta"]
+>;
+
 type ManifestSubjectVisibilityInput = {
     slug: string;
     enrolled: boolean;
-    versioning:
-        | (typeof SUBJECT_MANIFESTS)[string]["subject"]["meta"]["versioning"]
-        | null;
+    versioning: SubjectManifestMeta["versioning"] | null;
 };
-
 function buildVisibilityInput(
     slug: "python" | "python-v2" | "python-data-functions",
     enrolled = false,

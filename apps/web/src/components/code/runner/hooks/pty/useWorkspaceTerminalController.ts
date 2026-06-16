@@ -3,6 +3,7 @@
 import * as React from "react";
 import type { RunSessionState } from "@zoeskoul/code-contracts";
 import type {
+    TerminalConnectionState,
     TerminalEvidence,
     TerminalChunk,
     TerminalRecoverState,
@@ -13,7 +14,11 @@ import type {
 import {
     appendTerminalEvidenceCommand,
     appendTerminalEvidenceOutput,
+    createDisconnectedTerminalRecovery,
     createTerminalEvidence,
+    isTerminalActuallyInteractive,
+    reuseInFlightPromise,
+    shouldProbeTerminalOnVisibilityRestore,
 } from "../../runtime";
 import { useRunSession } from "../useRunSession";
 import {
@@ -31,18 +36,47 @@ type TerminalRecovery = {
 
 const NO_TERMINAL_RECOVERY: TerminalRecovery = { state: "none", message: null };
 const STARTING_STALE_MS = 12_000;
+const SOCKET_OPEN_READY_STATE = 1;
+const CLIENT_START_COOLDOWN_MS = 2_500;
+const CLIENT_AUTO_START_RETRY_COOLDOWN_MS = 60_000;
+const terminalAutoStartAttempts = new Map<string, number>();
 
-function isTooManySessionsMessage(message: string) {
-    return /too many active sessions/i.test(message);
+type OpenWorkspaceTerminalOptions = {
+    userInitiated?: boolean;
+};
+
+function shouldAllowAutomaticTerminalStart(key: string) {
+    const now = Date.now();
+    const previous = terminalAutoStartAttempts.get(key) ?? 0;
+
+    for (const [claimKey, at] of terminalAutoStartAttempts) {
+        if (now - at > CLIENT_AUTO_START_RETRY_COOLDOWN_MS * 2) {
+            terminalAutoStartAttempts.delete(claimKey);
+        }
+    }
+
+    if (now - previous < CLIENT_AUTO_START_RETRY_COOLDOWN_MS) {
+        return false;
+    }
+
+    terminalAutoStartAttempts.set(key, now);
+    return true;
 }
 
+function releaseAutomaticTerminalStart(key: string) {
+    terminalAutoStartAttempts.delete(key);
+}
+
+function isTooManySessionsMessage(message: string) {
+    return /too many\s+(active\s+sessions|session\s+starts|sessions)/i.test(message);
+}
 function normalizeRecoverableTerminalError(message: string): TerminalRecovery {
     const text = String(message ?? "").trim() || "Terminal session stopped.";
 
     if (isTooManySessionsMessage(text)) {
         return {
             state: "blocked_too_many_sessions",
-            message: "Too many active terminal sessions. Close another terminal or wait a moment, then restart.",
+            message: "Too many terminal starts. Wait about one minute, then click Restart terminal once.",
         };
     }
 
@@ -366,11 +400,16 @@ export function useWorkspaceTerminalController(
         sessionId,
         state: runSessionState,
         events,
+        connectionState,
+        socketReadyState,
+        lastMessageAt,
+        disconnectReason,
         start,
         sendInput,
         resize: sessionResize,
         cancel,
         closeSocket,
+        probeConnection,
     } = useRunSession();
     const terminalLeaseKey = React.useMemo(() => {
         const explicit = String((args as any).workspaceKey ?? "").trim();
@@ -404,6 +443,7 @@ export function useWorkspaceTerminalController(
     const [recoverState, setRecoverState] = React.useState<TerminalRecoverState>("none");
     const [recoverMessage, setRecoverMessage] = React.useState<string | null>(null);
     const [restarting, setRestarting] = React.useState(false);
+    const [stopping, setStopping] = React.useState(false);
 
     const nextChunkIdRef = React.useRef(1);
     const lastHandledSeqRef = React.useRef(0);
@@ -424,7 +464,9 @@ export function useWorkspaceTerminalController(
     const stateRef = React.useRef<RunSessionState | "idle">(state);
     const restartInFlightRef = React.useRef<Promise<void> | null>(null);
     const staleStartingTimerRef = React.useRef<number | null>(null);
-
+    const interactiveReadyRef = React.useRef(false);
+    const recoverStateRef = React.useRef<TerminalRecoverState>("none");
+    const lastStartAttemptAtRef = React.useRef(0);
     const historyStorageKey = React.useMemo(
         () =>
             buildHistoryStorageKey({
@@ -596,6 +638,26 @@ export function useWorkspaceTerminalController(
         stateRef.current = state;
     }, [state]);
 
+    const interactiveReady = isTerminalActuallyInteractive({
+        inputEnabled,
+        sessionId,
+        socketReadyState,
+        connectionState: connectionState as TerminalConnectionState,
+        restarting,
+        stopping,
+        recoverState,
+    });
+
+    React.useEffect(() => {
+        interactiveReadyRef.current = interactiveReady;
+    }, [interactiveReady]);
+
+    const disconnectedInputGuardActive =
+        recoverState !== "none" ||
+        restarting ||
+        stopping ||
+        (!sessionId && !starting);
+
     const getWorkspaceEntries = React.useCallback((): WorkspaceSyncEntry[] => {
         const live = args.getWorkspaceFiles?.();
         if (live) {
@@ -635,6 +697,7 @@ export function useWorkspaceTerminalController(
     }, []);
 
     const setTerminalRecovery = React.useCallback((recovery: TerminalRecovery) => {
+        recoverStateRef.current = recovery.state;
         setRecoverState(recovery.state);
         setRecoverMessage(recovery.message);
     }, []);
@@ -662,6 +725,7 @@ export function useWorkspaceTerminalController(
         setSyncStatus("idle");
         clearTerminalRecovery();
         setRestarting(false);
+        setStopping(false);
     }, [clearTerminalRecovery, initialEvidenceCwd]);
 
     const reset = React.useCallback(() => {
@@ -806,133 +870,174 @@ export function useWorkspaceTerminalController(
         schedulePostEnterSnapshot(700);
     }, [schedulePostEnterSnapshot]);
 
-    const open = React.useCallback(async (): Promise<void> => {
-        if (!args.enabled) return;
+    const open = React.useCallback(
+        async (options: OpenWorkspaceTerminalOptions = {}): Promise<void> => {
+            const userInitiated = options.userInitiated === true;
 
-        if (openInFlightRef.current) {
-            return await openInFlightRef.current;
-        }
+            if (!args.enabled) return;
 
-        if (startingRef.current) return;
-
-        if (
-            startedRef.current &&
-            openedLeaseKeyRef.current === terminalLeaseKey &&
-            !isFinalSessionState(stateRef.current)
-        ) {
-            return;
-        }
-
-        if (
-            startedRef.current &&
-            openedLeaseKeyRef.current !== terminalLeaseKey &&
-            !isFinalSessionState(stateRef.current)
-        ) {
-            try {
-                await cancel();
-            } catch {
-                // Ignore stale cancel failures; the next ensure call is authoritative.
+            /**
+             * Important:
+             * Automatic open must never restart while the terminal is in recovery.
+             * Otherwise disconnect/error -> started=false -> auto-open -> new session loop.
+             */
+            if (!userInitiated && recoverStateRef.current !== "none") {
+                return;
             }
 
-            closeSocket();
-            openedLeaseKeyRef.current = null;
-            setStarted(false);
-            setStarting(false);
-            setBusy(false);
-            setInputEnabled(false);
-        }
-
-        const run = (async (): Promise<void> => {
-            const visibleEntries = getWorkspaceEntries();
-            const historyContent = await ensureHistoryLoaded();
-            const fullEntries = augmentEntriesWithHistory(visibleEntries, historyContent);
-
-            lastHandledSeqRef.current = 0;
-            nextChunkIdRef.current = 1;
-            awaitingPostEnterSnapshotRef.current = false;
-            pendingInputLineRef.current = "";
-            escapeSequenceRef.current = "";
-            setTerminalFeed([]);
-            setInputEnabled(false);
-            setBusy(true);
-            setState("preparing");
-            setStarting(true);
-            setSyncStatus("idle");
-            clearTerminalRecovery();
-            clearStaleStartingTimer();
-
-            staleStartingTimerRef.current = window.setTimeout(() => {
-                staleStartingTimerRef.current = null;
-                if (!startingRef.current) return;
-                openInFlightRef.current = null;
-                setStarting(false);
-                setBusy(false);
-                setInputEnabled(false);
-                setState("failed");
-                setStarted(false);
-                setTerminalRecovery({
-                    state: "restart_available",
-                    message: "Terminal is still starting. Restart the terminal to try again.",
-                });
-            }, STARTING_STALE_MS);
-
-            pushChunk("sys", "[starting workspace terminal]\r\n");
-
-            try {
-                openedLeaseKeyRef.current = terminalLeaseKey;
-
-                await start({
-                    kind: "shell",
-                    mode: "interactive",
-                    language: "bash",
-                    projectId: args.projectId,
-                    cwd: args.cwd,
-                    workspaceKey: terminalLeaseKey,
-                    ...(fullEntries.length ? { files: fullEntries as any } : {}),
-                } as any);
-
-                lastPushedEntriesRef.current = visibleEntries;
-                setStarted(true);
-            } catch (e: any) {
-                const message = e?.message ?? "Failed to start workspace terminal.";
-                pushChunk("err", `${message}\r\n`);
-                setTerminalRecovery(normalizeRecoverableTerminalError(message));
-                setBusy(false);
-                setInputEnabled(false);
-                setState("failed");
-                setStarted(false);
-
-                if (openedLeaseKeyRef.current === terminalLeaseKey) {
-                    openedLeaseKeyRef.current = null;
+            /**
+             * Client-side safety brake. The runner already has a rate limiter, but the
+             * browser should not hammer /sessions/start if React effects remount quickly.
+             */
+            if (!userInitiated) {
+                const now = Date.now();
+                if (now - lastStartAttemptAtRef.current < CLIENT_START_COOLDOWN_MS) {
+                    return;
                 }
-                throw e;
-            } finally {
-                clearStaleStartingTimer();
-                setStarting(false);
-                openInFlightRef.current = null;
+                if (!shouldAllowAutomaticTerminalStart(terminalLeaseKey)) {
+                    return;
+                }
+                lastStartAttemptAtRef.current = now;
             }
-        })();
 
-        openInFlightRef.current = run;
-        return await run;
-    }, [
-        args.enabled,
-        args.projectId,
-        args.cwd,
-        getWorkspaceEntries,
-        ensureHistoryLoaded,
-        start,
-        pushChunk,
-        terminalLeaseKey,
-        cancel,
-        closeSocket,
-        clearStaleStartingTimer,
-        clearTerminalRecovery,
-        setTerminalRecovery,
-    ]);
+            if (openInFlightRef.current) {
+                return await openInFlightRef.current;
+            }
+
+            if (startingRef.current) return;
+
+            if (
+                startedRef.current &&
+                openedLeaseKeyRef.current === terminalLeaseKey &&
+                !isFinalSessionState(stateRef.current)
+            ) {
+                return;
+            }
+
+            if (
+                startedRef.current &&
+                openedLeaseKeyRef.current !== terminalLeaseKey &&
+                !isFinalSessionState(stateRef.current)
+            ) {
+                try {
+                    await cancel();
+                } catch {
+                    // Ignore stale cancel failures; the next start is authoritative.
+                }
+
+                closeSocket();
+                openedLeaseKeyRef.current = null;
+                setStarted(false);
+                setStarting(false);
+                setBusy(false);
+                setInputEnabled(false);
+            }
+
+            const run = (async (): Promise<void> => {
+                const visibleEntries = getWorkspaceEntries();
+                const historyContent = await ensureHistoryLoaded();
+                const fullEntries = augmentEntriesWithHistory(visibleEntries, historyContent);
+
+                lastHandledSeqRef.current = 0;
+                nextChunkIdRef.current = 1;
+                awaitingPostEnterSnapshotRef.current = false;
+                pendingInputLineRef.current = "";
+                escapeSequenceRef.current = "";
+                setTerminalFeed([]);
+                setInputEnabled(false);
+                setBusy(true);
+                setState("preparing");
+                setStarting(true);
+                setSyncStatus("idle");
+                clearTerminalRecovery();
+                clearStaleStartingTimer();
+
+                staleStartingTimerRef.current = window.setTimeout(() => {
+                    staleStartingTimerRef.current = null;
+
+                    if (!startingRef.current) return;
+
+                    openInFlightRef.current = null;
+                    setStarting(false);
+                    setBusy(false);
+                    setInputEnabled(false);
+                    setState("failed");
+                    setStarted(false);
+                    setTerminalRecovery({
+                        state: "restart_available",
+                        message: "Terminal is still starting. Restart the terminal to try again.",
+                    });
+                }, STARTING_STALE_MS);
+
+                pushChunk("sys", "[starting workspace terminal]\r\n");
+
+                try {
+                    openedLeaseKeyRef.current = terminalLeaseKey;
+
+                    await start({
+                        kind: "shell",
+                        mode: "interactive",
+                        language: "bash",
+                        projectId: args.projectId,
+                        cwd: args.cwd,
+                        workspaceKey: terminalLeaseKey,
+                        ...(fullEntries.length ? { files: fullEntries as any } : {}),
+                    } as any);
+
+                    lastPushedEntriesRef.current = visibleEntries;
+                    setStarted(true);
+                } catch (e: any) {
+                    const message = e?.message ?? "Failed to start workspace terminal.";
+
+                    pushChunk("err", `${message}\r\n`);
+                    setTerminalRecovery(normalizeRecoverableTerminalError(message));
+                    setBusy(false);
+                    setInputEnabled(false);
+                    setState("failed");
+                    setStarted(false);
+                    setStarting(false);
+
+                    if (openedLeaseKeyRef.current === terminalLeaseKey) {
+                        openedLeaseKeyRef.current = null;
+                    }
+
+                    /**
+                     * Do not throw here.
+                     *
+                     * If open() throws, the auto-open caller may clear its guard and retry,
+                     * which causes "Too many session starts. Limit is 5 per minute."
+                     */
+                    return;
+                } finally {
+                    clearStaleStartingTimer();
+                    setStarting(false);
+                    openInFlightRef.current = null;
+                }
+            })();
+
+            openInFlightRef.current = run;
+            return await run;
+        },
+        [
+            args.enabled,
+            args.projectId,
+            args.cwd,
+            getWorkspaceEntries,
+            ensureHistoryLoaded,
+            start,
+            pushChunk,
+            terminalLeaseKey,
+            cancel,
+            closeSocket,
+            clearStaleStartingTimer,
+            clearTerminalRecovery,
+            setTerminalRecovery,
+        ],
+    );
 
     const stop = React.useCallback(async (): Promise<void> => {
         if (!startedRef.current && !startingRef.current) return;
+        setStopping(true);
 
         try {
             await cancel();
@@ -941,17 +1046,16 @@ export function useWorkspaceTerminalController(
             clearStaleStartingTimer();
             openedLeaseKeyRef.current = null;
             clearLocalTerminalState();
+            setStopping(false);
         }
     }, [cancel, clearLocalTerminalState, clearQuietTimer, clearStaleStartingTimer]);
 
     const restart = React.useCallback(async (): Promise<void> => {
         if (!args.enabled) return;
-        if (restartInFlightRef.current) {
-            return await restartInFlightRef.current;
-        }
 
-        const run = (async (): Promise<void> => {
+        return await reuseInFlightPromise(restartInFlightRef, async () => {
             setRestarting(true);
+            setStopping(true);
             clearQuietTimer();
             clearStaleStartingTimer();
             openInFlightRef.current = null;
@@ -967,23 +1071,27 @@ export function useWorkspaceTerminalController(
                     try {
                         await cancel();
                     } catch {
-                        // A stale/expired backend session is already gone; restart should still proceed.
+                        // Stale/expired backend session may already be gone.
                     }
                 }
 
                 closeSocket();
                 openedLeaseKeyRef.current = null;
                 clearLocalTerminalState();
-                setRestarting(true);
-                await open();
-            } finally {
-                setRestarting(false);
-                restartInFlightRef.current = null;
-            }
-        })();
+                releaseAutomaticTerminalStart(terminalLeaseKey);
 
-        restartInFlightRef.current = run;
-        return await run;
+                setRestarting(true);
+
+                /**
+                 * User clicked Restart, so this is allowed to bypass recovery.
+                 * Automatic open is still blocked while recoverState !== "none".
+                 */
+                await open({ userInitiated: true });
+            } finally {
+                setStopping(false);
+                setRestarting(false);
+            }
+        });
     }, [
         args.enabled,
         cancel,
@@ -993,6 +1101,7 @@ export function useWorkspaceTerminalController(
         closeSocket,
         open,
         sessionId,
+        terminalLeaseKey,
     ]);
 
     React.useEffect(() => {
@@ -1051,15 +1160,72 @@ export function useWorkspaceTerminalController(
             closeSocket();
         };
     }, [cancel, clearQuietTimer, clearStaleStartingTimer, closeSocket]);
-
     const sendData = React.useCallback(
         (data: string) => {
             if (!data) return;
+
+            if (
+                recoverStateRef.current !== "none" ||
+                restarting ||
+                stopping ||
+                !sessionId ||
+                !inputEnabled
+            ) {
+                setTerminalRecovery(
+                    createDisconnectedTerminalRecovery(
+                        disconnectReason || "Terminal session is disconnected.",
+                    ),
+                );
+                setBusy(false);
+                setInputEnabled(false);
+                setStarted(false);
+                setStarting(false);
+                openInFlightRef.current = null;
+                return;
+            }
+
             mirrorOutgoingInput(data);
-            void sendInput(data);
+
+            void sendInput(data).catch((e: any) => {
+                setTerminalRecovery(
+                    createDisconnectedTerminalRecovery(
+                        e?.message || disconnectReason || "Terminal session is disconnected.",
+                    ),
+                );
+                setBusy(false);
+                setInputEnabled(false);
+                setStarted(false);
+                setStarting(false);
+                openInFlightRef.current = null;
+            });
         },
-        [mirrorOutgoingInput, sendInput],
+        [
+            disconnectReason,
+            inputEnabled,
+            mirrorOutgoingInput,
+            restarting,
+            sendInput,
+            sessionId,
+            setTerminalRecovery,
+            stopping,
+        ],
     );
+    const handleDisconnectedInputAttempt = React.useCallback(async () => {
+        setTerminalRecovery(
+            createDisconnectedTerminalRecovery(
+                disconnectReason || "Terminal session is disconnected.",
+            ),
+        );
+        setBusy(false);
+        setInputEnabled(false);
+        setStarted(false);
+        setStarting(false);
+        openInFlightRef.current = null;
+
+        if (socketReadyState === SOCKET_OPEN_READY_STATE) {
+            void probeConnection();
+        }
+    }, [disconnectReason, probeConnection, setTerminalRecovery, socketReadyState]);
 
     const resize = React.useCallback(
         (cols: number, rows: number) => {
@@ -1073,6 +1239,100 @@ export function useWorkspaceTerminalController(
             reset();
         }
     }, [args.enabled, reset]);
+
+    React.useEffect(() => {
+        if (!args.enabled) return;
+
+        const onVisibilityChange = () => {
+            if (document.visibilityState !== "visible") return;
+
+            const shouldProbe = shouldProbeTerminalOnVisibilityRestore({
+                sessionId,
+                socketReadyState,
+                lastSocketMessageAt: lastMessageAt,
+                started,
+                starting,
+                now: Date.now(),
+            });
+
+            if (!shouldProbe && openedLeaseKeyRef.current === null) {
+                return;
+            }
+
+            if (socketReadyState !== SOCKET_OPEN_READY_STATE) {
+                setTerminalRecovery(
+                    createDisconnectedTerminalRecovery(
+                        disconnectReason || "Terminal session is disconnected.",
+                    ),
+                );
+                setBusy(false);
+                setInputEnabled(false);
+                setStarted(false);
+                setStarting(false);
+                openInFlightRef.current = null;
+                return;
+            }
+
+            if (shouldProbe) {
+                void probeConnection();
+            }
+        };
+
+        document.addEventListener("visibilitychange", onVisibilityChange);
+        return () => {
+            document.removeEventListener("visibilitychange", onVisibilityChange);
+        };
+    }, [
+        args.enabled,
+        disconnectReason,
+        lastMessageAt,
+        probeConnection,
+        sessionId,
+        setTerminalRecovery,
+        socketReadyState,
+        started,
+        starting,
+    ]);
+
+
+    // React.useEffect(() => {
+    //     if (!args.enabled) return;
+    //     if (stopping || restarting) return;
+    //     if (recoverState !== "none") return;
+    //     if (!sessionId && !started && !starting) return;
+    //
+    //     const socketClosed =
+    //         Boolean(sessionId) &&
+    //         socketReadyState !== null &&
+    //         socketReadyState !== SOCKET_OPEN_READY_STATE;
+    //
+    //     const connectionClosed = connectionState === "disconnected";
+    //
+    //     if (!socketClosed && !connectionClosed) return;
+    //
+    //     setTerminalRecovery(
+    //         createDisconnectedTerminalRecovery(
+    //             disconnectReason || "Terminal session is disconnected.",
+    //         ),
+    //     );
+    //     setBusy(false);
+    //     setInputEnabled(false);
+    //     setStarted(false);
+    //     setStarting(false);
+    //     openInFlightRef.current = null;
+    // }, [
+    //     args.enabled,
+    //     connectionState,
+    //     disconnectReason,
+    //     recoverState,
+    //     restarting,
+    //     sessionId,
+    //     socketReadyState,
+    //     started,
+    //     starting,
+    //     stopping,
+    //     setTerminalRecovery,
+    // ]);
 
     React.useEffect(() => {
         if (!events.length) return;
@@ -1112,9 +1372,11 @@ export function useWorkspaceTerminalController(
                 }
 
                 if (ev.state === "running" || ev.state === "waiting_for_input") {
+                    clearTerminalRecovery();
                     setBusy(true);
                     setInputEnabled(true);
                     setStarted(true);
+                    setStarting(false);
 
                     if (awaitingPostEnterSnapshotRef.current) {
                         schedulePostEnterSnapshot(450);
@@ -1151,11 +1413,12 @@ export function useWorkspaceTerminalController(
             }
 
             if (ev.type === "input_request") {
+                clearTerminalRecovery();
                 setState("waiting_for_input");
                 setBusy(true);
                 setInputEnabled(true);
                 setStarted(true);
-
+                setStarting(false);
                 if (awaitingPostEnterSnapshotRef.current) {
                     schedulePostEnterSnapshot(250);
                 }
@@ -1226,11 +1489,19 @@ export function useWorkspaceTerminalController(
         setStarting(false);
         openInFlightRef.current = null;
         clearStaleStartingTimer();
-        setTerminalRecovery({
-            state: "restart_available",
-            message: "Terminal disconnected. Restart the terminal to continue.",
-        });
-    }, [args.enabled, runSessionState, sessionId, clearStaleStartingTimer, setTerminalRecovery]);
+        setTerminalRecovery(
+            createDisconnectedTerminalRecovery(
+                disconnectReason || "Terminal session is disconnected.",
+            ),
+        );
+    }, [
+        args.enabled,
+        runSessionState,
+        sessionId,
+        clearStaleStartingTimer,
+        disconnectReason,
+        setTerminalRecovery,
+    ]);
 
     React.useEffect(() => {
         return () => {
@@ -1243,8 +1514,11 @@ export function useWorkspaceTerminalController(
         available: args.enabled,
         started,
         starting,
+        stopping,
         busy,
         inputEnabled,
+        interactiveReady,
+        disconnectedInputGuardActive,
         sessionId,
         state,
         terminalFeed,
@@ -1253,17 +1527,22 @@ export function useWorkspaceTerminalController(
         recoverState,
         recoverMessage,
         restarting,
+        connectionState,
+        socketReadyState,
+        lastSocketMessageAt: lastMessageAt,
 
         open,
         stop,
         reset,
         restart,
+        handleDisconnectedInputAttempt,
 
         sendData,
         resize,
 
         replaceFiles,
         snapshotFiles,
+        syncWorkspaceNow: pullSnapshotIntoWorkspace,
         beforeSubmitEnter,
         afterSubmitEnter,
     };

@@ -1,4 +1,5 @@
 import type { TerminalSessionScope } from "@/components/code/runner/runtime";
+import {DEFAULT_IDE_FILE_ACTIONS, ResolvedIdeFileActions} from "@/lib/ide/workspacePolicy";
 
 export type FullIDEExplorerServices = {
     enabled: boolean;
@@ -9,16 +10,8 @@ export type FullIDEExplorerServices = {
     showHistoryControls: boolean;
     showFooter: boolean;
     showStdin: boolean;
-    fileActions: {
-        enabled: boolean;
-        createFile: boolean;
-        createFolder: boolean;
-        rename: boolean;
-        delete: boolean;
-        dragDrop: boolean;
-    };
+    fileActions: ResolvedIdeFileActions;
 };
-
 export type FullIDEEditorServices = {
     showTabs: boolean;
     showEditor: boolean;
@@ -66,6 +59,43 @@ type DeepPartial<T> = {
 
 export type FullIDEServicesInput = DeepPartial<FullIDEServices>;
 
+
+
+
+const DISABLED_IDE_FILE_ACTIONS: ResolvedIdeFileActions = {
+    enabled: false,
+    createFile: false,
+    createFolder: false,
+    rename: false,
+    delete: false,
+    dragDrop: false,
+};
+
+function resolveFileActions(
+    base?: Partial<ResolvedIdeFileActions> | null,
+    override?: Partial<ResolvedIdeFileActions> | null,
+): ResolvedIdeFileActions {
+    const merged = {
+        ...DEFAULT_IDE_FILE_ACTIONS,
+        ...(base ?? {}),
+        ...(override ?? {}),
+    };
+
+    if (merged.enabled === false) {
+        return { ...DISABLED_IDE_FILE_ACTIONS };
+    }
+
+    return {
+        enabled: true,
+        createFile: merged.createFile !== false,
+        createFolder: merged.createFolder !== false,
+        rename: merged.rename !== false,
+        delete: merged.delete !== false,
+        dragDrop: merged.dragDrop !== false,
+    };
+}
+
+
 const WORKSPACE_PRESET: FullIDEServices = {
     chrome: {
         showHeader: true,
@@ -84,14 +114,7 @@ const WORKSPACE_PRESET: FullIDEServices = {
         showHistoryControls: true,
         showFooter: true,
         showStdin: true,
-        fileActions: {
-            enabled: true,
-            createFile: true,
-            createFolder: true,
-            rename: true,
-            delete: true,
-            dragDrop: true,
-        },
+        fileActions: { ...DEFAULT_IDE_FILE_ACTIONS },
     },
     editor: {
         showTabs: true,
@@ -182,27 +205,9 @@ const PRESETS: Record<FullIDEServicePreset, FullIDEServices> = {
     lesson: LESSON_PRESET,
     runner: RUNNER_PRESET,
 };
-
-function disableExplorerServices(explorer: FullIDEExplorerServices) {
-    explorer.enabled = false;
-    explorer.allowMobileDrawer = false;
-    explorer.allowResize = false;
-    explorer.showFilter = false;
-    explorer.showActions = false;
-    explorer.showHistoryControls = false;
-    explorer.showFooter = false;
-    explorer.showStdin = false;
-    explorer.fileActions = {
-        enabled: false,
-        createFile: false,
-        createFolder: false,
-        rename: false,
-        delete: false,
-        dragDrop: false,
-    };
-}
-
 function mergeServices(base: FullIDEServices, overrides?: FullIDEServicesInput): FullIDEServices {
+    const explorerOverrides = overrides?.explorer;
+
     return {
         chrome: {
             ...base.chrome,
@@ -210,11 +215,11 @@ function mergeServices(base: FullIDEServices, overrides?: FullIDEServicesInput):
         },
         explorer: {
             ...base.explorer,
-            ...overrides?.explorer,
-            fileActions: {
-                ...base.explorer.fileActions,
-                ...overrides?.explorer?.fileActions,
-            },
+            ...explorerOverrides,
+            fileActions: resolveFileActions(
+                base.explorer.fileActions,
+                explorerOverrides?.fileActions as Partial<ResolvedIdeFileActions> | undefined,
+            ),
         },
         editor: {
             ...base.editor,
@@ -230,7 +235,6 @@ function mergeServices(base: FullIDEServices, overrides?: FullIDEServicesInput):
         },
     };
 }
-
 export function resolveFullIDEServices(args?: {
     preset?: FullIDEServicePreset;
     showTopLanguageButtons?: boolean;
@@ -253,13 +257,26 @@ export function resolveFullIDEServices(args?: {
         merged.editor.showTabs = false;
     }
 
-    const terminalOnlyWorkspace =
+    const terminalOnly =
         !merged.editor.showEditor &&
         merged.runner.showTerminal &&
         merged.runner.enableWorkspaceTerminal;
 
-    if (!merged.explorer.enabled || terminalOnlyWorkspace) {
-        disableExplorerServices(merged.explorer);
+    if (terminalOnly) {
+        merged.explorer.enabled = false;
+    }
+
+    if (!merged.explorer.enabled) {
+        merged.explorer.allowMobileDrawer = false;
+        merged.explorer.allowResize = false;
+        merged.explorer.showFilter = false;
+        merged.explorer.showActions = false;
+        merged.explorer.showHistoryControls = false;
+        merged.explorer.showFooter = false;
+        merged.explorer.showStdin = false;
+        merged.explorer.fileActions = { ...DISABLED_IDE_FILE_ACTIONS };
+    } else {
+        merged.explorer.fileActions = resolveFileActions(merged.explorer.fileActions);
     }
 
     if (!merged.projects.showSaveControls) {

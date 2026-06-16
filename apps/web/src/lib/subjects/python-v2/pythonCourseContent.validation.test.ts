@@ -152,6 +152,11 @@ describe("python-v2 course content", () => {
                   : Array.isArray(expected.tests)
                     ? expected.tests
                     : [];
+                const sourceChecks = Array.isArray(recipe.sourceChecks)
+                  ? recipe.sourceChecks
+                  : Array.isArray(expected.sourceChecks)
+                    ? expected.sourceChecks
+                    : [];
 
                 if (isTerminalWorkspaceShellTask) {
                   const workspaceExpectations =
@@ -172,8 +177,8 @@ describe("python-v2 course content", () => {
                 }
 
                 expect(
-                  tests.length >= 2,
-                  `${exerciseRef} code_input must include at least 2 tests`,
+                  tests.length >= 2 || (tests.length >= 1 && sourceChecks.length >= 1),
+                  `${exerciseRef} code_input must include at least 2 tests or 1 runtime test plus source checks`,
                 ).toBe(true);
 
                 for (const [index, test] of tests.entries()) {

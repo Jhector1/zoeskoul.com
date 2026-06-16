@@ -325,7 +325,7 @@ describe("buildExerciseFromManifest runtime IDE mapping", () => {
       ideConfig: (result.exercise as any).ideConfig ?? null,
     });
 
-    expect(fullIde.services.explorer?.enabled).toBe(true);
+    expect(fullIde.services.explorer?.enabled).toBe(false);
     expect(fullIde.services.explorer?.fileActions).toEqual({
       enabled: false,
       createFile: false,

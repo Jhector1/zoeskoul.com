@@ -100,21 +100,51 @@ const SPLIT_BAR_IDLE =
 
 const SPLIT_BAR_ACTIVE = "hover:bg-neutral-300/60 focus:bg-neutral-300/60";
 
+const TERMINAL_AUTO_OPEN_COOLDOWN_MS = 60_000;
+const terminalAutoOpenClaims = new Map<string, number>();
+
+function pruneTerminalAutoOpenClaims(now: number) {
+    for (const [key, at] of terminalAutoOpenClaims) {
+        if (now - at > TERMINAL_AUTO_OPEN_COOLDOWN_MS * 2) {
+            terminalAutoOpenClaims.delete(key);
+        }
+    }
+}
+
+function shouldClaimTerminalAutoOpen(key: string) {
+    const now = Date.now();
+    pruneTerminalAutoOpenClaims(now);
+
+    const previous = terminalAutoOpenClaims.get(key) ?? 0;
+    if (now - previous < TERMINAL_AUTO_OPEN_COOLDOWN_MS) {
+        return false;
+    }
+
+    terminalAutoOpenClaims.set(key, now);
+    return true;
+}
+
+function releaseTerminalAutoOpenClaim(key: string) {
+    terminalAutoOpenClaims.delete(key);
+}
+
 export async function restartWorkspaceTerminalSession(args: {
     resetAutoOpen: () => void;
     workspaceTerm: {
         stop: () => Promise<void>;
-        open: () => Promise<void>;
+        open: (options?: { userInitiated?: boolean }) => Promise<void>;
         restart?: () => Promise<void>;
     };
 }) {
     args.resetAutoOpen();
+
     if (typeof args.workspaceTerm.restart === "function") {
         await args.workspaceTerm.restart();
         return;
     }
+
     await args.workspaceTerm.stop();
-    await args.workspaceTerm.open();
+    await args.workspaceTerm.open({ userInitiated: true });
 }
 
 function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
@@ -172,6 +202,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         stdinPlaceholder = "Type stdin here. Each new line becomes one input line.",
         workspaceTerminal,
         onTerminalEvidenceChange,
+        onTerminalSyncReady,
 
         testId,
         editorTestId,
@@ -529,6 +560,21 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         onTerminalEvidenceChange?.(workspaceTerm.terminalEvidence);
     }, [onTerminalEvidenceChange, workspaceTerm.terminalEvidence]);
 
+    useEffect(() => {
+        if (!onTerminalSyncReady) return;
+
+        if (!workspaceTerminalEnabled) {
+            onTerminalSyncReady(null);
+            return;
+        }
+
+        onTerminalSyncReady(workspaceTerm.syncWorkspaceNow);
+
+        return () => {
+            onTerminalSyncReady(null);
+        };
+    }, [onTerminalSyncReady, workspaceTerminalEnabled, workspaceTerm.syncWorkspaceNow]);
+
 
     const terminalAutoOpenKey = buildTerminalAutoOpenKey({
         workspaceKey: workspaceTerminal?.workspaceKey,
@@ -581,7 +627,21 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
             return;
         }
 
-        if (workspaceTerm.state === "failed" || workspaceTerm.recoverState !== "none") {
+        /**
+         * Important:
+         * Auto-open should only happen for a clean, idle terminal.
+         * If the terminal is disconnected, failed, rate-limited, or waiting for restart,
+         * the learner must click Restart terminal.
+         */
+        if (workspaceTerm.recoverState !== "none") {
+            return;
+        }
+
+        if (workspaceTerm.state === "failed") {
+            return;
+        }
+
+        if (workspaceTerm.restarting || workspaceTerm.stopping) {
             return;
         }
 
@@ -597,18 +657,26 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
             return;
         }
 
+        /**
+         * Ref guards reset after React remounts. A module-level claim survives normal
+         * remounts and prevents xterm crashes/HMR/recovery renders from hammering
+         * the backend start endpoint until the user explicitly clicks Restart.
+         */
+        if (!shouldClaimTerminalAutoOpen(terminalAutoOpenKey)) {
+            return;
+        }
+
         terminalAutoOpenRequestedKeyRef.current = terminalAutoOpenKey;
 
-        void workspaceTerm.open().catch(() => {
-            // Allow manual retry after a failed start.
-            terminalAutoOpenRequestedKeyRef.current = null;
-        });
+        void workspaceTerm.open({ userInitiated: false });
     }, [
         outputTab,
         workspaceTerminalEnabled,
         workspaceTerm.sessionId,
         workspaceTerm.started,
         workspaceTerm.starting,
+        workspaceTerm.stopping,
+        workspaceTerm.restarting,
         workspaceTerm.state,
         workspaceTerm.recoverState,
         workspaceTerm.open,
@@ -774,14 +842,18 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                     recoverState={workspaceTerm.recoverState}
                     recoverMessage={workspaceTerm.recoverMessage}
                     restarting={workspaceTerm.restarting}
+                    interactiveReady={workspaceTerm.interactiveReady}
+                    captureInactiveInput={workspaceTerm.disconnectedInputGuardActive}
                     onRestart={() =>
                         restartWorkspaceTerminalSession({
                             resetAutoOpen: () => {
                                 terminalAutoOpenRequestedKeyRef.current = null;
+                                releaseTerminalAutoOpenClaim(terminalAutoOpenKey);
                             },
                             workspaceTerm,
                         })
                     }
+                    onInactiveInputAttempt={workspaceTerm.handleDisconnectedInputAttempt}
                 />
             );
         }
@@ -823,7 +895,6 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                             <button
                                 type="button"
                                 onClick={() => {
-                                    terminalAutoOpenRequestedKeyRef.current = null;
                                     setOutputTab("terminal");
                                 }}
                                 className={cx(
@@ -922,6 +993,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                             setCode(DEFAULT_CODE[lang]);
                             setOutputTab(terminalOnlyMode ? "terminal" : "output");
                             terminalAutoOpenRequestedKeyRef.current = null;
+                            releaseTerminalAutoOpenClaim(terminalAutoOpenKey);
                             term.resetTerminal();
                             if (isNarrowScreen && showEditor && showTerminal) {
                                 setMobilePane("editor");
@@ -932,6 +1004,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                             restartWorkspaceTerminalSession({
                                 resetAutoOpen: () => {
                                     terminalAutoOpenRequestedKeyRef.current = null;
+                                    releaseTerminalAutoOpenClaim(terminalAutoOpenKey);
                                 },
                                 workspaceTerm,
                             })

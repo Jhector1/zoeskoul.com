@@ -132,6 +132,7 @@ export type CommonProps = {
     onBeforeRun?: BeforeRunFn;
     onRun?: OnRun;
     onTerminalEvidenceChange?: (evidence: TerminalEvidence) => void;
+    onTerminalSyncReady?: (sync: (() => Promise<boolean>) | null) => void;
 };
 
 export type CodeRunnerProps =

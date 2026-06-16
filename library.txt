@@ -144,6 +144,10 @@ ssh -p 2222 \
   -L 8080:127.0.0.1:80 \
   jean@127.0.0.1
 
+
+  redis
+  ssh -p 2222 -N -L 6380:127.0.0.1:6379 jean@127.0.0.
+
 cd ~/Documents/judge0-masyg/infra/judge0
 sudo docker compose down
 sudo docker compose up -d db redis
@@ -173,7 +177,7 @@ cd /opt/zoeskoul/zoe-infra/hosts/runner
 ./deploy.sh
 ./smoke-test.sh
 
-
+pnpm --filter @zoeskoul/web validate:full
 
 
 
