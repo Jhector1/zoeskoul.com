@@ -4,7 +4,7 @@
       "linux-1-terminal-navigation": {
         "moving-around": {
           "label": "Moving Around with cd",
-          "summary": "Use cd, .., ., and ~ to move between folders safely.",
+          "summary": "Use `cd`, `..`, and longer paths to move through nested folders without getting lost.",
           "cards": {
             "sketch0": {
               "title": "cd changes the current folder"
@@ -19,32 +19,32 @@
               "title": "Quiz"
             },
             "project": {
-              "title": "Terminal practice project"
+              "title": "Folder travel practice"
             }
           },
           "projectSteps": {
             "ci_build_cd_practice": {
-              "title": "Build a cd practice path"
+              "title": "Go to the platform folder"
             },
             "ci_create_up_one_lab": {
-              "title": "Practice moving up one folder"
+              "title": "Move back to the parent folder"
             },
             "ci_create_path_trail": {
-              "title": "Create a path trail"
+              "title": "Find the final marker"
             }
           },
           "tryIt": {
             "try_moving_around_sketch0": {
-              "title": "Build a cd practice path",
-              "prompt": "Create `cd-practice/level1/level2/checkpoint.txt`. Practice using `cd` to move through the folders."
+              "title": "Step into the library",
+              "prompt": "Use `cd` to enter `library/desk`, then run `pwd`."
             },
             "try_moving_around_sketch1": {
-              "title": "Practice moving up one folder",
-              "prompt": "Create `up-one-lab/inside/done.txt`. Use `cd ..` at least once while practicing."
+              "title": "Back up one folder",
+              "prompt": "Enter `classroom/row`, run `cd ..`, then run `pwd`."
             },
             "try_moving_around_sketch2": {
-              "title": "Create a path trail",
-              "prompt": "Create `trail/start/middle/end.txt` to show you can work with nested folders."
+              "title": "Find the marker file",
+              "prompt": "Go to `trail/checkpoint`, then run `ls` and look for `marker.txt`."
             }
           },
           "quiz": {
@@ -113,37 +113,70 @@
               }
             },
             "ci-build-cd-practice": {
-              "title": "Build a cd practice path",
-              "prompt": "Create `cd-practice/level1/level2/checkpoint.txt`. Practice using `cd` to move through the folders.\n\nUse the terminal. The editor is hidden on purpose for this task.",
-              "hint": "Use terminal commands such as `pwd`, `ls`, `mkdir -p`, `touch`, `cp`, `mv`, or `rm` depending on the task.",
+              "title": "Go to the platform folder",
+              "prompt": "Use `cd` to enter `city-tour/station/platform`, then run `pwd`.",
+              "hint": "Change folders first, then use `pwd` to confirm where you landed.",
               "help": {
-                "concept": "This is a Linux terminal workspace task. Complete it by changing the file tree with terminal commands.",
-                "hint_1": "Use `pwd` and `ls` to inspect where you are.",
-                "hint_2": "The checker looks for the required folders/files and checks that forbidden files are gone."
+                "concept": "`cd` changes the terminal's current folder.",
+                "hint_1": "Run `cd city-tour/station/platform`.",
+                "hint_2": "Run `pwd` and check for `/workspace/city-tour/station/platform`."
               },
-              "placeholder": "Use the terminal to complete this task."
+              "placeholder": "Type commands in the terminal."
             },
             "ci-create-up-one-lab": {
-              "title": "Practice moving up one folder",
-              "prompt": "Create `up-one-lab/inside/done.txt`. Use `cd ..` at least once while practicing.\n\nUse the terminal. The editor is hidden on purpose for this task.",
-              "hint": "Use terminal commands such as `pwd`, `ls`, `mkdir -p`, `touch`, `cp`, `mv`, or `rm` depending on the task.",
+              "title": "Move back to the parent folder",
+              "prompt": "Go into `return-trip/start`, run `cd ..`, then run `pwd`.",
+              "hint": "Two dots mean the parent folder.",
               "help": {
-                "concept": "This is a Linux terminal workspace task. Complete it by changing the file tree with terminal commands.",
-                "hint_1": "Use `pwd` and `ls` to inspect where you are.",
-                "hint_2": "The checker looks for the required folders/files and checks that forbidden files are gone."
+                "concept": "`cd ..` moves one folder up.",
+                "hint_1": "Run `cd return-trip/start`.",
+                "hint_2": "Run `cd ..`, then `pwd`, and check that you are in `/workspace/return-trip`."
               },
-              "placeholder": "Use the terminal to complete this task."
+              "placeholder": "Type commands in the terminal."
             },
             "ci-create-path-trail": {
-              "title": "Create a path trail",
-              "prompt": "Create `trail/start/middle/end.txt` to show you can work with nested folders.\n\nUse the terminal. The editor is hidden on purpose for this task.",
-              "hint": "Use terminal commands such as `pwd`, `ls`, `mkdir -p`, `touch`, `cp`, `mv`, or `rm` depending on the task.",
+              "title": "Find the final marker",
+              "prompt": "Use `cd` to enter `trail/start/middle`, then run `ls` and look for `final-marker.txt`.",
+              "hint": "Move into the nested folder before you list it.",
               "help": {
-                "concept": "This is a Linux terminal workspace task. Complete it by changing the file tree with terminal commands.",
-                "hint_1": "Use `pwd` and `ls` to inspect where you are.",
-                "hint_2": "The checker looks for the required folders/files and checks that forbidden files are gone."
+                "concept": "You can use a longer path with `cd` to move through several folders at once.",
+                "hint_1": "Run `cd trail/start/middle`.",
+                "hint_2": "Run `ls` and check for `final-marker.txt`."
               },
-              "placeholder": "Use the terminal to complete this task."
+              "placeholder": "Type commands in the terminal."
+            },
+            "try-cd-enter-library": {
+              "title": "Step into the library",
+              "prompt": "Use `cd` to enter `library/desk`, then run `pwd`.",
+              "hint": "Run `cd library/desk`, then `pwd`.",
+              "help": {
+                "concept": "`cd` changes the current folder, and `pwd` confirms where you landed.",
+                "hint_1": "Run `cd library/desk`, then `pwd`.",
+                "hint_2": "Run the command in the terminal, check the response, then submit."
+              },
+              "placeholder": "Type commands in the terminal."
+            },
+            "try-cd-back-to-parent": {
+              "title": "Back up one folder",
+              "prompt": "Enter `classroom/row`, run `cd ..`, then run `pwd`.",
+              "hint": "Use `cd classroom/row`, then `cd ..`, then `pwd`.",
+              "help": {
+                "concept": "`cd ..` moves one folder up.",
+                "hint_1": "Use `cd classroom/row`, then `cd ..`, then `pwd`.",
+                "hint_2": "Run the command in the terminal, check the response, then submit."
+              },
+              "placeholder": "Type commands in the terminal."
+            },
+            "try-cd-find-marker": {
+              "title": "Find the marker file",
+              "prompt": "Go to `trail/checkpoint`, then run `ls` and look for `marker.txt`.",
+              "hint": "Use `cd trail/checkpoint`, then `ls`.",
+              "help": {
+                "concept": "After moving, `ls` shows what is in your new location.",
+                "hint_1": "Use `cd trail/checkpoint`, then `ls`.",
+                "hint_2": "Run the command in the terminal, check the response, then submit."
+              },
+              "placeholder": "Type commands in the terminal."
             }
           }
         }
@@ -155,16 +188,16 @@
       "linux-1-terminal-navigation": {
         "moving-around": {
           "cd-enters-folders": {
-            "title": "cd changes the current folder",
-            "bodyMarkdown": "`cd` means **change directory**.\n\n```bash\ncd folder-name\n```\n\nAfter using `cd`, run `pwd` to confirm where you are. Then run `ls` to see what is inside that folder."
+            "title": "`cd` changes the current folder",
+            "bodyMarkdown": "`cd` moves your terminal into another folder. After you move, run `pwd` so you know where you landed.\n\n```bash\ncd city-tour\npwd\n```\n\nWhen a path is long, build it slowly and check often."
           },
           "dot-dot-parent": {
-            "title": ".. means the parent folder",
-            "bodyMarkdown": "`..` means “go up one folder.”\n\n```bash\ncd ..\n```\n\n`.` means “this folder.” You will mostly use `..` when moving back out of a folder after entering it."
+            "title": "`..` means the parent folder",
+            "bodyMarkdown": "Use `cd ..` to go up one folder. It is useful when you move into a folder, create something, then need to return.\n\n```bash\ncd station\ncd ..\n```\n\nThat small move prevents many path mistakes."
           },
           "home-shortcut": {
-            "title": "~ points to your home folder",
-            "bodyMarkdown": "The shortcut `~` means your home folder.\n\n```bash\ncd ~\n```\n\nInside this course workspace, most tasks should stay in the provided workspace. Use `pwd` if you ever feel lost."
+            "title": "Relative paths start from where you are",
+            "bodyMarkdown": "A relative path is read from your current folder. If you are already inside `city-tour`, then `station/platform` points deeper inside that folder.\n\nUse `pwd` when a command does not affect the file you expected."
           }
         }
       }

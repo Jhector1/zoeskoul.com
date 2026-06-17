@@ -300,13 +300,7 @@ export async function getResolvedCatalogMap(): Promise<ResolvedCatalogMap> {
                     resolveSubjectCatalogItem(subjectSlug),
                 ),
             )
-        )
-            .filter((value): value is ResolvedCatalogSubjectItem => Boolean(value))
-            .sort((a, b) => {
-                const leftOrder = Number(subjectBySlug[a.slug]?.order ?? 0);
-                const rightOrder = Number(subjectBySlug[b.slug]?.order ?? 0);
-                return leftOrder - rightOrder || a.slug.localeCompare(b.slug);
-            });
+        ).filter((value): value is ResolvedCatalogSubjectItem => Boolean(value));
 
         out[catalog.slug] = {
             slug: catalog.slug,

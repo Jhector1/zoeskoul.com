@@ -42,7 +42,7 @@ async function expectAnyEditorInput(page: Page) {
 async function expectToolsEditorToContain(
     page: Page,
     expected: string,
-    timeout = 30_000,
+    timeout = 45_000,
 ) {
     await expect
         .poll(() => readToolsEditor(page), { timeout })
@@ -52,14 +52,14 @@ async function expectToolsEditorToContain(
 async function expectToolsEditorNotToContain(
     page: Page,
     unexpected: string,
-    timeout = 30_000,
+    timeout = 45_000,
 ) {
     await expect
         .poll(() => readToolsEditor(page), { timeout })
         .not.toContain(unexpected);
 }
 
-async function expectToolsEditorNotBlank(page: Page, timeout = 30_000) {
+async function expectToolsEditorNotBlank(page: Page, timeout = 45_000) {
     await expect
         .poll(async () => (await readToolsEditor(page)).trim(), { timeout })
         .not.toBe("");

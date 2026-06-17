@@ -63,6 +63,7 @@ export async function getOnboardingSubjects(): Promise<OnboardingSubjectOption[]
 
     const visibleSubjects = selectVisibleSubjectsForActor(
         await withSubjectEnrollment(mappedSubjects),
+        { familyPreference: "default" },
     );
 
     return visibleSubjects.map(({ db: s, resolved }) => {

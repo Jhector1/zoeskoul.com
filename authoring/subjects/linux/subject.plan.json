@@ -7,7 +7,7 @@
     "linux-terminal-fundamentals"
   ],
   "publishTarget": {
-    "liveSubjectSlug": "linux",
+    "liveSubjectSlug": "linux-terminal-fundamentals",
     "courseSlug": "linux-terminal-fundamentals",
     "channel": "current"
   },

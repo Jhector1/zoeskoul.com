@@ -13,6 +13,16 @@ export type SubjectVisibilityInput = {
     versioning?: SubjectVersioningLike;
 };
 
+export type SubjectFamilyPreference = "enrolled" | "default";
+
+export type SubjectVisibilityOptions = {
+    /**
+     * enrolled: learning surfaces keep the version the learner is already using.
+     * default: catalog/onboarding surfaces recommend the active default course.
+     */
+    familyPreference?: SubjectFamilyPreference;
+};
+
 export function getVersionFamily(subject: {
     slug: string;
     versioning?: SubjectVersioningLike;
@@ -43,14 +53,15 @@ export function isDefaultActiveSubject(subject: {
  * Rules:
  * 1. Non-versioned subjects are visible normally.
  * 2. For each version family:
- *    - If the learner is enrolled in an active or legacy version, show that version.
- *    - Otherwise show the active default version for new enrollments.
- *    - Otherwise show the first active version as a safe fallback.
+ *    - learning surfaces default to the enrolled active/legacy version.
+ *    - catalog/onboarding surfaces can prefer the active default version.
+ *    - otherwise show the first active version as a safe fallback.
  * 3. Never show draft/disabled versions to normal learners.
  * 4. Never show multiple versions from the same family.
  */
 export function selectVisibleSubjectsForActor<T extends SubjectVisibilityInput>(
     subjects: readonly T[],
+    options: SubjectVisibilityOptions = {},
 ): T[] {
     const subjectsByFamily = new Map<string, T[]>();
 
@@ -67,9 +78,13 @@ export function selectVisibleSubjectsForActor<T extends SubjectVisibilityInput>(
     }
 
     const visible: T[] = [];
+    const familyPreference = options.familyPreference ?? "enrolled";
 
     for (const familySubjects of subjectsByFamily.values()) {
-        const selected = selectVisibleSubjectFromFamily(familySubjects);
+        const selected = selectVisibleSubjectFromFamily(
+            familySubjects,
+            familyPreference,
+        );
 
         if (selected) {
             visible.push(selected);
@@ -81,33 +96,38 @@ export function selectVisibleSubjectsForActor<T extends SubjectVisibilityInput>(
 
 function selectVisibleSubjectFromFamily<T extends SubjectVisibilityInput>(
     subjects: readonly T[],
+    familyPreference: SubjectFamilyPreference,
 ): T | null {
-    const enrolledSubject = subjects.find((subject) => {
-        const status = subject.versioning?.status;
-
-        return (
-            subject.enrolled === true &&
-            (status === "active" || status === "legacy" || !subject.versioning)
-        );
-    });
-
-    if (enrolledSubject) {
-        return enrolledSubject;
-    }
-
+    const enrolledSubject = subjects.find(isEnrolledActiveOrLegacySubject);
     const defaultActiveSubject = subjects.find((subject) =>
         isDefaultActiveSubject(subject),
     );
 
-    if (defaultActiveSubject) {
-        return defaultActiveSubject;
+    if (familyPreference === "default") {
+        return defaultActiveSubject ?? enrolledSubject ?? firstActiveSubject(subjects);
     }
 
-    const firstActiveSubject = subjects.find(
-        (subject) => subject.versioning?.status === "active",
-    );
+    return enrolledSubject ?? defaultActiveSubject ?? firstActiveSubject(subjects);
+}
 
-    return firstActiveSubject ?? null;
+function isEnrolledActiveOrLegacySubject<T extends SubjectVisibilityInput>(
+    subject: T,
+): boolean {
+    const status = subject.versioning?.status;
+
+    return (
+        subject.enrolled === true &&
+        (status === "active" || status === "legacy" || !subject.versioning)
+    );
+}
+
+function firstActiveSubject<T extends SubjectVisibilityInput>(
+    subjects: readonly T[],
+): T | null {
+    return (
+        subjects.find((subject) => subject.versioning?.status === "active") ??
+        null
+    );
 }
 
 function isSubjectCandidateVisible<T extends SubjectVisibilityInput>(

@@ -379,7 +379,7 @@ async function gotoRealExercise(page: Page) {
         timeout: 45_000,
     });
 
-    await expect(page).toHaveURL(/\/exercise\/loop-debug-code-3(?:\?.*)?$/, {
+    await expect(page).toHaveURL(/\/exercise\/(?:loop-debug-code-3|loop-debug-code-4)(?:\?.*)?$/, {
         timeout: 30_000,
     });
 
@@ -504,7 +504,7 @@ test.describe("real review route Tools editor back/forward persistence", () => {
         await clickCheckThisAnswer(page);
         await waitForCorrect(page);
 
-        await expect(page).toHaveURL(/\/exercise\/loop-debug-code-3(?:\?.*)?$/, {
+        await expect(page).toHaveURL(/\/exercise\/(?:loop-debug-code-3|loop-debug-code-4)(?:\?.*)?$/, {
             timeout: 10_000,
         });
         await expectToolsEditorToContain(page, SOLVED_MARKER);
@@ -581,7 +581,7 @@ test.describe("real review route Tools editor back/forward persistence", () => {
         await clickCheckThisAnswer(page);
         await waitForCorrect(page);
 
-        await expect(page).toHaveURL(/\/exercise\/loop-debug-code-3(?:\?.*)?$/, {
+        await expect(page).toHaveURL(/\/exercise\/(?:loop-debug-code-3|loop-debug-code-4)(?:\?.*)?$/, {
             timeout: 10_000,
         });
         await expectToolsEditorToContain(page, SOLVED_MARKER);
@@ -614,7 +614,7 @@ test.describe("real review route Tools editor back/forward persistence", () => {
         await page.goBack();
         await page.waitForLoadState("domcontentloaded");
 
-        await expect(page).toHaveURL(/\/exercise\/loop-debug-code-3(?:\?.*)?$/, {
+        await expect(page).toHaveURL(/\/exercise\/(?:loop-debug-code-3|loop-debug-code-4)(?:\?.*)?$/, {
             timeout: 30_000,
         });
 
@@ -634,7 +634,7 @@ test.describe("real review route Tools editor back/forward persistence", () => {
         await page.goBack();
         await page.waitForLoadState("domcontentloaded");
 
-        await expect(page).toHaveURL(/\/exercise\/loop-debug-code-3(?:\?.*)?$/, {
+        await expect(page).toHaveURL(/\/exercise\/(?:loop-debug-code-3|loop-debug-code-4)(?:\?.*)?$/, {
             timeout: 30_000,
         });
 

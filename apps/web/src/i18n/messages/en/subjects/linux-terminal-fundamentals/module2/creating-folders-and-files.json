@@ -4,7 +4,7 @@
       "linux-2-files-and-folders": {
         "creating-folders-and-files": {
           "label": "Creating Folders and Files",
-          "summary": "Use mkdir, mkdir -p, and touch to create a useful project structure.",
+          "summary": "Use `mkdir`, `mkdir -p`, and `touch` to prepare useful project folders.",
           "cards": {
             "sketch0": {
               "title": "mkdir creates folders"
@@ -19,32 +19,32 @@
               "title": "Quiz"
             },
             "project": {
-              "title": "Terminal practice project"
+              "title": "Workspace setup practice"
             }
           },
           "projectSteps": {
             "ci_create_school_notes": {
-              "title": "Create a school notes structure"
+              "title": "Prepare biology notes"
             },
             "ci_create_project_folders": {
-              "title": "Create project folders"
+              "title": "Set up a small website folder"
             },
             "ci_create_multiple_files": {
-              "title": "Create multiple files"
+              "title": "Add website starter files"
             }
           },
           "tryIt": {
             "try_creating_folders_and_files_sketch0": {
-              "title": "Create a school notes structure",
-              "prompt": "Create `school/notes/week1/today.txt`."
+              "title": "Create a quick note",
+              "prompt": "Create `quick-notes/today.txt`."
             },
             "try_creating_folders_and_files_sketch1": {
-              "title": "Create project folders",
-              "prompt": "Create folders `project/src`, `project/docs`, and `project/tests`."
+              "title": "Make two website folders",
+              "prompt": "Create `site/assets` and `site/pages`."
             },
             "try_creating_folders_and_files_sketch2": {
-              "title": "Create multiple files",
-              "prompt": "Create `project/docs/plan.txt` and `project/tests/checklist.txt`."
+              "title": "Add starter website files",
+              "prompt": "Create `site/pages/index.html` and `site/assets/logo.txt`."
             }
           },
           "quiz": {
@@ -113,37 +113,70 @@
               }
             },
             "ci-create-school-notes": {
-              "title": "Create a school notes structure",
-              "prompt": "Create `school/notes/week1/today.txt`.\n\nUse the terminal. The editor is hidden on purpose for this task.",
-              "hint": "Use terminal commands such as `pwd`, `ls`, `mkdir -p`, `touch`, `cp`, `mv`, or `rm` depending on the task.",
+              "title": "Prepare biology notes",
+              "prompt": "Create `school/biology/week1/notes.txt` for today’s class notes.",
+              "hint": "Create the full path with `mkdir -p`, then create the file.",
               "help": {
-                "concept": "This is a Linux terminal workspace task. Complete it by changing the file tree with terminal commands.",
-                "hint_1": "Use `pwd` and `ls` to inspect where you are.",
-                "hint_2": "The checker looks for the required folders/files and checks that forbidden files are gone."
+                "concept": "Use the terminal to change the workspace, then check the result with `ls`.",
+                "hint_1": "Create the full path with `mkdir -p`, then create the file.",
+                "hint_2": "Submit when the required path exists and any unwanted path is gone."
               },
-              "placeholder": "Use the terminal to complete this task."
+              "placeholder": "Type commands in the terminal."
             },
             "ci-create-project-folders": {
-              "title": "Create project folders",
-              "prompt": "Create folders `project/src`, `project/docs`, and `project/tests`.\n\nUse the terminal. The editor is hidden on purpose for this task.",
-              "hint": "Use terminal commands such as `pwd`, `ls`, `mkdir -p`, `touch`, `cp`, `mv`, or `rm` depending on the task.",
+              "title": "Set up a small website folder",
+              "prompt": "Create folders `website/assets`, `website/pages`, and `website/scripts`.",
+              "hint": "You can create more than one folder path with one `mkdir -p` command.",
               "help": {
-                "concept": "This is a Linux terminal workspace task. Complete it by changing the file tree with terminal commands.",
-                "hint_1": "Use `pwd` and `ls` to inspect where you are.",
-                "hint_2": "The checker looks for the required folders/files and checks that forbidden files are gone."
+                "concept": "Use the terminal to change the workspace, then check the result with `ls`.",
+                "hint_1": "You can create more than one folder path with one `mkdir -p` command.",
+                "hint_2": "Submit when the required path exists and any unwanted path is gone."
               },
-              "placeholder": "Use the terminal to complete this task."
+              "placeholder": "Type commands in the terminal."
             },
             "ci-create-multiple-files": {
-              "title": "Create multiple files",
-              "prompt": "Create `project/docs/plan.txt` and `project/tests/checklist.txt`.\n\nUse the terminal. The editor is hidden on purpose for this task.",
-              "hint": "Use terminal commands such as `pwd`, `ls`, `mkdir -p`, `touch`, `cp`, `mv`, or `rm` depending on the task.",
+              "title": "Add website starter files",
+              "prompt": "Create `website/pages/home.html` and `website/scripts/todo.txt`.",
+              "hint": "Make sure the parent folders exist before touching the files.",
               "help": {
-                "concept": "This is a Linux terminal workspace task. Complete it by changing the file tree with terminal commands.",
-                "hint_1": "Use `pwd` and `ls` to inspect where you are.",
-                "hint_2": "The checker looks for the required folders/files and checks that forbidden files are gone."
+                "concept": "Use the terminal to change the workspace, then check the result with `ls`.",
+                "hint_1": "Make sure the parent folders exist before touching the files.",
+                "hint_2": "Submit when the required path exists and any unwanted path is gone."
               },
-              "placeholder": "Use the terminal to complete this task."
+              "placeholder": "Type commands in the terminal."
+            },
+            "try-create-quick-note": {
+              "title": "Create a quick note",
+              "prompt": "Create `quick-notes/today.txt`.",
+              "hint": "Use `mkdir -p quick-notes`, then `touch quick-notes/today.txt`.",
+              "help": {
+                "concept": "Use `mkdir` for the folder and `touch` for the file.",
+                "hint_1": "Use `mkdir -p quick-notes`, then `touch quick-notes/today.txt`.",
+                "hint_2": "Run the command in the terminal, check the response, then submit."
+              },
+              "placeholder": "Type commands in the terminal."
+            },
+            "try-create-site-folders": {
+              "title": "Make two website folders",
+              "prompt": "Create `site/assets` and `site/pages`.",
+              "hint": "Use `mkdir -p site/assets site/pages`.",
+              "help": {
+                "concept": "`mkdir -p` can create parent and child folders together.",
+                "hint_1": "Use `mkdir -p site/assets site/pages`.",
+                "hint_2": "Run the command in the terminal, check the response, then submit."
+              },
+              "placeholder": "Type commands in the terminal."
+            },
+            "try-create-site-files": {
+              "title": "Add starter website files",
+              "prompt": "Create `site/pages/index.html` and `site/assets/logo.txt`.",
+              "hint": "Create the folders first if needed, then use `touch` for both files.",
+              "help": {
+                "concept": "Once folders exist, `touch` can place files inside them.",
+                "hint_1": "Create the folders first if needed, then use `touch` for both files.",
+                "hint_2": "Run the command in the terminal, check the response, then submit."
+              },
+              "placeholder": "Type commands in the terminal."
             }
           }
         }
@@ -155,16 +188,16 @@
       "linux-2-files-and-folders": {
         "creating-folders-and-files": {
           "mkdir-creates-folders": {
-            "title": "mkdir creates folders",
-            "bodyMarkdown": "`mkdir` creates a folder.\n\n```bash\nmkdir notes\n```\n\nIf the folder already exists, Linux may show an error. That is normal protection."
+            "title": "Folders first, files second",
+            "bodyMarkdown": "`mkdir` creates one folder. `mkdir -p` creates a whole path if parts are missing. `touch` creates an empty file or updates its timestamp.\n\n```bash\nmkdir -p school/biology/week1\ntouch school/biology/week1/notes.txt\n```"
           },
           "mkdir-p-nested": {
-            "title": "mkdir -p creates nested folders",
-            "bodyMarkdown": "`mkdir -p` creates parent folders as needed.\n\n```bash\nmkdir -p school/notes/week1\n```\n\nThis is useful because many tasks require folders inside folders."
+            "title": "Nested folders keep work organized",
+            "bodyMarkdown": "A nested folder path tells a story: project, category, then file. The path `website/pages/home.html` tells you exactly what the file is for."
           },
           "touch-creates-files": {
-            "title": "touch creates empty files",
-            "bodyMarkdown": "`touch` creates an empty file if it does not already exist.\n\n```bash\ntouch school/notes/week1/today.txt\n```\n\nLater you can edit or write into that file, but for many organization tasks, creating it in the right place is the first win."
+            "title": "Check the shape after creating it",
+            "bodyMarkdown": "After creating folders and files, run `ls` on the folder you just changed. Small checks help you catch typos before they spread."
           }
         }
       }

@@ -1,0 +1,173 @@
+{
+  "topics": {
+    "linux-terminal-fundamentals": {
+      "linux-1-terminal-navigation": {
+        "moving-around": {
+          "label": "Moving Around with cd",
+          "summary": "Use `cd`, `..`, and longer paths to move through nested folders without getting lost.",
+          "cards": {
+            "sketch0": {
+              "title": "cd changes the current folder"
+            },
+            "sketch1": {
+              "title": ".. means the parent folder"
+            },
+            "sketch2": {
+              "title": "~ points to your home folder"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Folder travel practice"
+            }
+          },
+          "projectSteps": {
+            "ci_build_cd_practice": {
+              "title": "Place a ticket in the platform folder"
+            },
+            "ci_create_up_one_lab": {
+              "title": "Leave a note after moving back up"
+            },
+            "ci_create_path_trail": {
+              "title": "Build a trail to the final marker"
+            }
+          },
+          "tryIt": {
+            "try_moving_around_sketch0": {
+              "title": "Place a ticket in the platform folder",
+              "prompt": "Create `city-tour/station/platform/ticket.txt`. Move through the folders with `cd` as you work."
+            },
+            "try_moving_around_sketch1": {
+              "title": "Leave a note after moving back up",
+              "prompt": "Create `return-trip/start/back-home.txt`. Practice using `cd ..` before you finish."
+            },
+            "try_moving_around_sketch2": {
+              "title": "Build a trail to the final marker",
+              "prompt": "Create `trail/start/middle/final-marker.txt`."
+            }
+          },
+          "quiz": {
+            "sc-cd": {
+              "title": "Which command moves into a folder named notes?",
+              "prompt": "Use cd followed by the folder name.",
+              "hint": "Use cd followed by the folder name.",
+              "help": {
+                "concept": "Use cd followed by the folder name.",
+                "hint_1": "Use cd followed by the folder name.",
+                "hint_2": "Review the command names from the lesson, then choose the option that matches the task."
+              },
+              "options": {
+                "a": "cd notes",
+                "b": "ls notes",
+                "c": "touch notes",
+                "d": "pwd notes"
+              }
+            },
+            "sc-parent": {
+              "title": "What does cd .. usually do?",
+              "prompt": "Two dots refer to the parent folder.",
+              "hint": "Two dots refer to the parent folder.",
+              "help": {
+                "concept": "Two dots refer to the parent folder.",
+                "hint_1": "Two dots refer to the parent folder.",
+                "hint_2": "Review the command names from the lesson, then choose the option that matches the task."
+              },
+              "options": {
+                "a": "Deletes the current folder",
+                "b": "Moves up one folder",
+                "c": "Creates a new folder",
+                "d": "Lists hidden files"
+              }
+            },
+            "sc-home": {
+              "title": "What does ~ represent in Linux paths?",
+              "prompt": "It is a shortcut to a user's home folder.",
+              "hint": "It is a shortcut to a user's home folder.",
+              "help": {
+                "concept": "It is a shortcut to a user's home folder.",
+                "hint_1": "It is a shortcut to a user's home folder.",
+                "hint_2": "Review the command names from the lesson, then choose the option that matches the task."
+              },
+              "options": {
+                "a": "The current file",
+                "b": "The parent folder",
+                "c": "The user's home folder",
+                "d": "A deleted folder"
+              }
+            },
+            "mc-navigation-habits": {
+              "title": "Choose good navigation habits.",
+              "prompt": "Think about checking your location and nearby files.",
+              "hint": "Think about checking your location and nearby files.",
+              "help": {
+                "concept": "Think about checking your location and nearby files.",
+                "hint_1": "Think about checking your location and nearby files.",
+                "hint_2": "Review the command names from the lesson, then choose the option that matches the task."
+              },
+              "options": {
+                "a": "Run pwd if you feel lost",
+                "b": "Run ls before changing important files",
+                "c": "Use cd folder-name to enter folders",
+                "d": "Use rm whenever you want to move"
+              }
+            },
+            "ci-build-cd-practice": {
+              "title": "Place a ticket in the platform folder",
+              "prompt": "Create `city-tour/station/platform/ticket.txt`. Move through the folders with `cd` as you work.",
+              "hint": "Create the nested folders, move through them, and check with `pwd`.",
+              "help": {
+                "concept": "Use the terminal to change the workspace, then check the result with `ls`.",
+                "hint_1": "Create the nested folders, move through them, and check with `pwd`.",
+                "hint_2": "Submit when the required path exists and any unwanted path is gone."
+              },
+              "placeholder": "Type commands in the terminal."
+            },
+            "ci-create-up-one-lab": {
+              "title": "Leave a note after moving back up",
+              "prompt": "Create `return-trip/start/back-home.txt`. Practice using `cd ..` before you finish.",
+              "hint": "Move into the folder, then use `cd ..` to come back up and confirm where you are.",
+              "help": {
+                "concept": "Use the terminal to change the workspace, then check the result with `ls`.",
+                "hint_1": "Move into the folder, then use `cd ..` to come back up and confirm where you are.",
+                "hint_2": "Submit when the required path exists and any unwanted path is gone."
+              },
+              "placeholder": "Type commands in the terminal."
+            },
+            "ci-create-path-trail": {
+              "title": "Build a trail to the final marker",
+              "prompt": "Create `trail/start/middle/final-marker.txt`.",
+              "hint": "`mkdir -p trail/start/middle` can create the path in one command.",
+              "help": {
+                "concept": "Use the terminal to change the workspace, then check the result with `ls`.",
+                "hint_1": "`mkdir -p trail/start/middle` can create the path in one command.",
+                "hint_2": "Submit when the required path exists and any unwanted path is gone."
+              },
+              "placeholder": "Type commands in the terminal."
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "linux-terminal-fundamentals": {
+      "linux-1-terminal-navigation": {
+        "moving-around": {
+          "cd-enters-folders": {
+            "title": "`cd` changes the current folder",
+            "bodyMarkdown": "`cd` moves your terminal into another folder. After you move, run `pwd` so you know where you landed.\n\n```bash\ncd city-tour\npwd\n```\n\nWhen a path is long, build it slowly and check often."
+          },
+          "dot-dot-parent": {
+            "title": "`..` means the parent folder",
+            "bodyMarkdown": "Use `cd ..` to go up one folder. It is useful when you move into a folder, create something, then need to return.\n\n```bash\ncd station\ncd ..\n```\n\nThat small move prevents many path mistakes."
+          },
+          "home-shortcut": {
+            "title": "Relative paths start from where you are",
+            "bodyMarkdown": "A relative path is read from your current folder. If you are already inside `city-tour`, then `station/platform` points deeper inside that folder.\n\nUse `pwd` when a command does not affect the file you expected."
+          }
+        }
+      }
+    }
+  }
+}

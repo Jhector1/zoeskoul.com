@@ -1,0 +1,173 @@
+{
+  "topics": {
+    "linux-terminal-fundamentals": {
+      "linux-1-terminal-navigation": {
+        "what-the-terminal-is": {
+          "label": "What the Terminal Is",
+          "summary": "Understand the terminal as a place to type commands and see the computer respond.",
+          "cards": {
+            "sketch0": {
+              "title": "The terminal is a conversation with the computer"
+            },
+            "sketch1": {
+              "title": "The prompt waits for your next command"
+            },
+            "sketch2": {
+              "title": "Begin with safe commands"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Terminal practice project"
+            }
+          },
+          "projectSteps": {
+            "ci_create_linux_start": {
+              "title": "Create your first Linux folder"
+            },
+            "ci_make_command_practice": {
+              "title": "Create a command practice note"
+            },
+            "ci_create_first_lab": {
+              "title": "Set up a first lab folder"
+            }
+          },
+          "tryIt": {
+            "try_what_the_terminal_is_sketch0": {
+              "title": "Create your first Linux folder",
+              "prompt": "Use the terminal to create a folder named `linux-start` and a file named `hello.txt` inside it."
+            },
+            "try_what_the_terminal_is_sketch1": {
+              "title": "Create a command practice note",
+              "prompt": "Create `linux-start/command-practice.txt`. Use any safe command you want, such as `touch` or `echo >`."
+            },
+            "try_what_the_terminal_is_sketch2": {
+              "title": "Set up a first lab folder",
+              "prompt": "Create `first-lab/results.txt` so the explorer shows a folder with one result file."
+            }
+          },
+          "quiz": {
+            "sc-terminal-purpose": {
+              "title": "What is the terminal mainly for?",
+              "prompt": "It lets you type commands for the computer to run.",
+              "hint": "It lets you type commands for the computer to run.",
+              "help": {
+                "concept": "It lets you type commands for the computer to run.",
+                "hint_1": "It lets you type commands for the computer to run.",
+                "hint_2": "Review the command names from the lesson, then choose the option that matches the task."
+              },
+              "options": {
+                "a": "A text-based place to run commands",
+                "b": "Only a place to draw pictures",
+                "c": "A folder that stores downloads",
+                "d": "A command that deletes files"
+              }
+            },
+            "sc-whoami": {
+              "title": "Which command prints the current user?",
+              "prompt": "Think: who am I as a Linux user?",
+              "hint": "Think: who am I as a Linux user?",
+              "help": {
+                "concept": "Think: who am I as a Linux user?",
+                "hint_1": "Think: who am I as a Linux user?",
+                "hint_2": "Review the command names from the lesson, then choose the option that matches the task."
+              },
+              "options": {
+                "a": "pwd",
+                "b": "whoami",
+                "c": "clear",
+                "d": "mkdir"
+              }
+            },
+            "sc-clear": {
+              "title": "What does clear do?",
+              "prompt": "It changes the screen, not your files.",
+              "hint": "It changes the screen, not your files.",
+              "help": {
+                "concept": "It changes the screen, not your files.",
+                "hint_1": "It changes the screen, not your files.",
+                "hint_2": "Review the command names from the lesson, then choose the option that matches the task."
+              },
+              "options": {
+                "a": "Deletes all files",
+                "b": "Moves to the home folder",
+                "c": "Clears the terminal screen",
+                "d": "Creates a folder"
+              }
+            },
+            "mc-safe-first": {
+              "title": "Choose all safe beginner commands from this lesson.",
+              "prompt": "Look for commands that inspect or create simple workspace items.",
+              "hint": "Look for commands that inspect or create simple workspace items.",
+              "help": {
+                "concept": "Look for commands that inspect or create simple workspace items.",
+                "hint_1": "Look for commands that inspect or create simple workspace items.",
+                "hint_2": "Review the command names from the lesson, then choose the option that matches the task."
+              },
+              "options": {
+                "a": "pwd",
+                "b": "whoami",
+                "c": "mkdir linux-start",
+                "d": "rm -rf /"
+              }
+            },
+            "ci-create-linux-start": {
+              "title": "Create your first Linux folder",
+              "prompt": "Use the terminal to create a folder named `linux-start` and a file named `hello.txt` inside it.\n\nUse the terminal. The editor is hidden on purpose for this task.",
+              "hint": "Use terminal commands such as `pwd`, `ls`, `mkdir -p`, `touch`, `cp`, `mv`, or `rm` depending on the task.",
+              "help": {
+                "concept": "This is a Linux terminal workspace task. Complete it by changing the file tree with terminal commands.",
+                "hint_1": "Use `pwd` and `ls` to inspect where you are.",
+                "hint_2": "The checker looks for the required folders/files and checks that forbidden files are gone."
+              },
+              "placeholder": "Use the terminal to complete this task."
+            },
+            "ci-make-command-practice": {
+              "title": "Create a command practice note",
+              "prompt": "Create `linux-start/command-practice.txt`. Use any safe command you want, such as `touch` or `echo >`.\n\nUse the terminal. The editor is hidden on purpose for this task.",
+              "hint": "Use terminal commands such as `pwd`, `ls`, `mkdir -p`, `touch`, `cp`, `mv`, or `rm` depending on the task.",
+              "help": {
+                "concept": "This is a Linux terminal workspace task. Complete it by changing the file tree with terminal commands.",
+                "hint_1": "Use `pwd` and `ls` to inspect where you are.",
+                "hint_2": "The checker looks for the required folders/files and checks that forbidden files are gone."
+              },
+              "placeholder": "Use the terminal to complete this task."
+            },
+            "ci-create-first-lab": {
+              "title": "Set up a first lab folder",
+              "prompt": "Create `first-lab/results.txt` so the explorer shows a folder with one result file.\n\nUse the terminal. The editor is hidden on purpose for this task.",
+              "hint": "Use terminal commands such as `pwd`, `ls`, `mkdir -p`, `touch`, `cp`, `mv`, or `rm` depending on the task.",
+              "help": {
+                "concept": "This is a Linux terminal workspace task. Complete it by changing the file tree with terminal commands.",
+                "hint_1": "Use `pwd` and `ls` to inspect where you are.",
+                "hint_2": "The checker looks for the required folders/files and checks that forbidden files are gone."
+              },
+              "placeholder": "Use the terminal to complete this task."
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "linux-terminal-fundamentals": {
+      "linux-1-terminal-navigation": {
+        "what-the-terminal-is": {
+          "terminal-is-conversation": {
+            "title": "The terminal is a conversation with the computer",
+            "bodyMarkdown": "The **terminal** is a text-based way to control the computer. Instead of clicking buttons, you type commands.\n\nA command usually has this shape:\n\n```bash\ncommand option target\n```\n\nFor example:\n\n```bash\npwd\n```\n\n`pwd` means **print working directory**. It asks Linux, “Where am I right now?”\n\nIn this course, most tasks happen in the terminal. The file explorer shows the result after your commands create folders, create files, move files, or delete files."
+          },
+          "prompt-and-command": {
+            "title": "The prompt waits for your next command",
+            "bodyMarkdown": "The prompt is the line where you type. It may show your user, machine, or current folder.\n\nExample commands you can safely try:\n\n```bash\nwhoami\npwd\ndate\nclear\nhistory\n```\n\nEach command does one small job. `whoami` prints the current user. `date` prints the current date and time. `clear` cleans the screen without deleting files."
+          },
+          "safe-first-habits": {
+            "title": "Begin with safe commands",
+            "bodyMarkdown": "Early Linux practice should avoid dangerous commands. Start with commands that inspect or create small files inside the lesson workspace.\n\nSafe examples:\n\n```bash\npwd\nls\nmkdir linux-start\ntouch linux-start/hello.txt\n```\n\nBe careful with commands that delete files, especially `rm`. You will learn deletion later with small controlled examples."
+          }
+        }
+      }
+    }
+  }
+}

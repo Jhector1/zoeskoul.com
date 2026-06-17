@@ -38,7 +38,7 @@
         "id": "try-copy-move-rename-sketch0",
         "titleKey": "topics.linux-terminal-fundamentals.linux-2-files-and-folders.copy-move-rename.tryIt.try_copy_move_rename_sketch0.title",
         "promptKey": "topics.linux-terminal-fundamentals.linux-2-files-and-folders.copy-move-rename.tryIt.try_copy_move_rename_sketch0.prompt",
-        "exerciseKey": "ci-copy-draft",
+        "exerciseKey": "try-copy-menu-backup",
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -57,7 +57,7 @@
         "id": "try-copy-move-rename-sketch1",
         "titleKey": "topics.linux-terminal-fundamentals.linux-2-files-and-folders.copy-move-rename.tryIt.try_copy_move_rename_sketch1.title",
         "promptKey": "topics.linux-terminal-fundamentals.linux-2-files-and-folders.copy-move-rename.tryIt.try_copy_move_rename_sketch1.prompt",
-        "exerciseKey": "ci-rename-keep",
+        "exerciseKey": "try-rename-desk-file",
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -76,7 +76,7 @@
         "id": "try-copy-move-rename-sketch2",
         "titleKey": "topics.linux-terminal-fundamentals.linux-2-files-and-folders.copy-move-rename.tryIt.try_copy_move_rename_sketch2.title",
         "promptKey": "topics.linux-terminal-fundamentals.linux-2-files-and-folders.copy-move-rename.tryIt.try_copy_move_rename_sketch2.prompt",
-        "exerciseKey": "ci-remove-temp",
+        "exerciseKey": "try-remove-trash-temp",
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -242,87 +242,57 @@
       "messageBase": "topics.linux-terminal-fundamentals.linux-2-files-and-folders.copy-move-rename.quiz.ci-copy-draft",
       "language": "bash",
       "entryFilePath": "main.sh",
-      "starterCode": "#!/usr/bin/env bash\n# Copy, Move, and Rename\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+      "starterCode": "#!/usr/bin/env bash\n# Back up a report\n# Work from the terminal and shape the workspace with Linux commands.\n",
       "starterFiles": [
         {
           "path": "main.sh",
-          "content": "#!/usr/bin/env bash\n# Copy, Move, and Rename\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+          "content": "#!/usr/bin/env bash\n# Back up a report\n# Work from the terminal and shape the workspace with Linux commands.\n",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "README.md",
-          "content": "# Copy, Move, and Rename\n\nUse the terminal to complete the task. The editor is intentionally hidden for this Linux terminal lab.\n",
+          "content": "# Back up a report\n\nUse shell commands to inspect, create, move, copy, or remove files as needed.\n",
           "language": "text"
         },
         {
-          "path": "inbox/draft.txt",
-          "content": "Draft note\n",
-          "language": "text"
-        },
-        {
-          "path": "inbox/keep.txt",
-          "content": "Keep this\n",
-          "language": "text"
-        },
-        {
-          "path": "inbox/temp.tmp",
-          "content": "Temporary\n",
-          "language": "text"
-        },
-        {
-          "path": "backups/.keep",
-          "content": "",
+          "path": "inbox/report.txt",
+          "content": "daily report\n",
           "language": "text"
         }
       ],
       "workspace": {
         "language": "bash",
         "entryFilePath": "main.sh",
-        "starterCode": "#!/usr/bin/env bash\n# Copy, Move, and Rename\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+        "starterCode": "#!/usr/bin/env bash\n# Back up a report\n# Work from the terminal and shape the workspace with Linux commands.\n",
         "starterFiles": [
           {
             "path": "main.sh",
-            "content": "#!/usr/bin/env bash\n# Copy, Move, and Rename\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+            "content": "#!/usr/bin/env bash\n# Back up a report\n# Work from the terminal and shape the workspace with Linux commands.\n",
             "language": "bash",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "README.md",
-            "content": "# Copy, Move, and Rename\n\nUse the terminal to complete the task. The editor is intentionally hidden for this Linux terminal lab.\n",
+            "content": "# Back up a report\n\nUse shell commands to inspect, create, move, copy, or remove files as needed.\n",
             "language": "text"
           },
           {
-            "path": "inbox/draft.txt",
-            "content": "Draft note\n",
-            "language": "text"
-          },
-          {
-            "path": "inbox/keep.txt",
-            "content": "Keep this\n",
-            "language": "text"
-          },
-          {
-            "path": "inbox/temp.tmp",
-            "content": "Temporary\n",
-            "language": "text"
-          },
-          {
-            "path": "backups/.keep",
-            "content": "",
+            "path": "inbox/report.txt",
+            "content": "daily report\n",
             "language": "text"
           }
         ],
         "workspaceExpectations": {
           "requiredFolders": [
             "inbox",
-            "backups"
+            "archive"
           ],
           "requiredFiles": [
-            "inbox/draft.txt",
-            "backups/draft-copy.txt"
+            "inbox/report.txt",
+            "archive/report-copy.txt"
           ]
         }
       },
@@ -330,16 +300,16 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "Copy `inbox/draft.txt` to `backups/draft-copy.txt`."
+        "instructions": "Copy `inbox/report.txt` to `archive/report-copy.txt`."
       },
       "workspaceExpectations": {
         "requiredFolders": [
           "inbox",
-          "backups"
+          "archive"
         ],
         "requiredFiles": [
-          "inbox/draft.txt",
-          "backups/draft-copy.txt"
+          "inbox/report.txt",
+          "archive/report-copy.txt"
         ]
       }
     },
@@ -351,76 +321,46 @@
       "messageBase": "topics.linux-terminal-fundamentals.linux-2-files-and-folders.copy-move-rename.quiz.ci-rename-keep",
       "language": "bash",
       "entryFilePath": "main.sh",
-      "starterCode": "#!/usr/bin/env bash\n# Copy, Move, and Rename\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+      "starterCode": "#!/usr/bin/env bash\n# Rename today’s note\n# Work from the terminal and shape the workspace with Linux commands.\n",
       "starterFiles": [
         {
           "path": "main.sh",
-          "content": "#!/usr/bin/env bash\n# Copy, Move, and Rename\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+          "content": "#!/usr/bin/env bash\n# Rename today’s note\n# Work from the terminal and shape the workspace with Linux commands.\n",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "README.md",
-          "content": "# Copy, Move, and Rename\n\nUse the terminal to complete the task. The editor is intentionally hidden for this Linux terminal lab.\n",
+          "content": "# Rename today’s note\n\nUse shell commands to inspect, create, move, copy, or remove files as needed.\n",
           "language": "text"
         },
         {
-          "path": "inbox/draft.txt",
-          "content": "Draft note\n",
-          "language": "text"
-        },
-        {
-          "path": "inbox/keep.txt",
-          "content": "Keep this\n",
-          "language": "text"
-        },
-        {
-          "path": "inbox/temp.tmp",
-          "content": "Temporary\n",
-          "language": "text"
-        },
-        {
-          "path": "backups/.keep",
-          "content": "",
+          "path": "inbox/today.txt",
+          "content": "call back at 3\n",
           "language": "text"
         }
       ],
       "workspace": {
         "language": "bash",
         "entryFilePath": "main.sh",
-        "starterCode": "#!/usr/bin/env bash\n# Copy, Move, and Rename\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+        "starterCode": "#!/usr/bin/env bash\n# Rename today’s note\n# Work from the terminal and shape the workspace with Linux commands.\n",
         "starterFiles": [
           {
             "path": "main.sh",
-            "content": "#!/usr/bin/env bash\n# Copy, Move, and Rename\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+            "content": "#!/usr/bin/env bash\n# Rename today’s note\n# Work from the terminal and shape the workspace with Linux commands.\n",
             "language": "bash",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "README.md",
-            "content": "# Copy, Move, and Rename\n\nUse the terminal to complete the task. The editor is intentionally hidden for this Linux terminal lab.\n",
+            "content": "# Rename today’s note\n\nUse shell commands to inspect, create, move, copy, or remove files as needed.\n",
             "language": "text"
           },
           {
-            "path": "inbox/draft.txt",
-            "content": "Draft note\n",
-            "language": "text"
-          },
-          {
-            "path": "inbox/keep.txt",
-            "content": "Keep this\n",
-            "language": "text"
-          },
-          {
-            "path": "inbox/temp.tmp",
-            "content": "Temporary\n",
-            "language": "text"
-          },
-          {
-            "path": "backups/.keep",
-            "content": "",
+            "path": "inbox/today.txt",
+            "content": "call back at 3\n",
             "language": "text"
           }
         ],
@@ -429,10 +369,10 @@
             "inbox"
           ],
           "requiredFiles": [
-            "inbox/important.txt"
+            "inbox/priority.txt"
           ],
           "forbiddenFiles": [
-            "inbox/keep.txt"
+            "inbox/today.txt"
           ]
         }
       },
@@ -440,17 +380,17 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "Rename `inbox/keep.txt` to `inbox/important.txt`."
+        "instructions": "Rename `inbox/today.txt` to `inbox/priority.txt`."
       },
       "workspaceExpectations": {
         "requiredFolders": [
           "inbox"
         ],
         "requiredFiles": [
-          "inbox/important.txt"
+          "inbox/priority.txt"
         ],
         "forbiddenFiles": [
-          "inbox/keep.txt"
+          "inbox/today.txt"
         ]
       }
     },
@@ -462,76 +402,56 @@
       "messageBase": "topics.linux-terminal-fundamentals.linux-2-files-and-folders.copy-move-rename.quiz.ci-remove-temp",
       "language": "bash",
       "entryFilePath": "main.sh",
-      "starterCode": "#!/usr/bin/env bash\n# Copy, Move, and Rename\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+      "starterCode": "#!/usr/bin/env bash\n# Throw away a temp file\n# Work from the terminal and shape the workspace with Linux commands.\n",
       "starterFiles": [
         {
           "path": "main.sh",
-          "content": "#!/usr/bin/env bash\n# Copy, Move, and Rename\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+          "content": "#!/usr/bin/env bash\n# Throw away a temp file\n# Work from the terminal and shape the workspace with Linux commands.\n",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "README.md",
-          "content": "# Copy, Move, and Rename\n\nUse the terminal to complete the task. The editor is intentionally hidden for this Linux terminal lab.\n",
+          "content": "# Throw away a temp file\n\nUse shell commands to inspect, create, move, copy, or remove files as needed.\n",
           "language": "text"
         },
         {
-          "path": "inbox/draft.txt",
-          "content": "Draft note\n",
+          "path": "inbox/discard.tmp",
+          "content": "temporary\n",
           "language": "text"
         },
         {
           "path": "inbox/keep.txt",
-          "content": "Keep this\n",
-          "language": "text"
-        },
-        {
-          "path": "inbox/temp.tmp",
-          "content": "Temporary\n",
-          "language": "text"
-        },
-        {
-          "path": "backups/.keep",
-          "content": "",
+          "content": "keep me\n",
           "language": "text"
         }
       ],
       "workspace": {
         "language": "bash",
         "entryFilePath": "main.sh",
-        "starterCode": "#!/usr/bin/env bash\n# Copy, Move, and Rename\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+        "starterCode": "#!/usr/bin/env bash\n# Throw away a temp file\n# Work from the terminal and shape the workspace with Linux commands.\n",
         "starterFiles": [
           {
             "path": "main.sh",
-            "content": "#!/usr/bin/env bash\n# Copy, Move, and Rename\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+            "content": "#!/usr/bin/env bash\n# Throw away a temp file\n# Work from the terminal and shape the workspace with Linux commands.\n",
             "language": "bash",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "README.md",
-            "content": "# Copy, Move, and Rename\n\nUse the terminal to complete the task. The editor is intentionally hidden for this Linux terminal lab.\n",
+            "content": "# Throw away a temp file\n\nUse shell commands to inspect, create, move, copy, or remove files as needed.\n",
             "language": "text"
           },
           {
-            "path": "inbox/draft.txt",
-            "content": "Draft note\n",
+            "path": "inbox/discard.tmp",
+            "content": "temporary\n",
             "language": "text"
           },
           {
             "path": "inbox/keep.txt",
-            "content": "Keep this\n",
-            "language": "text"
-          },
-          {
-            "path": "inbox/temp.tmp",
-            "content": "Temporary\n",
-            "language": "text"
-          },
-          {
-            "path": "backups/.keep",
-            "content": "",
+            "content": "keep me\n",
             "language": "text"
           }
         ],
@@ -540,7 +460,7 @@
             "inbox"
           ],
           "forbiddenFiles": [
-            "inbox/temp.tmp"
+            "inbox/discard.tmp"
           ]
         }
       },
@@ -548,14 +468,293 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "Remove `inbox/temp.tmp` after checking the folder contents."
+        "instructions": "Remove `inbox/discard.tmp`."
       },
       "workspaceExpectations": {
         "requiredFolders": [
           "inbox"
         ],
         "forbiddenFiles": [
-          "inbox/temp.tmp"
+          "inbox/discard.tmp"
+        ]
+      }
+    },
+    {
+      "id": "try-copy-menu-backup",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-2-files-and-folders.copy-move-rename.quiz.try-copy-menu-backup",
+      "language": "bash",
+      "entryFilePath": "main.sh",
+      "starterCode": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "README.md",
+          "content": "# Copy a menu backup\n\nCopy `drafts/menu.txt` to `backup/menu.txt`.\n",
+          "language": "text"
+        },
+        {
+          "path": "drafts/menu.txt",
+          "content": "sandwich\nsalad\n",
+          "language": "text"
+        }
+      ],
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "starterCode": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "README.md",
+            "content": "# Copy a menu backup\n\nCopy `drafts/menu.txt` to `backup/menu.txt`.\n",
+            "language": "text"
+          },
+          {
+            "path": "drafts/menu.txt",
+            "content": "sandwich\nsalad\n",
+            "language": "text"
+          }
+        ],
+        "terminalExpectations": {
+          "requiredCommands": [
+            {
+              "pattern": "^cp\\s+drafts/menu\\.txt\\s+backup/menu\\.txt$",
+              "message": "Copy the menu file"
+            }
+          ]
+        },
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "drafts/menu.txt",
+            "backup/menu.txt"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "Copy `drafts/menu.txt` to `backup/menu.txt`."
+      },
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "drafts/menu.txt",
+          "backup/menu.txt"
+        ]
+      },
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^cp\\s+drafts/menu\\.txt\\s+backup/menu\\.txt$",
+            "message": "Copy the menu file"
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-rename-desk-file",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-2-files-and-folders.copy-move-rename.quiz.try-rename-desk-file",
+      "language": "bash",
+      "entryFilePath": "main.sh",
+      "starterCode": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "README.md",
+          "content": "# Rename a desk file\n\nRename the file in `desk`.\n",
+          "language": "text"
+        },
+        {
+          "path": "desk/old-name.txt",
+          "content": "final notes\n",
+          "language": "text"
+        }
+      ],
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "starterCode": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "README.md",
+            "content": "# Rename a desk file\n\nRename the file in `desk`.\n",
+            "language": "text"
+          },
+          {
+            "path": "desk/old-name.txt",
+            "content": "final notes\n",
+            "language": "text"
+          }
+        ],
+        "terminalExpectations": {
+          "requiredCommands": [
+            {
+              "pattern": "^mv\\s+desk/old-name\\.txt\\s+desk/final-name\\.txt$",
+              "message": "Rename the desk file"
+            }
+          ]
+        },
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "desk/final-name.txt"
+          ],
+          "forbiddenFiles": [
+            "desk/old-name.txt"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "Rename `desk/old-name.txt` to `desk/final-name.txt`."
+      },
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "desk/final-name.txt"
+        ],
+        "forbiddenFiles": [
+          "desk/old-name.txt"
+        ]
+      },
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^mv\\s+desk/old-name\\.txt\\s+desk/final-name\\.txt$",
+            "message": "Rename the desk file"
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-remove-trash-temp",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-2-files-and-folders.copy-move-rename.quiz.try-remove-trash-temp",
+      "language": "bash",
+      "entryFilePath": "main.sh",
+      "starterCode": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "README.md",
+          "content": "# Remove a temp file\n\nDelete only `trash/remove.tmp`.\n",
+          "language": "text"
+        },
+        {
+          "path": "trash/remove.tmp",
+          "content": "delete me\n",
+          "language": "text"
+        },
+        {
+          "path": "trash/keep.txt",
+          "content": "keep me\n",
+          "language": "text"
+        }
+      ],
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "starterCode": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "README.md",
+            "content": "# Remove a temp file\n\nDelete only `trash/remove.tmp`.\n",
+            "language": "text"
+          },
+          {
+            "path": "trash/remove.tmp",
+            "content": "delete me\n",
+            "language": "text"
+          },
+          {
+            "path": "trash/keep.txt",
+            "content": "keep me\n",
+            "language": "text"
+          }
+        ],
+        "terminalExpectations": {
+          "requiredCommands": [
+            {
+              "pattern": "^rm\\s+trash/remove\\.tmp$",
+              "message": "Remove only remove.tmp"
+            }
+          ]
+        },
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "trash/keep.txt"
+          ],
+          "forbiddenFiles": [
+            "trash/remove.tmp"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "Remove `trash/remove.tmp` and keep `trash/keep.txt`."
+      },
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "trash/keep.txt"
+        ],
+        "forbiddenFiles": [
+          "trash/remove.tmp"
+        ]
+      },
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^rm\\s+trash/remove\\.tmp$",
+            "message": "Remove only remove.tmp"
+          }
         ]
       }
     }

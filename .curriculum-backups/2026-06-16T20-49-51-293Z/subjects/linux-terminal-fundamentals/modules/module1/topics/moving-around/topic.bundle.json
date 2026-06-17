@@ -1,0 +1,571 @@
+{
+  "topicId": "moving-around",
+  "subjectSlug": "linux-terminal-fundamentals",
+  "moduleSlug": "linux-1-terminal-navigation",
+  "sectionSlug": "linux-terminal-fundamentals-linux-1-orientation",
+  "prefix": "lin1",
+  "minutes": 18,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "bash",
+    "supportsTerminal": true,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "runnerBackend": "pty",
+    "layoutMode": "terminal_workspace",
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": true
+    }
+  },
+  "topic": {
+    "labelKey": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.moving-around.label",
+    "summaryKey": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.moving-around.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.moving-around.cards.sketch0.title",
+      "sketchId": "cd-enters-folders",
+      "height": 420,
+      "tryIt": {
+        "id": "try-moving-around-sketch0",
+        "titleKey": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.moving-around.tryIt.try_moving_around_sketch0.title",
+        "promptKey": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.moving-around.tryIt.try_moving_around_sketch0.prompt",
+        "exerciseKey": "ci-build-cd-practice",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.moving-around.cards.sketch1.title",
+      "sketchId": "dot-dot-parent",
+      "height": 420,
+      "tryIt": {
+        "id": "try-moving-around-sketch1",
+        "titleKey": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.moving-around.tryIt.try_moving_around_sketch1.title",
+        "promptKey": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.moving-around.tryIt.try_moving_around_sketch1.prompt",
+        "exerciseKey": "ci-create-up-one-lab",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.moving-around.cards.sketch2.title",
+      "sketchId": "home-shortcut",
+      "height": 420,
+      "tryIt": {
+        "id": "try-moving-around-sketch2",
+        "titleKey": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.moving-around.tryIt.try_moving_around_sketch2.title",
+        "promptKey": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.moving-around.tryIt.try_moving_around_sketch2.prompt",
+        "exerciseKey": "ci-create-path-trail",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.moving-around.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 4,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.moving-around.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "ci_build_cd_practice",
+            "titleKey": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.moving-around.projectSteps.ci_build_cd_practice.title",
+            "exerciseKey": "ci-build-cd-practice",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "ci_create_up_one_lab",
+            "titleKey": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.moving-around.projectSteps.ci_create_up_one_lab.title",
+            "exerciseKey": "ci-create-up-one-lab",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "ci_create_path_trail",
+            "titleKey": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.moving-around.projectSteps.ci_create_path_trail.title",
+            "exerciseKey": "ci-create-path-trail",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "cd-enters-folders",
+      "archetype": "paragraph",
+      "titleKey": "sketches.linux-terminal-fundamentals.linux-1-terminal-navigation.moving-around.cd-enters-folders.title",
+      "bodyKey": "sketches.linux-terminal-fundamentals.linux-1-terminal-navigation.moving-around.cd-enters-folders.bodyMarkdown"
+    },
+    {
+      "id": "dot-dot-parent",
+      "archetype": "paragraph",
+      "titleKey": "sketches.linux-terminal-fundamentals.linux-1-terminal-navigation.moving-around.dot-dot-parent.title",
+      "bodyKey": "sketches.linux-terminal-fundamentals.linux-1-terminal-navigation.moving-around.dot-dot-parent.bodyMarkdown"
+    },
+    {
+      "id": "home-shortcut",
+      "archetype": "paragraph",
+      "titleKey": "sketches.linux-terminal-fundamentals.linux-1-terminal-navigation.moving-around.home-shortcut.title",
+      "bodyKey": "sketches.linux-terminal-fundamentals.linux-1-terminal-navigation.moving-around.home-shortcut.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "sc-cd",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.moving-around.quiz.sc-cd",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "sc-parent",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.moving-around.quiz.sc-parent",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "sc-home",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.moving-around.quiz.sc-home",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "c"
+      }
+    },
+    {
+      "id": "mc-navigation-habits",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.moving-around.quiz.mc-navigation-habits",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "ci-build-cd-practice",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.moving-around.quiz.ci-build-cd-practice",
+      "language": "bash",
+      "entryFilePath": "main.sh",
+      "starterCode": "#!/usr/bin/env bash\n# Go to the platform folder\n# Use the terminal for this task.\n",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "#!/usr/bin/env bash\n# Go to the platform folder\n# Use the terminal for this task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "README.md",
+          "content": "# Go to the platform folder\n\nUse `cd` to enter `city-tour/station/platform`, then run `pwd`.\n",
+          "language": "text"
+        },
+        {
+          "path": "city-tour/station/platform/ticket.txt",
+          "content": "Platform A\n",
+          "language": "text"
+        }
+      ],
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "starterCode": "#!/usr/bin/env bash\n# Go to the platform folder\n# Use the terminal for this task.\n",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "#!/usr/bin/env bash\n# Go to the platform folder\n# Use the terminal for this task.\n",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "README.md",
+            "content": "# Go to the platform folder\n\nUse `cd` to enter `city-tour/station/platform`, then run `pwd`.\n",
+            "language": "text"
+          },
+          {
+            "path": "city-tour/station/platform/ticket.txt",
+            "content": "Platform A\n",
+            "language": "text"
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [
+            "city-tour",
+            "city-tour/station",
+            "city-tour/station/platform"
+          ],
+          "requiredFiles": [
+            "city-tour/station/platform/ticket.txt"
+          ]
+        },
+        "terminalExpectations": {
+          "requiredCommands": [
+            {
+              "pattern": "^cd\\s+city-tour/station/platform$",
+              "message": "Run: cd city-tour/station/platform"
+            },
+            {
+              "pattern": "^pwd$",
+              "message": "Run: pwd"
+            }
+          ],
+          "outputRegex": [
+            "/workspace/city-tour/station/platform"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "Use `cd` to enter `city-tour/station/platform`, then run `pwd`."
+      },
+      "workspaceExpectations": {
+        "requiredFolders": [
+          "city-tour",
+          "city-tour/station",
+          "city-tour/station/platform"
+        ],
+        "requiredFiles": [
+          "city-tour/station/platform/ticket.txt"
+        ]
+      },
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^cd\\s+city-tour/station/platform$",
+            "message": "Run: cd city-tour/station/platform"
+          },
+          {
+            "pattern": "^pwd$",
+            "message": "Run: pwd"
+          }
+        ],
+        "outputRegex": [
+          "/workspace/city-tour/station/platform"
+        ]
+      }
+    },
+    {
+      "id": "ci-create-up-one-lab",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.moving-around.quiz.ci-create-up-one-lab",
+      "language": "bash",
+      "entryFilePath": "main.sh",
+      "starterCode": "#!/usr/bin/env bash\n# Move back to the parent folder\n# Use the terminal for this task.\n",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "#!/usr/bin/env bash\n# Move back to the parent folder\n# Use the terminal for this task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "README.md",
+          "content": "# Move back to the parent folder\n\nGo into `return-trip/start`, run `cd ..`, then run `pwd`.\n",
+          "language": "text"
+        },
+        {
+          "path": "return-trip/start/back-home.txt",
+          "content": "Return marker\n",
+          "language": "text"
+        }
+      ],
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "starterCode": "#!/usr/bin/env bash\n# Move back to the parent folder\n# Use the terminal for this task.\n",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "#!/usr/bin/env bash\n# Move back to the parent folder\n# Use the terminal for this task.\n",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "README.md",
+            "content": "# Move back to the parent folder\n\nGo into `return-trip/start`, run `cd ..`, then run `pwd`.\n",
+            "language": "text"
+          },
+          {
+            "path": "return-trip/start/back-home.txt",
+            "content": "Return marker\n",
+            "language": "text"
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [
+            "return-trip",
+            "return-trip/start"
+          ],
+          "requiredFiles": [
+            "return-trip/start/back-home.txt"
+          ]
+        },
+        "terminalExpectations": {
+          "requiredCommands": [
+            {
+              "pattern": "^cd\\s+return-trip/start$",
+              "message": "Run: cd return-trip/start"
+            },
+            {
+              "pattern": "^cd\\s+\\.\\.$",
+              "message": "Run: cd .."
+            },
+            {
+              "pattern": "^pwd$",
+              "message": "Run: pwd"
+            }
+          ],
+          "outputRegex": [
+            "/workspace/return-trip"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "Go into `return-trip/start`, run `cd ..`, then run `pwd`."
+      },
+      "workspaceExpectations": {
+        "requiredFolders": [
+          "return-trip",
+          "return-trip/start"
+        ],
+        "requiredFiles": [
+          "return-trip/start/back-home.txt"
+        ]
+      },
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^cd\\s+return-trip/start$",
+            "message": "Run: cd return-trip/start"
+          },
+          {
+            "pattern": "^cd\\s+\\.\\.$",
+            "message": "Run: cd .."
+          },
+          {
+            "pattern": "^pwd$",
+            "message": "Run: pwd"
+          }
+        ],
+        "outputRegex": [
+          "/workspace/return-trip"
+        ]
+      }
+    },
+    {
+      "id": "ci-create-path-trail",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.moving-around.quiz.ci-create-path-trail",
+      "language": "bash",
+      "entryFilePath": "main.sh",
+      "starterCode": "#!/usr/bin/env bash\n# Find the final marker\n# Use the terminal for this task.\n",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "#!/usr/bin/env bash\n# Find the final marker\n# Use the terminal for this task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "README.md",
+          "content": "# Find the final marker\n\nUse `cd` to enter `trail/start/middle`, then run `ls` and look for `final-marker.txt`.\n",
+          "language": "text"
+        },
+        {
+          "path": "trail/start/middle/final-marker.txt",
+          "content": "You found it.\n",
+          "language": "text"
+        }
+      ],
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "starterCode": "#!/usr/bin/env bash\n# Find the final marker\n# Use the terminal for this task.\n",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "#!/usr/bin/env bash\n# Find the final marker\n# Use the terminal for this task.\n",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "README.md",
+            "content": "# Find the final marker\n\nUse `cd` to enter `trail/start/middle`, then run `ls` and look for `final-marker.txt`.\n",
+            "language": "text"
+          },
+          {
+            "path": "trail/start/middle/final-marker.txt",
+            "content": "You found it.\n",
+            "language": "text"
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [
+            "trail",
+            "trail/start",
+            "trail/start/middle"
+          ],
+          "requiredFiles": [
+            "trail/start/middle/final-marker.txt"
+          ]
+        },
+        "terminalExpectations": {
+          "requiredCommands": [
+            {
+              "pattern": "^cd\\s+trail/start/middle$",
+              "message": "Run: cd trail/start/middle"
+            },
+            {
+              "pattern": "^ls$",
+              "message": "Run: ls"
+            }
+          ],
+          "outputContains": [
+            "final-marker.txt"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "Use `cd` to enter `trail/start/middle`, then run `ls` and look for `final-marker.txt`."
+      },
+      "workspaceExpectations": {
+        "requiredFolders": [
+          "trail",
+          "trail/start",
+          "trail/start/middle"
+        ],
+        "requiredFiles": [
+          "trail/start/middle/final-marker.txt"
+        ]
+      },
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^cd\\s+trail/start/middle$",
+            "message": "Run: cd trail/start/middle"
+          },
+          {
+            "pattern": "^ls$",
+            "message": "Run: ls"
+          }
+        ],
+        "outputContains": [
+          "final-marker.txt"
+        ]
+      }
+    }
+  ]
+}

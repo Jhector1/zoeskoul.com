@@ -78,7 +78,7 @@ docker compose -f docker-compose.prod.yml logs -f runner
 
 
 
-pnpm curr:course -- publish sql sql-v2 --live-subject sql-v2  --force
+pnpm curr:course -- publish linux linux-terminal-fundamentals --live-subject linux-terminal-fundamentals  --force
 
 
 
@@ -156,7 +156,7 @@ sudo docker compose up -d judge0 worker
 
 
 
-pnpm curr:course -- draft-goldens python applied-python-projects
+pnpm curr:course -- draft-goldens linux linux-terminal-fundamentals
 
 
 sudo scp -r deploy@5.78.159.224:/opt/edge-proxy ~/Downloads/

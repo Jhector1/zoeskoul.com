@@ -6,7 +6,8 @@
   "title": "Linux Terminal Fundamentals",
   "moduleOrder": [
     "linux-1-terminal-navigation",
-    "linux-2-files-and-folders"
+    "linux-2-files-and-folders",
+    "linux-3-final-capstone"
   ],
   "modules": [
     {
@@ -18,6 +19,53 @@
       "moduleSlug": "linux-2-files-and-folders",
       "moduleNumber": 2,
       "title": "Files, Folders, and Viewing Content"
+    },
+    {
+      "moduleNumber": 3,
+      "moduleSlug": "linux-3-final-capstone",
+      "prefix": "lin3",
+      "role": "capstone",
+      "title": "Final Capstone: File Room Handoff",
+      "learningObjectives": [
+        "Create a clean folder structure for a real workspace.",
+        "Move and rename files into useful locations.",
+        "Copy important notes into a backup folder.",
+        "Inspect files before removing temporary clutter.",
+        "Leave a final ready marker that confirms the workspace is organized."
+      ],
+      "guidedExercises": [
+        "Sort a messy workspace with mkdir, cp, mv, rm, cat, head, tail, wc, pwd, and ls.",
+        "Use only safe commands inside the provided workspace.",
+        "Check the final file tree against the handoff requirements."
+      ],
+      "quizFocus": [
+        "safe file cleanup",
+        "command choice",
+        "workspace organization"
+      ],
+      "moduleProject": "Clean an event workspace, back up key notes, remove temporary clutter, and leave a ready marker.",
+      "sections": [
+        {
+          "sectionSlug": "linux-terminal-fundamentals-linux-3-final-capstone",
+          "role": "capstone",
+          "title": "Final Capstone",
+          "summary": "Clean a small event file room and leave the workspace ready for handoff.",
+          "topics": [
+            {
+              "topicId": "final-file-room-handoff-capstone",
+              "title": "Capstone: File Room Handoff",
+              "summary": "Sort event notes, backups, code samples, and temporary files into a clean handoff workspace.",
+              "minutes": 35,
+              "technical": true,
+              "learningGoals": [
+                "Use core terminal commands together to organize a realistic workspace."
+              ]
+            }
+          ]
+        }
+      ],
+      "order": 3,
+      "description": "Use the terminal to clean up a small event workspace and leave a clear handoff for the next person."
     }
   ]
 }

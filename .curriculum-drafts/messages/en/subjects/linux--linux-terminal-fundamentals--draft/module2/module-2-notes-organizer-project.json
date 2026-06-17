@@ -4,7 +4,7 @@
       "linux-2-files-and-folders": {
         "module-2-notes-organizer-project": {
           "label": "Project: Notes Organizer",
-          "summary": "Organize a messy folder into notes, homework, code, and backups.",
+          "summary": "Turn a messy download folder into a clean school workspace with backups.",
           "cards": {
             "sketch0": {
               "title": "Turn a messy folder into a clean workspace"
@@ -19,32 +19,32 @@
               "title": "Quiz"
             },
             "project": {
-              "title": "Terminal practice project"
+              "title": "School download cleanup"
             }
           },
           "projectSteps": {
             "ci_organizer_create_folders": {
-              "title": "Create organizer folders"
+              "title": "Create the semester folders"
             },
             "ci_organizer_move_files": {
-              "title": "Move files into the right folders"
+              "title": "Sort the downloaded files"
             },
             "ci_organizer_final": {
-              "title": "Finish the organizer"
+              "title": "Back up notes and clear old clutter"
             }
           },
           "tryIt": {
             "try_module_2_notes_organizer_project_sketch0": {
-              "title": "Create organizer folders",
-              "prompt": "Create `school/notes`, `school/homework`, `school/code`, and `backups`."
+              "title": "Make a small practice shelf",
+              "prompt": "Create `practice/notes` and `practice/backups`."
             },
             "try_module_2_notes_organizer_project_sketch1": {
-              "title": "Move files into the right folders",
-              "prompt": "Move `notes.txt`, `homework.txt`, and `project.sh` from `messy-inbox` into their correct school folders."
+              "title": "Move one note card",
+              "prompt": "Move `practice-inbox/card.txt` to `practice/notes/card.txt`."
             },
             "try_module_2_notes_organizer_project_sketch2": {
-              "title": "Finish the organizer",
-              "prompt": "Copy `school/notes/notes.txt` to `backups/notes-backup.txt` and remove `messy-inbox/old.tmp`."
+              "title": "Back up the note card",
+              "prompt": "Copy `practice/notes/card.txt` to `practice/backups/card.txt`."
             }
           },
           "quiz": {
@@ -113,37 +113,70 @@
               }
             },
             "ci-organizer-create-folders": {
-              "title": "Create organizer folders",
-              "prompt": "Create `school/notes`, `school/homework`, `school/code`, and `backups`.\n\nUse the terminal. The editor is hidden on purpose for this task.",
-              "hint": "Use terminal commands such as `pwd`, `ls`, `mkdir -p`, `touch`, `cp`, `mv`, or `rm` depending on the task.",
+              "title": "Create the semester folders",
+              "prompt": "Create `semester/notes`, `semester/assignments`, `semester/scripts`, and `backups`.",
+              "hint": "Create the destination folders before moving files.",
               "help": {
-                "concept": "This is a Linux terminal workspace task. Complete it by changing the file tree with terminal commands.",
-                "hint_1": "Use `pwd` and `ls` to inspect where you are.",
-                "hint_2": "The checker looks for the required folders/files and checks that forbidden files are gone."
+                "concept": "Use the terminal to change the workspace, then check the result with `ls`.",
+                "hint_1": "Create the destination folders before moving files.",
+                "hint_2": "Submit when the required path exists and any unwanted path is gone."
               },
-              "placeholder": "Use the terminal to complete this task."
+              "placeholder": "Type commands in the terminal."
             },
             "ci-organizer-move-files": {
-              "title": "Move files into the right folders",
-              "prompt": "Move `notes.txt`, `homework.txt`, and `project.sh` from `messy-inbox` into their correct school folders.\n\nUse the terminal. The editor is hidden on purpose for this task.",
-              "hint": "Use terminal commands such as `pwd`, `ls`, `mkdir -p`, `touch`, `cp`, `mv`, or `rm` depending on the task.",
+              "title": "Sort the downloaded files",
+              "prompt": "Move `notes.txt`, `homework.txt`, and `project.sh` from `downloads` into their matching semester folders.",
+              "hint": "Create destinations first, then use `mv` for each file.",
               "help": {
-                "concept": "This is a Linux terminal workspace task. Complete it by changing the file tree with terminal commands.",
-                "hint_1": "Use `pwd` and `ls` to inspect where you are.",
-                "hint_2": "The checker looks for the required folders/files and checks that forbidden files are gone."
+                "concept": "Use the terminal to change the workspace, then check the result with `ls`.",
+                "hint_1": "Create destinations first, then use `mv` for each file.",
+                "hint_2": "Submit when the required path exists and any unwanted path is gone."
               },
-              "placeholder": "Use the terminal to complete this task."
+              "placeholder": "Type commands in the terminal."
             },
             "ci-organizer-final": {
-              "title": "Finish the organizer",
-              "prompt": "Copy `school/notes/notes.txt` to `backups/notes-backup.txt` and remove `messy-inbox/old.tmp`.\n\nUse the terminal. The editor is hidden on purpose for this task.",
-              "hint": "Use terminal commands such as `pwd`, `ls`, `mkdir -p`, `touch`, `cp`, `mv`, or `rm` depending on the task.",
+              "title": "Back up notes and clear old clutter",
+              "prompt": "Copy `semester/notes/notes.txt` to `backups/notes-backup.txt` and remove `downloads/old.tmp`.",
+              "hint": "This final task may need `mkdir -p`, `mv`, `cp`, and `rm`.",
               "help": {
-                "concept": "This is a Linux terminal workspace task. Complete it by changing the file tree with terminal commands.",
-                "hint_1": "Use `pwd` and `ls` to inspect where you are.",
-                "hint_2": "The checker looks for the required folders/files and checks that forbidden files are gone."
+                "concept": "Use the terminal to change the workspace, then check the result with `ls`.",
+                "hint_1": "This final task may need `mkdir -p`, `mv`, `cp`, and `rm`.",
+                "hint_2": "Submit when the required path exists and any unwanted path is gone."
               },
-              "placeholder": "Use the terminal to complete this task."
+              "placeholder": "Type commands in the terminal."
+            },
+            "try-organizer-make-practice-folders": {
+              "title": "Make a small practice shelf",
+              "prompt": "Create `practice/notes` and `practice/backups`.",
+              "hint": "Use `mkdir -p practice/notes practice/backups`.",
+              "help": {
+                "concept": "Build destination folders before moving files.",
+                "hint_1": "Use `mkdir -p practice/notes practice/backups`.",
+                "hint_2": "Run the command in the terminal, check the response, then submit."
+              },
+              "placeholder": "Type commands in the terminal."
+            },
+            "try-organizer-move-card": {
+              "title": "Move one note card",
+              "prompt": "Move `practice-inbox/card.txt` to `practice/notes/card.txt`.",
+              "hint": "Create the destination folder if needed, then use `mv`.",
+              "help": {
+                "concept": "Move a file into the folder where it belongs.",
+                "hint_1": "Create the destination folder if needed, then use `mv`.",
+                "hint_2": "Run the command in the terminal, check the response, then submit."
+              },
+              "placeholder": "Type commands in the terminal."
+            },
+            "try-organizer-backup-card": {
+              "title": "Back up the note card",
+              "prompt": "Copy `practice/notes/card.txt` to `practice/backups/card.txt`.",
+              "hint": "Use `cp practice/notes/card.txt practice/backups/card.txt`.",
+              "help": {
+                "concept": "A backup is a copy, so the original should remain.",
+                "hint_1": "Use `cp practice/notes/card.txt practice/backups/card.txt`.",
+                "hint_2": "Run the command in the terminal, check the response, then submit."
+              },
+              "placeholder": "Type commands in the terminal."
             }
           }
         }
@@ -155,16 +188,16 @@
       "linux-2-files-and-folders": {
         "module-2-notes-organizer-project": {
           "organizer-goal": {
-            "title": "Turn a messy folder into a clean workspace",
-            "bodyMarkdown": "Real developer folders get messy. In this project, you will organize loose files into purpose-based folders.\n\nYou will use:\n\n```bash\nmkdir\ncp\nmv\nrm\nls\n```\n\nThe checker will confirm the final file tree."
+            "title": "Sort by purpose",
+            "bodyMarkdown": "A messy folder is easier to fix when each destination has a clear job: notes, assignments, scripts, and backups."
           },
           "organizer-safe-plan": {
-            "title": "Plan before moving files",
-            "bodyMarkdown": "Before moving files, inspect the starting folder:\n\n```bash\nls messy-inbox\n```\n\nThen create destination folders before moving anything:\n\n```bash\nmkdir -p school/notes school/homework school/code backups\n```"
+            "title": "Move each file once",
+            "bodyMarkdown": "Before moving, list the inbox and read the filenames. Then move each file to the folder where someone would expect to find it."
           },
           "organizer-final-check": {
-            "title": "A clean final tree tells a story",
-            "bodyMarkdown": "At the end, your workspace should make sense to another person. Notes go in `school/notes`, homework in `school/homework`, code in `school/code`, and important copies in `backups`."
+            "title": "Back up what matters, remove what does not",
+            "bodyMarkdown": "A good cleanup keeps useful work, backs up important notes, and removes temporary clutter."
           }
         }
       }

@@ -2,7 +2,6 @@
   "catalog": {
     "slug": "linux",
     "order": 30,
-    "defaultSubjectSlug": "linux",
     "title": "Linux",
     "defaultSubjectSlug": "linux-terminal-fundamentals",
     "description": "Linux courses focused on terminal fluency, files, permissions, Bash, developer workflows, and server basics.",
@@ -16,5 +15,9 @@
       "family": "systems",
       "featured": true
     }
-  }
+  },
+  "subjectSlugs": [
+    "linux-terminal-fundamentals"
+  ],
+  "defaultSubjectSlug": "linux-terminal-fundamentals"
 }

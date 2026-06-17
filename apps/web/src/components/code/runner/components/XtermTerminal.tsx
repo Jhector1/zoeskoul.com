@@ -85,6 +85,16 @@ function writeChunk(term: XTerm, chunk: TerminalChunk) {
     term.write(`\x1b[90m${text}\x1b[0m`);
 }
 
+function isBenignXtermDimensionsError(value: unknown) {
+    const message =
+        value instanceof Error ? value.message : typeof value === "string" ? value : "";
+
+    return (
+        message.includes("dimensions") &&
+        (message.includes("undefined") || message.includes("null"))
+    );
+}
+
 function splitInputByEnter(data: string) {
     const parts: Array<{ kind: "text" | "enter"; value: string }> = [];
     let buf = "";
@@ -201,6 +211,7 @@ export default function XtermTerminal(props: {
 
     const lastSizeRef = useRef<{ cols: number; rows: number } | null>(null);
     const prevFeedRef = useRef<TerminalChunk[]>([]);
+    const terminalFeedRef = useRef<TerminalChunk[]>(terminalFeed);
 
     const onSendDataRef = useRef(onSendData);
     const onResizeRef = useRef(onResize);
@@ -208,6 +219,7 @@ export default function XtermTerminal(props: {
     const onAfterSubmitEnterRef = useRef(props.onAfterSubmitEnter);
     const onInactiveInputAttemptRef = useRef(onInactiveInputAttempt);
     const inputQueueRef = useRef<Promise<void>>(Promise.resolve());
+    const [terminalOpenEpoch, setTerminalOpenEpoch] = React.useState(0);
 
     const isCurrentTerminalUsable = useCallback((term: XTerm | null): term is XTerm => {
         if (!term) return false;
@@ -245,6 +257,90 @@ export default function XtermTerminal(props: {
     useEffect(() => {
         onInactiveInputAttemptRef.current = onInactiveInputAttempt;
     }, [onInactiveInputAttempt]);
+
+    useEffect(() => {
+        terminalFeedRef.current = terminalFeed;
+    }, [terminalFeed]);
+
+    useEffect(() => {
+        const stopBenignXtermCrash = (event: ErrorEvent) => {
+            if (!isBenignXtermDimensionsError(event.error ?? event.message)) return;
+            event.preventDefault();
+            event.stopImmediatePropagation();
+        };
+
+        const stopBenignXtermPromiseCrash = (event: PromiseRejectionEvent) => {
+            if (!isBenignXtermDimensionsError(event.reason)) return;
+            event.preventDefault();
+            event.stopImmediatePropagation();
+        };
+
+        window.addEventListener("error", stopBenignXtermCrash, true);
+        window.addEventListener("unhandledrejection", stopBenignXtermPromiseCrash, true);
+
+        return () => {
+            window.removeEventListener("error", stopBenignXtermCrash, true);
+            window.removeEventListener("unhandledrejection", stopBenignXtermPromiseCrash, true);
+        };
+    }, []); // xterm-dimensions-error-guard
+
+
+    const dispatchInputThroughApp = useCallback(async (data: string): Promise<boolean> => {
+        if (!inputReadyRef.current) return false;
+
+        const normalized = String(data ?? "")
+            .replace(/\r\n/g, "\r")
+            .replace(/\n/g, "\r");
+        const parts = splitInputByEnter(normalized);
+
+        for (const part of parts) {
+            if (part.kind === "text") {
+                onSendDataRef.current(part.value);
+                continue;
+            }
+
+            await onBeforeSubmitEnterRef.current?.();
+            onSendDataRef.current(part.value);
+            await onAfterSubmitEnterRef.current?.();
+        }
+
+        return true;
+    }, []);
+
+    useEffect(() => {
+        const w = window as typeof window & {
+            __pwEnableFullIdeTerminalInputHook?: boolean;
+            __pwDispatchTerminalInputThroughApp?: (data: string) => Promise<boolean>;
+            __pwSyncTerminalInputThroughApp?: (data: string) => Promise<boolean>;
+        };
+
+        if (!w.__pwEnableFullIdeTerminalInputHook) return;
+
+        w.__pwDispatchTerminalInputThroughApp = dispatchInputThroughApp;
+        w.__pwSyncTerminalInputThroughApp = async (data: string): Promise<boolean> => {
+            if (!inputReadyRef.current) return false;
+
+            const normalized = String(data ?? "")
+                .replace(/\r\n/g, "\r")
+                .replace(/\n/g, "\r");
+            const parts = splitInputByEnter(normalized);
+
+            for (const part of parts) {
+                if (part.kind !== "enter") continue;
+                await onBeforeSubmitEnterRef.current?.();
+                await onAfterSubmitEnterRef.current?.();
+            }
+
+            return true;
+        };
+
+        return () => {
+            if (w.__pwDispatchTerminalInputThroughApp === dispatchInputThroughApp) {
+                delete w.__pwDispatchTerminalInputThroughApp;
+            }
+            delete w.__pwSyncTerminalInputThroughApp;
+        };
+    }, [dispatchInputThroughApp]);
 
     const statusText = useMemo(
         () =>
@@ -384,6 +480,23 @@ export default function XtermTerminal(props: {
                         openedRef.current = true;
                         disposedRef.current = false;
 
+                        const feedToReplay = terminalFeedRef.current;
+                        if (feedToReplay.length > 0) {
+                            try {
+                                prevFeedRef.current = [];
+                                for (const chunk of feedToReplay) {
+                                    if (!isCurrentTerminalUsable(term)) break;
+                                    writeChunk(term, chunk);
+                                }
+                                prevFeedRef.current = feedToReplay;
+                                term.scrollToBottom();
+                            } catch (err) {
+                                console.warn("xterm initial feed replay skipped", err);
+                            }
+                        }
+
+                        setTerminalOpenEpoch((epoch) => epoch + 1);
+
                         term.attachCustomKeyEventHandler((ev: KeyboardEvent) => {
                             if (!inputReadyRef.current) {
                                 if (
@@ -463,7 +576,7 @@ export default function XtermTerminal(props: {
                         window.setTimeout(() => {
                             scheduleResize();
                             focusTerminal();
-                        }, 0);
+                        }, 80);
                     });
                 });
             };
@@ -554,7 +667,6 @@ export default function XtermTerminal(props: {
         const term = termRef.current;
 
         if (!isCurrentTerminalUsable(term)) {
-            prevFeedRef.current = terminalFeed;
             return;
         }
 
@@ -608,7 +720,7 @@ export default function XtermTerminal(props: {
         } catch (err) {
             console.warn("xterm feed write skipped after stale terminal instance", err);
         }
-    }, [terminalFeed, scrollTerminalToBottom, isCurrentTerminalUsable]);
+    }, [terminalFeed, terminalOpenEpoch, scrollTerminalToBottom, isCurrentTerminalUsable]);
 
     return (
         <div

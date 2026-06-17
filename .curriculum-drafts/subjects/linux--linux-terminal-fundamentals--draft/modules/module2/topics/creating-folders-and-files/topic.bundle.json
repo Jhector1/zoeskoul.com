@@ -38,7 +38,7 @@
         "id": "try-creating-folders-and-files-sketch0",
         "titleKey": "topics.linux--linux-terminal-fundamentals--draft.linux-2-files-and-folders.creating-folders-and-files.tryIt.try_creating_folders_and_files_sketch0.title",
         "promptKey": "topics.linux--linux-terminal-fundamentals--draft.linux-2-files-and-folders.creating-folders-and-files.tryIt.try_creating_folders_and_files_sketch0.prompt",
-        "exerciseKey": "ci-create-school-notes",
+        "exerciseKey": "try-create-quick-note",
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -57,7 +57,7 @@
         "id": "try-creating-folders-and-files-sketch1",
         "titleKey": "topics.linux--linux-terminal-fundamentals--draft.linux-2-files-and-folders.creating-folders-and-files.tryIt.try_creating_folders_and_files_sketch1.title",
         "promptKey": "topics.linux--linux-terminal-fundamentals--draft.linux-2-files-and-folders.creating-folders-and-files.tryIt.try_creating_folders_and_files_sketch1.prompt",
-        "exerciseKey": "ci-create-project-folders",
+        "exerciseKey": "try-create-site-folders",
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -76,7 +76,7 @@
         "id": "try-creating-folders-and-files-sketch2",
         "titleKey": "topics.linux--linux-terminal-fundamentals--draft.linux-2-files-and-folders.creating-folders-and-files.tryIt.try_creating_folders_and_files_sketch2.title",
         "promptKey": "topics.linux--linux-terminal-fundamentals--draft.linux-2-files-and-folders.creating-folders-and-files.tryIt.try_creating_folders_and_files_sketch2.prompt",
-        "exerciseKey": "ci-create-multiple-files",
+        "exerciseKey": "try-create-site-files",
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -242,47 +242,47 @@
       "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-2-files-and-folders.creating-folders-and-files.quiz.ci-create-school-notes",
       "language": "bash",
       "entryFilePath": "main.sh",
-      "starterCode": "#!/usr/bin/env bash\n# Creating Folders and Files\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+      "starterCode": "#!/usr/bin/env bash\n# Prepare biology notes\n# Work from the terminal and shape the workspace with Linux commands.\n",
       "starterFiles": [
         {
           "path": "main.sh",
-          "content": "#!/usr/bin/env bash\n# Creating Folders and Files\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+          "content": "#!/usr/bin/env bash\n# Prepare biology notes\n# Work from the terminal and shape the workspace with Linux commands.\n",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "README.md",
-          "content": "# Creating Folders and Files\n\nUse the terminal to complete the task. The editor is intentionally hidden for this Linux terminal lab.\n",
+          "content": "# Prepare biology notes\n\nUse shell commands to inspect, create, move, copy, or remove files as needed.\n",
           "language": "text"
         }
       ],
       "workspace": {
         "language": "bash",
         "entryFilePath": "main.sh",
-        "starterCode": "#!/usr/bin/env bash\n# Creating Folders and Files\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+        "starterCode": "#!/usr/bin/env bash\n# Prepare biology notes\n# Work from the terminal and shape the workspace with Linux commands.\n",
         "starterFiles": [
           {
             "path": "main.sh",
-            "content": "#!/usr/bin/env bash\n# Creating Folders and Files\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+            "content": "#!/usr/bin/env bash\n# Prepare biology notes\n# Work from the terminal and shape the workspace with Linux commands.\n",
             "language": "bash",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "README.md",
-            "content": "# Creating Folders and Files\n\nUse the terminal to complete the task. The editor is intentionally hidden for this Linux terminal lab.\n",
+            "content": "# Prepare biology notes\n\nUse shell commands to inspect, create, move, copy, or remove files as needed.\n",
             "language": "text"
           }
         ],
         "workspaceExpectations": {
           "requiredFolders": [
             "school",
-            "school/notes",
-            "school/notes/week1"
+            "school/biology",
+            "school/biology/week1"
           ],
           "requiredFiles": [
-            "school/notes/week1/today.txt"
+            "school/biology/week1/notes.txt"
           ]
         }
       },
@@ -290,16 +290,16 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "Create `school/notes/week1/today.txt`."
+        "instructions": "Create `school/biology/week1/notes.txt`."
       },
       "workspaceExpectations": {
         "requiredFolders": [
           "school",
-          "school/notes",
-          "school/notes/week1"
+          "school/biology",
+          "school/biology/week1"
         ],
         "requiredFiles": [
-          "school/notes/week1/today.txt"
+          "school/biology/week1/notes.txt"
         ]
       }
     },
@@ -311,45 +311,45 @@
       "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-2-files-and-folders.creating-folders-and-files.quiz.ci-create-project-folders",
       "language": "bash",
       "entryFilePath": "main.sh",
-      "starterCode": "#!/usr/bin/env bash\n# Creating Folders and Files\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+      "starterCode": "#!/usr/bin/env bash\n# Set up a small website folder\n# Work from the terminal and shape the workspace with Linux commands.\n",
       "starterFiles": [
         {
           "path": "main.sh",
-          "content": "#!/usr/bin/env bash\n# Creating Folders and Files\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+          "content": "#!/usr/bin/env bash\n# Set up a small website folder\n# Work from the terminal and shape the workspace with Linux commands.\n",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "README.md",
-          "content": "# Creating Folders and Files\n\nUse the terminal to complete the task. The editor is intentionally hidden for this Linux terminal lab.\n",
+          "content": "# Set up a small website folder\n\nUse shell commands to inspect, create, move, copy, or remove files as needed.\n",
           "language": "text"
         }
       ],
       "workspace": {
         "language": "bash",
         "entryFilePath": "main.sh",
-        "starterCode": "#!/usr/bin/env bash\n# Creating Folders and Files\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+        "starterCode": "#!/usr/bin/env bash\n# Set up a small website folder\n# Work from the terminal and shape the workspace with Linux commands.\n",
         "starterFiles": [
           {
             "path": "main.sh",
-            "content": "#!/usr/bin/env bash\n# Creating Folders and Files\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+            "content": "#!/usr/bin/env bash\n# Set up a small website folder\n# Work from the terminal and shape the workspace with Linux commands.\n",
             "language": "bash",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "README.md",
-            "content": "# Creating Folders and Files\n\nUse the terminal to complete the task. The editor is intentionally hidden for this Linux terminal lab.\n",
+            "content": "# Set up a small website folder\n\nUse shell commands to inspect, create, move, copy, or remove files as needed.\n",
             "language": "text"
           }
         ],
         "workspaceExpectations": {
           "requiredFolders": [
-            "project",
-            "project/src",
-            "project/docs",
-            "project/tests"
+            "website",
+            "website/assets",
+            "website/pages",
+            "website/scripts"
           ]
         }
       },
@@ -357,14 +357,14 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "Create folders `project/src`, `project/docs`, and `project/tests`."
+        "instructions": "Create `website/assets`, `website/pages`, and `website/scripts`."
       },
       "workspaceExpectations": {
         "requiredFolders": [
-          "project",
-          "project/src",
-          "project/docs",
-          "project/tests"
+          "website",
+          "website/assets",
+          "website/pages",
+          "website/scripts"
         ]
       }
     },
@@ -376,48 +376,47 @@
       "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-2-files-and-folders.creating-folders-and-files.quiz.ci-create-multiple-files",
       "language": "bash",
       "entryFilePath": "main.sh",
-      "starterCode": "#!/usr/bin/env bash\n# Creating Folders and Files\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+      "starterCode": "#!/usr/bin/env bash\n# Add website starter files\n# Work from the terminal and shape the workspace with Linux commands.\n",
       "starterFiles": [
         {
           "path": "main.sh",
-          "content": "#!/usr/bin/env bash\n# Creating Folders and Files\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+          "content": "#!/usr/bin/env bash\n# Add website starter files\n# Work from the terminal and shape the workspace with Linux commands.\n",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "README.md",
-          "content": "# Creating Folders and Files\n\nUse the terminal to complete the task. The editor is intentionally hidden for this Linux terminal lab.\n",
+          "content": "# Add website starter files\n\nUse shell commands to inspect, create, move, copy, or remove files as needed.\n",
           "language": "text"
         }
       ],
       "workspace": {
         "language": "bash",
         "entryFilePath": "main.sh",
-        "starterCode": "#!/usr/bin/env bash\n# Creating Folders and Files\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+        "starterCode": "#!/usr/bin/env bash\n# Add website starter files\n# Work from the terminal and shape the workspace with Linux commands.\n",
         "starterFiles": [
           {
             "path": "main.sh",
-            "content": "#!/usr/bin/env bash\n# Creating Folders and Files\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+            "content": "#!/usr/bin/env bash\n# Add website starter files\n# Work from the terminal and shape the workspace with Linux commands.\n",
             "language": "bash",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "README.md",
-            "content": "# Creating Folders and Files\n\nUse the terminal to complete the task. The editor is intentionally hidden for this Linux terminal lab.\n",
+            "content": "# Add website starter files\n\nUse shell commands to inspect, create, move, copy, or remove files as needed.\n",
             "language": "text"
           }
         ],
         "workspaceExpectations": {
           "requiredFolders": [
-            "project",
-            "project/docs",
-            "project/tests"
+            "website/pages",
+            "website/scripts"
           ],
           "requiredFiles": [
-            "project/docs/plan.txt",
-            "project/tests/checklist.txt"
+            "website/pages/home.html",
+            "website/scripts/todo.txt"
           ]
         }
       },
@@ -425,17 +424,259 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "Create `project/docs/plan.txt` and `project/tests/checklist.txt`."
+        "instructions": "Create `website/pages/home.html` and `website/scripts/todo.txt`."
       },
       "workspaceExpectations": {
         "requiredFolders": [
-          "project",
-          "project/docs",
-          "project/tests"
+          "website/pages",
+          "website/scripts"
         ],
         "requiredFiles": [
-          "project/docs/plan.txt",
-          "project/tests/checklist.txt"
+          "website/pages/home.html",
+          "website/scripts/todo.txt"
+        ]
+      }
+    },
+    {
+      "id": "try-create-quick-note",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-2-files-and-folders.creating-folders-and-files.quiz.try-create-quick-note",
+      "language": "bash",
+      "entryFilePath": "main.sh",
+      "starterCode": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "README.md",
+          "content": "# Create a quick note\n\nCreate `quick-notes/today.txt`.\n",
+          "language": "text"
+        }
+      ],
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "starterCode": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "README.md",
+            "content": "# Create a quick note\n\nCreate `quick-notes/today.txt`.\n",
+            "language": "text"
+          }
+        ],
+        "terminalExpectations": {
+          "requiredCommands": [
+            {
+              "pattern": "^mkdir\\s+(-p\\s+)?quick-notes$",
+              "message": "Create quick-notes"
+            },
+            {
+              "pattern": "^touch\\s+quick-notes/today\\.txt$",
+              "message": "Create today.txt"
+            }
+          ]
+        },
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "quick-notes/today.txt"
+          ],
+          "requiredFolders": [
+            "quick-notes"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "Create `quick-notes/today.txt`."
+      },
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "quick-notes/today.txt"
+        ],
+        "requiredFolders": [
+          "quick-notes"
+        ]
+      },
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^mkdir\\s+(-p\\s+)?quick-notes$",
+            "message": "Create quick-notes"
+          },
+          {
+            "pattern": "^touch\\s+quick-notes/today\\.txt$",
+            "message": "Create today.txt"
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-create-site-folders",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-2-files-and-folders.creating-folders-and-files.quiz.try-create-site-folders",
+      "language": "bash",
+      "entryFilePath": "main.sh",
+      "starterCode": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "README.md",
+          "content": "# Make two website folders\n\nCreate `site/assets` and `site/pages`.\n",
+          "language": "text"
+        }
+      ],
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "starterCode": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "README.md",
+            "content": "# Make two website folders\n\nCreate `site/assets` and `site/pages`.\n",
+            "language": "text"
+          }
+        ],
+        "terminalExpectations": {
+          "requiredCommands": [
+            {
+              "pattern": "^mkdir\\s+-p\\s+.*site/assets.*site/pages|^mkdir\\s+-p\\s+.*site/pages.*site/assets",
+              "message": "Create both folders"
+            }
+          ]
+        },
+        "workspaceExpectations": {
+          "requiredFolders": [
+            "site/assets",
+            "site/pages"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "Create `site/assets` and `site/pages`."
+      },
+      "workspaceExpectations": {
+        "requiredFolders": [
+          "site/assets",
+          "site/pages"
+        ]
+      },
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^mkdir\\s+-p\\s+.*site/assets.*site/pages|^mkdir\\s+-p\\s+.*site/pages.*site/assets",
+            "message": "Create both folders"
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-create-site-files",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-2-files-and-folders.creating-folders-and-files.quiz.try-create-site-files",
+      "language": "bash",
+      "entryFilePath": "main.sh",
+      "starterCode": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "README.md",
+          "content": "# Add starter website files\n\nCreate two files inside the site folders.\n",
+          "language": "text"
+        }
+      ],
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "starterCode": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "README.md",
+            "content": "# Add starter website files\n\nCreate two files inside the site folders.\n",
+            "language": "text"
+          }
+        ],
+        "terminalExpectations": {
+          "requiredCommands": [
+            {
+              "pattern": "^touch\\s+.*site/pages/index\\.html.*site/assets/logo\\.txt|^touch\\s+.*site/assets/logo\\.txt.*site/pages/index\\.html",
+              "message": "Create both files"
+            }
+          ]
+        },
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "site/pages/index.html",
+            "site/assets/logo.txt"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "Create `site/pages/index.html` and `site/assets/logo.txt`."
+      },
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "site/pages/index.html",
+          "site/assets/logo.txt"
+        ]
+      },
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^touch\\s+.*site/pages/index\\.html.*site/assets/logo\\.txt|^touch\\s+.*site/assets/logo\\.txt.*site/pages/index\\.html",
+            "message": "Create both files"
+          }
         ]
       }
     }

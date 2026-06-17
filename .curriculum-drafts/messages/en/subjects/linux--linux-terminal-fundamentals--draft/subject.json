@@ -2,7 +2,7 @@
   "subjects": {
     "linux--linux-terminal-fundamentals--draft": {
       "title": "Linux Terminal Fundamentals",
-      "description": "A beginner-friendly Linux course focused on terminal navigation, files, folders, safe command habits, and workspace-based practice.",
+      "description": "A practical first Linux course for moving around the terminal, organizing files, reading text, and finishing a real workspace cleanup.",
       "moreComingSoon": "More Linux lessons are coming soon."
     }
   },
@@ -10,7 +10,7 @@
     "linux--linux-terminal-fundamentals--draft": {
       "linux-1-terminal-navigation": {
         "title": "Terminal Navigation Basics",
-        "description": "Learn what the terminal is, how to know where you are, how to list files, and how to move between folders.",
+        "description": "Get comfortable with the prompt, your current folder, file lists, and safe movement through a workspace.",
         "outcomes": [
           "Explain what a terminal command does.",
           "Use pwd and ls to inspect the current location.",
@@ -18,13 +18,13 @@
           "Create a simple folder map using terminal commands."
         ],
         "why": [
-          "Builds comfort with the terminal before scripts or servers.",
-          "Gives learners real command practice with immediate file explorer feedback."
+          "Every terminal task starts with knowing where you are.",
+          "Small, visible changes build confidence before scripts, Git, SSH, or servers."
         ]
       },
       "linux-2-files-and-folders": {
         "title": "Files, Folders, and Viewing Content",
-        "description": "Create, copy, move, rename, delete, and inspect files from the terminal.",
+        "description": "Create useful folder structures, clean up files, and read text without leaving the terminal.",
         "outcomes": [
           "Create folders and files with mkdir, mkdir -p, and touch.",
           "Copy, move, and rename files using cp and mv.",
@@ -32,8 +32,22 @@
           "Inspect text files with cat, head, tail, and wc."
         ],
         "why": [
-          "Turns command memorization into visible workspace changes.",
-          "Prepares learners for Bash scripts, Git, SSH, and server work."
+          "File organization is a daily skill for development and server work.",
+          "Reading and cleaning files from the terminal makes larger tasks less intimidating."
+        ]
+      },
+      "linux-3-file-room-capstone": {
+        "title": "Final Capstone: File Room Handoff",
+        "description": "Clean up a messy event workspace and leave it ready for the next person.",
+        "outcomes": [
+          "Inspect a messy workspace before changing it.",
+          "Create a clean folder structure for a real task.",
+          "Move, rename, copy, and remove files safely.",
+          "Use file-reading commands to check your work before finishing."
+        ],
+        "why": [
+          "Brings the first course together in one realistic terminal job.",
+          "Builds the habit of checking, organizing, and handing off work clearly."
         ]
       }
     }
@@ -54,7 +68,7 @@
         },
         "linux--linux-terminal-fundamentals--draft-linux-1-module-project": {
           "title": "Module Project",
-          "description": "Build a simple terminal map that proves you can create and navigate a nested workspace.",
+          "description": "Build a small field kit map with clear folders and check files.",
           "weeks": null,
           "bullets": [
             "Create nested folders",
@@ -77,12 +91,25 @@
         },
         "linux--linux-terminal-fundamentals--draft-linux-2-module-project": {
           "title": "Module Project",
-          "description": "Organize a messy notes folder into a clean school workspace.",
+          "description": "Clean a downloaded school folder into notes, assignments, scripts, and backups.",
           "weeks": null,
           "bullets": [
             "Move files into purpose-based folders",
             "Copy important files into backups",
             "Remove old temporary files"
+          ]
+        }
+      },
+      "linux-3-file-room-capstone": {
+        "linux--linux-terminal-fundamentals--draft-linux-3-capstone": {
+          "title": "Capstone Project",
+          "description": "Take a messy event folder and leave behind a clean handoff.",
+          "weeks": null,
+          "bullets": [
+            "Inspect the incoming files",
+            "Create a clean folder map",
+            "Move and back up important files",
+            "Remove temporary clutter safely"
           ]
         }
       }

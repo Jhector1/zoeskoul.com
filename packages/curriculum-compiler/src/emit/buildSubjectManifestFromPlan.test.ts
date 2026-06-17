@@ -130,6 +130,58 @@ function makeArgs(overrides?: {
 }
 
 describe("buildSubjectManifestFromPlan", () => {
+
+    it("uses courseNumber for subject manifest order instead of catalog-specific hardcoding", () => {
+        const manifest = buildSubjectManifestFromPlan(
+            makeArgs({
+                blueprint: {
+                    subjectSlug: "sql-v2",
+                    catalogSlug: "sql",
+                    courseNumber: 2,
+                },
+            }),
+        );
+
+        expect(manifest.subject.order).toBe(2);
+    });
+
+    it("uses zero as the neutral subject manifest order when no courseNumber is provided", () => {
+        const manifest = buildSubjectManifestFromPlan(makeArgs());
+
+        expect(manifest.subject.order).toBe(0);
+    });
+    it("does not invent default versioning for independent courses", () => {
+        const manifest = buildSubjectManifestFromPlan(makeArgs());
+
+        expect(manifest.subject.meta?.versioning).toBeUndefined();
+    });
+
+    it("emits versioning only when the blueprint explicitly declares it", () => {
+        const manifest = buildSubjectManifestFromPlan(
+            makeArgs({
+                blueprint: {
+                    versioning: {
+                        family: "python",
+                        version: 2,
+                        status: "active",
+                        defaultForNewEnrollments: true,
+                        supersedes: "python",
+                        supersededBy: null,
+                    },
+                },
+            }),
+        );
+
+        expect(manifest.subject.meta?.versioning).toEqual({
+            family: "python",
+            version: 2,
+            status: "active",
+            defaultForNewEnrollments: true,
+            supersedes: "python",
+            supersededBy: null,
+        });
+    });
+
     it("does not hardcode the first modules as free", () => {
         const manifest = buildSubjectManifestFromPlan(
             makeArgs({
@@ -315,5 +367,6 @@ describe("buildSubjectManifestFromPlan", () => {
         );
 
         expect(source).not.toContain('module.order <= 2 ? "free" : null');
+        expect(source).not.toContain('blueprint.subjectSlug === "sql"');
     });
 });

@@ -9,6 +9,7 @@ import { requireRunnerActorKey } from "@/lib/server/runnerActorKey";
 import { RunnerHttpError, runnerPost } from "@/lib/server/runnerClient";
 import {
     acquirePtyLeaseLock,
+    forgetPtyLeaseBySession,
     getPtyLeaseByWorkspace,
     normalizeWorkspaceKey,
     releasePtyLeaseLock,
@@ -129,6 +130,76 @@ function stripLeaseFields(body: ShellEnsureReq): InteractiveRunReq {
     return runnerBody as InteractiveRunReq;
 }
 
+function isStaleRunnerSessionError(error: unknown) {
+    if (error instanceof RunnerHttpError) {
+        const message = error.message.toLowerCase();
+
+        return (
+            error.status === 403 ||
+            error.status === 404 ||
+            message.includes("no such container") ||
+            message.includes("no such session") ||
+            message.includes("session not found") ||
+            message.includes("forbidden")
+        );
+    }
+
+    const message =
+        error instanceof Error ? error.message.toLowerCase() : String(error).toLowerCase();
+
+    return (
+        message.includes("no such container") ||
+        message.includes("no such session") ||
+        message.includes("session not found") ||
+        message.includes("forbidden")
+    );
+}
+
+async function canReusePtyLease(args: {
+    actorKey: string;
+    sessionId: string;
+}) {
+    try {
+        const out = await runnerPost<{ ok?: boolean }>(
+            `/sessions/${encodeURIComponent(args.sessionId)}/snapshot-workspace`,
+            args.actorKey,
+            {},
+        );
+
+        return out?.ok !== false;
+    } catch (error) {
+        if (isStaleRunnerSessionError(error)) {
+            await forgetPtyLeaseBySession({
+                actorKey: args.actorKey,
+                sessionId: args.sessionId,
+            }).catch(() => {});
+
+            console.warn("PTY ensure dropped stale lease", {
+                sessionId: args.sessionId,
+                message: error instanceof Error ? error.message : String(error),
+            });
+
+            return false;
+        }
+
+        throw error;
+    }
+}
+
+async function reusableLeaseOrNull<T extends { sessionId: string }>(args: {
+    actorKey: string;
+    lease: T | null;
+}) {
+    if (!args.lease) return null;
+
+    const reusable = await canReusePtyLease({
+        actorKey: args.actorKey,
+        sessionId: args.lease.sessionId,
+    });
+
+    return reusable ? args.lease : null;
+}
+
 export async function POST(req: NextRequest) {
     let lock: { key: string; token: string } | null = null;
 
@@ -192,11 +263,13 @@ export async function POST(req: NextRequest) {
                 workspaceKey,
             });
 
-            if (existing) {
+            const reusable = await reusableLeaseOrNull({ actorKey, lease: existing });
+
+            if (reusable) {
                 return NextResponse.json<EnsureBrowserSessionResult>(
                     buildSessionResponse({
-                        sessionId: existing.sessionId,
-                        state: existing.state,
+                        sessionId: reusable.sessionId,
+                        state: reusable.state,
                         actorKey,
                         reused: true,
                     }),
@@ -217,11 +290,13 @@ export async function POST(req: NextRequest) {
                 delayMs: 150,
             });
 
-            if (existing) {
+            const reusable = await reusableLeaseOrNull({ actorKey, lease: existing });
+
+            if (reusable) {
                 return NextResponse.json<EnsureBrowserSessionResult>(
                     buildSessionResponse({
-                        sessionId: existing.sessionId,
-                        state: existing.state,
+                        sessionId: reusable.sessionId,
+                        state: reusable.state,
                         actorKey,
                         reused: true,
                     }),
@@ -243,11 +318,16 @@ export async function POST(req: NextRequest) {
                 workspaceKey,
             });
 
-            if (existingAfterLock) {
+            const reusableAfterLock = await reusableLeaseOrNull({
+                actorKey,
+                lease: existingAfterLock,
+            });
+
+            if (reusableAfterLock) {
                 return NextResponse.json<EnsureBrowserSessionResult>(
                     buildSessionResponse({
-                        sessionId: existingAfterLock.sessionId,
-                        state: existingAfterLock.state,
+                        sessionId: reusableAfterLock.sessionId,
+                        state: reusableAfterLock.state,
                         actorKey,
                         reused: true,
                     }),

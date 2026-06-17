@@ -22,7 +22,7 @@
     },
     "meta": {
       "curriculum": {
-        "plannedModuleCount": 2,
+        "plannedModuleCount": 3,
         "isTerminalRelease": true,
         "moreComingMessageKey": "subjects.linux--linux-terminal-fundamentals--draft.moreComingSoon"
       },
@@ -240,6 +240,78 @@
           },
           "topics": [
             "module-2-notes-organizer-project"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "linux-3-file-room-capstone",
+      "prefix": "lin3",
+      "order": 3,
+      "titleKey": "modules.linux--linux-terminal-fundamentals--draft.linux-3-file-room-capstone.title",
+      "descriptionKey": "modules.linux--linux-terminal-fundamentals--draft.linux-3-file-room-capstone.description",
+      "weekStart": null,
+      "weekEnd": null,
+      "accessOverride": null,
+      "serviceDefaults": {
+        "runnerBackend": "pty",
+        "layoutMode": "terminal_workspace",
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        }
+      },
+      "runtimeDefaults": {
+        "kind": "code",
+        "language": "bash",
+        "supportsTerminal": true,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true,
+        "supportsStdInStdOut": true,
+        "supportsPackageInstall": false
+      },
+      "meta": {
+        "estimatedMinutes": 60,
+        "prereqKeys": [],
+        "outcomeKeys": [
+          "modules.linux--linux-terminal-fundamentals--draft.linux-3-file-room-capstone.outcomes.0",
+          "modules.linux--linux-terminal-fundamentals--draft.linux-3-file-room-capstone.outcomes.1",
+          "modules.linux--linux-terminal-fundamentals--draft.linux-3-file-room-capstone.outcomes.2",
+          "modules.linux--linux-terminal-fundamentals--draft.linux-3-file-room-capstone.outcomes.3"
+        ],
+        "whyKeys": [
+          "modules.linux--linux-terminal-fundamentals--draft.linux-3-file-room-capstone.why.0",
+          "modules.linux--linux-terminal-fundamentals--draft.linux-3-file-room-capstone.why.1"
+        ]
+      },
+      "sections": [
+        {
+          "slug": "linux--linux-terminal-fundamentals--draft-linux-3-capstone",
+          "order": 1,
+          "titleKey": "sections.linux--linux-terminal-fundamentals--draft.linux-3-file-room-capstone.linux--linux-terminal-fundamentals--draft-linux-3-capstone.title",
+          "descriptionKey": "sections.linux--linux-terminal-fundamentals--draft.linux-3-file-room-capstone.linux--linux-terminal-fundamentals--draft-linux-3-capstone.description",
+          "serviceDefaults": {
+            "runnerBackend": "pty",
+            "layoutMode": "terminal_workspace",
+            "requires": {
+              "files": true,
+              "multiFile": true,
+              "terminal": true
+            }
+          },
+          "meta": {
+            "module": 3,
+            "weeksKey": "sections.linux--linux-terminal-fundamentals--draft.linux-3-file-room-capstone.linux--linux-terminal-fundamentals--draft-linux-3-capstone.weeks",
+            "bulletKeys": [
+              "sections.linux--linux-terminal-fundamentals--draft.linux-3-file-room-capstone.linux--linux-terminal-fundamentals--draft-linux-3-capstone.bullets.0",
+              "sections.linux--linux-terminal-fundamentals--draft.linux-3-file-room-capstone.linux--linux-terminal-fundamentals--draft-linux-3-capstone.bullets.1",
+              "sections.linux--linux-terminal-fundamentals--draft.linux-3-file-room-capstone.linux--linux-terminal-fundamentals--draft-linux-3-capstone.bullets.2",
+              "sections.linux--linux-terminal-fundamentals--draft.linux-3-file-room-capstone.linux--linux-terminal-fundamentals--draft-linux-3-capstone.bullets.3"
+            ]
+          },
+          "topics": [
+            "final-file-room-capstone"
           ]
         }
       ]

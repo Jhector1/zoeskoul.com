@@ -22,15 +22,20 @@ export function isSeededSubject<T extends SubjectAvailabilityInput>(
 }
 
 /**
- * Learner rule:
+ * Learner catalog rule:
  * - subject must exist in Prisma
- * - version-family rules apply
- * - draft/disabled hidden
+ * - unseeded manifests are ignored before version-family selection
+ * - catalog prefers the active default course over an enrolled legacy course
+ * - draft/disabled hidden by the shared subject visibility rule
  */
 export function selectSeededVisibleSubjectsForActor<
     T extends SubjectAvailabilityInput,
 >(subjects: readonly T[]): Array<SeededSubject<T>> {
-    return selectVisibleSubjectsForActor(subjects).filter(isSeededSubject);
+    const seededSubjects = subjects.filter(isSeededSubject);
+
+    return selectVisibleSubjectsForActor(seededSubjects, {
+        familyPreference: "default",
+    });
 }
 
 /**

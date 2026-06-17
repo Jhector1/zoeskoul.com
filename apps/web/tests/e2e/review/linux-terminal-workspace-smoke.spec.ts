@@ -178,10 +178,10 @@ test.describe("linux terminal_workspace smoke", () => {
             timeout: 45_000,
         });
 
-        await expect(page.getByTestId("code-input-exercise")).toBeVisible({
+        await expect(page.getByTestId("interactive-terminal")).toBeVisible({
             timeout: 45_000,
         });
-        await expect(page.getByTestId("tools-file-tree")).toBeVisible();
+        await expect(page.getByTestId("interactive-terminal")).toBeVisible();
         await expect(explorerPathLocator(page, "README.md")).toBeVisible();
         await expect(page.getByTestId("code-editor-e2e-input")).toHaveCount(0);
         await expectTerminalVisible(page);

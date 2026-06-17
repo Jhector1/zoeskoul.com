@@ -1,0 +1,173 @@
+{
+  "topics": {
+    "linux-terminal-fundamentals": {
+      "linux-3-file-room-capstone": {
+        "final-file-room-capstone": {
+          "label": "Final File Room Capstone",
+          "summary": "Clean up a real-looking event workspace and leave it ready for the next person.",
+          "cards": {
+            "sketch0": {
+              "title": "The file room handoff"
+            },
+            "sketch1": {
+              "title": "Sort the incoming files"
+            },
+            "sketch2": {
+              "title": "Check the handoff"
+            },
+            "quiz": {
+              "title": "Capstone check"
+            },
+            "project": {
+              "title": "File room handoff"
+            }
+          },
+          "projectSteps": {
+            "ci_capstone_create_map": {
+              "title": "Create the event room folders"
+            },
+            "ci_capstone_sort_files": {
+              "title": "Sort the incoming files"
+            },
+            "ci_capstone_finish_handoff": {
+              "title": "Finish the handoff"
+            }
+          },
+          "tryIt": {
+            "try_final_file_room_capstone_sketch0": {
+              "title": "Create the event room folders",
+              "prompt": "The community center needs a clean file room. Create `event-room/notes`, `event-room/scripts`, `event-room/archive`, and `backups` while keeping the incoming files available."
+            },
+            "try_final_file_room_capstone_sketch1": {
+              "title": "Sort the incoming files",
+              "prompt": "Move `agenda.txt` to notes, `setup.sh` to scripts, and rename `guest-list.txt` as `event-room/archive/guests.txt`."
+            },
+            "try_final_file_room_capstone_sketch2": {
+              "title": "Finish the handoff",
+              "prompt": "Read the agenda, back it up to `backups/agenda-backup.txt`, remove `event-room/incoming/old.tmp`, and create `event-room/ready.txt`."
+            }
+          },
+          "quiz": {
+            "sc-capstone-first-check": {
+              "title": "What is the best first move in a messy folder?",
+              "prompt": "Start by looking before changing anything.",
+              "hint": "Check where you are and what files are present.",
+              "help": {
+                "concept": "Safe terminal work starts with inspection.",
+                "hint_1": "Use `pwd` and `ls` before moving or deleting.",
+                "hint_2": "Choose the action that gives you information first."
+              },
+              "options": {
+                "a": "Delete temporary-looking files immediately",
+                "b": "Run `pwd` and `ls` to inspect the workspace",
+                "c": "Rename every file to shorter names",
+                "d": "Leave the folder without checking it"
+              }
+            },
+            "sc-capstone-copy-command": {
+              "title": "Which command makes a backup copy?",
+              "prompt": "A backup should leave the original in place.",
+              "hint": "`cp` copies; `mv` moves or renames.",
+              "help": {
+                "concept": "`cp` creates another copy of a file.",
+                "hint_1": "The original should still exist after the command.",
+                "hint_2": "Choose the command used for copying."
+              },
+              "options": {
+                "a": "cp event-room/notes/agenda.txt backups/agenda-backup.txt",
+                "b": "mv event-room/notes/agenda.txt backups/agenda-backup.txt",
+                "c": "rm event-room/notes/agenda.txt",
+                "d": "cd backups"
+              }
+            },
+            "sc-capstone-remove-temp": {
+              "title": "Which command removes the old temp file?",
+              "prompt": "Remove only the unwanted temp file.",
+              "hint": "The target file is `event-room/incoming/old.tmp`.",
+              "help": {
+                "concept": "`rm` removes files.",
+                "hint_1": "Use the exact path so you do not delete the wrong file.",
+                "hint_2": "Choose the command that removes one file."
+              },
+              "options": {
+                "a": "cp event-room/incoming/old.tmp backups/old.tmp",
+                "b": "cat event-room/incoming/old.tmp",
+                "c": "rm event-room/incoming/old.tmp",
+                "d": "mkdir event-room/incoming/old.tmp"
+              }
+            },
+            "mc-capstone-safe-handoff": {
+              "title": "Choose the safe handoff habits.",
+              "prompt": "Pick the habits that make terminal cleanup reliable.",
+              "hint": "Think about checking, sorting, and backing up.",
+              "help": {
+                "concept": "A good handoff is organized and easy to verify.",
+                "hint_1": "Do not choose a broad delete habit.",
+                "hint_2": "Choose habits that keep important work findable."
+              },
+              "options": {
+                "a": "List folders before changing them",
+                "b": "Back up an important note before finishing",
+                "c": "Delete whole folders without checking names",
+                "d": "Create a ready marker after the cleanup is complete"
+              }
+            },
+            "ci-capstone-create-map": {
+              "title": "Create the event room folders",
+              "prompt": "The community center needs a clean file room. Create `event-room/notes`, `event-room/scripts`, `event-room/archive`, and `backups` while keeping the incoming files available.",
+              "hint": "Create destination folders before moving the incoming files.",
+              "help": {
+                "concept": "A clean folder map gives each file a clear destination.",
+                "hint_1": "Use `mkdir -p` for nested destination folders.",
+                "hint_2": "Do not remove the incoming files in this first step."
+              },
+              "placeholder": "Type commands in the terminal."
+            },
+            "ci-capstone-sort-files": {
+              "title": "Sort the incoming files",
+              "prompt": "Move `agenda.txt` to notes, `setup.sh` to scripts, and rename `guest-list.txt` as `event-room/archive/guests.txt`.",
+              "hint": "Use `mv` to move files and to rename the guest list.",
+              "help": {
+                "concept": "`mv` can move a file to another folder or give it a new name.",
+                "hint_1": "Create the destination folders first if needed.",
+                "hint_2": "The incoming copies should be gone after the move."
+              },
+              "placeholder": "Type commands in the terminal."
+            },
+            "ci-capstone-finish-handoff": {
+              "title": "Finish the handoff",
+              "prompt": "Read the agenda, back it up to `backups/agenda-backup.txt`, remove `event-room/incoming/old.tmp`, and create `event-room/ready.txt`.",
+              "hint": "Use `cat`, `cp`, `rm`, and `touch` carefully.",
+              "help": {
+                "concept": "A final handoff keeps important files, removes clutter, and leaves a clear ready marker.",
+                "hint_1": "Back up the agenda before submitting.",
+                "hint_2": "Check that the temp file is gone and `ready.txt` exists."
+              },
+              "placeholder": "Type commands in the terminal."
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "linux-terminal-fundamentals": {
+      "linux-3-file-room-capstone": {
+        "final-file-room-capstone": {
+          "file-room-scenario": {
+            "title": "The file room handoff",
+            "bodyMarkdown": "A community center just finished planning an event. The workspace has an `incoming` folder with notes, a small setup script, a guest list, and an old temporary file.\n\nYour job is to leave a clean file room for the next volunteer. You will create folders, move files into the right places, make one backup, and remove the temporary file."
+          },
+          "sort-the-inbox": {
+            "title": "Sort the incoming files",
+            "bodyMarkdown": "Use names that make the handoff obvious. Agenda notes belong in `notes`, setup commands belong in `scripts`, and the guest list belongs in `archive`.\n\n`mv` is the main tool here. It can move a file and rename it at the same time."
+          },
+          "handoff-check": {
+            "title": "Check the handoff",
+            "bodyMarkdown": "Before finishing, read the agenda, make a backup, remove only the old temp file, and leave a `ready.txt` marker.\n\nThat final marker tells the next person the workspace has been checked."
+          }
+        }
+      }
+    }
+  }
+}

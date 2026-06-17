@@ -648,10 +648,24 @@ export default function QuizPracticeCard(props: {
 
   const codeTools = toolsEnabled && isCodeInput ? toolsAny : null;
 
-  const stableExerciseSlotId = useMemo(
-      () => getStableExerciseSlotId(q, projectStepManifest),
-      [q, projectStepManifest],
-  );
+  const stableExerciseSlotId = useMemo(() => {
+    const manifestSlotId = firstNonBlankString(
+        (livePracticeManifest as any)?.exerciseKey,
+        (livePracticeManifest as any)?.id,
+    );
+
+    /**
+     * The live/resolved exercise is the learner-facing contract.
+     *
+     * After route/card navigation, the outer practice question can briefly keep
+     * an older fetch.exerciseKey while livePracticeManifest already points at
+     * the visible exercise. If Tools uses the stale question key, the right rail
+     * can bind to the previous exercise workspace. In Linux terminal lessons this
+     * showed a card asking for trail/checkpoint while Tools still had only the
+     * library/desk starter files.
+     */
+    return manifestSlotId || getStableExerciseSlotId(q, projectStepManifest);
+  }, [q, projectStepManifest, livePracticeManifest]);
   const exerciseKeyForTools = useMemo(() => {
     const fetch = (q as any).fetch ?? {};
 

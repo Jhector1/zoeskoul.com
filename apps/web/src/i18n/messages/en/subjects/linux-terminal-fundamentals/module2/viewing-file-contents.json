@@ -4,7 +4,7 @@
       "linux-2-files-and-folders": {
         "viewing-file-contents": {
           "label": "Viewing File Contents",
-          "summary": "Inspect text files with cat, head, tail, and wc.",
+          "summary": "Use `cat`, `head`, `tail`, and `wc -l` to inspect text files quickly.",
           "cards": {
             "sketch0": {
               "title": "cat prints a whole text file"
@@ -19,32 +19,32 @@
               "title": "Quiz"
             },
             "project": {
-              "title": "Terminal practice project"
+              "title": "File review practice"
             }
           },
           "projectSteps": {
             "ci_create_log_review": {
-              "title": "Read the full message"
+              "title": "Open the welcome message"
             },
             "ci_create_notes_summary": {
-              "title": "Preview the beginning and end"
+              "title": "Preview a report and a log"
             },
             "ci_create_count_marker": {
-              "title": "Count the story lines"
+              "title": "Count the report lines"
             }
           },
           "tryIt": {
             "try_viewing_file_contents_sketch0": {
-              "title": "Read the full message",
-              "prompt": "Run `cat notes/message.txt` and read the full message in the terminal."
+              "title": "Read a tip file",
+              "prompt": "Run `cat messages/tip.txt` and read the line."
             },
             "try_viewing_file_contents_sketch1": {
-              "title": "Preview the beginning and end",
-              "prompt": "Run `head notes/story.txt`, then run `tail logs/app.log` to inspect the end of the log."
+              "title": "Preview a report and log",
+              "prompt": "Run `head reports/today.txt` and `tail logs/activity.log`."
             },
             "try_viewing_file_contents_sketch2": {
-              "title": "Count the story lines",
-              "prompt": "Run `wc -l notes/story.txt` and look for the line count in the terminal output."
+              "title": "Count report lines",
+              "prompt": "Run `wc -l reports/today.txt` and confirm it has 5 lines."
             }
           },
           "quiz": {
@@ -113,37 +113,70 @@
               }
             },
             "ci-create-log-review": {
-              "title": "Read the full message",
-              "prompt": "Run `cat notes/message.txt` and read the full message in the terminal.\n\nUse the terminal. The editor is hidden on purpose for this task.",
-              "hint": "Use `cat` when you want to print a small text file.",
+              "title": "Open the welcome message",
+              "prompt": "Run `cat messages/welcome.txt` and read the welcome line.",
+              "hint": "Use `cat` with the exact file path.",
               "help": {
-                "concept": "This task is checked from the command you run and the text printed in the terminal.",
-                "hint_1": "Run `cat notes/message.txt` exactly as written.",
-                "hint_2": "Check Answer looks for the `cat` command and for `Linux is powerful.` in the output."
+                "concept": "`cat` prints a text file in the terminal.",
+                "hint_1": "Run `cat messages/welcome.txt`.",
+                "hint_2": "Submit after the welcome line appears."
               },
-              "placeholder": "Use the terminal to complete this task."
+              "placeholder": "Type commands in the terminal."
             },
             "ci-create-notes-summary": {
-              "title": "Preview the beginning and end",
-              "prompt": "Run `head notes/story.txt`, then run `tail logs/app.log` to inspect the end of the log.\n\nUse the terminal. The editor is hidden on purpose for this task.",
-              "hint": "Use `head` for the beginning and `tail` for the ending lines.",
+              "title": "Preview a report and a log",
+              "prompt": "Run `head reports/week.txt` and `tail logs/server.log`.",
+              "hint": "Use `head` for the start of the report and `tail` for the end of the log.",
               "help": {
-                "concept": "This task is checked from two commands and the text they print.",
-                "hint_1": "Run `head notes/story.txt` first, then `tail logs/app.log`.",
-                "hint_2": "Check Answer looks for the first line of the story and the final line of the log."
+                "concept": "`head` shows the beginning of a file; `tail` shows the end.",
+                "hint_1": "Run `head reports/week.txt`.",
+                "hint_2": "Run `tail logs/server.log`, then submit."
               },
-              "placeholder": "Use the terminal to complete this task."
+              "placeholder": "Type commands in the terminal."
             },
             "ci-create-count-marker": {
-              "title": "Count the story lines",
-              "prompt": "Run `wc -l notes/story.txt` and look for the line count in the terminal output.\n\nUse the terminal. The editor is hidden on purpose for this task.",
-              "hint": "Use `wc -l` when you only want the number of lines.",
+              "title": "Count the report lines",
+              "prompt": "Run `wc -l reports/week.txt` and confirm the report has 5 lines.",
+              "hint": "Use `wc -l` with the report path.",
               "help": {
-                "concept": "This task is checked from your terminal command and the line-count output.",
-                "hint_1": "Run `wc -l notes/story.txt` exactly as written.",
-                "hint_2": "Check Answer looks for a line count of `4` next to `notes/story.txt`."
+                "concept": "`wc -l` counts the lines in a file.",
+                "hint_1": "Run `wc -l reports/week.txt`.",
+                "hint_2": "Submit after the output starts with `5`."
               },
-              "placeholder": "Use the terminal to complete this task."
+              "placeholder": "Type commands in the terminal."
+            },
+            "try-view-cat-tip": {
+              "title": "Read a tip file",
+              "prompt": "Run `cat messages/tip.txt` and read the line.",
+              "hint": "Type `cat messages/tip.txt`.",
+              "help": {
+                "concept": "`cat` prints a small text file to the terminal.",
+                "hint_1": "Type `cat messages/tip.txt`.",
+                "hint_2": "Run the command in the terminal, check the response, then submit."
+              },
+              "placeholder": "Type commands in the terminal."
+            },
+            "try-view-head-tail-today": {
+              "title": "Preview a report and log",
+              "prompt": "Run `head reports/today.txt` and `tail logs/activity.log`.",
+              "hint": "Use `head` for the report and `tail` for the log.",
+              "help": {
+                "concept": "`head` shows the start of a file; `tail` shows the end.",
+                "hint_1": "Use `head` for the report and `tail` for the log.",
+                "hint_2": "Run the command in the terminal, check the response, then submit."
+              },
+              "placeholder": "Type commands in the terminal."
+            },
+            "try-view-count-today": {
+              "title": "Count report lines",
+              "prompt": "Run `wc -l reports/today.txt` and confirm it has 5 lines.",
+              "hint": "Type `wc -l reports/today.txt`.",
+              "help": {
+                "concept": "`wc -l` counts lines in a text file.",
+                "hint_1": "Type `wc -l reports/today.txt`.",
+                "hint_2": "Run the command in the terminal, check the response, then submit."
+              },
+              "placeholder": "Type commands in the terminal."
             }
           }
         }
@@ -155,16 +188,16 @@
       "linux-2-files-and-folders": {
         "viewing-file-contents": {
           "cat-shows-whole-file": {
-            "title": "cat prints a whole text file",
-            "bodyMarkdown": "`cat` prints a file's contents to the terminal.\n\n```bash\ncat logs/app.log\n```\n\nIt is best for small files. Large files can flood the terminal."
+            "title": "`cat` shows a whole file",
+            "bodyMarkdown": "`cat file.txt` prints the full file. It is best for short notes, small config files, and quick checks."
           },
           "head-tail-preview": {
-            "title": "head and tail preview file parts",
-            "bodyMarkdown": "`head` shows the beginning of a file. `tail` shows the end.\n\n```bash\nhead logs/app.log\ntail logs/app.log\n```\n\nThis is useful for logs because the newest lines are often at the bottom."
+            "title": "`head` and `tail` show the edges",
+            "bodyMarkdown": "`head` previews the beginning of a file. `tail` checks the end. They are useful when a file is too long to read all at once."
           },
           "wc-counts": {
-            "title": "wc counts lines, words, and bytes",
-            "bodyMarkdown": "`wc` gives simple counts.\n\n```bash\nwc notes.txt\nwc -l notes.txt\n```\n\n`wc -l` is especially useful because it counts lines."
+            "title": "`wc -l` counts lines",
+            "bodyMarkdown": "`wc -l file.txt` prints the number of lines. That is handy for logs, lists, and data files."
           }
         }
       }

@@ -4,7 +4,7 @@
       "linux-1-terminal-navigation": {
         "where-am-i": {
           "label": "Where Am I? pwd and ls",
-          "summary": "Use pwd and ls to inspect your current folder and see what is inside it.",
+          "summary": "Use `pwd`, `ls`, and hidden-file listing to understand the current workspace.",
           "cards": {
             "sketch0": {
               "title": "pwd tells you your current location"
@@ -19,32 +19,32 @@
               "title": "Quiz"
             },
             "project": {
-              "title": "Terminal practice project"
+              "title": "Location check"
             }
           },
           "projectSteps": {
             "ci_create_navigation_lab": {
-              "title": "Check your current folder"
+              "title": "Check the workspace location"
             },
             "ci_create_visible_hidden_practice": {
-              "title": "List the current folder"
+              "title": "List a nearby folder"
             },
             "ci_create_long_list_lab": {
-              "title": "Show hidden files too"
+              "title": "Reveal the hidden room note"
             }
           },
           "tryIt": {
             "try_where_am_i_sketch0": {
-              "title": "Check your current folder",
-              "prompt": "Run `pwd` and look for the workspace path in the terminal output."
+              "title": "Print your current path",
+              "prompt": "Run `pwd` and confirm the path ends inside the workspace."
             },
             "try_where_am_i_sketch1": {
-              "title": "List the current folder",
-              "prompt": "Run `ls` and make sure `README.md` and `terminal-map` appear in the terminal output."
+              "title": "Look inside a folder",
+              "prompt": "Run `ls desk` and look for `notes.txt` and `schedule.txt`."
             },
             "try_where_am_i_sketch2": {
-              "title": "Show hidden files too",
-              "prompt": "Run `ls -a` so hidden files appear too, then look for `.hidden-map`."
+              "title": "Show hidden desk notes",
+              "prompt": "Run `ls -a desk` and look for `.locker`."
             }
           },
           "quiz": {
@@ -113,37 +113,70 @@
               }
             },
             "ci-create-navigation-lab": {
-              "title": "Check your current folder",
-              "prompt": "Run `pwd` and look for the workspace path in the terminal output.\n\nUse the terminal. The editor is hidden on purpose for this task.",
-              "hint": "Use `pwd` to print the current working directory.",
+              "title": "Check the workspace location",
+              "prompt": "Run `pwd` and confirm the terminal shows the workspace path.",
+              "hint": "Type `pwd`, press Enter, then check for `/workspace` in the response.",
               "help": {
-                "concept": "This task is checked from your terminal command and terminal output.",
-                "hint_1": "Run `pwd` exactly once or a few times until you see the current folder.",
-                "hint_2": "Check Answer looks for the `pwd` command and for `/workspace` in the printed path."
+                "concept": "`pwd` prints the folder where the terminal is currently working.",
+                "hint_1": "Type `pwd` and press Enter.",
+                "hint_2": "Submit after the output includes `/workspace`."
               },
-              "placeholder": "Use the terminal to complete this task."
+              "placeholder": "Type commands in the terminal."
             },
             "ci-create-visible-hidden-practice": {
-              "title": "List the current folder",
-              "prompt": "Run `ls` and make sure `README.md` and `terminal-map` appear in the terminal output.\n\nUse the terminal. The editor is hidden on purpose for this task.",
-              "hint": "Use `ls` to list what is in the current folder.",
+              "title": "List a nearby folder",
+              "prompt": "Run `ls campus` and look for `map.txt` and `room.txt`.",
+              "hint": "Type `ls campus` so you can inspect that folder without moving into it.",
               "help": {
-                "concept": "This task is checked from the command you type and the names that appear in terminal output.",
-                "hint_1": "Run `ls` from the workspace root so the folder names are easy to spot.",
-                "hint_2": "Check Answer looks for the `ls` command and for `README.md` plus `terminal-map` in the output."
+                "concept": "`ls folder-name` lists the contents of that folder from where you are.",
+                "hint_1": "Type `ls campus` and press Enter.",
+                "hint_2": "Submit after the output shows `map.txt` and `room.txt`."
               },
-              "placeholder": "Use the terminal to complete this task."
+              "placeholder": "Type commands in the terminal."
             },
             "ci-create-long-list-lab": {
-              "title": "Show hidden files too",
-              "prompt": "Run `ls -a` so hidden files appear too, then look for `.hidden-map`.\n\nUse the terminal. The editor is hidden on purpose for this task.",
-              "hint": "Use `ls -a` when you want hidden files to appear.",
+              "title": "Reveal the hidden room note",
+              "prompt": "Run `ls -a campus` and look for `.room-number`.",
+              "hint": "The `-a` option shows names that start with a dot.",
               "help": {
-                "concept": "This task is checked from terminal evidence rather than from creating new files.",
-                "hint_1": "Run `ls -a` from the workspace root.",
-                "hint_2": "Check Answer looks for a listing that includes `.hidden-map`."
+                "concept": "Files that start with `.` are hidden from a plain `ls`, but `ls -a` shows them.",
+                "hint_1": "Type `ls -a campus` and press Enter.",
+                "hint_2": "Submit after `.room-number` appears in the output."
               },
-              "placeholder": "Use the terminal to complete this task."
+              "placeholder": "Type commands in the terminal."
+            },
+            "try-location-print-path": {
+              "title": "Print your current path",
+              "prompt": "Run `pwd` and confirm the path ends inside the workspace.",
+              "hint": "Type `pwd` and read the full path.",
+              "help": {
+                "concept": "`pwd` helps you confirm your current location before choosing the next command.",
+                "hint_1": "Type `pwd` and read the full path.",
+                "hint_2": "Run the command in the terminal, check the response, then submit."
+              },
+              "placeholder": "Type commands in the terminal."
+            },
+            "try-location-list-desk": {
+              "title": "Look inside a folder",
+              "prompt": "Run `ls desk` and look for `notes.txt` and `schedule.txt`.",
+              "hint": "Type `ls desk` exactly.",
+              "help": {
+                "concept": "`ls folder-name` lists a folder without moving into it.",
+                "hint_1": "Type `ls desk` exactly.",
+                "hint_2": "Run the command in the terminal, check the response, then submit."
+              },
+              "placeholder": "Type commands in the terminal."
+            },
+            "try-location-show-hidden-desk": {
+              "title": "Show hidden desk notes",
+              "prompt": "Run `ls -a desk` and look for `.locker`.",
+              "hint": "Use `ls -a desk` so hidden names appear.",
+              "help": {
+                "concept": "The `-a` option includes hidden names that start with a dot.",
+                "hint_1": "Use `ls -a desk` so hidden names appear.",
+                "hint_2": "Run the command in the terminal, check the response, then submit."
+              },
+              "placeholder": "Type commands in the terminal."
             }
           }
         }
@@ -155,16 +188,16 @@
       "linux-1-terminal-navigation": {
         "where-am-i": {
           "pwd-current-place": {
-            "title": "pwd tells you your current location",
-            "bodyMarkdown": "`pwd` means **print working directory**. It shows the folder your terminal is currently inside.\n\n```bash\npwd\n```\n\nWhen a task says “create a file here,” your current directory matters. Running `pwd` before making changes is a good habit."
+            "title": "`pwd` answers \u201cwhere am I?\u201d",
+            "bodyMarkdown": "`pwd` prints the folder your terminal is using right now. That matters because commands like `touch report.txt` create files in the current folder unless you give a longer path.\n\nTry this rhythm often:\n\n```bash\npwd\nls\n```\n\nFirst find where you are, then decide what to change."
           },
           "ls-shows-nearby-files": {
-            "title": "ls lists what is nearby",
-            "bodyMarkdown": "`ls` shows files and folders in the current directory.\n\n```bash\nls\nls -a\nls -l\n```\n\n`ls -a` includes hidden files. `ls -l` shows a longer listing with extra details. In Course 1, use `ls` often to check your work before clicking Check Answer."
+            "title": "`ls` shows what is nearby",
+            "bodyMarkdown": "`ls` lists the visible files and folders in the current location. You can also list a folder by name:\n\n```bash\nls campus\n```\n\nThat lets you inspect a place before moving into it or changing it."
           },
           "paths-start-from-here": {
-            "title": "Relative paths start from where you are",
-            "bodyMarkdown": "A relative path like `notes/today.txt` starts from your current directory.\n\nExample:\n\n```bash\nmkdir -p navigation-lab/notes\ntouch navigation-lab/notes/today.txt\n```\n\nThis creates folders and a file under the current workspace folder."
+            "title": "Hidden files still count",
+            "bodyMarkdown": "Linux hides names that start with a dot from a plain `ls`. Use `ls -a` when you need the full picture.\n\n```bash\nls -a\n```\n\nHidden files often store settings, notes, or tool state."
           }
         }
       }

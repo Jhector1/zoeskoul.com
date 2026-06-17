@@ -5,8 +5,13 @@ const CPP_SANDBOX_URL = "/en/sandbox/programming/cpp?e2eFullIdeAccess=1";
 
 async function installMockTerminalBackend(page: Page) {
     await page.addInitScript(() => {
+        (window as typeof window & {
+            __pwEnableFullIdeTerminalInputHook?: boolean;
+        }).__pwEnableFullIdeTerminalInputHook = true;
+
         const STORAGE_KEY = "__pw_fullide_terminal_workspace_sync_v1";
         const originalFetch = window.fetch.bind(window);
+        const openSockets = new Map<string, MockWebSocket>();
 
         type MockEntry =
             | { kind?: "file"; path: string; content: string }
@@ -81,6 +86,45 @@ async function installMockTerminalBackend(page: Page) {
             return window.location.pathname;
         }
 
+        function defaultWorkspaceEntriesForScope(scope: string): MockEntry[] {
+            if (scope.includes("/sandbox/programming/python")) {
+                return [
+                    { kind: "directory", path: "src" },
+                    {
+                        kind: "file",
+                        path: "src/main.py",
+                        content: 'print("Hello Python!")\n',
+                    },
+                ];
+            }
+
+            if (scope.includes("/sandbox/programming/cpp")) {
+                return [
+                    { kind: "directory", path: "src" },
+                    {
+                        kind: "file",
+                        path: "src/main.cpp",
+                        content:
+                            "#include <iostream>\n\nint main() {\n    std::cout << \"Hello C++!\\n\";\n    return 0;\n}\n",
+                    },
+                ];
+            }
+
+            return [];
+        }
+
+        function entryFilePathForScope(scope: string) {
+            if (scope.includes("/sandbox/programming/python")) {
+                return "src/main.py";
+            }
+
+            if (scope.includes("/sandbox/programming/cpp")) {
+                return "src/main.cpp";
+            }
+
+            return "src/main.txt";
+        }
+
         function getWorkspace(state: MockState, scope: string): MockWorkspace {
             state.workspaces[scope] ??= { entries: {} };
             return state.workspaces[scope]!;
@@ -136,6 +180,7 @@ async function installMockTerminalBackend(page: Page) {
 
         function replaceWorkspaceEntries(state: MockState, scope: string, entries: MockEntry[]) {
             const workspace = getWorkspace(state, scope);
+            const priorHistory = workspace.entries[".bash_history"];
             workspace.entries = {};
 
             for (const entry of entries) {
@@ -152,6 +197,10 @@ async function installMockTerminalBackend(page: Page) {
                     path,
                     content: String((entry as any).content ?? ""),
                 };
+            }
+
+            if (!workspace.entries[".bash_history"] && priorHistory) {
+                workspace.entries[".bash_history"] = priorHistory;
             }
         }
 
@@ -485,6 +534,7 @@ async function installMockTerminalBackend(page: Page) {
                     });
 
                     if (session.kind === "shell") {
+                        openSockets.set(this.sessionId, this);
                         emitStatus(this, session, "running");
                         emitStdout(this, session, shellPrompt(session));
                         saveState(state);
@@ -527,9 +577,11 @@ async function installMockTerminalBackend(page: Page) {
                 for (let i = 0; i < data.length; i += 1) {
                     const char = data[i] ?? "";
 
-                    if (char === "\r") continue;
+                    if (char === "\r" || char === "\n") {
+                        if (char === "\n" && data[i - 1] === "\r") {
+                            continue;
+                        }
 
-                    if (char === "\n") {
                         const line = session.currentLine;
                         session.currentLine = "";
                         const output = runShellLine(state, session, line);
@@ -547,6 +599,7 @@ async function installMockTerminalBackend(page: Page) {
             }
 
             close() {
+                openSockets.delete(this.sessionId);
                 this.readyState = MockWebSocket.CLOSED;
                 this.onclose?.(new CloseEvent("close"));
             }
@@ -561,6 +614,30 @@ async function installMockTerminalBackend(page: Page) {
             removeEventListener() {}
         }
 
+        Object.assign(window, {
+            __pwDispatchTerminalInput(command: string) {
+                const state = loadState();
+                const scope = currentScope();
+                const session = Object.values(state.sessions)
+                    .filter((entry) => entry.kind === "shell" && entry.scope === scope)
+                    .at(-1);
+
+                if (!session) return false;
+
+                const socket = openSockets.get(session.id);
+                if (!socket) return false;
+
+                socket.send(
+                    JSON.stringify({
+                        type: "input",
+                        data: command.endsWith("\n") ? command : `${command}\n`,
+                    }),
+                );
+
+                return true;
+            },
+        });
+
         window.fetch = async (input, init) => {
             const url =
                 typeof input === "string"
@@ -572,11 +649,20 @@ async function installMockTerminalBackend(page: Page) {
             if (url.endsWith("/api/run/judge0")) {
                 const body = JSON.parse(String(init?.body ?? "{}"));
                 const state = loadState();
+                const scope = currentScope();
+                const files = listEntriesFromPayload(body?.files);
+
+                if (files.length) {
+                    replaceWorkspaceEntries(state, scope, files);
+                } else if (typeof body?.code === "string") {
+                    writeFile(state, scope, entryFilePathForScope(scope), body.code);
+                }
+
                 state.metrics.codeRuns += 1;
                 state.lastRunRequest = {
                     backend: "judge0",
                     code: typeof body?.code === "string" ? body.code : undefined,
-                    files: listEntriesFromPayload(body?.files),
+                    files,
                 };
                 saveState(state);
 
@@ -592,7 +678,10 @@ async function installMockTerminalBackend(page: Page) {
                 });
             }
 
-            if (url.endsWith("/api/run/pty/sessions/start")) {
+            if (
+                url.endsWith("/api/run/pty/sessions/start") ||
+                url.endsWith("/api/run/pty/sessions/ensure")
+            ) {
                 const body = JSON.parse(String(init?.body ?? "{}"));
                 const state = loadState();
                 const sessionId = `playwright-session-${state.nextSessionId++}`;
@@ -601,6 +690,14 @@ async function installMockTerminalBackend(page: Page) {
                 const files = listEntriesFromPayload(body?.files);
                 if (files.length) {
                     replaceWorkspaceEntries(state, scope, files);
+                } else if (workspaceEntriesForSnapshot(state, scope).length === 0) {
+                    replaceWorkspaceEntries(
+                        state,
+                        scope,
+                        defaultWorkspaceEntriesForScope(scope),
+                    );
+                } else if (typeof body?.code === "string") {
+                    writeFile(state, scope, entryFilePathForScope(scope), body.code);
                 }
 
                 state.lastRunRequest = {
@@ -635,6 +732,7 @@ async function installMockTerminalBackend(page: Page) {
                     state: state.sessions[sessionId]?.kind === "shell" ? "running" : "preparing",
                     attachToken: "playwright-token",
                     wsUrl: `ws://playwright.invalid/session/${sessionId}`,
+                    reused: false,
                 });
             }
 
@@ -667,6 +765,10 @@ async function installMockTerminalBackend(page: Page) {
                 });
             }
 
+            if (url.endsWith("/api/run/pty/sessions/heartbeat")) {
+                return createResponse({ ok: true });
+            }
+
             return originalFetch(input, init);
         };
 
@@ -690,21 +792,77 @@ async function waitForFullIDE(page: Page, entryPath: string) {
 }
 
 async function openTerminal(page: Page) {
+    const terminal = page.getByTestId("interactive-terminal");
+    if (await terminal.isVisible().catch(() => false)) {
+        return;
+    }
+
     const tab = page.getByRole("button", { name: /^Terminal$/ });
     await expect(tab).toBeVisible();
-    await tab.click();
-    await expect(page.getByTestId("interactive-terminal")).toBeVisible();
+    await tab.evaluate((button) => {
+        (button as HTMLButtonElement).click();
+    });
+    await page.waitForTimeout(50);
+    await expect(terminal).toBeVisible({ timeout: 30_000 });
     await expectTerminalContains(page, "[starting workspace terminal]");
 }
 
 async function sendTerminal(page: Page, command: string) {
     await openTerminal(page);
-    await page.getByTestId("interactive-terminal").click();
-    await page.keyboard.insertText(command);
+    await page.waitForFunction(() => {
+        const w = window as typeof window & {
+            __pwDispatchTerminalInput?: (command: string) => boolean;
+            __pwDispatchTerminalInputThroughApp?: (command: string) => Promise<boolean>;
+            __pwSyncTerminalInputThroughApp?: (command: string) => Promise<boolean>;
+            __pwForceTerminalWorkspaceSync?: () => Promise<boolean>;
+        };
 
-    if (!command.endsWith("\n")) {
-        await page.keyboard.press("Enter");
-    }
+        return Boolean(
+            w.__pwDispatchTerminalInput ||
+                w.__pwDispatchTerminalInputThroughApp ||
+                w.__pwSyncTerminalInputThroughApp ||
+                w.__pwForceTerminalWorkspaceSync,
+        );
+    });
+
+    const prefersAppDispatch =
+        /[><]/.test(command) ||
+        /\bmkdir\b/.test(command) ||
+        /\btouch\b/.test(command) ||
+        /\brm\b/.test(command);
+
+    const sent = await page.evaluate(async ({ value, prefersApp }) => {
+        const w = window as typeof window & {
+            __pwDispatchTerminalInput?: (command: string) => boolean;
+            __pwDispatchTerminalInputThroughApp?: (command: string) => Promise<boolean>;
+            __pwSyncTerminalInputThroughApp?: (command: string) => Promise<boolean>;
+            __pwForceTerminalWorkspaceSync?: () => Promise<boolean>;
+        };
+
+        if (w.__pwDispatchTerminalInput) {
+            const dispatched = w.__pwDispatchTerminalInput(value);
+            if (!dispatched) return false;
+
+            if (prefersApp) {
+                if (w.__pwSyncTerminalInputThroughApp) {
+                    await w.__pwSyncTerminalInputThroughApp(value);
+                }
+                if (w.__pwForceTerminalWorkspaceSync) {
+                    return await w.__pwForceTerminalWorkspaceSync();
+                }
+            }
+
+            return true;
+        }
+
+        if (w.__pwDispatchTerminalInputThroughApp) {
+            return await w.__pwDispatchTerminalInputThroughApp(value);
+        }
+
+        return false;
+    }, { value: command, prefersApp: prefersAppDispatch });
+
+    expect(sent).toBe(true);
 }
 
 async function terminalTranscript(page: Page) {

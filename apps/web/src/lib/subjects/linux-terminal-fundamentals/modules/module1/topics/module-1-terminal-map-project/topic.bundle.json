@@ -38,7 +38,7 @@
         "id": "try-module-1-terminal-map-project-sketch0",
         "titleKey": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.module-1-terminal-map-project.tryIt.try_module_1_terminal_map_project_sketch0.title",
         "promptKey": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.module-1-terminal-map-project.tryIt.try_module_1_terminal_map_project_sketch0.prompt",
-        "exerciseKey": "ci-terminal-map-base",
+        "exerciseKey": "try-map-list-demo",
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -57,7 +57,7 @@
         "id": "try-module-1-terminal-map-project-sketch1",
         "titleKey": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.module-1-terminal-map-project.tryIt.try_module_1_terminal_map_project_sketch1.title",
         "promptKey": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.module-1-terminal-map-project.tryIt.try_module_1_terminal_map_project_sketch1.prompt",
-        "exerciseKey": "ci-terminal-map-markers",
+        "exerciseKey": "try-map-enter-east",
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -76,7 +76,7 @@
         "id": "try-module-1-terminal-map-project-sketch2",
         "titleKey": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.module-1-terminal-map-project.tryIt.try_module_1_terminal_map_project_sketch2.title",
         "promptKey": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.module-1-terminal-map-project.tryIt.try_module_1_terminal_map_project_sketch2.prompt",
-        "exerciseKey": "ci-terminal-map-final",
+        "exerciseKey": "try-map-check-west",
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -242,45 +242,93 @@
       "messageBase": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.module-1-terminal-map-project.quiz.ci-terminal-map-base",
       "language": "bash",
       "entryFilePath": "main.sh",
-      "starterCode": "#!/usr/bin/env bash\n# Project: Terminal Map\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+      "starterCode": "#!/usr/bin/env bash\n# List the field kit folders\n# Use the terminal for this task.\n",
       "starterFiles": [
         {
           "path": "main.sh",
-          "content": "#!/usr/bin/env bash\n# Project: Terminal Map\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+          "content": "#!/usr/bin/env bash\n# List the field kit folders\n# Use the terminal for this task.\n",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "README.md",
-          "content": "# Project: Terminal Map\n\nUse the terminal to complete the task. The editor is intentionally hidden for this Linux terminal lab.\n",
+          "content": "# List the field kit folders\n\nRun `ls field-kit` and confirm you see `north`, `south`, and `logs`.\n",
+          "language": "text"
+        },
+        {
+          "path": "field-kit/north/door.txt",
+          "content": "North entrance checked.\n",
+          "language": "text"
+        },
+        {
+          "path": "field-kit/south/window.txt",
+          "content": "South window checked.\n",
+          "language": "text"
+        },
+        {
+          "path": "field-kit/logs/first-check.txt",
+          "content": "First check complete.\n",
           "language": "text"
         }
       ],
       "workspace": {
         "language": "bash",
         "entryFilePath": "main.sh",
-        "starterCode": "#!/usr/bin/env bash\n# Project: Terminal Map\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+        "starterCode": "#!/usr/bin/env bash\n# List the field kit folders\n# Use the terminal for this task.\n",
         "starterFiles": [
           {
             "path": "main.sh",
-            "content": "#!/usr/bin/env bash\n# Project: Terminal Map\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+            "content": "#!/usr/bin/env bash\n# List the field kit folders\n# Use the terminal for this task.\n",
             "language": "bash",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "README.md",
-            "content": "# Project: Terminal Map\n\nUse the terminal to complete the task. The editor is intentionally hidden for this Linux terminal lab.\n",
+            "content": "# List the field kit folders\n\nRun `ls field-kit` and confirm you see `north`, `south`, and `logs`.\n",
+            "language": "text"
+          },
+          {
+            "path": "field-kit/north/door.txt",
+            "content": "North entrance checked.\n",
+            "language": "text"
+          },
+          {
+            "path": "field-kit/south/window.txt",
+            "content": "South window checked.\n",
+            "language": "text"
+          },
+          {
+            "path": "field-kit/logs/first-check.txt",
+            "content": "First check complete.\n",
             "language": "text"
           }
         ],
         "workspaceExpectations": {
           "requiredFolders": [
-            "terminal-map",
-            "terminal-map/labs",
-            "terminal-map/notes",
-            "terminal-map/archive"
+            "field-kit",
+            "field-kit/north",
+            "field-kit/south",
+            "field-kit/logs"
+          ],
+          "requiredFiles": [
+            "field-kit/north/door.txt",
+            "field-kit/south/window.txt",
+            "field-kit/logs/first-check.txt"
+          ]
+        },
+        "terminalExpectations": {
+          "requiredCommands": [
+            {
+              "pattern": "^ls\\s+field-kit$",
+              "message": "Run: ls field-kit"
+            }
+          ],
+          "outputContains": [
+            "north",
+            "south",
+            "logs"
           ]
         }
       },
@@ -288,14 +336,32 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "Create `terminal-map/labs`, `terminal-map/notes`, and `terminal-map/archive`."
+        "instructions": "Run `ls field-kit` and confirm you see `north`, `south`, and `logs`."
       },
       "workspaceExpectations": {
         "requiredFolders": [
-          "terminal-map",
-          "terminal-map/labs",
-          "terminal-map/notes",
-          "terminal-map/archive"
+          "field-kit",
+          "field-kit/north",
+          "field-kit/south",
+          "field-kit/logs"
+        ],
+        "requiredFiles": [
+          "field-kit/north/door.txt",
+          "field-kit/south/window.txt",
+          "field-kit/logs/first-check.txt"
+        ]
+      },
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^ls\\s+field-kit$",
+            "message": "Run: ls field-kit"
+          }
+        ],
+        "outputContains": [
+          "north",
+          "south",
+          "logs"
         ]
       }
     },
@@ -307,50 +373,102 @@
       "messageBase": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.module-1-terminal-map-project.quiz.ci-terminal-map-markers",
       "language": "bash",
       "entryFilePath": "main.sh",
-      "starterCode": "#!/usr/bin/env bash\n# Project: Terminal Map\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+      "starterCode": "#!/usr/bin/env bash\n# Check the north note\n# Use the terminal for this task.\n",
       "starterFiles": [
         {
           "path": "main.sh",
-          "content": "#!/usr/bin/env bash\n# Project: Terminal Map\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+          "content": "#!/usr/bin/env bash\n# Check the north note\n# Use the terminal for this task.\n",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "README.md",
-          "content": "# Project: Terminal Map\n\nUse the terminal to complete the task. The editor is intentionally hidden for this Linux terminal lab.\n",
+          "content": "# Check the north note\n\nUse `cd` to enter `field-kit/north`, then run `pwd` and `ls`.\n",
+          "language": "text"
+        },
+        {
+          "path": "field-kit/north/door.txt",
+          "content": "North entrance checked.\n",
+          "language": "text"
+        },
+        {
+          "path": "field-kit/south/window.txt",
+          "content": "South window checked.\n",
+          "language": "text"
+        },
+        {
+          "path": "field-kit/logs/first-check.txt",
+          "content": "First check complete.\n",
           "language": "text"
         }
       ],
       "workspace": {
         "language": "bash",
         "entryFilePath": "main.sh",
-        "starterCode": "#!/usr/bin/env bash\n# Project: Terminal Map\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+        "starterCode": "#!/usr/bin/env bash\n# Check the north note\n# Use the terminal for this task.\n",
         "starterFiles": [
           {
             "path": "main.sh",
-            "content": "#!/usr/bin/env bash\n# Project: Terminal Map\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+            "content": "#!/usr/bin/env bash\n# Check the north note\n# Use the terminal for this task.\n",
             "language": "bash",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "README.md",
-            "content": "# Project: Terminal Map\n\nUse the terminal to complete the task. The editor is intentionally hidden for this Linux terminal lab.\n",
+            "content": "# Check the north note\n\nUse `cd` to enter `field-kit/north`, then run `pwd` and `ls`.\n",
+            "language": "text"
+          },
+          {
+            "path": "field-kit/north/door.txt",
+            "content": "North entrance checked.\n",
+            "language": "text"
+          },
+          {
+            "path": "field-kit/south/window.txt",
+            "content": "South window checked.\n",
+            "language": "text"
+          },
+          {
+            "path": "field-kit/logs/first-check.txt",
+            "content": "First check complete.\n",
             "language": "text"
           }
         ],
         "workspaceExpectations": {
           "requiredFolders": [
-            "terminal-map",
-            "terminal-map/labs",
-            "terminal-map/notes",
-            "terminal-map/archive"
+            "field-kit",
+            "field-kit/north",
+            "field-kit/south",
+            "field-kit/logs"
           ],
           "requiredFiles": [
-            "terminal-map/labs/lab1.txt",
-            "terminal-map/notes/readme.txt",
-            "terminal-map/archive/old.txt"
+            "field-kit/north/door.txt",
+            "field-kit/south/window.txt",
+            "field-kit/logs/first-check.txt"
+          ]
+        },
+        "terminalExpectations": {
+          "requiredCommands": [
+            {
+              "pattern": "^cd\\s+field-kit/north$",
+              "message": "Run: cd field-kit/north"
+            },
+            {
+              "pattern": "^pwd$",
+              "message": "Run: pwd"
+            },
+            {
+              "pattern": "^ls$",
+              "message": "Run: ls"
+            }
+          ],
+          "outputRegex": [
+            "/workspace/field-kit/north"
+          ],
+          "outputContains": [
+            "door.txt"
           ]
         }
       },
@@ -358,19 +476,41 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "Inside the terminal map, create `labs/lab1.txt`, `notes/readme.txt`, and `archive/old.txt`."
+        "instructions": "Use `cd` to enter `field-kit/north`, then run `pwd` and `ls`."
       },
       "workspaceExpectations": {
         "requiredFolders": [
-          "terminal-map",
-          "terminal-map/labs",
-          "terminal-map/notes",
-          "terminal-map/archive"
+          "field-kit",
+          "field-kit/north",
+          "field-kit/south",
+          "field-kit/logs"
         ],
         "requiredFiles": [
-          "terminal-map/labs/lab1.txt",
-          "terminal-map/notes/readme.txt",
-          "terminal-map/archive/old.txt"
+          "field-kit/north/door.txt",
+          "field-kit/south/window.txt",
+          "field-kit/logs/first-check.txt"
+        ]
+      },
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^cd\\s+field-kit/north$",
+            "message": "Run: cd field-kit/north"
+          },
+          {
+            "pattern": "^pwd$",
+            "message": "Run: pwd"
+          },
+          {
+            "pattern": "^ls$",
+            "message": "Run: ls"
+          }
+        ],
+        "outputRegex": [
+          "/workspace/field-kit/north"
+        ],
+        "outputContains": [
+          "door.txt"
         ]
       }
     },
@@ -382,51 +522,102 @@
       "messageBase": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.module-1-terminal-map-project.quiz.ci-terminal-map-final",
       "language": "bash",
       "entryFilePath": "main.sh",
-      "starterCode": "#!/usr/bin/env bash\n# Project: Terminal Map\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+      "starterCode": "#!/usr/bin/env bash\n# Confirm the south note from the map\n# Use the terminal for this task.\n",
       "starterFiles": [
         {
           "path": "main.sh",
-          "content": "#!/usr/bin/env bash\n# Project: Terminal Map\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+          "content": "#!/usr/bin/env bash\n# Confirm the south note from the map\n# Use the terminal for this task.\n",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "README.md",
-          "content": "# Project: Terminal Map\n\nUse the terminal to complete the task. The editor is intentionally hidden for this Linux terminal lab.\n",
+          "content": "# Confirm the south note from the map\n\nUse the field kit map to reach `field-kit/south`, then run `pwd` and `ls`.\n",
+          "language": "text"
+        },
+        {
+          "path": "field-kit/north/door.txt",
+          "content": "North entrance checked.\n",
+          "language": "text"
+        },
+        {
+          "path": "field-kit/south/window.txt",
+          "content": "South window checked.\n",
+          "language": "text"
+        },
+        {
+          "path": "field-kit/logs/first-check.txt",
+          "content": "First check complete.\n",
           "language": "text"
         }
       ],
       "workspace": {
         "language": "bash",
         "entryFilePath": "main.sh",
-        "starterCode": "#!/usr/bin/env bash\n# Project: Terminal Map\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+        "starterCode": "#!/usr/bin/env bash\n# Confirm the south note from the map\n# Use the terminal for this task.\n",
         "starterFiles": [
           {
             "path": "main.sh",
-            "content": "#!/usr/bin/env bash\n# Project: Terminal Map\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+            "content": "#!/usr/bin/env bash\n# Confirm the south note from the map\n# Use the terminal for this task.\n",
             "language": "bash",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "README.md",
-            "content": "# Project: Terminal Map\n\nUse the terminal to complete the task. The editor is intentionally hidden for this Linux terminal lab.\n",
+            "content": "# Confirm the south note from the map\n\nUse the field kit map to reach `field-kit/south`, then run `pwd` and `ls`.\n",
+            "language": "text"
+          },
+          {
+            "path": "field-kit/north/door.txt",
+            "content": "North entrance checked.\n",
+            "language": "text"
+          },
+          {
+            "path": "field-kit/south/window.txt",
+            "content": "South window checked.\n",
+            "language": "text"
+          },
+          {
+            "path": "field-kit/logs/first-check.txt",
+            "content": "First check complete.\n",
             "language": "text"
           }
         ],
         "workspaceExpectations": {
           "requiredFolders": [
-            "terminal-map",
-            "terminal-map/labs",
-            "terminal-map/notes",
-            "terminal-map/archive"
+            "field-kit",
+            "field-kit/north",
+            "field-kit/south",
+            "field-kit/logs"
           ],
           "requiredFiles": [
-            "terminal-map/done.txt",
-            "terminal-map/labs/lab1.txt",
-            "terminal-map/notes/readme.txt",
-            "terminal-map/archive/old.txt"
+            "field-kit/north/door.txt",
+            "field-kit/south/window.txt",
+            "field-kit/logs/first-check.txt"
+          ]
+        },
+        "terminalExpectations": {
+          "requiredCommands": [
+            {
+              "pattern": "^cd\\s+field-kit/south$",
+              "message": "Run: cd field-kit/south"
+            },
+            {
+              "pattern": "^pwd$",
+              "message": "Run: pwd"
+            },
+            {
+              "pattern": "^ls$",
+              "message": "Run: ls"
+            }
+          ],
+          "outputRegex": [
+            "/workspace/field-kit/south"
+          ],
+          "outputContains": [
+            "window.txt"
           ]
         }
       },
@@ -434,20 +625,358 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "Create `terminal-map/done.txt` and make sure the full map still contains labs, notes, and archive folders."
+        "instructions": "Use the field kit map to reach `field-kit/south`, then run `pwd` and `ls`."
       },
       "workspaceExpectations": {
         "requiredFolders": [
-          "terminal-map",
-          "terminal-map/labs",
-          "terminal-map/notes",
-          "terminal-map/archive"
+          "field-kit",
+          "field-kit/north",
+          "field-kit/south",
+          "field-kit/logs"
         ],
         "requiredFiles": [
-          "terminal-map/done.txt",
-          "terminal-map/labs/lab1.txt",
-          "terminal-map/notes/readme.txt",
-          "terminal-map/archive/old.txt"
+          "field-kit/north/door.txt",
+          "field-kit/south/window.txt",
+          "field-kit/logs/first-check.txt"
+        ]
+      },
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^cd\\s+field-kit/south$",
+            "message": "Run: cd field-kit/south"
+          },
+          {
+            "pattern": "^pwd$",
+            "message": "Run: pwd"
+          },
+          {
+            "pattern": "^ls$",
+            "message": "Run: ls"
+          }
+        ],
+        "outputRegex": [
+          "/workspace/field-kit/south"
+        ],
+        "outputContains": [
+          "window.txt"
+        ]
+      }
+    },
+    {
+      "id": "try-map-list-demo",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.module-1-terminal-map-project.quiz.try-map-list-demo",
+      "language": "bash",
+      "entryFilePath": "main.sh",
+      "starterCode": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "README.md",
+          "content": "# Check a small route map\n\nRun `ls demo-map`.\n",
+          "language": "text"
+        },
+        {
+          "path": "demo-map/east/sign.txt",
+          "content": "east\n",
+          "language": "text"
+        },
+        {
+          "path": "demo-map/west/sign.txt",
+          "content": "west\n",
+          "language": "text"
+        },
+        {
+          "path": "demo-map/notes.txt",
+          "content": "two halls\n",
+          "language": "text"
+        }
+      ],
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "starterCode": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "README.md",
+            "content": "# Check a small route map\n\nRun `ls demo-map`.\n",
+            "language": "text"
+          },
+          {
+            "path": "demo-map/east/sign.txt",
+            "content": "east\n",
+            "language": "text"
+          },
+          {
+            "path": "demo-map/west/sign.txt",
+            "content": "west\n",
+            "language": "text"
+          },
+          {
+            "path": "demo-map/notes.txt",
+            "content": "two halls\n",
+            "language": "text"
+          }
+        ],
+        "terminalExpectations": {
+          "requiredCommands": [
+            {
+              "pattern": "^ls\\s+demo-map$",
+              "message": "Run: ls demo-map"
+            }
+          ],
+          "outputContains": [
+            "east",
+            "west",
+            "notes.txt"
+          ]
+        },
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "demo-map/east/sign.txt",
+            "demo-map/west/sign.txt",
+            "demo-map/notes.txt"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "Run `ls demo-map` and look for `east`, `west`, and `notes.txt`."
+      },
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "demo-map/east/sign.txt",
+          "demo-map/west/sign.txt",
+          "demo-map/notes.txt"
+        ]
+      },
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^ls\\s+demo-map$",
+            "message": "Run: ls demo-map"
+          }
+        ],
+        "outputContains": [
+          "east",
+          "west",
+          "notes.txt"
+        ]
+      }
+    },
+    {
+      "id": "try-map-enter-east",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.module-1-terminal-map-project.quiz.try-map-enter-east",
+      "language": "bash",
+      "entryFilePath": "main.sh",
+      "starterCode": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "README.md",
+          "content": "# Visit the east hall\n\nMove into `demo-map/east`.\n",
+          "language": "text"
+        },
+        {
+          "path": "demo-map/east/sign.txt",
+          "content": "east\n",
+          "language": "text"
+        }
+      ],
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "starterCode": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "README.md",
+            "content": "# Visit the east hall\n\nMove into `demo-map/east`.\n",
+            "language": "text"
+          },
+          {
+            "path": "demo-map/east/sign.txt",
+            "content": "east\n",
+            "language": "text"
+          }
+        ],
+        "terminalExpectations": {
+          "requiredCommands": [
+            {
+              "pattern": "^cd\\s+demo-map/east$",
+              "message": "Run: cd demo-map/east"
+            },
+            {
+              "pattern": "^pwd$",
+              "message": "Run: pwd"
+            }
+          ],
+          "outputRegex": [
+            "/workspace/demo-map/east"
+          ]
+        },
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "demo-map/east/sign.txt"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "Use `cd` to enter `demo-map/east`, then run `pwd`."
+      },
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "demo-map/east/sign.txt"
+        ]
+      },
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^cd\\s+demo-map/east$",
+            "message": "Run: cd demo-map/east"
+          },
+          {
+            "pattern": "^pwd$",
+            "message": "Run: pwd"
+          }
+        ],
+        "outputRegex": [
+          "/workspace/demo-map/east"
+        ]
+      }
+    },
+    {
+      "id": "try-map-check-west",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.module-1-terminal-map-project.quiz.try-map-check-west",
+      "language": "bash",
+      "entryFilePath": "main.sh",
+      "starterCode": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "README.md",
+          "content": "# Check the west hall\n\nMove to `demo-map/west` and run `ls`.\n",
+          "language": "text"
+        },
+        {
+          "path": "demo-map/west/sign.txt",
+          "content": "west\n",
+          "language": "text"
+        }
+      ],
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "starterCode": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "README.md",
+            "content": "# Check the west hall\n\nMove to `demo-map/west` and run `ls`.\n",
+            "language": "text"
+          },
+          {
+            "path": "demo-map/west/sign.txt",
+            "content": "west\n",
+            "language": "text"
+          }
+        ],
+        "terminalExpectations": {
+          "requiredCommands": [
+            {
+              "pattern": "^(cd\\s+demo-map/west|cd\\s+\\.\\./west)$",
+              "message": "Move to demo-map/west"
+            },
+            {
+              "pattern": "^ls$",
+              "message": "Run: ls"
+            }
+          ],
+          "outputContains": [
+            "sign.txt"
+          ]
+        },
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "demo-map/west/sign.txt"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "Use the demo map to reach `demo-map/west`, then run `ls`."
+      },
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "demo-map/west/sign.txt"
+        ]
+      },
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^(cd\\s+demo-map/west|cd\\s+\\.\\./west)$",
+            "message": "Move to demo-map/west"
+          },
+          {
+            "pattern": "^ls$",
+            "message": "Run: ls"
+          }
+        ],
+        "outputContains": [
+          "sign.txt"
         ]
       }
     }

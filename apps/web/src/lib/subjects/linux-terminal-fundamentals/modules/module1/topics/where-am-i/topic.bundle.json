@@ -39,7 +39,7 @@
         "id": "try-where-am-i-sketch0",
         "titleKey": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.where-am-i.tryIt.try_where_am_i_sketch0.title",
         "promptKey": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.where-am-i.tryIt.try_where_am_i_sketch0.prompt",
-        "exerciseKey": "ci-create-navigation-lab",
+        "exerciseKey": "try-location-print-path",
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -58,7 +58,7 @@
         "id": "try-where-am-i-sketch1",
         "titleKey": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.where-am-i.tryIt.try_where_am_i_sketch1.title",
         "promptKey": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.where-am-i.tryIt.try_where_am_i_sketch1.prompt",
-        "exerciseKey": "ci-create-visible-hidden-practice",
+        "exerciseKey": "try-location-list-desk",
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -77,7 +77,7 @@
         "id": "try-where-am-i-sketch2",
         "titleKey": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.where-am-i.tryIt.try_where_am_i_sketch2.title",
         "promptKey": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.where-am-i.tryIt.try_where_am_i_sketch2.prompt",
-        "exerciseKey": "ci-create-long-list-lab",
+        "exerciseKey": "try-location-show-hidden-desk",
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -243,66 +243,53 @@
       "messageBase": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.where-am-i.quiz.ci-create-navigation-lab",
       "language": "bash",
       "entryFilePath": "main.sh",
-      "starterCode": "#!/usr/bin/env bash\n# Where Am I? pwd and ls\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+      "starterCode": "#!/usr/bin/env bash\n# Check the workspace location\n# Use the terminal for this task.\n",
       "starterFiles": [
         {
           "path": "main.sh",
-          "content": "#!/usr/bin/env bash\n# Where Am I? pwd and ls\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+          "content": "#!/usr/bin/env bash\n# Check the workspace location\n# Use the terminal for this task.\n",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "README.md",
-          "content": "# Where Am I? pwd and ls\n\nUse the terminal to complete the task. The editor is intentionally hidden for this Linux terminal lab.\n",
-          "language": "text"
-        },
-        {
-          "path": "terminal-map/README.txt",
-          "content": "map notes\n",
-          "language": "text"
-        },
-        {
-          "path": ".hidden-map",
-          "content": "secret route\n",
+          "content": "# Check the workspace location\n\nRun `pwd` and confirm the terminal shows the workspace path.\n",
           "language": "text"
         }
       ],
       "workspace": {
         "language": "bash",
         "entryFilePath": "main.sh",
-        "starterCode": "#!/usr/bin/env bash\n# Where Am I? pwd and ls\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+        "starterCode": "#!/usr/bin/env bash\n# Check the workspace location\n# Use the terminal for this task.\n",
         "starterFiles": [
           {
             "path": "main.sh",
-            "content": "#!/usr/bin/env bash\n# Where Am I? pwd and ls\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+            "content": "#!/usr/bin/env bash\n# Check the workspace location\n# Use the terminal for this task.\n",
             "language": "bash",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "README.md",
-            "content": "# Where Am I? pwd and ls\n\nUse the terminal to complete the task. The editor is intentionally hidden for this Linux terminal lab.\n",
-            "language": "text"
-          },
-          {
-            "path": "terminal-map/README.txt",
-            "content": "map notes\n",
-            "language": "text"
-          },
-          {
-            "path": ".hidden-map",
-            "content": "secret route\n",
+            "content": "# Check the workspace location\n\nRun `pwd` and confirm the terminal shows the workspace path.\n",
             "language": "text"
           }
         ],
         "workspaceExpectations": {
-          "requiredFolders": [
-            "terminal-map"
-          ],
           "requiredFiles": [
-            "README.md",
-            "terminal-map/README.txt"
+            "README.md"
+          ]
+        },
+        "terminalExpectations": {
+          "requiredCommands": [
+            {
+              "pattern": "^pwd$",
+              "message": "Run: pwd"
+            }
+          ],
+          "outputRegex": [
+            "/workspace"
           ]
         }
       },
@@ -310,7 +297,7 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "Run `pwd` to show the folder you are currently in."
+        "instructions": "Run `pwd` and confirm the terminal shows the workspace path."
       },
       "terminalExpectations": {
         "requiredCommands": [
@@ -324,12 +311,8 @@
         ]
       },
       "workspaceExpectations": {
-        "requiredFolders": [
-          "terminal-map"
-        ],
         "requiredFiles": [
-          "README.md",
-          "terminal-map/README.txt"
+          "README.md"
         ]
       }
     },
@@ -341,66 +324,78 @@
       "messageBase": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.where-am-i.quiz.ci-create-visible-hidden-practice",
       "language": "bash",
       "entryFilePath": "main.sh",
-      "starterCode": "#!/usr/bin/env bash\n# Where Am I? pwd and ls\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+      "starterCode": "#!/usr/bin/env bash\n# List a nearby folder\n# Use the terminal for this task.\n",
       "starterFiles": [
         {
           "path": "main.sh",
-          "content": "#!/usr/bin/env bash\n# Where Am I? pwd and ls\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+          "content": "#!/usr/bin/env bash\n# List a nearby folder\n# Use the terminal for this task.\n",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "README.md",
-          "content": "# Where Am I? pwd and ls\n\nUse the terminal to complete the task. The editor is intentionally hidden for this Linux terminal lab.\n",
+          "content": "# List a nearby folder\n\nRun `ls campus` and look for `map.txt` and `room.txt`.\n",
           "language": "text"
         },
         {
-          "path": "terminal-map/README.txt",
-          "content": "map notes\n",
+          "path": "campus/map.txt",
+          "content": "North hallway\nSouth lab\n",
           "language": "text"
         },
         {
-          "path": ".hidden-map",
-          "content": "secret route\n",
+          "path": "campus/room.txt",
+          "content": "Room 204\n",
           "language": "text"
         }
       ],
       "workspace": {
         "language": "bash",
         "entryFilePath": "main.sh",
-        "starterCode": "#!/usr/bin/env bash\n# Where Am I? pwd and ls\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+        "starterCode": "#!/usr/bin/env bash\n# List a nearby folder\n# Use the terminal for this task.\n",
         "starterFiles": [
           {
             "path": "main.sh",
-            "content": "#!/usr/bin/env bash\n# Where Am I? pwd and ls\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+            "content": "#!/usr/bin/env bash\n# List a nearby folder\n# Use the terminal for this task.\n",
             "language": "bash",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "README.md",
-            "content": "# Where Am I? pwd and ls\n\nUse the terminal to complete the task. The editor is intentionally hidden for this Linux terminal lab.\n",
+            "content": "# List a nearby folder\n\nRun `ls campus` and look for `map.txt` and `room.txt`.\n",
             "language": "text"
           },
           {
-            "path": "terminal-map/README.txt",
-            "content": "map notes\n",
+            "path": "campus/map.txt",
+            "content": "North hallway\nSouth lab\n",
             "language": "text"
           },
           {
-            "path": ".hidden-map",
-            "content": "secret route\n",
+            "path": "campus/room.txt",
+            "content": "Room 204\n",
             "language": "text"
           }
         ],
         "workspaceExpectations": {
           "requiredFolders": [
-            "terminal-map"
+            "campus"
           ],
           "requiredFiles": [
-            "README.md",
-            "terminal-map/README.txt"
+            "campus/map.txt",
+            "campus/room.txt"
+          ]
+        },
+        "terminalExpectations": {
+          "requiredCommands": [
+            {
+              "pattern": "^ls\\s+campus$",
+              "message": "Run: ls campus"
+            }
+          ],
+          "outputContains": [
+            "map.txt",
+            "room.txt"
           ]
         }
       },
@@ -408,27 +403,27 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "Run `ls` to list what is in the current folder. Make sure `README.md` and `terminal-map` appear."
+        "instructions": "Run `ls campus` and look for `map.txt` and `room.txt`."
       },
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^ls(\\s+[-a-zA-Z]+)?$",
-            "message": "Run: ls"
+            "pattern": "^ls\\s+campus$",
+            "message": "Run: ls campus"
           }
         ],
         "outputContains": [
-          "README.md",
-          "terminal-map"
+          "map.txt",
+          "room.txt"
         ]
       },
       "workspaceExpectations": {
         "requiredFolders": [
-          "terminal-map"
+          "campus"
         ],
         "requiredFiles": [
-          "README.md",
-          "terminal-map/README.txt"
+          "campus/map.txt",
+          "campus/room.txt"
         ]
       }
     },
@@ -440,66 +435,77 @@
       "messageBase": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.where-am-i.quiz.ci-create-long-list-lab",
       "language": "bash",
       "entryFilePath": "main.sh",
-      "starterCode": "#!/usr/bin/env bash\n# Where Am I? pwd and ls\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+      "starterCode": "#!/usr/bin/env bash\n# Reveal the hidden room note\n# Use the terminal for this task.\n",
       "starterFiles": [
         {
           "path": "main.sh",
-          "content": "#!/usr/bin/env bash\n# Where Am I? pwd and ls\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+          "content": "#!/usr/bin/env bash\n# Reveal the hidden room note\n# Use the terminal for this task.\n",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "README.md",
-          "content": "# Where Am I? pwd and ls\n\nUse the terminal to complete the task. The editor is intentionally hidden for this Linux terminal lab.\n",
+          "content": "# Reveal the hidden room note\n\nRun `ls -a campus` and look for `.room-number`.\n",
           "language": "text"
         },
         {
-          "path": "terminal-map/README.txt",
-          "content": "map notes\n",
+          "path": "campus/map.txt",
+          "content": "North hallway\nSouth lab\n",
           "language": "text"
         },
         {
-          "path": ".hidden-map",
-          "content": "secret route\n",
+          "path": "campus/.room-number",
+          "content": "204\n",
           "language": "text"
         }
       ],
       "workspace": {
         "language": "bash",
         "entryFilePath": "main.sh",
-        "starterCode": "#!/usr/bin/env bash\n# Where Am I? pwd and ls\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+        "starterCode": "#!/usr/bin/env bash\n# Reveal the hidden room note\n# Use the terminal for this task.\n",
         "starterFiles": [
           {
             "path": "main.sh",
-            "content": "#!/usr/bin/env bash\n# Where Am I? pwd and ls\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+            "content": "#!/usr/bin/env bash\n# Reveal the hidden room note\n# Use the terminal for this task.\n",
             "language": "bash",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "README.md",
-            "content": "# Where Am I? pwd and ls\n\nUse the terminal to complete the task. The editor is intentionally hidden for this Linux terminal lab.\n",
+            "content": "# Reveal the hidden room note\n\nRun `ls -a campus` and look for `.room-number`.\n",
             "language": "text"
           },
           {
-            "path": "terminal-map/README.txt",
-            "content": "map notes\n",
+            "path": "campus/map.txt",
+            "content": "North hallway\nSouth lab\n",
             "language": "text"
           },
           {
-            "path": ".hidden-map",
-            "content": "secret route\n",
+            "path": "campus/.room-number",
+            "content": "204\n",
             "language": "text"
           }
         ],
         "workspaceExpectations": {
           "requiredFolders": [
-            "terminal-map"
+            "campus"
           ],
           "requiredFiles": [
-            ".hidden-map",
-            "terminal-map/README.txt"
+            "campus/map.txt",
+            "campus/.room-number"
+          ]
+        },
+        "terminalExpectations": {
+          "requiredCommands": [
+            {
+              "pattern": "^ls\\s+-a\\s+campus$",
+              "message": "Run: ls -a campus"
+            }
+          ],
+          "outputContains": [
+            ".room-number"
           ]
         }
       },
@@ -507,26 +513,315 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "Run `ls -a` so hidden files appear too. Look for `.hidden-map` in the output."
+        "instructions": "Run `ls -a campus` and look for `.room-number`."
       },
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^ls(\\s+[-a-zA-Z]+)?$",
-            "message": "Run: ls -a"
+            "pattern": "^ls\\s+-a\\s+campus$",
+            "message": "Run: ls -a campus"
           }
         ],
         "outputContains": [
-          ".hidden-map"
+          ".room-number"
         ]
       },
       "workspaceExpectations": {
         "requiredFolders": [
-          "terminal-map"
+          "campus"
         ],
         "requiredFiles": [
-          ".hidden-map",
-          "terminal-map/README.txt"
+          "campus/map.txt",
+          "campus/.room-number"
+        ]
+      }
+    },
+    {
+      "id": "try-location-print-path",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.where-am-i.quiz.try-location-print-path",
+      "language": "bash",
+      "entryFilePath": "main.sh",
+      "starterCode": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "README.md",
+          "content": "# Print your current path\n\nRun `pwd` and check the path before moving anywhere.\n",
+          "language": "text"
+        }
+      ],
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "starterCode": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "README.md",
+            "content": "# Print your current path\n\nRun `pwd` and check the path before moving anywhere.\n",
+            "language": "text"
+          }
+        ],
+        "terminalExpectations": {
+          "requiredCommands": [
+            {
+              "pattern": "^pwd$",
+              "message": "Run: pwd"
+            }
+          ],
+          "outputRegex": [
+            "/workspace"
+          ]
+        },
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "README.md"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "Run `pwd` and confirm the path ends inside the workspace."
+      },
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "README.md"
+        ]
+      },
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^pwd$",
+            "message": "Run: pwd"
+          }
+        ],
+        "outputRegex": [
+          "/workspace"
+        ]
+      }
+    },
+    {
+      "id": "try-location-list-desk",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.where-am-i.quiz.try-location-list-desk",
+      "language": "bash",
+      "entryFilePath": "main.sh",
+      "starterCode": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "README.md",
+          "content": "# Look inside a folder\n\nRun `ls desk`.\n",
+          "language": "text"
+        },
+        {
+          "path": "desk/notes.txt",
+          "content": "Bring notebook\n",
+          "language": "text"
+        },
+        {
+          "path": "desk/schedule.txt",
+          "content": "Lab at 10\n",
+          "language": "text"
+        }
+      ],
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "starterCode": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "README.md",
+            "content": "# Look inside a folder\n\nRun `ls desk`.\n",
+            "language": "text"
+          },
+          {
+            "path": "desk/notes.txt",
+            "content": "Bring notebook\n",
+            "language": "text"
+          },
+          {
+            "path": "desk/schedule.txt",
+            "content": "Lab at 10\n",
+            "language": "text"
+          }
+        ],
+        "terminalExpectations": {
+          "requiredCommands": [
+            {
+              "pattern": "^ls\\s+desk$",
+              "message": "Run: ls desk"
+            }
+          ],
+          "outputContains": [
+            "notes.txt",
+            "schedule.txt"
+          ]
+        },
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "desk/notes.txt",
+            "desk/schedule.txt"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "Run `ls desk` and look for `notes.txt` and `schedule.txt`."
+      },
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "desk/notes.txt",
+          "desk/schedule.txt"
+        ]
+      },
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^ls\\s+desk$",
+            "message": "Run: ls desk"
+          }
+        ],
+        "outputContains": [
+          "notes.txt",
+          "schedule.txt"
+        ]
+      }
+    },
+    {
+      "id": "try-location-show-hidden-desk",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.where-am-i.quiz.try-location-show-hidden-desk",
+      "language": "bash",
+      "entryFilePath": "main.sh",
+      "starterCode": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "README.md",
+          "content": "# Show hidden desk notes\n\nRun `ls -a desk`.\n",
+          "language": "text"
+        },
+        {
+          "path": "desk/.locker",
+          "content": "blue\n",
+          "language": "text"
+        },
+        {
+          "path": "desk/notes.txt",
+          "content": "Bring notebook\n",
+          "language": "text"
+        }
+      ],
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "starterCode": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "README.md",
+            "content": "# Show hidden desk notes\n\nRun `ls -a desk`.\n",
+            "language": "text"
+          },
+          {
+            "path": "desk/.locker",
+            "content": "blue\n",
+            "language": "text"
+          },
+          {
+            "path": "desk/notes.txt",
+            "content": "Bring notebook\n",
+            "language": "text"
+          }
+        ],
+        "terminalExpectations": {
+          "requiredCommands": [
+            {
+              "pattern": "^ls\\s+-a\\s+desk$",
+              "message": "Run: ls -a desk"
+            }
+          ],
+          "outputContains": [
+            ".locker"
+          ]
+        },
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "desk/.locker",
+            "desk/notes.txt"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "Run `ls -a desk` and look for `.locker`."
+      },
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "desk/.locker",
+          "desk/notes.txt"
+        ]
+      },
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^ls\\s+-a\\s+desk$",
+            "message": "Run: ls -a desk"
+          }
+        ],
+        "outputContains": [
+          ".locker"
         ]
       }
     }

@@ -265,7 +265,7 @@ test.describe("linux terminal session reuse", () => {
             timeout: 45_000,
         });
 
-        await expect(page.getByTestId("code-input-exercise")).toBeVisible({
+        await expect(page.getByTestId("interactive-terminal")).toBeVisible({
             timeout: 45_000,
         });
         await expect(page.locator("body")).toContainText("Bound to:");
@@ -291,7 +291,7 @@ test.describe("linux terminal session reuse", () => {
             timeout: 45_000,
         });
 
-        await expect(page.getByTestId("code-input-exercise")).toBeVisible({
+        await expect(page.getByTestId("interactive-terminal")).toBeVisible({
             timeout: 45_000,
         });
         await expectTerminalVisible(page);

@@ -98,10 +98,10 @@ export async function selectCatalogSubjectsForActor<T extends { slug: string }>(
     const access = actorAccess ?? (await getCatalogActorAccess());
     const subjectsWithEnrollment = await withSubjectEnrollment(subjects);
 
-    const selected =
-        access.mode === "admin"
-            ? subjectsWithEnrollment
-            : selectCatalogSubjectsForMode(subjectsWithEnrollment, "learner");
+    const selected = selectCatalogSubjectsForMode(
+        subjectsWithEnrollment,
+        access.mode,
+    );
 
     return selected.map(
         (subject): CatalogSubjectWithAvailability<T> =>

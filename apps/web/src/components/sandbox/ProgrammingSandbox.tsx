@@ -22,7 +22,7 @@ const MIN_PREPARING_MS = 300;
 
 function ProgrammingIdeTransitionCover({ label }: { label: string }) {
     return (
-        <div className="absolute inset-0 z-20 flex items-center justify-center bg-white/88 backdrop-blur-sm dark:bg-neutral-950/82">
+        <div className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center bg-white/88 backdrop-blur-sm dark:bg-neutral-950/82">
             <div className="w-full max-w-sm rounded-2xl border border-neutral-200 bg-white/92 p-4 shadow-sm dark:border-white/10 dark:bg-neutral-900/92">
                 <div className="text-[11px] font-black uppercase tracking-[0.14em] text-neutral-500 dark:text-white/45">
                     Loading

@@ -31,12 +31,21 @@ export async function runnerPost<T>(
   actorKey: string,
   body?: unknown,
 ): Promise<T> {
-  const res = await fetch(`${getRunnerBaseUrl()}${path}`, {
-    method: "POST",
-    headers: buildRunnerHeaders({ actorKey }),
-    body: body == null ? undefined : JSON.stringify(body),
-    cache: "no-store",
-  });
+  const url = `${getRunnerBaseUrl()}${path}`;
+
+  let res: Response;
+
+  try {
+    res = await fetch(url, {
+      method: "POST",
+      headers: buildRunnerHeaders({ actorKey }),
+      body: body == null ? undefined : JSON.stringify(body),
+      cache: "no-store",
+    });
+  } catch (error: any) {
+    const cause = error?.cause?.message ? `: ${error.cause.message}` : "";
+    throw new Error(`Runner fetch failed for ${path}${cause}`);
+  }
 
   const data = await res.json().catch(() => ({}));
 

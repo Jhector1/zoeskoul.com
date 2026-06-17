@@ -41,6 +41,13 @@ describe("authoring compile target resolution", () => {
         expect(manifest.subject.slug).toBe("python-v2");
     });
 
+
+    it("copies courseNumber from course.spec.json into the live blueprint", async () => {
+        const target = await resolveSubjectPublishTarget("python");
+
+        expect(target.blueprint.courseNumber).toBe(target.spec.courseNumber);
+    });
+
     it("compileSubject compiles only the selected publishTarget course", async () => {
         const target = await resolveSubjectPublishTarget("python");
 
@@ -87,6 +94,19 @@ describe("authoring compile target resolution", () => {
 
         expect(target.liveSubjectSlug).toBe("python-preview");
         expect(target.blueprint.subjectSlug).toBe("python-preview");
+    });
+
+    it("does not inherit publish-target versioning into non-target Python courses", async () => {
+        const target = await resolveAuthoringCompileTarget({
+            subjectSlug: "python",
+            courseSlug: "applied-python-projects",
+            options: {
+                liveSubjectSlug: "applied-python-projects",
+            },
+        });
+
+        expect(target.blueprint.subjectSlug).toBe("applied-python-projects");
+        expect(target.blueprint.versioning).toBeUndefined();
     });
 
     it("compileCourse allows a non-target course in draft-only mode without a live subject slug", async () => {

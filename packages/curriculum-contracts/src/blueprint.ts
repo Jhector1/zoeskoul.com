@@ -39,6 +39,13 @@ export type CourseBlueprint = {
   targetLocales: LocaleCode[];
   title: string;
   description?: string;
+  /**
+   * Optional stable course position from course.spec.json.
+   * Catalog membership and catalog display order still come from
+   * authoring/catalogs/*.catalog.json; this value is only a manifest/DB
+   * fallback for surfaces that render subjects outside a catalog.
+   */
+  courseNumber?: number;
   level: "beginner" | "intermediate" | "advanced";
   audience: string[];
   goals: string[];

@@ -38,7 +38,7 @@
         "id": "try-what-the-terminal-is-sketch0",
         "titleKey": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.what-the-terminal-is.tryIt.try_what_the_terminal_is_sketch0.title",
         "promptKey": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.what-the-terminal-is.tryIt.try_what_the_terminal_is_sketch0.prompt",
-        "exerciseKey": "ci-create-linux-start",
+        "exerciseKey": "try-terminal-see-workspace",
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -57,7 +57,7 @@
         "id": "try-what-the-terminal-is-sketch1",
         "titleKey": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.what-the-terminal-is.tryIt.try_what_the_terminal_is_sketch1.title",
         "promptKey": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.what-the-terminal-is.tryIt.try_what_the_terminal_is_sketch1.prompt",
-        "exerciseKey": "ci-make-command-practice",
+        "exerciseKey": "try-terminal-print-user",
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -76,7 +76,7 @@
         "id": "try-what-the-terminal-is-sketch2",
         "titleKey": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.what-the-terminal-is.tryIt.try_what_the_terminal_is_sketch2.title",
         "promptKey": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.what-the-terminal-is.tryIt.try_what_the_terminal_is_sketch2.prompt",
-        "exerciseKey": "ci-create-first-lab",
+        "exerciseKey": "try-terminal-list-start",
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -237,50 +237,58 @@
     {
       "id": "ci-create-linux-start",
       "kind": "code_input",
-      "purpose": "project",
+      "purpose": "practice",
       "weight": 1,
       "messageBase": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.what-the-terminal-is.quiz.ci-create-linux-start",
       "language": "bash",
       "entryFilePath": "main.sh",
-      "starterCode": "#!/usr/bin/env bash\n# What the Terminal Is\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+      "starterCode": "#!/usr/bin/env bash\n# Run your first location check\n# Use the terminal to run the command for this check.\n",
       "starterFiles": [
         {
           "path": "main.sh",
-          "content": "#!/usr/bin/env bash\n# What the Terminal Is\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+          "content": "#!/usr/bin/env bash\n# Run your first location check\n# Use the terminal to run the command for this check.\n",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "README.md",
-          "content": "# What the Terminal Is\n\nUse the terminal to complete the task. The editor is intentionally hidden for this Linux terminal lab.\n",
+          "content": "# Run your first location check\n\nRun `pwd` to ask the terminal where this workspace starts. Check your answer after you see `/workspace`.\n",
           "language": "text"
         }
       ],
       "workspace": {
         "language": "bash",
         "entryFilePath": "main.sh",
-        "starterCode": "#!/usr/bin/env bash\n# What the Terminal Is\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+        "starterCode": "#!/usr/bin/env bash\n# Run your first location check\n# Use the terminal to run the command for this check.\n",
         "starterFiles": [
           {
             "path": "main.sh",
-            "content": "#!/usr/bin/env bash\n# What the Terminal Is\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+            "content": "#!/usr/bin/env bash\n# Run your first location check\n# Use the terminal to run the command for this check.\n",
             "language": "bash",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "README.md",
-            "content": "# What the Terminal Is\n\nUse the terminal to complete the task. The editor is intentionally hidden for this Linux terminal lab.\n",
+            "content": "# Run your first location check\n\nRun `pwd` to ask the terminal where this workspace starts. Check your answer after you see `/workspace`.\n",
             "language": "text"
           }
         ],
-        "workspaceExpectations": {
-          "requiredFolders": [
-            "linux-start"
+        "terminalExpectations": {
+          "requiredCommands": [
+            {
+              "pattern": "^pwd$",
+              "message": "Run: pwd"
+            }
           ],
+          "outputRegex": [
+            "/workspace"
+          ]
+        },
+        "workspaceExpectations": {
           "requiredFiles": [
-            "linux-start/hello.txt"
+            "README.md"
           ]
         }
       },
@@ -288,64 +296,77 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "Use the terminal to create a folder named `linux-start` and a file named `hello.txt` inside it."
+        "instructions": "Run `pwd` and confirm the workspace path appears."
       },
       "workspaceExpectations": {
-        "requiredFolders": [
-          "linux-start"
-        ],
         "requiredFiles": [
-          "linux-start/hello.txt"
+          "README.md"
+        ]
+      },
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^pwd$",
+            "message": "Run: pwd"
+          }
+        ],
+        "outputRegex": [
+          "/workspace"
         ]
       }
     },
     {
       "id": "ci-make-command-practice",
       "kind": "code_input",
-      "purpose": "project",
+      "purpose": "practice",
       "weight": 1,
       "messageBase": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.what-the-terminal-is.quiz.ci-make-command-practice",
       "language": "bash",
       "entryFilePath": "main.sh",
-      "starterCode": "#!/usr/bin/env bash\n# What the Terminal Is\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+      "starterCode": "#!/usr/bin/env bash\n# Check the session user\n# Use the terminal to run the command for this check.\n",
       "starterFiles": [
         {
           "path": "main.sh",
-          "content": "#!/usr/bin/env bash\n# What the Terminal Is\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+          "content": "#!/usr/bin/env bash\n# Check the session user\n# Use the terminal to run the command for this check.\n",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "README.md",
-          "content": "# What the Terminal Is\n\nUse the terminal to complete the task. The editor is intentionally hidden for this Linux terminal lab.\n",
+          "content": "# Check the session user\n\nRun `whoami` to see the Linux user name for this terminal session.\n",
           "language": "text"
         }
       ],
       "workspace": {
         "language": "bash",
         "entryFilePath": "main.sh",
-        "starterCode": "#!/usr/bin/env bash\n# What the Terminal Is\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+        "starterCode": "#!/usr/bin/env bash\n# Check the session user\n# Use the terminal to run the command for this check.\n",
         "starterFiles": [
           {
             "path": "main.sh",
-            "content": "#!/usr/bin/env bash\n# What the Terminal Is\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+            "content": "#!/usr/bin/env bash\n# Check the session user\n# Use the terminal to run the command for this check.\n",
             "language": "bash",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "README.md",
-            "content": "# What the Terminal Is\n\nUse the terminal to complete the task. The editor is intentionally hidden for this Linux terminal lab.\n",
+            "content": "# Check the session user\n\nRun `whoami` to see the Linux user name for this terminal session.\n",
             "language": "text"
           }
         ],
+        "terminalExpectations": {
+          "requiredCommands": [
+            {
+              "pattern": "^whoami$",
+              "message": "Run: whoami"
+            }
+          ]
+        },
         "workspaceExpectations": {
-          "requiredFolders": [
-            "linux-start"
-          ],
           "requiredFiles": [
-            "linux-start/command-practice.txt"
+            "README.md"
           ]
         }
       },
@@ -353,64 +374,77 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "Create `linux-start/command-practice.txt`. Use any safe command you want, such as `touch` or `echo >`."
+        "instructions": "Run `whoami` to print the current Linux user."
       },
       "workspaceExpectations": {
-        "requiredFolders": [
-          "linux-start"
-        ],
         "requiredFiles": [
-          "linux-start/command-practice.txt"
+          "README.md"
+        ]
+      },
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^whoami$",
+            "message": "Run: whoami"
+          }
         ]
       }
     },
     {
       "id": "ci-create-first-lab",
       "kind": "code_input",
-      "purpose": "project",
+      "purpose": "practice",
       "weight": 1,
       "messageBase": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.what-the-terminal-is.quiz.ci-create-first-lab",
       "language": "bash",
       "entryFilePath": "main.sh",
-      "starterCode": "#!/usr/bin/env bash\n# What the Terminal Is\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+      "starterCode": "#!/usr/bin/env bash\n# List the starting workspace\n# Use the terminal to run the command for this check.\n",
       "starterFiles": [
         {
           "path": "main.sh",
-          "content": "#!/usr/bin/env bash\n# What the Terminal Is\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+          "content": "#!/usr/bin/env bash\n# List the starting workspace\n# Use the terminal to run the command for this check.\n",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "README.md",
-          "content": "# What the Terminal Is\n\nUse the terminal to complete the task. The editor is intentionally hidden for this Linux terminal lab.\n",
+          "content": "# List the starting workspace\n\nRun `ls` to see what is already in the workspace. You should see `README.md`.\n",
           "language": "text"
         }
       ],
       "workspace": {
         "language": "bash",
         "entryFilePath": "main.sh",
-        "starterCode": "#!/usr/bin/env bash\n# What the Terminal Is\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+        "starterCode": "#!/usr/bin/env bash\n# List the starting workspace\n# Use the terminal to run the command for this check.\n",
         "starterFiles": [
           {
             "path": "main.sh",
-            "content": "#!/usr/bin/env bash\n# What the Terminal Is\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+            "content": "#!/usr/bin/env bash\n# List the starting workspace\n# Use the terminal to run the command for this check.\n",
             "language": "bash",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "README.md",
-            "content": "# What the Terminal Is\n\nUse the terminal to complete the task. The editor is intentionally hidden for this Linux terminal lab.\n",
+            "content": "# List the starting workspace\n\nRun `ls` to see what is already in the workspace. You should see `README.md`.\n",
             "language": "text"
           }
         ],
-        "workspaceExpectations": {
-          "requiredFolders": [
-            "first-lab"
+        "terminalExpectations": {
+          "requiredCommands": [
+            {
+              "pattern": "^ls$",
+              "message": "Run: ls"
+            }
           ],
+          "outputContains": [
+            "README.md"
+          ]
+        },
+        "workspaceExpectations": {
           "requiredFiles": [
-            "first-lab/results.txt"
+            "README.md"
           ]
         }
       },
@@ -418,14 +452,259 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "Create `first-lab/results.txt` so the explorer shows a folder with one result file."
+        "instructions": "Run `ls` and confirm the starter file is listed."
       },
       "workspaceExpectations": {
-        "requiredFolders": [
-          "first-lab"
-        ],
         "requiredFiles": [
-          "first-lab/results.txt"
+          "README.md"
+        ]
+      },
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^ls$",
+            "message": "Run: ls"
+          }
+        ],
+        "outputContains": [
+          "README.md"
+        ]
+      }
+    },
+    {
+      "id": "try-terminal-see-workspace",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.what-the-terminal-is.quiz.try-terminal-see-workspace",
+      "language": "bash",
+      "entryFilePath": "main.sh",
+      "starterCode": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "README.md",
+          "content": "# Ask where you are\n\nRun `pwd` and look for `/workspace` in the response.\n",
+          "language": "text"
+        }
+      ],
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "starterCode": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "README.md",
+            "content": "# Ask where you are\n\nRun `pwd` and look for `/workspace` in the response.\n",
+            "language": "text"
+          }
+        ],
+        "terminalExpectations": {
+          "requiredCommands": [
+            {
+              "pattern": "^pwd$",
+              "message": "Run: pwd"
+            }
+          ],
+          "outputRegex": [
+            "/workspace"
+          ]
+        },
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "README.md"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "Run `pwd` and look for the workspace path."
+      },
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "README.md"
+        ]
+      },
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^pwd$",
+            "message": "Run: pwd"
+          }
+        ],
+        "outputRegex": [
+          "/workspace"
+        ]
+      }
+    },
+    {
+      "id": "try-terminal-print-user",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.what-the-terminal-is.quiz.try-terminal-print-user",
+      "language": "bash",
+      "entryFilePath": "main.sh",
+      "starterCode": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "README.md",
+          "content": "# Print the terminal user\n\nRun `whoami` to see the user for this session.\n",
+          "language": "text"
+        }
+      ],
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "starterCode": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "README.md",
+            "content": "# Print the terminal user\n\nRun `whoami` to see the user for this session.\n",
+            "language": "text"
+          }
+        ],
+        "terminalExpectations": {
+          "requiredCommands": [
+            {
+              "pattern": "^whoami$",
+              "message": "Run: whoami"
+            }
+          ]
+        },
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "README.md"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "Run `whoami` to see the user for this terminal session."
+      },
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "README.md"
+        ]
+      },
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^whoami$",
+            "message": "Run: whoami"
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-terminal-list-start",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.what-the-terminal-is.quiz.try-terminal-list-start",
+      "language": "bash",
+      "entryFilePath": "main.sh",
+      "starterCode": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "README.md",
+          "content": "# List the starting files\n\nRun `ls`. You should see this README file.\n",
+          "language": "text"
+        }
+      ],
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "starterCode": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "README.md",
+            "content": "# List the starting files\n\nRun `ls`. You should see this README file.\n",
+            "language": "text"
+          }
+        ],
+        "terminalExpectations": {
+          "requiredCommands": [
+            {
+              "pattern": "^ls$",
+              "message": "Run: ls"
+            }
+          ],
+          "outputContains": [
+            "README.md"
+          ]
+        },
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "README.md"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "Run `ls` and confirm `README.md` is listed."
+      },
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "README.md"
+        ]
+      },
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^ls$",
+            "message": "Run: ls"
+          }
+        ],
+        "outputContains": [
+          "README.md"
         ]
       }
     }

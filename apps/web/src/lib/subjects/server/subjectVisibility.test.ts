@@ -244,4 +244,36 @@ describe("subject version visibility", () => {
         expect(visible).toHaveLength(1);
         expect(slugs(visible)).toEqual(["python-v2"]);
     });
+
+    it("can prefer the active default version for catalog and onboarding surfaces", () => {
+        const subjects: Subject[] = [
+            {
+                slug: "python",
+                enrolled: true,
+                versioning: {
+                    family: "python",
+                    status: "legacy",
+                    defaultForNewEnrollments: false,
+                },
+            },
+            {
+                slug: "python-v2",
+                enrolled: false,
+                versioning: {
+                    family: "python",
+                    status: "active",
+                    defaultForNewEnrollments: true,
+                },
+            },
+        ];
+
+        expect(
+            slugs(
+                selectVisibleSubjectsForActor(subjects, {
+                    familyPreference: "default",
+                }),
+            ),
+        ).toEqual(["python-v2"]);
+    });
+
 });

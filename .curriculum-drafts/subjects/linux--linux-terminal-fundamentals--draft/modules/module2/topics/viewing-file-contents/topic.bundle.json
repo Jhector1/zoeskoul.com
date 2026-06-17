@@ -39,7 +39,7 @@
         "id": "try-viewing-file-contents-sketch0",
         "titleKey": "topics.linux--linux-terminal-fundamentals--draft.linux-2-files-and-folders.viewing-file-contents.tryIt.try_viewing_file_contents_sketch0.title",
         "promptKey": "topics.linux--linux-terminal-fundamentals--draft.linux-2-files-and-folders.viewing-file-contents.tryIt.try_viewing_file_contents_sketch0.prompt",
-        "exerciseKey": "ci-create-log-review",
+        "exerciseKey": "try-view-cat-tip",
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -58,7 +58,7 @@
         "id": "try-viewing-file-contents-sketch1",
         "titleKey": "topics.linux--linux-terminal-fundamentals--draft.linux-2-files-and-folders.viewing-file-contents.tryIt.try_viewing_file_contents_sketch1.title",
         "promptKey": "topics.linux--linux-terminal-fundamentals--draft.linux-2-files-and-folders.viewing-file-contents.tryIt.try_viewing_file_contents_sketch1.prompt",
-        "exerciseKey": "ci-create-notes-summary",
+        "exerciseKey": "try-view-head-tail-today",
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -77,7 +77,7 @@
         "id": "try-viewing-file-contents-sketch2",
         "titleKey": "topics.linux--linux-terminal-fundamentals--draft.linux-2-files-and-folders.viewing-file-contents.tryIt.try_viewing_file_contents_sketch2.title",
         "promptKey": "topics.linux--linux-terminal-fundamentals--draft.linux-2-files-and-folders.viewing-file-contents.tryIt.try_viewing_file_contents_sketch2.prompt",
-        "exerciseKey": "ci-create-count-marker",
+        "exerciseKey": "try-view-count-today",
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -243,75 +243,66 @@
       "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-2-files-and-folders.viewing-file-contents.quiz.ci-create-log-review",
       "language": "bash",
       "entryFilePath": "main.sh",
-      "starterCode": "#!/usr/bin/env bash\n# Viewing File Contents\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+      "starterCode": "#!/usr/bin/env bash\n# Open the welcome message\n# Use the terminal for this task.\n",
       "starterFiles": [
         {
           "path": "main.sh",
-          "content": "#!/usr/bin/env bash\n# Viewing File Contents\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+          "content": "#!/usr/bin/env bash\n# Open the welcome message\n# Use the terminal for this task.\n",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "README.md",
-          "content": "# Viewing File Contents\n\nUse the terminal to complete the task. The editor is intentionally hidden for this Linux terminal lab.\n",
+          "content": "# Open the welcome message\n\nRun `cat messages/welcome.txt` and read the welcome line.\n",
           "language": "text"
         },
         {
-          "path": "notes/message.txt",
-          "content": "Linux is powerful.\nUse the terminal with care.\n",
-          "language": "text"
-        },
-        {
-          "path": "notes/story.txt",
-          "content": "Chapter 1: Linux basics\nCommands help you move quickly.\nPractice builds confidence.\nSmall steps add up.\n",
-          "language": "text"
-        },
-        {
-          "path": "logs/app.log",
-          "content": "INFO started\nINFO loaded config\nWARN low disk space\nERROR failed backup\nINFO stopped\n",
+          "path": "messages/welcome.txt",
+          "content": "Welcome to the file review desk.\n",
           "language": "text"
         }
       ],
       "workspace": {
         "language": "bash",
         "entryFilePath": "main.sh",
-        "starterCode": "#!/usr/bin/env bash\n# Viewing File Contents\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+        "starterCode": "#!/usr/bin/env bash\n# Open the welcome message\n# Use the terminal for this task.\n",
         "starterFiles": [
           {
             "path": "main.sh",
-            "content": "#!/usr/bin/env bash\n# Viewing File Contents\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+            "content": "#!/usr/bin/env bash\n# Open the welcome message\n# Use the terminal for this task.\n",
             "language": "bash",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "README.md",
-            "content": "# Viewing File Contents\n\nUse the terminal to complete the task. The editor is intentionally hidden for this Linux terminal lab.\n",
+            "content": "# Open the welcome message\n\nRun `cat messages/welcome.txt` and read the welcome line.\n",
             "language": "text"
           },
           {
-            "path": "notes/message.txt",
-            "content": "Linux is powerful.\nUse the terminal with care.\n",
-            "language": "text"
-          },
-          {
-            "path": "notes/story.txt",
-            "content": "Chapter 1: Linux basics\nCommands help you move quickly.\nPractice builds confidence.\nSmall steps add up.\n",
-            "language": "text"
-          },
-          {
-            "path": "logs/app.log",
-            "content": "INFO started\nINFO loaded config\nWARN low disk space\nERROR failed backup\nINFO stopped\n",
+            "path": "messages/welcome.txt",
+            "content": "Welcome to the file review desk.\n",
             "language": "text"
           }
         ],
         "workspaceExpectations": {
           "requiredFolders": [
-            "notes"
+            "messages"
           ],
           "requiredFiles": [
-            "notes/message.txt"
+            "messages/welcome.txt"
+          ]
+        },
+        "terminalExpectations": {
+          "requiredCommands": [
+            {
+              "pattern": "^cat\\s+messages/welcome\\.txt$",
+              "message": "Run: cat messages/welcome.txt"
+            }
+          ],
+          "outputContains": [
+            "Welcome to the file review desk."
           ]
         }
       },
@@ -319,25 +310,25 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "Run `cat notes/message.txt` and read the full message in the terminal."
+        "instructions": "Run `cat messages/welcome.txt` and read the welcome line."
       },
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^cat\\s+notes/message\\.txt$",
-            "message": "Run: cat notes/message.txt"
+            "pattern": "^cat\\s+messages/welcome\\.txt$",
+            "message": "Run: cat messages/welcome.txt"
           }
         ],
         "outputContains": [
-          "Linux is powerful."
+          "Welcome to the file review desk."
         ]
       },
       "workspaceExpectations": {
         "requiredFolders": [
-          "notes"
+          "messages"
         ],
         "requiredFiles": [
-          "notes/message.txt"
+          "messages/welcome.txt"
         ]
       }
     },
@@ -349,77 +340,83 @@
       "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-2-files-and-folders.viewing-file-contents.quiz.ci-create-notes-summary",
       "language": "bash",
       "entryFilePath": "main.sh",
-      "starterCode": "#!/usr/bin/env bash\n# Viewing File Contents\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+      "starterCode": "#!/usr/bin/env bash\n# Preview a report and a log\n# Use the terminal for this task.\n",
       "starterFiles": [
         {
           "path": "main.sh",
-          "content": "#!/usr/bin/env bash\n# Viewing File Contents\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+          "content": "#!/usr/bin/env bash\n# Preview a report and a log\n# Use the terminal for this task.\n",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "README.md",
-          "content": "# Viewing File Contents\n\nUse the terminal to complete the task. The editor is intentionally hidden for this Linux terminal lab.\n",
+          "content": "# Preview a report and a log\n\nRun `head reports/week.txt` and `tail logs/server.log`.\n",
           "language": "text"
         },
         {
-          "path": "notes/message.txt",
-          "content": "Linux is powerful.\nUse the terminal with care.\n",
+          "path": "reports/week.txt",
+          "content": "Monday\nTuesday\nWednesday\nThursday\nFriday\n",
           "language": "text"
         },
         {
-          "path": "notes/story.txt",
-          "content": "Chapter 1: Linux basics\nCommands help you move quickly.\nPractice builds confidence.\nSmall steps add up.\n",
-          "language": "text"
-        },
-        {
-          "path": "logs/app.log",
-          "content": "INFO started\nINFO loaded config\nWARN low disk space\nERROR failed backup\nINFO stopped\n",
+          "path": "logs/server.log",
+          "content": "start\ncheck\nfinish ok\n",
           "language": "text"
         }
       ],
       "workspace": {
         "language": "bash",
         "entryFilePath": "main.sh",
-        "starterCode": "#!/usr/bin/env bash\n# Viewing File Contents\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+        "starterCode": "#!/usr/bin/env bash\n# Preview a report and a log\n# Use the terminal for this task.\n",
         "starterFiles": [
           {
             "path": "main.sh",
-            "content": "#!/usr/bin/env bash\n# Viewing File Contents\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+            "content": "#!/usr/bin/env bash\n# Preview a report and a log\n# Use the terminal for this task.\n",
             "language": "bash",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "README.md",
-            "content": "# Viewing File Contents\n\nUse the terminal to complete the task. The editor is intentionally hidden for this Linux terminal lab.\n",
+            "content": "# Preview a report and a log\n\nRun `head reports/week.txt` and `tail logs/server.log`.\n",
             "language": "text"
           },
           {
-            "path": "notes/message.txt",
-            "content": "Linux is powerful.\nUse the terminal with care.\n",
+            "path": "reports/week.txt",
+            "content": "Monday\nTuesday\nWednesday\nThursday\nFriday\n",
             "language": "text"
           },
           {
-            "path": "notes/story.txt",
-            "content": "Chapter 1: Linux basics\nCommands help you move quickly.\nPractice builds confidence.\nSmall steps add up.\n",
-            "language": "text"
-          },
-          {
-            "path": "logs/app.log",
-            "content": "INFO started\nINFO loaded config\nWARN low disk space\nERROR failed backup\nINFO stopped\n",
+            "path": "logs/server.log",
+            "content": "start\ncheck\nfinish ok\n",
             "language": "text"
           }
         ],
         "workspaceExpectations": {
           "requiredFolders": [
-            "notes",
+            "reports",
             "logs"
           ],
           "requiredFiles": [
-            "notes/story.txt",
-            "logs/app.log"
+            "reports/week.txt",
+            "logs/server.log"
+          ]
+        },
+        "terminalExpectations": {
+          "requiredCommands": [
+            {
+              "pattern": "^head\\s+reports/week\\.txt$",
+              "message": "Run: head reports/week.txt"
+            },
+            {
+              "pattern": "^tail\\s+logs/server\\.log$",
+              "message": "Run: tail logs/server.log"
+            }
+          ],
+          "outputContains": [
+            "Monday",
+            "finish ok"
           ]
         }
       },
@@ -427,32 +424,32 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "Run `head notes/story.txt` to preview the beginning, then run `tail logs/app.log` to inspect the ending of the log."
+        "instructions": "Run `head reports/week.txt` and `tail logs/server.log`."
       },
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^head\\s+notes/story\\.txt$",
-            "message": "Run: head notes/story.txt"
+            "pattern": "^head\\s+reports/week\\.txt$",
+            "message": "Run: head reports/week.txt"
           },
           {
-            "pattern": "^tail\\s+logs/app\\.log$",
-            "message": "Run: tail logs/app.log"
+            "pattern": "^tail\\s+logs/server\\.log$",
+            "message": "Run: tail logs/server.log"
           }
         ],
         "outputContains": [
-          "Chapter 1: Linux basics",
-          "INFO stopped"
+          "Monday",
+          "finish ok"
         ]
       },
       "workspaceExpectations": {
         "requiredFolders": [
-          "notes",
+          "reports",
           "logs"
         ],
         "requiredFiles": [
-          "notes/story.txt",
-          "logs/app.log"
+          "reports/week.txt",
+          "logs/server.log"
         ]
       }
     },
@@ -464,75 +461,66 @@
       "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-2-files-and-folders.viewing-file-contents.quiz.ci-create-count-marker",
       "language": "bash",
       "entryFilePath": "main.sh",
-      "starterCode": "#!/usr/bin/env bash\n# Viewing File Contents\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+      "starterCode": "#!/usr/bin/env bash\n# Count the report lines\n# Use the terminal for this task.\n",
       "starterFiles": [
         {
           "path": "main.sh",
-          "content": "#!/usr/bin/env bash\n# Viewing File Contents\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+          "content": "#!/usr/bin/env bash\n# Count the report lines\n# Use the terminal for this task.\n",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "README.md",
-          "content": "# Viewing File Contents\n\nUse the terminal to complete the task. The editor is intentionally hidden for this Linux terminal lab.\n",
+          "content": "# Count the report lines\n\nRun `wc -l reports/week.txt` and confirm the report has 5 lines.\n",
           "language": "text"
         },
         {
-          "path": "notes/message.txt",
-          "content": "Linux is powerful.\nUse the terminal with care.\n",
-          "language": "text"
-        },
-        {
-          "path": "notes/story.txt",
-          "content": "Chapter 1: Linux basics\nCommands help you move quickly.\nPractice builds confidence.\nSmall steps add up.\n",
-          "language": "text"
-        },
-        {
-          "path": "logs/app.log",
-          "content": "INFO started\nINFO loaded config\nWARN low disk space\nERROR failed backup\nINFO stopped\n",
+          "path": "reports/week.txt",
+          "content": "Monday\nTuesday\nWednesday\nThursday\nFriday\n",
           "language": "text"
         }
       ],
       "workspace": {
         "language": "bash",
         "entryFilePath": "main.sh",
-        "starterCode": "#!/usr/bin/env bash\n# Viewing File Contents\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+        "starterCode": "#!/usr/bin/env bash\n# Count the report lines\n# Use the terminal for this task.\n",
         "starterFiles": [
           {
             "path": "main.sh",
-            "content": "#!/usr/bin/env bash\n# Viewing File Contents\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+            "content": "#!/usr/bin/env bash\n# Count the report lines\n# Use the terminal for this task.\n",
             "language": "bash",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "README.md",
-            "content": "# Viewing File Contents\n\nUse the terminal to complete the task. The editor is intentionally hidden for this Linux terminal lab.\n",
+            "content": "# Count the report lines\n\nRun `wc -l reports/week.txt` and confirm the report has 5 lines.\n",
             "language": "text"
           },
           {
-            "path": "notes/message.txt",
-            "content": "Linux is powerful.\nUse the terminal with care.\n",
-            "language": "text"
-          },
-          {
-            "path": "notes/story.txt",
-            "content": "Chapter 1: Linux basics\nCommands help you move quickly.\nPractice builds confidence.\nSmall steps add up.\n",
-            "language": "text"
-          },
-          {
-            "path": "logs/app.log",
-            "content": "INFO started\nINFO loaded config\nWARN low disk space\nERROR failed backup\nINFO stopped\n",
+            "path": "reports/week.txt",
+            "content": "Monday\nTuesday\nWednesday\nThursday\nFriday\n",
             "language": "text"
           }
         ],
         "workspaceExpectations": {
           "requiredFolders": [
-            "notes"
+            "reports"
           ],
           "requiredFiles": [
-            "notes/story.txt"
+            "reports/week.txt"
+          ]
+        },
+        "terminalExpectations": {
+          "requiredCommands": [
+            {
+              "pattern": "^wc\\s+-l\\s+reports/week\\.txt$",
+              "message": "Run: wc -l reports/week.txt"
+            }
+          ],
+          "outputRegex": [
+            "^\\s*5\\s+reports/week\\.txt$"
           ]
         }
       },
@@ -540,25 +528,320 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "Run `wc -l notes/story.txt` and look for the line count in the terminal output."
+        "instructions": "Run `wc -l reports/week.txt` and confirm the report has 5 lines."
       },
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^wc\\s+-l\\s+notes/story\\.txt$",
-            "message": "Run: wc -l notes/story.txt"
+            "pattern": "^wc\\s+-l\\s+reports/week\\.txt$",
+            "message": "Run: wc -l reports/week.txt"
           }
         ],
         "outputRegex": [
-          "^\\s*4\\s+notes/story\\.txt$"
+          "^\\s*5\\s+reports/week\\.txt$"
         ]
       },
       "workspaceExpectations": {
         "requiredFolders": [
-          "notes"
+          "reports"
         ],
         "requiredFiles": [
-          "notes/story.txt"
+          "reports/week.txt"
+        ]
+      }
+    },
+    {
+      "id": "try-view-cat-tip",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-2-files-and-folders.viewing-file-contents.quiz.try-view-cat-tip",
+      "language": "bash",
+      "entryFilePath": "main.sh",
+      "starterCode": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "README.md",
+          "content": "# Read a tip file\n\nUse `cat` on `messages/tip.txt`.\n",
+          "language": "text"
+        },
+        {
+          "path": "messages/tip.txt",
+          "content": "Check before you change files.\n",
+          "language": "text"
+        }
+      ],
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "starterCode": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "README.md",
+            "content": "# Read a tip file\n\nUse `cat` on `messages/tip.txt`.\n",
+            "language": "text"
+          },
+          {
+            "path": "messages/tip.txt",
+            "content": "Check before you change files.\n",
+            "language": "text"
+          }
+        ],
+        "terminalExpectations": {
+          "requiredCommands": [
+            {
+              "pattern": "^cat\\s+messages/tip\\.txt$",
+              "message": "Run: cat messages/tip.txt"
+            }
+          ],
+          "outputContains": [
+            "Check before you change files."
+          ]
+        },
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "messages/tip.txt"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "Run `cat messages/tip.txt` and read the line."
+      },
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "messages/tip.txt"
+        ]
+      },
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^cat\\s+messages/tip\\.txt$",
+            "message": "Run: cat messages/tip.txt"
+          }
+        ],
+        "outputContains": [
+          "Check before you change files."
+        ]
+      }
+    },
+    {
+      "id": "try-view-head-tail-today",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-2-files-and-folders.viewing-file-contents.quiz.try-view-head-tail-today",
+      "language": "bash",
+      "entryFilePath": "main.sh",
+      "starterCode": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "README.md",
+          "content": "# Preview a report and log\n\nRun head and tail.\n",
+          "language": "text"
+        },
+        {
+          "path": "reports/today.txt",
+          "content": "line 1\nline 2\nline 3\nline 4\nline 5\n",
+          "language": "text"
+        },
+        {
+          "path": "logs/activity.log",
+          "content": "start\nload\nfinish\n",
+          "language": "text"
+        }
+      ],
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "starterCode": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "README.md",
+            "content": "# Preview a report and log\n\nRun head and tail.\n",
+            "language": "text"
+          },
+          {
+            "path": "reports/today.txt",
+            "content": "line 1\nline 2\nline 3\nline 4\nline 5\n",
+            "language": "text"
+          },
+          {
+            "path": "logs/activity.log",
+            "content": "start\nload\nfinish\n",
+            "language": "text"
+          }
+        ],
+        "terminalExpectations": {
+          "requiredCommands": [
+            {
+              "pattern": "^head\\s+reports/today\\.txt$",
+              "message": "Run: head reports/today.txt"
+            },
+            {
+              "pattern": "^tail\\s+logs/activity\\.log$",
+              "message": "Run: tail logs/activity.log"
+            }
+          ],
+          "outputContains": [
+            "line 1",
+            "finish"
+          ]
+        },
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "reports/today.txt",
+            "logs/activity.log"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "Run `head reports/today.txt` and `tail logs/activity.log`."
+      },
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "reports/today.txt",
+          "logs/activity.log"
+        ]
+      },
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^head\\s+reports/today\\.txt$",
+            "message": "Run: head reports/today.txt"
+          },
+          {
+            "pattern": "^tail\\s+logs/activity\\.log$",
+            "message": "Run: tail logs/activity.log"
+          }
+        ],
+        "outputContains": [
+          "line 1",
+          "finish"
+        ]
+      }
+    },
+    {
+      "id": "try-view-count-today",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-2-files-and-folders.viewing-file-contents.quiz.try-view-count-today",
+      "language": "bash",
+      "entryFilePath": "main.sh",
+      "starterCode": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "README.md",
+          "content": "# Count report lines\n\nRun `wc -l reports/today.txt`.\n",
+          "language": "text"
+        },
+        {
+          "path": "reports/today.txt",
+          "content": "alpha\nbeta\ngamma\ndelta\nepsilon\n",
+          "language": "text"
+        }
+      ],
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "starterCode": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "README.md",
+            "content": "# Count report lines\n\nRun `wc -l reports/today.txt`.\n",
+            "language": "text"
+          },
+          {
+            "path": "reports/today.txt",
+            "content": "alpha\nbeta\ngamma\ndelta\nepsilon\n",
+            "language": "text"
+          }
+        ],
+        "terminalExpectations": {
+          "requiredCommands": [
+            {
+              "pattern": "^wc\\s+-l\\s+reports/today\\.txt$",
+              "message": "Run: wc -l reports/today.txt"
+            }
+          ],
+          "outputRegex": [
+            "^\\s*5\\s+reports/today\\.txt"
+          ]
+        },
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "reports/today.txt"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "Run `wc -l reports/today.txt` and confirm it has 5 lines."
+      },
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "reports/today.txt"
+        ]
+      },
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^wc\\s+-l\\s+reports/today\\.txt$",
+            "message": "Run: wc -l reports/today.txt"
+          }
+        ],
+        "outputRegex": [
+          "^\\s*5\\s+reports/today\\.txt"
         ]
       }
     }

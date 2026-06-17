@@ -4,7 +4,7 @@
       "linux-1-terminal-navigation": {
         "what-the-terminal-is": {
           "label": "What the Terminal Is",
-          "summary": "Understand the terminal as a place to type commands and see the computer respond.",
+          "summary": "Type simple commands and read the terminal response.",
           "cards": {
             "sketch0": {
               "title": "The terminal is a conversation with the computer"
@@ -19,32 +19,32 @@
               "title": "Quiz"
             },
             "project": {
-              "title": "Terminal practice project"
+              "title": "First terminal check-in"
             }
           },
           "projectSteps": {
             "ci_create_linux_start": {
-              "title": "Create your first Linux folder"
+              "title": "Run your first location check"
             },
             "ci_make_command_practice": {
-              "title": "Create a command practice note"
+              "title": "Check the session user"
             },
             "ci_create_first_lab": {
-              "title": "Set up a first lab folder"
+              "title": "List the starting workspace"
             }
           },
           "tryIt": {
             "try_what_the_terminal_is_sketch0": {
-              "title": "Create your first Linux folder",
-              "prompt": "Use the terminal to create a folder named `linux-start` and a file named `hello.txt` inside it."
+              "title": "Ask where you are",
+              "prompt": "Run `pwd` and look for the workspace path."
             },
             "try_what_the_terminal_is_sketch1": {
-              "title": "Create a command practice note",
-              "prompt": "Create `linux-start/command-practice.txt`. Use any safe command you want, such as `touch` or `echo >`."
+              "title": "Print the terminal user",
+              "prompt": "Run `whoami` to see the user for this terminal session."
             },
             "try_what_the_terminal_is_sketch2": {
-              "title": "Set up a first lab folder",
-              "prompt": "Create `first-lab/results.txt` so the explorer shows a folder with one result file."
+              "title": "List the starting files",
+              "prompt": "Run `ls` and confirm `README.md` is listed."
             }
           },
           "quiz": {
@@ -98,52 +98,85 @@
             },
             "mc-safe-first": {
               "title": "Choose all safe beginner commands from this lesson.",
-              "prompt": "Look for commands that inspect or create simple workspace items.",
-              "hint": "Look for commands that inspect or create simple workspace items.",
+              "prompt": "Look for commands that ask simple questions without changing files.",
+              "hint": "Choose commands that inspect the session or workspace.",
               "help": {
-                "concept": "Look for commands that inspect or create simple workspace items.",
-                "hint_1": "Look for commands that inspect or create simple workspace items.",
+                "concept": "Early terminal practice should start with commands that show information.",
+                "hint_1": "Choose commands that inspect the session or workspace.",
                 "hint_2": "Review the command names from the lesson, then choose the option that matches the task."
               },
               "options": {
                 "a": "pwd",
                 "b": "whoami",
-                "c": "mkdir linux-start",
+                "c": "ls",
                 "d": "rm -rf /"
               }
             },
             "ci-create-linux-start": {
-              "title": "Create your first Linux folder",
-              "prompt": "Use the terminal to create a folder named `linux-start` and a file named `hello.txt` inside it.\n\nUse the terminal. The editor is hidden on purpose for this task.",
-              "hint": "Use terminal commands such as `pwd`, `ls`, `mkdir -p`, `touch`, `cp`, `mv`, or `rm` depending on the task.",
+              "title": "Run your first location check",
+              "prompt": "Run `pwd` to ask the terminal where this workspace starts. Check your answer after you see `/workspace`.",
+              "hint": "Type `pwd`, press Enter, then check the terminal output.",
               "help": {
-                "concept": "This is a Linux terminal workspace task. Complete it by changing the file tree with terminal commands.",
-                "hint_1": "Use `pwd` and `ls` to inspect where you are.",
-                "hint_2": "The checker looks for the required folders/files and checks that forbidden files are gone."
+                "concept": "The terminal can answer simple questions before you change any files.",
+                "hint_1": "Type `pwd`, press Enter, then check the terminal output.",
+                "hint_2": "The expected path includes `/workspace`."
               },
-              "placeholder": "Use the terminal to complete this task."
+              "placeholder": "Type commands in the terminal."
             },
             "ci-make-command-practice": {
-              "title": "Create a command practice note",
-              "prompt": "Create `linux-start/command-practice.txt`. Use any safe command you want, such as `touch` or `echo >`.\n\nUse the terminal. The editor is hidden on purpose for this task.",
-              "hint": "Use terminal commands such as `pwd`, `ls`, `mkdir -p`, `touch`, `cp`, `mv`, or `rm` depending on the task.",
+              "title": "Check the session user",
+              "prompt": "Run `whoami` to see the Linux user name for this terminal session.",
+              "hint": "Type `whoami`, press Enter, and check the response.",
               "help": {
-                "concept": "This is a Linux terminal workspace task. Complete it by changing the file tree with terminal commands.",
-                "hint_1": "Use `pwd` and `ls` to inspect where you are.",
-                "hint_2": "The checker looks for the required folders/files and checks that forbidden files are gone."
+                "concept": "`whoami` prints the user account running the terminal session.",
+                "hint_1": "Type `whoami`, press Enter, and check the response.",
+                "hint_2": "Submit after the command appears in the terminal history."
               },
-              "placeholder": "Use the terminal to complete this task."
+              "placeholder": "Type commands in the terminal."
             },
             "ci-create-first-lab": {
-              "title": "Set up a first lab folder",
-              "prompt": "Create `first-lab/results.txt` so the explorer shows a folder with one result file.\n\nUse the terminal. The editor is hidden on purpose for this task.",
-              "hint": "Use terminal commands such as `pwd`, `ls`, `mkdir -p`, `touch`, `cp`, `mv`, or `rm` depending on the task.",
+              "title": "List the starting workspace",
+              "prompt": "Run `ls` to see what is already in the workspace. You should see `README.md`.",
+              "hint": "Type `ls`, press Enter, and look for `README.md` in the output.",
               "help": {
-                "concept": "This is a Linux terminal workspace task. Complete it by changing the file tree with terminal commands.",
-                "hint_1": "Use `pwd` and `ls` to inspect where you are.",
-                "hint_2": "The checker looks for the required folders/files and checks that forbidden files are gone."
+                "concept": "`ls` lists the files and folders in your current workspace.",
+                "hint_1": "Type `ls`, press Enter, and look for `README.md` in the output.",
+                "hint_2": "Submit after `README.md` appears in the terminal output."
               },
-              "placeholder": "Use the terminal to complete this task."
+              "placeholder": "Type commands in the terminal."
+            },
+            "try-terminal-see-workspace": {
+              "title": "Ask where you are",
+              "prompt": "Run `pwd` and look for the workspace path.",
+              "hint": "Type `pwd`, press Enter, then check for `/workspace`.",
+              "help": {
+                "concept": "`pwd` prints the folder where the terminal is currently working.",
+                "hint_1": "Type `pwd`, press Enter, then check for `/workspace`.",
+                "hint_2": "Run the command in the terminal, check the response, then submit."
+              },
+              "placeholder": "Type commands in the terminal."
+            },
+            "try-terminal-print-user": {
+              "title": "Print the terminal user",
+              "prompt": "Run `whoami` to see the user for this terminal session.",
+              "hint": "Type `whoami`, press Enter, then submit.",
+              "help": {
+                "concept": "`whoami` prints the current Linux user.",
+                "hint_1": "Type `whoami`, press Enter, then submit.",
+                "hint_2": "Run the command in the terminal, check the response, then submit."
+              },
+              "placeholder": "Type commands in the terminal."
+            },
+            "try-terminal-list-start": {
+              "title": "List the starting files",
+              "prompt": "Run `ls` and confirm `README.md` is listed.",
+              "hint": "Type `ls`, press Enter, and look for `README.md`.",
+              "help": {
+                "concept": "`ls` lists the files and folders in the current folder.",
+                "hint_1": "Type `ls`, press Enter, and look for `README.md`.",
+                "hint_2": "Run the command in the terminal, check the response, then submit."
+              },
+              "placeholder": "Type commands in the terminal."
             }
           }
         }
@@ -155,16 +188,16 @@
       "linux-1-terminal-navigation": {
         "what-the-terminal-is": {
           "terminal-is-conversation": {
-            "title": "The terminal is a conversation with the computer",
-            "bodyMarkdown": "The **terminal** is a text-based way to control the computer. Instead of clicking buttons, you type commands.\n\nA command usually has this shape:\n\n```bash\ncommand option target\n```\n\nFor example:\n\n```bash\npwd\n```\n\n`pwd` means **print working directory**. It asks Linux, “Where am I right now?”\n\nIn this course, most tasks happen in the terminal. The file explorer shows the result after your commands create folders, create files, move files, or delete files."
+            "title": "The terminal listens for one command at a time",
+            "bodyMarkdown": "A terminal is a direct way to ask Linux to do work. You type a command, press Enter, and read the response.\n\nStart with commands that answer simple questions:\n\n```bash\nwhoami\npwd\nls\n```\n\nThese commands are safe first steps because they show information without changing the workspace."
           },
           "prompt-and-command": {
-            "title": "The prompt waits for your next command",
-            "bodyMarkdown": "The prompt is the line where you type. It may show your user, machine, or current folder.\n\nExample commands you can safely try:\n\n```bash\nwhoami\npwd\ndate\nclear\nhistory\n```\n\nEach command does one small job. `whoami` prints the current user. `date` prints the current date and time. `clear` cleans the screen without deleting files."
+            "title": "The prompt is your starting line",
+            "bodyMarkdown": "The prompt marks where the next command goes. Type one command, press Enter, then read the response before typing the next one.\n\nSafe first commands:\n\n```bash\npwd\nwhoami\nls\n```\n\nUse `ls` often. It tells you what is in the current folder."
           },
           "safe-first-habits": {
-            "title": "Begin with safe commands",
-            "bodyMarkdown": "Early Linux practice should avoid dangerous commands. Start with commands that inspect or create small files inside the lesson workspace.\n\nSafe examples:\n\n```bash\npwd\nls\nmkdir linux-start\ntouch linux-start/hello.txt\n```\n\nBe careful with commands that delete files, especially `rm`. You will learn deletion later with small controlled examples."
+            "title": "Small commands are easier to trust",
+            "bodyMarkdown": "Good terminal habits start with checking before changing. Look around with `pwd` and `ls`, then decide what to do next.\n\nFor now, stay inside the lesson workspace and avoid delete commands. You will practice file changes later with small files that are safe to throw away."
           }
         }
       }

@@ -21,62 +21,13 @@ import {resolveWorkspacePolicy} from "../policy/resolveWorkspacePolicy.js";
 import {workspaceToRuntimeDefaults} from "../policy/workspaceToRuntimeDefaults.js";
 import { resolveModuleOutcomes } from "./resolveModuleOutcomes.js";
 
-// const SQL_DIALECTS = ["sqlite", "postgres", "mysql", "mssql"] as const;
-//
-// const CODE_LANGUAGES = [
-//     "python",
-//     "java",
-//     "javascript",
-//     "c",
-//     "cpp",
-//     "bash",
-//     "web",
-// ] as const;
-//
-// type ManifestCodeLanguage = Exclude<WorkspaceLanguage, "sql">;
+function resolveSubjectManifestOrder(blueprint: CourseBlueprint): number {
+    if (typeof blueprint.courseNumber === "number" && Number.isFinite(blueprint.courseNumber)) {
+        return Math.trunc(blueprint.courseNumber);
+    }
 
-// function toSqlDialect(value: string | undefined): SqlDialect | undefined {
-//     if (!value) return undefined;
-//
-//     return SQL_DIALECTS.includes(value as SqlDialect)
-//         ? (value as SqlDialect)
-//         : undefined;
-// }
-//
-// function toManifestCodeLanguage(
-//     value: string | undefined,
-// ): ManifestCodeLanguage | undefined {
-//     if (!value) return undefined;
-//
-//     return CODE_LANGUAGES.includes(value as ManifestCodeLanguage)
-//         ? (value as ManifestCodeLanguage)
-//         : undefined;
-// }
-
-// function toManifestRuntimeDefaults(
-//     runtimeDefaults: TopicSeedRuntimeDefaults | null | undefined,
-// ): ManifestRuntimeDefaults | undefined {
-//     if (!runtimeDefaults) return undefined;
-//
-//     if (runtimeDefaults.kind === "sql") {
-//         return {
-//             kind: "sql",
-//             datasetId: runtimeDefaults.datasetId,
-//             fixedSqlDialect:
-//                 toSqlDialect(runtimeDefaults.fixedSqlDialect) ?? "sqlite",
-//             resultShape: "table",
-//         };
-//     }
-//
-//     if (runtimeDefaults.kind === "code") {
-//         return {
-//             kind: "code",
-//             language: toManifestCodeLanguage(runtimeDefaults.language),
-//         };
-//     }
-//
-//     return undefined;
-// }
+    return 0;
+}
 
 export function buildSubjectManifestFromPlan(args: {
     blueprint: CourseBlueprint;
@@ -121,9 +72,6 @@ export function buildSubjectManifestFromPlan(args: {
                     resultShape: topicRuntimeDefaults.resultShape,
                 }
                 : workspaceRuntimeDefaults;
-
-        // const runtimeDefaults =
-        //     toManifestRuntimeDefaults(topicRuntimeDefaults);
 
         const sections: SubjectSectionManifest[] = module.sections.map(
             (section) => {
@@ -227,7 +175,7 @@ export function buildSubjectManifestFromPlan(args: {
             profileId: blueprint.profileId,
             catalogSlug: blueprint.catalogSlug ?? blueprint.subjectSlug,
             genKey: shape.subjectManifest.genKey,
-            order: blueprint.subjectSlug === "sql" ? 20 : 30,
+            order: resolveSubjectManifestOrder(blueprint),
             accessPolicy:
                 blueprint.accessPolicy ??
                 shape.subjectManifest.accessPolicyDefault,
@@ -245,14 +193,11 @@ export function buildSubjectManifestFromPlan(args: {
                     ),
                 },
                 completionPolicy: shape.subjectManifest.completionPolicy,
-                versioning: blueprint.versioning ?? {
-                    family: blueprint.catalogSlug ?? blueprint.subjectSlug,
-                    version: 1,
-                    status: "active",
-                    defaultForNewEnrollments: true,
-                    supersedes: null,
-                    supersededBy: null,
-                },
+                ...(blueprint.versioning
+                    ? {
+                        versioning: blueprint.versioning,
+                    }
+                    : {}),
             },
         },
         modules,

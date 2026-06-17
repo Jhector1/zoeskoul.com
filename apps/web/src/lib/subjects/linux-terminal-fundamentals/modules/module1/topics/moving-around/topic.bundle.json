@@ -38,7 +38,7 @@
         "id": "try-moving-around-sketch0",
         "titleKey": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.moving-around.tryIt.try_moving_around_sketch0.title",
         "promptKey": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.moving-around.tryIt.try_moving_around_sketch0.prompt",
-        "exerciseKey": "ci-build-cd-practice",
+        "exerciseKey": "try-cd-enter-library",
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -57,7 +57,7 @@
         "id": "try-moving-around-sketch1",
         "titleKey": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.moving-around.tryIt.try_moving_around_sketch1.title",
         "promptKey": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.moving-around.tryIt.try_moving_around_sketch1.prompt",
-        "exerciseKey": "ci-create-up-one-lab",
+        "exerciseKey": "try-cd-back-to-parent",
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -76,7 +76,7 @@
         "id": "try-moving-around-sketch2",
         "titleKey": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.moving-around.tryIt.try_moving_around_sketch2.title",
         "promptKey": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.moving-around.tryIt.try_moving_around_sketch2.prompt",
-        "exerciseKey": "ci-create-path-trail",
+        "exerciseKey": "try-cd-find-marker",
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -242,47 +242,72 @@
       "messageBase": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.moving-around.quiz.ci-build-cd-practice",
       "language": "bash",
       "entryFilePath": "main.sh",
-      "starterCode": "#!/usr/bin/env bash\n# Moving Around with cd\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+      "starterCode": "#!/usr/bin/env bash\n# Go to the platform folder\n# Use the terminal for this task.\n",
       "starterFiles": [
         {
           "path": "main.sh",
-          "content": "#!/usr/bin/env bash\n# Moving Around with cd\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+          "content": "#!/usr/bin/env bash\n# Go to the platform folder\n# Use the terminal for this task.\n",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "README.md",
-          "content": "# Moving Around with cd\n\nUse the terminal to complete the task. The editor is intentionally hidden for this Linux terminal lab.\n",
+          "content": "# Go to the platform folder\n\nUse `cd` to enter `city-tour/station/platform`, then run `pwd`.\n",
+          "language": "text"
+        },
+        {
+          "path": "city-tour/station/platform/ticket.txt",
+          "content": "Platform A\n",
           "language": "text"
         }
       ],
       "workspace": {
         "language": "bash",
         "entryFilePath": "main.sh",
-        "starterCode": "#!/usr/bin/env bash\n# Moving Around with cd\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+        "starterCode": "#!/usr/bin/env bash\n# Go to the platform folder\n# Use the terminal for this task.\n",
         "starterFiles": [
           {
             "path": "main.sh",
-            "content": "#!/usr/bin/env bash\n# Moving Around with cd\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+            "content": "#!/usr/bin/env bash\n# Go to the platform folder\n# Use the terminal for this task.\n",
             "language": "bash",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "README.md",
-            "content": "# Moving Around with cd\n\nUse the terminal to complete the task. The editor is intentionally hidden for this Linux terminal lab.\n",
+            "content": "# Go to the platform folder\n\nUse `cd` to enter `city-tour/station/platform`, then run `pwd`.\n",
+            "language": "text"
+          },
+          {
+            "path": "city-tour/station/platform/ticket.txt",
+            "content": "Platform A\n",
             "language": "text"
           }
         ],
         "workspaceExpectations": {
           "requiredFolders": [
-            "cd-practice",
-            "cd-practice/level1",
-            "cd-practice/level1/level2"
+            "city-tour",
+            "city-tour/station",
+            "city-tour/station/platform"
           ],
           "requiredFiles": [
-            "cd-practice/level1/level2/checkpoint.txt"
+            "city-tour/station/platform/ticket.txt"
+          ]
+        },
+        "terminalExpectations": {
+          "requiredCommands": [
+            {
+              "pattern": "^cd\\s+city-tour/station/platform$",
+              "message": "Run: cd city-tour/station/platform"
+            },
+            {
+              "pattern": "^pwd$",
+              "message": "Run: pwd"
+            }
+          ],
+          "outputRegex": [
+            "/workspace/city-tour/station/platform"
           ]
         }
       },
@@ -290,16 +315,31 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "Create `cd-practice/level1/level2/checkpoint.txt`. Practice using `cd` to move through the folders."
+        "instructions": "Use `cd` to enter `city-tour/station/platform`, then run `pwd`."
       },
       "workspaceExpectations": {
         "requiredFolders": [
-          "cd-practice",
-          "cd-practice/level1",
-          "cd-practice/level1/level2"
+          "city-tour",
+          "city-tour/station",
+          "city-tour/station/platform"
         ],
         "requiredFiles": [
-          "cd-practice/level1/level2/checkpoint.txt"
+          "city-tour/station/platform/ticket.txt"
+        ]
+      },
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^cd\\s+city-tour/station/platform$",
+            "message": "Run: cd city-tour/station/platform"
+          },
+          {
+            "pattern": "^pwd$",
+            "message": "Run: pwd"
+          }
+        ],
+        "outputRegex": [
+          "/workspace/city-tour/station/platform"
         ]
       }
     },
@@ -311,46 +351,75 @@
       "messageBase": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.moving-around.quiz.ci-create-up-one-lab",
       "language": "bash",
       "entryFilePath": "main.sh",
-      "starterCode": "#!/usr/bin/env bash\n# Moving Around with cd\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+      "starterCode": "#!/usr/bin/env bash\n# Move back to the parent folder\n# Use the terminal for this task.\n",
       "starterFiles": [
         {
           "path": "main.sh",
-          "content": "#!/usr/bin/env bash\n# Moving Around with cd\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+          "content": "#!/usr/bin/env bash\n# Move back to the parent folder\n# Use the terminal for this task.\n",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "README.md",
-          "content": "# Moving Around with cd\n\nUse the terminal to complete the task. The editor is intentionally hidden for this Linux terminal lab.\n",
+          "content": "# Move back to the parent folder\n\nGo into `return-trip/start`, run `cd ..`, then run `pwd`.\n",
+          "language": "text"
+        },
+        {
+          "path": "return-trip/start/back-home.txt",
+          "content": "Return marker\n",
           "language": "text"
         }
       ],
       "workspace": {
         "language": "bash",
         "entryFilePath": "main.sh",
-        "starterCode": "#!/usr/bin/env bash\n# Moving Around with cd\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+        "starterCode": "#!/usr/bin/env bash\n# Move back to the parent folder\n# Use the terminal for this task.\n",
         "starterFiles": [
           {
             "path": "main.sh",
-            "content": "#!/usr/bin/env bash\n# Moving Around with cd\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+            "content": "#!/usr/bin/env bash\n# Move back to the parent folder\n# Use the terminal for this task.\n",
             "language": "bash",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "README.md",
-            "content": "# Moving Around with cd\n\nUse the terminal to complete the task. The editor is intentionally hidden for this Linux terminal lab.\n",
+            "content": "# Move back to the parent folder\n\nGo into `return-trip/start`, run `cd ..`, then run `pwd`.\n",
+            "language": "text"
+          },
+          {
+            "path": "return-trip/start/back-home.txt",
+            "content": "Return marker\n",
             "language": "text"
           }
         ],
         "workspaceExpectations": {
           "requiredFolders": [
-            "up-one-lab",
-            "up-one-lab/inside"
+            "return-trip",
+            "return-trip/start"
           ],
           "requiredFiles": [
-            "up-one-lab/inside/done.txt"
+            "return-trip/start/back-home.txt"
+          ]
+        },
+        "terminalExpectations": {
+          "requiredCommands": [
+            {
+              "pattern": "^cd\\s+return-trip/start$",
+              "message": "Run: cd return-trip/start"
+            },
+            {
+              "pattern": "^cd\\s+\\.\\.$",
+              "message": "Run: cd .."
+            },
+            {
+              "pattern": "^pwd$",
+              "message": "Run: pwd"
+            }
+          ],
+          "outputRegex": [
+            "/workspace/return-trip"
           ]
         }
       },
@@ -358,15 +427,34 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "Create `up-one-lab/inside/done.txt`. Use `cd ..` at least once while practicing."
+        "instructions": "Go into `return-trip/start`, run `cd ..`, then run `pwd`."
       },
       "workspaceExpectations": {
         "requiredFolders": [
-          "up-one-lab",
-          "up-one-lab/inside"
+          "return-trip",
+          "return-trip/start"
         ],
         "requiredFiles": [
-          "up-one-lab/inside/done.txt"
+          "return-trip/start/back-home.txt"
+        ]
+      },
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^cd\\s+return-trip/start$",
+            "message": "Run: cd return-trip/start"
+          },
+          {
+            "pattern": "^cd\\s+\\.\\.$",
+            "message": "Run: cd .."
+          },
+          {
+            "pattern": "^pwd$",
+            "message": "Run: pwd"
+          }
+        ],
+        "outputRegex": [
+          "/workspace/return-trip"
         ]
       }
     },
@@ -378,36 +466,46 @@
       "messageBase": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.moving-around.quiz.ci-create-path-trail",
       "language": "bash",
       "entryFilePath": "main.sh",
-      "starterCode": "#!/usr/bin/env bash\n# Moving Around with cd\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+      "starterCode": "#!/usr/bin/env bash\n# Find the final marker\n# Use the terminal for this task.\n",
       "starterFiles": [
         {
           "path": "main.sh",
-          "content": "#!/usr/bin/env bash\n# Moving Around with cd\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+          "content": "#!/usr/bin/env bash\n# Find the final marker\n# Use the terminal for this task.\n",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "README.md",
-          "content": "# Moving Around with cd\n\nUse the terminal to complete the task. The editor is intentionally hidden for this Linux terminal lab.\n",
+          "content": "# Find the final marker\n\nUse `cd` to enter `trail/start/middle`, then run `ls` and look for `final-marker.txt`.\n",
+          "language": "text"
+        },
+        {
+          "path": "trail/start/middle/final-marker.txt",
+          "content": "You found it.\n",
           "language": "text"
         }
       ],
       "workspace": {
         "language": "bash",
         "entryFilePath": "main.sh",
-        "starterCode": "#!/usr/bin/env bash\n# Moving Around with cd\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+        "starterCode": "#!/usr/bin/env bash\n# Find the final marker\n# Use the terminal for this task.\n",
         "starterFiles": [
           {
             "path": "main.sh",
-            "content": "#!/usr/bin/env bash\n# Moving Around with cd\n# Use the terminal to complete this Linux lab.\n# The editor is intentionally hidden for Course 1 terminal tasks.\n",
+            "content": "#!/usr/bin/env bash\n# Find the final marker\n# Use the terminal for this task.\n",
             "language": "bash",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "README.md",
-            "content": "# Moving Around with cd\n\nUse the terminal to complete the task. The editor is intentionally hidden for this Linux terminal lab.\n",
+            "content": "# Find the final marker\n\nUse `cd` to enter `trail/start/middle`, then run `ls` and look for `final-marker.txt`.\n",
+            "language": "text"
+          },
+          {
+            "path": "trail/start/middle/final-marker.txt",
+            "content": "You found it.\n",
             "language": "text"
           }
         ],
@@ -418,7 +516,22 @@
             "trail/start/middle"
           ],
           "requiredFiles": [
-            "trail/start/middle/end.txt"
+            "trail/start/middle/final-marker.txt"
+          ]
+        },
+        "terminalExpectations": {
+          "requiredCommands": [
+            {
+              "pattern": "^cd\\s+trail/start/middle$",
+              "message": "Run: cd trail/start/middle"
+            },
+            {
+              "pattern": "^ls$",
+              "message": "Run: ls"
+            }
+          ],
+          "outputContains": [
+            "final-marker.txt"
           ]
         }
       },
@@ -426,7 +539,7 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "Create `trail/start/middle/end.txt` to show you can work with nested folders."
+        "instructions": "Use `cd` to enter `trail/start/middle`, then run `ls` and look for `final-marker.txt`."
       },
       "workspaceExpectations": {
         "requiredFolders": [
@@ -435,7 +548,327 @@
           "trail/start/middle"
         ],
         "requiredFiles": [
-          "trail/start/middle/end.txt"
+          "trail/start/middle/final-marker.txt"
+        ]
+      },
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^cd\\s+trail/start/middle$",
+            "message": "Run: cd trail/start/middle"
+          },
+          {
+            "pattern": "^ls$",
+            "message": "Run: ls"
+          }
+        ],
+        "outputContains": [
+          "final-marker.txt"
+        ]
+      }
+    },
+    {
+      "id": "try-cd-enter-library",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.moving-around.quiz.try-cd-enter-library",
+      "language": "bash",
+      "entryFilePath": "main.sh",
+      "starterCode": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "README.md",
+          "content": "# Step into the library\n\nUse `cd library/desk`, then run `pwd`.\n",
+          "language": "text"
+        },
+        {
+          "path": "library/desk/card.txt",
+          "content": "checked in\n",
+          "language": "text"
+        }
+      ],
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "starterCode": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "README.md",
+            "content": "# Step into the library\n\nUse `cd library/desk`, then run `pwd`.\n",
+            "language": "text"
+          },
+          {
+            "path": "library/desk/card.txt",
+            "content": "checked in\n",
+            "language": "text"
+          }
+        ],
+        "terminalExpectations": {
+          "requiredCommands": [
+            {
+              "pattern": "^cd\\s+library/desk$",
+              "message": "Run: cd library/desk"
+            },
+            {
+              "pattern": "^pwd$",
+              "message": "Run: pwd"
+            }
+          ],
+          "outputRegex": [
+            "/workspace/library/desk"
+          ]
+        },
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "library/desk/card.txt"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "Use `cd` to enter `library/desk`, then run `pwd`."
+      },
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "library/desk/card.txt"
+        ]
+      },
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^cd\\s+library/desk$",
+            "message": "Run: cd library/desk"
+          },
+          {
+            "pattern": "^pwd$",
+            "message": "Run: pwd"
+          }
+        ],
+        "outputRegex": [
+          "/workspace/library/desk"
+        ]
+      }
+    },
+    {
+      "id": "try-cd-back-to-parent",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.moving-around.quiz.try-cd-back-to-parent",
+      "language": "bash",
+      "entryFilePath": "main.sh",
+      "starterCode": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "README.md",
+          "content": "# Back up one folder\n\nPractice going into a folder and back to its parent.\n",
+          "language": "text"
+        },
+        {
+          "path": "classroom/row/seat.txt",
+          "content": "front\n",
+          "language": "text"
+        }
+      ],
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "starterCode": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "README.md",
+            "content": "# Back up one folder\n\nPractice going into a folder and back to its parent.\n",
+            "language": "text"
+          },
+          {
+            "path": "classroom/row/seat.txt",
+            "content": "front\n",
+            "language": "text"
+          }
+        ],
+        "terminalExpectations": {
+          "requiredCommands": [
+            {
+              "pattern": "^cd\\s+classroom/row$",
+              "message": "Run: cd classroom/row"
+            },
+            {
+              "pattern": "^cd\\s+\\.\\.$",
+              "message": "Run: cd .."
+            },
+            {
+              "pattern": "^pwd$",
+              "message": "Run: pwd"
+            }
+          ],
+          "outputRegex": [
+            "/workspace/classroom"
+          ]
+        },
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "classroom/row/seat.txt"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "Enter `classroom/row`, run `cd ..`, then run `pwd`."
+      },
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "classroom/row/seat.txt"
+        ]
+      },
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^cd\\s+classroom/row$",
+            "message": "Run: cd classroom/row"
+          },
+          {
+            "pattern": "^cd\\s+\\.\\.$",
+            "message": "Run: cd .."
+          },
+          {
+            "pattern": "^pwd$",
+            "message": "Run: pwd"
+          }
+        ],
+        "outputRegex": [
+          "/workspace/classroom"
+        ]
+      }
+    },
+    {
+      "id": "try-cd-find-marker",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.moving-around.quiz.try-cd-find-marker",
+      "language": "bash",
+      "entryFilePath": "main.sh",
+      "starterCode": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "README.md",
+          "content": "# Find the marker file\n\nMove to the checkpoint and list its files.\n",
+          "language": "text"
+        },
+        {
+          "path": "trail/checkpoint/marker.txt",
+          "content": "arrived\n",
+          "language": "text"
+        }
+      ],
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "starterCode": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "README.md",
+            "content": "# Find the marker file\n\nMove to the checkpoint and list its files.\n",
+            "language": "text"
+          },
+          {
+            "path": "trail/checkpoint/marker.txt",
+            "content": "arrived\n",
+            "language": "text"
+          }
+        ],
+        "terminalExpectations": {
+          "requiredCommands": [
+            {
+              "pattern": "^cd\\s+trail/checkpoint$",
+              "message": "Run: cd trail/checkpoint"
+            },
+            {
+              "pattern": "^ls$",
+              "message": "Run: ls"
+            }
+          ],
+          "outputContains": [
+            "marker.txt"
+          ]
+        },
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "trail/checkpoint/marker.txt"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "Go to `trail/checkpoint`, then run `ls` and look for `marker.txt`."
+      },
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "trail/checkpoint/marker.txt"
+        ]
+      },
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^cd\\s+trail/checkpoint$",
+            "message": "Run: cd trail/checkpoint"
+          },
+          {
+            "pattern": "^ls$",
+            "message": "Run: ls"
+          }
+        ],
+        "outputContains": [
+          "marker.txt"
         ]
       }
     }

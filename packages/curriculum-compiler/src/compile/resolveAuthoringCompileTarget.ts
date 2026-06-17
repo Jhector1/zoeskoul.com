@@ -29,6 +29,8 @@ type ResolveCourseTargetOptions = {
     draftOnly?: boolean;
 };
 
+type CourseVersioning = NonNullable<CourseBlueprint["versioning"]>;
+
 function buildDraftOnlySubjectSlug(args: {
     subjectSlug: string;
     courseSlug: string;
@@ -36,12 +38,82 @@ function buildDraftOnlySubjectSlug(args: {
     return `${args.subjectSlug}--${args.courseSlug}--draft`;
 }
 
+function versioningFingerprint(versioning: CourseVersioning): string {
+    return JSON.stringify({
+        family: versioning.family,
+        version: versioning.version,
+        status: versioning.status,
+        defaultForNewEnrollments: versioning.defaultForNewEnrollments ?? null,
+        supersedes: versioning.supersedes ?? null,
+        supersededBy: versioning.supersededBy ?? null,
+    });
+}
+
+function assertSameVersioning(args: {
+    courseSlug: string;
+    leftLabel: string;
+    left?: CourseVersioning;
+    rightLabel: string;
+    right?: CourseVersioning;
+}) {
+    if (!args.left || !args.right) return;
+
+    if (versioningFingerprint(args.left) === versioningFingerprint(args.right)) {
+        return;
+    }
+
+    throw new Error(
+        `Conflicting versioning for course "${args.courseSlug}" between ${args.leftLabel} and ${args.rightLabel}. Keep versioning in one source of truth, or make both definitions identical.`,
+    );
+}
+
+function getPublishTargetVersioning(args: {
+    subjectPlan: SubjectPlan;
+    spec: CourseSpec;
+    courseSlug: string;
+}): CourseVersioning | undefined {
+    const planVersioning = args.subjectPlan.versioning as CourseVersioning | undefined;
+    const specVersioning = args.spec.versioning as CourseVersioning | undefined;
+
+    assertSameVersioning({
+        courseSlug: args.courseSlug,
+        leftLabel: "subject.plan.json",
+        left: planVersioning,
+        rightLabel: "course.spec.json",
+        right: specVersioning,
+    });
+
+    return planVersioning ?? specVersioning;
+}
+
+function resolveCourseVersioning(args: {
+    subjectPlan: SubjectPlan;
+    spec: CourseSpec;
+    courseSlug: string;
+}): CourseVersioning | undefined {
+    const isPublishTarget =
+        args.subjectPlan.publishTarget?.courseSlug === args.spec.courseSlug;
+
+    if (isPublishTarget) {
+        return getPublishTargetVersioning(args);
+    }
+
+    /**
+     * Non-publish-target courses are independent catalog courses unless their own
+     * course.spec.json explicitly declares versioning. They must never inherit the
+     * subject.plan publish-target version family, because that collapses separate
+     * courses such as python-data-functions or applied-python-projects into
+     * python-v2 in the catalog.
+     */
+    return args.spec.versioning as CourseVersioning | undefined;
+}
+
 function assertVersioning(args: {
     subjectPlan: SubjectPlan;
     spec: CourseSpec;
     courseSlug: string;
 }) {
-    const versioning = args.subjectPlan.versioning ?? args.spec.versioning;
+    const versioning = getPublishTargetVersioning(args);
     if (!versioning?.family || !versioning.version || !versioning.status) {
         throw new Error(
             `Publish target course "${args.courseSlug}" must define compatible versioning in subject.plan.json or course.spec.json`,
@@ -69,8 +141,11 @@ function withLiveSubjectIdentity(args: {
     spec: CourseSpec;
     liveSubjectSlug: string;
 }): CourseBlueprint {
-    const versioning =
-        args.subjectPlan.versioning ?? args.spec.versioning ?? args.blueprint.versioning;
+    const versioning = resolveCourseVersioning({
+        subjectPlan: args.subjectPlan,
+        spec: args.spec,
+        courseSlug: args.spec.courseSlug,
+    });
 
     return {
         ...args.blueprint,
@@ -93,6 +168,7 @@ function withLiveSubjectIdentity(args: {
         sourceLocale: args.spec.sourceLocale as CourseBlueprint["sourceLocale"],
         targetLocales: args.spec.targetLocales as CourseBlueprint["targetLocales"],
         title: args.spec.title || args.blueprint.title,
+        courseNumber: args.spec.courseNumber ?? args.blueprint.courseNumber,
         description: resolveCourseDescription({
             spec: args.spec,
             blueprint: args.blueprint,
@@ -104,7 +180,7 @@ function withLiveSubjectIdentity(args: {
             args.spec.courseGenerationPolicy ?? args.blueprint.courseGenerationPolicy,
         modulePolicies: args.spec.modulePolicies ?? args.blueprint.modulePolicies,
         topicPolicies: args.spec.topicPolicies ?? args.blueprint.topicPolicies,
-        versioning: versioning as CourseBlueprint["versioning"],
+        versioning,
     };
 }
 

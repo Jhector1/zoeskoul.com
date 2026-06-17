@@ -303,6 +303,7 @@ export function useRunSession() {
 
                     if (parsedEvent.type === "status") {
                         setState(parsedEvent.state);
+                        stateRef.current = parsedEvent.state;
 
                         if (isFinalSessionState(parsedEvent.state)) {
                             expectedSocketClosuresRef.current.add(ws);
@@ -354,12 +355,21 @@ export function useRunSession() {
                     return;
                 }
 
-                setState("failed");
-                stateRef.current = "failed";
+                /**
+                 * A socket close is not the same as a dead PTY session.
+                 *
+                 * During refresh, route changes, HMR, or temporary network loss, the
+                 * browser WebSocket can close while the backend session is still alive.
+                 * Marking the run session as "failed" here made the workspace terminal
+                 * controller auto-start repeatedly and eventually hit the runner rate
+                 * limiter. Keep the session id/state intact and let the controller
+                 * reconnect once on the next visible/input event.
+                 */
                 setSocketHealth({
+                    connectionState: "disconnected",
                     socketReadyState: ws.readyState,
+                    disconnectReason: "Terminal connection closed. Reconnecting…",
                 });
-                markDisconnected();
 
                 console.warn("PTY WS closed unexpectedly:", finalWsUrl, {
                     opened: socketOpened,
@@ -497,45 +507,15 @@ export function useRunSession() {
 
 
 
-    React.useEffect(() => {
-        const cancelOnPageExit = () => {
-            const currentSessionId = sessionIdRef.current;
-            if (!currentSessionId) return;
-
-            const url = `/api/run/pty/sessions/${encodeURIComponent(
-                currentSessionId,
-            )}/cancel`;
-
-            try {
-                if (navigator.sendBeacon) {
-                    const body = new Blob(["{}"], {
-                        type: "application/json",
-                    });
-                    navigator.sendBeacon(url, body);
-                    return;
-                }
-            } catch {
-                // Fall through to fetch keepalive.
-            }
-
-            try {
-                void fetch(url, {
-                    method: "POST",
-                    keepalive: true,
-                });
-            } catch {
-                // Browser is closing; nothing else to do.
-            }
-        };
-
-        window.addEventListener("pagehide", cancelOnPageExit);
-        window.addEventListener("beforeunload", cancelOnPageExit);
-
-        return () => {
-            window.removeEventListener("pagehide", cancelOnPageExit);
-            window.removeEventListener("beforeunload", cancelOnPageExit);
-        };
-    }, []);
+    /**
+     * Do not cancel PTY sessions on pagehide/beforeunload.
+     *
+     * A browser refresh is a normal learner action. Canceling the backend session
+     * during refresh creates a race where the next page paints an xterm surface,
+     * then the first keypress discovers the old socket/session is gone and shows
+     * the scary "Restart terminal" recovery banner. The runner heartbeat/TTL is
+     * responsible for cleaning up abandoned sessions.
+     */
 
 
     React.useEffect(() => {
@@ -550,13 +530,9 @@ export function useRunSession() {
         return () => {
             clearProbeTimer();
             probeInFlightRef.current = null;
-            const currentSessionId = sessionIdRef.current;
-            if (currentSessionId && !isFinalSessionState(stateRef.current)) {
-                void cancelServerSession(currentSessionId).catch(() => {});
-            }
             closeSocket();
         };
-    }, [cancelServerSession, clearProbeTimer, closeSocket]);
+    }, [clearProbeTimer, closeSocket]);
 
     return React.useMemo(
         () => ({

@@ -1,0 +1,173 @@
+{
+  "topics": {
+    "linux-terminal-fundamentals": {
+      "linux-1-terminal-navigation": {
+        "where-am-i": {
+          "label": "Where Am I? pwd and ls",
+          "summary": "Use pwd and ls to inspect your current folder and see what is inside it.",
+          "cards": {
+            "sketch0": {
+              "title": "pwd tells you your current location"
+            },
+            "sketch1": {
+              "title": "ls lists what is nearby"
+            },
+            "sketch2": {
+              "title": "Relative paths start from where you are"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Terminal practice project"
+            }
+          },
+          "projectSteps": {
+            "ci_create_navigation_lab": {
+              "title": "Check your current folder"
+            },
+            "ci_create_visible_hidden_practice": {
+              "title": "List the current folder"
+            },
+            "ci_create_long_list_lab": {
+              "title": "Show hidden files too"
+            }
+          },
+          "tryIt": {
+            "try_where_am_i_sketch0": {
+              "title": "Check your current folder",
+              "prompt": "Run `pwd` and look for the workspace path in the terminal output."
+            },
+            "try_where_am_i_sketch1": {
+              "title": "List the current folder",
+              "prompt": "Run `ls` and make sure `README.md` and `terminal-map` appear in the terminal output."
+            },
+            "try_where_am_i_sketch2": {
+              "title": "Show hidden files too",
+              "prompt": "Run `ls -a` so hidden files appear too, then look for `.hidden-map`."
+            }
+          },
+          "quiz": {
+            "sc-pwd-meaning": {
+              "title": "Which command shows your current folder?",
+              "prompt": "The command name means print working directory.",
+              "hint": "The command name means print working directory.",
+              "help": {
+                "concept": "The command name means print working directory.",
+                "hint_1": "The command name means print working directory.",
+                "hint_2": "Review the command names from the lesson, then choose the option that matches the task."
+              },
+              "options": {
+                "a": "ls",
+                "b": "pwd",
+                "c": "cd",
+                "d": "touch"
+              }
+            },
+            "sc-list-files": {
+              "title": "Which command lists files in the current folder?",
+              "prompt": "Use the command that shows what is nearby.",
+              "hint": "Use the command that shows what is nearby.",
+              "help": {
+                "concept": "Use the command that shows what is nearby.",
+                "hint_1": "Use the command that shows what is nearby.",
+                "hint_2": "Review the command names from the lesson, then choose the option that matches the task."
+              },
+              "options": {
+                "a": "ls",
+                "b": "mkdir",
+                "c": "whoami",
+                "d": "cat"
+              }
+            },
+            "sc-hidden-files": {
+              "title": "Which command lists hidden files too?",
+              "prompt": "The `-a` option means all.",
+              "hint": "The `-a` option means all.",
+              "help": {
+                "concept": "The `-a` option means all.",
+                "hint_1": "The `-a` option means all.",
+                "hint_2": "Review the command names from the lesson, then choose the option that matches the task."
+              },
+              "options": {
+                "a": "ls -a",
+                "b": "pwd -a",
+                "c": "cd -a",
+                "d": "touch -a"
+              }
+            },
+            "mc-inspection": {
+              "title": "Choose all commands that inspect instead of creating files.",
+              "prompt": "Inspection commands show information.",
+              "hint": "Inspection commands show information.",
+              "help": {
+                "concept": "Inspection commands show information.",
+                "hint_1": "Inspection commands show information.",
+                "hint_2": "Review the command names from the lesson, then choose the option that matches the task."
+              },
+              "options": {
+                "a": "pwd",
+                "b": "ls",
+                "c": "ls -l",
+                "d": "mkdir notes"
+              }
+            },
+            "ci-create-navigation-lab": {
+              "title": "Check your current folder",
+              "prompt": "Run `pwd` and look for the workspace path in the terminal output.\n\nUse the terminal. The editor is hidden on purpose for this task.",
+              "hint": "Use `pwd` to print the current working directory.",
+              "help": {
+                "concept": "This task is checked from your terminal command and terminal output.",
+                "hint_1": "Run `pwd` exactly once or a few times until you see the current folder.",
+                "hint_2": "Check Answer looks for the `pwd` command and for `/workspace` in the printed path."
+              },
+              "placeholder": "Use the terminal to complete this task."
+            },
+            "ci-create-visible-hidden-practice": {
+              "title": "List the current folder",
+              "prompt": "Run `ls` and make sure `README.md` and `terminal-map` appear in the terminal output.\n\nUse the terminal. The editor is hidden on purpose for this task.",
+              "hint": "Use `ls` to list what is in the current folder.",
+              "help": {
+                "concept": "This task is checked from the command you type and the names that appear in terminal output.",
+                "hint_1": "Run `ls` from the workspace root so the folder names are easy to spot.",
+                "hint_2": "Check Answer looks for the `ls` command and for `README.md` plus `terminal-map` in the output."
+              },
+              "placeholder": "Use the terminal to complete this task."
+            },
+            "ci-create-long-list-lab": {
+              "title": "Show hidden files too",
+              "prompt": "Run `ls -a` so hidden files appear too, then look for `.hidden-map`.\n\nUse the terminal. The editor is hidden on purpose for this task.",
+              "hint": "Use `ls -a` when you want hidden files to appear.",
+              "help": {
+                "concept": "This task is checked from terminal evidence rather than from creating new files.",
+                "hint_1": "Run `ls -a` from the workspace root.",
+                "hint_2": "Check Answer looks for a listing that includes `.hidden-map`."
+              },
+              "placeholder": "Use the terminal to complete this task."
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "linux-terminal-fundamentals": {
+      "linux-1-terminal-navigation": {
+        "where-am-i": {
+          "pwd-current-place": {
+            "title": "pwd tells you your current location",
+            "bodyMarkdown": "`pwd` means **print working directory**. It shows the folder your terminal is currently inside.\n\n```bash\npwd\n```\n\nWhen a task says “create a file here,” your current directory matters. Running `pwd` before making changes is a good habit."
+          },
+          "ls-shows-nearby-files": {
+            "title": "ls lists what is nearby",
+            "bodyMarkdown": "`ls` shows files and folders in the current directory.\n\n```bash\nls\nls -a\nls -l\n```\n\n`ls -a` includes hidden files. `ls -l` shows a longer listing with extra details. In Course 1, use `ls` often to check your work before clicking Check Answer."
+          },
+          "paths-start-from-here": {
+            "title": "Relative paths start from where you are",
+            "bodyMarkdown": "A relative path like `notes/today.txt` starts from your current directory.\n\nExample:\n\n```bash\nmkdir -p navigation-lab/notes\ntouch navigation-lab/notes/today.txt\n```\n\nThis creates folders and a file under the current workspace folder."
+          }
+        }
+      }
+    }
+  }
+}

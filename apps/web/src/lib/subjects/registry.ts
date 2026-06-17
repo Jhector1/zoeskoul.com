@@ -4,12 +4,7 @@ import type {
     ReviewTopicShape,
 } from "@/lib/subjects/types";
 import { SUBJECT_ARTIFACTS } from "@/lib/subjects";
-import { TOPIC_MANIFESTS as APPLIED_PYTHON_PROJECTS_TOPIC_MANIFESTS } from "@/lib/subjects/applied-python-projects/topics.generated";
-import { TOPIC_MANIFESTS as PYTHON_TOPIC_MANIFESTS } from "@/lib/subjects/python/topics.generated";
-import { TOPIC_MANIFESTS as PYTHON_V2_TOPIC_MANIFESTS } from "@/lib/subjects/python-v2/topics.generated";
-import { TOPIC_MANIFESTS as PYTHON_DATA_FUNCTIONS_TOPIC_MANIFESTS } from "@/lib/subjects/python-data-functions/topics.generated";
-import { TOPIC_MANIFESTS as SQL_TOPIC_MANIFESTS } from "@/lib/subjects/sql/topics.generated";
-import { TOPIC_MANIFESTS as SQL_V2_TOPIC_MANIFESTS } from "@/lib/subjects/sql-v2/topics.generated";
+import { SUBJECT_GENERATOR_SOURCES } from "@/lib/subjects/subjects.generated";
 import type { SlimTopicManifest } from "@/lib/subjects/_core/subjectManifestTypes";
 
 function indexBy<T extends { slug: string }>(items: readonly T[]) {
@@ -49,33 +44,21 @@ function cloneReviewTopic(
     };
 }
 
+function getTopicId(topicSlugOrId: string): string {
+    return String(topicSlugOrId ?? "").includes(".")
+        ? String(topicSlugOrId).split(".").slice(1).join(".")
+        : String(topicSlugOrId ?? "");
+}
+
 function getTopicManifestForSubject(
     subjectSlug: string,
     topicSlugOrId: string,
 ): SlimTopicManifest | null {
-    const topicId = String(topicSlugOrId ?? "").includes(".")
-        ? String(topicSlugOrId).split(".").slice(1).join(".")
-        : String(topicSlugOrId ?? "");
-
+    const topicId = getTopicId(topicSlugOrId);
     if (!topicId) return null;
 
-    switch (subjectSlug) {
-        case "applied-python-projects":
-            return APPLIED_PYTHON_PROJECTS_TOPIC_MANIFESTS[topicId] ?? null;
-        case "python":
-            return PYTHON_TOPIC_MANIFESTS[topicId] ?? null;
-        case "python-v2":
-            return PYTHON_V2_TOPIC_MANIFESTS[topicId] ?? null;
-        case "python-data-functions":
-        case "python--python-data-functions--draft":
-            return PYTHON_DATA_FUNCTIONS_TOPIC_MANIFESTS[topicId] ?? null;
-        case "sql":
-            return SQL_TOPIC_MANIFESTS[topicId] ?? null;
-        case "sql-v2":
-            return SQL_V2_TOPIC_MANIFESTS[topicId] ?? null;
-        default:
-            return null;
-    }
+    const source = SUBJECT_GENERATOR_SOURCES[subjectSlug];
+    return source?.topicManifests[topicId] ?? null;
 }
 
 function getReviewTopicBySlug(subjectSlug: string, topicSlug: string): ReviewTopicShape | null {

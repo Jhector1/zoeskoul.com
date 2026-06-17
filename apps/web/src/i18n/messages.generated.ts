@@ -78,6 +78,7 @@ const loaders: Record<string, Array<() => Promise<AnyObj>>> = {
     () => import("./messages/en/subjects/linux-terminal-fundamentals/module2/creating-folders-and-files.json").then((m) => (m?.default ?? {}) as AnyObj),
     () => import("./messages/en/subjects/linux-terminal-fundamentals/module2/module-2-notes-organizer-project.json").then((m) => (m?.default ?? {}) as AnyObj),
     () => import("./messages/en/subjects/linux-terminal-fundamentals/module2/viewing-file-contents.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/linux-terminal-fundamentals/module3/final-file-room-capstone.json").then((m) => (m?.default ?? {}) as AnyObj),
     () => import("./messages/en/subjects/linux-terminal-fundamentals/subject.json").then((m) => (m?.default ?? {}) as AnyObj),
     () => import("./messages/en/subjects/python-data-functions/module5/creating-and-indexing-lists.json").then((m) => (m?.default ?? {}) as AnyObj),
     () => import("./messages/en/subjects/python-data-functions/module5/dictionary-basics.json").then((m) => (m?.default ?? {}) as AnyObj),

@@ -575,6 +575,28 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         };
     }, [onTerminalSyncReady, workspaceTerminalEnabled, workspaceTerm.syncWorkspaceNow]);
 
+    useEffect(() => {
+        const w = window as typeof window & {
+            __pwEnableFullIdeTerminalInputHook?: boolean;
+            __pwForceTerminalWorkspaceSync?: (() => Promise<boolean>) | undefined;
+        };
+
+        if (!w.__pwEnableFullIdeTerminalInputHook || !workspaceTerminalEnabled) {
+            if (w.__pwForceTerminalWorkspaceSync) {
+                delete w.__pwForceTerminalWorkspaceSync;
+            }
+            return;
+        }
+
+        w.__pwForceTerminalWorkspaceSync = workspaceTerm.syncWorkspaceNow;
+
+        return () => {
+            if (w.__pwForceTerminalWorkspaceSync === workspaceTerm.syncWorkspaceNow) {
+                delete w.__pwForceTerminalWorkspaceSync;
+            }
+        };
+    }, [workspaceTerminalEnabled, workspaceTerm.syncWorkspaceNow]);
+
 
     const terminalAutoOpenKey = buildTerminalAutoOpenKey({
         workspaceKey: workspaceTerminal?.workspaceKey,
@@ -628,12 +650,11 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         }
 
         /**
-         * Important:
-         * Auto-open should only happen for a clean, idle terminal.
-         * If the terminal is disconnected, failed, rate-limited, or waiting for restart,
-         * the learner must click Restart terminal.
+         * Only the runner rate limiter should block automatic recovery. Normal
+         * refresh/socket recovery should reconnect without forcing the learner to
+         * click Restart terminal.
          */
-        if (workspaceTerm.recoverState !== "none") {
+        if (workspaceTerm.recoverState === "blocked_too_many_sessions") {
             return;
         }
 

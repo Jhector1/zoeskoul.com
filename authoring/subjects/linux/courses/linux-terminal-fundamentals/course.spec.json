@@ -24,6 +24,12 @@
         "title": "Files, Folders, and Viewing Content",
         "coreSkill": "Create, copy, move, rename, delete, and inspect files from the terminal.",
         "outputFocus": "Organize a messy notes folder into a clean school workspace."
+      },
+      {
+        "moduleNumber": 3,
+        "title": "Final Capstone: File Room Handoff",
+        "coreSkill": "Use navigation, file creation, copying, moving, renaming, deletion, and file inspection together in one realistic workspace cleanup.",
+        "outputFocus": "Prepare a clean event handoff folder with sorted files, a backup, a removed temporary file, and a ready marker."
       }
     ]
   },
@@ -31,13 +37,13 @@
     "currentRelease": {
       "name": "linux-terminal-fundamentals",
       "startModuleNumber": 1,
-      "endModuleNumber": 2
+      "endModuleNumber": 3
     },
     "releases": [
       {
         "name": "linux-terminal-fundamentals",
         "startModuleNumber": 1,
-        "endModuleNumber": 2
+        "endModuleNumber": 3
       }
     ]
   },
@@ -67,7 +73,7 @@
     },
     "projectPolicy": {
       "minProjectsBeforeCapstone": 1,
-      "capstoneRequired": false
+      "capstoneRequired": true
     },
     "qualityPolicy": {
       "allowBlankTopicIds": false,
@@ -94,7 +100,8 @@
       "Short concept sketches",
       "Command-purpose quizzes",
       "Terminal workspace tasks",
-      "Module projects"
+      "Module projects",
+      "Final capstone"
     ],
     "toolingSuggestions": [
       "ZoeSkoul terminal",
@@ -167,6 +174,7 @@
         },
         {
           "sectionSlug": "linux-terminal-fundamentals-linux-1-module-project",
+          "role": "module_project",
           "title": "Module Project",
           "summary": "Build a simple terminal map that proves you can create and navigate a nested workspace.",
           "topics": [
@@ -247,6 +255,7 @@
         },
         {
           "sectionSlug": "linux-terminal-fundamentals-linux-2-module-project",
+          "role": "module_project",
           "title": "Module Project",
           "summary": "Organize a messy notes folder into a clean school workspace.",
           "topics": [
@@ -258,6 +267,51 @@
               "technical": true,
               "learningGoals": [
                 "Organize a messy folder into notes, homework, code, and backups."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleNumber": 3,
+      "moduleSlug": "linux-3-final-capstone",
+      "prefix": "lin3",
+      "role": "capstone",
+      "title": "Final Capstone: File Room Handoff",
+      "purpose": "Use the terminal to clean up a small real-world workspace and leave it ready for someone else.",
+      "learningObjectives": [
+        "Inspect a workspace before changing it.",
+        "Create a clean folder structure for a real task.",
+        "Move, copy, rename, and remove files safely.",
+        "Verify the finished workspace with terminal commands."
+      ],
+      "guidedExercises": [
+        "Inspect a messy workspace before organizing it",
+        "Create folders and marker files for a handoff",
+        "Use workspace validation to confirm the final structure"
+      ],
+      "quizFocus": [
+        "choosing safe commands",
+        "reading workspace structure",
+        "checking terminal results"
+      ],
+      "moduleProject": "Prepare a clean event handoff folder with sorted files, a backup, a removed temporary file, and a ready marker.",
+      "sections": [
+        {
+          "sectionSlug": "linux-terminal-fundamentals-linux-3-final-capstone",
+          "role": "capstone",
+          "title": "Final Capstone",
+          "summary": "Clean up a small event workspace and leave a clear handoff for the next person.",
+          "topics": [
+            {
+              "topicId": "final-capstone-file-room-handoff",
+              "title": "Capstone: File Room Handoff",
+              "summary": "Use the terminal to sort a messy event folder, protect important notes, remove temporary clutter, and mark the workspace ready.",
+              "minutes": 35,
+              "technical": true,
+              "learningGoals": [
+                "Use the terminal to sort a messy event folder, protect important notes, remove temporary clutter, and mark the workspace ready."
               ]
             }
           ]

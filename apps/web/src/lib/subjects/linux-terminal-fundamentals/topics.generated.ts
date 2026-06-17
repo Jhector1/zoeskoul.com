@@ -15,6 +15,7 @@ import creatingFoldersAndFilesJson from "./modules/module2/topics/creating-folde
 import copyMoveRenameJson from "./modules/module2/topics/copy-move-rename/topic.bundle.json";
 import viewingFileContentsJson from "./modules/module2/topics/viewing-file-contents/topic.bundle.json";
 import module2NotesOrganizerProjectJson from "./modules/module2/topics/module-2-notes-organizer-project/topic.bundle.json";
+import finalFileRoomCapstoneJson from "./modules/module3/topics/final-file-room-capstone/topic.bundle.json";
 
 
 const whatTheTerminalIs = whatTheTerminalIsJson as SlimTopicManifest;
@@ -25,6 +26,7 @@ const creatingFoldersAndFiles = creatingFoldersAndFilesJson as SlimTopicManifest
 const copyMoveRename = copyMoveRenameJson as SlimTopicManifest;
 const viewingFileContents = viewingFileContentsJson as SlimTopicManifest;
 const module2NotesOrganizerProject = module2NotesOrganizerProjectJson as SlimTopicManifest;
+const finalFileRoomCapstone = finalFileRoomCapstoneJson as SlimTopicManifest;
 
 export const TOPIC_MANIFESTS: TopicManifestRefMap = {
   "what-the-terminal-is": whatTheTerminalIs,
@@ -35,4 +37,5 @@ export const TOPIC_MANIFESTS: TopicManifestRefMap = {
   "copy-move-rename": copyMoveRename,
   "viewing-file-contents": viewingFileContents,
   "module-2-notes-organizer-project": module2NotesOrganizerProject,
+  "final-file-room-capstone": finalFileRoomCapstone,
 };

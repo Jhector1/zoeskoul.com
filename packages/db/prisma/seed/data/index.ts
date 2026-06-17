@@ -169,6 +169,7 @@ function buildSeedData() {
   const sections: SectionSeed[] = [];
   const topics: TopicSeed[] = [];
   const subjectToCatalog = new Map<string, string>();
+  const subjectCatalogOrder = new Map<string, number>();
 
   for (const fileName of listCatalogFileNames()) {
     const manifest = loadCatalogManifest(fileName);
@@ -186,15 +187,25 @@ function buildSeedData() {
       meta: catalog.meta ?? null,
     });
 
-    for (const subjectSlug of catalog.subjectSlugs) {
+    const localSubjectSlugs = new Set<string>();
+
+    for (const [index, subjectSlug] of catalog.subjectSlugs.entries()) {
+      if (localSubjectSlugs.has(subjectSlug)) {
+        throw new Error(
+          `Catalog "${catalog.slug}" lists subject "${subjectSlug}" more than once`,
+        );
+      }
+      localSubjectSlugs.add(subjectSlug);
+
       const existing = subjectToCatalog.get(subjectSlug);
-      if (existing && existing !== catalog.slug) {
+      if (existing) {
         throw new Error(
           `Subject "${subjectSlug}" is assigned to multiple catalogs: "${existing}" and "${catalog.slug}"`,
         );
       }
 
       subjectToCatalog.set(subjectSlug, catalog.slug);
+      subjectCatalogOrder.set(subjectSlug, catalog.order * 1000 + index + 1);
     }
   }
 
@@ -222,10 +233,17 @@ function buildSeedData() {
       );
     }
 
+    const catalogOrder = subjectCatalogOrder.get(subject.slug);
+    if (typeof catalogOrder !== "number") {
+      throw new Error(
+        `Subject "${subject.slug}" is missing a catalog order from authoring/catalogs/*.catalog.json`,
+      );
+    }
+
     subjects.push({
       slug: subject.slug,
       catalogSlug,
-      order: subject.order,
+      order: catalogOrder,
       title: tag(subject.titleKey) ?? subject.slug,
       description: tag(subject.descriptionKey),
       imagePublicId: subject.imagePublicId ?? null,

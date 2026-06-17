@@ -2,7 +2,10 @@ import { describe, expect, it, vi } from "vitest";
 
 vi.mock("server-only", () => ({}));
 
-import {selectCatalogSubjectsForMode, selectSeededVisibleSubjectsForActor} from "./catalogVisibilityCore";
+import {
+    selectCatalogSubjectsForMode,
+    selectSeededVisibleSubjectsForActor,
+} from "./catalogVisibilityCore";
 
 describe("selectSeededVisibleSubjectsForActor", () => {
     it("hides manifest subjects that are not seeded in Prisma", () => {
@@ -20,6 +23,33 @@ describe("selectSeededVisibleSubjectsForActor", () => {
         ]);
 
         expect(visible).toEqual([]);
+    });
+
+    it("filters unseeded subjects before version family selection", () => {
+        const visible = selectSeededVisibleSubjectsForActor([
+            {
+                slug: "python",
+                subjectId: "sub_legacy",
+                enrolled: true,
+                versioning: {
+                    family: "python",
+                    status: "legacy",
+                    defaultForNewEnrollments: false,
+                },
+            },
+            {
+                slug: "python-v2",
+                subjectId: null,
+                enrolled: false,
+                versioning: {
+                    family: "python",
+                    status: "active",
+                    defaultForNewEnrollments: true,
+                },
+            },
+        ]);
+
+        expect(visible.map((subject) => subject.slug)).toEqual(["python"]);
     });
 
     it("selects only the active default seeded subject for a version family", () => {
@@ -49,7 +79,7 @@ describe("selectSeededVisibleSubjectsForActor", () => {
         expect(visible.map((subject) => subject.slug)).toEqual(["python-v2"]);
     });
 
-    it("keeps an enrolled legacy subject visible instead of switching to active default", () => {
+    it("catalog prefers the active default even when the learner is enrolled in legacy", () => {
         const visible = selectSeededVisibleSubjectsForActor([
             {
                 slug: "python",
@@ -73,7 +103,7 @@ describe("selectSeededVisibleSubjectsForActor", () => {
             },
         ]);
 
-        expect(visible.map((subject) => subject.slug)).toEqual(["python"]);
+        expect(visible.map((subject) => subject.slug)).toEqual(["python-v2"]);
     });
 
     it("selects sql-v2 as the SQL default for an unenrolled learner", () => {
@@ -105,7 +135,7 @@ describe("selectSeededVisibleSubjectsForActor", () => {
         expect(visible.map((subject) => subject.slug)).toEqual(["sql-v2"]);
     });
 
-    it("keeps sql visible for a learner enrolled in legacy SQL v1", () => {
+    it("keeps sql-v2 visible for a learner enrolled in legacy SQL v1 on catalog surfaces", () => {
         const visible = selectSeededVisibleSubjectsForActor([
             {
                 slug: "sql",
@@ -131,7 +161,7 @@ describe("selectSeededVisibleSubjectsForActor", () => {
             },
         ]);
 
-        expect(visible.map((subject) => subject.slug)).toEqual(["sql"]);
+        expect(visible.map((subject) => subject.slug)).toEqual(["sql-v2"]);
     });
 
     it("never shows draft or disabled subjects even when seeded", () => {
@@ -160,7 +190,6 @@ describe("selectSeededVisibleSubjectsForActor", () => {
 
         expect(visible).toEqual([]);
     });
-
 
     it("admin mode keeps unseeded legacy draft and disabled subjects", () => {
         const visible = selectCatalogSubjectsForMode(
@@ -298,4 +327,50 @@ describe("selectSeededVisibleSubjectsForActor", () => {
 
         expect(visible.map((subject) => subject.slug)).toEqual(["python-v2"]);
     });
+    it("preserves catalog subject order after seeded filtering and version-family selection", () => {
+        const visible = selectCatalogSubjectsForMode(
+            [
+                {
+                    slug: "python",
+                    subjectId: "sub_python_legacy",
+                    enrolled: true,
+                    versioning: {
+                        family: "python",
+                        status: "legacy",
+                        defaultForNewEnrollments: false,
+                    },
+                },
+                {
+                    slug: "python-v2",
+                    subjectId: "sub_python_v2",
+                    enrolled: false,
+                    versioning: {
+                        family: "python",
+                        status: "active",
+                        defaultForNewEnrollments: true,
+                    },
+                },
+                {
+                    slug: "python-data-functions",
+                    subjectId: "sub_python_data_functions",
+                    enrolled: false,
+                    versioning: null,
+                },
+                {
+                    slug: "applied-python-projects",
+                    subjectId: "sub_applied_python_projects",
+                    enrolled: false,
+                    versioning: null,
+                },
+            ],
+            "learner",
+        );
+
+        expect(visible.map((subject) => subject.slug)).toEqual([
+            "python-v2",
+            "python-data-functions",
+            "applied-python-projects",
+        ]);
+    });
+
 });
