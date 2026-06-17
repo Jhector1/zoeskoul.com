@@ -9,7 +9,12 @@ export const buildShellTaskRecipe: RecipeHandler<any> = (def, args, resolved) =>
             ? {
                 runnerBackend: "pty" as const,
                 layoutMode: "terminal_workspace" as const,
-                terminalSessionScope: "topic" as const,
+                /**
+                 * Shell-task quiz items must start from the exercise starter
+                 * workspace. Topic-scoped PTY reuse can leak files from another
+                 * exercise/tool session, e.g. `main.py` inside a Linux task.
+                 */
+                terminalSessionScope: "exercise" as const,
                 fileActions: {
                     enabled: false,
                 },

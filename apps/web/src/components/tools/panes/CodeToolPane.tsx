@@ -1694,12 +1694,38 @@ export default function CodeToolPane(props: {
         emitWorkspaceUpstreamRef.current(pending);
     }, [boundId, syncCodeInputSnapshot]);
 
+    useEffect(() => {
+        if (!boundId) return;
+        if (typeof pendingTerminalEvidenceRef.current === "undefined") return;
+
+        flushPendingWorkspace();
+    }, [boundId, flushPendingWorkspace]);
+
     const handleTerminalEvidenceChange = useCallback(
         (evidence: TerminalEvidence) => {
             pendingTerminalEvidenceRef.current = evidence;
+
+            /**
+             * Terminal evidence can arrive before the Tools binding has fully
+             * propagated to the quiz card. Persist it against the current review
+             * runtime key immediately so terminal-only checks do not lose the
+             * transcript and report "Terminal activity missing".
+             */
+            if (isReviewRouteMode && resolvedEditorOwnerKey) {
+                patchExerciseRuntime(resolvedEditorOwnerKey, {
+                    terminalEvidence: evidence,
+                    updatedAt: Date.now(),
+                });
+            }
+
             flushPendingWorkspace();
         },
-        [flushPendingWorkspace],
+        [
+            flushPendingWorkspace,
+            isReviewRouteMode,
+            patchExerciseRuntime,
+            resolvedEditorOwnerKey,
+        ],
     );
 
     const handleWorkspaceChange = useCallback((

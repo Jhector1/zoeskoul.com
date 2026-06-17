@@ -36,22 +36,9 @@ type TerminalRecovery = {
 
 const NO_TERMINAL_RECOVERY: TerminalRecovery = { state: "none", message: null };
 const STARTING_STALE_MS = 12_000;
-const PROMPT_FALLBACK_DELAY_MS = 250;
-const LOCAL_SHELL_PROMPT = "[zoeskoul]~$ ";
-
-function terminalFeedText(feed: TerminalChunk[]) {
-    return feed.map((chunk) => String(chunk.data ?? "")).join("");
-}
-
-function feedEndsWithPrompt(feed: TerminalChunk[]) {
-    const text = terminalFeedText(feed).replace(/\x1b\[[0-9;]*m/g, "").trimEnd();
-    if (!text) return false;
-    if (text.endsWith(LOCAL_SHELL_PROMPT.trimEnd())) return true;
-    return /(?:^|\r?\n)\[[^\]]+\].*[$#]\s*$/.test(text);
-}
 const SOCKET_OPEN_READY_STATE = 1;
 const CLIENT_START_COOLDOWN_MS = 2_500;
-const CLIENT_AUTO_START_RETRY_COOLDOWN_MS = 60_000;
+const CLIENT_AUTO_START_RETRY_COOLDOWN_MS = 2_500;
 const CLIENT_RECOVERY_RETRY_COOLDOWN_MS = 6_000;
 const MAX_PENDING_RECOVERY_INPUT_CHARS = 4096;
 const terminalAutoStartAttempts = new Map<string, number>();
@@ -790,18 +777,14 @@ export function useWorkspaceTerminalController(
     }, []);
 
     const schedulePromptFallback = React.useCallback(() => {
+        /**
+         * Do not synthesize shell prompts in the browser.
+         *
+         * The PTY owns the prompt and echo stream. Faking "[zoeskoul]~$" here
+         * races the real bash prompt and creates duplicate prompts.
+         */
         clearPromptFallbackTimer();
-
-        promptFallbackTimerRef.current = window.setTimeout(() => {
-            promptFallbackTimerRef.current = null;
-
-            if (terminalProcessExitedRef.current) return;
-            if (recoverStateRef.current !== "none") return;
-            if (feedEndsWithPrompt(terminalFeedRef.current)) return;
-
-            pushChunk("pty", LOCAL_SHELL_PROMPT);
-        }, PROMPT_FALLBACK_DELAY_MS);
-    }, [clearPromptFallbackTimer, pushChunk]);
+    }, [clearPromptFallbackTimer]);
 
     const setTerminalRecovery = React.useCallback((recovery: TerminalRecovery) => {
         recoverStateRef.current = recovery.state;
@@ -823,6 +806,9 @@ export function useWorkspaceTerminalController(
         escapeSequenceRef.current = "";
         terminalProcessExitedRef.current = false;
         terminalExitCodeRef.current = null;
+        startedRef.current = false;
+        startingRef.current = false;
+        stateRef.current = "idle";
         currentCwdRef.current = initialEvidenceCwd;
         terminalFeedRef.current = [];
         setTerminalFeed([]);
@@ -1070,6 +1056,9 @@ export function useWorkspaceTerminalController(
                 setTerminalFeed([]);
                 setInputEnabled(false);
                 setBusy(true);
+                stateRef.current = "preparing";
+                startingRef.current = true;
+                startedRef.current = false;
                 setState("preparing");
                 setStarting(true);
                 setSyncStatus("idle");
@@ -1110,6 +1099,8 @@ export function useWorkspaceTerminalController(
                     } as any);
 
                     lastPushedEntriesRef.current = visibleEntries;
+                    startedRef.current = true;
+                    releaseAutomaticTerminalStart(terminalLeaseKey);
                     setStarted(true);
                 } catch (e: any) {
                     const message = e?.message ?? "Failed to start workspace terminal.";
@@ -1121,6 +1112,9 @@ export function useWorkspaceTerminalController(
 
                     if (tooManySessions) {
                         pendingRecoveryInputRef.current = "";
+                    }
+                    if (!tooManySessions) {
+                        releaseAutomaticTerminalStart(terminalLeaseKey);
                     }
                     setBusy(false);
                     setInputEnabled(false);
@@ -1141,6 +1135,7 @@ export function useWorkspaceTerminalController(
                     return;
                 } finally {
                     clearStaleStartingTimer();
+                    startingRef.current = false;
                     setStarting(false);
                     openInFlightRef.current = null;
                 }
@@ -1259,6 +1254,13 @@ export function useWorkspaceTerminalController(
         openInFlightRef.current = null;
         pendingInputLineRef.current = "";
         escapeSequenceRef.current = "";
+        terminalProcessExitedRef.current = false;
+        terminalExitCodeRef.current = null;
+        stateRef.current = "idle";
+        startedRef.current = false;
+        startingRef.current = false;
+        releaseAutomaticTerminalStart(previousLeaseKey);
+        releaseAutomaticTerminalStart(terminalLeaseKey);
         setBusy(false);
         setInputEnabled(false);
         setStarted(false);

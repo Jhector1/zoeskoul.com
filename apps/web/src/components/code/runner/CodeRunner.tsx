@@ -100,7 +100,9 @@ const SPLIT_BAR_IDLE =
 
 const SPLIT_BAR_ACTIVE = "hover:bg-neutral-300/60 focus:bg-neutral-300/60";
 
-const TERMINAL_AUTO_OPEN_COOLDOWN_MS = 60_000;
+// Short guard only. A 60s module-level claim makes exercise navigation show
+// a blank "Idle" terminal until the learner clicks/presses something.
+const TERMINAL_AUTO_OPEN_COOLDOWN_MS = 2_500;
 const terminalAutoOpenClaims = new Map<string, number>();
 
 function pruneTerminalAutoOpenClaims(now: number) {

@@ -18,6 +18,15 @@ describe("workspacePolicy", () => {
         expect(isAllowedWorkspaceFile("logs/app.log")).toBe(true);
     });
 
+    it("allows Linux lab hidden text files", () => {
+        expect(isAllowedWorkspaceFile("desk/.locker")).toBe(true);
+        expect(isAllowedWorkspaceFile("desk/.secret-note")).toBe(true);
+    });
+
+    it("does not allow runner-managed hidden metadata as lesson files", () => {
+        expect(isAllowedWorkspaceFile(".bash_history")).toBe(false);
+    });
+
     it("normalizes workspace entries that include .keep files", () => {
         expect(
             normalizeWorkspaceEntries([

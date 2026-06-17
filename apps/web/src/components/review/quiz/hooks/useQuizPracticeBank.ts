@@ -103,13 +103,13 @@ function withTimeout<T>(promise: Promise<T>, ms: number, message: string) {
 }
 
 function isExpiredPracticeKeyError(error: unknown) {
-    const message = String((error as any)?.message ?? "").toLowerCase();
+  const message = String((error as any)?.message ?? "").toLowerCase();
 
-    return (
-        message.includes("invalid or expired key") ||
-        message.includes("practice validate failed (401)") ||
-        message.includes("practice help failed (401)")
-    );
+  return (
+      message.includes("invalid or expired key") ||
+      message.includes("practice validate failed (401)") ||
+      message.includes("practice help failed (401)")
+  );
 }
 
 export function getStablePracticeQuestionKey(q: ReviewQuestion) {
@@ -361,6 +361,64 @@ function getWorkspaceEntryCodeForPracticeBank(workspace: any) {
   return file?.kind === "file" ? String(file.content ?? "") : "";
 }
 
+function isRuntimeRecordLike(value: unknown): value is Record<string, any> {
+  return Boolean(value && typeof value === "object" && !Array.isArray(value));
+}
+
+function normalizeTerminalEvidenceForPracticeSubmit(value: unknown) {
+  if (!isRuntimeRecordLike(value)) return null;
+
+  const commands = Array.isArray(value.commands)
+      ? value.commands
+          .map((command) => String(command ?? "").trim())
+          .filter(Boolean)
+      : [];
+
+  const outputText =
+      typeof value.outputText === "string"
+          ? value.outputText
+          : typeof value.output === "string"
+              ? value.output
+              : "";
+
+  const cwd = typeof value.cwd === "string" ? value.cwd.trim() : "";
+
+  if (!commands.length && !outputText.trim() && !cwd) {
+    return null;
+  }
+
+  return {
+    commands,
+    outputText,
+    ...(cwd ? { cwd } : {}),
+  };
+}
+
+function practiceQuestionNeedsTerminalEvidence(
+    q: Extract<ReviewQuestion, { kind: "practice" }>,
+) {
+  const qAny = q as any;
+  const expected =
+      qAny.item?.expected ??
+      qAny.expected ??
+      qAny.exercise?.expected ??
+      qAny.item?.exercise?.expected ??
+      null;
+
+  if (!isRuntimeRecordLike(expected)) return false;
+
+  const terminalExpectations = expected.terminalExpectations;
+  if (Array.isArray(terminalExpectations) && terminalExpectations.length > 0) {
+    return true;
+  }
+
+  return Boolean(
+      expected.terminalWorkspaceShellTask ||
+      expected.mode === "terminal_workspace" ||
+      expected.checkMode === "terminal_workspace",
+  );
+}
+
 function getRuntimePracticePatchForQuestion(
     q: Extract<ReviewQuestion, { kind: "practice" }>,
 ) {
@@ -369,6 +427,7 @@ function getRuntimePracticePatchForQuestion(
   const exercises = runtime.exercises ?? {};
 
   const qAny = q as any;
+  const needsTerminalEvidence = practiceQuestionNeedsTerminalEvidence(q);
 
   const wantedIds = new Set(
       [
@@ -473,6 +532,9 @@ function getRuntimePracticePatchForQuestion(
         if (!hasIdentityMatch && !hasActiveMatch) return null;
 
         const updatedAt = Number(value.updatedAt ?? 0);
+        const terminalEvidence = normalizeTerminalEvidenceForPracticeSubmit(
+            value.terminalEvidence,
+        );
 
         return {
           key,
@@ -480,14 +542,21 @@ function getRuntimePracticePatchForQuestion(
           score,
           hasIdentityMatch,
           hasActiveMatch,
+          hasTerminalEvidence: Boolean(terminalEvidence),
           updatedAt: Number.isFinite(updatedAt) ? updatedAt : 0,
         };
       })
       .filter(Boolean);
 
-  const identityCandidates = candidates.filter((candidate: any) => candidate.hasIdentityMatch);
-  const rankedCandidates = (identityCandidates.length ? identityCandidates : candidates)
+  const rankedCandidates = candidates
       .sort((a: any, b: any) => {
+        if (
+            needsTerminalEvidence &&
+            a.hasTerminalEvidence !== b.hasTerminalEvidence
+        ) {
+          return a.hasTerminalEvidence ? -1 : 1;
+        }
+
         if (b.score !== a.score) return b.score - a.score;
         return b.updatedAt - a.updatedAt;
       });
@@ -515,7 +584,11 @@ function getRuntimePracticePatchForQuestion(
                   ? estate.source
                   : "";
 
-  if (!code.trim()) return null;
+  const terminalEvidence = normalizeTerminalEvidenceForPracticeSubmit(
+      estate.terminalEvidence,
+  );
+
+  if (!code.trim() && !terminalEvidence) return null;
 
   const stdin =
       typeof workspace?.stdin === "string"
@@ -549,6 +622,8 @@ function getRuntimePracticePatchForQuestion(
       boundExerciseKey,
       score: found.score,
       submittedCode: code,
+      submittedTerminalCommandCount:
+          terminalEvidence?.commands?.length ?? 0,
     });
   }
 
@@ -568,6 +643,7 @@ function getRuntimePracticePatchForQuestion(
     lang,
     language: lang,
     codeLang: lang,
+    ...(terminalEvidence ? { terminalEvidence } : {}),
     userEdited:
         estate.userEdited === true ||
         estate.workspaceOrigin === "user" ||
@@ -587,128 +663,128 @@ function getRuntimePracticePatchForQuestion(
   };
 }
 export function sanitizeSavedPracticePatch(savedPatch: any, exerciseKind?: string) {
-    if (!savedPatch) return null;
+  if (!savedPatch) return null;
 
-    const next = { ...savedPatch };
+  const next = { ...savedPatch };
 
-    /**
-     * Practice keys are short-lived signed transport tokens, not learner state.
-     * A saved patch must never overwrite the fresh key returned by /api/practice.
-     */
-    delete next.key;
-    delete next.sessionId;
+  /**
+   * Practice keys are short-lived signed transport tokens, not learner state.
+   * A saved patch must never overwrite the fresh key returned by /api/practice.
+   */
+  delete next.key;
+  delete next.sessionId;
 
-    // Never let saved progress replace the freshly resolved exercise contract.
-    // Old saved patches may contain an entire QItem, including item.exercise from
-    // another topic/project step. Merging that object is what caused a stale
-    // calculate_tip prompt to render while the editor had the new imports starter.
-    delete next.exercise;
-    delete next.title;
-    delete next.prompt;
-    delete next.hint;
-    delete next.options;
-    delete next.tokens;
-    delete next.expected;
-    delete next.starterCode;
-    delete next.starterFiles;
-    delete next.workspaceExpectations;
-    delete next.recipe;
-    delete next.help;
-    delete next.tests;
-    delete next.solutionCode;
-    delete next.solutionFiles;
-    delete next.messageBase;
+  // Never let saved progress replace the freshly resolved exercise contract.
+  // Old saved patches may contain an entire QItem, including item.exercise from
+  // another topic/project step. Merging that object is what caused a stale
+  // calculate_tip prompt to render while the editor had the new imports starter.
+  delete next.exercise;
+  delete next.title;
+  delete next.prompt;
+  delete next.hint;
+  delete next.options;
+  delete next.tokens;
+  delete next.expected;
+  delete next.starterCode;
+  delete next.starterFiles;
+  delete next.workspaceExpectations;
+  delete next.recipe;
+  delete next.help;
+  delete next.tests;
+  delete next.solutionCode;
+  delete next.solutionFiles;
+  delete next.messageBase;
 
-    if (exerciseKind === "drag_reorder" && !next.ui?.reorderTouched) {
-        delete next.reorder;
-        delete next.reorderIds;
-    }
+  if (exerciseKind === "drag_reorder" && !next.ui?.reorderTouched) {
+    delete next.reorder;
+    delete next.reorderIds;
+  }
 
-    return next;
+  return next;
 }
 function mayRestoreQuestionIdPatch(
     q: Extract<ReviewQuestion, { kind: "practice" }>,
     stableKey: string,
 ) {
-    /**
-     * q.id is often just the review-card slot id, while stableKey is the real
-     * fetched/generated exercise identity. Falling back from stableKey to q.id
-     * lets an old practice exercise patch override a new exercise starter.
-     *
-     * Only use q.id as a restore key when it is the stable identity.
-     */
-    return q.id === stableKey;
+  /**
+   * q.id is often just the review-card slot id, while stableKey is the real
+   * fetched/generated exercise identity. Falling back from stableKey to q.id
+   * lets an old practice exercise patch override a new exercise starter.
+   *
+   * Only use q.id as a restore key when it is the stable identity.
+   */
+  return q.id === stableKey;
 }
 function getSavedPracticePatch(
     initialState: SavedQuizState | null,
     q: Extract<ReviewQuestion, { kind: "practice" }>,
 ) {
-    const stableKey = getStablePracticeQuestionKey(q);
-    const allowQuestionIdPatch = mayRestoreQuestionIdPatch(q, stableKey);
+  const stableKey = getStablePracticeQuestionKey(q);
+  const allowQuestionIdPatch = mayRestoreQuestionIdPatch(q, stableKey);
 
-    const byStableKey = initialState?.practiceItemPatch?.[stableKey] ?? null;
-    const byQuestionId = allowQuestionIdPatch
-        ? initialState?.practiceItemPatch?.[q.id] ?? null
-        : null;
+  const byStableKey = initialState?.practiceItemPatch?.[stableKey] ?? null;
+  const byQuestionId = allowQuestionIdPatch
+      ? initialState?.practiceItemPatch?.[q.id] ?? null
+      : null;
 
-    const selected = byStableKey ?? byQuestionId ?? null;
+  const selected = byStableKey ?? byQuestionId ?? null;
 
-    exerciseDebug("B_useQuizPracticeBank_getSavedPracticePatch", {
-        qid: q.id,
-        stableKey,
-        allowQuestionIdPatch,
-        selectedFrom: byStableKey ? "stableKey" : byQuestionId ? "questionId" : "none",
-        availablePatchKeys: Object.keys(initialState?.practiceItemPatch ?? {}),
-        selected: summarizeExercisePatch(selected),
-    });
+  exerciseDebug("B_useQuizPracticeBank_getSavedPracticePatch", {
+    qid: q.id,
+    stableKey,
+    allowQuestionIdPatch,
+    selectedFrom: byStableKey ? "stableKey" : byQuestionId ? "questionId" : "none",
+    availablePatchKeys: Object.keys(initialState?.practiceItemPatch ?? {}),
+    selected: summarizeExercisePatch(selected),
+  });
 
-    reviewDebug("6_RESTORE_READ useQuizPracticeBank.getSavedPracticePatch", {
-        qid: q.id,
-        stableKey,
-        allowQuestionIdPatch,
-        availablePatchKeys: Object.keys(initialState?.practiceItemPatch ?? {}),
-        selectedFrom:
-            byStableKey ? "stableKey" : byQuestionId ? "questionId" : "none",
-        selected: summarizeExercisePatch(selected),
-    });
+  reviewDebug("6_RESTORE_READ useQuizPracticeBank.getSavedPracticePatch", {
+    qid: q.id,
+    stableKey,
+    allowQuestionIdPatch,
+    availablePatchKeys: Object.keys(initialState?.practiceItemPatch ?? {}),
+    selectedFrom:
+        byStableKey ? "stableKey" : byQuestionId ? "questionId" : "none",
+    selected: summarizeExercisePatch(selected),
+  });
 
-    return selected;
+  return selected;
 }
 
 function getSavedPracticeMeta(
     initialState: SavedQuizState | null,
     q: Extract<ReviewQuestion, { kind: "practice" }>,
 ) {
-    const stableKey = getStablePracticeQuestionKey(q);
-    const practiceMeta = initialState?.practiceMeta ?? {};
-    const qAny = q as any;
+  const stableKey = getStablePracticeQuestionKey(q);
+  const practiceMeta = initialState?.practiceMeta ?? {};
+  const qAny = q as any;
 
-    const restoreKeys = Array.from(
-        new Set(
-            [
-                stableKey,
-                mayRestoreQuestionIdPatch(q, stableKey) ? q.id : null,
-                qAny.fetch?.exerciseKey,
-                qAny.fetch?.stepId,
-                qAny.exerciseKey,
-                qAny.stepId,
-                qAny.sourceStepId,
-                qAny.item?.exerciseKey,
-                qAny.item?.id,
-                qAny.exercise?.exerciseKey,
-                qAny.exercise?.id,
-            ]
-                .map((value) => String(value ?? "").trim())
-                .filter(Boolean),
-        ),
-    );
+  const restoreKeys = Array.from(
+      new Set(
+          [
+            stableKey,
+            mayRestoreQuestionIdPatch(q, stableKey) ? q.id : null,
+            qAny.fetch?.exerciseKey,
+            qAny.fetch?.stepId,
+            qAny.exerciseKey,
+            qAny.stepId,
+            qAny.sourceStepId,
+            qAny.item?.exerciseKey,
+            qAny.item?.id,
+            qAny.exercise?.exerciseKey,
+            qAny.exercise?.id,
+          ]
+              .map((value) => String(value ?? "").trim())
+              .filter(Boolean),
+      ),
+  );
 
-    for (const key of restoreKeys) {
-        const found = practiceMeta[key];
-        if (found) return found;
-    }
+  for (const key of restoreKeys) {
+    const found = practiceMeta[key];
+    if (found) return found;
+  }
 
-    return null;
+  return null;
 }
 
 function resolveQuestionByAnyId(
@@ -783,24 +859,24 @@ function mergeSavedPatchIntoPracticeItem(item: any, savedPatch: any) {
       savedPatch.workspaceOrigin === "saved";
 
   const patch = { ...savedPatch };
-    /**
-     * Do not merge ephemeral signed transport tokens from saved progress.
-     * The live item.key from /api/practice is always the source of truth.
-     */
-    delete patch.key;
-    delete patch.sessionId;
-    delete patch.help;
+  /**
+   * Do not merge ephemeral signed transport tokens from saved progress.
+   * The live item.key from /api/practice is always the source of truth.
+   */
+  delete patch.key;
+  delete patch.sessionId;
+  delete patch.help;
   if (isCodeInput && expectedLanguage && !stateLanguageMatches(patch, expectedLanguage, patch.workspace)) {
-      delete patch.code;
-      delete patch.source;
-      delete patch.workspace;
-      delete patch.codeWorkspace;
-      delete patch.ideWorkspace;
-      delete patch.codeStdin;
-      delete patch.stdin;
-      delete patch.language;
-      delete patch.lang;
-      delete patch.codeLang;
+    delete patch.code;
+    delete patch.source;
+    delete patch.workspace;
+    delete patch.codeWorkspace;
+    delete patch.ideWorkspace;
+    delete patch.codeStdin;
+    delete patch.stdin;
+    delete patch.language;
+    delete patch.lang;
+    delete patch.codeLang;
   }
   /**
    * Do not let a blank non-user saved/sync patch erase starterCode.
@@ -808,31 +884,31 @@ function mergeSavedPatchIntoPracticeItem(item: any, savedPatch: any) {
    *   - starterCode on first load
    *   - real user edits when userEdited/workspaceOrigin says it is user data
    */
-    /**
-     * Do not let a non-user saved/sync patch override authored starterCode.
-     *
-     * Important:
-     * A passive runtime/tool sync can contain nonblank code, for example "1" or
-     * an old query.sql snapshot. That is still not learner work unless it is
-     * explicitly marked user/saved.
-     *
-     * For starter-backed code_input exercises:
-     * - non-user patch may keep metadata/result/help/attempts
-     * - non-user patch must not replace code/source/workspace
-     * - real learner edits are preserved through userEdited/workspaceOrigin=user/saved
-     */
-    if (isCodeInput && starterCode && !userEdited) {
-        delete patch.code;
-        delete patch.source;
-        delete patch.workspace;
-        delete patch.codeWorkspace;
-        delete patch.ideWorkspace;
-        delete patch.codeStdin;
-        delete patch.stdin;
-        delete patch.language;
-        delete patch.lang;
-        delete patch.codeLang;
-    }
+  /**
+   * Do not let a non-user saved/sync patch override authored starterCode.
+   *
+   * Important:
+   * A passive runtime/tool sync can contain nonblank code, for example "1" or
+   * an old query.sql snapshot. That is still not learner work unless it is
+   * explicitly marked user/saved.
+   *
+   * For starter-backed code_input exercises:
+   * - non-user patch may keep metadata/result/help/attempts
+   * - non-user patch must not replace code/source/workspace
+   * - real learner edits are preserved through userEdited/workspaceOrigin=user/saved
+   */
+  if (isCodeInput && starterCode && !userEdited) {
+    delete patch.code;
+    delete patch.source;
+    delete patch.workspace;
+    delete patch.codeWorkspace;
+    delete patch.ideWorkspace;
+    delete patch.codeStdin;
+    delete patch.stdin;
+    delete patch.language;
+    delete patch.lang;
+    delete patch.codeLang;
+  }
   const workspace =
       patch.workspace ??
       patch.codeWorkspace ??
@@ -956,12 +1032,12 @@ export function useQuizPracticeBank(args: {
       for (const q of questions) {
         if (q.kind !== "practice") continue;
 
-          const stableKey = getStablePracticeQuestionKey(q);
-          const savedPatch =
-              initialState.practiceItemPatch?.[stableKey] ??
-              (mayRestoreQuestionIdPatch(q, stableKey)
-                  ? initialState.practiceItemPatch?.[q.id] ?? null
-                  : null);
+        const stableKey = getStablePracticeQuestionKey(q);
+        const savedPatch =
+            initialState.practiceItemPatch?.[stableKey] ??
+            (mayRestoreQuestionIdPatch(q, stableKey)
+                ? initialState.practiceItemPatch?.[q.id] ?? null
+                : null);
 
         if (!savedPatch) continue;
 
@@ -969,8 +1045,8 @@ export function useQuizPracticeBank(args: {
         if (!current?.item) continue;
 
         const mergedItem = mergeSavedPatchIntoPracticeItem(
-          current.item,
-          savedPatch,
+            current.item,
+            savedPatch,
         );
 
         if (mergedItem === current.item) continue;
@@ -1013,8 +1089,8 @@ export function useQuizPracticeBank(args: {
             setPractice((prev) => {
               const current = prev[stableKey] ?? prev[q.id] ?? existing;
               const mergedItem = mergeSavedPatchIntoPracticeItem(
-                current.item,
-                savedPatch,
+                  current.item,
+                  savedPatch,
               );
 
               if (mergedItem === current.item) return prev;
@@ -1382,7 +1458,7 @@ export function useQuizPracticeBank(args: {
           const runtimeStoreKey = String(runtimePatch?.__runtimeStoreKey ?? "").trim();
           const runtimePatchForSubmit = runtimePatch
               ? Object.fromEntries(
-                Object.entries(runtimePatch).filter(([patchKey]) => patchKey !== "__runtimeStoreKey"),
+                  Object.entries(runtimePatch).filter(([patchKey]) => patchKey !== "__runtimeStoreKey"),
               )
               : null;
 
@@ -1458,40 +1534,40 @@ export function useQuizPracticeBank(args: {
             return setPracticeForQuestion(prev, q, nextState);
           });
         } catch (e: any) {
-            if (isExpiredPracticeKeyError(e)) {
-                /**
-                 * Keep the card disabled/loading while the replacement practice item is
-                 * fetched. Do not briefly unlock the stale item, or the learner can submit
-                 * the same expired key again before React installs the refreshed item.
-                 */
-                setPractice((prev) => {
-                    const current = prev[key] ?? prev[q.id];
-                    if (!current) return prev;
-
-                    return setPracticeForQuestion(prev, q, {
-                        ...current,
-                        loading: true,
-                        busy: false,
-                        error: null,
-                    });
-                });
-
-                await loadPracticeQuestion(q, { force: true });
-                return;
-            }
-
+          if (isExpiredPracticeKeyError(e)) {
+            /**
+             * Keep the card disabled/loading while the replacement practice item is
+             * fetched. Do not briefly unlock the stale item, or the learner can submit
+             * the same expired key again before React installs the refreshed item.
+             */
             setPractice((prev) => {
-                const current = prev[key] ?? prev[q.id];
-                if (!current) return prev;
+              const current = prev[key] ?? prev[q.id];
+              if (!current) return prev;
 
-                const nextState: PracticeState = {
-                    ...current,
-                    busy: false,
-                    error: e?.message ?? "Submit failed.",
-                };
-
-                return setPracticeForQuestion(prev, q, nextState);
+              return setPracticeForQuestion(prev, q, {
+                ...current,
+                loading: true,
+                busy: false,
+                error: null,
+              });
             });
+
+            await loadPracticeQuestion(q, { force: true });
+            return;
+          }
+
+          setPractice((prev) => {
+            const current = prev[key] ?? prev[q.id];
+            if (!current) return prev;
+
+            const nextState: PracticeState = {
+              ...current,
+              busy: false,
+              error: e?.message ?? "Submit failed.",
+            };
+
+            return setPracticeForQuestion(prev, q, nextState);
+          });
         }
       },
       [practice, unlimitedAttempts, isCompleted, locked, loadPracticeQuestion],  );
@@ -1621,59 +1697,59 @@ export function useQuizPracticeBank(args: {
             return setPracticeForQuestion(prev, q, nextState);
           });
         } catch (e: any) {
-            if (isExpiredPracticeKeyError(e)) {
-                /**
-                 * Same stale-key protection as submitPractice:
-                 * do not re-enable the old item while the refreshed key is still loading.
-                 */
-                setPractice((prev) => {
-                    const current = prev[key] ?? prev[q.id];
-                    if (!current) return prev;
-
-                    return setPracticeForQuestion(prev, q, {
-                        ...current,
-                        loading: true,
-                        busy: false,
-                        error: null,
-                        item: current.item
-                            ? {
-                                ...current.item,
-                                help: {
-                                    ...current.item.help,
-                                    busyStepKey: null,
-                                    error: null,
-                                },
-                            }
-                            : current.item,
-                    });
-                });
-
-                await loadPracticeQuestion(q, { force: true });
-                return;
-            }
-
+          if (isExpiredPracticeKeyError(e)) {
+            /**
+             * Same stale-key protection as submitPractice:
+             * do not re-enable the old item while the refreshed key is still loading.
+             */
             setPractice((prev) => {
-                const current = prev[key] ?? prev[q.id];
-                if (!current) return prev;
+              const current = prev[key] ?? prev[q.id];
+              if (!current) return prev;
 
-                const nextState: PracticeState = {
-                    ...current,
-                    busy: false,
-                    error: e?.message ?? "Help failed.",
-                    item: current.item
-                        ? {
-                            ...current.item,
-                            help: {
-                                ...current.item.help,
-                                busyStepKey: null,
-                                error: e?.message ?? "Help failed.",
-                            },
-                        }
-                        : current.item,
-                };
-
-                return setPracticeForQuestion(prev, q, nextState);
+              return setPracticeForQuestion(prev, q, {
+                ...current,
+                loading: true,
+                busy: false,
+                error: null,
+                item: current.item
+                    ? {
+                      ...current.item,
+                      help: {
+                        ...current.item.help,
+                        busyStepKey: null,
+                        error: null,
+                      },
+                    }
+                    : current.item,
+              });
             });
+
+            await loadPracticeQuestion(q, { force: true });
+            return;
+          }
+
+          setPractice((prev) => {
+            const current = prev[key] ?? prev[q.id];
+            if (!current) return prev;
+
+            const nextState: PracticeState = {
+              ...current,
+              busy: false,
+              error: e?.message ?? "Help failed.",
+              item: current.item
+                  ? {
+                    ...current.item,
+                    help: {
+                      ...current.item.help,
+                      busyStepKey: null,
+                      error: e?.message ?? "Help failed.",
+                    },
+                  }
+                  : current.item,
+            };
+
+            return setPracticeForQuestion(prev, q, nextState);
+          });
         }
       },
       [practice, isCompleted, locked, loadPracticeQuestion],  );

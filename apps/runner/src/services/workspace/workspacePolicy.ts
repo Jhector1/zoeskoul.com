@@ -46,6 +46,24 @@ const ALLOWED_BASENAMES = new Set([
   ".keep",
 ]);
 
+const DENIED_HIDDEN_TEXT_BASENAMES = new Set([
+  ".bash_history",
+  ".git",
+  ".DS_Store",
+]);
+
+function isAllowedHiddenTextFile(base: string) {
+  if (!base.startsWith(".")) return false;
+  if (base.length <= 1) return false;
+  if (DENIED_HIDDEN_TEXT_BASENAMES.has(base)) return false;
+
+  // Linux terminal lessons commonly use hidden text files such as
+  // desk/.locker. They are normal learner-visible filesystem content,
+  // not executable/runtime metadata. Keep the path character policy strict
+  // and the file-size limits below as the safety boundary.
+  return /^\.[A-Za-z0-9._-]+$/.test(base);
+}
+
 export const IGNORED_SNAPSHOT_DIRS = new Set([
   ".git",
   "node_modules",
@@ -59,6 +77,7 @@ export const IGNORED_SNAPSHOT_DIRS = new Set([
 export function isAllowedWorkspaceFile(relPath: string) {
   const base = path.basename(relPath);
   if (ALLOWED_BASENAMES.has(base)) return true;
+  if (isAllowedHiddenTextFile(base)) return true;
 
   const ext = path.extname(base).toLowerCase();
   return ALLOWED_EXTENSIONS.has(ext);
