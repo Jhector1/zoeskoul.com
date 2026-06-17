@@ -4,7 +4,7 @@
     "order": 20,
     "title": "SQL",
     "description": "SQL courses focused on querying, reporting, data modeling, and practical database thinking.",
-    "imagePublicId": null,
+    "imagePublicId": "sql_cover_fumhrx.png",
     "imageAlt": "SQL catalog cover",
     "defaultSubjectSlug": "sql-v2",
     "status": "active",

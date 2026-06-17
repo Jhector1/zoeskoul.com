@@ -5,7 +5,7 @@
     "title": "Linux",
     "defaultSubjectSlug": "linux-terminal-fundamentals",
     "description": "Linux courses focused on terminal fluency, files, permissions, Bash, developer workflows, and server basics.",
-    "imagePublicId": null,
+    "imagePublicId": "linux_cover_u0eb9c.png",
     "imageAlt": "Linux catalog cover",
     "status": "active",
     "subjectSlugs": [

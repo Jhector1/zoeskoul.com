@@ -35,6 +35,8 @@
       "titleKey": "topics.python-v2.python-v2-4.mini-gradebook-capstone.cards.project.title",
       "project": {
         "difficulty": "medium",
+        "displayKind": "capstone",
+        "uiKind": "capstone",
         "allowReveal": true,
         "preferKind": "code_input",
         "maxAttempts": 10,

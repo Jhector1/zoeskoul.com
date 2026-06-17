@@ -7,7 +7,7 @@
     "order": 30,
     "accessPolicy": "paid",
     "status": "active",
-    "imagePublicId": null,
+    "imagePublicId": "python_for_beginners_uct3dz.png",
     "imageAlt": null,
     "titleKey": "subjects.python-v2.title",
     "descriptionKey": "subjects.python-v2.description",

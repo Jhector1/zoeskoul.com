@@ -477,7 +477,6 @@ export function useWorkspaceTerminalController(
     ]);
     const [terminalFeed, setTerminalFeed] = React.useState<TerminalChunk[]>([]);
     const terminalFeedRef = React.useRef<TerminalChunk[]>([]);
-    const promptFallbackTimerRef = React.useRef<number | null>(null);
     const [terminalEvidence, setTerminalEvidence] = React.useState<TerminalEvidence>(
         () => createTerminalEvidence(initialEvidenceCwd),
     );
@@ -769,23 +768,6 @@ export function useWorkspaceTerminalController(
         }
     }, []);
 
-    const clearPromptFallbackTimer = React.useCallback(() => {
-        if (promptFallbackTimerRef.current != null) {
-            window.clearTimeout(promptFallbackTimerRef.current);
-            promptFallbackTimerRef.current = null;
-        }
-    }, []);
-
-    const schedulePromptFallback = React.useCallback(() => {
-        /**
-         * Do not synthesize shell prompts in the browser.
-         *
-         * The PTY owns the prompt and echo stream. Faking "[zoeskoul]~$" here
-         * races the real bash prompt and creates duplicate prompts.
-         */
-        clearPromptFallbackTimer();
-    }, [clearPromptFallbackTimer]);
-
     const setTerminalRecovery = React.useCallback((recovery: TerminalRecovery) => {
         recoverStateRef.current = recovery.state;
         setRecoverState(recovery.state);
@@ -827,11 +809,10 @@ export function useWorkspaceTerminalController(
     const reset = React.useCallback(() => {
         clearQuietTimer();
         clearStaleStartingTimer();
-        clearPromptFallbackTimer();
         void cancel().catch(() => {});
         closeSocket();
         clearLocalTerminalState();
-    }, [cancel, clearLocalTerminalState, clearQuietTimer, clearStaleStartingTimer, clearPromptFallbackTimer, closeSocket]);
+    }, [cancel, clearLocalTerminalState, clearQuietTimer, clearStaleStartingTimer, closeSocket]);
 
     const replaceFiles = React.useCallback(
         async (files: WorkspaceSyncEntry[]): Promise<boolean> => {
@@ -1064,7 +1045,6 @@ export function useWorkspaceTerminalController(
                 setSyncStatus("idle");
                 clearTerminalRecovery();
                 clearStaleStartingTimer();
-                clearPromptFallbackTimer();
 
                 staleStartingTimerRef.current = window.setTimeout(() => {
                     staleStartingTimerRef.current = null;
@@ -1106,8 +1086,7 @@ export function useWorkspaceTerminalController(
                     const message = e?.message ?? "Failed to start workspace terminal.";
                     const tooManySessions = isTooManySessionsMessage(message);
 
-                    clearPromptFallbackTimer();
-                    pushChunk("err", `${message}\r\n`);
+                        pushChunk("err", `${message}\r\n`);
                     setTerminalRecovery(normalizeRecoverableTerminalError(message));
 
                     if (tooManySessions) {
@@ -1156,7 +1135,6 @@ export function useWorkspaceTerminalController(
             cancel,
             closeSocket,
             clearStaleStartingTimer,
-            clearPromptFallbackTimer,
             clearTerminalRecovery,
             setTerminalRecovery,
         ],
@@ -1602,7 +1580,6 @@ export function useWorkspaceTerminalController(
                     setStarted(true);
                     setStarting(false);
 
-                    schedulePromptFallback();
 
                     if (awaitingPostEnterSnapshotRef.current) {
                         schedulePostEnterSnapshot(450);
@@ -1614,8 +1591,7 @@ export function useWorkspaceTerminalController(
                     terminalProcessExitedRef.current = true;
                     terminalExitCodeRef.current = null;
                     pendingRecoveryInputRef.current = "";
-                    clearPromptFallbackTimer();
-                    setBusy(false);
+                        setBusy(false);
                     setInputEnabled(false);
                     setStarted(false);
                     openInFlightRef.current = null;
@@ -1651,7 +1627,6 @@ export function useWorkspaceTerminalController(
                 setInputEnabled(true);
                 setStarted(true);
                 setStarting(false);
-                schedulePromptFallback();
 
                 if (awaitingPostEnterSnapshotRef.current) {
                     schedulePostEnterSnapshot(250);
@@ -1663,7 +1638,6 @@ export function useWorkspaceTerminalController(
                 terminalProcessExitedRef.current = true;
                 terminalExitCodeRef.current = null;
                 pendingRecoveryInputRef.current = "";
-                clearPromptFallbackTimer();
                 if (ev.stdout) pushChunk("pty", ev.stdout);
                 if (ev.stderr) pushChunk("err", ev.stderr);
                 setBusy(false);
@@ -1686,7 +1660,6 @@ export function useWorkspaceTerminalController(
                 terminalProcessExitedRef.current = true;
                 terminalExitCodeRef.current = ev.code;
                 pendingRecoveryInputRef.current = "";
-                clearPromptFallbackTimer();
                 pushChunk("sys", `\r\n[process exited with code ${ev.code}]\r\n`);
                 setBusy(false);
                 setInputEnabled(false);
@@ -1712,7 +1685,6 @@ export function useWorkspaceTerminalController(
                     pendingRecoveryInputRef.current = "";
                 }
 
-                clearPromptFallbackTimer();
                 pushChunk("err", `\r\n${ev.message}\r\n`);
                 setTerminalRecovery(
                     staleRunnerSession
@@ -1733,7 +1705,7 @@ export function useWorkspaceTerminalController(
                 }
             }
         }
-    }, [events, pushChunk, schedulePostEnterSnapshot, clearStaleStartingTimer, clearPromptFallbackTimer, schedulePromptFallback, setTerminalRecovery]);
+    }, [events, pushChunk, schedulePostEnterSnapshot, clearStaleStartingTimer, setTerminalRecovery]);
 
     React.useEffect(() => {
         if (!args.enabled) return;
@@ -1759,7 +1731,6 @@ export function useWorkspaceTerminalController(
         setStarting(false);
         openInFlightRef.current = null;
         clearStaleStartingTimer();
-        clearPromptFallbackTimer();
         setTerminalRecovery({
             state: "restart_available",
             message: isStaleRunnerSessionMessage(disconnectReason ?? "")
@@ -1771,7 +1742,6 @@ export function useWorkspaceTerminalController(
         runSessionState,
         sessionId,
         clearStaleStartingTimer,
-        clearPromptFallbackTimer,
         disconnectReason,
         setTerminalRecovery,
     ]);
@@ -1780,9 +1750,8 @@ export function useWorkspaceTerminalController(
         return () => {
             clearQuietTimer();
             clearStaleStartingTimer();
-            clearPromptFallbackTimer();
-        };
-    }, [clearQuietTimer, clearStaleStartingTimer, clearPromptFallbackTimer]);
+            };
+    }, [clearQuietTimer, clearStaleStartingTimer]);
 
     return {
         available: args.enabled,

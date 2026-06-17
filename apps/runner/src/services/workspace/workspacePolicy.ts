@@ -64,6 +64,25 @@ function isAllowedHiddenTextFile(base: string) {
   return /^\.[A-Za-z0-9._-]+$/.test(base);
 }
 
+
+const DENIED_HIDDEN_LESSON_BASENAMES = new Set([
+  ".bash_history",
+  ".git",
+  ".DS_Store",
+  ".ssh",
+  ".env",
+]);
+
+function isAllowedHiddenLessonTextFile(base: string) {
+  if (!base.startsWith(".")) return false;
+  if (base.length <= 1) return false;
+  if (DENIED_HIDDEN_LESSON_BASENAMES.has(base)) return false;
+
+  // Linux lessons need safe hidden text files such as desk/.locker.
+  // Keep the path-name policy strict; file-size/content limits still apply.
+  return /^\.[A-Za-z0-9._-]+$/.test(base);
+}
+
 export const IGNORED_SNAPSHOT_DIRS = new Set([
   ".git",
   "node_modules",
@@ -76,6 +95,7 @@ export const IGNORED_SNAPSHOT_DIRS = new Set([
 
 export function isAllowedWorkspaceFile(relPath: string) {
   const base = path.basename(relPath);
+  if (isAllowedHiddenLessonTextFile(base)) return true;
   if (ALLOWED_BASENAMES.has(base)) return true;
   if (isAllowedHiddenTextFile(base)) return true;
 

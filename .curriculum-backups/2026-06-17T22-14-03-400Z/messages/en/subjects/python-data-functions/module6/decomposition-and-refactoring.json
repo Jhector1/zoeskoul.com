@@ -1,0 +1,288 @@
+{
+  "topics": {
+    "python-data-functions": {
+      "python-6-functions-and-modularity": {
+        "decomposition-and-refactoring": {
+          "label": "Decomposition and Refactoring",
+          "summary": "Break a larger task into clear helper functions.",
+          "cards": {
+            "sketch0": {
+              "title": "Why break a program into helper functions?"
+            },
+            "sketch1": {
+              "title": "Spotting repeated code"
+            },
+            "sketch2": {
+              "title": "Make each function do one clear job"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Refactor a larger task into reusable helpers"
+            }
+          },
+          "projectSteps": {
+            "ci_1": {
+              "title": "Extract a cleaning helper"
+            },
+            "ci_2": {
+              "title": "Build a summary with helpers"
+            },
+            "ci_3": {
+              "title": "Refactor repeated math into helpers"
+            }
+          },
+          "quiz": {
+            "sc-1": {
+              "title": "Best reason to extract a helper",
+              "prompt": "Which situation is the strongest reason to move code into a helper function?",
+              "hint": "Look for repeated logic that does the same job in more than one place.",
+              "help": {
+                "concept": "Helper functions are especially useful when the same logic appears multiple times, because one function can replace repeated code and make updates easier.",
+                "hint_1": "Compare the choices and find the one where the same steps would otherwise be copied.",
+                "hint_2": "A helper is most valuable when one reusable task appears in several places, not just because a program has many lines."
+              },
+              "options": {
+                "a": "A variable name is short",
+                "b": "The same cleanup steps are written in several places",
+                "c": "The program uses input() once",
+                "d": "A print statement appears at the end"
+              }
+            },
+            "sc-2": {
+              "title": "What refactoring should preserve",
+              "prompt": "When you refactor a working program, what should stay the same?",
+              "hint": "Refactoring changes structure, not the program's intended result.",
+              "help": {
+                "concept": "Refactoring improves readability or organization while preserving behavior, so the program should still produce the same results for the same inputs.",
+                "hint_1": "Think about what users notice: the program should still solve the same problem correctly.",
+                "hint_2": "The code layout may change, but the output and behavior for the same input should not change."
+              },
+              "options": {
+                "a": "The number of functions must decrease",
+                "b": "The variable names must stay identical",
+                "c": "The program's behavior for the same input should remain correct",
+                "d": "Every line must stay in the same order"
+              }
+            },
+            "mc-1": {
+              "title": "Signs a function is doing too much",
+              "prompt": "Which choices suggest a function should be split into smaller helpers? Choose all that apply.",
+              "hint": "Look for mixed responsibilities and repeated chunks of logic.",
+              "help": {
+                "concept": "A function often needs decomposition when it handles several different jobs or contains repeated logic that could be reused elsewhere.",
+                "hint_1": "One clue is that the function both transforms data and formats final output in a long block.",
+                "hint_2": "Another clue is seeing nearly identical code chunks or a function that tries to clean, calculate, and display all at once."
+              },
+              "options": {
+                "a": "It cleans text, calculates a result, and formats a message in one long block",
+                "b": "It contains repeated code chunks with only small changes",
+                "c": "It has one short return statement for one clear task",
+                "d": "It is hard to describe the function's job in one sentence"
+              }
+            },
+            "mc-2": {
+              "title": "Benefits of helper functions",
+              "prompt": "Which are real benefits of breaking code into helper functions? Choose all that apply.",
+              "hint": "Think about readability, reuse, and testing.",
+              "help": {
+                "concept": "Helper functions improve organization by giving small tasks clear names, reducing duplication, and making logic easier to test separately.",
+                "hint_1": "Useful helpers usually make code easier to read and let you reuse one piece of logic in multiple places.",
+                "hint_2": "They also help you test one small behavior at a time; they do not automatically make every program shorter in line count."
+              },
+              "options": {
+                "a": "You can reuse the same logic from multiple places",
+                "b": "Small pieces are easier to test one at a time",
+                "c": "Every program will always use fewer total lines",
+                "d": "Function names can explain what each step does"
+              }
+            },
+            "dr-1": {
+              "title": "Refactor repeated cleanup",
+              "prompt": "Put these steps in the best order for refactoring repeated text-cleaning code into a helper function.",
+              "hint": "First identify the repeated task, then define the helper, then replace the duplicates.",
+              "help": {
+                "concept": "A clean refactor usually starts by noticing repeated logic, extracting it into a function, and then calling that function where needed.",
+                "hint_1": "You should not replace old code with helper calls before the helper exists.",
+                "hint_2": "The repeated behavior must be identified first, then moved into a function, then used from the original locations."
+              },
+              "tokens": {
+                "t1": "Notice the same cleanup logic appears more than once",
+                "t2": "Write a helper function for that cleanup task",
+                "t3": "Replace the repeated code with calls to the helper",
+                "t4": "Run the program and confirm the behavior still matches"
+              }
+            },
+            "dr-2": {
+              "title": "How a helper-based program flows",
+              "prompt": "Arrange the steps in the order they happen when this pattern runs: input is cleaned, then used to build a message, then printed.",
+              "hint": "A helper returns a value before the next function uses it.",
+              "help": {
+                "concept": "In decomposed code, one function often returns a cleaned value, another function uses that value to build a result, and then the main code prints the final result.",
+                "hint_1": "The cleaned text must exist before a greeting or summary can be built from it.",
+                "hint_2": "Printing is usually the last step after helper functions have returned the needed values."
+              },
+              "tokens": {
+                "t1": "Call the cleaning helper with the original text",
+                "t2": "Receive the cleaned text as a return value",
+                "t3": "Use the cleaned text to build the final message",
+                "t4": "Print the final message"
+              }
+            },
+            "fb-1": {
+              "title": "Call the helper",
+              "prompt": "Choose the function call that uses the helper to clean the variable `name`.",
+              "hint": "The blank should be a call that passes `name` into the helper.",
+              "help": {
+                "concept": "To use a helper function, write its name followed by parentheses and pass the needed argument inside.",
+                "hint_1": "You are filling the right side of an assignment, so the blank should produce a value.",
+                "hint_2": "Look for the choice that calls `clean_name` with `name` inside the parentheses."
+              },
+              "template": "nice_name = [blank1]",
+              "choices": [
+                "clean_name(name)",
+                "name = clean_name",
+                "print(name)",
+                "return clean_name"
+              ]
+            },
+            "fb-2": {
+              "title": "Return from a helper",
+              "prompt": "Choose the missing word that sends the computed value back from the function.",
+              "hint": "Inside a function, one keyword sends a value back to the caller.",
+              "help": {
+                "concept": "A helper function uses `the missing term` to send a result back so other code can store it, print it, or use it in another calculation.",
+                "hint_1": "`print` shows text in the output panel, but it does not send a reusable value back to the caller.",
+                "hint_2": "The missing word is the keyword used before an expression like `text.strip()` when the function should produce a value."
+              },
+              "template": "def clean_text(text):\n    [blank1] text.strip().lower()",
+              "choices": [
+                "return",
+                "print",
+                "input",
+                "def"
+              ]
+            },
+            "ci-1": {
+              "title": "Extract a cleaning helper",
+              "prompt": "Write `clean_name(name)` so it returns the cleaned version of `name`. This helper should do the name-cleaning work instead of leaving it repeated elsewhere.",
+              "hint": "Read the task \"Extract a cleaning helper\" and identify the required result.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "def clean_name(name):\n    # return the cleaned version of name\n    pass"
+            },
+            "ci-2": {
+              "title": "Build a summary with helpers",
+              "prompt": "Split this job into two helpers. `word_count(text)` should return the number of words, and `summary(text)` should call that helper and return a string like `Words: 3`.",
+              "hint": "Read the task \"Build a summary with helpers\" and identify the required result.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "def word_count(text):\n    # return the number of words\n    pass\n\n\ndef summary(text):\n    # return a string like: Words: 3\n    pass"
+            },
+            "ci-3": {
+              "title": "Refactor repeated math into helpers",
+              "prompt": "Finish `double(number)` and `triple(number)`, then use those helper functions inside `combined_total(a, b)` instead of repeating the math there.",
+              "hint": "Read the task \"Refactor repeated math into helpers\" and identify the required result.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "def double(number):\n    pass\n\n\ndef triple(number):\n    pass\n\n\ndef combined_total(a, b):\n    # use the helper functions here\n    pass"
+            },
+            "try-decomposition-and-refactoring-checkpoint": {
+              "title": "Use a helper function",
+              "prompt": "Define `clean_title(text)` that strips spaces and title-cases the text. Print the cleaned version of `\"  python helper  \"`.",
+              "hint": "Use `.strip().title()` inside a helper function.",
+              "help": {
+                "concept": "Decomposition means moving one clear step into a helper function.",
+                "hint_1": "Use `.strip().title()` inside a helper function.",
+                "hint_2": "Run your code and compare the output with the expected result."
+              },
+              "starterCode": "def clean_title(text):\n    # Return the cleaned title.\n    pass\n\nprint(clean_title(\"  python helper  \"))\n"
+            },
+            "try-decomposition-and-refactoring-sketch0": {
+              "title": "Clean text with a helper",
+              "prompt": "Move one clear step into a helper function.",
+              "hint": "Strip whitespace and lowercase the text.",
+              "help": {
+                "concept": "Strip whitespace and lowercase the text.",
+                "hint_1": "Write the line for this step, then run the program to see what changes.",
+                "hint_2": "When you run it, print only the value or lines the prompt asks for."
+              },
+              "starterCode": "def clean_text(text):\n    # Strip whitespace and lowercase the text.\n    pass\n\nprint(clean_text('  HELLO  '))\n"
+            },
+            "try-decomposition-and-refactoring-sketch1": {
+              "title": "Split a full name",
+              "prompt": "A helper can hide a small string-processing step.",
+              "hint": "Return the first word from full_name.",
+              "help": {
+                "concept": "Return the first word from full_name.",
+                "hint_1": "Write the line for this step, then run the program to see what changes.",
+                "hint_2": "When you run it, print only the value or lines the prompt asks for."
+              },
+              "starterCode": "def get_first_name(full_name):\n    # Return the first word from full_name.\n    pass\n\nprint(get_first_name('Ava Smith'))\n"
+            },
+            "try-decomposition-and-refactoring-sketch2": {
+              "title": "Combine two helpers",
+              "prompt": "One helper can call another helper.",
+              "hint": "Return 'Badge: ' plus the cleaned name.",
+              "help": {
+                "concept": "Return 'Badge: ' plus the cleaned name.",
+                "hint_1": "Write the line for this step, then run the program to see what changes.",
+                "hint_2": "When you run it, print only the value or lines the prompt asks for."
+              },
+              "starterCode": "def clean(text):\n    return text.strip().title()\n\ndef badge(name):\n    # Return 'Badge: ' plus the cleaned name.\n    pass\n\nprint(badge('  ava  '))\n"
+            }
+          },
+          "tryIt": {
+            "try_decomposition_and_refactoring_checkpoint": {
+              "title": "Try it yourself",
+              "prompt": "Define `clean_title(text)` that strips spaces and title-cases the text. Print the cleaned version of `\"  python helper  \"`."
+            },
+            "try_decomposition_and_refactoring_sketch0": {
+              "title": "Try it yourself",
+              "prompt": "Move one clear step into a helper function."
+            },
+            "try_decomposition_and_refactoring_sketch1": {
+              "title": "Try it yourself",
+              "prompt": "A helper can hide a small string-processing step."
+            },
+            "try_decomposition_and_refactoring_sketch2": {
+              "title": "Try it yourself",
+              "prompt": "One helper can call another helper."
+            },
+            "allowReveal": true
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-data-functions": {
+      "python-6-functions-and-modularity": {
+        "decomposition-and-refactoring": {
+          "sketch-1": {
+            "title": "Why break a program into helper functions?",
+            "bodyMarkdown": "Decomposition means splitting one larger task into smaller jobs. Refactoring means improving the structure of code without changing what the program does.\n\nA beginner-friendly rule is: if you see the same idea repeated, or one block of code is doing too many things, that is a good time to make a helper function.\n\nHere is a small example. Suppose you want to format a name and then build a greeting.\n\n```python\ndef clean_name(name):\n    return name.strip().title()\n\ndef make_greeting(name):\n    nice_name = clean_name(name)\n    return f\"Hello, {nice_name}!\"\n\nprint(make_greeting(\"  aVA  \"))\n```\n\nStep by step:\n\n- `clean_name(name)` handles one job: fixing spaces and capitalization.\n- `make_greeting(name)` handles a different job: building the final message.\n- Inside `make_greeting`, the program calls `clean_name` instead of repeating that cleanup logic.\n- `print(make_greeting(\"  aVA  \"))` shows the returned result in the output panel.\n\nThe output is:\n\n```python\nHello, Ava!\n```\n\nThis version is easier to read, easier to test, and easier to reuse."
+          },
+          "sketch-2": {
+            "title": "Spotting repeated code",
+            "bodyMarkdown": "One common reason to refactor is repeated code. If two parts of a program do the same cleanup or calculation, that logic usually belongs in one helper function.\n\nBefore refactoring:\n\n```python\nfirst = input()\nsecond = input()\n\nfirst_clean = first.strip().lower()\nsecond_clean = second.strip().lower()\n\nprint(first_clean)\nprint(second_clean)\n```\n\nThis works, but the cleanup logic is repeated.\n\nAfter refactoring:\n\n```python\ndef clean_text(text):\n    return text.strip().lower()\n\nfirst = input()\nsecond = input()\n\nprint(clean_text(first))\nprint(clean_text(second))\n```\n\nLine by line:\n\n- `def clean_text(text):` creates a reusable helper.\n- `return text.strip().lower()` sends back cleaned text.\n- Each `print(clean_text(...))` call uses the same helper instead of copying the cleanup steps.\n\nNow if you want different cleanup later, you only change one function."
+          },
+          "sketch-3": {
+            "title": "Make each function do one clear job",
+            "bodyMarkdown": "A good helper function usually has one clear responsibility. That makes code easier to understand and debug.\n\nHere is a worked example that separates counting from message building.\n\n```python\ndef word_count(text):\n    words = text.split()\n    return len(words)\n\ndef summary(text):\n    count = word_count(text)\n    return f\"Words: {count}\"\n\nprint(summary(\"Python makes refactoring easier\"))\n```\n\nStep by step:\n\n- `word_count(text)` splits the text into words and returns the number.\n- `summary(text)` calls `word_count(text)` instead of doing the counting itself.\n- `summary` builds the final string.\n- `print(...)` displays that string.\n\nThe output is:\n\n```python\nWords: 4\n```\n\nThis is better than one long function because each part has a clear purpose."
+          }
+        }
+      }
+    }
+  }
+}

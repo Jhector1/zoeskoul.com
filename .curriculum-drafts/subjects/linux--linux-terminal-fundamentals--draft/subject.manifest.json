@@ -7,7 +7,7 @@
     "order": 40,
     "accessPolicy": "paid",
     "status": "active",
-    "imagePublicId": null,
+    "imagePublicId": "linux-fundamentasl_dkydeq.png",
     "imageAlt": null,
     "titleKey": "subjects.linux--linux-terminal-fundamentals--draft.title",
     "descriptionKey": "subjects.linux--linux-terminal-fundamentals--draft.description",

@@ -691,7 +691,9 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
 
         terminalAutoOpenRequestedKeyRef.current = terminalAutoOpenKey;
 
-        void workspaceTerm.open({ userInitiated: false });
+        void workspaceTerm.open({ userInitiated: false }).finally(() => {
+            releaseTerminalAutoOpenClaim(terminalAutoOpenKey);
+        });
     }, [
         outputTab,
         workspaceTerminalEnabled,

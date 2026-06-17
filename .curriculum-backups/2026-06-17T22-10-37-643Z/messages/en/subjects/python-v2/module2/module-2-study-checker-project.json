@@ -1,0 +1,110 @@
+{
+  "topics": {
+    "python-v2": {
+      "python-v2-2": {
+        "module-2-study-checker-project": {
+          "label": "Module Project: Build a Study Checker",
+          "summary": "A study coach wants one checker that gets smarter step by step. Keep adding rules to the same program until it can handle missing codes, bad scores, and final status messages.",
+          "cards": {
+            "sketch0": {
+              "title": "Your first rules-based client"
+            },
+            "project": {
+              "title": "Study Checker Builder"
+            }
+          },
+          "projectSteps": {
+            "mp_1": {
+              "title": "Start the score rule"
+            },
+            "mp_2": {
+              "title": "Add the join rule"
+            },
+            "mp_3": {
+              "title": "Handle a missing code"
+            },
+            "mp_4": {
+              "title": "Finish the full checker"
+            }
+          },
+          "quiz": {
+            "mp-1-check-pass-fail": {
+              "title": "Start the score rule",
+              "prompt": "Start the study checker with one simple rule. Read one whole-number score. Print `Pass` if the score is at least 70. Otherwise print `Try again`.",
+              "hint": "Convert the input, then choose between two outputs.",
+              "help": {
+                "concept": "The project begins with the simplest useful rule: read one score and choose one of two messages.",
+                "hint_1": "Use `int(input())` so the comparison uses numbers.",
+                "hint_2": "Only one message should print."
+              },
+              "starterCode": "# Read one score and print Pass or Try again.\n"
+            },
+            "mp-2-check-join-rule": {
+              "title": "Add the join rule",
+              "prompt": "Keep the score-based checker idea, but add one more rule. Read `member` with `input()`. Print `Join` only when the score is at least 70 and `member` is exactly `yes`. Otherwise print `Wait`.",
+              "hint": "Use `and` so both conditions must be true.",
+              "help": {
+                "concept": "This step extends the same checker with a second condition instead of starting a new exercise from scratch.",
+                "hint_1": "The score still matters, but now membership matters too.",
+                "hint_2": "If either part fails, the output should be `Wait`."
+              },
+              "starterCode": "score = int(input())\nif score >= 70:\n    print(\"Pass\")\nelse:\n    print(\"Try again\")\n\n# Keep the score rule idea.\n# Read member with input().\n# Print Join only when the score is at least 70 and member is yes.\n"
+            },
+            "mp-3-handle-missing-text": {
+              "title": "Handle a missing code",
+              "prompt": "Keep the Join/Wait checker you already built. Add one more input named `code`. If `code` is an empty string, print `Missing code` before checking the normal Join/Wait rule.",
+              "hint": "Check the missing-code case first, then fall through to the earlier rule.",
+              "help": {
+                "concept": "A connected checker grows by handling special cases before the broader rule that already works.",
+                "hint_1": "The empty string is written as `\"\"`.",
+                "hint_2": "If the code is missing, no other message should print."
+              },
+              "starterCode": "score = int(input())\nmember = input()\nif score >= 70 and member == \"yes\":\n    print(\"Join\")\nelse:\n    print(\"Wait\")\n\n# Keep the Join/Wait rule.\n# Read one more input named code.\n# If code is empty, print Missing code before the normal rule.\n"
+            },
+            "mp-4-build-final-study-checker": {
+              "title": "Finish the full checker",
+              "prompt": "Keep the same three inputs in the same order: score, member, code. Now finish the checker with these rules:\n- `Missing code` if `code` is empty\n- `Invalid score` if the score is less than 0\n- `Join club first` if `member` is not `yes`\n- `Excellent` if the score is at least 90\n- `Passing` if the score is at least 70\n- `Needs practice` otherwise",
+              "hint": "Keep the special cases first, then end with the normal score ranges.",
+              "help": {
+                "concept": "The final version keeps the same checker structure and adds clearer branches in the order a real program would need them.",
+                "hint_1": "Use one `if` / `elif` / `else` chain so only one result prints.",
+                "hint_2": "The missing-code and invalid-score branches should come before the status branches."
+              },
+              "starterCode": "score = int(input())\nmember = input()\ncode = input()\nif code == \"\":\n    print(\"Missing code\")\nelif score >= 70 and member == \"yes\":\n    print(\"Join\")\nelse:\n    print(\"Wait\")\n\n# Keep the same inputs.\n# Add invalid-score and not-a-member checks before the normal score results.\n# Then print the final status message.\n"
+            },
+            "try-module-2-study-checker-project-sketch0": {
+              "title": "Preview the checker",
+              "prompt": "Read one score. Print `Ready` if it is at least 50. Otherwise print `Keep going`.",
+              "hint": "Use `int(input())` and an `if` / `else` choice.",
+              "help": {
+                "concept": "This quick preview shows the basic pattern behind the larger project: read a value, test a rule, and print one matching result.",
+                "hint_1": "There are only two possible outputs.",
+                "hint_2": "Compare the score to 50."
+              },
+              "starterCode": "# Read one score and print Ready or Keep going.\n"
+            }
+          },
+          "tryIt": {
+            "try_module_2_study_checker_project_sketch0": {
+              "title": "Try it yourself",
+              "prompt": "Read one score. Print `Ready` if it is at least 50. Otherwise print `Keep going`."
+            },
+            "allowReveal": true
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-v2": {
+      "python-v2-2": {
+        "module-2-study-checker-project": {
+          "sketch-1": {
+            "title": "Your first rules-based client",
+            "bodyMarkdown": "A study coach keeps making the same decisions by hand: is a score high enough, is a code missing, or does a student need a different next step? She wants one small Python checker that grows a little smarter each time you improve it.\n\nThis module project is meant to feel connected. You start with one rule, then keep the same checker and add more branches until the final version handles the real cases clearly."
+          }
+        }
+      }
+    }
+  }
+}

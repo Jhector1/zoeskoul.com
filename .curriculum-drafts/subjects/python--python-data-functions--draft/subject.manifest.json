@@ -7,7 +7,7 @@
     "order": 30,
     "accessPolicy": "paid",
     "status": "active",
-    "imagePublicId": null,
+    "imagePublicId": "python_data_function_qeemap.png",
     "imageAlt": null,
     "titleKey": "subjects.python--python-data-functions--draft.title",
     "descriptionKey": "subjects.python--python-data-functions--draft.description",

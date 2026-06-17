@@ -7,7 +7,7 @@
     "order": 30,
     "accessPolicy": "paid",
     "status": "active",
-    "imagePublicId": null,
+    "imagePublicId": "python_data_function_qeemap.png",
     "imageAlt": null,
     "titleKey": "subjects.python-data-functions.title",
     "descriptionKey": "subjects.python-data-functions.description",
@@ -21,6 +21,14 @@
         "requireAllPublishedModules": true,
         "rewardEnabledByDefault": true,
         "certificateEnabledByDefault": true
+      },
+      "versioning": {
+        "family": "python",
+        "version": 2,
+        "status": "active",
+        "defaultForNewEnrollments": true,
+        "supersedes": "python",
+        "supersededBy": null
       }
     }
   },
