@@ -154,6 +154,7 @@ export const interactiveRunReqSchema = z.union([
             z.record(z.string(), z.string()),
         ]).optional(),
         projectId: z.string().optional(),
+        workspaceKey: z.string().min(1).optional(),
         cwd: z.string().min(1).optional(),
         ...timeoutFields,
     }),
@@ -183,6 +184,7 @@ export type InteractiveRunReq =
     language: "bash";
     files?: WorkspaceSyncEntry[] | Record<string, string>;
     projectId?: string;
+    workspaceKey?: string;
     cwd?: string;
     wallTimeoutMs?: number;
     idleTimeoutMs?: number;

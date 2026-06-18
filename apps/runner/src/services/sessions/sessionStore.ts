@@ -11,6 +11,8 @@ export type NodeJSStream = NodeJS.ReadWriteStream;
 export type SessionRecord = {
   id: string;
   ownerKey?: string;
+  kind?: "code" | "shell";
+  workspaceKey?: string | null;
   containerId: string;
   workspaceDir: string;
   state: RunSessionState;
@@ -73,6 +75,12 @@ export function getSessionStats() {
   };
 }
 
+export function getActiveSessionsForActor(ownerKey: string) {
+  return [...sessions.values()]
+    .filter((session) => session.ownerKey === ownerKey && isActiveSession(session))
+    .sort((a, b) => a.createdAt - b.createdAt);
+}
+
 export function countActiveSessionsForActor(ownerKey: string) {
   let count = pendingStartsByActor.get(ownerKey) ?? 0;
   for (const session of sessions.values()) {
@@ -125,6 +133,8 @@ export function reserveSessionSlot(ownerKey: string) {
 export function createSession(args: {
   id: string;
   ownerKey?: string;
+  kind?: "code" | "shell";
+  workspaceKey?: string | null;
   containerId: string;
   workspaceDir: string;
   idleTimeoutMs?: number | null;
@@ -134,6 +144,8 @@ export function createSession(args: {
   const session: SessionRecord = {
     id: args.id,
     ownerKey: args.ownerKey,
+    kind: args.kind,
+    workspaceKey: args.workspaceKey ?? null,
     containerId: args.containerId,
     workspaceDir: args.workspaceDir,
     state: "queued",
@@ -152,6 +164,8 @@ export function createSession(args: {
   console.info("RUNNER session created", {
     sessionId: session.id,
     ownerKey: session.ownerKey ?? "anonymous",
+    kind: session.kind ?? null,
+    workspaceKey: session.workspaceKey ?? null,
     idleTimeoutMs: session.idleTimeoutMs ?? null,
     hardLifetimeMs: session.hardLifetimeMs ?? null,
   });

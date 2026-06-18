@@ -41,7 +41,7 @@ const envSchema = z.object({
   RUNNER_MAX_CONCURRENT_PER_ACTOR: z.coerce.number().int().positive().optional(),
   MAX_ACTIVE_SESSIONS_PER_USER: intEnv(4),
   RUNNER_MAX_CONCURRENT_GLOBAL: intEnv(40),
-  RUNNER_STARTS_PER_MINUTE_PER_ACTOR: intEnv(12),
+  RUNNER_STARTS_PER_MINUTE_PER_ACTOR: intEnv(60),
 
   RUNNER_CHILD_NETWORK: z.string().min(1).default("none"),
   RUNNER_DISABLE_NETWORK: boolFlag(true),

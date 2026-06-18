@@ -646,6 +646,8 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         workspaceTerminalEnabled,
     ]);
 
+    const [terminalAutoOpenRetryTick, setTerminalAutoOpenRetryTick] = useState(0);
+
     useEffect(() => {
         if (outputTab !== "terminal" || !workspaceTerminalEnabled) {
             return;
@@ -693,6 +695,10 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
 
         void workspaceTerm.open({ userInitiated: false }).finally(() => {
             releaseTerminalAutoOpenClaim(terminalAutoOpenKey);
+
+            if (terminalAutoOpenRequestedKeyRef.current === terminalAutoOpenKey) {
+                terminalAutoOpenRequestedKeyRef.current = null;
+            }
         });
     }, [
         outputTab,
@@ -706,8 +712,33 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         workspaceTerm.recoverState,
         workspaceTerm.open,
         terminalAutoOpenKey,
+        terminalAutoOpenRetryTick,
     ]);
 
+
+    useEffect(() => {
+        if (outputTab !== "terminal" || !workspaceTerminalEnabled) return;
+        if (workspaceTerm.sessionId || workspaceTerm.started || workspaceTerm.starting) return;
+        if (workspaceTerm.recoverState === "blocked_too_many_sessions") return;
+        if (workspaceTerm.state === "failed") return;
+
+        const timer = window.setTimeout(() => {
+            setTerminalAutoOpenRetryTick((value) => value + 1);
+        }, TERMINAL_AUTO_OPEN_COOLDOWN_MS);
+
+        return () => {
+            window.clearTimeout(timer);
+        };
+    }, [
+        outputTab,
+        workspaceTerminalEnabled,
+        workspaceTerm.sessionId,
+        workspaceTerm.started,
+        workspaceTerm.starting,
+        workspaceTerm.recoverState,
+        workspaceTerm.state,
+        terminalAutoOpenRetryTick,
+    ]);
 
 
     useEffect(() => {

@@ -9,6 +9,7 @@ import type {
 import { env } from "../../lib/env.js";
 import {
   createSession,
+  getActiveSessionsForActor,
   getSession,
   pushEvent,
   reserveSessionSlot,
@@ -33,6 +34,7 @@ import {
 
 import { getExecutionPlan } from "../execution/executionPlan.js";
 import { docker } from "./dockerClient.js";
+import { killSession } from "./killSession.js";
 
 type NormalizedRequest =
   | {
@@ -49,6 +51,7 @@ type NormalizedRequest =
       language: "bash";
       files: WorkspaceSyncEntry[];
       entry?: undefined;
+      workspaceKey?: string;
       wallTimeoutMs?: number;
       idleTimeoutMs?: number;
       cwd?: string;
@@ -142,6 +145,7 @@ function normalizeRequest(req: InteractiveRunReq): NormalizedRequest {
       kind: "shell",
       language: "bash",
       files: normalizeFilesMap(req.files),
+      workspaceKey: req.workspaceKey,
       wallTimeoutMs: req.wallTimeoutMs,
       idleTimeoutMs: req.idleTimeoutMs,
       cwd: req.cwd,
@@ -171,6 +175,40 @@ function normalizeRequest(req: InteractiveRunReq): NormalizedRequest {
   };
 }
 
+function isReplaceableShellSession(session: {
+  kind?: "code" | "shell";
+}) {
+  // Sessions created before this field existed are treated as replaceable
+  // because the original runner only used long-lived interactive PTY sessions.
+  return session.kind === "shell" || session.kind == null;
+}
+
+async function cancelSupersededShellSessionsForActor(args: {
+  ownerKey: string;
+  workspaceKey?: string;
+}) {
+  const active = getActiveSessionsForActor(args.ownerKey).filter(
+    isReplaceableShellSession,
+  );
+
+  for (const session of active) {
+    if (args.workspaceKey && session.workspaceKey === args.workspaceKey) {
+      continue;
+    }
+
+    try {
+      await killSession(session.id, "canceled");
+    } catch (err) {
+      console.warn("RUNNER superseded shell session cleanup failed", {
+        sessionId: session.id,
+        ownerKey: args.ownerKey,
+        workspaceKey: session.workspaceKey ?? null,
+        message: err instanceof Error ? err.message : String(err),
+      });
+    }
+  }
+}
+
 function isTerminalState(state: string) {
   return (
     state === "completed" ||
@@ -184,12 +222,12 @@ export async function startDockerSession(
   req: InteractiveRunReq,
   ownerKey: string,
 ): Promise<StartSessionResult> {
-  const releaseSlot = reserveSessionSlot(ownerKey);
+  let releaseSlot: (() => void) | null = null;
   let slotReleased = false;
   const releaseReservedSlot = () => {
     if (slotReleased) return;
     slotReleased = true;
-    releaseSlot();
+    releaseSlot?.();
   };
 
   let workspaceDir: string | null = null;
@@ -197,6 +235,15 @@ export async function startDockerSession(
 
   try {
     const normalized = normalizeRequest(req);
+
+    if (normalized.kind === "shell") {
+      await cancelSupersededShellSessionsForActor({
+        ownerKey,
+        workspaceKey: normalized.workspaceKey,
+      });
+    }
+
+    releaseSlot = reserveSessionSlot(ownerKey);
     const timeouts = resolveTimeoutPolicy({
       kind: normalized.kind,
       requestedIdleTimeoutMs: normalized.idleTimeoutMs,

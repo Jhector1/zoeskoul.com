@@ -3,6 +3,7 @@ import "server-only";
 import { createHash, randomUUID } from "node:crypto";
 import type { RunSessionState } from "@zoeskoul/code-contracts";
 import { getServerRedisReady } from "@/lib/server/redis";
+
 export type PtySessionLease = {
     sessionId: string;
     actorKey: string;
@@ -36,17 +37,23 @@ function sha(input: string) {
 export function normalizeWorkspaceKey(input: unknown): string | null {
     if (typeof input !== "string") return null;
 
-    const value = input
-        .replace(/\s+/g, " ")
-        .trim();
+    const value = input.replace(/\s+/g, " ").trim();
 
     if (!value) return null;
 
     return value.slice(0, 500);
 }
 
+function actorHash(actorKey: string) {
+    return sha(actorKey);
+}
+
 function workspaceHash(actorKey: string, workspaceKey: string) {
     return sha(`${actorKey}\0${workspaceKey}`);
+}
+
+function actorSessionSetKey(actorKey: string) {
+    return `${PREFIX}:actor:${actorHash(actorKey)}:sessions`;
 }
 
 function workspaceLeaseKey(actorKey: string, workspaceKey: string) {
@@ -91,6 +98,21 @@ function freshLease(lease: PtySessionLease): PtySessionLease {
     };
 }
 
+async function writeLease(lease: PtySessionLease): Promise<void> {
+    const redis = await getServerRedisReady();
+    const ttl = leaseTtlMs();
+    const json = JSON.stringify(lease);
+    const actorSetKey = actorSessionSetKey(lease.actorKey);
+
+    await redis
+        .multi()
+        .set(workspaceLeaseKey(lease.actorKey, lease.workspaceKey), json, "PX", ttl)
+        .set(sessionLeaseKey(lease.sessionId), json, "PX", ttl)
+        .sadd(actorSetKey, lease.sessionId)
+        .pexpire(actorSetKey, ttl)
+        .exec();
+}
+
 export async function getPtyLeaseByWorkspace(args: {
     actorKey: string;
     workspaceKey: string;
@@ -116,16 +138,35 @@ export async function getPtyLeaseByWorkspace(args: {
     }
 
     const touched = freshLease(lease);
-    const json = JSON.stringify(touched);
-    const ttl = leaseTtlMs();
-
-    await redis
-        .multi()
-        .set(workspaceLeaseKey(touched.actorKey, touched.workspaceKey), json, "PX", ttl)
-        .set(sessionLeaseKey(touched.sessionId), json, "PX", ttl)
-        .exec();
+    await writeLease(touched);
 
     return touched;
+}
+
+export async function listPtyLeasesByActor(args: {
+    actorKey: string;
+}): Promise<PtySessionLease[]> {
+    const redis = await getServerRedisReady();
+    const actorSetKey = actorSessionSetKey(args.actorKey);
+    const ids = await redis.smembers(actorSetKey);
+    const leases: PtySessionLease[] = [];
+
+    for (const sessionId of ids) {
+        const raw = await redis.get(sessionLeaseKey(sessionId));
+        const lease = parseLease(raw);
+
+        if (!lease || lease.actorKey !== args.actorKey || isExpired(lease)) {
+            await forgetPtyLeaseBySession({
+                actorKey: args.actorKey,
+                sessionId,
+            }).catch(() => {});
+            continue;
+        }
+
+        leases.push(lease);
+    }
+
+    return leases;
 }
 
 export async function rememberPtyLease(args: {
@@ -150,17 +191,19 @@ export async function rememberPtyLease(args: {
 
     const workspaceKeyName = workspaceLeaseKey(args.actorKey, args.workspaceKey);
     const previous = parseLease(await redis.get(workspaceKeyName));
-
+    const actorSetKey = actorSessionSetKey(args.actorKey);
+    const json = JSON.stringify(next);
     const multi = redis.multi();
 
     if (previous?.sessionId && previous.sessionId !== args.sessionId) {
         multi.del(sessionLeaseKey(previous.sessionId));
+        multi.srem(actorSetKey, previous.sessionId);
     }
-
-    const json = JSON.stringify(next);
 
     multi.set(workspaceKeyName, json, "PX", ttl);
     multi.set(sessionLeaseKey(args.sessionId), json, "PX", ttl);
+    multi.sadd(actorSetKey, args.sessionId);
+    multi.pexpire(actorSetKey, ttl);
 
     await multi.exec();
 
@@ -184,14 +227,7 @@ export async function touchPtyLeaseBySession(args: {
     }
 
     const touched = freshLease(lease);
-    const json = JSON.stringify(touched);
-    const ttl = leaseTtlMs();
-
-    await redis
-        .multi()
-        .set(sessionLeaseKey(touched.sessionId), json, "PX", ttl)
-        .set(workspaceLeaseKey(touched.actorKey, touched.workspaceKey), json, "PX", ttl)
-        .exec();
+    await writeLease(touched);
 
     return true;
 }
@@ -207,6 +243,9 @@ export async function forgetPtyLeaseBySession(args: {
 
     if (!lease) {
         await redis.del(sessionLeaseKey(args.sessionId));
+        if (args.actorKey) {
+            await redis.srem(actorSessionSetKey(args.actorKey), args.sessionId);
+        }
         return false;
     }
 
@@ -218,6 +257,7 @@ export async function forgetPtyLeaseBySession(args: {
         .multi()
         .del(sessionLeaseKey(lease.sessionId))
         .del(workspaceLeaseKey(lease.actorKey, lease.workspaceKey))
+        .srem(actorSessionSetKey(lease.actorKey), lease.sessionId)
         .exec();
 
     return true;

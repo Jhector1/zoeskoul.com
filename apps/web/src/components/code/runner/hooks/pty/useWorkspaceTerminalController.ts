@@ -38,12 +38,14 @@ const NO_TERMINAL_RECOVERY: TerminalRecovery = { state: "none", message: null };
 const STARTING_STALE_MS = 12_000;
 const SOCKET_OPEN_READY_STATE = 1;
 const CLIENT_START_COOLDOWN_MS = 2_500;
-const CLIENT_AUTO_START_RETRY_COOLDOWN_MS = 2_500;
+const CLIENT_AUTO_START_RETRY_COOLDOWN_MS = 1_000;
 const CLIENT_RECOVERY_RETRY_COOLDOWN_MS = 6_000;
 const MAX_PENDING_RECOVERY_INPUT_CHARS = 4096;
+const WORKSPACE_READY_TIMEOUT_MS = 8_000;
+const WORKSPACE_READY_POLL_MS = 150;
 const terminalAutoStartAttempts = new Map<string, number>();
 
-const CLIENT_UNMOUNT_CANCEL_GRACE_MS = 4_000;
+const CLIENT_UNMOUNT_CANCEL_GRACE_MS = 300;
 const terminalUnmountCancelTimers = new Map<string, number>();
 
 function unmountCancelKey(workspaceKey: string, sessionId: string) {
@@ -106,6 +108,139 @@ function shouldAllowAutomaticTerminalStart(key: string) {
 function releaseAutomaticTerminalStart(key: string) {
     terminalAutoStartAttempts.delete(key);
 }
+
+
+type WorkspaceSnapshotResponse =
+    | { ok: true; files: WorkspaceSyncEntry[] }
+    | { ok: false; error: string };
+
+type WorkspaceReplaceResponse =
+    | { ok: true; fileCount: number }
+    | { ok: false; error: string };
+
+function sleep(ms: number) {
+    return new Promise((resolve) => window.setTimeout(resolve, ms));
+}
+
+function normalizeWorkspacePathForCompare(path: string) {
+    return String(path ?? "")
+        .replace(/\\/g, "/")
+        .replace(/^\/+/, "")
+        .replace(/\/+/g, "/")
+        .replace(/\/$/, "");
+}
+
+function workspaceSnapshotHasEntries(
+    snapshotEntries: WorkspaceSyncEntry[],
+    expectedEntries: WorkspaceSyncEntry[],
+) {
+    const snapshot = new Map(
+        snapshotEntries.map((entry) => [
+            normalizeWorkspacePathForCompare(entry.path),
+            entry,
+        ]),
+    );
+
+    return expectedEntries.every((expected) => {
+        const expectedPath = normalizeWorkspacePathForCompare(expected.path);
+        if (!expectedPath) return true;
+
+        if ((expected as any).kind === "directory") {
+            if (snapshot.has(expectedPath)) return true;
+
+            const prefix = `${expectedPath}/`;
+            return snapshotEntries.some((entry) =>
+                normalizeWorkspacePathForCompare(entry.path).startsWith(prefix),
+            );
+        }
+
+        const actual = snapshot.get(expectedPath);
+        if (!actual) return false;
+
+        if ((actual as any).kind === "directory") return false;
+
+        return String((actual as any).content ?? "") ===
+            String((expected as any).content ?? "");
+    });
+}
+
+async function replaceWorkspaceForSession(
+    sessionId: string,
+    files: WorkspaceSyncEntry[],
+) {
+    if (!files.length) return;
+
+    const res = await fetch(
+        `/api/run/pty/sessions/${encodeURIComponent(sessionId)}/workspace/replace`,
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ files }),
+        },
+    );
+
+    const data = (await res.json().catch(() => null)) as WorkspaceReplaceResponse | null;
+
+    if (!res.ok || !data?.ok) {
+        throw new Error(
+            data && "error" in data
+                ? data.error
+                : `Failed to prepare terminal workspace (${res.status})`,
+        );
+    }
+}
+
+async function snapshotWorkspaceForSession(sessionId: string) {
+    const res = await fetch(
+        `/api/run/pty/sessions/${encodeURIComponent(sessionId)}/workspace/snapshot`,
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        },
+    );
+
+    const data = (await res.json().catch(() => null)) as WorkspaceSnapshotResponse | null;
+
+    if (!res.ok || !data?.ok) {
+        throw new Error(
+            data && "error" in data
+                ? data.error
+                : `Failed to read terminal workspace (${res.status})`,
+        );
+    }
+
+    return data.files;
+}
+
+async function ensureWorkspaceReadyForInput(args: {
+    sessionId: string;
+    files: WorkspaceSyncEntry[];
+}) {
+    const expectedFiles = args.files.filter((entry) => !isHiddenHistoryEntry(entry));
+
+    if (!expectedFiles.length) return;
+
+    await replaceWorkspaceForSession(args.sessionId, expectedFiles);
+
+    const deadline = Date.now() + WORKSPACE_READY_TIMEOUT_MS;
+
+    while (Date.now() < deadline) {
+        const snapshot = await snapshotWorkspaceForSession(args.sessionId);
+
+        if (workspaceSnapshotHasEntries(snapshot, expectedFiles)) {
+            return;
+        }
+
+        await sleep(WORKSPACE_READY_POLL_MS);
+    }
+
+    throw new Error("Terminal workspace did not finish preparing. Restart the terminal to try again.");
+}
+
 
 function isTooManySessionsMessage(message: string) {
     return /too many\s+(active\s+sessions|session\s+starts|sessions)/i.test(message);
@@ -503,6 +638,7 @@ export function useWorkspaceTerminalController(
     const awaitingPostEnterSnapshotRef = React.useRef(false);
     const snapshotInFlightRef = React.useRef<Promise<boolean> | null>(null);
     const openInFlightRef = React.useRef<Promise<void> | null>(null);
+    const workspaceReadyRef = React.useRef(true);
     const openedLeaseKeyRef = React.useRef<string | null>(null);
     const previousLeaseKeyRef = React.useRef<string | null>(null);
     const sessionIdRef = React.useRef<string | null>(sessionId);
@@ -1026,6 +1162,8 @@ export function useWorkspaceTerminalController(
                 const historyContent = await ensureHistoryLoaded();
                 const fullEntries = augmentEntriesWithHistory(visibleEntries, historyContent);
 
+                workspaceReadyRef.current = fullEntries.length === 0;
+
                 lastHandledSeqRef.current = 0;
                 nextChunkIdRef.current = 1;
                 awaitingPostEnterSnapshotRef.current = false;
@@ -1068,7 +1206,7 @@ export function useWorkspaceTerminalController(
                 try {
                     openedLeaseKeyRef.current = terminalLeaseKey;
 
-                    await start({
+                    const nextSessionId = await start({
                         kind: "shell",
                         mode: "interactive",
                         language: "bash",
@@ -1078,10 +1216,24 @@ export function useWorkspaceTerminalController(
                         ...(fullEntries.length ? { files: fullEntries as any } : {}),
                     } as any);
 
+                    await ensureWorkspaceReadyForInput({
+                        sessionId: nextSessionId,
+                        files: fullEntries,
+                    });
+
+                    workspaceReadyRef.current = true;
                     lastPushedEntriesRef.current = visibleEntries;
                     startedRef.current = true;
                     releaseAutomaticTerminalStart(terminalLeaseKey);
                     setStarted(true);
+
+                    const latestTerminalState = stateRef.current as string;
+                    if (
+                        latestTerminalState === "running" ||
+                        latestTerminalState === "waiting_for_input"
+                    ) {
+                        setInputEnabled(true);
+                    }
                 } catch (e: any) {
                     const message = e?.message ?? "Failed to start workspace terminal.";
                     const tooManySessions = isTooManySessionsMessage(message);
@@ -1109,7 +1261,7 @@ export function useWorkspaceTerminalController(
                      * Do not throw here.
                      *
                      * If open() throws, the auto-open caller may clear its guard and retry,
-                     * which causes "Too many session starts. Limit is 5 per minute."
+                     * which causes runner session-start rate limiting.
                      */
                     return;
                 } finally {
@@ -1234,6 +1386,7 @@ export function useWorkspaceTerminalController(
         escapeSequenceRef.current = "";
         terminalProcessExitedRef.current = false;
         terminalExitCodeRef.current = null;
+        workspaceReadyRef.current = false;
         stateRef.current = "idle";
         startedRef.current = false;
         startingRef.current = false;
@@ -1384,7 +1537,8 @@ export function useWorkspaceTerminalController(
                 terminalProcessExitedRef.current ||
                 isFinalSessionState(stateRef.current) ||
                 recoverStateRef.current === "restart_available" ||
-                recoverStateRef.current === "blocked_too_many_sessions"
+                recoverStateRef.current === "blocked_too_many_sessions" ||
+                !workspaceReadyRef.current
             ) {
                 return;
             }
@@ -1576,7 +1730,7 @@ export function useWorkspaceTerminalController(
                     terminalExitCodeRef.current = null;
                     clearTerminalRecovery();
                     setBusy(true);
-                    setInputEnabled(true);
+                    setInputEnabled(workspaceReadyRef.current);
                     setStarted(true);
                     setStarting(false);
 

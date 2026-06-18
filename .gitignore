@@ -75,3 +75,7 @@ prisma/*.db-journal
 infra/postgres-data
 infra/redis-data
 .runner-workspaces/
+# accidental ChatGPT/upload analysis archives
+src.zip
+packages.zip
+apps/web/src.zip

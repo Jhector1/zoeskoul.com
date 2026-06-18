@@ -11,6 +11,7 @@ import {
     acquirePtyLeaseLock,
     forgetPtyLeaseBySession,
     getPtyLeaseByWorkspace,
+    listPtyLeasesByActor,
     normalizeWorkspaceKey,
     releasePtyLeaseLock,
     rememberPtyLease,
@@ -20,6 +21,7 @@ import {
     isRedisUnavailableError,
     redisUnavailableMessage,
 } from "@/lib/server/redis";
+
 export const runtime = "nodejs";
 
 type WorkspaceSyncEntry =
@@ -35,17 +37,19 @@ type ShellEnsureReq = Extract<InteractiveRunReq, { kind: "shell" }> & {
 
 type EnsureBrowserSessionResult =
     | {
-    ok: true;
-    sessionId: string;
-    state: RunSessionState;
-    attachToken: string;
-    wsUrl: string;
-    reused: boolean;
-}
+          ok: true;
+          sessionId: string;
+          state: RunSessionState;
+          attachToken: string;
+          wsUrl: string;
+          reused: boolean;
+      }
     | {
-    ok: false;
-    error: string;
-};
+          ok: false;
+          error: string;
+      };
+
+type CancelSessionResponse = { ok: true } | { ok: false; error: string };
 
 function isShellRequest(body: unknown): body is ShellEnsureReq {
     if (!body || typeof body !== "object") return false;
@@ -155,6 +159,13 @@ function isStaleRunnerSessionError(error: unknown) {
     );
 }
 
+function isTooManyActiveSessionsError(error: unknown) {
+    const message =
+        error instanceof Error ? error.message.toLowerCase() : String(error).toLowerCase();
+
+    return message.includes("too many active sessions");
+}
+
 async function canReusePtyLease(args: {
     actorKey: string;
     sessionId: string;
@@ -198,6 +209,72 @@ async function reusableLeaseOrNull<T extends { sessionId: string }>(args: {
     });
 
     return reusable ? args.lease : null;
+}
+
+async function cancelOtherActorShellLeases(args: {
+    actorKey: string;
+    workspaceKey: string;
+}) {
+    const leases = await listPtyLeasesByActor({ actorKey: args.actorKey });
+
+    await Promise.allSettled(
+        leases
+            .filter((lease) => lease.workspaceKey !== args.workspaceKey)
+            .map(async (lease) => {
+                try {
+                    await runnerPost<CancelSessionResponse>(
+                        `/sessions/${encodeURIComponent(lease.sessionId)}/cancel`,
+                        args.actorKey,
+                    );
+                } catch (error) {
+                    if (!isStaleRunnerSessionError(error)) {
+                        console.warn("Failed to cancel older PTY session", {
+                            sessionId: lease.sessionId,
+                            message:
+                                error instanceof Error ? error.message : String(error),
+                        });
+                    }
+                } finally {
+                    await forgetPtyLeaseBySession({
+                        actorKey: args.actorKey,
+                        sessionId: lease.sessionId,
+                    }).catch(() => {});
+                }
+            }),
+    );
+}
+
+async function startRunnerSessionWithOneCleanupRetry(args: {
+    actorKey: string;
+    workspaceKey: string;
+    body: ShellEnsureReq;
+}) {
+    const runnerBody = stripLeaseFields(args.body);
+
+    try {
+        return await runnerPost<StartSessionResult>(
+            "/sessions/start",
+            args.actorKey,
+            runnerBody,
+        );
+    } catch (error) {
+        if (!isTooManyActiveSessionsError(error)) {
+            throw error;
+        }
+
+        await cancelOtherActorShellLeases({
+            actorKey: args.actorKey,
+            workspaceKey: args.workspaceKey,
+        });
+
+        await new Promise((resolve) => setTimeout(resolve, 300));
+
+        return await runnerPost<StartSessionResult>(
+            "/sessions/start",
+            args.actorKey,
+            runnerBody,
+        );
+    }
 }
 
 export async function POST(req: NextRequest) {
@@ -258,11 +335,7 @@ export async function POST(req: NextRequest) {
         }
 
         if (!body.forceNew) {
-            const existing = await getPtyLeaseByWorkspace({
-                actorKey,
-                workspaceKey,
-            });
-
+            const existing = await getPtyLeaseByWorkspace({ actorKey, workspaceKey });
             const reusable = await reusableLeaseOrNull({ actorKey, lease: existing });
 
             if (reusable) {
@@ -277,10 +350,7 @@ export async function POST(req: NextRequest) {
             }
         }
 
-        lock = await acquirePtyLeaseLock({
-            actorKey,
-            workspaceKey,
-        });
+        lock = await acquirePtyLeaseLock({ actorKey, workspaceKey });
 
         if (!lock) {
             const existing = await waitForPtyLeaseByWorkspace({
@@ -313,11 +383,7 @@ export async function POST(req: NextRequest) {
         }
 
         if (!body.forceNew) {
-            const existingAfterLock = await getPtyLeaseByWorkspace({
-                actorKey,
-                workspaceKey,
-            });
-
+            const existingAfterLock = await getPtyLeaseByWorkspace({ actorKey, workspaceKey });
             const reusableAfterLock = await reusableLeaseOrNull({
                 actorKey,
                 lease: existingAfterLock,
@@ -335,11 +401,14 @@ export async function POST(req: NextRequest) {
             }
         }
 
-        const out = await runnerPost<StartSessionResult>(
-            "/sessions/start",
+        // This is the key prod fix: there should be only one visible shell PTY per learner.
+        await cancelOtherActorShellLeases({ actorKey, workspaceKey });
+
+        const out = await startRunnerSessionWithOneCleanupRetry({
             actorKey,
-            stripLeaseFields(body),
-        );
+            workspaceKey,
+            body,
+        });
 
         if (!out.ok) {
             return NextResponse.json<EnsureBrowserSessionResult>(out, {
