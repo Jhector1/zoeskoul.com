@@ -19,7 +19,11 @@ function getWorkspaceEntryContent(args: {
 
 type WorkspaceSubmitEntryForAnswer =
     | {
-          kind: "file";
+          /**
+           * Existing workspace export entries may omit kind for normal files.
+           * Treat missing kind as "file" to match WorkspaceSyncEntry.
+           */
+          kind?: "file";
           path: string;
           content: string;
       }

@@ -4,12 +4,12 @@ import crypto from "node:crypto";
 import type { FileEntry } from "@zoeskoul/code-contracts";
 import { env } from "../../lib/env.js";
 import {
-import { ensureWorkspaceWritableForShellUser } from "./workspacePermissions.js";
   assertSafeWorkspacePath,
   assertWorkspaceRootHasCapacity,
   normalizeWorkspaceEntries,
   type NormalizedWorkspaceEntry,
 } from "./workspacePolicy.js";
+import { ensureWorkspaceWritableForShellUser } from "./workspacePermissions.js";
 
 export type WorkspaceSyncEntry =
   | (FileEntry & { kind?: "file" })

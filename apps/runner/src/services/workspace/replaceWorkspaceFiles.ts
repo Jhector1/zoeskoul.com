@@ -7,10 +7,10 @@ import {
   RUNNER_MANAGED_DIRS,
 } from "./runnerManagedWorkspace.js";
 import {
-import { ensureWorkspaceWritableForShellUser } from "./workspacePermissions.js";
   isSafeRelativePath,
   normalizeWorkspaceEntries,
 } from "./workspacePolicy.js";
+import { ensureWorkspaceWritableForShellUser } from "./workspacePermissions.js";
 
 type CurrentEntry = {
   kind: "file" | "directory";
