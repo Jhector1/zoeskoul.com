@@ -1091,7 +1091,14 @@ export default function CodeToolPane(props: {
                 ? useReviewRuntimeStore.getState().cards[cardRuntimeKey] ?? null
                 : null
         );
+    const terminalSyncRef = useRef<(() => Promise<boolean>) | null>(null);
 
+    const handleTerminalSyncReady = useCallback(
+        (sync: (() => Promise<boolean>) | null) => {
+            terminalSyncRef.current = sync;
+        },
+        [],
+    );
     const patchEditorWorkspace = useReviewRuntimeStore((s) => s.patchEditorWorkspace);
     const patchExerciseRuntime = useReviewRuntimeStore((s) => s.patchExercise);
     /**
@@ -2025,7 +2032,26 @@ export default function CodeToolPane(props: {
      */
     const fullIdeKey = `${workspaceOwnerKey}:${effectiveLanguage}:${usesWorkspaceShell ? "workspace" : "single"}:${reviewWorkspaceNeedsMultiFile ? "multi" : "mono"}`;
     const fullIdeLanguage = asWorkspaceLanguage(effectiveLanguage);
+    useEffect(() => {
+        if (!boundId) return;
 
+        const win = window as typeof window & {
+            __zoeFlushTerminalBeforeSubmit?: Record<string, () => Promise<void>>;
+        };
+
+        win.__zoeFlushTerminalBeforeSubmit ??= {};
+
+        win.__zoeFlushTerminalBeforeSubmit[boundId] = async () => {
+            const sync = terminalSyncRef.current;
+            if (sync) {
+                await sync();
+            }
+        };
+
+        return () => {
+            delete win.__zoeFlushTerminalBeforeSubmit?.[boundId];
+        };
+    }, [boundId]);
     useEffect(() => {
         if (typeof window === "undefined") return;
         (window as any).__ZOE_REVIEW_WORKSPACE_DEBUG__ = {
@@ -2101,6 +2127,8 @@ export default function CodeToolPane(props: {
                             kind: "review-tool" as any,
                             scopeKey: `review-tool:${workspaceOwnerKey}`,
                         }}
+                        onTerminalSyncReady={handleTerminalSyncReady}
+
                         onWorkspaceChange={handleWorkspaceChange}
                         onBeforeRun={handleBeforeRun}
                         onRunResult={handleRunResult}

@@ -54,6 +54,31 @@ describe("snapshotWorkspaceFiles", () => {
         );
     });
 
+    it("captures empty nested directories", async () => {
+        await fs.mkdir(path.join(root, "site", "assets"), { recursive: true });
+        await fs.mkdir(path.join(root, "site", "pages"), { recursive: true });
+        await fs.writeFile(path.join(root, "main.sh"), "#!/usr/bin/env bash\n");
+
+        const snapshot = await snapshotWorkspaceFiles(root);
+
+        expect(snapshot).toEqual(
+            expect.arrayContaining([
+                {
+                    kind: "directory",
+                    path: "site",
+                },
+                {
+                    kind: "directory",
+                    path: "site/assets",
+                },
+                {
+                    kind: "directory",
+                    path: "site/pages",
+                },
+            ]),
+        );
+    });
+
     it("does not include a deleted file in the next snapshot", async () => {
         const outputPath = path.join(root, "output.txt");
 

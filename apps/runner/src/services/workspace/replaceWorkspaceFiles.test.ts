@@ -84,4 +84,30 @@ describe("replaceWorkspaceFiles", () => {
         expect(result).toEqual({ fileCount: 1 });
     });
 
+    it("creates and preserves empty directories", async () => {
+        const result = await replaceWorkspaceFiles(root, [
+            {
+                kind: "directory",
+                path: "site/assets",
+            },
+            {
+                kind: "directory",
+                path: "site/pages",
+            },
+            {
+                kind: "file",
+                path: "main.sh",
+                content: "#!/usr/bin/env bash\n",
+            },
+        ]);
+
+        await expect(fs.stat(path.join(root, "site", "assets"))).resolves.toMatchObject({
+            isDirectory: expect.any(Function),
+        });
+        await expect(fs.stat(path.join(root, "site", "pages"))).resolves.toMatchObject({
+            isDirectory: expect.any(Function),
+        });
+        expect(result).toEqual({ fileCount: 1 });
+    });
+
 });

@@ -335,6 +335,9 @@ export async function startDockerSession(
     createSession({
       id: sessionId,
       ownerKey,
+      kind: normalized.kind,
+      workspaceKey:
+        normalized.kind === "shell" ? normalized.workspaceKey ?? null : null,
       containerId: container.id,
       workspaceDir,
       idleTimeoutMs: timeouts.idleTimeoutMs,

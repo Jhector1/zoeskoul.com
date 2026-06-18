@@ -125,7 +125,7 @@ function buildSessionResponse(args: {
 
 function stripLeaseFields(body: ShellEnsureReq): InteractiveRunReq {
     const {
-        workspaceKey: _workspaceKey,
+        // workspaceKey: _workspaceKey,
         leaseKey: _leaseKey,
         forceNew: _forceNew,
         ...runnerBody

@@ -36,7 +36,35 @@ describe("gradeProgrammingCodeInput", () => {
             mockedSharedRunner as any,
         );
     });
+    it("passes terminal workspace folder checks for empty directories", async () => {
+        const expected: ProgrammingExpected = {
+            kind: "code_input",
+            strategy: "programming",
+            checkMode: "stdout",
+            tests: [{ stdin: "", stdout: "", match: "includes" }],
+            semanticChecks: [],
+            language: "bash",
+            workspaceExpectations: {
+                requiredFolders: ["site/assets", "site/pages"],
+            },
+        } as any;
 
+        const result = await gradeProgrammingCodeInput({
+            expected,
+            terminalWorkspaceShellTask: true,
+            code: "",
+            language: "bash",
+            files: [
+                { kind: "directory", path: "site" },
+                { kind: "directory", path: "site/assets" },
+                { kind: "directory", path: "site/pages" },
+                { kind: "file", path: "main.sh", content: "" },
+            ] as any,
+            showDebug: false,
+        });
+
+        expect(result.ok).toBe(true);
+    });
     it("passes stdout exercises with shared stdout matching", async () => {
         mockedSharedRunner.mockResolvedValue({
             ok: true,

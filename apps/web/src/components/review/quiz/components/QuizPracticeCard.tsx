@@ -35,8 +35,18 @@ import { normalizeCurrentPracticeItem } from "@/lib/practice/runtime";
 import { deriveEntryCode } from "@/components/review/module/runtime/exerciseWorkspaceResolver";
 
 export async function flushReviewToolsBeforeSubmit(
-    tools: { flushLatest?: () => void | Promise<void> } | null | undefined,
+    tools: { flushLatest?: () => void | Promise<void>; boundId?: string | null } | null | undefined,
 ) {
+  const boundId = tools?.boundId ?? null;
+
+  if (boundId && typeof window !== "undefined") {
+    const win = window as typeof window & {
+      __zoeFlushTerminalBeforeSubmit?: Record<string, () => Promise<void>>;
+    };
+
+    await win.__zoeFlushTerminalBeforeSubmit?.[boundId]?.();
+  }
+
   await tools?.flushLatest?.();
 }
 
