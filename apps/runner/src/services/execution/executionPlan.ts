@@ -101,7 +101,7 @@ export function getExecutionPlan(
                         "--noprofile",
                         "--norc",
                         "-c",
-                        "umask 000; exec /bin/bash --noprofile --norc -i",
+                        "export PS1='[zoeskoul]\\w$ '; umask 000; exec /bin/bash --noprofile --norc -i",
                     ],
                 };
             }
@@ -113,7 +113,7 @@ export function getExecutionPlan(
                     "--noprofile",
                     "--norc",
                     "-c",
-                    'umask 000; exec /bin/bash --noprofile --norc "$1"',
+                    'export PS1="[zoeskoul]\\w$ "; umask 000; exec /bin/bash --noprofile --norc "$1"',
                     "zoeskoul-bash",
                     entry,
                 ],
