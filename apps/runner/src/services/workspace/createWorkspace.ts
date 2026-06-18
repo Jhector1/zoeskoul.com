@@ -4,6 +4,7 @@ import crypto from "node:crypto";
 import type { FileEntry } from "@zoeskoul/code-contracts";
 import { env } from "../../lib/env.js";
 import {
+import { ensureWorkspaceWritableForShellUser } from "./workspacePermissions.js";
   assertSafeWorkspacePath,
   assertWorkspaceRootHasCapacity,
   normalizeWorkspaceEntries,
@@ -93,6 +94,7 @@ export async function createWorkspace(files: WorkspaceSyncEntry[]) {
   try {
     await writeInitialEntries(root, normalized);
     await ensureWorkspaceRuntimeFiles(root);
+    await ensureWorkspaceWritableForShellUser(root);
     return root;
   } catch (err) {
     await fs.rm(root, { recursive: true, force: true }).catch(() => {});

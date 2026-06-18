@@ -169,6 +169,7 @@ ENABLE_JUDGE0=1 ./scripts/compose.sh up -d --force-recreate runner
 
 
 cd /opt/zoeskoul/zoe-infra/hosts/runner
+docker compose down
 docker compose up -d
 sleep 30
 ./smoke-test.sh

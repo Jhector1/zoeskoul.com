@@ -7,6 +7,7 @@ import {
   RUNNER_MANAGED_DIRS,
 } from "./runnerManagedWorkspace.js";
 import {
+import { ensureWorkspaceWritableForShellUser } from "./workspacePermissions.js";
   isSafeRelativePath,
   normalizeWorkspaceEntries,
 } from "./workspacePolicy.js";
@@ -62,6 +63,7 @@ export async function replaceWorkspaceFiles(
 
   await fs.mkdir(workspaceDir, { recursive: true, mode: 0o777 });
   await fs.chmod(workspaceDir, 0o777).catch(() => {});
+  await ensureWorkspaceWritableForShellUser(workspaceDir);
 
   const currentEntries: CurrentEntry[] = [];
   await walkCurrentEntries(workspaceDir, workspaceDir, currentEntries);
@@ -163,6 +165,8 @@ export async function replaceWorkspaceFiles(
     await fs.mkdir(abs, { recursive: true, mode: 0o777 });
     await fs.chmod(abs, 0o777).catch(() => {});
   }
+
+  await ensureWorkspaceWritableForShellUser(workspaceDir);
 
   return {
     fileCount: normalized.filter((entry) => entry.kind === "file").length,

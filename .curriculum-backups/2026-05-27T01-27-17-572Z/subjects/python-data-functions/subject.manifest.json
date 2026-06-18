@@ -21,14 +21,6 @@
         "requireAllPublishedModules": true,
         "rewardEnabledByDefault": true,
         "certificateEnabledByDefault": true
-      },
-      "versioning": {
-        "family": "python",
-        "version": 2,
-        "status": "active",
-        "defaultForNewEnrollments": true,
-        "supersedes": "python",
-        "supersededBy": null
       }
     }
   },

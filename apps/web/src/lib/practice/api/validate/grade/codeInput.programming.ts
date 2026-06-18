@@ -136,10 +136,147 @@ function submittedFolderExists(
     return false;
 }
 
+function addSubmittedFolderPathFromTerminalCommand(
+    folderPath: string,
+    submittedFolderPaths: Set<string>,
+) {
+    const normalized = normalizeSubmittedFilePath(folderPath);
+    if (!normalized) return;
+
+    const parts = normalized.split("/");
+    let current = "";
+
+    for (const part of parts) {
+        current = current ? `${current}/${part}` : part;
+        submittedFolderPaths.add(current);
+    }
+}
+
+function addSubmittedFilePathFromTerminalCommand(
+    filePath: string,
+    submittedFilePaths: Set<string>,
+    submittedFolderPaths: Set<string>,
+) {
+    const normalized = normalizeSubmittedFilePath(filePath);
+    if (!normalized) return;
+
+    submittedFilePaths.add(normalized);
+
+    const parts = normalized.split("/");
+    let current = "";
+
+    for (const part of parts.slice(0, -1)) {
+        current = current ? `${current}/${part}` : part;
+        submittedFolderPaths.add(current);
+    }
+}
+
+function tokenizeSimpleShellCommand(command: string): string[] {
+    const tokens: string[] = [];
+    let current = "";
+    let quote: "'" | '"' | null = null;
+    let escaped = false;
+
+    for (const char of String(command ?? "")) {
+        if (escaped) {
+            current += char;
+            escaped = false;
+            continue;
+        }
+
+        if (char === "\\") {
+            escaped = true;
+            continue;
+        }
+
+        if (quote) {
+            if (char === quote) {
+                quote = null;
+            } else {
+                current += char;
+            }
+            continue;
+        }
+
+        if (char === "'" || char === '"') {
+            quote = char;
+            continue;
+        }
+
+        if (/\s/.test(char)) {
+            if (current) {
+                tokens.push(current);
+                current = "";
+            }
+            continue;
+        }
+
+        if (char === ";" || char === "|" || char === "&") {
+            break;
+        }
+
+        current += char;
+    }
+
+    if (current) tokens.push(current);
+
+    return tokens;
+}
+
+function applyTerminalCommandWorkspaceHints(args: {
+    terminalEvidence?: TerminalEvidenceInput;
+    submittedFilePaths: Set<string>;
+    submittedFolderPaths: Set<string>;
+}) {
+    const outputText = String(args.terminalEvidence?.outputText ?? "");
+    const commands = collectTerminalEvidenceCommands(
+        args.terminalEvidence,
+        outputText,
+    );
+
+    for (const command of commands) {
+        const tokens = tokenizeSimpleShellCommand(command);
+        const executable = tokens[0] ?? "";
+
+        if (executable === "mkdir") {
+            for (const token of tokens.slice(1)) {
+                if (!token || token.startsWith("-")) continue;
+                addSubmittedFolderPathFromTerminalCommand(
+                    token,
+                    args.submittedFolderPaths,
+                );
+            }
+            continue;
+        }
+
+        if (executable === "touch") {
+            for (const token of tokens.slice(1)) {
+                if (!token || token.startsWith("-")) continue;
+                addSubmittedFilePathFromTerminalCommand(
+                    token,
+                    args.submittedFilePaths,
+                    args.submittedFolderPaths,
+                );
+            }
+            continue;
+        }
+
+        const redirectIndex = tokens.indexOf(">");
+        if (redirectIndex >= 0 && tokens[redirectIndex + 1]) {
+            addSubmittedFilePathFromTerminalCommand(
+                tokens[redirectIndex + 1],
+                args.submittedFilePaths,
+                args.submittedFolderPaths,
+            );
+        }
+    }
+}
+
 function validateWorkspaceExpectations(args: {
     expected: ProgrammingExpected;
     entry?: string;
     files?: WorkspaceSubmissionEntry[];
+    terminalEvidence?: TerminalEvidenceInput;
 }): GradeResult | null {
     const expectations = args.expected
         .workspaceExpectations as WorkspaceExpectationInput | undefined;
@@ -170,6 +307,12 @@ function validateWorkspaceExpectations(args: {
             submittedFolderPaths.add(current);
         }
     }
+
+    applyTerminalCommandWorkspaceHints({
+        terminalEvidence: args.terminalEvidence,
+        submittedFilePaths,
+        submittedFolderPaths,
+    });
 
     const requiredFiles = asWorkspacePathArray(expectations.requiredFiles);
     const requiredFolders = asWorkspacePathArray(expectations.requiredFolders);
@@ -309,6 +452,71 @@ function terminalFeedback(args: {
     };
 }
 
+
+function stripAnsiForTerminalEvidence(value: string) {
+    return String(value ?? "").replace(/\u001b\[[0-9;?]*[ -/]*[@-~]/g, "");
+}
+
+function extractPromptCommandsFromTerminalOutput(outputText: string): string[] {
+    const commands: string[] = [];
+    const seen = new Set<string>();
+
+    const normalized = stripAnsiForTerminalEvidence(outputText)
+        .replace(/\r\n/g, "\n")
+        .replace(/\r/g, "\n");
+
+    for (const rawLine of normalized.split("\n")) {
+        const line = rawLine.trimEnd();
+        if (!line.trim()) continue;
+
+        /**
+         * PTY input mirroring can be racy in the browser. The shell transcript is
+         * still authoritative because echoed commands appear after the prompt, for
+         * example:
+         *
+         *   [zoeskoul]~$ mkdir -p site/assets site/pages
+         *   [zoeskoul]~/site$ ls
+         *
+         * Extract the command after the last shell prompt marker on the line.
+         */
+        const promptMatch = line.match(/(?:^|\s)(?:\[[^\]]+\][^$#\n]*|\S+)?[$#]\s+(.+)$/);
+        const command = promptMatch?.[1]?.trim() ?? "";
+
+        if (!command) continue;
+        if (seen.has(command)) continue;
+
+        seen.add(command);
+        commands.push(command);
+    }
+
+    return commands;
+}
+
+function collectTerminalEvidenceCommands(
+    terminalEvidence: TerminalEvidenceInput | undefined,
+    outputText: string,
+): string[] {
+    const commands = Array.isArray(terminalEvidence?.commands)
+        ? terminalEvidence.commands
+              .filter((entry: any): entry is string => typeof entry === "string")
+              .map((entry: string) => entry.trim())
+              .filter(Boolean)
+        : [];
+
+    const transcriptCommands = extractPromptCommandsFromTerminalOutput(outputText);
+
+    const out: string[] = [];
+    const seen = new Set<string>();
+
+    for (const command of [...commands, ...transcriptCommands]) {
+        if (!command || seen.has(command)) continue;
+        seen.add(command);
+        out.push(command);
+    }
+
+    return out;
+}
+
 function validateTerminalExpectations(args: {
     expected: ProgrammingExpected;
     terminalEvidence?: TerminalEvidenceInput;
@@ -321,13 +529,11 @@ function validateTerminalExpectations(args: {
         return null;
     }
 
-    const commands = Array.isArray(args.terminalEvidence?.commands)
-        ? args.terminalEvidence?.commands
-            .filter((entry: any): entry is string => typeof entry === "string")
-            .map((entry:string) => entry.trim())
-            .filter(Boolean)
-        : [];
     const outputText = String(args.terminalEvidence?.outputText ?? "");
+    const commands = collectTerminalEvidenceCommands(
+        args.terminalEvidence,
+        outputText,
+    );
     const cwd =
         typeof args.terminalEvidence?.cwd === "string"
             ? args.terminalEvidence.cwd
@@ -1066,6 +1272,7 @@ export async function gradeProgrammingCodeInput(args: {
         expected,
         entry,
         files,
+        terminalEvidence,
     });
 
     if (workspaceValidation) {

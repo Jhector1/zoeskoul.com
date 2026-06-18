@@ -763,6 +763,12 @@ function workspaceKeyOf(workspace: WorkspaceStateV2 | null | undefined) {
         })
         .sort((a, b) => a.path.localeCompare(b.path));
 
+    const folders = (workspace.nodes as any[])
+        .filter((node) => node?.kind === "folder")
+        .map((node) => filePath(node))
+        .filter(Boolean)
+        .sort((a, b) => a.localeCompare(b));
+
     const activeNode = (workspace.nodes as any[]).find(
         (node) => node?.kind === "file" && node.id === workspace.activeFileId,
     );
@@ -776,6 +782,7 @@ function workspaceKeyOf(workspace: WorkspaceStateV2 | null | undefined) {
         stdin: typeof workspace.stdin === "string" ? `${workspace.stdin.length}:${fastTextHash(workspace.stdin)}` : "",
         activePath: activeNode ? filePath(activeNode) : null,
         entryPath: entryNode ? filePath(entryNode) : null,
+        folders,
         files,
     });
 }
@@ -1754,25 +1761,40 @@ export default function CodeToolPane(props: {
         }
 
         const isDirectUserWorkspaceEdit = meta?.origin === "user";
+        const workspaceKey = workspaceKeyOf(workspace ?? null);
+        const previousStructureKey = lastHandledStructureKeyRef.current;
+        const nextStructureKey = workspaceStructureKeyOf(workspace ?? null);
+        const structureChanged =
+            previousStructureKey !== "" && previousStructureKey !== nextStructureKey;
+
+        const isTerminalWorkspaceSync = Boolean(
+            isReviewRouteMode &&
+                usesWorkspaceShell &&
+                effectiveLanguage === "bash" &&
+                !isDirectUserWorkspaceEdit &&
+                workspace &&
+                forceWorkspaceHasContent(workspace) &&
+                (
+                    structureChanged ||
+                    lastHandledWorkspaceKeyRef.current !== workspaceKey
+                ),
+        );
+
+        const isEffectiveUserWorkspaceEdit =
+            isDirectUserWorkspaceEdit || isTerminalWorkspaceSync;
 
         /**
-         * Critical SQL/review-route guard:
-         *
-         * In review route mode, FullIDE is controlled by the runtime store.
-         * Programmatic/sync emissions from FullIDE are hydration echoes.
-         * Writing those echoes back into runtime/progress causes:
-         *
-         * runtime -> FullIDE hydrate -> sync emit -> runtime patch -> FullIDE hydrate -> ...
-         *
-         * That is the SQL maximum update depth loop.
-         *
-         * Only true user edits should flow from FullIDE back into review runtime.
+         * Keep the SQL/review hydration-loop guard, but do not drop real terminal
+         * filesystem snapshots. Terminal snapshots are how bash mkdir/touch/rm
+         * changes reach quiz validation.
          */
-        if (isReviewRouteMode && !isDirectUserWorkspaceEdit) {
+        if (
+            isReviewRouteMode &&
+            !isDirectUserWorkspaceEdit &&
+            !isTerminalWorkspaceSync
+        ) {
             return;
         }
-
-        const workspaceKey = workspaceKeyOf(workspace ?? null);
 
         /**
          * Critical:
@@ -1785,16 +1807,11 @@ export default function CodeToolPane(props: {
             return;
         }
 
-        const previousStructureKey = lastHandledStructureKeyRef.current;
-        const nextStructureKey = workspaceStructureKeyOf(workspace ?? null);
-        const structureChanged =
-            previousStructureKey !== "" && previousStructureKey !== nextStructureKey;
-
         lastHandledWorkspaceKeyRef.current = workspaceKey;
         lastHandledStructureKeyRef.current = nextStructureKey;
 
         if (
-            isDirectUserWorkspaceEdit &&
+            isEffectiveUserWorkspaceEdit &&
             isReviewRouteMode &&
             resolvedEditorOwnerKey &&
             workspace &&
@@ -1837,7 +1854,7 @@ export default function CodeToolPane(props: {
         }
 
         if (
-            (!isReviewRouteMode || isDirectUserWorkspaceEdit) &&
+            (!isReviewRouteMode || isEffectiveUserWorkspaceEdit) &&
             boundId &&
             workspace &&
             forceWorkspaceHasContent(workspace)
@@ -1858,8 +1875,8 @@ export default function CodeToolPane(props: {
                 language: effectiveLanguage,
                 lang: effectiveLanguage,
 
-                updateOrigin: isDirectUserWorkspaceEdit ? "user" : "sync",
-                workspaceOrigin: isDirectUserWorkspaceEdit ? "user" : "sync",
+                updateOrigin: isEffectiveUserWorkspaceEdit ? "user" : "sync",
+                workspaceOrigin: isEffectiveUserWorkspaceEdit ? "user" : "sync",
 
                 /**
                  * Critical:
@@ -1867,9 +1884,9 @@ export default function CodeToolPane(props: {
                  * stale starter registerArgs when the exercise component rerenders
                  * during sidebar navigation.
                  */
-                preferSnapshot: isDirectUserWorkspaceEdit,
+                preferSnapshot: isEffectiveUserWorkspaceEdit,
 
-                ...(isDirectUserWorkspaceEdit
+                ...(isEffectiveUserWorkspaceEdit
                     ? {
                         submitted: false,
                         feedbackDismissed: true,
@@ -1887,7 +1904,7 @@ export default function CodeToolPane(props: {
             }
 
             pendingWorkspaceRef.current = undefined;
-            emitWorkspaceUpstream(workspace, isDirectUserWorkspaceEdit);
+            emitWorkspaceUpstream(workspace, isEffectiveUserWorkspaceEdit);
             return;
         }
 
@@ -1898,7 +1915,7 @@ export default function CodeToolPane(props: {
             }
 
             pendingWorkspaceRef.current = undefined;
-            emitWorkspaceUpstream(workspace, isDirectUserWorkspaceEdit);
+            emitWorkspaceUpstream(workspace, isEffectiveUserWorkspaceEdit);
             return;
         }
 
@@ -1912,7 +1929,7 @@ export default function CodeToolPane(props: {
             persistTimerRef.current = null;
             const pending = pendingWorkspaceRef.current;
             pendingWorkspaceRef.current = undefined;
-            emitWorkspaceUpstreamRef.current(pending ?? null, isDirectUserWorkspaceEdit);
+            emitWorkspaceUpstreamRef.current(pending ?? null, isEffectiveUserWorkspaceEdit);
         }, 220);
     }, [
         boundId,
@@ -2052,6 +2069,74 @@ export default function CodeToolPane(props: {
             delete win.__zoeFlushTerminalBeforeSubmit?.[boundId];
         };
     }, [boundId]);
+
+    useEffect(() => {
+        if (typeof window === "undefined") return;
+
+        const win = window as typeof window & {
+            __zoeFlushTerminalBeforeSubmit?: Record<
+                string,
+                () => Promise<boolean | void>
+            >;
+            __zoeFlushAnyTerminalBeforeSubmit?: () => Promise<boolean | void>;
+        };
+
+        win.__zoeFlushTerminalBeforeSubmit ??= {};
+
+        const waitForTerminalFlushSettle = () =>
+            new Promise<void>((resolve) => {
+                const raf =
+                    typeof window !== "undefined"
+                        ? window.requestAnimationFrame
+                        : undefined;
+
+                if (typeof raf === "function") {
+                    raf(() => resolve());
+                    return;
+                }
+
+                window.setTimeout(() => resolve(), 0);
+            });
+
+        const flush = async () => {
+            const sync = terminalSyncRef.current;
+            if (!sync) return false;
+
+            const result = await sync();
+
+            /**
+             * Terminal snapshots can be emitted by FullIDE on the next render tick.
+             * Force pending workspace/evidence through both before and after that
+             * tick so Check never validates a stale workspace after mkdir/touch.
+             */
+            flushPendingWorkspace();
+            await waitForTerminalFlushSettle();
+            flushPendingWorkspace();
+
+            await new Promise<void>((resolve) => {
+                window.setTimeout(() => resolve(), 50);
+            });
+            flushPendingWorkspace();
+
+            return result;
+        };
+
+        win.__zoeFlushAnyTerminalBeforeSubmit = flush;
+
+        if (boundId) {
+            win.__zoeFlushTerminalBeforeSubmit[boundId] = flush;
+        }
+
+        return () => {
+            if (boundId) {
+                delete win.__zoeFlushTerminalBeforeSubmit?.[boundId];
+            }
+
+            if (win.__zoeFlushAnyTerminalBeforeSubmit === flush) {
+                delete win.__zoeFlushAnyTerminalBeforeSubmit;
+            }
+        };
+    }, [boundId, flushPendingWorkspace]);
     useEffect(() => {
         if (typeof window === "undefined") return;
         (window as any).__ZOE_REVIEW_WORKSPACE_DEBUG__ = {

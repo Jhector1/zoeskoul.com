@@ -7,7 +7,7 @@
     "order": 30,
     "accessPolicy": "free",
     "status": "active",
-    "imagePublicId": null,
+    "imagePublicId": "sql_for_beginers_yhge3d.png",
     "imageAlt": null,
     "titleKey": "subjects.sql-v2.title",
     "descriptionKey": "subjects.sql-v2.description",

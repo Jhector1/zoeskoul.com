@@ -96,13 +96,27 @@ export function getExecutionPlan(
         case "bash":
             if (shell) {
                 return {
-                    runCmd: ["/bin/bash", "--noprofile", "--norc", "-i"],
+                    runCmd: [
+                        "/bin/bash",
+                        "--noprofile",
+                        "--norc",
+                        "-c",
+                        "umask 000; exec /bin/bash --noprofile --norc -i",
+                    ],
                 };
             }
 
             if (!entry) throw new Error("Missing Bash entry file.");
             return {
-                runCmd: ["/bin/bash", "--noprofile", "--norc", entry],
+                runCmd: [
+                    "/bin/bash",
+                    "--noprofile",
+                    "--norc",
+                    "-c",
+                    'umask 000; exec /bin/bash --noprofile --norc "$1"',
+                    "zoeskoul-bash",
+                    entry,
+                ],
             };
 
         case "c": {

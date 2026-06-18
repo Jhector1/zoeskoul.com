@@ -53,39 +53,39 @@ describe("linux terminal fundamentals content", () => {
 
     expect(getExercise(whereAmI, "ci-create-visible-hidden-practice")).toMatchObject({
       terminalExpectations: {
-        requiredCommands: [{ pattern: "^ls(\\s+[-a-zA-Z]+)?$" }],
-        outputContains: ["README.md", "terminal-map"],
+        requiredCommands: [{ pattern: "^ls\\s+campus$" }],
+        outputContains: ["map.txt", "room.txt"],
       },
     });
 
     expect(getExercise(whereAmI, "ci-create-long-list-lab")).toMatchObject({
       terminalExpectations: {
-        requiredCommands: [{ pattern: "^ls(\\s+[-a-zA-Z]+)?$" }],
-        outputContains: [".hidden-map"],
+        requiredCommands: [{ pattern: "^ls\\s+-a\\s+campus$" }],
+        outputContains: [".room-number"],
       },
     });
 
     expect(getExercise(viewingFileContents, "ci-create-log-review")).toMatchObject({
       terminalExpectations: {
-        requiredCommands: [{ pattern: "^cat\\s+notes/message\\.txt$" }],
-        outputContains: ["Linux is powerful."],
+        requiredCommands: [{ pattern: "^cat\\s+messages/welcome\\.txt$" }],
+        outputContains: ["Welcome to the file review desk."],
       },
     });
 
     expect(getExercise(viewingFileContents, "ci-create-notes-summary")).toMatchObject({
       terminalExpectations: {
         requiredCommands: [
-          { pattern: "^head\\s+notes/story\\.txt$" },
-          { pattern: "^tail\\s+logs/app\\.log$" },
+          { pattern: "^head\\s+reports/week\\.txt$" },
+          { pattern: "^tail\\s+logs/server\\.log$" },
         ],
-        outputContains: ["Chapter 1: Linux basics", "INFO stopped"],
+        outputContains: ["Monday", "finish ok"],
       },
     });
 
     expect(getExercise(viewingFileContents, "ci-create-count-marker")).toMatchObject({
       terminalExpectations: {
-        requiredCommands: [{ pattern: "^wc\\s+-l\\s+notes/story\\.txt$" }],
-        outputRegex: ["^\\s*4\\s+notes/story\\.txt$"],
+        requiredCommands: [{ pattern: "^wc\\s+-l\\s+reports/week\\.txt$" }],
+        outputRegex: ["^\\s*5\\s+reports/week\\.txt$"],
       },
     });
   });

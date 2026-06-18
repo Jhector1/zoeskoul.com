@@ -412,7 +412,52 @@ function practiceQuestionNeedsTerminalEvidence(
     return true;
   }
 
+  if (terminalExpectations && typeof terminalExpectations === "object") {
+    const record = terminalExpectations as Record<string, unknown>;
+    return (
+        Array.isArray(record.requiredCommands) ||
+        Array.isArray(record.forbiddenCommands) ||
+        Array.isArray(record.outputContains) ||
+        Array.isArray(record.outputRegex) ||
+        typeof record.cwdContains === "string" ||
+        typeof record.cwdEndsWith === "string"
+    );
+  }
+
+  const workspaceExpectations = expected.workspaceExpectations;
+  const hasWorkspaceExpectations =
+      workspaceExpectations &&
+      typeof workspaceExpectations === "object" &&
+      (
+          Array.isArray((workspaceExpectations as Record<string, unknown>).requiredFiles) ||
+          Array.isArray((workspaceExpectations as Record<string, unknown>).requiredFolders) ||
+          Array.isArray((workspaceExpectations as Record<string, unknown>).forbiddenFiles)
+      );
+
+  const recipe = (expected as any).recipe;
+  const recipeType =
+      typeof (expected as any).recipeType === "string"
+          ? (expected as any).recipeType
+          : typeof recipe?.type === "string"
+              ? recipe.type
+              : "";
+  const shellTaskMode =
+      typeof (expected as any).shellTaskMode === "string"
+          ? (expected as any).shellTaskMode
+          : typeof recipe?.mode === "string"
+              ? recipe.mode
+              : "";
+
+  /**
+   * Workspace-only shell tasks still need terminal evidence in the client.
+   * The evidence lets candidate selection prefer the live PTY runtime patch and
+   * gives validation a command-transcript fallback if the filesystem snapshot is
+   * a render tick behind.
+   */
   return Boolean(
+      hasWorkspaceExpectations ||
+      recipeType === "shell_task" ||
+      shellTaskMode === "terminal_workspace" ||
       expected.terminalWorkspaceShellTask ||
       expected.mode === "terminal_workspace" ||
       expected.checkMode === "terminal_workspace",
@@ -588,7 +633,7 @@ function getRuntimePracticePatchForQuestion(
       estate.terminalEvidence,
   );
 
-  if (!code.trim() && !terminalEvidence) return null;
+  if (!code.trim() && !terminalEvidence && !workspace) return null;
 
   const stdin =
       typeof workspace?.stdin === "string"
@@ -1451,7 +1496,17 @@ export function useQuizPracticeBank(args: {
           useReviewRuntimeStore.getState().flushToolSnapshot();
 
           await new Promise<void>((resolve) => {
-            requestAnimationFrame(() => resolve());
+            const raf =
+                typeof window !== "undefined"
+                    ? window.requestAnimationFrame
+                    : undefined;
+
+            if (typeof raf === "function") {
+              raf(() => resolve());
+              return;
+            }
+
+            setTimeout(() => resolve(), 0);
           });
 
           const runtimePatch = getRuntimePracticePatchForQuestion(q) as (Record<string, any> | null);

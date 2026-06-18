@@ -21,3 +21,14 @@
         opacity: 0.45;
     }
 }
+
+/* Keep xterm text selection readable in both light and dark themes. */
+.xterm .xterm-selection div {
+    background-color: rgba(37, 99, 235, 0.24) !important;
+}
+
+.dark .xterm .xterm-selection div,
+[data-theme="dark"] .xterm .xterm-selection div {
+    background-color: rgba(147, 197, 253, 0.28) !important;
+}
+

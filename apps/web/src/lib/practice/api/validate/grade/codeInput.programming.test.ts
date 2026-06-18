@@ -65,6 +65,50 @@ describe("gradeProgrammingCodeInput", () => {
 
         expect(result.ok).toBe(true);
     });
+
+    it("matches required terminal commands from echoed PTY output", async () => {
+        const expected: ProgrammingExpected = {
+            kind: "code_input",
+            strategy: "programming",
+            checkMode: "stdout",
+            tests: [{ stdin: "", stdout: "", match: "includes" }],
+            semanticChecks: [],
+            language: "bash",
+            workspaceExpectations: {
+                requiredFolders: ["site/assets", "site/pages"],
+            },
+            terminalExpectations: {
+                requiredCommands: [
+                    {
+                        pattern:
+                            "^mkdir\\s+-p\\s+.*site/assets.*site/pages|^mkdir\\s+-p\\s+.*site/pages.*site/assets",
+                        message: "Create both folders",
+                    },
+                ],
+            },
+        } as any;
+
+        const result = await gradeProgrammingCodeInput({
+            expected,
+            terminalWorkspaceShellTask: true,
+            code: "",
+            language: "bash",
+            terminalEvidence: {
+                commands: [],
+                outputText:
+                    "[starting workspace terminal]\n[zoeskoul]~$ mkdir -p site/assets site/pages\n[zoeskoul]~$ ls site\nassets pages\n",
+            },
+            files: [
+                { kind: "directory", path: "site" },
+                { kind: "directory", path: "site/assets" },
+                { kind: "directory", path: "site/pages" },
+                { kind: "file", path: "main.sh", content: "" },
+            ] as any,
+            showDebug: false,
+        });
+
+        expect(result.ok).toBe(true);
+    });
     it("passes stdout exercises with shared stdout matching", async () => {
         mockedSharedRunner.mockResolvedValue({
             ok: true,
@@ -1450,4 +1494,70 @@ for book in books:
         );
         expect(result.feedback?.title).toBe("Print the list variable");
     });
+
+    it("infers required empty folders from mkdir terminal evidence when snapshot is stale", async () => {
+        const expected: ProgrammingExpected = {
+            kind: "code_input",
+            strategy: "programming",
+            language: "bash",
+            checkMode: "stdout",
+            tests: [{ stdout: "", match: "includes" }],
+            semanticChecks: [],
+            workspaceExpectations: {
+                requiredFolders: ["site/assets", "site/pages"],
+            },
+        } as any;
+
+        const result = await gradeProgrammingCodeInput({
+            expected,
+            terminalWorkspaceShellTask: true,
+            code: "",
+            language: "bash",
+            terminalEvidence: {
+                commands: [],
+                outputText:
+                    "[zoeskoul]~$ mkdir -p site/pages\n" +
+                    "[zoeskoul]~$ mkdir -p site/assets\n",
+            },
+            files: [{ path: "main.sh", content: "" }] as any,
+            showDebug: false,
+        });
+
+        expect(result.ok).toBe(true);
+    });
+
+    it("infers required files from touch terminal evidence when snapshot is stale", async () => {
+        const expected: ProgrammingExpected = {
+            kind: "code_input",
+            strategy: "programming",
+            language: "bash",
+            checkMode: "stdout",
+            tests: [{ stdout: "", match: "includes" }],
+            semanticChecks: [],
+            workspaceExpectations: {
+                requiredFiles: ["site/pages/index.html", "site/assets/logo.txt"],
+            },
+        } as any;
+
+        const result = await gradeProgrammingCodeInput({
+            expected,
+            terminalWorkspaceShellTask: true,
+            code: "",
+            language: "bash",
+            terminalEvidence: {
+                commands: [
+                    "mkdir -p site/pages",
+                    "mkdir -p site/assets",
+                    "touch site/pages/index.html",
+                    "touch site/assets/logo.txt",
+                ],
+                outputText: "",
+            },
+            files: [{ path: "main.sh", content: "" }] as any,
+            showDebug: false,
+        });
+
+        expect(result.ok).toBe(true);
+    });
+
 });

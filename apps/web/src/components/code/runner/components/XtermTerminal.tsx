@@ -408,7 +408,11 @@ export default function XtermTerminal(props: {
                 onResizeRef.current(cols, rows);
 
                 if (isCurrentTerminalUsable(current)) {
-                    current.scrollToBottom();
+                    try {
+                        current.scrollToBottom();
+                    } catch (err) {
+                        console.warn("xterm scroll after resize skipped", err);
+                    }
                 }
             } catch (err) {
                 console.warn("xterm resize skipped after stale terminal instance", err);
@@ -489,7 +493,11 @@ export default function XtermTerminal(props: {
                                     writeChunk(term, chunk);
                                 }
                                 prevFeedRef.current = feedToReplay;
-                                term.scrollToBottom();
+                                try {
+                                    term.scrollToBottom();
+                                } catch (err) {
+                                    console.warn("xterm initial scroll skipped", err);
+                                }
                             } catch (err) {
                                 console.warn("xterm initial feed replay skipped", err);
                             }
@@ -632,8 +640,8 @@ export default function XtermTerminal(props: {
             /**
              * xterm may have an internal viewport refresh queued. Disposing in the
              * same turn as a React unmount/hide can leave that refresh touching
-             * disposed render dimensions. Delay disposal one frame so queued xterm
-             * work can settle before we tear down its renderer.
+             * disposed render dimensions. Delay disposal long enough for queued
+             * viewport refresh work to drain before tearing down its renderer.
              */
             if (termToDispose) {
                 window.setTimeout(() => {
@@ -642,7 +650,7 @@ export default function XtermTerminal(props: {
                     } catch (err) {
                         console.warn("xterm dispose skipped after stale terminal instance", err);
                     }
-                }, 0);
+                }, 500);
             }
         };
     }, [captureInactiveInput, focusTerminal, isCurrentTerminalUsable, reportInactiveInputAttempt]);

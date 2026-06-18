@@ -49,7 +49,7 @@ describe("QuizPracticeCard project-step fallback", () => {
 
         steps.push("submit");
 
-        expect(steps).toEqual(["flush:start", "flush:end", "submit"]);
+        expect(steps).toEqual(["flush:start", "flush:end", "flush:start", "flush:end", "submit"]);
     });
 
     it("renders a project step starter even before a fetched practice item exists", () => {

@@ -35,18 +35,56 @@ import { normalizeCurrentPracticeItem } from "@/lib/practice/runtime";
 import { deriveEntryCode } from "@/components/review/module/runtime/exerciseWorkspaceResolver";
 
 export async function flushReviewToolsBeforeSubmit(
-    tools: { flushLatest?: () => void | Promise<void>; boundId?: string | null } | null | undefined,
+    tools:
+        | {
+      flushLatest?: () => void | Promise<void>;
+      boundId?: string | null;
+    }
+        | null
+        | undefined,
 ) {
   const boundId = tools?.boundId ?? null;
 
-  if (boundId && typeof window !== "undefined") {
+  if (typeof window !== "undefined") {
     const win = window as typeof window & {
-      __zoeFlushTerminalBeforeSubmit?: Record<string, () => Promise<void>>;
+      __zoeFlushTerminalBeforeSubmit?: Record<
+          string,
+          () => Promise<boolean | void>
+      >;
+      __zoeFlushAnyTerminalBeforeSubmit?: () => Promise<boolean | void>;
     };
 
-    await win.__zoeFlushTerminalBeforeSubmit?.[boundId]?.();
+    const boundFlush =
+        boundId && win.__zoeFlushTerminalBeforeSubmit
+            ? win.__zoeFlushTerminalBeforeSubmit[boundId]
+            : null;
+
+    if (boundFlush) {
+      await boundFlush();
+    } else {
+      await win.__zoeFlushAnyTerminalBeforeSubmit?.();
+    }
   }
 
+  await tools?.flushLatest?.();
+
+  // Give React/store state one tick to receive the merged terminal snapshot
+  // before the validate request is built. Vitest does not always provide
+  // requestAnimationFrame, so fall back to setTimeout for tests/server-like envs.
+  await new Promise<void>((resolve) => {
+    const raf =
+        typeof window !== "undefined" ? window.requestAnimationFrame : undefined;
+
+    if (typeof raf === "function") {
+      raf(() => resolve());
+      return;
+    }
+
+    setTimeout(() => resolve(), 0);
+  });
+
+  // One more flush after the terminal snapshot tick catches mkdir/touch changes
+  // emitted by FullIDE just after the first terminal sync promise resolves.
   await tools?.flushLatest?.();
 }
 

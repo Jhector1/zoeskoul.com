@@ -35,6 +35,7 @@ import {
 import { getExecutionPlan } from "../execution/executionPlan.js";
 import { docker } from "./dockerClient.js";
 import { killSession } from "./killSession.js";
+import { ensureWorkspaceWritableForShellUser } from "../workspace/workspacePermissions.js";
 
 type NormalizedRequest =
   | {
@@ -276,6 +277,7 @@ export async function startDockerSession(
     const containerName = `zoeskoul_${sessionId}`;
 
     await ensureWorkspaceRuntimeFiles(workspaceDir, plan.prepareDirs ?? []);
+    await ensureWorkspaceWritableForShellUser(workspaceDir);
 
     const container = await docker.createContainer({
       Image: env.runnerImage,
@@ -311,6 +313,7 @@ export async function startDockerSession(
         "HISTFILESIZE=2000",
         "HISTCONTROL=ignoredups:erasedups",
         "PROMPT_COMMAND=history -a; history -n",
+        "UMASK=000",
       ],
       Cmd: ["python3", "/opt/runner/pty-runner.py"],
       HostConfig: {

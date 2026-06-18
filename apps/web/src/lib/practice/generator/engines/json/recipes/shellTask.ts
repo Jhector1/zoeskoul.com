@@ -14,7 +14,7 @@ export const buildShellTaskRecipe: RecipeHandler<any> = (def, args, resolved) =>
                  * workspace. Topic-scoped PTY reuse can leak files from another
                  * exercise/tool session, e.g. `main.py` inside a Linux task.
                  */
-                terminalSessionScope: "exercise" as const,
+                terminalSessionScope: "topic" as const,
                 fileActions: {
                     enabled: false,
                 },

@@ -2023,7 +2023,7 @@ export default function HomePageAvatarOnboardingClient({
                                                     )}
 
                                                     <NavButton
-                                                        href={`/${encodeURIComponent(locale)}/subjects`}
+                                                        href={`/${encodeURIComponent(locale)}/catalogs`}
                                                         prefetch
                                                         className={cn(buttonClass("secondary"), "h-9 sm:w-auto")}
                                                     >
@@ -2174,7 +2174,7 @@ export default function HomePageAvatarOnboardingClient({
                                             </div>
 
                                             <Link
-                                                href={`/${encodeURIComponent(locale)}/subjects`}
+                                                href={`/${encodeURIComponent(locale)}/catalogs`}
                                                 className="inline-flex items-center gap-2 text-sm font-medium text-[rgb(var(--ui-text)/0.96)] transition-opacity hover:opacity-70"
                                             >
                                                 {t("recommended.viewAll")}

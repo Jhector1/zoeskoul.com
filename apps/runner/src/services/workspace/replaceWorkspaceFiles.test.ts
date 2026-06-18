@@ -110,4 +110,22 @@ describe("replaceWorkspaceFiles", () => {
         expect(result).toEqual({ fileCount: 1 });
     });
 
+    it("overwrites files inside learner-created directories after permission normalization", async () => {
+        const backup = path.join(root, "backup");
+        await fs.mkdir(backup, { recursive: true, mode: 0o755 });
+        await fs.writeFile(path.join(backup, "menu.txt"), "old", "utf8");
+
+        await replaceWorkspaceFiles(root, [
+            {
+                kind: "file",
+                path: "backup/menu.txt",
+                content: "new",
+            },
+        ]);
+
+        await expect(
+            fs.readFile(path.join(backup, "menu.txt"), "utf8"),
+        ).resolves.toBe("new");
+    });
+
 });
