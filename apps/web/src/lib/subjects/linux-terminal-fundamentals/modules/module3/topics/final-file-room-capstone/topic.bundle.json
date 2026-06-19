@@ -497,21 +497,21 @@
         },
         {
           "path": "README.md",
-          "content": "# Finish the handoff\n\nUse shell commands to inspect, create, move, copy, or remove files as needed.\n",
+          "content": "# Finish the handoff\n\nThis workspace starts after the room files have already been sorted. Read the agenda, back it up, remove the temp file, and leave a ready marker.\n",
           "language": "text"
         },
         {
-          "path": "event-room/incoming/agenda.txt",
+          "path": "event-room/notes/agenda.txt",
           "content": "10:00 setup\n11:00 doors open\n12:00 lunch\n",
           "language": "text"
         },
         {
-          "path": "event-room/incoming/setup.sh",
+          "path": "event-room/scripts/setup.sh",
           "content": "echo setup lights\n",
           "language": "bash"
         },
         {
-          "path": "event-room/incoming/guest-list.txt",
+          "path": "event-room/archive/guests.txt",
           "content": "Ari\nSam\nMina\n",
           "language": "text"
         },
@@ -535,21 +535,21 @@
           },
           {
             "path": "README.md",
-            "content": "# Finish the handoff\n\nUse shell commands to inspect, create, move, copy, or remove files as needed.\n",
+            "content": "# Finish the handoff\n\nThis workspace starts after the room files have already been sorted. Read the agenda, back it up, remove the temp file, and leave a ready marker.\n",
             "language": "text"
           },
           {
-            "path": "event-room/incoming/agenda.txt",
+            "path": "event-room/notes/agenda.txt",
             "content": "10:00 setup\n11:00 doors open\n12:00 lunch\n",
             "language": "text"
           },
           {
-            "path": "event-room/incoming/setup.sh",
+            "path": "event-room/scripts/setup.sh",
             "content": "echo setup lights\n",
             "language": "bash"
           },
           {
-            "path": "event-room/incoming/guest-list.txt",
+            "path": "event-room/archive/guests.txt",
             "content": "Ari\nSam\nMina\n",
             "language": "text"
           },

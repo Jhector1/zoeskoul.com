@@ -311,7 +311,7 @@ describe("buildExerciseFromManifest runtime IDE mapping", () => {
     expect((result.exercise as any).ideConfig).toMatchObject({
       runnerBackend: "pty",
       layoutMode: "terminal_workspace",
-      terminalSessionScope: "topic",
+      terminalSessionScope: "exercise",
       fileActions: {
         enabled: false,
       },

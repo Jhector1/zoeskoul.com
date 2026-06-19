@@ -206,4 +206,32 @@ describe("workspaceTerminalSync cloud merge", () => {
         expect(allPaths(next)).not.toContain(".bash_history");
         expect(allPaths(next)).not.toContain("src/src");
     });
+
+    it("preserves empty directories from terminal snapshots", () => {
+        const prior = workspaceWithSyntheticSrc([
+            { id: "file:main", name: "main.py", content: "print('old')" },
+        ]);
+
+        const next = mergeWorkspaceWithTerminalSnapshot({
+            prior,
+            files: [
+                { path: "src/main.py", content: "print('new')" },
+                { kind: "directory", path: "semester" },
+                { kind: "directory", path: "semester/notes" },
+                { kind: "directory", path: "semester/assignments" },
+                { kind: "directory", path: "semester/scripts" },
+                { kind: "directory", path: "backups" },
+            ],
+        });
+
+        expect(allPaths(next)).toEqual([
+            "backups",
+            "semester",
+            "semester/assignments",
+            "semester/notes",
+            "semester/scripts",
+            "src",
+            "src/main.py",
+        ]);
+    });
 });

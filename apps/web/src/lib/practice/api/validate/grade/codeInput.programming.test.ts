@@ -1560,4 +1560,156 @@ for book in books:
         expect(result.ok).toBe(true);
     });
 
+
+    it("infers moved files from mv terminal evidence when snapshot is stale", async () => {
+        const expected: ProgrammingExpected = {
+            kind: "code_input",
+            strategy: "programming",
+            language: "bash",
+            checkMode: "stdout",
+            tests: [{ stdout: "", match: "includes" }],
+            semanticChecks: [],
+            workspaceExpectations: {
+                requiredFiles: ["desk/final-name.txt"],
+                forbiddenFiles: ["desk/old-name.txt"],
+            },
+        } as any;
+
+        const result = await gradeProgrammingCodeInput({
+            expected,
+            code: "",
+            language: "bash",
+            terminalWorkspaceShellTask: true,
+            terminalEvidence: {
+                commands: ["mv desk/old-name.txt desk/final-name.txt"],
+                outputText: "",
+            },
+            files: [
+                { path: "main.sh", content: "" },
+                { path: "desk/old-name.txt", content: "old" },
+            ] as any,
+            showDebug: false,
+        });
+
+        expect(result.ok).toBe(true);
+    });
+
+
+    it("infers removed files from rm terminal evidence when snapshot is stale", async () => {
+        const expected: ProgrammingExpected = {
+            kind: "code_input",
+            strategy: "programming",
+            language: "bash",
+            checkMode: "stdout",
+            tests: [{ stdout: "", match: "includes" }],
+            semanticChecks: [],
+            workspaceExpectations: {
+                requiredFiles: ["trash/keep.txt"],
+                forbiddenFiles: ["trash/remove.tmp"],
+            },
+        } as any;
+
+        const result = await gradeProgrammingCodeInput({
+            expected,
+            code: "",
+            language: "bash",
+            terminalWorkspaceShellTask: true,
+            terminalEvidence: { commands: ["rm trash/remove.tmp"], outputText: "" },
+            files: [
+                { path: "trash/keep.txt", content: "keep" },
+                { path: "trash/remove.tmp", content: "remove" },
+            ] as any,
+            showDebug: false,
+        });
+
+        expect(result.ok).toBe(true);
+    });
+
+    it("infers moved files from mv terminal evidence when snapshot is stale", async () => {
+        const expected: ProgrammingExpected = {
+            kind: "code_input",
+            strategy: "programming",
+            language: "bash",
+            checkMode: "stdout",
+            tests: [{ stdout: "", match: "includes" }],
+            semanticChecks: [],
+            workspaceExpectations: {
+                requiredFiles: ["desk/final-name.txt"],
+                forbiddenFiles: ["desk/old-name.txt"],
+            },
+        } as any;
+
+        const result = await gradeProgrammingCodeInput({
+            expected,
+            code: "",
+            language: "bash",
+            terminalWorkspaceShellTask: true,
+            terminalEvidence: { commands: ["mv desk/old-name.txt desk/final-name.txt"], outputText: "" },
+            files: [{ path: "desk/old-name.txt", content: "old" }] as any,
+            showDebug: false,
+        });
+
+        expect(result.ok).toBe(true);
+    });
+
+    it("reconstructs the capstone handoff after failed terminal attempts and a later recovery", async () => {
+        const expected: ProgrammingExpected = {
+            kind: "code_input",
+            strategy: "programming",
+            language: "bash",
+            checkMode: "stdout",
+            tests: [{ stdout: "", match: "includes" }],
+            semanticChecks: [],
+            workspaceExpectations: {
+                requiredFolders: [
+                    "event-room/notes",
+                    "event-room/scripts",
+                    "event-room/archive",
+                    "backups",
+                ],
+                requiredFiles: [
+                    "event-room/notes/agenda.txt",
+                    "event-room/scripts/setup.sh",
+                    "event-room/archive/guests.txt",
+                    "backups/agenda-backup.txt",
+                    "event-room/ready.txt",
+                ],
+                forbiddenFiles: ["event-room/incoming/old.tmp"],
+            },
+        } as any;
+
+        const result = await gradeProgrammingCodeInput({
+            expected,
+            code: "",
+            language: "bash",
+            terminalWorkspaceShellTask: true,
+            terminalEvidence: {
+                outputText:
+                    "[zoeskoul]~$ mv event-room/notes/agenda.txt backups/agenda-backup.txt\n" +
+                    "mv: cannot move 'event-room/notes/agenda.txt' to 'backups/agenda-backup.txt': No such file or directory\n" +
+                    "[zoeskoul]~$ mkdir backups\n" +
+                    "[zoeskoul]~$ mv event-room/notes/agenda.txt backups/agenda-backup.txt\n" +
+                    "[zoeskoul]~$ mv backups/agenda-backup.txt event-room/notes/agenda.txt\n" +
+                    "[zoeskoul]~$ cp backups/agenda-backup.txt event-room/notes/agenda.txt\n" +
+                    "cp: cannot stat 'backups/agenda-backup.txt': No such file or directory\n" +
+                    "[zoeskoul]~$ cp event-room/notes/agenda.txt backups/agenda-backup.txt\n" +
+                    "[zoeskoul]~$ rm event-room/incoming/old.tmp\n" +
+                    "[zoeskoul]~$ touch event-room/ready.txt\n",
+            },
+            files: [
+                { path: "main.sh", content: "" },
+                { kind: "directory", path: "event-room" },
+                { kind: "directory", path: "event-room/notes" },
+                { kind: "directory", path: "event-room/scripts" },
+                { kind: "directory", path: "event-room/archive" },
+                { path: "event-room/scripts/setup.sh", content: "echo setup lights\n" },
+                { path: "event-room/archive/guests.txt", content: "Ari\nSam\nMina\n" },
+                { path: "event-room/incoming/old.tmp", content: "delete after cleanup\n" },
+            ] as any,
+            showDebug: false,
+        });
+
+        expect(result.ok).toBe(true);
+    });
+
 });

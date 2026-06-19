@@ -28,6 +28,13 @@ function getExercise(topic: JsonObject, exerciseId: string) {
   return (topic.exercises ?? []).find((exercise: JsonObject) => exercise.id === exerciseId);
 }
 
+function starterPaths(exercise: JsonObject) {
+  return (exercise?.starterFiles ?? [])
+    .map((file: JsonObject) => String(file?.path ?? ""))
+    .filter(Boolean)
+    .sort();
+}
+
 describe("linux terminal fundamentals content", () => {
   it("uses terminalExpectations for output-only command practice", () => {
     const whereAmI = readJson(topicPath(1, "where-am-i"));
@@ -116,4 +123,35 @@ describe("linux terminal fundamentals content", () => {
     });
     expect(getExercise(copyMoveRename, "ci-copy-draft")?.terminalExpectations).toBeUndefined();
   });
+  it("final project exercises start from the workspace their prompt describes", () => {
+    const organizer = readJson(topicPath(2, "module-2-notes-organizer-project"));
+    const capstone = readJson(topicPath(3, "final-file-room-capstone"));
+
+    const organizerFinal = getExercise(organizer, "ci-organizer-final");
+    expect(starterPaths(organizerFinal)).toEqual([
+      "README.md",
+      "downloads/old.tmp",
+      "main.sh",
+      "semester/assignments/homework.txt",
+      "semester/notes/notes.txt",
+      "semester/scripts/project.sh",
+    ]);
+    expect(starterPaths(organizerFinal)).not.toContain("downloads/notes.txt");
+    expect(starterPaths(organizerFinal)).not.toContain("downloads/homework.txt");
+    expect(starterPaths(organizerFinal)).not.toContain("downloads/project.sh");
+
+    const capstoneFinal = getExercise(capstone, "ci-capstone-finish-handoff");
+    expect(starterPaths(capstoneFinal)).toEqual([
+      "README.md",
+      "event-room/archive/guests.txt",
+      "event-room/incoming/old.tmp",
+      "event-room/notes/agenda.txt",
+      "event-room/scripts/setup.sh",
+      "main.sh",
+    ]);
+    expect(starterPaths(capstoneFinal)).not.toContain("event-room/incoming/agenda.txt");
+    expect(starterPaths(capstoneFinal)).not.toContain("event-room/incoming/setup.sh");
+    expect(starterPaths(capstoneFinal)).not.toContain("event-room/incoming/guest-list.txt");
+  });
+
 });

@@ -562,6 +562,23 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         onTerminalEvidenceChange?.(workspaceTerm.terminalEvidence);
     }, [onTerminalEvidenceChange, workspaceTerm.terminalEvidence]);
 
+    const syncWorkspaceAndTerminalEvidenceNow = useCallback(async () => {
+        const ok = await workspaceTerm.syncWorkspaceNow();
+
+        /**
+         * The workspace snapshot and the terminal transcript have different
+         * clocks. Force the latest synchronous terminal evidence through the
+         * Tools -> quiz bridge during submit flush so validation never sees an
+         * older command list while the visible terminal is already correct.
+         */
+        onTerminalEvidenceChange?.(workspaceTerm.getTerminalEvidenceNow());
+
+        return ok;
+    }, [
+        onTerminalEvidenceChange,
+        workspaceTerm,
+    ]);
+
     useEffect(() => {
         if (!onTerminalSyncReady) return;
 
@@ -570,12 +587,16 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
             return;
         }
 
-        onTerminalSyncReady(workspaceTerm.syncWorkspaceNow);
+        onTerminalSyncReady(syncWorkspaceAndTerminalEvidenceNow);
 
         return () => {
             onTerminalSyncReady(null);
         };
-    }, [onTerminalSyncReady, workspaceTerminalEnabled, workspaceTerm.syncWorkspaceNow]);
+    }, [
+        onTerminalSyncReady,
+        workspaceTerminalEnabled,
+        syncWorkspaceAndTerminalEvidenceNow,
+    ]);
 
     useEffect(() => {
         const w = window as typeof window & {

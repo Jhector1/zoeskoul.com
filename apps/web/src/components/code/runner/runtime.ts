@@ -140,6 +140,14 @@ export type WorkspaceTerminalController = {
     state: RunSessionState | "idle";
     terminalFeed: TerminalChunk[];
     terminalEvidence: TerminalEvidence;
+    /**
+     * Synchronous terminal evidence getter.
+     *
+     * React state can lag behind a just-entered command. Submit-time checks use
+     * this getter so the visible terminal transcript, not a stale render, is the
+     * source of truth.
+     */
+    getTerminalEvidenceNow: () => TerminalEvidence;
     syncStatus: "idle" | "pushing" | "pulling" | "error";
     recoverState: TerminalRecoverState;
     recoverMessage: string | null;

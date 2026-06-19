@@ -14,7 +14,12 @@ export const buildShellTaskRecipe: RecipeHandler<any> = (def, args, resolved) =>
                  * workspace. Topic-scoped PTY reuse can leak files from another
                  * exercise/tool session, e.g. `main.py` inside a Linux task.
                  */
-                terminalSessionScope: "topic" as const,
+                /**
+                 * Shell-task exercises with starterFiles must start from their own
+                 * starter workspace. Cumulative/project tasks can still opt into
+                 * topic/project scope with serviceOverrides.ideConfig.
+                 */
+                terminalSessionScope: "exercise" as const,
                 fileActions: {
                     enabled: false,
                 },

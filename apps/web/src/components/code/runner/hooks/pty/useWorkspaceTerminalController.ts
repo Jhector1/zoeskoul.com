@@ -40,6 +40,10 @@ const SOCKET_OPEN_READY_STATE = 1;
 const CLIENT_START_COOLDOWN_MS = 2_500;
 const CLIENT_AUTO_START_RETRY_COOLDOWN_MS = 1_000;
 const CLIENT_RECOVERY_RETRY_COOLDOWN_MS = 6_000;
+const TERMINAL_AUTO_REVIVE_STALE_MS = 60_000;
+const TERMINAL_INPUT_STALE_MS = 60_000;
+const TERMINAL_REVIVE_WATCHDOG_INTERVAL_MS = 15_000;
+
 const MAX_PENDING_RECOVERY_INPUT_CHARS = 4096;
 const WORKSPACE_READY_TIMEOUT_MS = 8_000;
 const WORKSPACE_READY_POLL_MS = 150;
@@ -615,6 +619,28 @@ export function useWorkspaceTerminalController(
     const [terminalEvidence, setTerminalEvidence] = React.useState<TerminalEvidence>(
         () => createTerminalEvidence(initialEvidenceCwd),
     );
+    const terminalEvidenceRef = React.useRef<TerminalEvidence>(
+        createTerminalEvidence(initialEvidenceCwd),
+    );
+    const setTerminalEvidenceNow = React.useCallback(
+        (
+            nextOrUpdater:
+                | TerminalEvidence
+                | ((previous: TerminalEvidence) => TerminalEvidence),
+        ): TerminalEvidence => {
+            const previous = terminalEvidenceRef.current;
+            const next =
+                typeof nextOrUpdater === "function"
+                    ? nextOrUpdater(previous)
+                    : nextOrUpdater;
+
+            terminalEvidenceRef.current = next;
+            setTerminalEvidence(next);
+
+            return next;
+        },
+        [],
+    );
     const [inputEnabled, setInputEnabled] = React.useState(false);
     const [busy, setBusy] = React.useState(false);
     const [state, setState] = React.useState<RunSessionState | "idle">("idle");
@@ -736,7 +762,7 @@ export function useWorkspaceTerminalController(
         const trimmed = line.trim();
         if (!trimmed) return;
 
-        setTerminalEvidence((prev) =>
+        setTerminalEvidenceNow((prev) =>
             appendTerminalEvidenceCommand(prev, trimmed, currentCwdRef.current),
         );
 
@@ -746,7 +772,7 @@ export function useWorkspaceTerminalController(
         }
 
         await appendHistoryLineNow(trimmed);
-    }, [appendHistoryLineNow, persistHistoryContent]);
+    }, [appendHistoryLineNow, persistHistoryContent, setTerminalEvidenceNow]);
 
     const mirrorOutgoingInput = React.useCallback(
         (data: string) => {
@@ -814,9 +840,9 @@ export function useWorkspaceTerminalController(
         terminalProcessExitedRef.current = false;
         terminalExitCodeRef.current = null;
         currentCwdRef.current = initialEvidenceCwd;
-        setTerminalEvidence(createTerminalEvidence(initialEvidenceCwd));
+        setTerminalEvidenceNow(createTerminalEvidence(initialEvidenceCwd));
         void ensureHistoryLoaded();
-    }, [ensureHistoryLoaded, initialEvidenceCwd]);
+    }, [ensureHistoryLoaded, initialEvidenceCwd, setTerminalEvidenceNow]);
 
     React.useEffect(() => {
         startedRef.current = started;
@@ -877,7 +903,7 @@ export function useWorkspaceTerminalController(
         (kind: TerminalChunk["kind"], data: string) => {
             if (!data) return;
 
-            setTerminalEvidence((prev) => appendTerminalEvidenceOutput(prev, data));
+            setTerminalEvidenceNow((prev) => appendTerminalEvidenceOutput(prev, data));
             setTerminalFeed((prev) => {
                 const next = [
                     ...prev,
@@ -887,7 +913,7 @@ export function useWorkspaceTerminalController(
                 return next;
             });
         },
-        [],
+        [setTerminalEvidenceNow],
     );
 
     const clearQuietTimer = React.useCallback(() => {
@@ -930,7 +956,7 @@ export function useWorkspaceTerminalController(
         currentCwdRef.current = initialEvidenceCwd;
         terminalFeedRef.current = [];
         setTerminalFeed([]);
-        setTerminalEvidence(createTerminalEvidence(initialEvidenceCwd));
+        setTerminalEvidenceNow(createTerminalEvidence(initialEvidenceCwd));
         setInputEnabled(false);
         setBusy(false);
         setState("idle");
@@ -940,7 +966,7 @@ export function useWorkspaceTerminalController(
         clearTerminalRecovery();
         setRestarting(false);
         setStopping(false);
-    }, [clearTerminalRecovery, initialEvidenceCwd]);
+    }, [clearTerminalRecovery, initialEvidenceCwd, setTerminalEvidenceNow]);
 
     const reset = React.useCallback(() => {
         clearQuietTimer();
@@ -1479,6 +1505,18 @@ export function useWorkspaceTerminalController(
                 if (ok) {
                     setStarted(true);
                     setInputEnabled(true);
+
+                    const pending = pendingRecoveryInputRef.current;
+                    pendingRecoveryInputRef.current = "";
+
+                    if (pending) {
+                        void sendInput(pending).catch(() => {
+                            pendingRecoveryInputRef.current = (
+                                pending + pendingRecoveryInputRef.current
+                            ).slice(-MAX_PENDING_RECOVERY_INPUT_CHARS);
+                        });
+                    }
+
                     return;
                 }
             }
@@ -1543,13 +1581,18 @@ export function useWorkspaceTerminalController(
                 return;
             }
 
+            const socketLooksStale =
+                lastMessageAt != null &&
+                Date.now() - lastMessageAt > TERMINAL_INPUT_STALE_MS;
+
             if (
                 recoverStateRef.current !== "none" ||
                 restarting ||
                 stopping ||
                 !sessionId ||
                 !inputEnabled ||
-                socketReadyState !== SOCKET_OPEN_READY_STATE
+                socketReadyState !== SOCKET_OPEN_READY_STATE ||
+                socketLooksStale
             ) {
                 pendingRecoveryInputRef.current = (pendingRecoveryInputRef.current + data).slice(
                     -MAX_PENDING_RECOVERY_INPUT_CHARS,
@@ -1577,6 +1620,7 @@ export function useWorkspaceTerminalController(
         [
             disconnectReason,
             inputEnabled,
+            lastMessageAt,
             mirrorOutgoingInput,
             recoverTerminalAfterInactiveInput,
             restarting,
@@ -1907,6 +1951,82 @@ export function useWorkspaceTerminalController(
             };
     }, [clearQuietTimer, clearStaleStartingTimer]);
 
+    const getTerminalEvidenceNow = React.useCallback((): TerminalEvidence => {
+        const pendingCommand = pendingInputLineRef.current.trim();
+
+        if (!pendingCommand) {
+            return terminalEvidenceRef.current;
+        }
+
+        return appendTerminalEvidenceCommand(
+            terminalEvidenceRef.current,
+            pendingCommand,
+            currentCwdRef.current,
+        );
+    }, []);
+
+
+    React.useEffect(() => {
+        if (!args.enabled || typeof window === "undefined") return;
+
+        const shouldSkipRevive = () =>
+            stoppingRef.current ||
+            restartingRef.current ||
+            terminalProcessExitedRef.current ||
+            recoverStateRef.current === "restart_available" ||
+            recoverStateRef.current === "blocked_too_many_sessions";
+
+        const reviveIfStale = () => {
+            if (
+                typeof document !== "undefined" &&
+                document.visibilityState === "hidden"
+            ) {
+                return;
+            }
+
+            if (shouldSkipRevive()) return;
+
+            const hasSession = Boolean(sessionIdRef.current);
+            const socketClosed =
+                hasSession &&
+                socketReadyState !== null &&
+                socketReadyState !== SOCKET_OPEN_READY_STATE;
+
+            const socketStale =
+                hasSession &&
+                lastMessageAt != null &&
+                Date.now() - lastMessageAt > TERMINAL_AUTO_REVIVE_STALE_MS;
+
+            if (socketClosed || socketStale) {
+                void recoverTerminalAfterInactiveInput();
+            }
+        };
+
+        const timer = window.setInterval(
+            reviveIfStale,
+            TERMINAL_REVIVE_WATCHDOG_INTERVAL_MS,
+        );
+
+        window.addEventListener("focus", reviveIfStale);
+        window.addEventListener("pageshow", reviveIfStale);
+        window.addEventListener("online", reviveIfStale);
+
+        reviveIfStale();
+
+        return () => {
+            window.clearInterval(timer);
+            window.removeEventListener("focus", reviveIfStale);
+            window.removeEventListener("pageshow", reviveIfStale);
+            window.removeEventListener("online", reviveIfStale);
+        };
+    }, [
+        args.enabled,
+        lastMessageAt,
+        recoverTerminalAfterInactiveInput,
+        socketReadyState,
+    ]);
+
+
     return {
         available: args.enabled,
         started,
@@ -1920,6 +2040,7 @@ export function useWorkspaceTerminalController(
         state,
         terminalFeed,
         terminalEvidence,
+        getTerminalEvidenceNow,
         syncStatus,
         recoverState,
         recoverMessage,

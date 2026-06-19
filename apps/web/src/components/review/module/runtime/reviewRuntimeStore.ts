@@ -182,6 +182,10 @@ function workspaceStructureKey(workspace: WorkspaceStateV2 | null | undefined) {
         return parentPath ? `${parentPath}/${name}` : name;
     };
 
+    const folders = Array.from(folderPathById.values()).sort((a, b) =>
+        a.localeCompare(b),
+    );
+
     const files = (workspace.nodes as any[])
         .filter((node) => node?.kind === "file")
         .map((node) => filePath(node))
@@ -199,6 +203,7 @@ function workspaceStructureKey(workspace: WorkspaceStateV2 | null | undefined) {
         language: workspace.language ?? null,
         activePath: activeNode ? filePath(activeNode) : null,
         entryPath: entryNode ? filePath(entryNode) : null,
+        folders,
         files,
     });
 }
@@ -273,6 +278,14 @@ function workspaceContentKey(workspace: WorkspaceStateV2 | null | undefined) {
         return parentPath ? `${parentPath}/${name}` : name;
     };
 
+    const folders = (workspace.nodes as any[])
+        .filter((node) => node?.kind === "folder")
+        .map((node) => ({
+            path: filePath(node),
+        }))
+        .filter((entry) => entry.path)
+        .sort((a, b) => a.path.localeCompare(b.path));
+
     const files = (workspace.nodes as any[])
         .filter((node) => node?.kind === "file")
         .map((node) => ({
@@ -297,6 +310,22 @@ function workspaceContentKey(workspace: WorkspaceStateV2 | null | undefined) {
         files,
     });
 }
+function terminalEvidenceContentKey(value: unknown) {
+    const record = asRecord(value);
+    if (!record) return "null";
+
+    const commands = Array.isArray(record.commands)
+        ? record.commands.map((entry) => String(entry ?? "")).filter(Boolean)
+        : [];
+
+    return JSON.stringify({
+        cwd: typeof record.cwd === "string" ? record.cwd : "",
+        commands,
+        outputText:
+            typeof record.outputText === "string" ? record.outputText : "",
+    });
+}
+
 
 function workspacePathForNode(
     nodes: WorkspaceStateV2["nodes"],
@@ -382,6 +411,27 @@ function mergeMissingFilesFromWorkspace(
         openTabs: [...(baseWorkspace.openTabs ?? [])],
         expanded: [...(baseWorkspace.expanded ?? [])],
     };
+
+    const existingFolderPaths = new Set(
+        merged.nodes
+            .filter((node: any) => node?.kind === "folder")
+            .map((node: any) => workspacePathForNode(merged.nodes, String(node.id ?? "")))
+            .filter(Boolean),
+    );
+
+    for (const node of sourceWorkspace.nodes as any[]) {
+        if (node?.kind !== "folder") continue;
+
+        const path = workspacePathForNode(sourceWorkspace.nodes, String(node.id ?? ""));
+        if (!path || existingFolderPaths.has(path)) continue;
+
+        ensureWorkspaceFolderForRuntime({
+            workspace: merged,
+            folderPath: path,
+        });
+
+        existingFolderPaths.add(path);
+    }
 
     const existingPaths = new Set(
         merged.nodes
@@ -1900,6 +1950,8 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
                 Boolean(existing.userEdited) === Boolean(nextExercise.userEdited) &&
                 String(existing.starterHash ?? "") ===
                 String(nextExercise.starterHash ?? "") &&
+                terminalEvidenceContentKey((existing as any)?.terminalEvidence) ===
+                terminalEvidenceContentKey((nextExercise as any).terminalEvidence) &&
                 workspaceContentKey(existing.workspace ?? null) ===
                 workspaceContentKey(workspaceForState)
             );
@@ -2147,6 +2199,18 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
 
             const existingWorkspaceKey = workspaceContentKey(existing?.workspace ?? null);
             const nextWorkspaceKey = workspaceContentKey(workspace ?? null);
+            const patchHasTerminalEvidence = Object.prototype.hasOwnProperty.call(
+                effectivePatch,
+                "terminalEvidence",
+            );
+            const existingTerminalEvidenceKey = terminalEvidenceContentKey(
+                (existing as any)?.terminalEvidence,
+            );
+            const nextTerminalEvidenceKey = terminalEvidenceContentKey(
+                patchHasTerminalEvidence
+                    ? (effectivePatch as any).terminalEvidence
+                    : (existing as any)?.terminalEvidence,
+            );
             const existingCode = String(
                 existing?.code ?? deriveCodeFromWorkspace(existing?.workspace ?? null) ?? "",
             );
@@ -2159,6 +2223,7 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
             const noMeaningfulChange = Boolean(
                 existing &&
                 existingWorkspaceKey === nextWorkspaceKey &&
+                existingTerminalEvidenceKey === nextTerminalEvidenceKey &&
                 existingCode === nextCode &&
                 existingStdin === nextStdin &&
                 existingLanguage === nextLanguageComparable &&
@@ -2171,6 +2236,8 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
                 key,
                 existingWorkspaceKey,
                 nextWorkspaceKey,
+                existingTerminalEvidenceKey,
+                nextTerminalEvidenceKey,
                 existingCodeLength: existingCode.length,
                 nextCodeLength: nextCode.length,
                 existingStdinLength: existingStdin.length,

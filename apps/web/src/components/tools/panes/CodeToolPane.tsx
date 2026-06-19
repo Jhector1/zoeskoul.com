@@ -1253,11 +1253,21 @@ export default function CodeToolPane(props: {
 // Otherwise single-file starter can get stuck in the legacy "single" loading path.
     const usesWorkspaceShell = paneIdeMode.usesWorkspaceShell;
     const workspaceOwnerKey = resolvedEditorOwnerKey ?? editorExerciseStateKey ?? toolScopeKey ?? boundId ?? "general";
+    const workspaceStarterHash = String(
+        (resolvedEditorOwnerKey ? (editorRuntime as any)?.starterHash : null) ??
+        (exerciseKey ? (canonicalReviewRuntime as any)?.starterHash : null) ??
+        (cardRuntimeKey ? (cardRuntime as any)?.starterHash : null) ??
+        "",
+    ).trim();
+    const workspaceOwnerIdentityKey = workspaceStarterHash
+        ? `${workspaceOwnerKey}:starter:${workspaceStarterHash}`
+        : workspaceOwnerKey;
 
     const workspaceContextKey = useMemo(
         () =>
             JSON.stringify({
-                ownerKey: workspaceOwnerKey,
+                ownerKey: workspaceOwnerIdentityKey,
+                starterHash: workspaceStarterHash,
                 language: effectiveLanguage,
                 sqlDatasetId: sqlDatasetId ?? "",
                 sqlSchemaSql: sqlSchemaSql ?? sqlSetupSql ?? "",
@@ -1265,7 +1275,8 @@ export default function CodeToolPane(props: {
                 workspaceShell: usesWorkspaceShell,
             }),
         [
-            workspaceOwnerKey,
+            workspaceOwnerIdentityKey,
+            workspaceStarterHash,
             sqlDatasetId,
             sqlSchemaSql,
             sqlSeedSql,
@@ -1283,6 +1294,7 @@ export default function CodeToolPane(props: {
     const persistTimerRef = useRef<number | null>(null);
     const pendingWorkspaceRef = useRef<WorkspaceStateV2 | null | undefined>(undefined);
     const pendingTerminalEvidenceRef = useRef<TerminalEvidence | null | undefined>(undefined);
+    const latestTerminalEvidenceRef = useRef<TerminalEvidence | null>(null);
     const lastTerminalEvidenceKeyRef = useRef<string>("");
     const lastHandledWorkspaceKeyRef = useRef<string>("");
     const lastHandledStructureKeyRef = useRef<string>("");
@@ -1290,13 +1302,13 @@ export default function CodeToolPane(props: {
     const [localWorkspaceDraft, setLocalWorkspaceDraft] = useState<ReviewWorkspaceDraft | null>(null);
 
     useEffect(() => {
-        if (!isReviewRouteMode || !resolvedEditorOwnerKey) {
+        if (!isReviewRouteMode || !workspaceOwnerIdentityKey) {
             setLocalWorkspaceDraft(null);
             return;
         }
 
-        setLocalWorkspaceDraft(readReviewWorkspaceDraft(resolvedEditorOwnerKey));
-    }, [isReviewRouteMode, resolvedEditorOwnerKey, workspaceContextKey]);
+        setLocalWorkspaceDraft(readReviewWorkspaceDraft(workspaceOwnerIdentityKey));
+    }, [isReviewRouteMode, workspaceOwnerIdentityKey, workspaceContextKey]);
 
     const exerciseWorkspaceReady = Boolean(
         exerciseKey && forceWorkspaceHasContent(exerciseRuntime?.workspace),
@@ -1549,6 +1561,8 @@ export default function CodeToolPane(props: {
             cardRuntimeKey,
             editorOwnerKey: resolvedEditorOwnerKey,
             workspaceContextKey,
+            workspaceOwnerIdentityKey,
+            workspaceStarterHash,
             directRuntimeWorkspaceKey: workspaceKeyOf(directRuntimeWorkspace ?? null),
             finalReviewWorkspaceKey: workspaceKeyOf(finalReviewWorkspace ?? null),
             finalReviewWorkspaceHasContent: forceWorkspaceHasContent(finalReviewWorkspace),
@@ -1638,7 +1652,7 @@ export default function CodeToolPane(props: {
 
             if (shouldEmitCodeFields && resolvedEditorOwnerKey && workspace) {
                 patchEditorWorkspace(resolvedEditorOwnerKey, workspace);
-                writeReviewWorkspaceDraft(resolvedEditorOwnerKey, workspace);
+                writeReviewWorkspaceDraft(workspaceOwnerIdentityKey, workspace);
                 setLocalWorkspaceDraft({ savedAt: Date.now(), workspace });
 
                 onChangeWorkspace?.(workspace);
@@ -1689,6 +1703,11 @@ export default function CodeToolPane(props: {
 
                 syncCodeInputSnapshot?.(boundId, {
                     terminalEvidence: nextEvidence ?? undefined,
+                    submitted: false,
+                    feedbackDismissed: true,
+                    dismissFeedbackOnEdit: true,
+                    userEdited: true,
+                    workspaceOrigin: "user",
                     updatedAt: Date.now(),
                 });
             }
@@ -1717,6 +1736,7 @@ export default function CodeToolPane(props: {
 
     const handleTerminalEvidenceChange = useCallback(
         (evidence: TerminalEvidence) => {
+            latestTerminalEvidenceRef.current = evidence;
             pendingTerminalEvidenceRef.current = evidence;
 
             /**
@@ -1728,6 +1748,11 @@ export default function CodeToolPane(props: {
             if (isReviewRouteMode && resolvedEditorOwnerKey) {
                 patchExerciseRuntime(resolvedEditorOwnerKey, {
                     terminalEvidence: evidence,
+                    submitted: false,
+                    feedbackDismissed: true,
+                    dismissFeedbackOnEdit: true,
+                    userEdited: true,
+                    workspaceOrigin: "user",
                     updatedAt: Date.now(),
                 });
             }
@@ -1828,7 +1853,7 @@ export default function CodeToolPane(props: {
              * registry re-registers during sidebar/direct navigation.
              */
             patchEditorWorkspace(ownerKey, nextWorkspace);
-            writeReviewWorkspaceDraft(ownerKey, nextWorkspace);
+            writeReviewWorkspaceDraft(workspaceOwnerIdentityKey, nextWorkspace);
             setLocalWorkspaceDraft({ savedAt: Date.now(), workspace: nextWorkspace });
             patchExerciseRuntime(ownerKey, {
                 language: effectiveLanguage,
@@ -1988,7 +2013,7 @@ export default function CodeToolPane(props: {
             const next = extractWorkspaceSnapshot(finalReviewWorkspace);
 
             patchEditorWorkspace(resolvedEditorOwnerKey, finalReviewWorkspace);
-            writeReviewWorkspaceDraft(resolvedEditorOwnerKey, finalReviewWorkspace);
+            writeReviewWorkspaceDraft(workspaceOwnerIdentityKey, finalReviewWorkspace);
             patchExerciseRuntime(resolvedEditorOwnerKey, {
                 language: effectiveLanguage,
                 lang: effectiveLanguage,
@@ -2047,7 +2072,7 @@ export default function CodeToolPane(props: {
      *
      * route target -> runtime store workspace -> FullIDE
      */
-    const fullIdeKey = `${workspaceOwnerKey}:${effectiveLanguage}:${usesWorkspaceShell ? "workspace" : "single"}:${reviewWorkspaceNeedsMultiFile ? "multi" : "mono"}`;
+    const fullIdeKey = `${workspaceOwnerIdentityKey}:${effectiveLanguage}:${usesWorkspaceShell ? "workspace" : "single"}:${reviewWorkspaceNeedsMultiFile ? "multi" : "mono"}`;
     const fullIdeLanguage = asWorkspaceLanguage(effectiveLanguage);
     useEffect(() => {
         if (!boundId) return;
@@ -2079,9 +2104,21 @@ export default function CodeToolPane(props: {
                 () => Promise<boolean | void>
             >;
             __zoeFlushAnyTerminalBeforeSubmit?: () => Promise<boolean | void>;
+            __zoeGetTerminalEvidenceBeforeSubmit?: Record<
+                string,
+                () => TerminalEvidence | null | undefined
+            >;
+            __zoeGetAnyTerminalEvidenceBeforeSubmit?: () =>
+                | TerminalEvidence
+                | null
+                | undefined;
         };
 
         win.__zoeFlushTerminalBeforeSubmit ??= {};
+        win.__zoeGetTerminalEvidenceBeforeSubmit ??= {};
+
+        const getLatestTerminalEvidence = () =>
+            latestTerminalEvidenceRef.current ?? pendingTerminalEvidenceRef.current ?? null;
 
         const waitForTerminalFlushSettle = () =>
             new Promise<void>((resolve) => {
@@ -2122,21 +2159,57 @@ export default function CodeToolPane(props: {
         };
 
         win.__zoeFlushAnyTerminalBeforeSubmit = flush;
+        win.__zoeGetAnyTerminalEvidenceBeforeSubmit = getLatestTerminalEvidence;
 
-        if (boundId) {
-            win.__zoeFlushTerminalBeforeSubmit[boundId] = flush;
+        const terminalRegistryKeys = Array.from(
+            new Set(
+                [
+                    boundId,
+                    resolvedEditorOwnerKey,
+                    editorExerciseStateKey,
+                    workspaceOwnerKey,
+                    workspaceOwnerIdentityKey,
+                ]
+                    .map((value) => String(value ?? "").trim())
+                    .filter(Boolean),
+            ),
+        );
+
+        for (const key of terminalRegistryKeys) {
+            win.__zoeFlushTerminalBeforeSubmit[key] = flush;
+            win.__zoeGetTerminalEvidenceBeforeSubmit[key] = getLatestTerminalEvidence;
         }
 
         return () => {
-            if (boundId) {
-                delete win.__zoeFlushTerminalBeforeSubmit?.[boundId];
+            for (const key of terminalRegistryKeys) {
+                if (win.__zoeFlushTerminalBeforeSubmit?.[key] === flush) {
+                    delete win.__zoeFlushTerminalBeforeSubmit[key];
+                }
+
+                if (
+                    win.__zoeGetTerminalEvidenceBeforeSubmit?.[key] ===
+                    getLatestTerminalEvidence
+                ) {
+                    delete win.__zoeGetTerminalEvidenceBeforeSubmit[key];
+                }
+            }
+
+            if (win.__zoeGetAnyTerminalEvidenceBeforeSubmit === getLatestTerminalEvidence) {
+                delete win.__zoeGetAnyTerminalEvidenceBeforeSubmit;
             }
 
             if (win.__zoeFlushAnyTerminalBeforeSubmit === flush) {
                 delete win.__zoeFlushAnyTerminalBeforeSubmit;
             }
         };
-    }, [boundId, flushPendingWorkspace]);
+    }, [
+        boundId,
+        resolvedEditorOwnerKey,
+        editorExerciseStateKey,
+        workspaceOwnerKey,
+        workspaceOwnerIdentityKey,
+        flushPendingWorkspace,
+    ]);
     useEffect(() => {
         if (typeof window === "undefined") return;
         (window as any).__ZOE_REVIEW_WORKSPACE_DEBUG__ = {
@@ -2207,10 +2280,10 @@ export default function CodeToolPane(props: {
                         }}
                         initialWorkspace={finalReviewWorkspace}
                         externalWorkspace={finalReviewWorkspace}
-                        exerciseStateKey={workspaceOwnerKey}
+                        exerciseStateKey={workspaceOwnerIdentityKey}
                         projectScope={{
                             kind: "review-tool" as any,
-                            scopeKey: `review-tool:${workspaceOwnerKey}`,
+                            scopeKey: `review-tool:${workspaceOwnerIdentityKey}`,
                         }}
                         onTerminalSyncReady={handleTerminalSyncReady}
 

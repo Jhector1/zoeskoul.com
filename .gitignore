@@ -77,5 +77,8 @@ infra/redis-data
 .runner-workspaces/
 # accidental ChatGPT/upload analysis archives
 src.zip
+apps/runner/src.zip
+Archive.zip
 packages.zip
 apps/web/src.zip
+apps/runner/Archive.zip

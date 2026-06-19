@@ -52,6 +52,8 @@ export async function flushReviewToolsBeforeSubmit(
           () => Promise<boolean | void>
       >;
       __zoeFlushAnyTerminalBeforeSubmit?: () => Promise<boolean | void>;
+      __zoeGetTerminalEvidenceBeforeSubmit?: Record<string, () => unknown>;
+      __zoeGetAnyTerminalEvidenceBeforeSubmit?: () => unknown;
     };
 
     const boundFlush =
@@ -63,6 +65,21 @@ export async function flushReviewToolsBeforeSubmit(
       await boundFlush();
     } else {
       await win.__zoeFlushAnyTerminalBeforeSubmit?.();
+    }
+
+    const liveTerminalEvidence =
+        (boundId ? win.__zoeGetTerminalEvidenceBeforeSubmit?.[boundId]?.() : null) ??
+        win.__zoeGetAnyTerminalEvidenceBeforeSubmit?.() ??
+        null;
+
+    if (boundId && liveTerminalEvidence) {
+      useReviewRuntimeStore.getState().patchExercise(boundId, {
+        terminalEvidence: liveTerminalEvidence,
+        userEdited: true,
+        updateOrigin: "user",
+        workspaceOrigin: "user",
+        updatedAt: Date.now(),
+      } as any);
     }
   }
 
@@ -86,6 +103,28 @@ export async function flushReviewToolsBeforeSubmit(
   // One more flush after the terminal snapshot tick catches mkdir/touch changes
   // emitted by FullIDE just after the first terminal sync promise resolves.
   await tools?.flushLatest?.();
+
+  if (typeof window !== "undefined" && boundId) {
+    const win = window as typeof window & {
+      __zoeGetTerminalEvidenceBeforeSubmit?: Record<string, () => unknown>;
+      __zoeGetAnyTerminalEvidenceBeforeSubmit?: () => unknown;
+    };
+
+    const liveTerminalEvidence =
+        win.__zoeGetTerminalEvidenceBeforeSubmit?.[boundId]?.() ??
+        win.__zoeGetAnyTerminalEvidenceBeforeSubmit?.() ??
+        null;
+
+    if (liveTerminalEvidence) {
+      useReviewRuntimeStore.getState().patchExercise(boundId, {
+        terminalEvidence: liveTerminalEvidence,
+        userEdited: true,
+        updateOrigin: "user",
+        workspaceOrigin: "user",
+        updatedAt: Date.now(),
+      } as any);
+    }
+  }
 }
 
 const LOADING_TIMEOUT_MS = 8000;
@@ -604,9 +643,44 @@ export default function QuizPracticeCard(props: {
   const { raw } = useTaggedT();
 
   const [loadTimedOut, setLoadTimedOut] = useState(false);
+  const [submitAfterToolsFlushToken, setSubmitAfterToolsFlushToken] = useState(0);
+  const submitAfterToolsFlushInFlightRef = useRef(false);
+  const latestOnSubmitRef = useRef(onSubmit);
+  const lastSubmittedAfterToolsFlushTokenRef = useRef(0);
   const autoRetriedRef = useRef<string | null>(null);
   const lastToolsBindKeyRef = useRef<string | null>(null);
   const lastEnsureRuntimeExerciseKeyRef = useRef<string | null>(null);
+
+  useEffect(() => {
+    latestOnSubmitRef.current = onSubmit;
+  }, [onSubmit]);
+
+  useEffect(() => {
+    if (submitAfterToolsFlushToken <= 0) return;
+    if (
+        lastSubmittedAfterToolsFlushTokenRef.current ===
+        submitAfterToolsFlushToken
+    ) {
+      return;
+    }
+
+    lastSubmittedAfterToolsFlushTokenRef.current =
+        submitAfterToolsFlushToken;
+
+    void Promise.resolve()
+        .then(() => latestOnSubmitRef.current())
+        .catch((error) => {
+          console.error("[QuizPracticeCard] post-flush submit failed", error);
+        })
+        .finally(() => {
+          if (
+              lastSubmittedAfterToolsFlushTokenRef.current ===
+              submitAfterToolsFlushToken
+          ) {
+            submitAfterToolsFlushInFlightRef.current = false;
+          }
+        });
+  }, [submitAfterToolsFlushToken]);
 
   const ex: Exercise | null = useMemo(() => {
     if (!ps?.exercise) {
@@ -1354,8 +1428,30 @@ export default function QuizPracticeCard(props: {
                   <button
                       type="button"
                       onClick={async () => {
-                        await flushReviewToolsBeforeSubmit(toolsAny);
-                        await Promise.resolve(onSubmit());
+                        if (submitAfterToolsFlushInFlightRef.current) return;
+
+                        submitAfterToolsFlushInFlightRef.current = true;
+
+                        try {
+                          await flushReviewToolsBeforeSubmit(toolsAny);
+
+                          /**
+                           * Do not call the current onSubmit closure here.
+                           *
+                           * flushReviewToolsBeforeSubmit updates the runtime store with
+                           * the latest terminal transcript/workspace. The onSubmit prop
+                           * was created by the render BEFORE that flush, so calling it
+                           * in the same click handler can submit stale/no terminal
+                           * evidence and show "Terminal activity missing".
+                           *
+                           * Bump local state and let the next render call the fresh
+                           * onSubmit from an effect.
+                           */
+                          setSubmitAfterToolsFlushToken((token) => token + 1);
+                        } catch (error) {
+                          submitAfterToolsFlushInFlightRef.current = false;
+                          throw error;
+                        }
                       }}
                       disabled={disableCheck}
                       data-testid="review-practice-submit-button"

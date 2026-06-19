@@ -394,6 +394,103 @@ function normalizeTerminalEvidenceForPracticeSubmit(value: unknown) {
   };
 }
 
+function getVisibleTerminalEvidenceForPracticeSubmit() {
+  if (typeof document === "undefined") return null;
+
+  const transcriptText = normalizeVisibleTerminalTranscriptText(
+      Array.from(
+      document.querySelectorAll<HTMLElement>(
+          '[data-testid="interactive-terminal-transcript"], [data-testid="interactive-terminal"]',
+      ),
+  )
+          .map((node) =>
+              typeof node.innerText === "string" && node.innerText.trim()
+                  ? node.innerText
+                  : node.textContent,
+          ),
+  );
+
+  if (!transcriptText) return null;
+
+  return normalizeTerminalEvidenceForPracticeSubmit({ outputText: transcriptText });
+}
+
+function mergeTerminalEvidenceForPracticeSubmit(...values: unknown[]) {
+  const commands: string[] = [];
+  const seenCommands = new Set<string>();
+  const outputParts: string[] = [];
+  let cwd = "";
+
+  for (const value of values) {
+    const evidence = normalizeTerminalEvidenceForPracticeSubmit(value);
+    if (!evidence) continue;
+
+    for (const command of evidence.commands ?? []) {
+      const normalized = String(command ?? "").trim();
+      if (!normalized || seenCommands.has(normalized)) continue;
+      seenCommands.add(normalized);
+      commands.push(normalized);
+    }
+
+    if (String(evidence.outputText ?? "").trim()) {
+      outputParts.push(String(evidence.outputText));
+    }
+
+    if (!cwd && typeof evidence.cwd === "string" && evidence.cwd.trim()) {
+      cwd = evidence.cwd.trim();
+    }
+  }
+
+  const outputText = outputParts.join("\n");
+
+  if (!commands.length && !outputText.trim() && !cwd) return null;
+
+  return {
+    commands,
+    outputText,
+    ...(cwd ? { cwd } : {}),
+  };
+}
+
+function getLiveTerminalEvidenceForPracticeSubmit(candidateKeys: string[]) {
+  if (typeof window === "undefined") return null;
+
+  const win = window as typeof window & {
+    __zoeGetTerminalEvidenceBeforeSubmit?: Record<string, () => unknown>;
+    __zoeGetAnyTerminalEvidenceBeforeSubmit?: () => unknown;
+  };
+
+  const seen = new Set<string>();
+  let keyedEvidence: ReturnType<typeof normalizeTerminalEvidenceForPracticeSubmit> = null;
+
+  for (const candidateKey of candidateKeys) {
+    const key = String(candidateKey ?? "").trim();
+    if (!key || seen.has(key)) continue;
+    seen.add(key);
+
+    const getter = win.__zoeGetTerminalEvidenceBeforeSubmit?.[key];
+    const evidence = normalizeTerminalEvidenceForPracticeSubmit(getter?.());
+    if (evidence) {
+      keyedEvidence = evidence;
+      break;
+    }
+  }
+
+  /**
+   * Last-resort browser fallback.
+   *
+   * The visible xterm transcript is rendered from the terminalFeed. It is the
+   * one source that definitely matches what the learner sees. If the runtime
+   * store/global getter is one render tick behind, this still carries commands
+   * such as `mkdir -p semester/notes ...` into validation.
+   */
+  return mergeTerminalEvidenceForPracticeSubmit(
+      keyedEvidence,
+      win.__zoeGetAnyTerminalEvidenceBeforeSubmit?.(),
+      getVisibleTerminalEvidenceForPracticeSubmit(),
+  );
+}
+
 function practiceQuestionNeedsTerminalEvidence(
     q: Extract<ReviewQuestion, { kind: "practice" }>,
 ) {
@@ -608,7 +705,39 @@ function getRuntimePracticePatchForQuestion(
 
   const found = rankedCandidates[0];
 
-  if (!found) return null;
+  if (!found) {
+    const liveTerminalEvidence = needsTerminalEvidence
+        ? getLiveTerminalEvidenceForPracticeSubmit([
+            boundExerciseKey,
+            activeExerciseKey,
+            stableKey,
+            ...Array.from(wantedIds),
+          ])
+        : null;
+
+    if (!liveTerminalEvidence) return null;
+
+    return {
+      __runtimeStoreKey: boundExerciseKey || activeExerciseKey || stableKey,
+      exerciseKey: qAny.fetch?.exerciseKey ?? qAny.exerciseKey ?? qAny.item?.exerciseKey,
+      exerciseId: qAny.exercise?.id ?? qAny.item?.id,
+      subjectSlug: qAny.fetch?.subject ?? qAny.subjectSlug,
+      moduleSlug: qAny.fetch?.module ?? qAny.moduleSlug,
+      sectionSlug: qAny.fetch?.section ?? qAny.sectionSlug,
+      topicId: wantedTopic,
+      code: "",
+      source: "",
+      stdin: "",
+      codeStdin: "",
+      lang: "bash",
+      language: "bash",
+      codeLang: "bash",
+      terminalEvidence: liveTerminalEvidence,
+      userEdited: true,
+      workspaceOrigin: "user",
+      updatedAt: Date.now(),
+    };
+  }
 
   const estate = found.value;
 
@@ -629,9 +758,26 @@ function getRuntimePracticePatchForQuestion(
                   ? estate.source
                   : "";
 
-  const terminalEvidence = normalizeTerminalEvidenceForPracticeSubmit(
-      estate.terminalEvidence,
-  );
+  /**
+   * Always prefer the live Tools terminal evidence for shell tasks.
+   *
+   * The runtime store can already contain terminalEvidence from a previous
+   * submit/step. If we only fall back when runtime evidence is missing, a stale
+   * transcript can win even while the visible terminal has the correct latest
+   * command. This is the browser-only gap that goldens cannot catch.
+   */
+  const liveTerminalEvidence = needsTerminalEvidence
+      ? getLiveTerminalEvidenceForPracticeSubmit([
+        boundExerciseKey,
+        activeExerciseKey,
+        stableKey,
+        ...Array.from(wantedIds),
+      ])
+      : null;
+
+  let terminalEvidence =
+      liveTerminalEvidence ??
+      normalizeTerminalEvidenceForPracticeSubmit(estate.terminalEvidence);
 
   if (!code.trim() && !terminalEvidence && !workspace) return null;
 
@@ -669,6 +815,11 @@ function getRuntimePracticePatchForQuestion(
       submittedCode: code,
       submittedTerminalCommandCount:
           terminalEvidence?.commands?.length ?? 0,
+      liveTerminalCommandCount:
+          liveTerminalEvidence?.commands?.length ?? 0,
+      runtimeTerminalCommandCount:
+          normalizeTerminalEvidenceForPracticeSubmit(estate.terminalEvidence)
+              ?.commands?.length ?? 0,
     });
   }
 
@@ -1827,3 +1978,4 @@ export function useQuizPracticeBank(args: {
     retryPracticeQuestion,
   };
 }
+import { normalizeVisibleTerminalTranscriptText } from "@/lib/practice/visibleTerminalTranscript";

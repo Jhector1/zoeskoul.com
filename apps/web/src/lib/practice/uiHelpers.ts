@@ -8,6 +8,8 @@ import type {
 import type { QItem } from "@/lib/practice/uiTypes";
 import { serializeWorkspaceForCodeRun } from "@/lib/code/workspaceSubmission";
 import { exportWorkspaceEntries } from "@/components/ide/fsTree";
+import { applyTerminalWorkspaceHintsToEntries } from "@/lib/practice/terminalWorkspaceHints";
+import { normalizeVisibleTerminalTranscriptText } from "@/lib/practice/visibleTerminalTranscript";
 
 function getWorkspaceEntryContent(args: {
     entry: string;
@@ -15,207 +17,6 @@ function getWorkspaceEntryContent(args: {
 }) {
     const match = args.files.find((file) => file.path === args.entry);
     return match ? String(match.content ?? "") : "";
-}
-
-type WorkspaceSubmitEntryForAnswer =
-    | {
-          /**
-           * Existing workspace export entries may omit kind for normal files.
-           * Treat missing kind as "file" to match WorkspaceSyncEntry.
-           */
-          kind?: "file";
-          path: string;
-          content: string;
-      }
-    | {
-          kind: "directory";
-          path: string;
-      };
-
-function normalizeTerminalHintPath(input: unknown) {
-    const value = String(input ?? "")
-        .trim()
-        .replace(/\\/g, "/")
-        .replace(/^\.\//, "")
-        .replace(/\/+/g, "/")
-        .replace(/^\/+/, "");
-
-    if (!value) return "";
-    if (value.includes("\0")) return "";
-
-    const parts = value.split("/").filter(Boolean);
-    if (!parts.length) return "";
-
-    if (parts.some((part) => part === "." || part === "..")) return "";
-
-    return parts.join("/");
-}
-
-function tokenizeTerminalCommandForWorkspaceHints(command: string): string[] {
-    const tokens: string[] = [];
-    let current = "";
-    let quote: "'" | '"' | null = null;
-    let escaped = false;
-
-    for (const char of String(command ?? "")) {
-        if (escaped) {
-            current += char;
-            escaped = false;
-            continue;
-        }
-
-        if (char === "\\") {
-            escaped = true;
-            continue;
-        }
-
-        if (quote) {
-            if (char === quote) quote = null;
-            else current += char;
-            continue;
-        }
-
-        if (char === "'" || char === '"') {
-            quote = char;
-            continue;
-        }
-
-        if (/\s/.test(char)) {
-            if (current) {
-                tokens.push(current);
-                current = "";
-            }
-            continue;
-        }
-
-        if (char === ";" || char === "|" || char === "&") {
-            break;
-        }
-
-        current += char;
-    }
-
-    if (current) tokens.push(current);
-
-    return tokens;
-}
-
-function collectTerminalCommandsForWorkspaceHints(evidence: {
-    commands?: string[];
-    outputText?: string;
-}): string[] {
-    const commands = Array.isArray(evidence.commands)
-        ? evidence.commands.map((entry) => String(entry ?? "").trim()).filter(Boolean)
-        : [];
-
-    const seen = new Set(commands);
-    const outputText = String(evidence.outputText ?? "");
-
-    for (const line of outputText.split(/\r?\n/g)) {
-        const match = line.match(/(?:^|\])[^\r\n$#]*[$#]\s*(.+)$/);
-        const command = String(match?.[1] ?? "").trim();
-
-        if (command && !seen.has(command)) {
-            seen.add(command);
-            commands.push(command);
-        }
-    }
-
-    return commands;
-}
-
-function addDirectoryHint(
-    entries: WorkspaceSubmitEntryForAnswer[],
-    seen: Set<string>,
-    path: string,
-) {
-    const normalized = normalizeTerminalHintPath(path);
-    if (!normalized) return;
-
-    const parts = normalized.split("/");
-    let current = "";
-
-    for (const part of parts) {
-        current = current ? `${current}/${part}` : part;
-
-        if (seen.has(`directory:${current}`) || seen.has(`file:${current}`)) {
-            continue;
-        }
-
-        entries.push({
-            kind: "directory",
-            path: current,
-        });
-        seen.add(`directory:${current}`);
-    }
-}
-
-function addFileHint(
-    entries: WorkspaceSubmitEntryForAnswer[],
-    seen: Set<string>,
-    path: string,
-) {
-    const normalized = normalizeTerminalHintPath(path);
-    if (!normalized) return;
-
-    const parent = normalized.split("/").slice(0, -1).join("/");
-    if (parent) addDirectoryHint(entries, seen, parent);
-
-    if (seen.has(`file:${normalized}`)) return;
-
-    entries.push({
-        kind: "file",
-        path: normalized,
-        content: "",
-    });
-    seen.add(`file:${normalized}`);
-}
-
-function mergeTerminalWorkspaceHintsIntoAnswerFiles(args: {
-    files: WorkspaceSubmitEntryForAnswer[];
-    terminalEvidence?: {
-        commands?: string[];
-        outputText?: string;
-    };
-}) {
-    const files = [...args.files];
-    const seen = new Set<string>();
-
-    for (const entry of files) {
-        const kind = entry.kind === "directory" ? "directory" : "file";
-        const path = normalizeTerminalHintPath(entry.path);
-        if (path) seen.add(`${kind}:${path}`);
-    }
-
-    for (const command of collectTerminalCommandsForWorkspaceHints(
-        args.terminalEvidence ?? {},
-    )) {
-        const tokens = tokenizeTerminalCommandForWorkspaceHints(command);
-        const executable = tokens[0] ?? "";
-
-        if (executable === "mkdir") {
-            for (const token of tokens.slice(1)) {
-                if (!token || token.startsWith("-")) continue;
-                addDirectoryHint(files, seen, token);
-            }
-            continue;
-        }
-
-        if (executable === "touch") {
-            for (const token of tokens.slice(1)) {
-                if (!token || token.startsWith("-")) continue;
-                addFileHint(files, seen, token);
-            }
-            continue;
-        }
-
-        const redirectIndex = tokens.indexOf(">");
-        if (redirectIndex >= 0 && tokens[redirectIndex + 1]) {
-            addFileHint(files, seen, tokens[redirectIndex + 1]);
-        }
-    }
-
-    return files;
 }
 
 function getTerminalEvidence(value: unknown) {
@@ -229,11 +30,77 @@ function getTerminalEvidence(value: unknown) {
               .map((entry) => String(entry ?? "").trim())
               .filter(Boolean)
         : [];
-    const outputText = typeof record.outputText === "string" ? record.outputText : "";
+    const outputText =
+        typeof record.outputText === "string"
+            ? record.outputText
+            : typeof record.output === "string"
+                ? record.output
+                : "";
     const cwd =
         typeof record.cwd === "string" && record.cwd.trim().length > 0
             ? record.cwd.trim()
             : undefined;
+
+    if (!commands.length && !outputText.trim() && !cwd) {
+        return undefined;
+    }
+
+    return {
+        commands,
+        outputText,
+        ...(cwd ? { cwd } : {}),
+    };
+}
+
+type PracticeTerminalEvidenceForSubmit = ReturnType<typeof getTerminalEvidence>;
+
+function getVisibleTerminalEvidenceForSubmit(): PracticeTerminalEvidenceForSubmit {
+    if (typeof document === "undefined") return undefined;
+
+    const outputText = normalizeVisibleTerminalTranscriptText(
+        Array.from(
+            document.querySelectorAll<HTMLElement>(
+                '[data-testid="interactive-terminal-transcript"], [data-testid="interactive-terminal"]',
+            ),
+        ).map((node) =>
+            typeof node.innerText === "string" && node.innerText.trim()
+                ? node.innerText
+                : node.textContent,
+        ),
+    );
+
+    return getTerminalEvidence({ outputText });
+}
+
+function mergeTerminalEvidenceForSubmit(
+    ...values: Array<unknown | PracticeTerminalEvidenceForSubmit>
+): PracticeTerminalEvidenceForSubmit {
+    const commands: string[] = [];
+    const seenCommands = new Set<string>();
+    const outputParts: string[] = [];
+    let cwd: string | undefined;
+
+    for (const value of values) {
+        const evidence = getTerminalEvidence(value);
+        if (!evidence) continue;
+
+        for (const command of evidence.commands ?? []) {
+            const normalized = String(command ?? "").trim();
+            if (!normalized || seenCommands.has(normalized)) continue;
+            seenCommands.add(normalized);
+            commands.push(normalized);
+        }
+
+        if (String(evidence.outputText ?? "").trim()) {
+            outputParts.push(String(evidence.outputText));
+        }
+
+        if (!cwd && evidence.cwd) {
+            cwd = evidence.cwd;
+        }
+    }
+
+    const outputText = normalizeVisibleTerminalTranscriptText(outputParts);
 
     if (!commands.length && !outputText.trim() && !cwd) {
         return undefined;
@@ -436,17 +303,20 @@ export function buildSubmitAnswerFromItem(item: QItem): SubmitAnswer | undefined
             workspaceCode ||
             String((item as any).code ?? (item as any).source ?? "")
         ).trimEnd();
-        const terminalEvidence = getTerminalEvidence((item as any).terminalEvidence);
+        const terminalEvidence = mergeTerminalEvidenceForSubmit(
+            (item as any).terminalEvidence,
+            getVisibleTerminalEvidenceForSubmit(),
+        );
 
         if (!code.trim() && !workspaceSubmission && !terminalEvidence) return undefined;
 
         const workspaceFiles = workspaceSubmission
-            ? mergeTerminalWorkspaceHintsIntoAnswerFiles({
-                  files: exportWorkspaceEntries(workspace.nodes),
+            ? applyTerminalWorkspaceHintsToEntries({
+                  entries: exportWorkspaceEntries(workspace.nodes),
                   terminalEvidence,
               })
-            : mergeTerminalWorkspaceHintsIntoAnswerFiles({
-                  files: [],
+            : applyTerminalWorkspaceHintsToEntries({
+                  entries: [],
                   terminalEvidence,
               });
 

@@ -483,21 +483,21 @@
         },
         {
           "path": "README.md",
-          "content": "# Back up notes and clear old clutter\n\nUse shell commands to inspect, create, move, copy, or remove files as needed.\n",
+          "content": "# Back up notes and clear old clutter\n\nThis workspace starts after the files have already been sorted. Back up the notes and remove the old temp file.\n",
           "language": "text"
         },
         {
-          "path": "downloads/notes.txt",
+          "path": "semester/notes/notes.txt",
           "content": "chapter notes\n",
           "language": "text"
         },
         {
-          "path": "downloads/homework.txt",
+          "path": "semester/assignments/homework.txt",
           "content": "problem set\n",
           "language": "text"
         },
         {
-          "path": "downloads/project.sh",
+          "path": "semester/scripts/project.sh",
           "content": "echo project\n",
           "language": "bash"
         },
@@ -521,21 +521,21 @@
           },
           {
             "path": "README.md",
-            "content": "# Back up notes and clear old clutter\n\nUse shell commands to inspect, create, move, copy, or remove files as needed.\n",
+            "content": "# Back up notes and clear old clutter\n\nThis workspace starts after the files have already been sorted. Back up the notes and remove the old temp file.\n",
             "language": "text"
           },
           {
-            "path": "downloads/notes.txt",
+            "path": "semester/notes/notes.txt",
             "content": "chapter notes\n",
             "language": "text"
           },
           {
-            "path": "downloads/homework.txt",
+            "path": "semester/assignments/homework.txt",
             "content": "problem set\n",
             "language": "text"
           },
           {
-            "path": "downloads/project.sh",
+            "path": "semester/scripts/project.sh",
             "content": "echo project\n",
             "language": "bash"
           },

@@ -5,6 +5,8 @@ import {
     getPracticeStateIdentity,
     sanitizeSavedPracticePatch,
 } from "@/components/review/quiz/hooks/useQuizPracticeBank";
+import { collectTerminalWorkspaceCommands } from "@/lib/practice/terminalWorkspaceHints";
+import { normalizeVisibleTerminalTranscriptText } from "@/lib/practice/visibleTerminalTranscript";
 
 describe("useQuizPracticeBank practice identity guards", () => {
     const subjectSlug = "python-data-functions";
@@ -195,5 +197,29 @@ describe("useQuizPracticeBank practice identity guards", () => {
         expect((sanitized as any).workspace?.language).toBe("python");
         expect((sanitized as any).code).toBe("print('learner work')\n");
         expect((sanitized as any).userEdited).toBe(true);
+    });
+
+    it("preserves prompt boundaries in visible terminal transcript fallback", () => {
+        const transcript = normalizeVisibleTerminalTranscriptText([
+            "[starting workspace terminal][zoeskoul]~$ mkdir -p practice/notes[zoeskoul]~$ mv practice-inbox/card.txt practice/notes/card.txt",
+        ]);
+
+        expect(transcript).toContain("\n[zoeskoul]~$ mkdir -p practice/notes");
+        expect(transcript).toContain("\n[zoeskoul]~$ mv practice-inbox/card.txt practice/notes/card.txt");
+    });
+
+    it("extracts separate shell commands from a normalized visible transcript fallback", () => {
+        const outputText = normalizeVisibleTerminalTranscriptText([
+            "[starting workspace terminal][zoeskoul]~$ mkdir -p practice/notes[zoeskoul]~$ mv practice-inbox/card.txt practice/notes/card.txt",
+        ]);
+
+        expect(
+            collectTerminalWorkspaceCommands({
+                outputText,
+            }),
+        ).toEqual([
+            "mkdir -p practice/notes",
+            "mv practice-inbox/card.txt practice/notes/card.txt",
+        ]);
     });
 });

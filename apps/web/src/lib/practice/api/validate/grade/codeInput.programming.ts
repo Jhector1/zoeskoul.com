@@ -12,6 +12,7 @@ import {
     createJudge0CodeRunnerFromEnv,
     validateCodeAgainstTests,
 } from "@zoeskoul/curriculum-runtime";
+import { applyTerminalWorkspaceHintsToPathSets } from "@/lib/practice/terminalWorkspaceHints";
 
 const DEFAULT_LIMITS = {
     cpu_time_limit: 2,
@@ -136,142 +137,6 @@ function submittedFolderExists(
     return false;
 }
 
-function addSubmittedFolderPathFromTerminalCommand(
-    folderPath: string,
-    submittedFolderPaths: Set<string>,
-) {
-    const normalized = normalizeSubmittedFilePath(folderPath);
-    if (!normalized) return;
-
-    const parts = normalized.split("/");
-    let current = "";
-
-    for (const part of parts) {
-        current = current ? `${current}/${part}` : part;
-        submittedFolderPaths.add(current);
-    }
-}
-
-function addSubmittedFilePathFromTerminalCommand(
-    filePath: string,
-    submittedFilePaths: Set<string>,
-    submittedFolderPaths: Set<string>,
-) {
-    const normalized = normalizeSubmittedFilePath(filePath);
-    if (!normalized) return;
-
-    submittedFilePaths.add(normalized);
-
-    const parts = normalized.split("/");
-    let current = "";
-
-    for (const part of parts.slice(0, -1)) {
-        current = current ? `${current}/${part}` : part;
-        submittedFolderPaths.add(current);
-    }
-}
-
-function tokenizeSimpleShellCommand(command: string): string[] {
-    const tokens: string[] = [];
-    let current = "";
-    let quote: "'" | '"' | null = null;
-    let escaped = false;
-
-    for (const char of String(command ?? "")) {
-        if (escaped) {
-            current += char;
-            escaped = false;
-            continue;
-        }
-
-        if (char === "\\") {
-            escaped = true;
-            continue;
-        }
-
-        if (quote) {
-            if (char === quote) {
-                quote = null;
-            } else {
-                current += char;
-            }
-            continue;
-        }
-
-        if (char === "'" || char === '"') {
-            quote = char;
-            continue;
-        }
-
-        if (/\s/.test(char)) {
-            if (current) {
-                tokens.push(current);
-                current = "";
-            }
-            continue;
-        }
-
-        if (char === ";" || char === "|" || char === "&") {
-            break;
-        }
-
-        current += char;
-    }
-
-    if (current) tokens.push(current);
-
-    return tokens;
-}
-
-function applyTerminalCommandWorkspaceHints(args: {
-    terminalEvidence?: TerminalEvidenceInput;
-    submittedFilePaths: Set<string>;
-    submittedFolderPaths: Set<string>;
-}) {
-    const outputText = String(args.terminalEvidence?.outputText ?? "");
-    const commands = collectTerminalEvidenceCommands(
-        args.terminalEvidence,
-        outputText,
-    );
-
-    for (const command of commands) {
-        const tokens = tokenizeSimpleShellCommand(command);
-        const executable = tokens[0] ?? "";
-
-        if (executable === "mkdir") {
-            for (const token of tokens.slice(1)) {
-                if (!token || token.startsWith("-")) continue;
-                addSubmittedFolderPathFromTerminalCommand(
-                    token,
-                    args.submittedFolderPaths,
-                );
-            }
-            continue;
-        }
-
-        if (executable === "touch") {
-            for (const token of tokens.slice(1)) {
-                if (!token || token.startsWith("-")) continue;
-                addSubmittedFilePathFromTerminalCommand(
-                    token,
-                    args.submittedFilePaths,
-                    args.submittedFolderPaths,
-                );
-            }
-            continue;
-        }
-
-        const redirectIndex = tokens.indexOf(">");
-        if (redirectIndex >= 0 && tokens[redirectIndex + 1]) {
-            addSubmittedFilePathFromTerminalCommand(
-                tokens[redirectIndex + 1],
-                args.submittedFilePaths,
-                args.submittedFolderPaths,
-            );
-        }
-    }
-}
-
 function validateWorkspaceExpectations(args: {
     expected: ProgrammingExpected;
     entry?: string;
@@ -308,7 +173,7 @@ function validateWorkspaceExpectations(args: {
         }
     }
 
-    applyTerminalCommandWorkspaceHints({
+    applyTerminalWorkspaceHintsToPathSets({
         terminalEvidence: args.terminalEvidence,
         submittedFilePaths,
         submittedFolderPaths,
