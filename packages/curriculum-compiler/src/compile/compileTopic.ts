@@ -4,7 +4,7 @@ import path from "node:path";
 import type { CourseBlueprint, TopicAuthoringDraft } from "@zoeskoul/curriculum-contracts";
 import type { AiProvider, TopicRetryContext } from "@zoeskoul/curriculum-ai";
 import { generateTopicAuthoringDraftAttempt } from "@zoeskoul/curriculum-ai";
-import { getRepoRoot } from "@zoeskoul/curriculum-core";
+import { getDraftReportsRoot } from "@zoeskoul/curriculum-core";
 import {
     getProfileServices,
     getSubjectShape,
@@ -56,10 +56,7 @@ function getTopicReportDir(args: {
     topicId: string;
 }) {
     return path.join(
-        getRepoRoot(),
-        ".curriculum-drafts",
-        "reports",
-        args.subjectSlug,
+        getDraftReportsRoot(args.subjectSlug),
         `module${args.moduleOrder}`,
         args.topicId,
     );

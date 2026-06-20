@@ -26,7 +26,7 @@ import type {LearningIdeConfig} from "@/lib/ide/learningIdeConfig";
 import type {WorkspaceStateV2} from "@/components/ide/types";
 import {useReviewRuntimeStore} from "@/components/review/module/runtime/reviewRuntimeStore";
 import {getExerciseStateKey} from "@/components/review/module/runtime/exerciseKeys";
-import {resolveSqlRunnerConfig} from "@/lib/subjects/sql/runtime/resolveSqlRunnerConfig";
+import {resolveSqlRunnerConfig} from "@/lib/subjects/sql/sql/runtime/resolveSqlRunnerConfig";
 import type { SqlPaneOptions } from "@/components/code/runner/components/sql/results-pane";
 
 import {resolveExerciseWorkspace, deriveEntryCode} from "@/components/review/module/runtime/exerciseWorkspaceResolver";

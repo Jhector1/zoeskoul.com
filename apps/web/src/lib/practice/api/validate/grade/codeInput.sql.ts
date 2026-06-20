@@ -5,7 +5,7 @@ import {
     classifySqlResultMismatch,
     classifySqlRunFailure,
 } from "@/lib/code/feedback";
-import { getSqlDataset } from "@/lib/subjects/sql/datasets";
+import { getSqlDataset } from "@/lib/subjects/sql/sql/datasets";
 import {
     extractFirstSqlTable,
     sqlTablesEqual,

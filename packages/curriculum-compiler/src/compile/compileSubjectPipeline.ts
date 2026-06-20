@@ -15,9 +15,9 @@ import {
     getSubjectShape,
 } from "@zoeskoul/curriculum-profiles";
 import {
+    getDraftReportsRoot,
     getDraftTopicBundlePath,
     getDraftTopicMessagesPath,
-    getRepoRoot,
 } from "@zoeskoul/curriculum-core";
 import { buildSubjectManifestFromPlan } from "../emit/buildSubjectManifestFromPlan.js";
 import { buildSubjectMessagesFromPlan } from "../emit/buildSubjectMessagesFromPlan.js";
@@ -83,10 +83,7 @@ function getTopicReportDir(args: {
     topicId: string;
 }) {
     return path.join(
-        getRepoRoot(),
-        ".curriculum-drafts",
-        "reports",
-        args.subjectSlug,
+        getDraftReportsRoot(args.subjectSlug),
         `module${args.moduleOrder}`,
         args.topicId,
     );
@@ -189,7 +186,7 @@ async function writeRetrySummary(args: {
         retryCodes: string[];
     }>;
 }) {
-    const dir = path.join(getRepoRoot(), ".curriculum-drafts", "reports", args.subjectSlug);
+    const dir = getDraftReportsRoot(args.subjectSlug);
     await fs.mkdir(dir, { recursive: true });
     await fs.writeFile(
         path.join(dir, "retry-summary.json"),

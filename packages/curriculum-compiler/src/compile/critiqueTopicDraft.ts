@@ -4,7 +4,7 @@ import type {
     TopicAuthoringDraft,
 } from "@zoeskoul/curriculum-contracts";
 import type { AiProvider } from "@zoeskoul/curriculum-ai";
-import { getRepoRoot } from "@zoeskoul/curriculum-core";
+import { getDraftReportsRoot } from "@zoeskoul/curriculum-core";
 import {
     getProfileServices,
     getSubjectShape,
@@ -188,10 +188,7 @@ export async function critiqueTopicDraft(args: {
         sectionSlug: node.section.sectionSlug,
         moduleOrder: node.moduleIndex,
         reportDir: path.join(
-            getRepoRoot(),
-            ".curriculum-drafts",
-            "reports",
-            args.blueprint.subjectSlug,
+            getDraftReportsRoot(args.blueprint.subjectSlug),
             `module${node.moduleIndex}`,
             node.topic.topicId,
         ),

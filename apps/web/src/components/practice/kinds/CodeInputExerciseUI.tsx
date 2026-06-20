@@ -22,7 +22,7 @@ import CodeFeedbackCallout from "@/components/practice/kinds/CodeFeedbackCallout
 import {
     resolveSqlRunnerConfig,
     type SqlTableSnapshots,
-} from "@/lib/subjects/sql/runtime/resolveSqlRunnerConfig";
+} from "@/lib/subjects/sql/sql/runtime/resolveSqlRunnerConfig";
 import {isRunnerLanguage, RunnerLanguage} from "@zoeskoul/code-contracts";
 
 type CodeInputExercise = Extract<Exercise, { kind: "code_input" }>;

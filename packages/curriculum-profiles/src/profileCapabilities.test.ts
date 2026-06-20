@@ -31,6 +31,20 @@ describe("workspace profile file and folder creation capabilities", () => {
         expect(profile.capabilities.createFiles?.enabled).toBe(false);
         expect(profile.capabilities.createFolders?.enabled).toBe(false);
     });
+
+    it("registers the Linux terminal workspace runner profile", () => {
+        const profile = WORKSPACE_PROFILES["terminal-workspace-runner"];
+
+        expect(profile).toBeDefined();
+        expect(profile.capabilities.terminal.enabled).toBe(true);
+        expect(profile.capabilities.filesystem.enabled).toBe(true);
+        expect(profile.capabilities.multiFileProjects.enabled).toBe(true);
+        expect(profile.capabilities.createFiles?.enabled).toBe(true);
+        expect(profile.capabilities.createFolders?.enabled).toBe(true);
+        expect(profile.capabilities.packageInstall.enabled).toBe(false);
+        expect(profile.preferredActionLanguage.join("\n")).toMatch(/terminal/i);
+        expect(profile.preferredActionLanguage.join("\n")).toMatch(/mkdir|touch|cp|mv|rm/i);
+    });
 });
 describe("profile code_input capabilities", () => {
     it("marks math as concept-only and keeps bash/python/sql code-capable", () => {

@@ -1,8 +1,4 @@
-import { TOPIC_MANIFESTS as PYTHON_TOPIC_MANIFESTS } from "@/lib/subjects/python/topics.generated";
-import { TOPIC_MANIFESTS as PYTHON_V2_TOPIC_MANIFESTS } from "@/lib/subjects/python-v2/topics.generated";
-import { TOPIC_MANIFESTS as PYTHON_DATA_FUNCTIONS_TOPIC_MANIFESTS } from "@/lib/subjects/python-data-functions/topics.generated";
-import { TOPIC_MANIFESTS as SQL_TOPIC_MANIFESTS } from "@/lib/subjects/sql/topics.generated";
-import { TOPIC_MANIFESTS as SQL_V2_TOPIC_MANIFESTS } from "@/lib/subjects/sql-v2/topics.generated";
+import { SUBJECT_GENERATOR_SOURCES } from "@/lib/subjects/subjects.generated";
 
 type TopicManifest = {
   topicId: string;
@@ -18,13 +14,13 @@ type TopicCard = {
   spec?: { steps?: Array<{ id?: string; exerciseKey?: string }> };
 };
 
-const SUBJECT_TOPIC_MANIFESTS: Record<string, Record<string, TopicManifest>> = {
-  python: PYTHON_TOPIC_MANIFESTS as Record<string, TopicManifest>,
-  "python-v2": PYTHON_V2_TOPIC_MANIFESTS as Record<string, TopicManifest>,
-  "python-data-functions": PYTHON_DATA_FUNCTIONS_TOPIC_MANIFESTS as Record<string, TopicManifest>,
-  sql: SQL_TOPIC_MANIFESTS as Record<string, TopicManifest>,
-  "sql-v2": SQL_V2_TOPIC_MANIFESTS as Record<string, TopicManifest>,
-};
+const SUBJECT_TOPIC_MANIFESTS: Record<string, Record<string, TopicManifest>> =
+  Object.fromEntries(
+    Object.entries(SUBJECT_GENERATOR_SOURCES).map(([subjectSlug, source]) => [
+      subjectSlug,
+      source.topicManifests as Record<string, TopicManifest>,
+    ]),
+  );
 
 function getProjectSteps(card: TopicCard) {
   return card.project?.steps ?? card.spec?.steps ?? [];

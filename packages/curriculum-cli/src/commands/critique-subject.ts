@@ -6,6 +6,18 @@ import {
     renderProgressBar,
 } from "../utils/renderProgressBar.js";
 
+function getReportsRootFromTopics(
+    topics: Array<{ reportDir: string }>,
+    subjectSlug: string,
+) {
+    const firstReportDir = topics[0]?.reportDir;
+    if (!firstReportDir) {
+        return path.join(".curriculum-drafts", "reports", subjectSlug);
+    }
+
+    return path.dirname(path.dirname(firstReportDir));
+}
+
 function makeProgressLabel(info: {
     stage: string;
     moduleSlug?: string;
@@ -88,7 +100,7 @@ export async function runCritiqueSubject(blueprintPath: string) {
 
         console.log(`Mode: ${result.mode}`);
         console.log(
-            `Reports root: ${path.join(".curriculum-drafts", "reports", result.subjectSlug)}`,
+            `Reports root: ${path.relative(process.cwd(), getReportsRootFromTopics(result.topics, result.subjectSlug))}`,
         );
         console.log(
             `Critique issues: ${summary.critiqueErrors + summary.critiqueWarnings} (${summary.critiqueErrors} errors, ${summary.critiqueWarnings} warnings)`,

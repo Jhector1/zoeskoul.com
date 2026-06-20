@@ -181,6 +181,9 @@ sleep 30
 
 pnpm --filter @zoeskoul/web validate:full
 
+pnpm curr:course -- check linux linux-terminal-fundamentals --resume
+
+
 
 
 

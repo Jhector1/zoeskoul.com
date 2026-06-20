@@ -5,7 +5,7 @@ import path from "node:path";
 import {
     projectRoot,
     exists,
-    getDirectories,
+    findSubjectManifestFiles,
     walkFiles,
     readJsonFile,
     toSafeIdentifier,
@@ -192,21 +192,28 @@ async function main() {
     const onlySubject = readFlag("subject");
     const onlyTopic = readFlag("topic");
 
-    const subjectDirs = await getDirectories(subjectsRoot);
+    const manifestFiles = await findSubjectManifestFiles(subjectsRoot);
 
-    for (const subjectName of subjectDirs) {
-        if (subjectName.startsWith("_")) continue;
+    if (manifestFiles.length < 1) {
+        throw new Error(
+            `No nested subject manifests were found under ${subjectsRoot}. Move generated subjects to src/lib/subjects/<catalogSlug>/<subjectSlug>/ before running this generator.`,
+        );
+    }
+
+    for (const manifestFile of manifestFiles) {
+        const subjectDir = path.dirname(manifestFile);
+        const subjectName = path.basename(subjectDir);
         if (onlySubject && subjectName !== onlySubject) continue;
-
-        const subjectDir = path.join(subjectsRoot, subjectName);
         await buildSubjectRegistry(subjectDir, {
             requiredTopicId: onlyTopic,
         });
     }
 
     if (onlySubject) {
-        const subjectDir = path.join(subjectsRoot, onlySubject);
-        if (!(await exists(subjectDir))) {
+        const foundSubject = manifestFiles.some(
+            (manifestFile) => path.basename(path.dirname(manifestFile)) === onlySubject,
+        );
+        if (!foundSubject) {
             throw new Error(
                 `Subject folder "${onlySubject}" does not exist under ${subjectsRoot}`,
             );

@@ -43,8 +43,10 @@ Topic delivery policy:
 - Project code_input count must be between ${targets.projectCodeInputMin} and ${targets.projectCodeInputMax}.
 - Quiz card will show ${targets.quizVisibleDefault} random exercises by default.
 - Quiz card may show up to ${targets.quizVisibleMax} exercises.
-- Do not put code_input exercises in quiz practice.
-- All code_input exercises become project practice.
+- AUTHORING DISTINCTION: quizDraft is the source array for all practice items, including code_input.
+- You MUST put required code_input authoring items inside quizDraft.
+- Do not place code_input only in projectDraft; projectDraft is optional metadata, not the exercise source.
+- The published learner quiz will exclude code_input later; the compiler automatically moves code_input from quizDraft into project practice.
 - Attempts are unlimited when maxAttempts is null.
 `
         : "";
@@ -68,7 +70,8 @@ Policy rules:
 - Do not approximate the mix when exact counts are provided.
 - Do not generate more than the required count for any exercise kind.
 - Do not replace missing non-code exercises with extra code_input exercises.
-- If required counts say code_input: 3, generate exactly 3 code_input exercises.
+- If required counts say code_input: 3, generate exactly 3 code_input exercises inside quizDraft.
+- If required counts say fill_blank_choice: 2, generate exactly 2 fill_blank_choice exercises, not 5.
 - If delivery policy gives a min/max range, the exact required counts still win.
 - "Dominant" means the planned dominant kind has the highest planned count; it does not mean you should add extra exercises.
 - Keep beginner-friendly variety, but do not violate the required counts.`;

@@ -78,6 +78,7 @@ export async function runPublishCourse(
     await publishDraftToLive({
         draftSubjectSlug: checkedDraftTarget.liveSubjectSlug,
         liveSubjectSlug: liveTarget.liveSubjectSlug,
+        courseSlug,
     });
 
     console.log(

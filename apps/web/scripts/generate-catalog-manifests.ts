@@ -3,8 +3,7 @@
 import path from "node:path";
 import {
     assertUnique,
-    exists,
-    getDirectories,
+    findSubjectManifestFiles,
     readJsonFile,
     relFromProject,
     toSafeIdentifier,
@@ -199,7 +198,7 @@ function createUnknownSubjectError(args: {
             `Catalog "${args.catalogSlug}" references unknown subject "${args.subjectSlug}".`,
             "",
             "Fix one of these:",
-            `1. Add apps/web/src/lib/subjects/${args.subjectSlug}/subject.manifest.json`,
+            `1. Add apps/web/src/lib/subjects/<catalogSlug>/${args.subjectSlug}/subject.manifest.json`,
             `2. Remove "${args.subjectSlug}" from the catalog subjectSlugs`,
             "3. Change defaultSubjectSlug to an existing subject",
             "",
@@ -209,19 +208,11 @@ function createUnknownSubjectError(args: {
 }
 
 async function loadSubjectCatalogEntries() {
-    const subjectDirs = await getDirectories(subjectsRoot);
+    const manifestFiles = await findSubjectManifestFiles(subjectsRoot);
     const subjectsBySlug: Record<string, SubjectCatalogEntry> = {};
 
-    for (const subjectName of subjectDirs) {
-        if (subjectName.startsWith("_")) continue;
-
-        const manifestFile = path.join(
-            subjectsRoot,
-            subjectName,
-            "subject.manifest.json",
-        );
-        if (!(await exists(manifestFile))) continue;
-
+    for (const manifestFile of manifestFiles) {
+        const subjectName = path.basename(path.dirname(manifestFile));
         const manifest = await readJsonFile<SubjectManifestJson>(manifestFile);
         const subjectSlug = String(manifest.subject?.slug ?? subjectName).trim();
         const catalogSlug = String(

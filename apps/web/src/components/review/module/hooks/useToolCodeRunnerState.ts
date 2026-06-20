@@ -9,7 +9,7 @@ import { DEFAULT_SQL_DIALECT } from "@/components/code/runner/constants";
 import {
     resolveSqlRunnerConfig,
     type SqlTableSnapshots,
-} from "@/lib/subjects/sql/runtime/resolveSqlRunnerConfig";
+} from "@/lib/subjects/sql/sql/runtime/resolveSqlRunnerConfig";
 import type { LearningIdeConfig } from "@/lib/ide/learningIdeConfig";
 import { useReviewRuntimeStore } from "../runtime/reviewRuntimeStore";
 import { deriveEntryCode } from "../runtime/exerciseWorkspaceResolver";

@@ -1,0 +1,217 @@
+{
+  "title": "What the Terminal Is",
+  "summary": "Understand the terminal as a place to type commands and see the computer respond.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Introduction to the Terminal",
+      "bodyMarkdown": "The terminal is a powerful tool that allows you to interact with your computer using text commands. Unlike graphical interfaces, the terminal provides a direct way to control your system by typing commands and receiving text-based feedback.\n\n### Example\n\nA common command is `pwd`, which stands for 'print working directory'. This command tells you the current directory you are in.\n\n```bash\n$ pwd\n/home/user\n```\n\nThis output shows that you are in the `/home/user` directory.\n\n### Try it yourself\nOpen your terminal and type `pwd` to see your current directory."
+    },
+    {
+      "id": "sketch2",
+      "title": "Navigating the File System",
+      "bodyMarkdown": "In the terminal, you can navigate through your file system using commands like `cd` (change directory), `ls` (list), and `mkdir` (make directory).\n\n- **`cd`**: Changes the current directory.\n- **`ls`**: Lists the files and directories in the current directory.\n- **`mkdir`**: Creates a new directory.\n\n### Example\n```bash\n$ mkdir new_folder\n$ cd new_folder\n$ pwd\n/home/user/new_folder\n```\n\nThis sequence creates a new directory called `new_folder`, moves into it, and confirms the change with `pwd`.\n\n### Your turn\nTry creating a new directory and navigating into it using `mkdir` and `cd`."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "quiz1",
+      "kind": "single_choice",
+      "title": "Purpose of the Terminal",
+      "prompt": "What is the primary purpose of the terminal?",
+      "hint": "Think about how the terminal allows you to interact with your computer.",
+      "help": {
+        "concept": "The terminal is used to execute commands and interact with the operating system.",
+        "hint_1": "The terminal is a text-based interface for command execution.",
+        "hint_2": "The terminal allows you to type commands to control your computer."
+      },
+      "options": [
+        "To browse the internet",
+        "To execute commands and interact with the operating system",
+        "To edit images",
+        "To play games"
+      ],
+      "correctOptionIds": [
+        "b"
+      ]
+    },
+    {
+      "id": "quiz2",
+      "kind": "single_choice",
+      "title": "Command to List Files",
+      "prompt": "Which command is used to list files in the current directory?",
+      "hint": "This command shows the contents of the directory.",
+      "help": {
+        "concept": "The `ls` command lists files and directories in the current directory.",
+        "hint_1": "The command starts with 'l'.",
+        "hint_2": "It's a two-letter command that lists directory contents."
+      },
+      "options": [
+        "pwd",
+        "cd",
+        "ls",
+        "mkdir"
+      ],
+      "correctOptionIds": [
+        "c"
+      ]
+    },
+    {
+      "id": "quiz3",
+      "kind": "multi_choice",
+      "title": "Commands for Navigation",
+      "prompt": "Which of the following commands are used for navigating the file system? (Choose all that apply)",
+      "hint": "Consider commands that help you move around directories.",
+      "help": {
+        "concept": "Commands like `cd`, `pwd`, and `ls` are used for navigation.",
+        "hint_1": "One command changes directories, another lists contents.",
+        "hint_2": "Think about commands that help you see where you are and move to different places."
+      },
+      "options": [
+        "cd",
+        "ls",
+        "pwd",
+        "mkdir"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c"
+      ]
+    },
+    {
+      "id": "quiz4",
+      "kind": "drag_reorder",
+      "title": "Order of Commands to Create and Enter a Directory",
+      "prompt": "Arrange the commands in the correct order to create a directory and navigate into it.",
+      "hint": "First, create the directory, then move into it.",
+      "help": {
+        "concept": "The sequence involves creating a directory and then changing into it.",
+        "hint_1": "Start with making the directory.",
+        "hint_2": "After creating, use the command to change directories."
+      },
+      "tokens": [
+        "mkdir new_folder",
+        "cd new_folder",
+        "pwd"
+      ],
+      "correctOrder": [
+        "mkdir new_folder",
+        "cd new_folder",
+        "pwd"
+      ]
+    },
+    {
+      "id": "quiz5",
+      "kind": "fill_blank_choice",
+      "title": "Command to Print Working Directory",
+      "prompt": "Fill in the blank: The command to print the current working directory is `[blank1]`.",
+      "hint": "This command starts with 'p'.",
+      "help": {
+        "concept": "The `pwd` command shows the current directory path.",
+        "hint_1": "The command is three letters long.",
+        "hint_2": "It stands for 'print working directory'."
+      },
+      "template": "The command to print the current working directory is `[blank1]`.",
+      "choices": [
+        "pwd",
+        "cd",
+        "ls",
+        "mkdir"
+      ],
+      "correctValue": "pwd"
+    },
+    {
+      "id": "quiz6",
+      "kind": "fill_blank_choice",
+      "title": "Command to Change Directory",
+      "prompt": "Fill in the blank: To change directories, use the `[blank1]` command.",
+      "hint": "This command is two letters long.",
+      "help": {
+        "concept": "The `cd` command is used to change directories.",
+        "hint_1": "The command starts with 'c'.",
+        "hint_2": "It stands for 'change directory'."
+      },
+      "template": "To change directories, use the `[blank1]` command.",
+      "choices": [
+        "pwd",
+        "cd",
+        "ls",
+        "mkdir"
+      ],
+      "correctValue": "cd"
+    },
+    {
+      "id": "quiz7",
+      "kind": "code_input",
+      "title": "Using pwd Command",
+      "prompt": "Use the `pwd` command to display the current directory path.",
+      "hint": "Type `pwd` in the terminal to see the current directory.",
+      "help": {
+        "concept": "The `pwd` command outputs the current directory path.",
+        "hint_1": "Simply type `pwd` and press enter.",
+        "hint_2": "This command will show you where you are in the file system."
+      },
+      "starterCode": "# Type your command below\n",
+      "solutionCode": "pwd\n",
+      "tests": [
+        {
+          "stdout": "/home/user\n",
+          "match": "includes"
+        }
+      ],
+      "recipeType": "fixed_tests"
+    },
+    {
+      "id": "quiz8",
+      "kind": "code_input",
+      "title": "Creating and Navigating Directories",
+      "prompt": "Create a directory named `test_dir` and navigate into it.",
+      "hint": "Use `mkdir` to create and `cd` to navigate.",
+      "help": {
+        "concept": "Use `mkdir` to create a directory and `cd` to enter it.",
+        "hint_1": "First, create the directory with `mkdir test_dir`.",
+        "hint_2": "Then, navigate into it using `cd test_dir`."
+      },
+      "starterCode": "# Create and navigate into a directory\n",
+      "solutionCode": "mkdir test_dir\ncd test_dir\n",
+      "tests": [
+        {
+          "stdout": "/home/user/test_dir\n",
+          "match": "includes"
+        }
+      ],
+      "recipeType": "fixed_tests"
+    },
+    {
+      "id": "quiz9",
+      "kind": "code_input",
+      "title": "Listing Files in a Directory",
+      "prompt": "List all files in the current directory using the appropriate command.",
+      "hint": "Use the `ls` command to list files.",
+      "help": {
+        "concept": "The `ls` command lists all files and directories in the current directory.",
+        "hint_1": "Type `ls` and press enter.",
+        "hint_2": "This command will show you the contents of the current directory."
+      },
+      "starterCode": "# List files in the current directory\n",
+      "solutionCode": "ls\n",
+      "tests": [
+        {
+          "stdout": "file1.txt\nfile2.txt\n",
+          "match": "includes"
+        }
+      ],
+      "recipeType": "fixed_tests"
+    }
+  ],
+  "projectDraft": {
+    "title": "Terminal Navigation Project",
+    "stepIds": [
+      "quiz7",
+      "quiz8",
+      "quiz9"
+    ]
+  }
+}

@@ -4,9 +4,9 @@
 
 import path from "node:path";
 import {
+    findSubjectManifestFiles,
+    getSubjectRelativeDir,
     projectRoot,
-    exists,
-    getDirectories,
     readJsonFile,
     toSafeIdentifier,
     assertUnique,
@@ -25,7 +25,7 @@ type SubjectManifestJson = {
 };
 
 async function main() {
-    const subjectDirs = await getDirectories(subjectsRoot);
+    const manifestFiles = await findSubjectManifestFiles(subjectsRoot);
 
     const subjectEntries: Array<{
         slug: string;
@@ -36,22 +36,18 @@ async function main() {
         topicsImportPath: string;
     }> = [];
 
-    for (const subjectName of subjectDirs) {
-        if (subjectName.startsWith("_")) continue;
-
-        const subjectDir = path.join(subjectsRoot, subjectName);
-        const manifestFile = path.join(subjectDir, "subject.manifest.json");
-
-        if (!(await exists(manifestFile))) continue;
-
+    for (const manifestFile of manifestFiles) {
+        const subjectDir = path.dirname(manifestFile);
+        const subjectDirRelative = getSubjectRelativeDir(subjectsRoot, manifestFile);
         const json = await readJsonFile<SubjectManifestJson>(manifestFile);
-        const manifestSlug = String(json.subject?.slug ?? subjectName);
+        const folderName = path.basename(subjectDir);
+        const manifestSlug = String(json.subject?.slug ?? folderName);
         const genKey = String(json.subject?.genKey ?? "").trim();
 
-        if (json.subject?.slug && json.subject.slug !== subjectName) {
+        if (json.subject?.slug && json.subject.slug !== folderName) {
             throw new Error(
                 `subject slug mismatch in ${manifestFile}\n` +
-                `- folder name: ${subjectName}\n` +
+                `- folder name: ${folderName}\n` +
                 `- json subject.slug: ${json.subject.slug}`,
             );
         }
@@ -65,8 +61,8 @@ async function main() {
             genKey,
             importName: toSafeIdentifier(manifestSlug, "subjectManifest", "s"),
             topicsImportName: toSafeIdentifier(`${manifestSlug}_topic_manifests`, "topicManifests", "t"),
-            importPath: `./${subjectName}/subject.manifest.json`,
-            topicsImportPath: `./${subjectName}/topics.generated`,
+            importPath: `./${subjectDirRelative}/subject.manifest.json`,
+            topicsImportPath: `./${subjectDirRelative}/topics.generated`,
         });
     }
 
@@ -75,6 +71,13 @@ async function main() {
         "subject slug",
         outputFile,
     );
+
+    if (subjectEntries.length < 1) {
+        throw new Error(
+            `No nested subject manifests were found under ${subjectsRoot}. Move generated subjects to src/lib/subjects/<catalogSlug>/<subjectSlug>/ before running this generator.`,
+        );
+    }
+
     const importLines = subjectEntries.flatMap((entry) => [
         `import ${entry.importName} from "${entry.importPath}";`,
         `import { TOPIC_MANIFESTS as ${entry.topicsImportName} } from "${entry.topicsImportPath}";`,

@@ -1,0 +1,30 @@
+{
+  "topicId": "what-the-terminal-is",
+  "ok": false,
+  "issues": [
+    {
+      "code": "PROJECT_CODE_INPUT_TOO_SMALL",
+      "category": "clarity",
+      "severity": "error",
+      "message": "Expected at least 2 code_input project exercise(s), but the draft has 1."
+    },
+    {
+      "code": "EXERCISE_POLICY_KIND_OVER_TARGET",
+      "category": "clarity",
+      "severity": "error",
+      "message": "Exercise policy targets 2 \"fill_blank_choice\" exercise(s), but the draft has 4."
+    },
+    {
+      "code": "EXERCISE_POLICY_CODE_INPUT_UNDER_TARGET",
+      "category": "clarity",
+      "severity": "error",
+      "message": "Exercise policy expects 3 \"code_input\" exercise(s), but the draft has 1."
+    },
+    {
+      "code": "EXERCISE_POLICY_DOMINANT_KIND_MISMATCH",
+      "category": "clarity",
+      "severity": "warn",
+      "message": "Exercise policy expects \"code_input\" to be dominant, but the draft is dominated by \"fill_blank_choice\"."
+    }
+  ]
+}

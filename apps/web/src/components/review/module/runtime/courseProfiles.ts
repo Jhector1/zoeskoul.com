@@ -3,7 +3,7 @@ import { DEFAULT_SQL_DIALECT } from "@/components/code/runner/constants";
 import {
   resolveSqlRunnerConfig,
   type ResolvedSqlRunnerConfig,
-} from "@/lib/subjects/sql/runtime/resolveSqlRunnerConfig";
+} from "@/lib/subjects/sql/sql/runtime/resolveSqlRunnerConfig";
 import {isUsableStarterCode} from "@/components/review/module/runtime/starterContent";
 import { resolveEffectiveExerciseRuntime } from "@zoeskoul/curriculum-runtime/runtime";
 

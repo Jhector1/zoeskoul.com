@@ -407,7 +407,7 @@ export async function validateDraftSubject(subjectSlug: string) {
         }
     }
 
-    const messagesRoot = getDraftMessagesRoot();
+    const messagesRoot = getDraftMessagesRoot(subjectSlug);
     if (await pathExists(messagesRoot)) {
         const localeDirs = await fs.readdir(messagesRoot, { withFileTypes: true });
 

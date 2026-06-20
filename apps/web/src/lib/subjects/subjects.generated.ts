@@ -7,32 +7,32 @@ import type {
   TopicManifestRefMap,
 } from "@/lib/subjects/_core/subjectManifestTypes";
 
-import appliedPythonProjects from "./applied-python-projects/subject.manifest.json";
-import { TOPIC_MANIFESTS as appliedPythonProjectsTopicManifests } from "./applied-python-projects/topics.generated";
-import linuxTerminalFundamentals from "./linux-terminal-fundamentals/subject.manifest.json";
-import { TOPIC_MANIFESTS as linuxTerminalFundamentalsTopicManifests } from "./linux-terminal-fundamentals/topics.generated";
-import python from "./python/subject.manifest.json";
-import { TOPIC_MANIFESTS as pythonTopicManifests } from "./python/topics.generated";
-import pythonDataFunctions from "./python-data-functions/subject.manifest.json";
-import { TOPIC_MANIFESTS as pythonDataFunctionsTopicManifests } from "./python-data-functions/topics.generated";
-import pythonV2 from "./python-v2/subject.manifest.json";
-import { TOPIC_MANIFESTS as pythonV2TopicManifests } from "./python-v2/topics.generated";
-import sql from "./sql/subject.manifest.json";
-import { TOPIC_MANIFESTS as sqlTopicManifests } from "./sql/topics.generated";
-import sqlV2 from "./sql-v2/subject.manifest.json";
-import { TOPIC_MANIFESTS as sqlV2TopicManifests } from "./sql-v2/topics.generated";
+import linuxTerminalFundamentals from "./linux/linux-terminal-fundamentals/subject.manifest.json";
+import { TOPIC_MANIFESTS as linuxTerminalFundamentalsTopicManifests } from "./linux/linux-terminal-fundamentals/topics.generated";
+import appliedPythonProjects from "./python/applied-python-projects/subject.manifest.json";
+import { TOPIC_MANIFESTS as appliedPythonProjectsTopicManifests } from "./python/applied-python-projects/topics.generated";
+import pythonDataFunctions from "./python/python-data-functions/subject.manifest.json";
+import { TOPIC_MANIFESTS as pythonDataFunctionsTopicManifests } from "./python/python-data-functions/topics.generated";
+import pythonV2 from "./python/python-v2/subject.manifest.json";
+import { TOPIC_MANIFESTS as pythonV2TopicManifests } from "./python/python-v2/topics.generated";
+import python from "./python/python/subject.manifest.json";
+import { TOPIC_MANIFESTS as pythonTopicManifests } from "./python/python/topics.generated";
+import sqlV2 from "./sql/sql-v2/subject.manifest.json";
+import { TOPIC_MANIFESTS as sqlV2TopicManifests } from "./sql/sql-v2/topics.generated";
+import sql from "./sql/sql/subject.manifest.json";
+import { TOPIC_MANIFESTS as sqlTopicManifests } from "./sql/sql/topics.generated";
 
 
-export type GeneratedSubjectGenKey = "python_part1" | "linux_terminal_fundamentals" | "sql_for_beginners";
+export type GeneratedSubjectGenKey = "linux_terminal_fundamentals" | "python_part1" | "sql_for_beginners";
 
 export const SUBJECT_MANIFESTS: Record<string, SubjectManifest> = {
-  "applied-python-projects": appliedPythonProjects as SubjectManifest,
   "linux-terminal-fundamentals": linuxTerminalFundamentals as SubjectManifest,
-  "python": python as SubjectManifest,
+  "applied-python-projects": appliedPythonProjects as SubjectManifest,
   "python-data-functions": pythonDataFunctions as SubjectManifest,
   "python-v2": pythonV2 as SubjectManifest,
-  "sql": sql as SubjectManifest,
+  "python": python as SubjectManifest,
   "sql-v2": sqlV2 as SubjectManifest,
+  "sql": sql as SubjectManifest,
 };
 
 export const SUBJECT_GENERATOR_SOURCES: Record<
@@ -44,23 +44,17 @@ export const SUBJECT_GENERATOR_SOURCES: Record<
     topicManifests: TopicManifestRefMap;
   }
 > = {
-  "applied-python-projects": {
-    subjectSlug: "applied-python-projects",
-    genKey: "python_part1",
-    manifest: appliedPythonProjects as SubjectManifest,
-    topicManifests: appliedPythonProjectsTopicManifests as TopicManifestRefMap,
-  },
   "linux-terminal-fundamentals": {
     subjectSlug: "linux-terminal-fundamentals",
     genKey: "linux_terminal_fundamentals",
     manifest: linuxTerminalFundamentals as SubjectManifest,
     topicManifests: linuxTerminalFundamentalsTopicManifests as TopicManifestRefMap,
   },
-  "python": {
-    subjectSlug: "python",
+  "applied-python-projects": {
+    subjectSlug: "applied-python-projects",
     genKey: "python_part1",
-    manifest: python as SubjectManifest,
-    topicManifests: pythonTopicManifests as TopicManifestRefMap,
+    manifest: appliedPythonProjects as SubjectManifest,
+    topicManifests: appliedPythonProjectsTopicManifests as TopicManifestRefMap,
   },
   "python-data-functions": {
     subjectSlug: "python-data-functions",
@@ -74,11 +68,11 @@ export const SUBJECT_GENERATOR_SOURCES: Record<
     manifest: pythonV2 as SubjectManifest,
     topicManifests: pythonV2TopicManifests as TopicManifestRefMap,
   },
-  "sql": {
-    subjectSlug: "sql",
-    genKey: "sql_for_beginners",
-    manifest: sql as SubjectManifest,
-    topicManifests: sqlTopicManifests as TopicManifestRefMap,
+  "python": {
+    subjectSlug: "python",
+    genKey: "python_part1",
+    manifest: python as SubjectManifest,
+    topicManifests: pythonTopicManifests as TopicManifestRefMap,
   },
   "sql-v2": {
     subjectSlug: "sql-v2",
@@ -86,13 +80,19 @@ export const SUBJECT_GENERATOR_SOURCES: Record<
     manifest: sqlV2 as SubjectManifest,
     topicManifests: sqlV2TopicManifests as TopicManifestRefMap,
   },
+  "sql": {
+    subjectSlug: "sql",
+    genKey: "sql_for_beginners",
+    manifest: sql as SubjectManifest,
+    topicManifests: sqlTopicManifests as TopicManifestRefMap,
+  },
 };
 
 export const SUBJECT_GENERATOR_SOURCES_BY_GENKEY: Record<
   GeneratedSubjectGenKey,
   Array<(typeof SUBJECT_GENERATOR_SOURCES)[keyof typeof SUBJECT_GENERATOR_SOURCES]>
 > = {
-  "python_part1": [SUBJECT_GENERATOR_SOURCES["applied-python-projects"], SUBJECT_GENERATOR_SOURCES["python"], SUBJECT_GENERATOR_SOURCES["python-data-functions"], SUBJECT_GENERATOR_SOURCES["python-v2"]],
   "linux_terminal_fundamentals": [SUBJECT_GENERATOR_SOURCES["linux-terminal-fundamentals"]],
-  "sql_for_beginners": [SUBJECT_GENERATOR_SOURCES["sql"], SUBJECT_GENERATOR_SOURCES["sql-v2"]],
+  "python_part1": [SUBJECT_GENERATOR_SOURCES["applied-python-projects"], SUBJECT_GENERATOR_SOURCES["python-data-functions"], SUBJECT_GENERATOR_SOURCES["python-v2"], SUBJECT_GENERATOR_SOURCES["python"]],
+  "sql_for_beginners": [SUBJECT_GENERATOR_SOURCES["sql-v2"], SUBJECT_GENERATOR_SOURCES["sql"]],
 };

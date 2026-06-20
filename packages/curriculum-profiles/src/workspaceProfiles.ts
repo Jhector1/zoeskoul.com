@@ -174,4 +174,62 @@ export const WORKSPACE_PROFILES: Record<string, WorkspaceProfile> = {
         ],
         forbiddenActionLanguage: [],
     },
+    "terminal-workspace-runner": {
+        id: "terminal-workspace-runner",
+        name: "Terminal workspace runner",
+        ui: {
+            editorLabel: "terminal",
+            runButtonLabel: "terminal command",
+            outputPanelLabel: "terminal output",
+            feedbackPanelLabel: "feedback area",
+            terminalPanelLabel: "terminal",
+            filesPanelLabel: "file explorer",
+        },
+        capabilities: {
+            singleFileCodeInput: { enabled: true },
+            multiFileProjects: { enabled: true },
+            terminal: {
+                enabled: true,
+                label: "Terminal",
+                notes: "Learners complete tasks by typing shell commands in the workspace terminal.",
+            },
+            filesystem: {
+                enabled: true,
+                label: "Workspace filesystem",
+                notes: "Learners create, move, copy, rename, remove, and inspect files inside the lesson workspace.",
+            },
+            stdinStdout: { enabled: true },
+            packageInstall: { enabled: false },
+            externalNetwork: { enabled: false },
+            uploads: { enabled: false },
+            createFiles: {
+                enabled: true,
+                label: "Create file",
+                notes: "Learners create files with terminal commands such as touch, cp, mv, or shell redirection.",
+            },
+            createFolders: {
+                enabled: true,
+                label: "Create folder",
+                notes: "Learners create folders with terminal commands such as mkdir and mkdir -p.",
+            },
+        },
+        preferredActionLanguage: [
+            "Use the terminal to complete the task.",
+            "Type Linux commands at the prompt.",
+            "Use pwd and ls to inspect the current workspace.",
+            "Use mkdir, touch, cp, mv, rm, cat, head, tail, or wc only when the lesson asks for them.",
+            "Check the terminal output and file explorer.",
+            "Click Check Answer when the workspace matches the goal.",
+        ],
+        forbiddenActionLanguage: [
+            "Use sudo",
+            "Install packages",
+            "Use external network access",
+            "Change system directories",
+            "Use rm -rf /",
+            "Leave the lesson workspace",
+            "Edit hidden solution files",
+        ],
+    },
+
 };

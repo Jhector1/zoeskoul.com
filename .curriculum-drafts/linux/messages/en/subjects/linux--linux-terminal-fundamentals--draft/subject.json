@@ -1,0 +1,109 @@
+{
+  "subjects": {
+    "linux--linux-terminal-fundamentals--draft": {
+      "title": "Linux Terminal Fundamentals",
+      "description": "A beginner-friendly Linux course focused on terminal navigation, files, folders, safe command habits, and workspace-based practice.",
+      "moreComingSoon": "More Linux Terminal Fundamentals lessons are coming soon."
+    }
+  },
+  "modules": {
+    "linux--linux-terminal-fundamentals--draft": {
+      "linux-1-terminal-navigation": {
+        "title": "Terminal Navigation Basics",
+        "description": "Learn what the terminal is, how to know where you are, how to list files, and how to move between folders.",
+        "outcomes": [
+          "Explain what a terminal command does.",
+          "Use pwd and ls to inspect the current location.",
+          "Use cd, ., .., and ~ to move around safely.",
+          "Create a simple folder map using terminal commands."
+        ],
+        "why": [
+          "Builds confidence with terminal navigation basics.",
+          "Prepares learners for the next skills in the course."
+        ]
+      },
+      "linux-2-files-and-folders": {
+        "title": "Files, Folders, and Viewing Content",
+        "description": "Create, copy, move, rename, delete, and inspect files from the terminal.",
+        "outcomes": [
+          "Create folders and files with mkdir, mkdir -p, and touch.",
+          "Copy, move, and rename files using cp and mv.",
+          "Use safe deletion habits with rm.",
+          "Inspect text files with cat, head, tail, and wc."
+        ],
+        "why": [
+          "Builds confidence with files, folders, and viewing content.",
+          "Prepares learners for the next skills in the course."
+        ]
+      },
+      "linux-3-final-capstone": {
+        "title": "Final Capstone: File Room Handoff",
+        "description": "Use the terminal to clean up a small real-world workspace and leave it ready for someone else.",
+        "outcomes": [
+          "Inspect a workspace before changing it.",
+          "Create a clean folder structure for a real task.",
+          "Move, copy, rename, and remove files safely.",
+          "Verify the finished workspace with terminal commands."
+        ],
+        "why": [
+          "Builds confidence with final capstone: file room handoff.",
+          "Prepares learners for the next skills in the course."
+        ]
+      }
+    }
+  },
+  "sections": {
+    "linux--linux-terminal-fundamentals--draft": {
+      "linux-1-terminal-navigation": {
+        "linux--linux-terminal-fundamentals--draft-linux-terminal-fundamentals-linux-1-orientation": {
+          "title": "Terminal Orientation",
+          "description": "Learn what the terminal is, where am i? pwd and ls, moving around with cd through focused examples and practice.",
+          "weeks": null,
+          "bullets": [
+            "What the Terminal Is",
+            "Where Am I? pwd and ls",
+            "Moving Around with cd"
+          ]
+        },
+        "linux--linux-terminal-fundamentals--draft-linux-terminal-fundamentals-linux-1-module-project": {
+          "title": "Module Project",
+          "description": "Learn project: terminal map through focused examples and practice.",
+          "weeks": null,
+          "bullets": [
+            "Project: Terminal Map"
+          ]
+        }
+      },
+      "linux-2-files-and-folders": {
+        "linux--linux-terminal-fundamentals--draft-linux-terminal-fundamentals-linux-2-file-workflow": {
+          "title": "File Workflow",
+          "description": "Learn creating folders and files, copy, move, and rename, viewing file contents through focused examples and practice.",
+          "weeks": null,
+          "bullets": [
+            "Creating Folders and Files",
+            "Copy, Move, and Rename",
+            "Viewing File Contents"
+          ]
+        },
+        "linux--linux-terminal-fundamentals--draft-linux-terminal-fundamentals-linux-2-module-project": {
+          "title": "Module Project",
+          "description": "Learn project: notes organizer through focused examples and practice.",
+          "weeks": null,
+          "bullets": [
+            "Project: Notes Organizer"
+          ]
+        }
+      },
+      "linux-3-final-capstone": {
+        "linux--linux-terminal-fundamentals--draft-linux-terminal-fundamentals-linux-3-final-capstone": {
+          "title": "Final Capstone",
+          "description": "Learn capstone: file room handoff through focused examples and practice.",
+          "weeks": null,
+          "bullets": [
+            "Capstone: File Room Handoff"
+          ]
+        }
+      }
+    }
+  }
+}

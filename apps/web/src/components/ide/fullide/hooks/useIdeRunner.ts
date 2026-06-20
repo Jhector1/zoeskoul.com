@@ -135,6 +135,7 @@ export function buildProjectRunRequest(args: {
     sqlSeedSql?: string;
     sqlSetupSql?: string;
     canUseMultiFile: boolean;
+    preferWorkspaceFiles?: boolean;
     code?: string;
 }): ProjectSqlReq | ProjectCodeReq {
     const {
@@ -151,6 +152,7 @@ export function buildProjectRunRequest(args: {
         sqlSeedSql,
         sqlSetupSql,
         canUseMultiFile,
+        preferWorkspaceFiles,
         code,
     } = args;
 
@@ -203,9 +205,10 @@ export function buildProjectRunRequest(args: {
             resultShape: sqlResultShape,
         };
     }
-    const shouldUseMultiFile = canUseMultiFile && files.length > 1;
+    const shouldUseWorkspaceFiles =
+        canUseMultiFile && (files.length > 1 || preferWorkspaceFiles === true);
 
-    if (!shouldUseMultiFile) {
+    if (!shouldUseWorkspaceFiles) {
         return {
             kind: "code",
             language,
@@ -278,6 +281,7 @@ export function useIdeRunner({
                 sqlSetupSql:
                     args.language === "sql" ? (args.sqlSetupSql ?? sqlSetupSql) : undefined,
                 canUseMultiFile,
+                preferWorkspaceFiles: backend === "pty",
                 code: args.code,
             });
 

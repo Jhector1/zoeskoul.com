@@ -18,6 +18,7 @@ const subjectSlug = "python--course-quality-aggregation-test";
 const reportRoot = path.join(
     getRepoRoot(),
     ".curriculum-drafts",
+    "python",
     "reports",
     subjectSlug,
 );

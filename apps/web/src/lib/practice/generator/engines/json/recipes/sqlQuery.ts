@@ -4,7 +4,7 @@ import {
     starterCodeForGeneratedExercise
 } from "@/lib/practice/generator/engines/utils";
 import type { RecipeHandler } from "./types";
-import { resolveSqlRunnerConfig } from "@/lib/subjects/sql/runtime/resolveSqlRunnerConfig";
+import { resolveSqlRunnerConfig } from "@/lib/subjects/sql/sql/runtime/resolveSqlRunnerConfig";
 import { buildSqlExpectedExample } from "./expectedExample";
 import { makeSqlExpected } from "@/lib/practice/generator/engines/sql/sqlExpected";
 

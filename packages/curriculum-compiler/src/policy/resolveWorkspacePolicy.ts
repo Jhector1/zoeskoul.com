@@ -95,6 +95,17 @@ export function resolveWorkspacePolicy(args: {
         args.blueprint.workspaceProfileId ??
         "browser-code-runner";
     const base = WORKSPACE_PROFILES[baseProfileId];
+
+    if (!base) {
+        throw new Error(
+            `Unknown workspaceProfileId "${baseProfileId}". Known workspace profiles: ${Object.keys(
+                WORKSPACE_PROFILES,
+            )
+                .sort()
+                .join(", ")}`,
+        );
+    }
+
     const blueprintWorkspace = deepMergeWorkspace(base, args.blueprint.workspaceOverrides);
     const workspace = deepMergeWorkspace(
         blueprintWorkspace,

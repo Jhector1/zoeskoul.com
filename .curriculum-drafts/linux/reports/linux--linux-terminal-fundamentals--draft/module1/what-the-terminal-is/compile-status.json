@@ -1,0 +1,8 @@
+{
+  "reportDir": "/Users/admin/Documents/NextJSProject/zoeskoul.com/.curriculum-drafts/linux/reports/linux--linux-terminal-fundamentals--draft/module1/what-the-terminal-is",
+  "status": "failed",
+  "attempts": 3,
+  "finalAttempt": 2,
+  "errorCode": "CRITIQUE_VALIDATION_FAILED",
+  "errorMessage": "Critique failed for topic \"what-the-terminal-is\"\nModule: linux-1-terminal-navigation\nSection: linux-terminal-fundamentals-linux-1-orientation\nReport dir: /Users/admin/Documents/NextJSProject/zoeskoul.com/.curriculum-drafts/linux/reports/linux--linux-terminal-fundamentals--draft/module1/what-the-terminal-is\n- Exercise policy expects 3 \"code_input\" exercise(s), but the draft has 2."
+}

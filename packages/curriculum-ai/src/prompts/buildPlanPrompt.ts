@@ -1,5 +1,16 @@
 import type { CourseBlueprint } from "@zoeskoul/curriculum-contracts";
 
+export const COURSE_STRUCTURE_NAMING_RULES = [
+  "Use normalized readable slugs for every future generated course.",
+  "moduleSlug format: <subjectSlug>-module-<number>-<short-topic-area>, for example linux-module-1-terminal-navigation.",
+  "sectionSlug format: <subjectSlug>-module-<number>-<short-section-role>, for example linux-module-1-orientation or linux-module-1-project.",
+  "prefix format: <subject_slug_with_underscores>_module_<number>, for example linux_module_1.",
+  "Do not use shorthand prefixes such as lin1, py1, sql1, js1, or bash1.",
+  "Do not use bare module slugs such as linux-1, python-1, sql-1, or module-1.",
+  "Do not duplicate the course slug inside module or section slugs, for example avoid linux-terminal-fundamentals-linux-1-orientation.",
+  "Keep topicId short and content-based, for example what-the-terminal-is, moving-around, or notes-organizer-project.",
+] as const;
+
 export function buildPlanPrompt(blueprint: CourseBlueprint) {
   return {
     system: "You generate curriculum structure only. Return valid JSON only.",
@@ -10,6 +21,7 @@ export function buildPlanPrompt(blueprint: CourseBlueprint) {
         "Do not generate learner copy beyond short planning fields.",
         "Keep output structural and deterministic.",
         "Do not invent unsupported course mechanics.",
+        ...COURSE_STRUCTURE_NAMING_RULES,
       ],
     }),
   };

@@ -1,14 +1,19 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import {
+  getBackupRoot,
+  getDraftCatalogRoot,
   getBackupSubjectManifestPath,
   getBackupTopicBundlePath,
   getBackupTopicMessagesPath,
+  getDraftSubjectMessagesPath,
   getDraftMessagesRoot,
   getDraftSubjectManifestPath,
   getDraftSubjectRoot,
   getDraftTopicBundlePath,
   getDraftTopicMessagesPath,
+  getLiveSubjectMessagesRoot,
+  getSubjectMessagesPath,
   getSubjectManifestPath,
   getTopicBundlePath,
   getTopicMessagesPath,
@@ -110,20 +115,32 @@ function makeTimestamp() {
   return new Date().toISOString().replace(/[:.]/g, "-");
 }
 
+function makeBackupKey(args: {
+  courseSlug?: string;
+  liveSubjectSlug: string;
+}) {
+  const now = new Date();
+  const date = [
+    now.getUTCFullYear(),
+    String(now.getUTCMonth() + 1).padStart(2, "0"),
+    String(now.getUTCDate()).padStart(2, "0"),
+  ].join("-");
+  const time = [
+    String(now.getUTCHours()).padStart(2, "0"),
+    String(now.getUTCMinutes()).padStart(2, "0"),
+    String(now.getUTCSeconds()).padStart(2, "0"),
+  ].join("-");
+  const scope = args.courseSlug ?? args.liveSubjectSlug;
+
+  return `${scope}--${date}--${time}`;
+}
+
 function getBackupSubjectMessagesPath(
-    timestamp: string,
+    backupKey: string,
     locale: string,
     subjectSlug: string,
 ) {
-  return path.join(
-      ".curriculum-backups",
-      timestamp,
-      "messages",
-      locale,
-      "subjects",
-      subjectSlug,
-      "subject.json",
-  );
+  return path.join(getBackupRoot(backupKey, subjectSlug), "messages", locale, "subjects", subjectSlug, "subject.json");
 }
 
 async function readDraftJsonForLive(args: {
@@ -150,11 +167,15 @@ export async function publishDraft(args: { subjectSlug: string }) {
 export async function publishDraftToLive(args: {
   draftSubjectSlug: string;
   liveSubjectSlug: string;
+  courseSlug?: string;
 }) {
   const timestamp = makeTimestamp();
+  const backupKey = makeBackupKey({
+    courseSlug: args.courseSlug,
+    liveSubjectSlug: args.liveSubjectSlug,
+  });
   const draftSubjectRoot = getDraftSubjectRoot(args.draftSubjectSlug);
-  const draftMessagesRoot = getDraftMessagesRoot();
-  const liveMessagesRoot = path.join("apps/web/src/i18n/messages");
+  const draftMessagesRoot = getDraftMessagesRoot(args.draftSubjectSlug);
 
   const draftManifestPath = getDraftSubjectManifestPath(args.draftSubjectSlug);
   const liveManifestPath = getSubjectManifestPath(args.liveSubjectSlug);
@@ -165,7 +186,7 @@ export async function publishDraftToLive(args: {
 
   await backupIfExists(
       liveManifestPath,
-      getBackupSubjectManifestPath(timestamp, args.liveSubjectSlug),
+      getBackupSubjectManifestPath(backupKey, args.liveSubjectSlug),
   );
 
   const manifestRaw = await readDraftJsonForLive({
@@ -211,7 +232,7 @@ export async function publishDraftToLive(args: {
         await backupIfExists(
             liveBundlePath,
             getBackupTopicBundlePath(
-                timestamp,
+                backupKey,
                 args.liveSubjectSlug,
                 moduleDir.name,
                 topicId,
@@ -248,27 +269,21 @@ export async function publishDraftToLive(args: {
 
       if (!(await pathExists(draftSubjectMessagesDir))) continue;
 
-      const draftSubjectJsonPath = path.join(
-          draftMessagesRoot,
+      const draftSubjectJsonPath = getDraftSubjectMessagesPath(
           locale,
-          "subjects",
           args.draftSubjectSlug,
-          "subject.json",
       );
 
-      const liveSubjectJsonPath = path.join(
-          liveMessagesRoot,
+      const liveSubjectJsonPath = getSubjectMessagesPath(
           locale,
-          "subjects",
           args.liveSubjectSlug,
-          "subject.json",
       );
 
       if (await pathExists(draftSubjectJsonPath)) {
         await backupIfExists(
             liveSubjectJsonPath,
             getBackupSubjectMessagesPath(
-                timestamp,
+                backupKey,
                 locale,
                 args.liveSubjectSlug,
             ),
@@ -315,7 +330,7 @@ export async function publishDraftToLive(args: {
           await backupIfExists(
               liveMessagePath,
               getBackupTopicMessagesPath(
-                  timestamp,
+                  backupKey,
                   locale,
                   args.liveSubjectSlug,
                   moduleDir.name,
@@ -335,5 +350,5 @@ export async function publishDraftToLive(args: {
     }
   }
 
-  return { ok: true, backupTimestamp: timestamp };
+  return { ok: true, backupKey, backupTimestamp: timestamp };
 }

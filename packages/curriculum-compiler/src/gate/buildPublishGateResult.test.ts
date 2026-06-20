@@ -8,6 +8,7 @@ const subjectSlug = "publish-gate-quality-test";
 const reportRoot = path.join(
     getRepoRoot(),
     ".curriculum-drafts",
+    "python",
     "reports",
     subjectSlug,
 );

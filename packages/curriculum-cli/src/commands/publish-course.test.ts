@@ -76,6 +76,7 @@ describe("runPublishCourse", () => {
             },
         });
         expect(mockedCompiler.publishDraftToLive).toHaveBeenCalledWith({
+            courseSlug: "python-data-functions",
             draftSubjectSlug: "python--python-data-functions--draft",
             liveSubjectSlug: "python-v2",
         });

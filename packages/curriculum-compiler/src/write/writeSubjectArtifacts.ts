@@ -1,5 +1,9 @@
 import fs from "node:fs/promises";
 import path from "node:path";
+import {
+    getDraftSubjectManifestPath,
+    getDraftSubjectMessagesPath,
+} from "@zoeskoul/curriculum-core";
 
 async function ensureDir(filePath: string) {
     await fs.mkdir(path.dirname(filePath), { recursive: true });
@@ -17,12 +21,15 @@ export async function writeSubjectArtifacts(args: {
     subjectManifest: unknown;
     subjectMessagesByLocale?: Record<string, Record<string, unknown>>;
 }) {
-    const manifestPath = `.curriculum-drafts/subjects/${args.subjectSlug}/subject.manifest.json`;
+    const manifestPath = getDraftSubjectManifestPath(args.subjectSlug);
 
     await writeJsonAtomic(manifestPath, args.subjectManifest);
 
     for (const [locale, messages] of Object.entries(args.subjectMessagesByLocale ?? {})) {
-        const subjectMessagesPath = `.curriculum-drafts/messages/${locale}/subjects/${args.subjectSlug}/subject.json`;
+        const subjectMessagesPath = getDraftSubjectMessagesPath(
+            locale,
+            args.subjectSlug,
+        );
         await writeJsonAtomic(subjectMessagesPath, messages);
     }
 

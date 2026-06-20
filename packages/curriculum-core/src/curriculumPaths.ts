@@ -1,4 +1,5 @@
 import { fromRepoRoot } from "./repoPaths.js";
+import { getCatalogSlugForSubjectSlug } from "./catalogResolver.js";
 
 export function getAuthoringRoot() {
     return fromRepoRoot("authoring");
@@ -151,16 +152,39 @@ export function getAuthoringCourseValidationPath(
 }
 
 export function getDraftSubjectRoot(subjectSlug: string) {
-    return fromRepoRoot(".curriculum-drafts", "subjects", subjectSlug);
+    return fromRepoRoot(
+        ".curriculum-drafts",
+        getCatalogSlugForSubjectSlug(subjectSlug),
+        "subjects",
+        subjectSlug,
+    );
 }
 
-export function getDraftMessagesRoot() {
-    return fromRepoRoot(".curriculum-drafts", "messages");
+export function getDraftCatalogRoot(subjectSlug: string) {
+    return fromRepoRoot(".curriculum-drafts", getCatalogSlugForSubjectSlug(subjectSlug));
+}
+
+export function getDraftMessagesRoot(subjectSlug: string) {
+    return fromRepoRoot(
+        ".curriculum-drafts",
+        getCatalogSlugForSubjectSlug(subjectSlug),
+        "messages",
+    );
+}
+
+export function getDraftReportsRoot(subjectSlug: string) {
+    return fromRepoRoot(
+        ".curriculum-drafts",
+        getCatalogSlugForSubjectSlug(subjectSlug),
+        "reports",
+        subjectSlug,
+    );
 }
 
 export function getDraftSubjectManifestPath(subjectSlug: string) {
     return fromRepoRoot(
         ".curriculum-drafts",
+        getCatalogSlugForSubjectSlug(subjectSlug),
         "subjects",
         subjectSlug,
         "subject.manifest.json",
@@ -174,6 +198,7 @@ export function getDraftTopicBundlePath(
 ) {
     return fromRepoRoot(
         ".curriculum-drafts",
+        getCatalogSlugForSubjectSlug(subjectSlug),
         "subjects",
         subjectSlug,
         "modules",
@@ -192,6 +217,7 @@ export function getDraftTopicMessagesPath(
 ) {
     return fromRepoRoot(
         ".curriculum-drafts",
+        getCatalogSlugForSubjectSlug(subjectSlug),
         "messages",
         locale,
         "subjects",
@@ -201,12 +227,53 @@ export function getDraftTopicMessagesPath(
     );
 }
 
-export function getLiveSubjectRoot(subjectSlug: string) {
-    return fromRepoRoot("apps", "web", "src", "lib", "subjects", subjectSlug);
+export function getDraftSubjectMessagesPath(locale: string, subjectSlug: string) {
+    return fromRepoRoot(
+        ".curriculum-drafts",
+        getCatalogSlugForSubjectSlug(subjectSlug),
+        "messages",
+        locale,
+        "subjects",
+        subjectSlug,
+        "subject.json",
+    );
 }
 
-export function getLiveMessagesRoot() {
-    return fromRepoRoot("apps", "web", "src", "i18n", "messages");
+export function getLiveSubjectRoot(subjectSlug: string) {
+    return fromRepoRoot(
+        "apps",
+        "web",
+        "src",
+        "lib",
+        "subjects",
+        getCatalogSlugForSubjectSlug(subjectSlug),
+        subjectSlug,
+    );
+}
+
+export function getLiveMessagesRoot(subjectSlug: string) {
+    return fromRepoRoot(
+        "apps",
+        "web",
+        "src",
+        "i18n",
+        "messages",
+        getCatalogSlugForSubjectSlug(subjectSlug),
+    );
+}
+
+export function getLiveSubjectMessagesRoot(locale: string, subjectSlug: string) {
+    return fromRepoRoot(
+        "apps",
+        "web",
+        "src",
+        "i18n",
+        "messages",
+        locale,
+        "subjects",
+        getCatalogSlugForSubjectSlug(subjectSlug),
+        subjectSlug,
+    );
 }
 
 export function getSubjectManifestPath(subjectSlug: string) {
@@ -216,6 +283,7 @@ export function getSubjectManifestPath(subjectSlug: string) {
         "src",
         "lib",
         "subjects",
+        getCatalogSlugForSubjectSlug(subjectSlug),
         subjectSlug,
         "subject.manifest.json",
     );
@@ -232,6 +300,7 @@ export function getTopicBundlePath(
         "src",
         "lib",
         "subjects",
+        getCatalogSlugForSubjectSlug(subjectSlug),
         subjectSlug,
         "modules",
         moduleDir,
@@ -255,20 +324,41 @@ export function getTopicMessagesPath(
         "messages",
         locale,
         "subjects",
+        getCatalogSlugForSubjectSlug(subjectSlug),
         subjectSlug,
         moduleDir,
         `${topicId}.json`,
     );
 }
 
-export function getBackupRoot(timestamp: string) {
-    return fromRepoRoot(".curriculum-backups", timestamp);
+export function getSubjectMessagesPath(locale: string, subjectSlug: string) {
+    return fromRepoRoot(
+        "apps",
+        "web",
+        "src",
+        "i18n",
+        "messages",
+        locale,
+        "subjects",
+        getCatalogSlugForSubjectSlug(subjectSlug),
+        subjectSlug,
+        "subject.json",
+    );
 }
 
-export function getBackupSubjectManifestPath(timestamp: string, subjectSlug: string) {
+export function getBackupRoot(backupKey: string, subjectSlug: string) {
     return fromRepoRoot(
         ".curriculum-backups",
-        timestamp,
+        getCatalogSlugForSubjectSlug(subjectSlug),
+        backupKey,
+    );
+}
+
+export function getBackupSubjectManifestPath(backupKey: string, subjectSlug: string) {
+    return fromRepoRoot(
+        ".curriculum-backups",
+        getCatalogSlugForSubjectSlug(subjectSlug),
+        backupKey,
         "subjects",
         subjectSlug,
         "subject.manifest.json",
@@ -276,14 +366,15 @@ export function getBackupSubjectManifestPath(timestamp: string, subjectSlug: str
 }
 
 export function getBackupTopicBundlePath(
-    timestamp: string,
+    backupKey: string,
     subjectSlug: string,
     moduleDir: string,
     topicId: string,
 ) {
     return fromRepoRoot(
         ".curriculum-backups",
-        timestamp,
+        getCatalogSlugForSubjectSlug(subjectSlug),
+        backupKey,
         "subjects",
         subjectSlug,
         "modules",
@@ -295,7 +386,7 @@ export function getBackupTopicBundlePath(
 }
 
 export function getBackupTopicMessagesPath(
-    timestamp: string,
+    backupKey: string,
     locale: string,
     subjectSlug: string,
     moduleDir: string,
@@ -303,7 +394,8 @@ export function getBackupTopicMessagesPath(
 ) {
     return fromRepoRoot(
         ".curriculum-backups",
-        timestamp,
+        getCatalogSlugForSubjectSlug(subjectSlug),
+        backupKey,
         "messages",
         locale,
         "subjects",

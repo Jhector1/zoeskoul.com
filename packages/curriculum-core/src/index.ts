@@ -5,4 +5,5 @@ export * from "./slugs.js";
 export * from "./topicMeta.js";
 export * from "./withTopicParentContext.js";
 export * from "./repoPaths.js";
+export * from "./catalogResolver.js";
 export * from "./curriculumPaths.js";

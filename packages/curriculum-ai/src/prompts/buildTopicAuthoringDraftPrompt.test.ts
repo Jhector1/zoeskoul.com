@@ -327,3 +327,49 @@ describe("buildTopicAuthoringDraftPrompt", () => {
         expect(first).toEqual(second);
     });
 });
+
+describe("Linux/Bash prompt policy wording", () => {
+    it("makes clear code_input belongs in quizDraft authoring", () => {
+        const source = buildTopicAuthoringDraftPrompt({
+            locale: "en",
+            shape: {} as any,
+            seed: {
+                profileId: "bash",
+                topicId: "what-the-terminal-is",
+                title: "What the Terminal Is",
+                plannedExerciseCounts: {
+                    total: 5,
+                    dominantKind: "code_input",
+                    counts: {
+                        code_input: 3,
+                        fill_blank_choice: 2,
+                    },
+                },
+                exercisePolicy: {
+                    source: "test",
+                    mix: {
+                        single_choice: 0,
+                        multi_choice: 0,
+                        drag_reorder: 0,
+                        fill_blank_choice: 0.4,
+                        code_input: 0.6,
+                    },
+                },
+                generationTargets: {
+                    quizBankMin: 2,
+                    quizBankTarget: 2,
+                    quizVisibleDefault: 2,
+                    quizVisibleMax: 2,
+                    projectCodeInputMin: 3,
+                    projectCodeInputTarget: 3,
+                    projectCodeInputMax: 3,
+                    maxAttempts: null,
+                },
+            } as any,
+        }).system;
+
+        expect(source).toContain("quizDraft is an authoring array, not the final learner quiz");
+        expect(source).toContain("generate exactly 3 code_input exercises inside quizDraft");
+        expect(source).toContain("put required code_input authoring items inside quizDraft");
+    });
+});

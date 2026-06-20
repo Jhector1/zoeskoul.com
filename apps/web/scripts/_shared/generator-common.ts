@@ -53,6 +53,24 @@ export async function walkFiles(
     return out.sort((a, b) => a.localeCompare(b));
 }
 
+export async function findSubjectManifestFiles(subjectsRoot: string): Promise<string[]> {
+    const files = await walkFiles(
+        subjectsRoot,
+        (fullPath, entryName) =>
+            entryName === "subject.manifest.json" &&
+            path.basename(path.dirname(fullPath)) !== "_core",
+    );
+
+    return files.filter((file) => {
+        const relativeDir = getSubjectRelativeDir(subjectsRoot, file);
+        return relativeDir.includes("/");
+    });
+}
+
+export function getSubjectRelativeDir(subjectsRoot: string, manifestFile: string): string {
+    return path.relative(subjectsRoot, path.dirname(manifestFile)).replace(/\\/g, "/");
+}
+
 export function toPosixImportPath(fromFileDir: string, targetFile: string): string {
     const rel = path.relative(fromFileDir, targetFile).replace(/\\/g, "/");
     return rel.startsWith(".") ? rel : `./${rel}`;

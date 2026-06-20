@@ -12,30 +12,59 @@ function tag(key) {
     return key ? `@:${key}` : null;
 }
 function loadSubjectManifest(subjectSlug) {
-    return readJson(path.join(subjectsRoot, subjectSlug, "subject.manifest.json"));
+    const catalogSlug = resolveCatalogSlugForSubject(subjectSlug);
+    return readJson(path.join(subjectsRoot, catalogSlug, subjectSlug, "subject.manifest.json"));
 }
 function loadCatalogManifest(fileName) {
     return readJson(path.join(authoringCatalogsRoot, fileName));
 }
 function loadTopicBundle(args) {
-    return readJson(path.join(subjectsRoot, args.subjectSlug, "modules", `module${args.moduleOrder}`, "topics", args.topicId, "topic.bundle.json"));
+    return readJson(path.join(subjectsRoot, resolveCatalogSlugForSubject(args.subjectSlug), args.subjectSlug, "modules", `module${args.moduleOrder}`, "topics", args.topicId, "topic.bundle.json"));
 }
 export function isSeedableSubjectSlug(subjectSlug) {
     return !subjectSlug.endsWith("--draft");
 }
 export function listSubjectSlugs() {
-    return fs
-        .readdirSync(subjectsRoot, { withFileTypes: true })
-        .filter((entry) => entry.isDirectory())
-        .map((entry) => entry.name)
+    return listSubjectDirectories()
+        .map((entry) => entry.subjectSlug)
         .filter((subjectSlug) => {
         if (isSeedableSubjectSlug(subjectSlug))
             return true;
         console.warn(`[db:seed] Skipping generated draft subject folder: ${subjectSlug}`);
         return false;
     })
-        .filter((subjectSlug) => fs.existsSync(path.join(subjectsRoot, subjectSlug, "subject.manifest.json")))
         .sort();
+}
+function resolveCatalogSlugForSubject(subjectSlug) {
+    for (const fileName of listCatalogFileNames()) {
+        const manifest = loadCatalogManifest(fileName);
+        if (manifest.catalog.subjectSlugs.includes(subjectSlug)) {
+            return manifest.catalog.slug;
+        }
+    }
+    throw new Error(`Subject "${subjectSlug}" is not listed in any authoring/catalogs/*.catalog.json file`);
+}
+function listSubjectDirectories() {
+    const out = [];
+    if (!fs.existsSync(subjectsRoot))
+        return out;
+    for (const catalogEntry of fs.readdirSync(subjectsRoot, { withFileTypes: true })) {
+        if (!catalogEntry.isDirectory())
+            continue;
+        const catalogRoot = path.join(subjectsRoot, catalogEntry.name);
+        for (const subjectEntry of fs.readdirSync(catalogRoot, { withFileTypes: true })) {
+            if (!subjectEntry.isDirectory())
+                continue;
+            const manifestPath = path.join(catalogRoot, subjectEntry.name, "subject.manifest.json");
+            if (!fs.existsSync(manifestPath))
+                continue;
+            out.push({
+                catalogSlug: catalogEntry.name,
+                subjectSlug: subjectEntry.name,
+            });
+        }
+    }
+    return out;
 }
 function listCatalogFileNames() {
     if (!fs.existsSync(authoringCatalogsRoot))

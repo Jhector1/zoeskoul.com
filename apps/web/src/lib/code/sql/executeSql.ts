@@ -13,7 +13,7 @@ import type {
     SqlScalar,
 } from "../types";
 import { renderAsciiTable } from "./formatAsciiTable";
-import { getSqlDataset } from "@/lib/subjects/sql/datasets";
+import { getSqlDataset } from "@/lib/subjects/sql/sql/datasets";
 
 const DEFAULT_SQL_LIMITS = {
     statementTimeoutMs: 4000,

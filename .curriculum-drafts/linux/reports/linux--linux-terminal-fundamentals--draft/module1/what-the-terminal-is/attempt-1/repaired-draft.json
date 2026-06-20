@@ -1,0 +1,209 @@
+{
+  "title": "What the Terminal Is",
+  "summary": "Understand the terminal as a place to type commands and see the computer respond.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Introduction to the Terminal",
+      "bodyMarkdown": "The terminal is a powerful tool that allows you to interact with your computer using text commands. Unlike graphical interfaces, the terminal provides a direct way to execute commands and see immediate results.\n\n### Example: Listing Files\n\nOne of the most basic commands is `ls`, which lists the files and directories in the current directory.\n\n```bash\nls\n```\n\nThis command will display all the files and folders in your current location.\n\n### Try it yourself\nTry running the `ls` command in your terminal to see the files in your current directory. Then, create a new file using `touch newfile.txt` and run `ls` again to see the change."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "exercise1",
+      "kind": "single_choice",
+      "title": "Purpose of the Terminal",
+      "prompt": "What is the primary purpose of the terminal?",
+      "options": [
+        "To browse the internet",
+        "To execute commands and interact with the computer",
+        "To edit images",
+        "To play games"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "exercise2",
+      "kind": "single_choice",
+      "title": "Command to List Files",
+      "prompt": "Which command is used to list files in the current directory?",
+      "options": [
+        "pwd",
+        "ls",
+        "cd",
+        "mkdir"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare each option to the exact topic named in the question.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "exercise3",
+      "kind": "multi_choice",
+      "title": "Commands for Navigation",
+      "prompt": "Which of the following commands are used for navigating directories? (Select all that apply)",
+      "options": [
+        "cd",
+        "ls",
+        "pwd",
+        "touch"
+      ],
+      "correctOptionIds": [
+        "a",
+        "c"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "exercise4",
+      "kind": "drag_reorder",
+      "title": "Order of Commands",
+      "prompt": "Arrange the commands in the order you would use them to create a new directory and navigate into it.",
+      "tokens": [
+        "mkdir new_folder",
+        "cd new_folder"
+      ],
+      "correctOrder": [
+        "mkdir new_folder",
+        "cd new_folder"
+      ],
+      "hint": "Think about the sequence of creating and then entering a directory.",
+      "help": {
+        "concept": "First, you create a directory, then you navigate into it.",
+        "hint_1": "You need to create the directory before you can enter it.",
+        "hint_2": "Use `mkdir` before `cd`."
+      }
+    },
+    {
+      "id": "exercise5",
+      "kind": "fill_blank_choice",
+      "title": "Command to Create a File",
+      "prompt": "Fill in the blank to complete the command that creates a new file named 'example.txt'.",
+      "template": "[blank1] example.txt",
+      "choices": [
+        "touch",
+        "mkdir",
+        "ls",
+        "cd"
+      ],
+      "correctValue": "touch",
+      "hint": "This command is used to create an empty file.",
+      "help": {
+        "concept": "The `the missing term` command is used to create a new file.",
+        "hint_1": "The command starts with 't'.",
+        "hint_2": "It's a simple command that creates an empty file."
+      }
+    },
+    {
+      "id": "exercise6",
+      "kind": "fill_blank_choice",
+      "title": "Command to Display Current Directory",
+      "prompt": "Fill in the blank to complete the command that displays the current directory path.",
+      "template": "[blank1]",
+      "choices": [
+        "pwd",
+        "ls",
+        "cd",
+        "mkdir"
+      ],
+      "correctValue": "pwd",
+      "hint": "This command prints the working directory.",
+      "help": {
+        "concept": "The `the missing term` command shows the current directory path.",
+        "hint_1": "The command starts with 'p'.",
+        "hint_2": "It's a three-letter command."
+      }
+    },
+    {
+      "id": "exercise7",
+      "kind": "code_input",
+      "title": "List Files in Terminal",
+      "prompt": "Use the terminal to list all files and directories in the current directory.",
+      "starterCode": "# Type your command below",
+      "solutionCode": "ls",
+      "tests": [
+        {
+          "stdout": "main.sh\n",
+          "match": "includes"
+        }
+      ],
+      "recipeType": "shell_task",
+      "hint": "Use the `ls` command to list files.",
+      "help": {
+        "concept": "The `ls` command lists files and directories in the current location.",
+        "hint_1": "Simply type `ls` and press enter.",
+        "hint_2": "This command will show you everything in your current directory."
+      },
+      "fixedLanguage": "bash",
+      "mode": "terminal_workspace"
+    },
+    {
+      "id": "exercise8",
+      "kind": "fill_blank_choice",
+      "title": "Create and Navigate Directory",
+      "prompt": "Create a new directory named 'test_dir' and navigate into it.",
+      "template": "A file-writing code exercise should also ____ so automated tests can check it.",
+      "choices": [
+        "print an observable result",
+        "hide all output",
+        "delete the file immediately",
+        "skip the program"
+      ],
+      "correctValue": "print an observable result",
+      "hint": "Use `mkdir` to create and `cd` to navigate.",
+      "help": {
+        "concept": "Use `mkdir` to create a directory and `cd` to change into it.",
+        "hint_1": "First, create the directory with `mkdir test_dir`.",
+        "hint_2": "Then, navigate into it using `cd test_dir`."
+      }
+    },
+    {
+      "id": "exercise9",
+      "kind": "fill_blank_choice",
+      "title": "Create a File in Terminal",
+      "prompt": "Create a new file named 'example.txt' in the current directory.",
+      "template": "A file-writing code exercise should also ____ so automated tests can check it.",
+      "choices": [
+        "print an observable result",
+        "hide all output",
+        "delete the file immediately",
+        "skip the program"
+      ],
+      "correctValue": "print an observable result",
+      "hint": "Use the `touch` command to create a file.",
+      "help": {
+        "concept": "The `touch` command creates a new file.",
+        "hint_1": "Type `touch example.txt` to create the file.",
+        "hint_2": "This command will create an empty file named 'example.txt'."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Terminal Navigation Project",
+    "stepIds": [
+      "exercise7",
+      "exercise8",
+      "exercise9"
+    ]
+  }
+}

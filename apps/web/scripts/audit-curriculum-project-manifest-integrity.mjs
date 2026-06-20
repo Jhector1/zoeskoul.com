@@ -8,7 +8,7 @@ const WEB_ROOT = path.resolve(__dirname, "..");
 const REPO_ROOT = path.resolve(WEB_ROOT, "../..");
 const DEFAULT_SUBJECT_ROOT = path.resolve(
   REPO_ROOT,
-  ".curriculum-drafts/subjects/python--python-data-functions--draft",
+  ".curriculum-drafts/python/subjects/python--python-data-functions--draft",
 );
 
 function getSubjectRoot() {

@@ -76,6 +76,35 @@ describe("buildProjectRunRequest", () => {
         });
     });
 
+    it("serializes single-file PTY runs as workspace requests", () => {
+        const mainFile = {
+            ...baseFile,
+            id: "file:main.py",
+            name: "main.py",
+            content: 'print("hello")\n',
+        };
+
+        const req = buildProjectRunRequest({
+            language: "python",
+            nodes: [mainFile],
+            activeFile: mainFile,
+            entryFile: mainFile,
+            activeFileId: "file:main.py",
+            entryFileId: "file:main.py",
+            sqlDialect: "sqlite",
+            canUseMultiFile: true,
+            preferWorkspaceFiles: true,
+            code: mainFile.content,
+        });
+
+        expect(req).toEqual({
+            kind: "code",
+            language: "python",
+            entry: "main.py",
+            files: [{ path: "main.py", content: 'print("hello")\n' }],
+        });
+    });
+
     it("treats the passed code as authoritative for the active file in multi-file runs", () => {
         const nodes = [
             {

@@ -1,7 +1,11 @@
 import fs from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
-import { getRepoRoot } from "@zoeskoul/curriculum-core";
+import {
+    getDraftCatalogRoot,
+    getDraftMessagesRoot,
+    getRepoRoot,
+} from "@zoeskoul/curriculum-core";
 import { getProfileServices } from "@zoeskoul/curriculum-profiles";
 
 type JsonObject = Record<string, any>;
@@ -64,12 +68,6 @@ for (const relativePath of [
 const draftCourseSlug =
     process.env.DRAFT_COURSE_SLUG ?? "python-data-functions";
 
-const draftSubjectsRoot = path.join(
-    repoRoot,
-    ".curriculum-drafts",
-    "subjects",
-);
-
 function readJson(filePath: string): JsonObject {
     return JSON.parse(fs.readFileSync(filePath, "utf8")) as JsonObject;
 }
@@ -100,15 +98,27 @@ function findTopicBundlePaths(subjectRoot: string): string[] {
 }
 
 function findDraftSubjectRoots(): string[] {
-    if (!fs.existsSync(draftSubjectsRoot)) {
-        return [];
+    const draftsRoot = path.join(repoRoot, ".curriculum-drafts");
+    if (!fs.existsSync(draftsRoot)) return [];
+
+    const subjectRoots: string[] = [];
+
+    for (const catalogEntry of fs.readdirSync(draftsRoot, { withFileTypes: true })) {
+        if (!catalogEntry.isDirectory()) continue;
+
+        const catalogSubjectsRoot = path.join(draftsRoot, catalogEntry.name, "subjects");
+        if (!fs.existsSync(catalogSubjectsRoot)) continue;
+
+        for (const subjectEntry of fs.readdirSync(catalogSubjectsRoot, { withFileTypes: true })) {
+            if (!subjectEntry.isDirectory()) continue;
+            const subjectRoot = path.join(catalogSubjectsRoot, subjectEntry.name);
+            if (findTopicBundlePaths(subjectRoot).length > 0) {
+                subjectRoots.push(subjectRoot);
+            }
+        }
     }
 
-    return fs
-        .readdirSync(draftSubjectsRoot, { withFileTypes: true })
-        .filter((entry) => entry.isDirectory())
-        .map((entry) => path.join(draftSubjectsRoot, entry.name))
-        .filter((subjectRoot) => findTopicBundlePaths(subjectRoot).length > 0);
+    return subjectRoots.sort();
 }
 
 function normalizeDraftSlug(value: string): string {
@@ -178,13 +188,6 @@ function resolveDraftSubjectRoot(): string {
     const explicitSlug = process.env.DRAFT_SUBJECT_SLUG;
 
     if (explicitSlug) {
-        const resolved = path.join(draftSubjectsRoot, explicitSlug);
-        const bundles = findTopicBundlePaths(resolved);
-
-        if (bundles.length > 0) {
-            return resolved;
-        }
-
         const matchingRoots = findDraftSubjectRoots().filter((subjectRoot) =>
             matchesExplicitDraftSlug(subjectRoot, explicitSlug),
         );
@@ -206,8 +209,7 @@ function resolveDraftSubjectRoot(): string {
 
         throw new Error(
             [
-                `DRAFT_SUBJECT_SLUG=${explicitSlug} was provided, but no topic.bundle.json files were found under:`,
-                `  ${resolved}`,
+                `DRAFT_SUBJECT_SLUG=${explicitSlug} was provided, but no matching draft subject root with topic.bundle.json files was found.`,
                 "",
                 "Available draft subject roots:",
                 ...findDraftSubjectRoots().map((root) =>
@@ -456,9 +458,7 @@ describe("draft subject code_input goldens", () => {
     it("keeps Python Data and Functions try-it-yourself copy and multi-file/file rules aligned", () => {
         const subjectRoot = resolveDraftSubjectRoot();
         const messageRoot = path.join(
-            repoRoot,
-            ".curriculum-drafts",
-            "messages",
+            getDraftMessagesRoot(path.basename(subjectRoot)),
             "en",
             "subjects",
             path.basename(subjectRoot),

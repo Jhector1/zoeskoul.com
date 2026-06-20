@@ -1,7 +1,14 @@
 import fs from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
-import { getRepoRoot } from "@zoeskoul/curriculum-core";
+import {
+    getCatalogSlugForSubjectSlug,
+    getRepoRoot,
+    getSubjectManifestPath,
+    getSubjectMessagesPath,
+    getTopicBundlePath,
+    getTopicMessagesPath,
+} from "@zoeskoul/curriculum-core";
 import { validateGoldenTopicBundle } from "@zoeskoul/curriculum-profiles";
 import { resolveEffectiveExerciseRuntime } from "@zoeskoul/curriculum-runtime/runtime";
 import { loadSubjectPlan } from "../spec/loadCourseSpec.js";
@@ -51,11 +58,7 @@ function collectTranslationKeys(value: unknown, keys = new Set<string>()) {
 }
 
 function topicRefs(liveSubjectSlug: string): TopicRef[] {
-    const manifestPath = path.join(
-        subjectsRoot,
-        liveSubjectSlug,
-        "subject.manifest.json",
-    );
+    const manifestPath = getSubjectManifestPath(liveSubjectSlug);
     const manifest = readJson(manifestPath);
 
     return (manifest.modules ?? []).flatMap((module: JsonObject) => {
@@ -65,20 +68,9 @@ function topicRefs(liveSubjectSlug: string): TopicRef[] {
                 module,
                 topicId,
                 bundlePath: path.join(
-                    subjectsRoot,
-                    liveSubjectSlug,
-                    "modules",
-                    moduleDir,
-                    "topics",
-                    topicId,
-                    "topic.bundle.json",
+                    getTopicBundlePath(liveSubjectSlug, moduleDir, topicId),
                 ),
-                messagePath: path.join(
-                    messagesRoot,
-                    liveSubjectSlug,
-                    moduleDir,
-                    `${topicId}.json`,
-                ),
+                messagePath: getTopicMessagesPath("en", liveSubjectSlug, moduleDir, topicId),
             })),
         );
     });
@@ -192,18 +184,28 @@ describe("generated subject output compatibility", () => {
             expect(liveSubjectSlug).toBeTruthy();
 
             const manifestPath = path.join(
-                subjectsRoot,
-                liveSubjectSlug!,
-                "subject.manifest.json",
+                getSubjectManifestPath(liveSubjectSlug!),
             );
-            const messagesPath = path.join(messagesRoot, liveSubjectSlug!, "subject.json");
-            const modulesRoot = path.join(subjectsRoot, liveSubjectSlug!, "modules");
+            const messagesPath = getSubjectMessagesPath("en", liveSubjectSlug!);
+            const modulesRoot = path.join(
+                subjectsRoot,
+                getCatalogSlugForSubjectSlug(liveSubjectSlug!),
+                liveSubjectSlug!,
+                "modules",
+            );
 
             expect(fs.existsSync(manifestPath), manifestPath).toBe(true);
             expect(fs.existsSync(messagesPath), messagesPath).toBe(true);
             expect(fs.existsSync(modulesRoot), modulesRoot).toBe(true);
             expect(
-                fs.existsSync(path.join(subjectsRoot, liveSubjectSlug!, "courses")),
+                fs.existsSync(
+                    path.join(
+                        subjectsRoot,
+                        getCatalogSlugForSubjectSlug(liveSubjectSlug!),
+                        liveSubjectSlug!,
+                        "courses",
+                    ),
+                ),
                 "course-nested runtime output should not be required yet",
             ).toBe(false);
 
@@ -310,8 +312,8 @@ describe("generated subject output compatibility", () => {
     });
 
     it("keeps SQL v1 legacy output alongside active SQL v2 output", () => {
-        const sqlManifestPath = path.join(subjectsRoot, "sql", "subject.manifest.json");
-        const sqlV2ManifestPath = path.join(subjectsRoot, "sql-v2", "subject.manifest.json");
+        const sqlManifestPath = getSubjectManifestPath("sql");
+        const sqlV2ManifestPath = getSubjectManifestPath("sql-v2");
 
         expect(fs.existsSync(sqlManifestPath), sqlManifestPath).toBe(true);
         expect(fs.existsSync(sqlV2ManifestPath), sqlV2ManifestPath).toBe(true);
