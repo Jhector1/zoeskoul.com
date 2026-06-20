@@ -60,6 +60,7 @@ import {
 } from "@/components/review/module/runtime/progressiveUnlock";
 import {resolveRightRailSqlProps} from "../runtime/resolveRightRailSqlProps";
 import { resolveTopicStageRuntimeDefaults } from "../runtime/topicStageRuntimeDefaults";
+import { shouldUseWorkspaceCodeSurface } from "@/components/practice/workspaceExercise";
 function lastExerciseIdSegment(value: unknown) {
     const raw = typeof value === "string" ? value.trim() : "";
     if (!raw) return "";
@@ -894,6 +895,8 @@ export function useReviewModuleController({
 
     const activeCardIndex = routeCardIndex >= 0 ? routeCardIndex : 0;
     const activeCard = viewCards[activeCardIndex] ?? null;
+    const [activeMobileWorkspaceTab, setActiveMobileWorkspaceTab] = useState<"lesson" | "code">("lesson");
+    const runtimeExercises = useReviewRuntimeStore((s) => s.exercises);
 
     useEffect(() => {
         useReviewRuntimeStore.getState().goToCard(Math.max(0, activeCardIndex));
@@ -910,6 +913,34 @@ export function useReviewModuleController({
         }
         return null;
     }, [routeTarget]);
+
+    const activeCardWorkspaceExercise = useMemo(() => {
+        if (!activeCard?.id) return null;
+
+        return Object.values(runtimeExercises)
+            .filter(
+                (exercise) =>
+                    exercise.topicId === viewTid &&
+                    exercise.cardId === activeCard.id,
+            )
+            .sort((a, b) => Number(b.updatedAt ?? 0) - Number(a.updatedAt ?? 0))
+            .find((exercise) =>
+                shouldUseWorkspaceCodeSurface({
+                    exercise:
+                        ((exercise.manifest as Record<string, unknown> | null) ??
+                            ({
+                                kind: "code_input",
+                                language: exercise.language,
+                                ideConfig: exercise.ideConfig,
+                                workspace: exercise.workspace,
+                                sqlDatasetId: exercise.sqlDatasetId,
+                                sqlSchemaSql: exercise.sqlSchemaSql,
+                                sqlSeedSql: exercise.sqlSeedSql,
+                                sqlInitialTableSnapshots: exercise.sqlInitialTableSnapshots,
+                            } as any)) as any,
+                }),
+            ) ?? null;
+    }, [runtimeExercises, viewTid, activeCard?.id]);
 
     const activeToolScopeKey =
         activeExerciseTarget?.exerciseStateKey ??
@@ -1246,11 +1277,33 @@ export function useReviewModuleController({
         ],
     );
 
+    const stackedToolsRef = useRef<HTMLElement | null>(null);
+
     const handleEnsureToolsVisible = useCallback(() => {
         if (panels.rightCollapsed) {
             panels.setRightCollapsed(false);
         }
-    }, [panels.rightCollapsed, panels.setRightCollapsed]);
+
+        if (panels.showDesktopRight) return;
+
+        setActiveMobileWorkspaceTab("code");
+
+        const scrollToTools = () => {
+            stackedToolsRef.current?.scrollIntoView({
+                block: "start",
+                behavior: "smooth",
+            });
+        };
+
+        if (typeof window !== "undefined") {
+            window.requestAnimationFrame(() => {
+                window.requestAnimationFrame(scrollToTools);
+            });
+            return;
+        }
+
+        scrollToTools();
+    }, [panels.rightCollapsed, panels.setRightCollapsed, panels.showDesktopRight]);
 
     const handleRun = useCallback(() => {
         void flushAll();
@@ -1441,6 +1494,32 @@ export function useReviewModuleController({
     const routeOwnsExercise = routeTarget?.kind === "exercise";
     const routeCanUseBoundExercise =
         routeOwnsExercise || activeCard?.type === "quiz" || activeCard?.type === "project";
+    const routeWorkspaceExercise =
+        routeEditorEntry?.ownerKind === "exercise" &&
+        shouldUseWorkspaceCodeSurface({
+            exercise: routeEditorEntry.toolManifest as any,
+        })
+            ? routeEditorEntry
+            : null;
+    const shouldRenderStackedTools = Boolean(
+        routeWorkspaceExercise || activeCardWorkspaceExercise,
+    );
+
+    useEffect(() => {
+        setActiveMobileWorkspaceTab("lesson");
+    }, [viewTid, activeCard?.id, activeExerciseTarget?.exerciseId]);
+
+    useEffect(() => {
+        if (panels.showDesktopRight || !shouldRenderStackedTools) {
+            setActiveMobileWorkspaceTab("lesson");
+        }
+    }, [panels.showDesktopRight, shouldRenderStackedTools]);
+
+    const stackedToolsExerciseKey =
+        activeExerciseTarget?.exerciseStateKey ??
+        activeCardWorkspaceExercise?.exerciseKey ??
+        routeWorkspaceExercise?.exerciseStateKey ??
+        null;
     const boundExerciseRuntime = useReviewRuntimeStore((s) =>
         tool.boundId ? s.exercises[tool.boundId] ?? null : null,
     );
@@ -1585,6 +1664,8 @@ export function useReviewModuleController({
             showDesktopRight: panels.showDesktopRight,
             rightCollapsed: panels.rightCollapsed,
             rightW: panels.rightW,
+            containerRef: stackedToolsRef,
+            shouldRenderStackedTools,
             onResizeStart: panels.onMouseDownRightHandle,
             toolsPanelProps: {
                 onCollapse: panels.handleCollapseRight,
@@ -1599,15 +1680,17 @@ export function useReviewModuleController({
                  * generated SQL practice exercise currently bound in Tools.
                  */
                 editorOwnerKey: routeCanUseBoundExercise
-                    ? rightRailExerciseKey ?? routeEditorOwnerKey
-                    : null,
+                    ? rightRailExerciseKey ?? stackedToolsExerciseKey ?? routeEditorOwnerKey
+                    : stackedToolsExerciseKey,
                 toolScopeKey: routeCanUseBoundExercise
                     ? rightRailExerciseKey
                         ? rightRailExerciseKey
-                        : routeEditorToolScopeKey
+                        : stackedToolsExerciseKey
+                            ? stackedToolsExerciseKey
+                            : routeEditorToolScopeKey
                             ? routeEditorToolScopeKey
                             : activeToolScopeKey
-                    : activeToolScopeKey,
+                    : stackedToolsExerciseKey ?? activeToolScopeKey,
                 rightBodyRef: tool.rightBodyRef,
                 codeRunnerRegionH: tool.codeRunnerRegionH,
                 toolHydrated: tool.toolHydrated,
@@ -1728,6 +1811,9 @@ export function useReviewModuleController({
             sectionSlug,
             routeExerciseId: activeExerciseTarget?.exerciseId ?? null,
             defaultToolLanguage: runtime.toolDefaults.defaultLang,
+            showMobileWorkspaceTabs: shouldRenderStackedTools && !panels.showDesktopRight,
+            activeMobileWorkspaceTab,
+            onMobileWorkspaceTabChange: setActiveMobileWorkspaceTab,
             subjectFinish,
             onBeforeCardNavigate: flushAll,
             onOpenCertificate: handleOpenCertificate,

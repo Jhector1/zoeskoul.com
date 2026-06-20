@@ -16,7 +16,7 @@ describe("resolveCodeToolPaneFullIdeMode", () => {
         });
 
         expect(resolved.usesWorkspaceShell).toBe(true);
-        expect(resolved.forceDesktopLayout).toBe(true);
+        expect(resolved.forceDesktopLayout).toBe(false);
         expect(resolved.fullIdeTitle).toBe("Linux terminal");
         expect(resolved.ideShell.services.explorer?.enabled).toBe(false);
         expect(resolved.ideShell.services.editor?.showEditor).toBe(false);
@@ -37,7 +37,7 @@ describe("resolveCodeToolPaneFullIdeMode", () => {
         });
 
         expect(resolved.usesWorkspaceShell).toBe(true);
-        expect(resolved.forceDesktopLayout).toBe(true);
+        expect(resolved.forceDesktopLayout).toBe(false);
         expect(resolved.fullIdeTitle).toBe("Run code");
         expect(resolved.ideShell.services.explorer?.enabled).toBe(true);
         expect(resolved.ideShell.services.editor?.showEditor).toBe(true);

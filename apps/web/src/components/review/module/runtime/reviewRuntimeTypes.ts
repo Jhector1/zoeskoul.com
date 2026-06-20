@@ -1,5 +1,6 @@
 import type { WorkspaceStateV2 } from "@/components/ide/types";
 import type { SavedSketchState } from "@/components/sketches/subjects/types";
+import type { LearningIdeConfig } from "@/lib/ide/learningIdeConfig";
 import type { TerminalEvidence } from "@/lib/practice/types";
 
 import type { ReviewTargetEntry } from "./reviewTargetRegistry";
@@ -92,6 +93,8 @@ export type ExerciseRuntimeState = {
   sqlSchemaSql?: string;
   sqlSeedSql?: string;
   sqlInitialTableSnapshots?: unknown;
+  ideConfig?: LearningIdeConfig | null;
+  manifest?: UnknownRecord | null;
   runtime?: { kind: "sql"; datasetId?: string; resultShape?: "table" } | Record<string, unknown>;
 };
 

@@ -7,6 +7,7 @@ import { isEmptyPracticeAnswer } from "@/components/review/quiz/hooks/useQuizPra
 import type { VectorPadState } from "@/components/vectorpad/types";
 
 import ExerciseRenderer from "@/components/practice/ExerciseRenderer";
+import { resolveCodeSurface } from "@/components/practice/workspaceExercise";
 import {
   shouldSkipEmbeddedEnsureExercise,
 } from "@/components/practice/ExerciseRenderer";
@@ -765,10 +766,14 @@ export default function QuizPracticeCard(props: {
 
   const toolsEnabled = Boolean(toolsAny?.enabled);
   const isCodeInput = ex?.kind === "code_input";
-  const codeRunnerMode: "embedded" | "tools" =
-      toolsEnabled && isCodeInput ? "tools" : "embedded";
+  const resolvedCodeSurface = resolveCodeSurface({
+    exercise: livePracticeManifest ?? ex,
+    projectStepManifest,
+  });
+  const useToolsCodeSurface = toolsEnabled && isCodeInput && resolvedCodeSurface === "tools";
+  const codeRunnerMode: "embedded" | "tools" = useToolsCodeSurface ? "tools" : "embedded";
 
-  const codeTools = toolsEnabled && isCodeInput ? toolsAny : null;
+  const codeTools = useToolsCodeSurface ? toolsAny : null;
 
   const stableExerciseSlotId = useMemo(() => {
     const manifestSlotId = firstNonBlankString(
@@ -1139,7 +1144,6 @@ export default function QuizPracticeCard(props: {
     if (!codeInputId) return;
     if (!ex) return;
     if (!livePracticeItem) return;
-    if (isFinalized) return;
 
     const bindKey = `${codeInputId}:${exerciseKeyForTools}`;
     const alreadyBoundToThisExercise =
@@ -1163,7 +1167,6 @@ export default function QuizPracticeCard(props: {
     ex,
     Boolean(livePracticeItem),
     exerciseKeyForTools,
-    isFinalized,
     toolsAny.boundId,
   ]);
 

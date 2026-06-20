@@ -630,7 +630,7 @@ export default function CodeInputExerciseUI({
                     <div className="flex items-center justify-between gap-3">
                         <div className="min-w-0">
                             <div className="ui-title-sm">
-                                {ui.t("tools.title", {}, "Solve in Tools")}
+                                {ui.t("tools.title", {}, "Use the Code tab")}
                             </div>
 
                             <div className="mt-1 ui-meta">
@@ -638,14 +638,14 @@ export default function CodeInputExerciseUI({
                                 <span className="font-medium ui-text">{String(language ?? "python")}</span>
                                 {" • "}
                                 {toolsBound
-                                    ? ui.t("tools.bound", {}, "Bound to Tools")
-                                    : ui.t("tools.notBound", {}, "Not bound yet")}
+                                    ? ui.t("tools.bound", {}, "Workspace ready")
+                                    : ui.t("tools.notBound", {}, "Workspace opening")}
                             </div>
                             <div className="mt-2 ui-meta">
                                 {ui.t(
                                     "tools.desc",
                                     {},
-                                    "Write code and run it here. Fill answer appears after the reveal steps."
+                                    "Open the Code tab to edit and run your answer in the full workspace."
                                 )}
                             </div>
                         </div>
@@ -657,11 +657,11 @@ export default function CodeInputExerciseUI({
                             className={
                                 !onUseTools ? "ui-btn-disabled" : "ui-btn-secondary"
                             }
-                            title={ui.t("tools.bindTitle", {}, "Bind this question to the Tools panel")}
+                            title={ui.t("tools.bindTitle", {}, "Open the full code workspace")}
                         >
                             {toolsBound
-                                ? ui.t("tools.boundShort", {}, "Bound ✓")
-                                : ui.t("tools.open", {}, "Open in Tools")}
+                                ? ui.t("tools.boundShort", {}, "Jump to Code")
+                                : ui.t("tools.open", {}, "Open Code")}
                         </button>
                     </div>
                 </div>

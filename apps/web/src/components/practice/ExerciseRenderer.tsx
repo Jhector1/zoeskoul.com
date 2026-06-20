@@ -1121,8 +1121,18 @@ function CodeInputWithTools(props: {
         lastAutoBindKeyRef.current = autoBindKey;
 
         queueMicrotask(() => {
-            ensureVisible?.();
             requestBind(codeInputId);
+
+            if (typeof window !== "undefined") {
+                window.requestAnimationFrame(() => {
+                    window.requestAnimationFrame(() => {
+                        ensureVisible?.();
+                    });
+                });
+                return;
+            }
+
+            ensureVisible?.();
         });
 
         // Intentionally depend only on the active exercise identity.
@@ -1747,7 +1757,7 @@ export default function ExerciseRenderer({
                     ownerCardId={codeOwnerCardId}
                     updateCurrent={updateCurrent}
                     showPrompt={showPrompt}
-                    toolAutoOpen={codeToolsAutoOpen && !lockInputs && !readOnly}
+                    toolAutoOpen={codeToolsAutoOpen}
                     feedback={codeFeedback}
                     explanation={codeExplanation}
                     subjectSlug={subjectSlug}

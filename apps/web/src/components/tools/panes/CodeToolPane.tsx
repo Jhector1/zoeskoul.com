@@ -229,7 +229,7 @@ export function resolveCodeToolPaneFullIdeMode(args: {
     return {
         ideShell,
         usesWorkspaceShell,
-        forceDesktopLayout: usesWorkspaceShell,
+        forceDesktopLayout: false,
         fullIdeTitle,
     };
 }

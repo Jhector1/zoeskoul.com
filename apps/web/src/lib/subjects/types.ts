@@ -2,6 +2,7 @@ import type { PracticeKind } from "@zoeskoul/db";
 import type { ManifestRuntimeDefaults } from "@/lib/subjects/_core/manifestTypes";
 import type { LearningIdeConfig } from "@/lib/ide/learningIdeConfig";
 import type { ReviewContentVersion } from "@/lib/review/contentVersionTypes";
+import type { CodeInputSurface, CodeInputUiSpec } from "@/lib/practice/types";
 export type ReviewQuestion =
     | {
     kind: "mcq";
@@ -68,6 +69,16 @@ export type ReviewProjectStep = {
     seedPolicy?: SeedPolicy;
     maxAttempts?: number | null;
     carryFromPrev?: boolean;
+    /**
+     * Optional authoring hint for code_input display surface. Runtime still
+     * forces workspace when this project step provides files/multi-file data.
+     */
+    codeSurface?: CodeInputSurface;
+    /** @deprecated Prefer codeSurface: "embedded". */
+    embedded?: boolean;
+    /** @deprecated Prefer codeSurface: "embedded". */
+    embeddedCodeInput?: boolean;
+    ui?: CodeInputUiSpec;
 
     /**
      * Optional project-step authored workspace fallback.

@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { cn } from "@/lib/cn";
 import TopicShell from "../../components/TopicShell";
 import ReviewTopicCards from "./ReviewTopicCards";
 import ReviewTopicCompletion from "./ReviewTopicCompletion";
@@ -15,6 +16,10 @@ import { useDebouncedSketchState } from "../../hooks/useDebouncedSketchState";
 type Props = {
     leftCollapsedEff: boolean;
     onOpenTopics: () => void;
+    mobileToolsPanel?: React.ReactNode;
+    showMobileWorkspaceTabs?: boolean;
+    activeMobileWorkspaceTab?: "lesson" | "code";
+    onMobileWorkspaceTabChange?: (tab: "lesson" | "code") => void;
     mainScrollRef: React.RefObject<HTMLElement | null>;
     padStyle: React.CSSProperties;
     viewTopic: ReviewModule["topics"][number] | null;
@@ -62,6 +67,10 @@ type Props = {
 export default function ReviewTopicStage({
     leftCollapsedEff,
     onOpenTopics,
+    mobileToolsPanel,
+    showMobileWorkspaceTabs = false,
+    activeMobileWorkspaceTab = "lesson",
+    onMobileWorkspaceTabChange,
     mainScrollRef,
     padStyle,
     viewTopic,
@@ -107,75 +116,157 @@ export default function ReviewTopicStage({
 
                                              onBeforeCardNavigate,
 }: Props) {
+    const useWorkspaceTabs = Boolean(showMobileWorkspaceTabs && mobileToolsPanel);
+    const activeTab = useWorkspaceTabs ? activeMobileWorkspaceTab : "lesson";
+    const setActiveTab = (tab: "lesson" | "code") => {
+        onMobileWorkspaceTabChange?.(tab);
+    };
+
+    const lessonContent = (
+        <TopicShell title={viewTopic?.label ?? ""} subtitle={viewTopic?.summary ?? null}>
+            <div className="flex min-h-full flex-col pb-28">
+                <ReviewTopicCards
+                    motionKey={`${viewTid}:${versionStr}`}
+                    viewCards={viewCards}
+                    activeCardIndex={activeCardIndex}
+                    navModes={navModes}
+                    reduceMotion={reduceMotion}
+                    tp={tp}
+                    progressHydrated={progressHydrated}
+                    versionStr={versionStr}
+                    prereqsForAllQuizzes={prereqsForAllQuizzes}
+                    viewTid={viewTid}
+                    sketch={sketch}
+                    setProgress={setProgress}
+                    flushNow={flushNow}
+                    onRun={onRun}
+                    onReveal={onReveal}
+                    onSubmit={onSubmit}
+                    scrollToNextActionable={scrollToNextActionable}
+                    setCardEl={setCardEl}
+                    subjectSlug={subjectSlug}
+                    moduleSlug={moduleSlug}
+                    sectionSlug={sectionSlug}
+                    subjectRuntimeDefaults={subjectRuntimeDefaults}
+                    courseRuntimeDefaults={courseRuntimeDefaults}
+                    moduleRuntimeDefaults={moduleRuntimeDefaults}
+                    sectionRuntimeDefaults={sectionRuntimeDefaults}
+                    topicRuntimeDefaults={topicRuntimeDefaults}
+                    routeExerciseId={routeExerciseId}
+                    defaultToolLanguage={defaultToolLanguage}
+                    onActiveCardIndexChange={onActiveCardIndexChange}
+                    onNavigateToExerciseRoute={onNavigateToExerciseRoute}
+                    onBeforeCardNavigate={onBeforeCardNavigate}
+                    maxUnlockedCardIndex={maxUnlockedCardIndex}
+                    progressiveLockMessage={progressiveLockMessage}
+                    onLockedNavigate={onLockedNavigate}
+                />
+                {!useWorkspaceTabs ? mobileToolsPanel : null}
+                <ReviewTopicCompletion
+                    viewIsComplete={viewIsComplete}
+                    viewTopic={viewTopic}
+                    onContinue={onContinue}
+                    continueLabel={continueLabel}
+                    showSubjectFinish={showSubjectFinish}
+                    subjectSlug={subjectSlug}
+                    subjectFinish={subjectFinish}
+                    onOpenCertificate={onOpenCertificate}
+                />
+            </div>
+        </TopicShell>
+    );
+
+    const topicsButton = leftCollapsedEff ? (
+        <div className="mb-3 flex gap-2 px-3 pt-3">
+            <button
+                type="button"
+                onClick={onOpenTopics}
+                className="ui-btn ui-btn-secondary text-xs font-extrabold"
+            >
+                Topics ▶
+            </button>
+        </div>
+    ) : null;
+
+    if (useWorkspaceTabs) {
+        return (
+            <main
+                ref={mainScrollRef}
+                className="flex-1 min-w-0 min-h-0 overflow-hidden"
+                style={padStyle}
+            >
+                <div className="flex h-full min-h-0 flex-col">
+                    {topicsButton}
+                    <div className="shrink-0 border-b border-[rgb(var(--ui-border)/0.75)] bg-[rgb(var(--ui-surface)/0.94)] p-3 backdrop-blur">
+                        <div
+                            className="mx-auto grid max-w-xl grid-cols-2 rounded-full bg-[rgb(var(--ui-muted)/0.7)] p-1 text-sm font-black"
+                            role="tablist"
+                            aria-label="Lesson and code workspace"
+                            data-testid="review-mobile-workspace-tabs"
+                        >
+                            <button
+                                type="button"
+                                role="tab"
+                                aria-selected={activeTab === "lesson"}
+                                onClick={() => setActiveTab("lesson")}
+                                className={cn(
+                                    "rounded-full px-4 py-2 transition",
+                                    activeTab === "lesson"
+                                        ? "bg-[rgb(var(--ui-surface)/0.96)] text-[rgb(var(--ui-text))] shadow-sm"
+                                        : "text-[rgb(var(--ui-text-muted))] hover:text-[rgb(var(--ui-text))]",
+                                )}
+                            >
+                                Lesson
+                            </button>
+                            <button
+                                type="button"
+                                role="tab"
+                                aria-selected={activeTab === "code"}
+                                onClick={() => setActiveTab("code")}
+                                className={cn(
+                                    "rounded-full px-4 py-2 transition",
+                                    activeTab === "code"
+                                        ? "bg-[rgb(var(--ui-surface)/0.96)] text-[rgb(var(--ui-text))] shadow-sm"
+                                        : "text-[rgb(var(--ui-text-muted))] hover:text-[rgb(var(--ui-text))]",
+                                )}
+                            >
+                                Code
+                            </button>
+                        </div>
+                    </div>
+
+                    <div className="min-h-0 flex-1 overflow-hidden">
+                        <section
+                            className={cn("h-full min-h-0 overflow-auto", activeTab !== "lesson" && "hidden")}
+                            role="tabpanel"
+                            aria-hidden={activeTab !== "lesson"}
+                            data-testid="review-mobile-lesson-panel"
+                        >
+                            {lessonContent}
+                        </section>
+
+                        <section
+                            className={cn("h-full min-h-0 overflow-hidden", activeTab !== "code" && "hidden")}
+                            role="tabpanel"
+                            aria-hidden={activeTab !== "code"}
+                            data-testid="review-mobile-code-panel"
+                        >
+                            {mobileToolsPanel}
+                        </section>
+                    </div>
+                </div>
+            </main>
+        );
+    }
+
     return (
         <main
             ref={mainScrollRef}
             className="flex-1 min-w-0 min-h-0 overflow-auto"
             style={padStyle}
         >
-            {leftCollapsedEff ? (
-                <div className="mb-3 flex gap-2">
-                    <button
-                        type="button"
-                        onClick={onOpenTopics}
-                        className="ui-btn ui-btn-secondary text-xs font-extrabold"
-                    >
-                        Topics ▶
-                    </button>
-                </div>
-            ) : null}
-
-            <TopicShell title={viewTopic?.label ?? ""} subtitle={viewTopic?.summary ?? null}>
-                <div className="flex min-h-full flex-col">
-                    <ReviewTopicCards
-                        motionKey={`${viewTid}:${versionStr}`}
-                        viewCards={viewCards}
-                        activeCardIndex={activeCardIndex}
-                        navModes={navModes}
-                        reduceMotion={reduceMotion}
-                        tp={tp}
-                        progressHydrated={progressHydrated}
-                        versionStr={versionStr}
-                        prereqsForAllQuizzes={prereqsForAllQuizzes}
-                        viewTid={viewTid}
-                        sketch={sketch}
-                        setProgress={setProgress}
-                        flushNow={flushNow}
-                        onRun={onRun}
-                        onReveal={onReveal}
-                        onSubmit={onSubmit}
-                        scrollToNextActionable={scrollToNextActionable}
-                        setCardEl={setCardEl}
-                        subjectSlug={subjectSlug}
-                        moduleSlug={moduleSlug}
-                        sectionSlug={sectionSlug}
-                        subjectRuntimeDefaults={subjectRuntimeDefaults}
-                        courseRuntimeDefaults={courseRuntimeDefaults}
-                        moduleRuntimeDefaults={moduleRuntimeDefaults}
-                        sectionRuntimeDefaults={sectionRuntimeDefaults}
-                        topicRuntimeDefaults={topicRuntimeDefaults}
-                        routeExerciseId={routeExerciseId}
-                        defaultToolLanguage={defaultToolLanguage}
-                        onActiveCardIndexChange={onActiveCardIndexChange}
-                        onNavigateToExerciseRoute={onNavigateToExerciseRoute}
-                        onBeforeCardNavigate={onBeforeCardNavigate}
-
-                        maxUnlockedCardIndex={maxUnlockedCardIndex}
-                        progressiveLockMessage={progressiveLockMessage}
-                        onLockedNavigate={onLockedNavigate}
-                    />
-                    <ReviewTopicCompletion
-                        viewIsComplete={viewIsComplete}
-                        viewTopic={viewTopic}
-                        onContinue={onContinue}
-                        continueLabel={continueLabel}
-                        showSubjectFinish={showSubjectFinish}
-                        subjectSlug={subjectSlug}
-                        subjectFinish={subjectFinish}
-                        onOpenCertificate={onOpenCertificate}
-                    />
-                </div>
-            </TopicShell>
+            {topicsButton}
+            {lessonContent}
         </main>
     );
 }

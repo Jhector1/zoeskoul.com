@@ -33,6 +33,25 @@ export type GenKey =
     | GeneratedSubjectGenKey
     | (string & {});
 
+
+export type CodeInputSurface = "auto" | "embedded" | "workspace";
+
+export type CodeInputUiSpec = {
+    /**
+     * Chooses the learner-facing code surface.
+     *
+     * - "workspace"/"auto" use ToolsPanel/FullIDE.
+     * - "embedded" is only for very small inline checks. Runtime still forces
+     *   ToolsPanel when files, SQL, terminal, or multi-file workspace is used.
+     */
+    codeSurface?: CodeInputSurface;
+    /** @deprecated Prefer codeSurface: "embedded". */
+    embedded?: boolean;
+    /** @deprecated Prefer codeSurface. */
+    embeddedCodeInput?: boolean;
+    [key: string]: unknown;
+};
+
 export type ExerciseBase = {
     id: string;
     topic: TopicSlug;
@@ -89,6 +108,16 @@ export type VectorDragDotExercise = ExerciseBase & {
 export type CodeInputExercise = ExerciseBase & {
     kind: "code_input";
     language?: WorkspaceLanguage;
+    /**
+     * Optional authoring hint for the display surface. Omit or use "auto" to
+     * default to ToolsPanel/FullIDE. Use "embedded" only for tiny inline checks.
+     */
+    codeSurface?: CodeInputSurface;
+    /** @deprecated Prefer codeSurface: "embedded". */
+    embedded?: boolean;
+    /** @deprecated Prefer codeSurface: "embedded". */
+    embeddedCodeInput?: boolean;
+    ui?: CodeInputUiSpec;
     starterCode?: string;
     starterStdin?: string;
     stdinHint?: string;

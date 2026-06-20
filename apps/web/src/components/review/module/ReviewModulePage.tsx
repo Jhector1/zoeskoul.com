@@ -11,6 +11,7 @@ import ReviewModuleHeader from "./components/layout/ReviewModuleHeader";
 import ReviewModuleLeftRail from "./components/layout/ReviewModuleLeftRail";
 import ReviewModuleRightRail from "./components/layout/ReviewModuleRightRail";
 import ReviewModuleMobileDrawer from "./components/layout/ReviewModuleMobileDrawer";
+import ReviewModuleStackedTools from "./components/layout/ReviewModuleStackedTools";
 
 import ReviewTopicStage from "./components/content/ReviewTopicStage";
 
@@ -47,7 +48,12 @@ export default function ReviewModulePage(props: ReviewModulePageProps) {
                         <CelebrationLayer {...vm.celebrations} />
                     </>
                 }
-                body={<ReviewTopicStage {...vm.topicStage} />}
+                body={
+                    <ReviewTopicStage
+                        {...vm.topicStage}
+                        mobileToolsPanel={<ReviewModuleStackedTools {...vm.rightRail} displayMode="tab" />}
+                    />
+                }
 
             />
             <ReviewModuleNavBar {...vm.moduleNav} />

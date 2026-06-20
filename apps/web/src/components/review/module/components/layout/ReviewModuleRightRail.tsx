@@ -8,6 +8,8 @@ type Props = {
     showDesktopRight: boolean;
     rightCollapsed: boolean;
     rightW: number;
+    shouldRenderStackedTools?: boolean;
+    containerRef?: React.Ref<HTMLElement>;
     onResizeStart: (e: React.MouseEvent<HTMLDivElement>) => void;
     toolsPanelProps: React.ComponentProps<typeof ToolsPanel>;
 };

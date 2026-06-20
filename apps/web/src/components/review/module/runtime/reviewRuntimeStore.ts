@@ -1930,6 +1930,8 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
                 workspaceOrigin,
                 userEdited,
                 starterHash,
+                ideConfig: (manifest as any)?.ideConfig ?? existing?.ideConfig ?? null,
+                manifest: (manifest as Record<string, unknown> | null) ?? existing?.manifest ?? null,
                 updatedAt: existing?.updatedAt ?? Date.now(),
             };
 

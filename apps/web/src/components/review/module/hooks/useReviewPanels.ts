@@ -11,11 +11,11 @@ export function useReviewPanels({ footerInsetPx = 0 }: Args) {
 
     const mdUp = useMediaQuery("(min-width: 768px)");
     const lgUp = useMediaQuery("(min-width: 1024px)");
+    const xlUp = useMediaQuery("(min-width: 1280px)");
 
-    const showDesktopLeft = mdUp;
-    const TOOLS_DESKTOP_ONLY = true;
-    const toolsUiEnabled = TOOLS_DESKTOP_ONLY ? lgUp : mdUp;
-    const showDesktopRight = toolsUiEnabled;
+    const showDesktopLeft = xlUp;
+    const toolsUiEnabled = true;
+    const showDesktopRight = xlUp;
 
     const [mobileTopicsOpen, setMobileTopicsOpen] = useState(false);
 
@@ -79,6 +79,7 @@ export function useReviewPanels({ footerInsetPx = 0 }: Args) {
         ...panels,
         mdUp,
         lgUp,
+        xlUp,
         showDesktopLeft,
         toolsUiEnabled,
         showDesktopRight,
