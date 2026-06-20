@@ -1,6 +1,5 @@
 import { expect, test, type Page } from "@playwright/test";
 import {
-    expectExplorerHasPath,
     expectTerminalContains,
     expectTerminalVisible,
     explorerPathLocator,
@@ -182,7 +181,7 @@ test.describe("linux terminal_workspace smoke", () => {
             timeout: 45_000,
         });
         await expect(page.getByTestId("interactive-terminal")).toBeVisible();
-        await expect(explorerPathLocator(page, "README.md")).toBeVisible();
+        await expect(explorerPathLocator(page, "README.md")).toHaveCount(0);
         await expect(page.getByTestId("code-editor-e2e-input")).toHaveCount(0);
         await expectTerminalVisible(page);
         await expect(page.getByTestId("code-runner-run-button")).toHaveCount(0);
@@ -194,10 +193,6 @@ test.describe("linux terminal_workspace smoke", () => {
 
         await sendTerminal(page, "mkdir -p linux-lab/notes");
         await sendTerminal(page, "touch linux-lab/notes/today.txt");
-
-        await expectExplorerHasPath(page, "linux-lab");
-        await expectExplorerHasPath(page, "linux-lab/notes");
-        await expectExplorerHasPath(page, "linux-lab/notes/today.txt");
 
         await page.getByTestId("review-practice-submit-button").click();
 

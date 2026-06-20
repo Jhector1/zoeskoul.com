@@ -64,7 +64,18 @@ export async function POST(req: Request) {
       return jsonNoStore({ ok: false, error: "Service unavailable." }, 503);
     }
 
-    const raw = await req.json();
+    const rawText = await req.text();
+    if (!rawText.trim()) {
+      return jsonNoStore({ ok: false, error: "Missing request body." }, 400);
+    }
+
+    let raw: unknown;
+    try {
+      raw = JSON.parse(rawText);
+    } catch {
+      return jsonNoStore({ ok: false, error: "Invalid JSON request body." }, 400);
+    }
+
     const parsed = parseRunReq(raw);
     const body: RunReq =
         parsed.kind === "sql"

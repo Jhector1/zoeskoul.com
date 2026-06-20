@@ -634,6 +634,7 @@ export function useReviewProgress(args: {
     const activeTopicIdRef = useRef(firstTopicId);
     const saveSeqRef = useRef(0);
     const hydrationCompleteRef = useRef(false);
+    const pendingRuntimeHydrationRef = useRef(false);
     const applyingRemoteRef = useRef(false);
     const localDirtyRef = useRef(false);
     const remoteSyncInFlightRef = useRef(false);
@@ -656,6 +657,19 @@ export function useReviewProgress(args: {
     }, []);
 
     const store = useReviewRuntimeStore();
+    const runtimeExerciseContractsKey = useReviewRuntimeStore((state) =>
+        Object.entries(state.exercises ?? {})
+            .map(([key, value]) =>
+                [
+                    key,
+                    String(value?.starterHash ?? ""),
+                    String(value?.workspaceStatus ?? ""),
+                    String(value?.language ?? value?.lang ?? ""),
+                ].join("::"),
+            )
+            .sort()
+            .join("|"),
+    );
 
     useEffect(() => {
         store.setTopicIds(activeTopicId, viewTopicId);
@@ -1106,6 +1120,7 @@ export function useReviewProgress(args: {
 
     const hydrateRuntimeFromProgress = useCallback(
         (normalizedProgress: ReviewProgressState, reason: string) => {
+            pendingRuntimeHydrationRef.current = false;
             const topics = (normalizedProgress as any).topics ?? {};
             if (!topics) return;
 
@@ -1223,6 +1238,7 @@ export function useReviewProgress(args: {
                  * authored sources has registered this exact exercise key.
                  */
                 if (!existingExercise) {
+                    pendingRuntimeHydrationRef.current = true;
                     return;
                 }
 
@@ -1532,6 +1548,13 @@ export function useReviewProgress(args: {
         },
         [firstTopicId, moduleSlug, subjectSlug],
     );
+
+    useEffect(() => {
+        if (!hydrated) return;
+        if (!pendingRuntimeHydrationRef.current) return;
+
+        hydrateRuntimeFromProgress(progressRef.current, "runtime-contract-ready");
+    }, [hydrated, hydrateRuntimeFromProgress, runtimeExerciseContractsKey]);
 
     useEffect(() => {
         if (!subjectSlug || !moduleSlug) return;

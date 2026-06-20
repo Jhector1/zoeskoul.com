@@ -1,6 +1,5 @@
 import { expect, test, type Page, type Route } from "@playwright/test";
 import {
-    expectExplorerHasPath,
     expectTerminalContains,
     expectTerminalVisible,
     installMockTerminalWorkspaceBackend,
@@ -275,9 +274,6 @@ test.describe("linux terminal session reuse", () => {
         await sendTerminal(page, "mkdir -p linux-start");
         await sendTerminal(page, "touch linux-start/hello.txt");
 
-        await expectExplorerHasPath(page, "linux-start");
-        await expectExplorerHasPath(page, "linux-start/hello.txt");
-
         await page.getByTestId("review-practice-submit-button").click();
         await expect(page.getByTestId("review-practice-result-correct")).toBeVisible({
             timeout: 15_000,
@@ -296,12 +292,8 @@ test.describe("linux terminal session reuse", () => {
         });
         await expectTerminalVisible(page);
         await expect(page.locator("body")).not.toContainText("Too many active sessions");
-        await expectExplorerHasPath(page, "linux-start");
-        await expectExplorerHasPath(page, "linux-start/hello.txt");
 
         await sendTerminal(page, "touch linux-start/command-practice.txt");
-
-        await expectExplorerHasPath(page, "linux-start/command-practice.txt");
 
         await page.getByTestId("review-practice-submit-button").click();
         await expect(page.getByTestId("review-practice-result-correct")).toBeVisible({

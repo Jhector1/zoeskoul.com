@@ -518,6 +518,13 @@ function reviewRuntimeWorkspaceIsUsable(runtime: any, workspace: WorkspaceStateV
      * and suppresses later starter hydration.
      */
     if (
+        runtime?.workspaceOrigin === "empty" &&
+        runtime?.workspaceSeedMode === "empty"
+    ) {
+        return true;
+    }
+
+    if (
         runtime?.workspaceOrigin === "starter" ||
         runtime?.workspaceOrigin === "empty" ||
         runtime?.userEdited === false
@@ -1706,8 +1713,6 @@ export default function CodeToolPane(props: {
                     submitted: false,
                     feedbackDismissed: true,
                     dismissFeedbackOnEdit: true,
-                    userEdited: true,
-                    workspaceOrigin: "user",
                     updatedAt: Date.now(),
                 });
             }
@@ -1751,8 +1756,6 @@ export default function CodeToolPane(props: {
                     submitted: false,
                     feedbackDismissed: true,
                     dismissFeedbackOnEdit: true,
-                    userEdited: true,
-                    workspaceOrigin: "user",
                     updatedAt: Date.now(),
                 });
             }

@@ -19,7 +19,7 @@ test.describe("catalog subject version visibility", () => {
             timeout: 30_000,
         });
 
-        await expect(pythonCatalog).toContainText(/2 courses/i);
+        await expect(pythonCatalog).toContainText(/3 courses/i);
         await expect(pythonCatalog).toContainText(/Python/i);
         await expect(pythonCatalog).not.toContainText(/1 course/i);
 
@@ -60,7 +60,7 @@ test.describe("catalog subject version visibility", () => {
             timeout: 30_000,
         });
 
-        await expect(pythonCatalog).toContainText(/2 courses/i);
+        await expect(pythonCatalog).toContainText(/3 courses/i);
         await expect(pythonCatalog).not.toContainText(/1 course/i);
     });
 });

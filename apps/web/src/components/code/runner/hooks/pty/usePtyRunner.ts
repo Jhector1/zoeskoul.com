@@ -199,6 +199,44 @@ function patchWorkspaceEntriesWithRunCode(args: {
     return sortEntries(changed ? patchedEntries : entries);
 }
 
+function activeWorkspacePath(
+    workspace?: SharedRunnerArgs["workspace"],
+) {
+    if (
+        !workspace ||
+        workspace.version !== 2 ||
+        !Array.isArray((workspace as any).nodes)
+    ) {
+        return "";
+    }
+
+    const activeFileId = String(
+        (workspace as any).activeFileId || (workspace as any).entryFileId || "",
+    );
+    if (!activeFileId) return "";
+
+    return normalizePath(pathOf((workspace as any).nodes, activeFileId));
+}
+
+function readRunCodeFromWorkspaceEntries(args: {
+    entries: WorkspaceSyncEntry[];
+    workspace?: SharedRunnerArgs["workspace"];
+}) {
+    const activePath = activeWorkspacePath(args.workspace);
+    if (!activePath) return null;
+
+    const match = sortEntries(args.entries).find((entry) =>
+        (entry as any).kind !== "directory" &&
+        normalizePath((entry as any).path) === activePath,
+    );
+
+    if (!match || (match as any).kind === "directory") {
+        return null;
+    }
+
+    return String((match as any).content ?? "");
+}
+
 async function postJson<T>(url: string, body: unknown): Promise<T> {
     const res = await fetch(url, {
         method: "POST",
@@ -458,7 +496,14 @@ export function usePtyRunner(args: SharedRunnerArgs): CodeRunnerController {
 
     const startRun = React.useCallback(async () => {
         if (disabled || !allowRun || busy) return;
-        const runCode = args.getLatestCode?.() ?? code;
+        const currentEntries = getCurrentWorkspaceEntries();
+        const runCode =
+            readRunCodeFromWorkspaceEntries({
+                entries: currentEntries,
+                workspace,
+            }) ??
+            args.getLatestCode?.() ??
+            code;
 
         if (!isInteractiveLanguage(lang)) {
             pushChunk(
@@ -479,7 +524,7 @@ export function usePtyRunner(args: SharedRunnerArgs): CodeRunnerController {
         }
 
         runBaselineEntriesRef.current = patchWorkspaceEntriesWithRunCode({
-            entries: getCurrentWorkspaceEntries(),
+            entries: currentEntries,
             workspace,
             runCode,
         });
