@@ -167,7 +167,7 @@ export function resolveFullIDEConfigFromLearningIde(args?: {
                     // `mkdir`, `rm`, `mv`, and `cp` in the shell instead of using
                     // Explorer buttons.
                     enabled: !terminalWorkspaceMode,
-                    allowMobileDrawer: false,
+                    allowMobileDrawer: !terminalWorkspaceMode,
                     allowResize: !terminalWorkspaceMode,
                     showFilter: false,
                     showActions: !terminalWorkspaceMode,

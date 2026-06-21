@@ -316,6 +316,8 @@ function FullIDEInner({
         editorHostRef,
         onCloseMobileExplorer: handleCloseMobileExplorer,
     });
+    const mobileExplorerAvailable =
+        services.explorer.enabled && !viewport.isDesktop;
 
     const isSql = language === "sql";
     const canUseWorkspaceTerminal =
@@ -435,7 +437,13 @@ function FullIDEInner({
             canRedo={history.canRedo}
             onUndo={actions.undo}
             onRedo={actions.redo}
-            onToggleExplorer={viewport.isDesktop ? () => setExplorerCollapsed(true) : undefined}
+            onToggleExplorer={
+                viewport.isDesktop
+                    ? () => setExplorerCollapsed(true)
+                    : services.explorer.allowMobileDrawer
+                        ? handleCloseMobileExplorer
+                        : undefined
+            }
             services={services}
             actions={{
                 setInlineEdit: actions.setInlineEdit,
@@ -564,9 +572,7 @@ function FullIDEInner({
                     isDesktop={viewport.isDesktop}
                     showTopLanguageButtons={services.chrome.showTopLanguageButtons}
                     showBackButton={services.chrome.showBackButton}
-                    showMobileFilesButton={
-                        services.explorer.enabled && services.explorer.allowMobileDrawer
-                    }
+                    showMobileFilesButton={mobileExplorerAvailable}
                     showProjectSwitcher={services.projects.showProjectSwitcher}
                     showActivePath={services.chrome.showActivePath}
                     showStatus={services.chrome.showStatus}
@@ -625,8 +631,10 @@ function FullIDEInner({
                     />
                 ) : services.explorer.enabled ? (
                     <IdeMobileLayout
-                        open={services.explorer.allowMobileDrawer && showMobileExplorer}
+                        open={mobileExplorerAvailable && showMobileExplorer}
+                        onOpen={() => setShowMobileExplorer(true)}
                         onClose={handleCloseMobileExplorer}
+                        showExplorerRail={mobileExplorerAvailable && !showMobileExplorer}
                         explorer={explorerPane}
                         editor={editorPane}
                     />

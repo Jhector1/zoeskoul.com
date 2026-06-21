@@ -82,6 +82,7 @@ describe("resolveFullIDEConfigFromLearningIde", () => {
         });
 
         expect(resolved.services.explorer?.enabled).toBe(true);
+        expect(resolved.services.explorer?.allowMobileDrawer).toBe(true);
         expect(resolved.services.editor?.showEditor).toBe(true);
         expect(resolved.services.editor?.showTabs).toBe(true);
         expect(resolved.services.explorer?.fileActions).toEqual({
@@ -108,6 +109,7 @@ describe("resolveFullIDEConfigFromLearningIde", () => {
         });
 
         expect(resolved.services.explorer?.enabled).toBe(false);
+        expect(resolved.services.explorer?.allowMobileDrawer).toBe(false);
         expect(resolved.services.explorer?.showActions).toBe(false);
         expect(resolved.services.editor?.showEditor).toBe(false);
         expect(resolved.services.editor?.showTabs).toBe(false);

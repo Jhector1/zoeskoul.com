@@ -43,7 +43,7 @@ export default function IdeDesktopLayout({
           className="grid h-full min-h-0 w-full"
           style={{
             gridTemplateColumns: explorerCollapsed
-                ? "44px minmax(0, 1fr)"
+                ? "48px minmax(0, 1fr)"
                 : `minmax(240px, ${leftPct}%) 6px minmax(0, 1fr)`,
           }}
       >
@@ -52,8 +52,8 @@ export default function IdeDesktopLayout({
               <button
                   type="button"
                   onClick={onToggleExplorer}
-                  aria-label="Expand explorer"
-                  title="Expand explorer"
+                  aria-label="Open file explorer"
+                  title="Open file explorer"
                   className="grid h-8 w-8 place-items-center rounded-lg border border-neutral-200 bg-white text-neutral-700 transition-colors hover:bg-neutral-50 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/75 dark:hover:bg-white/[0.08]"
               >
                 <IconChevronRight className="h-4 w-4" />

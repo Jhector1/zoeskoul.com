@@ -1,7 +1,6 @@
 "use client";
 
 import type { Exercise } from "@/lib/practice/types";
-import type { ReviewProjectStep } from "@/lib/subjects/types";
 
 export type CodeSurfaceRequest = "auto" | "embedded" | "workspace";
 export type ResolvedCodeSurface = "embedded" | "tools";
@@ -150,7 +149,7 @@ function isSqlWorkspaceExercise(exercise: Record<string, unknown>) {
 
 export function getRequestedCodeSurface(args: {
     exercise: Exercise | null | undefined;
-    projectStepManifest?: ReviewProjectStep | null;
+    projectStepManifest?: unknown;
 }): CodeSurfaceRequest {
     const exerciseRecord = isRecord(args.exercise) ? (args.exercise as unknown as Record<string, unknown>) : null;
     const projectStepRecord = isRecord(args.projectStepManifest)
@@ -176,7 +175,7 @@ export function getRequestedCodeSurface(args: {
  */
 export function isFullWorkspaceExercise(args: {
     exercise: Exercise | null | undefined;
-    projectStepManifest?: ReviewProjectStep | null;
+    projectStepManifest?: unknown;
 }) {
     const exercise = args.exercise;
     if (!exercise || exercise.kind !== "code_input") return false;
@@ -207,11 +206,13 @@ export function isFullWorkspaceExercise(args: {
         return true;
     }
 
-    const projectStep = args.projectStepManifest;
+    const projectStep = isRecord(args.projectStepManifest)
+        ? args.projectStepManifest
+        : null;
     if (!projectStep) return false;
 
     return (
-        hasAnyFileSources(projectStep as unknown as Record<string, unknown>) ||
+        hasAnyFileSources(projectStep) ||
         hasWorkspaceFiles(projectStep.workspace) ||
         typeof projectStep.solutionCode === "string"
     );
@@ -227,7 +228,7 @@ export function isFullWorkspaceExercise(args: {
  */
 export function resolveCodeSurface(args: {
     exercise: Exercise | null | undefined;
-    projectStepManifest?: ReviewProjectStep | null;
+    projectStepManifest?: unknown;
 }): ResolvedCodeSurface {
     const exercise = args.exercise;
     if (!exercise || exercise.kind !== "code_input") return "embedded";
@@ -240,7 +241,7 @@ export function resolveCodeSurface(args: {
 
 export function shouldUseWorkspaceCodeSurface(args: {
     exercise: Exercise | null | undefined;
-    projectStepManifest?: ReviewProjectStep | null;
+    projectStepManifest?: unknown;
 }) {
     return resolveCodeSurface(args) === "tools";
 }

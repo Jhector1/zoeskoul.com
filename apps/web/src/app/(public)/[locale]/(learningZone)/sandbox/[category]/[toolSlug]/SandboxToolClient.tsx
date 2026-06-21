@@ -61,6 +61,7 @@ export default function SandboxToolClient({
             : undefined;
 
         return (
+
             <ProgrammingSandbox
                 initialLanguage={(entry.initialLanguage ?? "python") as WorkspaceLanguage}
                 initialSurfaceMode={entry.toolSlug === "shell" ? "shell" : "code"}

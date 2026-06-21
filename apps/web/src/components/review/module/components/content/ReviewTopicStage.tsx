@@ -176,17 +176,17 @@ export default function ReviewTopicStage({
         </TopicShell>
     );
 
-    const topicsButton = leftCollapsedEff ? (
-        <div className="mb-3 flex gap-2 px-3 pt-3">
-            <button
-                type="button"
-                onClick={onOpenTopics}
-                className="ui-btn ui-btn-secondary text-xs font-extrabold"
-            >
-                Topics ▶
-            </button>
-        </div>
-    ) : null;
+    // const topicsButton = leftCollapsedEff ? (
+    //     <div className="mb-3 flex gap-2 px-3 pt-3">
+    //         <button
+    //             type="button"
+    //             onClick={onOpenTopics}
+    //             className="ui-btn ui-btn-secondary text-xs font-extrabold"
+    //         >
+    //             Topics ▶
+    //         </button>
+    //     </div>
+    // ) : null;
 
     if (useWorkspaceTabs) {
         return (
@@ -196,7 +196,7 @@ export default function ReviewTopicStage({
                 style={padStyle}
             >
                 <div className="flex h-full min-h-0 flex-col">
-                    {topicsButton}
+                    {/*{topicsButton}*/}
                     <div className="shrink-0 border-b border-[rgb(var(--ui-border)/0.75)] bg-[rgb(var(--ui-surface)/0.94)] p-3 backdrop-blur">
                         <div
                             className="mx-auto grid max-w-xl grid-cols-2 rounded-full bg-[rgb(var(--ui-muted)/0.7)] p-1 text-sm font-black"
@@ -265,7 +265,7 @@ export default function ReviewTopicStage({
             className="flex-1 min-w-0 min-h-0 overflow-auto"
             style={padStyle}
         >
-            {topicsButton}
+            {/*{topicsButton}*/}
             {lessonContent}
         </main>
     );
