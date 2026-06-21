@@ -1,5 +1,12 @@
 {
   "topicId": "what-the-terminal-is",
-  "ok": true,
-  "issues": []
+  "ok": false,
+  "issues": [
+    {
+      "code": "PROGRAMMING_LINE_BY_LINE_EXPLANATION_MISSING",
+      "category": "pedagogy",
+      "severity": "error",
+      "message": "Programming profile \"code-family\" includes a multi-line code example but does not explain it step by step or line by line in sketchBlocks."
+    }
+  ]
 }

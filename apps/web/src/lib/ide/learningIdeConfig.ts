@@ -132,9 +132,7 @@ export function resolveFullIDEConfigFromLearningIde(args?: {
     const runnerBackend = ideConfig?.runnerBackend ?? "auto";
     const enableWorkspaceTerminal =
         runnerBackend === "pty" || (runnerBackend === "auto" && wantsTerminal);
-    const terminalSessionScope =
-        ideConfig?.terminalSessionScope ??
-        (terminalWorkspaceMode ? "topic" : "exercise");
+    const terminalSessionScope = ideConfig?.terminalSessionScope ?? "exercise";
     const requestedFileActions = resolveIdeFileActions(ideConfig?.fileActions ?? null);
     const fileActions: ResolvedIdeFileActions = terminalWorkspaceMode
         ? {

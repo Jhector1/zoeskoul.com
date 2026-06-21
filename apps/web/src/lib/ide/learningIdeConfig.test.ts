@@ -121,7 +121,7 @@ describe("resolveFullIDEConfigFromLearningIde", () => {
             delete: false,
             dragDrop: false,
         });
-        expect(resolved.services.runner?.terminalSessionScope).toBe("topic");
+        expect(resolved.services.runner?.terminalSessionScope).toBe("exercise");
         expect(resolved.access.canUseMultiFile).toBe(true);
     });
 

@@ -1,6 +1,6 @@
 {
   "subjectSlug": "linux--linux-terminal-fundamentals--draft",
-  "generatedAt": "2026-06-20T16:55:05.744Z",
+  "generatedAt": "2026-06-21T20:44:00.133Z",
   "topics": [
     {
       "moduleSlug": "linux-1-terminal-navigation",
@@ -9,7 +9,7 @@
       "status": "failed",
       "attempts": 3,
       "retryCodes": [
-        "SEMANTIC_VALIDATION_FAILED",
+        "CRITIQUE_VALIDATION_FAILED",
         "CRITIQUE_VALIDATION_FAILED",
         "CRITIQUE_VALIDATION_FAILED"
       ]

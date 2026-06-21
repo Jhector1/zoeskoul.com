@@ -11,6 +11,7 @@ type StartBrowserSessionResult =
     sessionId: string;
     state: RunSessionState;
     attachToken: string;
+    wsUrl: string;
 }
     | {
     ok: false;
@@ -41,7 +42,7 @@ export async function startInteractiveProjectRun(
     signal?: AbortSignal,
 ): Promise<StartBrowserSessionResult> {
     try {
-        const res = await fetch("/api/run/pty/sessions/start", {
+        const res = await fetch("/api/run/pty/sessions/ensure", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

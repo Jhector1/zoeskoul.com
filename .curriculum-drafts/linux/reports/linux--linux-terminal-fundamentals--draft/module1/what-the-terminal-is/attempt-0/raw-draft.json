@@ -6,12 +6,17 @@
     {
       "id": "sketch1",
       "title": "Introduction to the Terminal",
-      "bodyMarkdown": "The terminal is a powerful tool that allows you to interact with your computer using text commands. Unlike graphical interfaces, the terminal provides a direct way to control your system by typing commands and receiving text-based feedback.\n\n### Example\n\nA common command is `pwd`, which stands for 'print working directory'. This command tells you the current directory you are in.\n\n```bash\n$ pwd\n/home/user\n```\n\nThis output shows that you are in the `/home/user` directory.\n\n### Try it yourself\nOpen your terminal and type `pwd` to see your current directory."
+      "bodyMarkdown": "The terminal is a powerful tool that allows you to interact with your computer using text commands. Unlike graphical interfaces, the terminal provides a direct way to execute commands and automate tasks. \n\n### Example\n\nA simple command you can try is `pwd`, which stands for 'print working directory'. This command tells you the current directory you are in.\n\n```bash\n$ pwd\n/home/user\n```\n\nThis output shows that you are in the `/home/user` directory.\n\n**Try it yourself:** Open your terminal and type `pwd` to see your current directory."
     },
     {
       "id": "sketch2",
       "title": "Navigating the File System",
-      "bodyMarkdown": "In the terminal, you can navigate through your file system using commands like `cd` (change directory), `ls` (list), and `mkdir` (make directory).\n\n- **`cd`**: Changes the current directory.\n- **`ls`**: Lists the files and directories in the current directory.\n- **`mkdir`**: Creates a new directory.\n\n### Example\n```bash\n$ mkdir new_folder\n$ cd new_folder\n$ pwd\n/home/user/new_folder\n```\n\nThis sequence creates a new directory called `new_folder`, moves into it, and confirms the change with `pwd`.\n\n### Your turn\nTry creating a new directory and navigating into it using `mkdir` and `cd`."
+      "bodyMarkdown": "In the terminal, you can navigate through your file system using commands like `cd` (change directory), `ls` (list), and `pwd` (print working directory).\n\n### Example\n\n```bash\n$ cd /home/user/Documents\n$ pwd\n/home/user/Documents\n$ ls\nfile1.txt  file2.txt  folder1\n```\n\n- `cd /home/user/Documents` changes the current directory to `/home/user/Documents`.\n- `pwd` confirms your current directory.\n- `ls` lists the files and folders in the current directory.\n\n**Your turn:** Use `cd` to navigate to a different directory and `ls` to list its contents."
+    },
+    {
+      "id": "sketch3",
+      "title": "Creating and Managing Files",
+      "bodyMarkdown": "You can create and manage files directly from the terminal using commands like `touch`, `mkdir`, and `rm`.\n\n### Example\n\n```bash\n$ mkdir new_folder\n$ touch new_folder/new_file.txt\n$ ls new_folder\nnew_file.txt\n```\n\n- `mkdir new_folder` creates a new directory named `new_folder`.\n- `touch new_folder/new_file.txt` creates a new file named `new_file.txt` inside `new_folder`.\n- `ls new_folder` lists the contents of `new_folder`, showing `new_file.txt`.\n\n**Try this:** Create a new directory and a file within it, then list the contents to verify."
     }
   ],
   "quizDraft": [
@@ -20,11 +25,11 @@
       "kind": "single_choice",
       "title": "Purpose of the Terminal",
       "prompt": "What is the primary purpose of the terminal?",
-      "hint": "Think about how the terminal allows you to interact with your computer.",
+      "hint": "Think about how the terminal allows you to interact with the computer.",
       "help": {
         "concept": "The terminal is used to execute commands and interact with the operating system.",
-        "hint_1": "The terminal is a text-based interface for command execution.",
-        "hint_2": "The terminal allows you to type commands to control your computer."
+        "hint_1": "The terminal is not primarily for graphical tasks.",
+        "hint_2": "The terminal allows you to type commands to perform tasks."
       },
       "options": [
         "To browse the internet",
@@ -38,41 +43,20 @@
     },
     {
       "id": "quiz2",
-      "kind": "single_choice",
-      "title": "Command to List Files",
-      "prompt": "Which command is used to list files in the current directory?",
-      "hint": "This command shows the contents of the directory.",
-      "help": {
-        "concept": "The `ls` command lists files and directories in the current directory.",
-        "hint_1": "The command starts with 'l'.",
-        "hint_2": "It's a two-letter command that lists directory contents."
-      },
-      "options": [
-        "pwd",
-        "cd",
-        "ls",
-        "mkdir"
-      ],
-      "correctOptionIds": [
-        "c"
-      ]
-    },
-    {
-      "id": "quiz3",
       "kind": "multi_choice",
       "title": "Commands for Navigation",
       "prompt": "Which of the following commands are used for navigating the file system? (Choose all that apply)",
       "hint": "Consider commands that help you move around directories.",
       "help": {
-        "concept": "Commands like `cd`, `pwd`, and `ls` are used for navigation.",
-        "hint_1": "One command changes directories, another lists contents.",
-        "hint_2": "Think about commands that help you see where you are and move to different places."
+        "concept": "Navigation commands help you move between directories and list their contents.",
+        "hint_1": "Think about commands that change your location or show directory contents.",
+        "hint_2": "These commands include changing directories and listing files."
       },
       "options": [
         "cd",
         "ls",
         "pwd",
-        "mkdir"
+        "rm"
       ],
       "correctOptionIds": [
         "a",
@@ -81,77 +65,98 @@
       ]
     },
     {
-      "id": "quiz4",
+      "id": "quiz3",
       "kind": "drag_reorder",
-      "title": "Order of Commands to Create and Enter a Directory",
-      "prompt": "Arrange the commands in the correct order to create a directory and navigate into it.",
-      "hint": "First, create the directory, then move into it.",
+      "title": "Order of Commands",
+      "prompt": "Arrange the commands in the order you would use them to navigate to a directory and list its contents.",
+      "hint": "Think about the sequence of changing directories and then listing files.",
       "help": {
-        "concept": "The sequence involves creating a directory and then changing into it.",
-        "hint_1": "Start with making the directory.",
-        "hint_2": "After creating, use the command to change directories."
+        "concept": "First, you change to the desired directory, then list its contents.",
+        "hint_1": "Start with changing the directory.",
+        "hint_2": "End with listing the contents of the directory."
       },
       "tokens": [
-        "mkdir new_folder",
-        "cd new_folder",
-        "pwd"
+        "cd /home/user/Documents",
+        "pwd",
+        "ls"
       ],
       "correctOrder": [
-        "mkdir new_folder",
-        "cd new_folder",
-        "pwd"
+        "cd /home/user/Documents",
+        "pwd",
+        "ls"
       ]
     },
     {
-      "id": "quiz5",
+      "id": "quiz4",
       "kind": "fill_blank_choice",
-      "title": "Command to Print Working Directory",
-      "prompt": "Fill in the blank: The command to print the current working directory is `[blank1]`.",
-      "hint": "This command starts with 'p'.",
+      "title": "Command for Current Directory",
+      "prompt": "Fill in the blank: The command to display the current directory is `[blank1]`.",
+      "hint": "This command prints the working directory.",
       "help": {
-        "concept": "The `pwd` command shows the current directory path.",
-        "hint_1": "The command is three letters long.",
-        "hint_2": "It stands for 'print working directory'."
+        "concept": "The command shows your current location in the file system.",
+        "hint_1": "It's a three-letter command starting with 'p'.",
+        "hint_2": "The command is 'pwd'."
       },
-      "template": "The command to print the current working directory is `[blank1]`.",
+      "template": "The command to display the current directory is `[blank1]`.",
       "choices": [
         "pwd",
         "cd",
         "ls",
-        "mkdir"
+        "rm"
       ],
       "correctValue": "pwd"
     },
     {
-      "id": "quiz6",
+      "id": "quiz5",
       "kind": "fill_blank_choice",
-      "title": "Command to Change Directory",
-      "prompt": "Fill in the blank: To change directories, use the `[blank1]` command.",
-      "hint": "This command is two letters long.",
+      "title": "Creating a Directory",
+      "prompt": "Fill in the blank: To create a new directory, use the command `[blank1]`.",
+      "hint": "This command is used to make directories.",
       "help": {
-        "concept": "The `cd` command is used to change directories.",
-        "hint_1": "The command starts with 'c'.",
-        "hint_2": "It stands for 'change directory'."
+        "concept": "The command creates a new folder in the file system.",
+        "hint_1": "It's a five-letter command starting with 'm'.",
+        "hint_2": "The command is 'mkdir'."
       },
-      "template": "To change directories, use the `[blank1]` command.",
+      "template": "To create a new directory, use the command `[blank1]`.",
       "choices": [
+        "mkdir",
+        "touch",
+        "rm",
+        "ls"
+      ],
+      "correctValue": "mkdir"
+    },
+    {
+      "id": "quiz6",
+      "kind": "single_choice",
+      "title": "Listing Files",
+      "prompt": "Which command is used to list files in the current directory?",
+      "hint": "This command shows the contents of a directory.",
+      "help": {
+        "concept": "The command lists all files and folders in the current directory.",
+        "hint_1": "It's a two-letter command starting with 'l'.",
+        "hint_2": "The command is 'ls'."
+      },
+      "options": [
         "pwd",
         "cd",
         "ls",
-        "mkdir"
+        "rm"
       ],
-      "correctValue": "cd"
+      "correctOptionIds": [
+        "c"
+      ]
     },
     {
       "id": "quiz7",
       "kind": "code_input",
       "title": "Using pwd Command",
-      "prompt": "Use the `pwd` command to display the current directory path.",
-      "hint": "Type `pwd` in the terminal to see the current directory.",
+      "prompt": "Use the `pwd` command to print the current working directory.",
+      "hint": "Type the command that prints the current directory.",
       "help": {
-        "concept": "The `pwd` command outputs the current directory path.",
+        "concept": "The `pwd` command shows your current directory path.",
         "hint_1": "Simply type `pwd` and press enter.",
-        "hint_2": "This command will show you where you are in the file system."
+        "hint_2": "The command is `pwd`."
       },
       "starterCode": "# Type your command below\n",
       "solutionCode": "pwd\n",
@@ -165,41 +170,40 @@
     },
     {
       "id": "quiz8",
-      "kind": "code_input",
-      "title": "Creating and Navigating Directories",
-      "prompt": "Create a directory named `test_dir` and navigate into it.",
-      "hint": "Use `mkdir` to create and `cd` to navigate.",
+      "kind": "fill_blank_choice",
+      "title": "Creating a Directory with mkdir",
+      "prompt": "Create a directory named `test_folder` using the `mkdir` command.",
+      "hint": "Use the `mkdir` command followed by the directory name.",
       "help": {
-        "concept": "Use `mkdir` to create a directory and `cd` to enter it.",
-        "hint_1": "First, create the directory with `mkdir test_dir`.",
-        "hint_2": "Then, navigate into it using `cd test_dir`."
+        "concept": "The `mkdir` command creates a new directory.",
+        "hint_1": "Type `mkdir test_folder`.",
+        "hint_2": "The command is `mkdir test_folder`."
       },
-      "starterCode": "# Create and navigate into a directory\n",
-      "solutionCode": "mkdir test_dir\ncd test_dir\n",
-      "tests": [
-        {
-          "stdout": "/home/user/test_dir\n",
-          "match": "includes"
-        }
+      "template": "A file-writing code exercise should also ____ so automated tests can check it.",
+      "choices": [
+        "print an observable result",
+        "hide all output",
+        "delete the file immediately",
+        "skip the program"
       ],
-      "recipeType": "fixed_tests"
+      "correctValue": "print an observable result"
     },
     {
       "id": "quiz9",
       "kind": "code_input",
-      "title": "Listing Files in a Directory",
-      "prompt": "List all files in the current directory using the appropriate command.",
-      "hint": "Use the `ls` command to list files.",
+      "title": "Listing Contents with ls",
+      "prompt": "List the contents of the current directory using the `ls` command.",
+      "hint": "Type the command that lists directory contents.",
       "help": {
-        "concept": "The `ls` command lists all files and directories in the current directory.",
-        "hint_1": "Type `ls` and press enter.",
-        "hint_2": "This command will show you the contents of the current directory."
+        "concept": "The `ls` command lists files and directories.",
+        "hint_1": "Simply type `ls` and press enter.",
+        "hint_2": "The command is `ls`."
       },
-      "starterCode": "# List files in the current directory\n",
+      "starterCode": "# List the contents of the current directory\n",
       "solutionCode": "ls\n",
       "tests": [
         {
-          "stdout": "file1.txt\nfile2.txt\n",
+          "stdout": "file1.txt\nfile2.txt\nfolder1\n",
           "match": "includes"
         }
       ],

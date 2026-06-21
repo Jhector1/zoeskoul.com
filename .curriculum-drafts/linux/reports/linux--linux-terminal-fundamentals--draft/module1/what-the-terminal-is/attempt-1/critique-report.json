@@ -3,22 +3,16 @@
   "ok": false,
   "issues": [
     {
-      "code": "PROJECT_CODE_INPUT_TOO_SMALL",
-      "category": "clarity",
-      "severity": "error",
-      "message": "Expected at least 2 code_input project exercise(s), but the draft has 1."
-    },
-    {
       "code": "EXERCISE_POLICY_KIND_OVER_TARGET",
       "category": "clarity",
-      "severity": "error",
-      "message": "Exercise policy targets 2 \"fill_blank_choice\" exercise(s), but the draft has 4."
+      "severity": "warn",
+      "message": "Exercise policy targets 2 \"fill_blank_choice\" exercise(s), but the draft has 3."
     },
     {
       "code": "EXERCISE_POLICY_CODE_INPUT_UNDER_TARGET",
       "category": "clarity",
       "severity": "error",
-      "message": "Exercise policy expects 3 \"code_input\" exercise(s), but the draft has 1."
+      "message": "Exercise policy expects 3 \"code_input\" exercise(s), but the draft has 2."
     },
     {
       "code": "EXERCISE_POLICY_DOMINANT_KIND_MISMATCH",

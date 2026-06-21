@@ -10,16 +10,16 @@
     },
     {
       "id": "sketch2",
-      "title": "Basic Commands",
-      "bodyMarkdown": "Here are some basic terminal commands:\n\n- `pwd`: Print the current working directory.\n- `ls`: List files and directories in the current directory.\n- `cd`: Change the current directory.\n\n### Example\n\n```bash\nls\n```\n\nThis command lists all files and directories in your current location.\n\nTry it yourself: Use `ls` to see what's in your current directory."
+      "title": "Navigating the File System",
+      "bodyMarkdown": "In the terminal, you can navigate through directories using commands like `cd`, `ls`, and `pwd`.\n\n- `pwd`: Prints the current directory.\n- `ls`: Lists files and directories in the current directory.\n- `cd`: Changes the current directory.\n\n### Example\n\n```bash\ncd /home\nls\npwd\n```\n\nThis sequence changes the directory to `/home`, lists its contents, and prints the current directory.\n\nTry this: Use `cd` to navigate to a different directory and use `ls` to list its contents."
     }
   ],
   "quizDraft": [
     {
       "id": "exercise1",
       "kind": "code_input",
-      "title": "Using pwd",
-      "prompt": "Use the terminal to find out your current directory.",
+      "title": "Using pwd to Find Your Location",
+      "prompt": "Use the terminal to find out your current directory using the `pwd` command.",
       "starterCode": "# Type your command below",
       "solutionCode": "pwd",
       "tests": [
@@ -29,11 +29,11 @@
         }
       ],
       "recipeType": "shell_task",
-      "hint": "Type the command that prints the current directory.",
+      "hint": "Type `pwd` in the terminal to see your current directory.",
       "help": {
         "concept": "The `pwd` command prints the current working directory.",
-        "hint_1": "Use the command that shows your current location.",
-        "hint_2": "The command starts with 'p' and ends with 'd'."
+        "hint_1": "Use `pwd` to display your current location in the file system.",
+        "hint_2": "Simply type `pwd` and press Enter."
       },
       "fixedLanguage": "bash",
       "mode": "terminal_workspace"
@@ -41,8 +41,8 @@
     {
       "id": "exercise2",
       "kind": "code_input",
-      "title": "Listing Files",
-      "prompt": "List all files and directories in the current directory.",
+      "title": "Listing Files with ls",
+      "prompt": "Use the `ls` command to list all files and directories in the current directory.",
       "starterCode": "# Type your command below",
       "solutionCode": "ls",
       "tests": [
@@ -52,11 +52,11 @@
         }
       ],
       "recipeType": "shell_task",
-      "hint": "Use the command that lists files and directories.",
+      "hint": "Type `ls` to see the contents of the current directory.",
       "help": {
         "concept": "The `ls` command lists files and directories in the current directory.",
-        "hint_1": "The command is two letters long.",
-        "hint_2": "It starts with 'l' and ends with 's'."
+        "hint_1": "Use `ls` to view the contents of your current directory.",
+        "hint_2": "Simply type `ls` and press Enter."
       },
       "fixedLanguage": "bash",
       "mode": "terminal_workspace"
@@ -64,8 +64,8 @@
     {
       "id": "exercise3",
       "kind": "fill_blank_choice",
-      "title": "Changing Directories",
-      "prompt": "Change to the home directory using a terminal command.",
+      "title": "Changing Directories with cd",
+      "prompt": "Use the `cd` command to change to the `/home` directory.",
       "template": "A file-writing code exercise should also ____ so automated tests can check it.",
       "choices": [
         "print an observable result",
@@ -74,26 +74,26 @@
         "skip the program"
       ],
       "correctValue": "print an observable result",
-      "hint": "Use the command that changes directories.",
+      "hint": "Type `cd /home` to change to the `/home` directory.",
       "help": {
         "concept": "The `cd` command changes the current directory.",
-        "hint_1": "Use `cd` followed by the directory path.",
-        "hint_2": "To go to the home directory, use `cd ~`."
+        "hint_1": "Use `cd` followed by the directory path to change directories.",
+        "hint_2": "Type `cd /home` and press Enter to navigate to `/home`."
       }
     },
     {
       "id": "exercise4",
       "kind": "single_choice",
-      "title": "Purpose of pwd",
-      "prompt": "What does the `pwd` command do?",
+      "title": "Purpose of the Terminal",
+      "prompt": "What is the primary purpose of using a terminal?",
       "options": [
-        "Prints the current working directory",
-        "Lists all files in the directory",
-        "Changes the current directory",
-        "Deletes a file"
+        "To browse the internet",
+        "To execute commands and interact with the system",
+        "To edit images",
+        "To play games"
       ],
       "correctOptionIds": [
-        "a"
+        "b"
       ],
       "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
       "help": {
@@ -105,29 +105,49 @@
     {
       "id": "exercise5",
       "kind": "single_choice",
-      "title": "Using ls",
-      "prompt": "What is the primary function of the `ls` command?",
+      "title": "Command to List Files",
+      "prompt": "Which command is used to list files and directories in the current directory?",
       "options": [
-        "Lists files and directories",
-        "Changes the current directory",
-        "Prints the current working directory",
-        "Creates a new file"
+        "pwd",
+        "ls",
+        "cd",
+        "mkdir"
       ],
       "correctOptionIds": [
-        "a"
+        "b"
       ],
       "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
       "help": {
         "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_1": "Compare each option to the exact topic named in the question.",
         "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
       }
     },
     {
       "id": "exercise6",
       "kind": "fill_blank_choice",
-      "title": "Command for Home Directory",
-      "prompt": "Fill in the blank to change to the home directory: `cd [blank1]`",
+      "title": "Command to Print Working Directory",
+      "prompt": "Complete the command to print the current working directory: `[blank1]`",
+      "template": "[blank1]",
+      "choices": [
+        "pwd",
+        "ls",
+        "cd",
+        "mkdir"
+      ],
+      "correctValue": "pwd",
+      "hint": "This command shows your current location in the file system.",
+      "help": {
+        "concept": "The `the missing term` command prints the current working directory.",
+        "hint_1": "The command is three letters long and starts with 'p'.",
+        "hint_2": "The command is `the missing term`."
+      }
+    },
+    {
+      "id": "exercise7",
+      "kind": "fill_blank_choice",
+      "title": "Command to Change Directory",
+      "prompt": "Complete the command to change to the home directory: `cd [blank1]`",
       "template": "cd [blank1]",
       "choices": [
         "~",
@@ -144,35 +164,15 @@
       }
     },
     {
-      "id": "exercise7",
-      "kind": "fill_blank_choice",
-      "title": "Symbol for Parent Directory",
-      "prompt": "Fill in the blank to move to the parent directory: `cd [blank1]`",
-      "template": "cd [blank1]",
-      "choices": [
-        "..",
-        "~",
-        "/",
-        "."
-      ],
-      "correctValue": "..",
-      "hint": "Use the symbol that represents the parent directory.",
-      "help": {
-        "concept": "The `..` symbol is used to move to the parent directory.",
-        "hint_1": "It's two dots.",
-        "hint_2": "It's used with `cd` to go up one level."
-      }
-    },
-    {
       "id": "exercise8",
       "kind": "multi_choice",
       "title": "Commands for Navigation",
-      "prompt": "Which commands are used for navigating directories? Select all that apply.",
+      "prompt": "Which commands are used for navigating the file system? (Select all that apply)",
       "options": [
         "cd",
         "pwd",
         "ls",
-        "rm"
+        "mkdir"
       ],
       "correctOptionIds": [
         "a",
@@ -189,23 +189,21 @@
     {
       "id": "exercise9",
       "kind": "drag_reorder",
-      "title": "Order of Commands",
-      "prompt": "Arrange the commands in the order you would use them to navigate to a directory, list its contents, and then return to the previous directory.",
+      "title": "Order of Commands to Navigate and List",
+      "prompt": "Arrange the commands in the order you would use them to navigate to a directory and list its contents.",
       "tokens": [
-        "cd new_directory",
-        "ls",
-        "cd .."
+        "cd /home",
+        "ls"
       ],
       "correctOrder": [
-        "cd new_directory",
-        "ls",
-        "cd .."
+        "cd /home",
+        "ls"
       ],
-      "hint": "Think about the sequence of navigating, listing, and returning.",
+      "hint": "Read each piece and arrange them in the order the statement should be understood.",
       "help": {
-        "concept": "The sequence involves changing directories, listing contents, and returning.",
-        "hint_1": "Start with changing to the directory.",
-        "hint_2": "End with returning to the previous directory."
+        "concept": "The pieces should form a valid statement in a logical order.",
+        "hint_1": "Start with the piece that introduces the idea or action.",
+        "hint_2": "Place dependent pieces after the part they describe or complete."
       }
     }
   ],

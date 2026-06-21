@@ -44,12 +44,22 @@ const TERMINAL_AUTO_REVIVE_STALE_MS = 60_000;
 const TERMINAL_INPUT_STALE_MS = 60_000;
 const TERMINAL_REVIVE_WATCHDOG_INTERVAL_MS = 15_000;
 
+/**
+ * Docker/runner recycle often appears to the browser as a shell exit 137
+ * (SIGKILL) or 143 (SIGTERM). Treat those as recoverable infrastructure
+ * events for the long-lived workspace terminal instead of leaving the learner
+ * on a scary dead prompt.
+ */
+const TERMINAL_RECYCLE_EXIT_CODES = new Set([137, 143]);
+const TERMINAL_RECYCLE_AUTORESTART_DELAY_MS = 900;
+const TERMINAL_RECYCLE_AUTORESTART_COOLDOWN_MS = 30_000;
+
 const MAX_PENDING_RECOVERY_INPUT_CHARS = 4096;
 const WORKSPACE_READY_TIMEOUT_MS = 8_000;
 const WORKSPACE_READY_POLL_MS = 150;
 const terminalAutoStartAttempts = new Map<string, number>();
 
-const CLIENT_UNMOUNT_CANCEL_GRACE_MS = 300;
+const CLIENT_UNMOUNT_CANCEL_GRACE_MS = 5_000;
 const terminalUnmountCancelTimers = new Map<string, number>();
 
 function unmountCancelKey(workspaceKey: string, sessionId: string) {
@@ -675,6 +685,8 @@ export function useWorkspaceTerminalController(
     const stateRef = React.useRef<RunSessionState | "idle">(state);
     const restartInFlightRef = React.useRef<Promise<void> | null>(null);
     const staleStartingTimerRef = React.useRef<number | null>(null);
+    const recycleRestartTimerRef = React.useRef<number | null>(null);
+    const lastRecycleRestartAtRef = React.useRef(0);
     const interactiveReadyRef = React.useRef(false);
     const recoverStateRef = React.useRef<TerminalRecoverState>("none");
     const lastStartAttemptAtRef = React.useRef(0);
@@ -930,6 +942,13 @@ export function useWorkspaceTerminalController(
         }
     }, []);
 
+    const clearRecycleRestartTimer = React.useCallback(() => {
+        if (recycleRestartTimerRef.current != null) {
+            window.clearTimeout(recycleRestartTimerRef.current);
+            recycleRestartTimerRef.current = null;
+        }
+    }, []);
+
     const setTerminalRecovery = React.useCallback((recovery: TerminalRecovery) => {
         recoverStateRef.current = recovery.state;
         setRecoverState(recovery.state);
@@ -946,6 +965,7 @@ export function useWorkspaceTerminalController(
         awaitingPostEnterSnapshotRef.current = false;
         snapshotInFlightRef.current = null;
         openInFlightRef.current = null;
+        clearRecycleRestartTimer();
         pendingInputLineRef.current = "";
         escapeSequenceRef.current = "";
         terminalProcessExitedRef.current = false;
@@ -966,15 +986,16 @@ export function useWorkspaceTerminalController(
         clearTerminalRecovery();
         setRestarting(false);
         setStopping(false);
-    }, [clearTerminalRecovery, initialEvidenceCwd, setTerminalEvidenceNow]);
+    }, [clearRecycleRestartTimer, clearTerminalRecovery, initialEvidenceCwd, setTerminalEvidenceNow]);
 
     const reset = React.useCallback(() => {
         clearQuietTimer();
         clearStaleStartingTimer();
+        clearRecycleRestartTimer();
         void cancel().catch(() => {});
         closeSocket();
         clearLocalTerminalState();
-    }, [cancel, clearLocalTerminalState, clearQuietTimer, clearStaleStartingTimer, closeSocket]);
+    }, [cancel, clearLocalTerminalState, clearQuietTimer, clearRecycleRestartTimer, clearStaleStartingTimer, closeSocket]);
 
     const replaceFiles = React.useCallback(
         async (files: WorkspaceSyncEntry[]): Promise<boolean> => {
@@ -1342,6 +1363,7 @@ export function useWorkspaceTerminalController(
             clearScheduledUnmountCancelsForWorkspace(terminalLeaseKey);
             clearQuietTimer();
             clearStaleStartingTimer();
+            clearRecycleRestartTimer();
             openInFlightRef.current = null;
 
             try {
@@ -1406,6 +1428,7 @@ export function useWorkspaceTerminalController(
 
         clearQuietTimer();
         clearStaleStartingTimer();
+        clearRecycleRestartTimer();
         clearTerminalRecovery();
         openInFlightRef.current = null;
         pendingInputLineRef.current = "";
@@ -1432,7 +1455,7 @@ export function useWorkspaceTerminalController(
         }
 
         closeSocket();
-    }, [terminalLeaseKey, cancel, clearQuietTimer, clearStaleStartingTimer, clearTerminalRecovery, closeSocket]);
+    }, [terminalLeaseKey, cancel, clearQuietTimer, clearRecycleRestartTimer, clearStaleStartingTimer, clearTerminalRecovery, closeSocket]);
 
     React.useEffect(() => {
         return () => {
@@ -1471,9 +1494,10 @@ export function useWorkspaceTerminalController(
             openedLeaseKeyRef.current = null;
             clearQuietTimer();
             clearStaleStartingTimer();
+            clearRecycleRestartTimer();
             closeSocket();
         };
-    }, [clearQuietTimer, clearStaleStartingTimer, closeSocket]);
+    }, [clearQuietTimer, clearRecycleRestartTimer, clearStaleStartingTimer, closeSocket]);
     const recoverTerminalAfterInactiveInput = React.useCallback(async (): Promise<void> => {
         if (!args.enabled) return;
         if (restarting || stopping) return;
@@ -1634,6 +1658,52 @@ export function useWorkspaceTerminalController(
     const handleDisconnectedInputAttempt = React.useCallback(async () => {
         await recoverTerminalAfterInactiveInput();
     }, [recoverTerminalAfterInactiveInput]);
+
+    const scheduleRestartAfterRunnerRecycle = React.useCallback(
+        (exitCode: number) => {
+            if (!args.enabled) return false;
+            if (!TERMINAL_RECYCLE_EXIT_CODES.has(exitCode)) return false;
+            if (stoppingRef.current || restartingRef.current) return false;
+            if (recycleRestartTimerRef.current != null) return true;
+
+            const now = Date.now();
+            if (
+                now - lastRecycleRestartAtRef.current <
+                TERMINAL_RECYCLE_AUTORESTART_COOLDOWN_MS
+            ) {
+                return false;
+            }
+
+            lastRecycleRestartAtRef.current = now;
+            setTerminalRecovery({
+                state: "starting",
+                message: "Terminal session was recycled by the runner. Reopening it now…",
+            });
+
+            recycleRestartTimerRef.current = window.setTimeout(() => {
+                recycleRestartTimerRef.current = null;
+
+                void (async () => {
+                    if (!args.enabled) return;
+                    if (stoppingRef.current || restartingRef.current) return;
+
+                    openInFlightRef.current = null;
+                    releaseAutomaticTerminalStart(terminalLeaseKey);
+                    await open({ userInitiated: true });
+                })().catch((error: any) => {
+                    setTerminalRecovery({
+                        state: "restart_available",
+                        message:
+                            error?.message ??
+                            "Terminal session closed. Restart the terminal to continue.",
+                    });
+                });
+            }, TERMINAL_RECYCLE_AUTORESTART_DELAY_MS);
+
+            return true;
+        },
+        [args.enabled, open, setTerminalRecovery, terminalLeaseKey],
+    );
 
     const resize = React.useCallback(
         (cols: number, rows: number) => {
@@ -1863,14 +1933,19 @@ export function useWorkspaceTerminalController(
                 setInputEnabled(false);
                 setStarted(false);
                 openInFlightRef.current = null;
-                setTerminalRecovery({
-                    state: "restart_available",
-                    message: "Terminal session closed. Restart the terminal to continue.",
-                });
 
                 if (awaitingPostEnterSnapshotRef.current) {
                     schedulePostEnterSnapshot(100);
                 }
+
+                if (scheduleRestartAfterRunnerRecycle(ev.code)) {
+                    continue;
+                }
+
+                setTerminalRecovery({
+                    state: "restart_available",
+                    message: "Terminal session closed. Restart the terminal to continue.",
+                });
                 continue;
             }
 
@@ -1903,7 +1978,14 @@ export function useWorkspaceTerminalController(
                 }
             }
         }
-    }, [events, pushChunk, schedulePostEnterSnapshot, clearStaleStartingTimer, setTerminalRecovery]);
+    }, [
+        events,
+        pushChunk,
+        schedulePostEnterSnapshot,
+        clearStaleStartingTimer,
+        scheduleRestartAfterRunnerRecycle,
+        setTerminalRecovery,
+    ]);
 
     React.useEffect(() => {
         if (!args.enabled) return;
@@ -1948,8 +2030,9 @@ export function useWorkspaceTerminalController(
         return () => {
             clearQuietTimer();
             clearStaleStartingTimer();
-            };
-    }, [clearQuietTimer, clearStaleStartingTimer]);
+            clearRecycleRestartTimer();
+        };
+    }, [clearQuietTimer, clearRecycleRestartTimer, clearStaleStartingTimer]);
 
     const getTerminalEvidenceNow = React.useCallback((): TerminalEvidence => {
         const pendingCommand = pendingInputLineRef.current.trim();

@@ -17,6 +17,7 @@
   "serviceDefaults": {
     "runnerBackend": "pty",
     "layoutMode": "terminal_workspace",
+    "terminalSessionScope": "exercise",
     "requires": {
       "files": true,
       "multiFile": true,

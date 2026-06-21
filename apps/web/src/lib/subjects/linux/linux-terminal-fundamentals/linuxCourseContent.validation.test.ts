@@ -35,15 +35,39 @@ function starterPaths(exercise: JsonObject) {
     .sort();
 }
 
+function listTopicBundlePaths() {
+  return fs
+    .readdirSync(path.join(SUBJECT_ROOT, "modules"), { withFileTypes: true })
+    .filter((entry) => entry.isDirectory())
+    .flatMap((moduleEntry) => {
+      const topicsRoot = path.join(SUBJECT_ROOT, "modules", moduleEntry.name, "topics");
+      return fs
+        .readdirSync(topicsRoot, { withFileTypes: true })
+        .filter((entry) => entry.isDirectory())
+        .map((topicEntry) => path.join(topicsRoot, topicEntry.name, "topic.bundle.json"));
+    });
+}
+
 describe("linux terminal fundamentals content", () => {
+  it("uses per-exercise terminal sessions for Linux terminal workspaces", () => {
+    for (const bundlePath of listTopicBundlePaths()) {
+      const topic = readJson(bundlePath);
+
+      if (topic.serviceDefaults?.layoutMode !== "terminal_workspace") continue;
+
+      expect(topic.serviceDefaults?.runnerBackend).toBe("pty");
+      expect(topic.serviceDefaults?.terminalSessionScope).toBe("exercise");
+    }
+  });
+
   it("uses terminalExpectations for output-only command practice", () => {
     const whereAmI = readJson(topicPath(1, "where-am-i"));
     const viewingFileContents = readJson(topicPath(2, "viewing-file-contents"));
 
     expect(whereAmI.serviceDefaults?.layoutMode).toBe("terminal_workspace");
-    expect(whereAmI.serviceDefaults?.terminalSessionScope).toBe("topic");
+    expect(whereAmI.serviceDefaults?.terminalSessionScope).toBe("exercise");
     expect(viewingFileContents.serviceDefaults?.layoutMode).toBe("terminal_workspace");
-    expect(viewingFileContents.serviceDefaults?.terminalSessionScope).toBe("topic");
+    expect(viewingFileContents.serviceDefaults?.terminalSessionScope).toBe("exercise");
 
     expect(getExercise(whereAmI, "ci-create-navigation-lab")).toMatchObject({
       kind: "code_input",

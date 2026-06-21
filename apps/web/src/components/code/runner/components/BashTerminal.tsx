@@ -236,7 +236,7 @@ export default function BashTerminal({
 
         pushChunk("sys", "[starting bash shell]\r\n");
 
-        const res = await fetch("/api/run/pty/sessions/start", {
+        const res = await fetch("/api/run/pty/sessions/ensure", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -246,6 +246,7 @@ export default function BashTerminal({
                 mode: "interactive",
                 language: "bash",
                 projectId,
+                workspaceKey: projectId ? `bash-terminal:${projectId}` : `bash-terminal:${title}`,
                 files: initialFiles,
                 wallTimeoutMs,
                 idleTimeoutMs,
