@@ -718,6 +718,50 @@ function mergeMissingFilesIntoWorkspace(args: {
   return workspace;
 }
 
+
+function workspaceFileEntries(
+  workspace: WorkspaceStateV2 | null | undefined,
+): Array<{ path: string; content: string }> {
+  if (!isWorkspace(workspace)) return [];
+
+  return workspace.nodes
+    .filter((node) => node.kind === "file")
+    .map((node) => {
+      const path = normalizePath(
+        workspacePathForNode(workspace.nodes, String(node.id ?? "")),
+        defaultMainFile(workspace.language),
+      );
+
+      return {
+        path,
+        content: String(node.content ?? ""),
+      };
+    })
+    .filter((file) => file.path.trim().length > 0);
+}
+
+function manifestFilesForMissingMerge(
+  manifest: ManifestWorkspaceDefinition,
+): Array<{ path: string; content: string }> {
+  /**
+   * Saved/user workspaces are authoritative. Only runtime fixture files
+   * should be merged back into a saved workspace. Do not merge the full
+   * manifest workspace here because that workspace includes starterFiles;
+   * doing so resurrects starter/helper files that the learner never saved.
+   */
+  return manifest.fixtureFiles;
+}
+
+function mergeMissingManifestFilesIntoWorkspace(args: {
+  base: WorkspaceStateV2;
+  manifest: ManifestWorkspaceDefinition;
+}): WorkspaceStateV2 {
+  return mergeMissingFilesIntoWorkspace({
+    base: args.base,
+    fixtureFiles: manifestFilesForMissingMerge(args.manifest),
+  });
+}
+
 function deriveEntryCode(workspace: WorkspaceStateV2 | null | undefined) {
   if (!isWorkspace(workspace)) return "";
 
@@ -932,11 +976,17 @@ function shouldUseSavedWorkspace(args: {
           : "";
   const currentStarterHash = args.manifest.starterHash;
 
+  const matchesSavedStarter = Boolean(savedStarterHash && savedWorkspaceKey === savedStarterHash);
+  const matchesCurrentStarter = Boolean(currentStarterHash && savedWorkspaceKey === currentStarterHash);
+
   /**
-   * Passive starter/default snapshots are not learner work.
-   * They should not beat a newer manifest starter.
+   * Passive starter/default snapshots are not learner work, but older progress
+   * payloads sometimes persisted user-authored code with userEdited=false.
+   * Treat passive state as rejectable only when its workspace still matches a
+   * known starter snapshot. If the contents differ from both starter hashes,
+   * saved progress must still beat the manifest starter.
    */
-  if (isPassiveWorkspaceState(args.savedState)) {
+  if (isPassiveWorkspaceState(args.savedState) && (matchesSavedStarter || matchesCurrentStarter)) {
     return false;
   }
 
@@ -944,11 +994,7 @@ function shouldUseSavedWorkspace(args: {
    * Legacy saved states may not have workspaceOrigin/userEdited.
    * Keep them only if they are not merely an old starter snapshot.
    */
-  if (savedStarterHash && savedWorkspaceKey === savedStarterHash) {
-    return false;
-  }
-
-  if (currentStarterHash && savedWorkspaceKey === currentStarterHash) {
+  if (matchesSavedStarter || matchesCurrentStarter) {
     return false;
   }
 
@@ -990,8 +1036,18 @@ function normalizeSavedCandidate(args: {
           ? args.candidate.source
           : null;
 
+    const workspaceEntryCode = String(deriveEntryCode(workspace) ?? "");
+    const manifestEntryCode = String(deriveEntryCode(args.manifest.manifestWorkspace) ?? "");
     const shouldHydrateLegacyCode =
-      explicitCode != null && !String(deriveEntryCode(workspace) ?? "").trim();
+      explicitCode != null &&
+      (
+        !workspaceEntryCode.trim() ||
+        (
+          isUserWorkspaceState(args.candidate) &&
+          workspaceEntryCode === manifestEntryCode &&
+          explicitCode !== workspaceEntryCode
+        )
+      );
 
     if (shouldHydrateLegacyCode || typeof args.candidate.stdin === "string") {
       return workspaceWithEntryContent({
@@ -1208,9 +1264,9 @@ export function resolveWorkspaceForTarget(args: {
 
   if (draftIsFresh && args.localDraft) {
     const mergedWorkspace = manifest.manifestWorkspace
-      ? mergeMissingFilesIntoWorkspace({
+      ? mergeMissingManifestFilesIntoWorkspace({
           base: args.localDraft.workspace,
-          fixtureFiles: manifest.fixtureFiles,
+          manifest,
         })
       : cloneWorkspace(args.localDraft.workspace);
 
@@ -1242,9 +1298,9 @@ export function resolveWorkspaceForTarget(args: {
       }) &&
       workspace
     ) {
-      const mergedWorkspace = mergeMissingFilesIntoWorkspace({
+      const mergedWorkspace = mergeMissingManifestFilesIntoWorkspace({
         base: workspace,
-        fixtureFiles: manifest.fixtureFiles,
+        manifest,
       });
 
       return {

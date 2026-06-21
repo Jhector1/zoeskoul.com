@@ -30,6 +30,7 @@ export type ToolsPanelProps = {
     onCollapse: () => void;
     onUnbind?: () => void;
     boundId?: string | null;
+    pendingExerciseBinding?: boolean;
     editorOwnerKey?: string | null;
     toolScopeKey?: string;
 
@@ -112,6 +113,7 @@ function ToolsPanelInner(props: ToolsPanelProps) {
                 active={active}
                 setActive={setActive}
                 boundId={props.boundId ?? null}
+                pendingExerciseBinding={props.pendingExerciseBinding === true}
                 onUnbind={props.onUnbind}
                 onCollapse={props.onCollapse}
             />
@@ -124,6 +126,7 @@ function ToolsPanelInner(props: ToolsPanelProps) {
                         height={props.codeRunnerRegionH}
                         editorOwnerKey={props.editorOwnerKey}
                         toolScopeKey={scopeKey}
+                        pendingExerciseBinding={props.pendingExerciseBinding === true}
                         toolHydrated={props.toolHydrated}
                         toolLang={props.toolLang}
                         toolCode={props.toolCode}
@@ -163,6 +166,7 @@ function ToolsHeader({
                          active,
                          setActive,
                          boundId,
+                         pendingExerciseBinding,
                          onUnbind,
                          onCollapse,
                      }: {
@@ -170,6 +174,7 @@ function ToolsHeader({
     active: ToolId;
     setActive: (v: ToolId) => void;
     boundId: string | null;
+    pendingExerciseBinding: boolean;
     onUnbind?: () => void;
     onCollapse: () => void;
 }) {
@@ -193,6 +198,10 @@ function ToolsHeader({
                                     Unbind
                                 </button>
                             ) : null}
+                        </div>
+                    ) : pendingExerciseBinding ? (
+                        <div className="mt-1 text-[11px] font-extrabold text-neutral-600 dark:text-white/60">
+                            Loading exercise…
                         </div>
                     ) : (
                         <div className="mt-1 text-[11px] font-extrabold text-neutral-600 dark:text-white/60">
@@ -234,6 +243,7 @@ const MemoToolsHeader = React.memo(
         prev.active === next.active &&
         prev.setActive === next.setActive &&
         prev.boundId === next.boundId &&
+        prev.pendingExerciseBinding === next.pendingExerciseBinding &&
         prev.onUnbind === next.onUnbind &&
         prev.onCollapse === next.onCollapse,
 );
@@ -244,6 +254,7 @@ function CodePaneLayer(props: {
     height: number;
     editorOwnerKey?: string | null;
     toolScopeKey?: string;
+    pendingExerciseBinding?: boolean;
     toolHydrated: boolean;
     toolLang: WorkspaceLanguage;
     toolCode: string;
@@ -288,6 +299,7 @@ function CodePaneLayer(props: {
             height: props.height,
             editorOwnerKey: props.editorOwnerKey,
             toolScopeKey: props.toolScopeKey,
+            pendingExerciseBinding: props.pendingExerciseBinding,
             toolHydrated: props.toolHydrated,
             toolLang: props.toolLang,
             toolCode: props.toolCode,
@@ -335,6 +347,7 @@ const MemoCodePaneLayer = React.memo(
         prev.height === next.height &&
         prev.editorOwnerKey === next.editorOwnerKey &&
         prev.toolScopeKey === next.toolScopeKey &&
+        prev.pendingExerciseBinding === next.pendingExerciseBinding &&
         prev.toolHydrated === next.toolHydrated &&
         prev.toolLang === next.toolLang &&
         prev.toolCode === next.toolCode &&

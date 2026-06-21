@@ -186,12 +186,13 @@ export function resolveFullIDEConfigFromLearningIde(args?: {
             ? {
                 runner: {
                     showTerminal: true,
-                    // Terminal-workspace labs are graded from the synced
-                    // workspace snapshot, so learners should not see a normal
-                    // Run button for this layout.
                     enableWorkspaceTerminal: true,
-                    showTerminalDockToggle: false,
-                    allowRun: false,
+                    // Only terminal_workspace labs are graded directly from the
+                    // synced shell workspace, so only that layout hides the normal
+                    // Run button. Editor + terminal exercises still need Run for
+                    // PTY-backed code execution and workspace sync tests.
+                    showTerminalDockToggle: !terminalWorkspaceMode,
+                    allowRun: !terminalWorkspaceMode,
                     terminalSessionScope,
                 },
             }

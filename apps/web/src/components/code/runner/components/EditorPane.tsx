@@ -338,7 +338,6 @@ export default function EditorPane(props: {
         modelKey,
         normalizedLang,
         lang,
-        code,
     ]);
 
     const refreshMobileEditNeed = useCallback(() => {
@@ -496,7 +495,7 @@ export default function EditorPane(props: {
 
     useEffect(() => {
         refreshMobileEditNeed();
-    }, [refreshMobileEditNeed, code, height, path]);
+    }, [refreshMobileEditNeed, height, path]);
 
     const canUseMobileEditGuard =
         frame === "card" && isNarrowScreen && mobileEditMode !== "never";
@@ -528,7 +527,7 @@ export default function EditorPane(props: {
             ed.updateOptions?.({
                 readOnly: effectiveReadOnly,
                 readOnlyMessage: { value: "" },
-                domReadOnly: true,
+                domReadOnly: effectiveReadOnly,
             });
         } catch {
             // Ignore Monaco disposal races during card navigation.
@@ -586,7 +585,7 @@ export default function EditorPane(props: {
             automaticLayout: true,
             readOnly: effectiveReadOnly,
             readOnlyMessage: { value: "" },
-            domReadOnly: true,
+            domReadOnly: effectiveReadOnly,
             formatOnPaste: false,
             formatOnType: false,
             glyphMargin: false,

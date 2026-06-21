@@ -134,6 +134,37 @@ function remapExpandedFolderIds(
     return out;
 }
 
+function allFolderIds(nodes: readonly FSNode[]): NodeId[] {
+    return nodes
+        .filter((node): node is FolderNode => node.kind === "folder")
+        .map((node) => node.id);
+}
+
+function normalizeExpandedForHydration(args: {
+    normalized: WorkspaceStateV2;
+    preservedExpanded?: Iterable<NodeId>;
+}) {
+    const explicitIncoming = Array.isArray(args.normalized.expanded)
+        ? args.normalized.expanded
+        : [];
+
+    /**
+     * Course-authored workspaces often contain fixture files under folders.
+     * The Explorer only renders descendants of expanded folders, so an empty
+     * expanded list makes real fixture nodes invisible to E2E and learners.
+     * Keep any explicit/preserved folders, and default to expanding authored
+     * folders so files like data/message.txt are visible immediately.
+     */
+    return Array.from(
+        new Set<NodeId>([
+            ...(args.preservedExpanded ? Array.from(args.preservedExpanded) : []),
+            ...explicitIncoming,
+            ...allFolderIds(args.normalized.nodes),
+        ]),
+    );
+}
+
+
 
 
 function arrayShallowEqual<T>(a: readonly T[], b: readonly T[]) {
@@ -322,7 +353,9 @@ export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResu
             const nextOpenTabs = normalized.openTabs?.length
                 ? normalized.openTabs
                 : [normalized.activeFileId];
-            const nextExpanded = new Set(normalized.expanded ?? []);
+            const nextExpanded = new Set(
+                normalizeExpandedForHydration({ normalized }),
+            );
             const nextLeftPct = normalized.leftPct ?? 26;
             const nextKey = workspaceStateHydrationKey({
                 ...normalized,
@@ -516,7 +549,10 @@ export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResu
 
             const nextWorkspace = {
                 ...normalized,
-                expanded: preservedExpanded,
+                expanded: normalizeExpandedForHydration({
+                    normalized,
+                    preservedExpanded,
+                }),
             };
 
             hydrateWorkspace(nextWorkspace);

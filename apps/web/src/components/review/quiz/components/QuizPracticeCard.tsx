@@ -35,6 +35,43 @@ import {
 import { normalizeCurrentPracticeItem } from "@/lib/practice/runtime";
 import { deriveEntryCode } from "@/components/review/module/runtime/exerciseWorkspaceResolver";
 
+function uniqueTruthyStrings(values: Array<unknown>) {
+  return Array.from(
+      new Set(
+          values
+              .map((value) => String(value ?? "").trim())
+              .filter(Boolean),
+      ),
+  );
+}
+
+function patchTerminalEvidenceForSubmit(args: {
+  boundId?: string | null;
+  terminalEvidence: unknown;
+}) {
+  if (!args.terminalEvidence || typeof window === "undefined") return;
+
+  const store = useReviewRuntimeStore.getState();
+  const candidateKeys = uniqueTruthyStrings([
+    args.boundId,
+    store.tool?.boundExerciseKey,
+    store.activeExerciseKey,
+  ]);
+
+  for (const key of candidateKeys) {
+    store.patchExercise(key, {
+      terminalEvidence: args.terminalEvidence,
+      userEdited: true,
+      updateOrigin: "user",
+      workspaceOrigin: "user",
+      submitted: false,
+      feedbackDismissed: true,
+      dismissFeedbackOnEdit: true,
+      updatedAt: Date.now(),
+    } as any);
+  }
+}
+
 export async function flushReviewToolsBeforeSubmit(
     tools:
         | {
@@ -72,16 +109,10 @@ export async function flushReviewToolsBeforeSubmit(
         (boundId ? win.__zoeGetTerminalEvidenceBeforeSubmit?.[boundId]?.() : null) ??
         win.__zoeGetAnyTerminalEvidenceBeforeSubmit?.() ??
         null;
-
-    if (boundId && liveTerminalEvidence) {
-      useReviewRuntimeStore.getState().patchExercise(boundId, {
-        terminalEvidence: liveTerminalEvidence,
-        userEdited: true,
-        updateOrigin: "user",
-        workspaceOrigin: "user",
-        updatedAt: Date.now(),
-      } as any);
-    }
+    patchTerminalEvidenceForSubmit({
+      boundId,
+      terminalEvidence: liveTerminalEvidence,
+    });
   }
 
   await tools?.flushLatest?.();
@@ -115,16 +146,10 @@ export async function flushReviewToolsBeforeSubmit(
         win.__zoeGetTerminalEvidenceBeforeSubmit?.[boundId]?.() ??
         win.__zoeGetAnyTerminalEvidenceBeforeSubmit?.() ??
         null;
-
-    if (liveTerminalEvidence) {
-      useReviewRuntimeStore.getState().patchExercise(boundId, {
-        terminalEvidence: liveTerminalEvidence,
-        userEdited: true,
-        updateOrigin: "user",
-        workspaceOrigin: "user",
-        updatedAt: Date.now(),
-      } as any);
-    }
+    patchTerminalEvidenceForSubmit({
+      boundId,
+      terminalEvidence: liveTerminalEvidence,
+    });
   }
 }
 

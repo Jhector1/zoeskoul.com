@@ -45,13 +45,13 @@ test.use({
 });
 
 const FIRST_EXERCISE_URL =
-    "/en/catalog/linux/subjects/linux-terminal-fundamentals/modules/linux-1-terminal-navigation/learn/linux-terminal-fundamentals-linux-1-orientation/what-the-terminal-is/exercise/ci-create-linux-start?e2eUnlockAll=1";
+    "/en/dev/e2e/review-module-clone/linux/e2e-terminal-review-clone/learn/e2e-terminal-section/e2e-terminal-topic/exercise/e2e-linux-start?e2eUnlockAll=1";
 
 const SECOND_EXERCISE_URL =
-    "/en/catalog/linux/subjects/linux-terminal-fundamentals/modules/linux-1-terminal-navigation/learn/linux-terminal-fundamentals-linux-1-orientation/what-the-terminal-is/exercise/ci-make-command-practice?e2eUnlockAll=1";
+    "/en/dev/e2e/review-module-clone/linux/e2e-terminal-review-clone/learn/e2e-terminal-section/e2e-terminal-topic/exercise/e2e-linux-command-practice?e2eUnlockAll=1";
 
 const LINUX_TOPIC_SHELL_TASKS = {
-    "ci-create-linux-start": {
+    "e2e-linux-start": {
         title: "Create linux-start",
         prompt: "Use the terminal to create linux-start/hello.txt.",
         starterCode: 'echo "Hello from Bash!"\n',
@@ -84,7 +84,7 @@ const LINUX_TOPIC_SHELL_TASKS = {
             requiredFiles: ["linux-start/hello.txt"],
         },
     },
-    "ci-make-command-practice": {
+    "e2e-linux-command-practice": {
         title: "Make command practice",
         prompt: "Use the terminal to create linux-start/command-practice.txt.",
         starterCode: 'echo "Hello from Bash!"\n',
@@ -168,6 +168,33 @@ function collectSubmittedEntries(value: unknown): SubmittedEntry[] {
 
 
 async function installLinuxPracticeMocks(page: Page) {
+    await page.route("**/api/review/module-nav**", async (route) => {
+        await route.fulfill({
+            status: 200,
+            contentType: "application/json",
+            body: JSON.stringify({
+                prevModuleId: null,
+                nextModuleId: null,
+                nextLocked: false,
+                nextBillingHref: null,
+                index: 1,
+                total: 1,
+            }),
+        });
+    });
+
+    await page.route("**/api/review/subject-finish**", async (route) => {
+        await route.fulfill({
+            status: 200,
+            contentType: "application/json",
+            body: JSON.stringify({
+                status: "in_progress",
+                certificateReady: false,
+                certificateIssued: false,
+            }),
+        });
+    });
+
     await page.route(
         (url) => url.pathname === "/api/practice",
         async (route) => {
@@ -175,7 +202,7 @@ async function installLinuxPracticeMocks(page: Page) {
             const fixture =
                 LINUX_TOPIC_SHELL_TASKS[
                     exerciseKey as keyof typeof LINUX_TOPIC_SHELL_TASKS
-                ] ?? LINUX_TOPIC_SHELL_TASKS["ci-create-linux-start"];
+                ] ?? LINUX_TOPIC_SHELL_TASKS["e2e-linux-start"];
 
             await route.fulfill({
                 status: 200,
@@ -215,13 +242,13 @@ async function installLinuxPracticeMocks(page: Page) {
             const paths = new Set(entries.map((entry) => entry.path));
             const rawBody = JSON.stringify(body);
 
-            const exerciseKey = rawBody.includes("practice-key-ci-make-command-practice")
-                ? "ci-make-command-practice"
-                : rawBody.includes("practice-key-ci-create-linux-start")
-                  ? "ci-create-linux-start"
-                  : route.request().headers()["referer"]?.includes("ci-make-command-practice")
-                    ? "ci-make-command-practice"
-                    : "ci-create-linux-start";
+            const exerciseKey = rawBody.includes("practice-key-e2e-linux-command-practice")
+                ? "e2e-linux-command-practice"
+                : rawBody.includes("practice-key-e2e-linux-start")
+                  ? "e2e-linux-start"
+                  : route.request().headers()["referer"]?.includes("e2e-linux-command-practice")
+                    ? "e2e-linux-command-practice"
+                    : "e2e-linux-start";
 
             const requiredFiles =
                 LINUX_TOPIC_SHELL_TASKS[
@@ -235,6 +262,7 @@ async function installLinuxPracticeMocks(page: Page) {
                 contentType: "application/json",
                 body: JSON.stringify({
                     ok,
+                    expected: null,
                     finalized: ok,
                     explanation: ok
                         ? "Correct."

@@ -312,6 +312,24 @@ const fileIoDefinition = {
     solutionCode: fileIoSolutionFiles["main.py"],
 };
 
+const linuxTerminalStepAStarterFiles = {
+    "README.md": "Use the terminal to create linux-start/hello.txt\n",
+};
+
+const linuxTerminalStepASolutionFiles = {
+    "README.md": "Use the terminal to create linux-start/hello.txt\n",
+    "linux-start/hello.txt": "",
+};
+
+const linuxTerminalStepBStarterFiles = {
+    "README.md": "Use the terminal to create linux-start/command-practice.txt\n",
+};
+
+const linuxTerminalStepBSolutionFiles = {
+    "README.md": "Use the terminal to create linux-start/command-practice.txt\n",
+    "linux-start/command-practice.txt": "",
+};
+
 function makeProjectCard({
                              id,
                              title,
@@ -551,6 +569,105 @@ const reviewCloneTopic = {
     ],
 } satisfies ReviewModule["topics"][number];
 
+const linuxTerminalCloneTopic = {
+    id: "e2e-terminal-topic",
+    label: "E2E Terminal Topic",
+    minutes: 5,
+    summary:
+        "A dev-only topic used to test terminal_workspace review flows without catalog billing gates.",
+    meta: {
+        runtimeDefaults,
+        serviceDefaults: defaultServiceDefaults,
+        rawManifest: {
+            exercises: [
+                {
+                    id: "e2e-linux-start",
+                    title: "Create linux-start",
+                    runtime: runtimeDefaults,
+                    workspace: {
+                        language: "bash",
+                        entryFile: "README.md",
+                        starterFiles: linuxTerminalStepAStarterFiles,
+                        solutionFiles: linuxTerminalStepASolutionFiles,
+                    },
+                    starterCode: linuxTerminalStepAStarterFiles["README.md"],
+                    solutionCode: linuxTerminalStepASolutionFiles["README.md"],
+                },
+                {
+                    id: "e2e-linux-command-practice",
+                    title: "Make command practice",
+                    runtime: runtimeDefaults,
+                    workspace: {
+                        language: "bash",
+                        entryFile: "README.md",
+                        starterFiles: linuxTerminalStepBStarterFiles,
+                        solutionFiles: linuxTerminalStepBSolutionFiles,
+                    },
+                    starterCode: linuxTerminalStepBStarterFiles["README.md"],
+                    solutionCode: linuxTerminalStepBSolutionFiles["README.md"],
+                },
+            ],
+        },
+    },
+    cards: [
+        {
+            type: "text",
+            id: "e2e-terminal-reading",
+            title: "Read before using the terminal",
+            markdown:
+                "This dev-only terminal clone exists to test terminal workspace review flows with deterministic routing and no billing gates.",
+        },
+        makeProjectCard({
+            id: "review-clone-terminal-project",
+            title: "Review Clone Terminal Project",
+            steps: [
+                {
+                    id: "e2e-linux-start",
+                    title: "Create linux-start",
+                    starterFiles: linuxTerminalStepAStarterFiles,
+                    solutionFiles: linuxTerminalStepASolutionFiles,
+                    starterCode: linuxTerminalStepAStarterFiles["README.md"],
+                    solutionCode: linuxTerminalStepASolutionFiles["README.md"],
+                },
+                {
+                    id: "e2e-linux-command-practice",
+                    title: "Make command practice",
+                    starterFiles: linuxTerminalStepBStarterFiles,
+                    solutionFiles: linuxTerminalStepBSolutionFiles,
+                    starterCode: linuxTerminalStepBStarterFiles["README.md"],
+                    solutionCode: linuxTerminalStepBSolutionFiles["README.md"],
+                },
+            ],
+        }),
+    ],
+} satisfies ReviewModule["topics"][number];
+
+const linuxTerminalCloneSection = {
+    id: "e2e-terminal-section",
+    slug: "e2e-terminal-section",
+    title: "E2E Terminal Review Clone Section",
+    summary: "A dev-only section for terminal workspace review tests.",
+    description:
+        "This clone intentionally reuses the actual review module page shell for terminal_workspace coverage.",
+    order: 1,
+    topics: [linuxTerminalCloneTopic],
+} satisfies NonNullable<ReviewModule["sections"]>[number];
+
+const linuxTerminalCloneModule: ReviewModule = {
+    id: "e2e-terminal-review-clone",
+    profileId: "python",
+    versionFamily: "python",
+    title: "E2E Terminal Review Module Clone",
+    subtitle:
+        "Dev-only clone that keeps terminal workspace review tests off the paywalled catalog path.",
+    startPracticeSectionSlug: "e2e-terminal-section",
+    runtimeDefaults,
+    serviceDefaults: defaultServiceDefaults,
+    topics: [linuxTerminalCloneTopic],
+    sections: [linuxTerminalCloneSection],
+    contentVersion: null,
+};
+
 const reviewCloneSection = {
     id: "e2e-section",
     slug: "e2e-section",
@@ -625,6 +742,9 @@ export default async function Page({
     const isSqlClone =
         resolvedParams.subjectSlug === "sql" ||
         resolvedParams.moduleSlug === "e2e-sql-review-clone";
+    const isLinuxTerminalClone =
+        resolvedParams.subjectSlug === "linux" ||
+        resolvedParams.moduleSlug === "e2e-terminal-review-clone";
 
     const selectedServiceDefaults = serviceDefaultsForBackend(
         resolveDevRunnerBackend(resolvedSearchParams),
@@ -632,6 +752,11 @@ export default async function Page({
 
     const selectedModule = isSqlClone
         ? sqlReviewCloneModule
+        : isLinuxTerminalClone
+          ? cloneReviewModuleWithServiceDefaults(
+                linuxTerminalCloneModule,
+                selectedServiceDefaults,
+            )
         : cloneReviewModuleWithServiceDefaults(
             reviewCloneModule,
             selectedServiceDefaults,

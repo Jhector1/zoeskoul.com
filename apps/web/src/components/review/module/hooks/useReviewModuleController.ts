@@ -104,6 +104,19 @@ function pickRouteExerciseId(args: {
         targetExerciseKey
     );
 }
+
+function cardHasAuthoredExerciseSurface(card: any) {
+    if (!card) return false;
+
+    if (card.type === "project") {
+        const steps = (card.spec as { steps?: unknown[] } | null | undefined)?.steps;
+        return Array.isArray(steps) && steps.length > 0;
+    }
+
+    const tryIt = (card as { tryIt?: { spec?: { steps?: unknown[] } | null } | null }).tryIt;
+    return Array.isArray(tryIt?.spec?.steps) && tryIt.spec.steps.length > 0;
+}
+
 function registryEntryToRouteTarget(entry: any): ReviewResolvedRouteTarget | null {
     if (!entry) return null;
 
@@ -1520,6 +1533,7 @@ export function useReviewModuleController({
         activeCardWorkspaceExercise?.exerciseKey ??
         routeWorkspaceExercise?.exerciseStateKey ??
         null;
+    const runtimeBoundExerciseKey = useReviewRuntimeStore((s) => s.tool.boundExerciseKey);
     const boundExerciseRuntime = useReviewRuntimeStore((s) =>
         tool.boundId ? s.exercises[tool.boundId] ?? null : null,
     );
@@ -1527,6 +1541,26 @@ export function useReviewModuleController({
         tool.boundId &&
         activeCard?.id &&
         boundExerciseRuntime?.cardId === activeCard.id,
+    );
+    const expectedExerciseBindingKey =
+        activeExerciseTarget?.exerciseStateKey ??
+        routeWorkspaceExercise?.exerciseStateKey ??
+        activeCardWorkspaceExercise?.exerciseKey ??
+        null;
+    const hasExpectedExerciseSurface = Boolean(
+        expectedExerciseBindingKey ||
+        routeOwnsExercise ||
+        cardHasAuthoredExerciseSurface(activeCard)
+    );
+    const runtimeBindingMatchesExpectedExercise = Boolean(
+        expectedExerciseBindingKey &&
+        runtimeBoundExerciseKey &&
+        runtimeBoundExerciseKey === expectedExerciseBindingKey,
+    );
+    const pendingExerciseBinding = Boolean(
+        hasExpectedExerciseSurface &&
+        !runtimeBindingMatchesExpectedExercise &&
+        !boundExerciseMatchesActiveCard,
     );
 
     const rightRailExerciseKey = routeCanUseBoundExercise
@@ -1671,6 +1705,7 @@ export function useReviewModuleController({
                 onCollapse: panels.handleCollapseRight,
                 onUnbind: handleUnbindFromToolsPanel,
                 boundId: rightRailExerciseKey,
+                pendingExerciseBinding,
 
                 /**
                  * Prefer the dynamically bound exercise owner when present.

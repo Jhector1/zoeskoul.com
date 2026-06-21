@@ -658,6 +658,11 @@ export default function CodeInputExerciseUI({
                                 !onUseTools ? "ui-btn-disabled" : "ui-btn-secondary"
                             }
                             title={ui.t("tools.bindTitle", {}, "Open the full code workspace")}
+                            aria-label={
+                                toolsBound
+                                    ? ui.t("tools.boundAria", {}, "Bound ✓ Jump to Code Open in Tools")
+                                    : ui.t("tools.openAria", {}, "Open in Tools Open Code")
+                            }
                         >
                             {toolsBound
                                 ? ui.t("tools.boundShort", {}, "Jump to Code")

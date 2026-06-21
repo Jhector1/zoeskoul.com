@@ -673,6 +673,39 @@ export default function QuizBlock({
     if (routeExerciseIndex < 0) return null;
     return questions[routeExerciseIndex]?.id ?? null;
   }, [questions, routeExerciseIndex]);
+  const routeExercisePendingResolution = Boolean(
+    routeExerciseId &&
+    !quizError &&
+    quizLoading,
+  );
+
+  const routeExerciseMissingAfterLoad = Boolean(
+    routeExerciseId &&
+    !quizLoading &&
+    !quizError &&
+    questions.length > 0 &&
+    routeExerciseIndex < 0,
+  );
+
+  useEffect(() => {
+    if (!routeExerciseMissingAfterLoad) return;
+
+    console.warn(
+      "[review-quiz] route exercise was not found in loaded questions; showing the quiz instead of leaving the card in a skeleton state",
+      {
+        quizId,
+        quizCardId,
+        routeExerciseId,
+        questionIds: questions.map((q) => q.id),
+      },
+    );
+  }, [
+    quizId,
+    quizCardId,
+    routeExerciseId,
+    routeExerciseMissingAfterLoad,
+    questions,
+  ]);
   const isProjectQuestionFlow = useMemo(
     () => Array.isArray((spec as { steps?: unknown[] } | null | undefined)?.steps),
     [spec],
@@ -1438,7 +1471,7 @@ export default function QuizBlock({
     setActiveIndex(0);
   }
 
-  if (quizLoading) return <QuizBlockSkeleton />;
+  if (quizLoading || routeExercisePendingResolution) return <QuizBlockSkeleton />;
 
   if (quizError) {
     return <div className="ui-quiz-note-danger">{quizError}</div>;

@@ -2099,8 +2099,15 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
                 (effectivePatch.userEdited === true || effectivePatch.workspaceOrigin === "user")
                     ? workspaceWithEntryCode(rawIncomingWorkspace, effectivePatch.code)
                     : rawIncomingWorkspace;
+            const shouldPreserveExistingMissingFiles =
+                !(
+                    effectivePatch.userEdited === true ||
+                    effectivePatch.workspaceOrigin === "user" ||
+                    effectivePatch.updateOrigin === "user" ||
+                    effectivePatch.dismissFeedbackOnEdit === true
+                );
             const mergedIncomingWorkspace =
-                incomingWorkspace && existing?.workspace
+                shouldPreserveExistingMissingFiles && incomingWorkspace && existing?.workspace
                     ? mergeMissingFilesFromWorkspace(incomingWorkspace, existing.workspace)
                     : incomingWorkspace;
 
@@ -2813,22 +2820,17 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
                 userEdited: workspace ? true : existing.userEdited,
                 updatedAt: Date.now(),
             };
-            const exerciseWorkspaceWithFixtures =
-                existing.ownerKind === "exercise"
-                    ? mergeMissingFilesFromWorkspace(
-                        workspace ?? null,
-                        state.exercises[ownerKey]?.workspace ?? null,
-                    )
-                    : workspace ?? null;
-            const cardWorkspaceWithFixtures =
-                existing.ownerKind === "card"
-                    ? mergeMissingFilesFromWorkspace(
-                        workspace ?? null,
-                        state.cards[ownerKey]?.toolWorkspace ?? null,
-                    )
-                    : workspace ?? null;
-            const nextExerciseWorkspace = exerciseWorkspaceWithFixtures ?? workspace ?? null;
-            const nextCardWorkspace = cardWorkspaceWithFixtures ?? workspace ?? null;
+            /**
+             * patchEditorWorkspace receives the visible editor workspace after a user/run
+             * action. Treat that workspace as authoritative. Re-merging missing files from
+             * the previously saved exercise/card workspace resurrects files the runner just
+             * deleted, such as output.txt in the workspace sync E2E tests.
+             *
+             * Required starter/fixture files are restored earlier when a target is resolved
+             * and registered, not during every user workspace patch.
+             */
+            const nextExerciseWorkspace = workspace ?? null;
+            const nextCardWorkspace = workspace ?? null;
 
             const nextPendingExerciseKeys = new Set(state.persistence.pendingExerciseKeys);
             const nextPendingCardKeys = new Set(state.persistence.pendingCardKeys);

@@ -19,6 +19,13 @@ const specSnap = JSON.stringify(spec);
 
   useEffect(() => {
     const ctrl = new AbortController();
+    let didTimeout = false;
+    let disposed = false;
+    const timeoutId = window.setTimeout(() => {
+      didTimeout = true;
+      ctrl.abort();
+    }, 20000);
+
     setQuizLoading(true);
     setQuizError(null);
     setQuestions([]);
@@ -27,22 +34,38 @@ const specSnap = JSON.stringify(spec);
       try {
         const reqSpec = { ...(spec as any), quizKey: stableQuizKey } as any;
         const data = await fetchReviewQuiz(reqSpec, ctrl.signal);
+        if (disposed) return;
 
         setServerQuizKey(data?.quizKey ?? stableQuizKey);
 
         const qs = Array.isArray(data?.questions) ? data.questions : [];
         setQuestions(qs);
       } catch (e: any) {
+        if (disposed) return;
+
+        if (didTimeout) {
+          setQuizError(
+            "The quiz/exercise took too long to load. Please refresh this card, and check the /api/review/quiz server log if it happens again.",
+          );
+          setQuestions([]);
+          return;
+        }
+
         if (e?.name !== "AbortError") {
           setQuizError(e?.message ?? "Failed to load quiz.");
           setQuestions([]);
         }
       } finally {
-        setQuizLoading(false);
+        window.clearTimeout(timeoutId);
+        if (!disposed) setQuizLoading(false);
       }
     })();
 
-    return () => ctrl.abort();
+    return () => {
+      disposed = true;
+      window.clearTimeout(timeoutId);
+      ctrl.abort();
+    };
   }, [quizId, stableQuizKey, reloadNonce, specSnap]);
 
   return { quizLoading, quizError, questions, serverQuizKey };

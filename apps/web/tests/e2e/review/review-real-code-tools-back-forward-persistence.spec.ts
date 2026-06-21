@@ -58,14 +58,11 @@ const LOOP_DEBUG_FIXTURES = {
 } as const;
 
 function getEditorInputs(page: Page): Locator {
-    return page.getByTestId("code-editor-e2e-input");
+    return page.locator('[data-testid="code-editor-e2e-input"]:visible');
 }
 
-/**
- * The right-side Tools editor is the last code-editor textarea on the page.
- */
 function getToolsEditorInput(page: Page): Locator {
-    return getEditorInputs(page).last();
+    return getEditorInputs(page).first();
 }
 
 async function readToolsEditor(page: Page): Promise<string> {
@@ -356,14 +353,15 @@ async function installPracticeMocks(page: Page) {
             submittedSource.includes("while n >= 1") &&
             submittedSource.includes("n = n - 1");
 
-        await route.fulfill({
-            status: 200,
-            contentType: "application/json",
-            body: JSON.stringify({
-                ok,
-                finalized: ok,
-                explanation: ok ? "Correct." : "Expected a countdown loop.",
-                attempts: {
+            await route.fulfill({
+                status: 200,
+                contentType: "application/json",
+                body: JSON.stringify({
+                    ok,
+                    expected: null,
+                    finalized: ok,
+                    explanation: ok ? "Correct." : "Expected a countdown loop.",
+                    attempts: {
                     used: 1,
                     max: 10,
                     left: ok ? 9 : 9,
@@ -395,6 +393,15 @@ async function gotoRealExercise(page: Page) {
     const submitButton = page.getByTestId("review-practice-submit-button");
     await expect(submitButton).toBeVisible({ timeout: 30_000 });
     await expect(submitButton).toBeEnabled({ timeout: 30_000 });
+
+    const autoAdvanceToggle = page.getByLabel(/auto-advance/i).first();
+    if (await autoAdvanceToggle.count()) {
+        try {
+            if (await autoAdvanceToggle.isChecked()) {
+                await autoAdvanceToggle.uncheck();
+            }
+        } catch {}
+    }
 }
 
 async function fillToolsEditor(page: Page, code: string) {

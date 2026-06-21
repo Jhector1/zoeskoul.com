@@ -604,13 +604,14 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
             __pwForceTerminalWorkspaceSync?: (() => Promise<boolean>) | undefined;
         };
 
-        if (!w.__pwEnableFullIdeTerminalInputHook || !workspaceTerminalEnabled) {
+        if (process.env.NODE_ENV === "production" || !workspaceTerminalEnabled) {
             if (w.__pwForceTerminalWorkspaceSync) {
                 delete w.__pwForceTerminalWorkspaceSync;
             }
             return;
         }
 
+        w.__pwEnableFullIdeTerminalInputHook = true;
         w.__pwForceTerminalWorkspaceSync = workspaceTerm.syncWorkspaceNow;
 
         return () => {

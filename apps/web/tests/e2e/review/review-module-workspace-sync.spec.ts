@@ -60,12 +60,15 @@ async function waitForReviewEditor(page: Page) {
 
 async function writeCodeAndRun(page: Page, code: string) {
     const editor = page.getByTestId("code-editor-e2e-input");
+    const runButton = page.locator('[data-testid="code-runner-run-button"]:visible').first();
 
     await page.getByTestId("tools-file-node-main.py").click();
     await expect(editor).toBeAttached();
     await editor.fill(code);
 
-    await page.getByTestId("code-runner-run-button").click();
+    await expect(runButton).toBeVisible({ timeout: 20_000 });
+    await expect(runButton).toBeEnabled({ timeout: 20_000 });
+    await runButton.click();
 }
 
 async function expectMainFileStillHasCode(page: Page, code: string) {

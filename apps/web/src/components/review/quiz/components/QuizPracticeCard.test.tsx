@@ -2,6 +2,9 @@ import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import QuizPracticeCard, { flushReviewToolsBeforeSubmit } from "./QuizPracticeCard";
+import type { CodeInputExercise, ValidateResponse } from "@/lib/practice/types";
+import type { QItem } from "@/lib/practice/uiTypes";
+import { DEFAULT_PRACTICE_HELP_POLICY } from "@/lib/practice/help/steps";
 
 const mocked = vi.hoisted(() => ({
     exerciseRendererProps: [] as any[],
@@ -47,6 +50,78 @@ vi.mock("@/components/review/module/context/ReviewToolsContext", () => ({
         setCodeInputMeta: mocked.setCodeInputMeta,
     }),
 }));
+
+function makeCodeInputExercise(
+    overrides: Partial<CodeInputExercise> = {},
+    compat: Record<string, unknown> = {},
+): CodeInputExercise {
+    return {
+        id: "test-ex",
+        kind: "code_input",
+        topic: "topic-1",
+        difficulty: "easy",
+        title: "Test exercise",
+        prompt: "Write code",
+        language: "python",
+        starterCode: "print('hi')",
+        ...overrides,
+        ...compat,
+    } as CodeInputExercise;
+}
+
+function makeQItem(args: {
+    exercise: CodeInputExercise;
+    code?: string;
+    result?: ValidateResponse | null;
+}): QItem {
+    return {
+        key: args.exercise.id,
+        exercise: args.exercise,
+        single: "",
+        multi: [],
+        num: "",
+        dragA: { x: 0, y: 0, z: 0 },
+        dragB: { x: 0, y: 0, z: 0 },
+        matRows: 0,
+        matCols: 0,
+        mat: [],
+        result: args.result ?? null,
+        submitted: false,
+        attempts: 0,
+        code: args.code ?? "",
+        codeLang: "python",
+        codeStdin: "",
+        text: "",
+        voiceTranscript: "",
+        help: {
+            openedStepKeys: [],
+            activeStepKey: null,
+            entries: {},
+            busyStepKey: null,
+            error: null,
+        },
+    };
+}
+
+function makePracticeState(args: {
+    item: QItem | null;
+    exercise: CodeInputExercise | null;
+    attempts?: number;
+    maxAttempts?: number | null;
+    ok?: boolean | null;
+}) {
+    return {
+        loading: false,
+        error: null,
+        busy: false,
+        item: args.item,
+        exercise: args.exercise,
+        attempts: args.attempts ?? 0,
+        maxAttempts: args.maxAttempts ?? 3,
+        ok: args.ok ?? null,
+        helpPolicy: DEFAULT_PRACTICE_HELP_POLICY,
+    };
+}
 
 describe("QuizPracticeCard project-step fallback", () => {
     beforeEach(() => {
@@ -147,6 +222,22 @@ describe("QuizPracticeCard project-step fallback", () => {
     });
 
     it("routes file-based Python exercises through Tools", () => {
+        const exercise = makeCodeInputExercise(
+            {
+                id: "workspace-ex",
+                title: "Workspace exercise",
+                prompt: "Edit files",
+            },
+            {
+                workspace: {
+                    starterFiles: {
+                        "main.py": "print('hi')",
+                        "note.txt": "remember me",
+                    },
+                },
+            },
+        );
+
         renderToStaticMarkup(
             <QuizPracticeCard
                 q={{
@@ -160,42 +251,10 @@ describe("QuizPracticeCard project-step fallback", () => {
                     },
                 } as any}
                 ownerCardId="card-1"
-                ps={{
-                    loading: false,
-                    error: null,
-                    busy: false,
-                    item: {
-                        code: "print('hi')",
-                        exercise: {
-                            id: "workspace-ex",
-                            kind: "code_input",
-                            topic: "topic-1",
-                            difficulty: "easy",
-                            title: "Workspace exercise",
-                            prompt: "Edit files",
-                            language: "python",
-                            starterFiles: {
-                                "main.py": "print('hi')",
-                                "note.txt": "remember me",
-                            },
-                        },
-                    },
-                    exercise: {
-                        id: "workspace-ex",
-                        kind: "code_input",
-                        topic: "topic-1",
-                        difficulty: "easy",
-                        title: "Workspace exercise",
-                        prompt: "Edit files",
-                        language: "python",
-                        starterFiles: {
-                            "main.py": "print('hi')",
-                            "note.txt": "remember me",
-                        },
-                    },
-                    attempts: 0,
-                    maxAttempts: 3,
-                }}
+                ps={makePracticeState({
+                    item: makeQItem({ code: "print('hi')", exercise }),
+                    exercise,
+                })}
                 toolsActive
                 unlocked
                 isCompleted={false}
@@ -218,6 +277,12 @@ describe("QuizPracticeCard project-step fallback", () => {
     });
 
     it("defaults simple code_input exercises to the tools workspace", () => {
+        const exercise = makeCodeInputExercise({
+            id: "default-tools-ex",
+            title: "Default tools exercise",
+            prompt: "Type one line",
+        });
+
         renderToStaticMarkup(
             <QuizPracticeCard
                 q={{
@@ -231,36 +296,10 @@ describe("QuizPracticeCard project-step fallback", () => {
                     },
                 } as any}
                 ownerCardId="card-1"
-                ps={{
-                    loading: false,
-                    error: null,
-                    busy: false,
-                    item: {
-                        code: "print('hi')",
-                        exercise: {
-                            id: "default-tools-ex",
-                            kind: "code_input",
-                            topic: "topic-1",
-                            difficulty: "easy",
-                            title: "Default tools exercise",
-                            prompt: "Type one line",
-                            language: "python",
-                            starterCode: "print('hi')",
-                        },
-                    },
-                    exercise: {
-                        id: "default-tools-ex",
-                        kind: "code_input",
-                        topic: "topic-1",
-                        difficulty: "easy",
-                        title: "Default tools exercise",
-                        prompt: "Type one line",
-                        language: "python",
-                        starterCode: "print('hi')",
-                    },
-                    attempts: 0,
-                    maxAttempts: 3,
-                }}
+                ps={makePracticeState({
+                    item: makeQItem({ code: "print('hi')", exercise }),
+                    exercise,
+                })}
                 toolsActive
                 unlocked
                 isCompleted={false}
@@ -283,6 +322,13 @@ describe("QuizPracticeCard project-step fallback", () => {
     });
 
     it("keeps simple inline code_input exercises embedded when the manifest opts in", () => {
+        const exercise = makeCodeInputExercise({
+            id: "inline-ex",
+            title: "Inline exercise",
+            prompt: "Type one line",
+            ui: { codeSurface: "embedded" },
+        });
+
         renderToStaticMarkup(
             <QuizPracticeCard
                 q={{
@@ -296,38 +342,10 @@ describe("QuizPracticeCard project-step fallback", () => {
                     },
                 } as any}
                 ownerCardId="card-1"
-                ps={{
-                    loading: false,
-                    error: null,
-                    busy: false,
-                    item: {
-                        code: "print('hi')",
-                        exercise: {
-                            id: "inline-ex",
-                            kind: "code_input",
-                            topic: "topic-1",
-                            difficulty: "easy",
-                            title: "Inline exercise",
-                            prompt: "Type one line",
-                            language: "python",
-                            starterCode: "print('hi')",
-                            ui: { codeSurface: "embedded" },
-                        },
-                    },
-                    exercise: {
-                        id: "inline-ex",
-                        kind: "code_input",
-                        topic: "topic-1",
-                        difficulty: "easy",
-                        title: "Inline exercise",
-                        prompt: "Type one line",
-                        language: "python",
-                        starterCode: "print('hi')",
-                        ui: { codeSurface: "embedded" },
-                    },
-                    attempts: 0,
-                    maxAttempts: 3,
-                }}
+                ps={makePracticeState({
+                    item: makeQItem({ code: "print('hi')", exercise }),
+                    exercise,
+                })}
                 toolsActive
                 unlocked
                 isCompleted={false}
@@ -350,6 +368,22 @@ describe("QuizPracticeCard project-step fallback", () => {
     });
 
     it("keeps completed full workspace exercises in tools mode for review", () => {
+        const exercise = makeCodeInputExercise(
+            {
+                id: "workspace-complete-ex",
+                title: "Workspace review exercise",
+                prompt: "Review files",
+            },
+            {
+                workspace: {
+                    starterFiles: {
+                        "main.py": "print('done')",
+                        "data/students.csv": "id,name\n1,Ada",
+                    },
+                },
+            },
+        );
+
         renderToStaticMarkup(
             <QuizPracticeCard
                 q={{
@@ -363,48 +397,16 @@ describe("QuizPracticeCard project-step fallback", () => {
                     },
                 } as any}
                 ownerCardId="card-1"
-                ps={{
-                    loading: false,
-                    error: null,
-                    busy: false,
-                    item: {
+                ps={makePracticeState({
+                    item: makeQItem({
                         code: "print('done')",
-                        result: { ok: true, finalized: true },
-                        exercise: {
-                            id: "workspace-complete-ex",
-                            kind: "code_input",
-                            topic: "topic-1",
-                            difficulty: "easy",
-                            title: "Workspace review exercise",
-                            prompt: "Review files",
-                            language: "python",
-                            workspace: {
-                                starterFiles: {
-                                    "main.py": "print('done')",
-                                    "data/students.csv": "id,name\n1,Ada",
-                                },
-                            },
-                        },
-                    },
-                    exercise: {
-                        id: "workspace-complete-ex",
-                        kind: "code_input",
-                        topic: "topic-1",
-                        difficulty: "easy",
-                        title: "Workspace review exercise",
-                        prompt: "Review files",
-                        language: "python",
-                        workspace: {
-                            starterFiles: {
-                                "main.py": "print('done')",
-                                "data/students.csv": "id,name\n1,Ada",
-                            },
-                        },
-                    },
+                        exercise,
+                        result: { ok: true, finalized: true, expected: null },
+                    }),
+                    exercise,
                     attempts: 1,
-                    maxAttempts: 3,
                     ok: true,
-                }}
+                })}
                 toolsActive
                 unlocked
                 isCompleted={true}

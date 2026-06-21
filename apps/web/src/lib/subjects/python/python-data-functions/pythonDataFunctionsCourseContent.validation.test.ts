@@ -7,12 +7,12 @@ type JsonObject = Record<string, any>;
 
 const WEB_ROOT = path.resolve(
     path.dirname(fileURLToPath(import.meta.url)),
-    "../../../..",
+    "../../../../..",
 );
 
 const I18N_ROOT = path.join(
     WEB_ROOT,
-    "src/i18n/messages/en/subjects/python-data-functions",
+    "src/i18n/messages/en/subjects/python/python-data-functions",
 );
 
 const BANNED_TRY_PHRASES = [

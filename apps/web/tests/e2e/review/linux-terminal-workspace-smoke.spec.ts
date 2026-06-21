@@ -15,7 +15,7 @@ test.use({
 });
 
 const LINUX_TERMINAL_LAB_URL =
-    "/en/dev/e2e/review-module-clone/python/e2e-review-clone/learn/e2e-section/e2e-review-topic/exercise/e2e-print-name";
+    "/en/dev/e2e/review-module-clone/linux/e2e-terminal-review-clone/learn/e2e-terminal-section/e2e-terminal-topic/exercise/e2e-linux-start";
 
 const LINUX_TERMINAL_FIXTURE = {
     title: "Create the Linux lab folders",
@@ -97,6 +97,33 @@ function collectSubmittedEntries(value: unknown): SubmittedEntry[] {
 }
 
 async function installPracticeMocks(page: Page) {
+    await page.route("**/api/review/module-nav**", async (route) => {
+        await route.fulfill({
+            status: 200,
+            contentType: "application/json",
+            body: JSON.stringify({
+                prevModuleId: null,
+                nextModuleId: null,
+                nextLocked: false,
+                nextBillingHref: null,
+                index: 1,
+                total: 1,
+            }),
+        });
+    });
+
+    await page.route("**/api/review/subject-finish**", async (route) => {
+        await route.fulfill({
+            status: 200,
+            contentType: "application/json",
+            body: JSON.stringify({
+                status: "in_progress",
+                certificateReady: false,
+                certificateIssued: false,
+            }),
+        });
+    });
+
     await page.route(
         (url) => url.pathname === "/api/practice",
         async (route) => {
@@ -148,6 +175,7 @@ async function installPracticeMocks(page: Page) {
                 contentType: "application/json",
                 body: JSON.stringify({
                     ok,
+                    expected: null,
                     finalized: ok,
                     explanation: ok
                         ? "Correct."
@@ -194,7 +222,9 @@ test.describe("linux terminal_workspace smoke", () => {
         await sendTerminal(page, "mkdir -p linux-lab/notes");
         await sendTerminal(page, "touch linux-lab/notes/today.txt");
 
-        await page.getByTestId("review-practice-submit-button").click();
+        await page
+            .getByTestId("review-practice-submit-button")
+            .evaluate((button: HTMLButtonElement) => button.click());
 
         await expect(page.getByTestId("review-practice-result-correct")).toBeVisible({
             timeout: 15_000,

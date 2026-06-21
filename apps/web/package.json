@@ -35,7 +35,7 @@
     "test:e2e:real": "E2E_REAL_PROGRESS_API=1 E2E_REVIEW_URL=/en/catalog/python/subjects/python/modules/python-1/learn/python-1-core-building-blocks/variables-intro/exercise/boxes-print playwright test tests/e2e/review-code-workspace-real-api.spec.ts",
     "validate": "pnpm typecheck && pnpm test && pnpm build",
     "validate:e2e": "pnpm validate && pnpm test:e2e:harness   && pnpm test:e2e:practice-review && pnpm test:e2e:review-module-clone",
-    "validate:full": "pnpm validate && pnpm test:e2e",
+    "validate:full": "lsof -ti tcp:3000 | xargs kill -9 && pnpm validate && pnpm test:e2e ",
     "user:roles": "NODE_ENV=development tsx scripts/set-user-roles.ts",
     "postinstall": "prisma generate --schema ../../packages/db/prisma/schema.prisma",
     "cleanup:onboarding": "tsx scripts/cleanup-guest-onboarding.ts"

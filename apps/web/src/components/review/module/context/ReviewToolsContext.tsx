@@ -422,8 +422,7 @@ export function ReviewToolsProvider({
             patch?.userEdited === true ||
             patch?.workspaceOrigin === "user" ||
             patch?.updateOrigin === "user" ||
-            patch?.dismissFeedbackOnEdit === true ||
-            patch?.preferSnapshot === true
+            patch?.dismissFeedbackOnEdit === true
         );
     }
   const getRunFeedbackEntry = useCallback(
@@ -441,7 +440,6 @@ export function ReviewToolsProvider({
 
             const { snap, targetKey } = entry;
             const userEdited =
-                snap.preferSnapshot === true ||
                 snap.userEdited === true ||
                 snap.workspaceOrigin === "user" ||
                 snap.workspaceOrigin === "saved";
@@ -492,8 +490,6 @@ export function ReviewToolsProvider({
         flushByToolKey(current);
       }
 
-      ensureVisible?.();
-
       const accepted = await onBindToToolsPanel({ id, ...snap, exerciseKey: targetKey });
 
       /**
@@ -537,7 +533,7 @@ export function ReviewToolsProvider({
         workspaceOrigin: boundOrigin,
       });
 
-      if (boundWorkspace) {
+      if (boundWorkspace && (boundOrigin === "user" || boundOrigin === "saved")) {
         patchEditorWorkspace(targetKey, boundWorkspace);
       }
 

@@ -183,6 +183,8 @@ pnpm --filter @zoeskoul/web validate:full
 
 pnpm curr:course -- check linux linux-terminal-fundamentals --resume
 
+ssh deploy@5.78.227.155
+
 
 
 

@@ -43,15 +43,22 @@ function getTheme(isDark: boolean) {
         };
 }
 
-function isHostReady(el: HTMLDivElement | null) {
+export function isHostVisibleForTerminalInteraction(el: HTMLDivElement | null) {
     if (!el) return false;
     if (!el.isConnected) return false;
 
-    const rect = el.getBoundingClientRect();
-    if (rect.width < 80 || rect.height < 120) return false;
-
     const style = window.getComputedStyle(el);
     if (style.display === "none" || style.visibility === "hidden") return false;
+
+    return true;
+}
+
+export function isHostLargeEnoughForTerminalLayout(el: HTMLDivElement | null) {
+    if (!isHostVisibleForTerminalInteraction(el)) return false;
+    if (!el) return false;
+
+    const rect = el.getBoundingClientRect();
+    if (rect.width < 80 || rect.height < 120) return false;
 
     return true;
 }
@@ -227,7 +234,7 @@ export default function XtermTerminal(props: {
         if (!openedRef.current) return false;
         if (termRef.current !== term) return false;
         if (!term.element || !term.textarea) return false;
-        if (!isHostReady(hostRef.current)) return false;
+        if (!isHostVisibleForTerminalInteraction(hostRef.current)) return false;
         return true;
     }, []);
 
@@ -314,8 +321,9 @@ export default function XtermTerminal(props: {
             __pwSyncTerminalInputThroughApp?: (data: string) => Promise<boolean>;
         };
 
-        if (!w.__pwEnableFullIdeTerminalInputHook) return;
+        if (process.env.NODE_ENV === "production") return;
 
+        w.__pwEnableFullIdeTerminalInputHook = true;
         w.__pwDispatchTerminalInputThroughApp = dispatchInputThroughApp;
         w.__pwSyncTerminalInputThroughApp = async (data: string): Promise<boolean> => {
             if (!inputReadyRef.current) return false;
@@ -383,7 +391,7 @@ export default function XtermTerminal(props: {
             const term = termRef.current;
 
             if (!host || !probe || !term || !openedRef.current) return;
-            if (!isHostReady(host)) return;
+            if (!isHostLargeEnoughForTerminalLayout(host)) return;
             if (!term.element || !term.textarea) return;
 
             const rect = host.getBoundingClientRect();
@@ -440,7 +448,7 @@ export default function XtermTerminal(props: {
                 if (cancelled || openedRef.current) return;
 
                 const el = hostRef.current;
-                if (!isHostReady(el)) {
+                if (!isHostLargeEnoughForTerminalLayout(el)) {
                     openTimerRef.current = window.setTimeout(waitUntilVisible, 80);
                     return;
                 }
@@ -450,7 +458,7 @@ export default function XtermTerminal(props: {
                         if (cancelled || openedRef.current) return;
 
                         const node = hostRef.current;
-                        if (!isHostReady(node)) {
+                        if (!isHostLargeEnoughForTerminalLayout(node)) {
                             openTimerRef.current = window.setTimeout(waitUntilVisible, 80);
                             return;
                         }
@@ -794,8 +802,11 @@ export default function XtermTerminal(props: {
                     className="relative min-h-0 w-full flex-1 px-2 pb-2"
                     data-testid="interactive-terminal"
                     aria-label="Interactive terminal"
-                    onMouseDown={(e) => {
-                        e.preventDefault();
+                    tabIndex={0}
+                    onMouseDown={() => {
+                        focusTerminal();
+                    }}
+                    onFocus={() => {
                         focusTerminal();
                     }}
                 />

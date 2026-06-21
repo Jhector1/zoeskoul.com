@@ -390,6 +390,152 @@ function workspaceIncludesStarterFiles(args: {
     return true;
 }
 
+
+type WorkspacePathIndex = {
+    pathById: Map<string, string>;
+    idByPath: Map<string, string>;
+};
+
+function workspacePathIndex(workspace: WorkspaceStateV2 | null | undefined): WorkspacePathIndex {
+    const pathById = new Map<string, string>();
+    const idByPath = new Map<string, string>();
+
+    if (!workspace || workspace.version !== 2 || !Array.isArray(workspace.nodes)) {
+        return {pathById, idByPath};
+    }
+
+    const nodesById = new Map<string, any>();
+    for (const node of workspace.nodes as any[]) {
+        const id = String(node?.id ?? "");
+        if (id) nodesById.set(id, node);
+    }
+
+    const resolvePath = (id: string, seen = new Set<string>()): string => {
+        if (pathById.has(id)) return pathById.get(id)!;
+        if (seen.has(id)) return "";
+        seen.add(id);
+
+        const node = nodesById.get(id);
+        if (!node) return "";
+
+        const name = String(node.name ?? "").trim();
+        if (!name) return "";
+
+        const parentId = node.parentId == null ? "" : String(node.parentId);
+        const parentPath = parentId ? resolvePath(parentId, seen) : "";
+        const path = parentPath ? `${parentPath}/${name}` : name;
+        pathById.set(id, path);
+        idByPath.set(path, id);
+        return path;
+    };
+
+    for (const id of nodesById.keys()) {
+        resolvePath(id);
+    }
+
+    return {pathById, idByPath};
+}
+
+function uniqueWorkspaceNodeId(base: string, usedIds: Set<string>) {
+    const cleanBase = String(base || "node").replace(/[^A-Za-z0-9_-]/g, "-") || "node";
+    let candidate = cleanBase;
+    let i = 1;
+
+    while (usedIds.has(candidate)) {
+        candidate = `${cleanBase}-${i}`;
+        i += 1;
+    }
+
+    usedIds.add(candidate);
+    return candidate;
+}
+
+function mergeMissingStarterWorkspaceFiles(
+    workspace: WorkspaceStateV2 | null | undefined,
+    starterWorkspace: WorkspaceStateV2 | null | undefined,
+): WorkspaceStateV2 | null {
+    if (!workspace || workspace.version !== 2 || !Array.isArray(workspace.nodes)) {
+        return starterWorkspace ?? null;
+    }
+
+    if (!starterWorkspace || starterWorkspace.version !== 2 || !Array.isArray(starterWorkspace.nodes)) {
+        return workspace;
+    }
+
+    const starterFilePaths = workspaceFilePaths(starterWorkspace);
+    if (starterFilePaths.size === 0) return workspace;
+
+    const workspaceFiles = workspaceFilePaths(workspace);
+    let missingAnyStarterFile = false;
+    for (const path of starterFilePaths) {
+        if (!workspaceFiles.has(path)) {
+            missingAnyStarterFile = true;
+            break;
+        }
+    }
+
+    if (!missingAnyStarterFile) return workspace;
+
+    const targetIndex = workspacePathIndex(workspace);
+    const starterIndex = workspacePathIndex(starterWorkspace);
+    const usedIds = new Set<string>(
+        (workspace.nodes as any[])
+            .map((node) => String(node?.id ?? ""))
+            .filter(Boolean),
+    );
+    const pathToId = new Map(targetIndex.idByPath);
+    const addedIdByStarterId = new Map<string, string>();
+    const nextNodes = [...(workspace.nodes as any[])];
+
+    const sortedStarterNodes = [...(starterWorkspace.nodes as any[])]
+        .filter((node) => node?.kind === "folder" || node?.kind === "file")
+        .sort((a, b) => {
+            const aPath = starterIndex.pathById.get(String(a.id ?? "")) ?? "";
+            const bPath = starterIndex.pathById.get(String(b.id ?? "")) ?? "";
+            const aDepth = aPath ? aPath.split("/").length : 0;
+            const bDepth = bPath ? bPath.split("/").length : 0;
+            if (aDepth !== bDepth) return aDepth - bDepth;
+            if (a.kind !== b.kind) return a.kind === "folder" ? -1 : 1;
+            return aPath.localeCompare(bPath);
+        });
+
+    for (const starterNode of sortedStarterNodes) {
+        const starterId = String(starterNode?.id ?? "");
+        const path = starterIndex.pathById.get(starterId);
+        if (!starterId || !path) continue;
+
+        const existingId = pathToId.get(path);
+        if (existingId) {
+            addedIdByStarterId.set(starterId, existingId);
+            continue;
+        }
+
+        const parentStarterId = starterNode.parentId == null ? "" : String(starterNode.parentId);
+        const parentId = parentStarterId
+            ? addedIdByStarterId.get(parentStarterId) ??
+              pathToId.get(
+                  (starterIndex.pathById.get(parentStarterId) ?? "")
+              ) ??
+              null
+            : null;
+
+        const nextId = uniqueWorkspaceNodeId(starterId, usedIds);
+        addedIdByStarterId.set(starterId, nextId);
+        pathToId.set(path, nextId);
+
+        nextNodes.push({
+            ...starterNode,
+            id: nextId,
+            parentId,
+        });
+    }
+
+    return {
+        ...workspace,
+        nodes: nextNodes,
+    };
+}
+
 function isUserOwnedWorkspaceState(value: any) {
     return (
         value?.userEdited === true ||
@@ -972,7 +1118,10 @@ function CodeInputWithTools(props: {
         ].filter(Boolean) as any,
     });
 
-    const activeWorkspace = resolvedTargetWorkspace.workspace ?? currentWorkspace;
+    const activeWorkspace = mergeMissingStarterWorkspaceFiles(
+        resolvedTargetWorkspace.workspace ?? currentWorkspace,
+        manifestStarterWorkspace,
+    );
     const activeCode =
         resolvedTargetWorkspace.source === "saved"
             ? deriveEntryCode(activeWorkspace) ?? resolvedTargetWorkspace.code
@@ -1037,7 +1186,10 @@ function CodeInputWithTools(props: {
 
     const registerArgs = useMemo(
         () => {
-            const activeStateIsLearnerOwned = isUserOwnedWorkspaceState(activeState);
+            const activeStateIsLearnerOwned =
+                isUserOwnedWorkspaceState(activeState) ||
+                resolvedTargetWorkspace.source === "saved" ||
+                resolvedTargetWorkspace.source === "draft";
 
             return {
             exerciseKey,
@@ -1107,10 +1259,11 @@ function CodeInputWithTools(props: {
 
     /**
      * Critical:
-     * In tools mode, the right-side editor must follow the currently rendered
-     * exercise. But this must be idempotent; otherwise requestBind causes a
-     * Zustand update, which rerenders this component, which calls requestBind
-     * again forever.
+     * In tools mode, the Tools editor must follow the currently rendered
+     * exercise. Auto-binding must not force responsive Lesson/Code tabs to the
+     * Code tab; otherwise terminal/project E2E and real learners lose the
+     * visible Check button after the editor binds. User-initiated Open Code
+     * still calls ensureVisible below.
      */
     useEffect(() => {
         if (!toolAutoOpen) return;
@@ -1122,17 +1275,6 @@ function CodeInputWithTools(props: {
 
         queueMicrotask(() => {
             requestBind(codeInputId);
-
-            if (typeof window !== "undefined") {
-                window.requestAnimationFrame(() => {
-                    window.requestAnimationFrame(() => {
-                        ensureVisible?.();
-                    });
-                });
-                return;
-            }
-
-            ensureVisible?.();
         });
 
         // Intentionally depend only on the active exercise identity.
@@ -1207,7 +1349,7 @@ function CodeInputWithTools(props: {
             variant="tools"
             toolsBound={toolsBoundToThis}
             toolsUnbound={toolsUnbound}
-            autoBindMode={toolAutoOpen ? "always" : "never"}
+            autoBindMode="never"
             showPrompt={showPrompt}
             feedback={feedback ?? null}
             explanation={explanation ?? null}

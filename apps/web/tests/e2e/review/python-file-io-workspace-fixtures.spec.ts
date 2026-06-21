@@ -18,7 +18,6 @@ const SOLUTION_CODE = [
 
 const FIXTURE_PATH = "data/message.txt";
 const FIXTURE_NODE_TEST_ID = "tools-file-node-message.txt";
-const FIXTURE_FOLDER_TEST_ID = "tools-file-node-data";
 const FIXTURE_CONTENT = "Hello, World!\nThis is a test file.";
 const FIXTURE_OUTPUT = `${FIXTURE_CONTENT}\n`;
 const PRACTICE_FIXTURES = {
@@ -138,6 +137,21 @@ function hasWorkspaceEntry(files: SubmittedFile[]) {
     return files.some(
         (file) => file.path === "main.py" && file.content.includes('open("data/message.txt"'),
     );
+}
+
+async function ensureFixtureFileVisible(page: Page) {
+    const fixtureNode = page.getByTestId(FIXTURE_NODE_TEST_ID);
+    if (await fixtureNode.count()) {
+        return fixtureNode;
+    }
+
+    const dataFolderNode = page.getByTestId("tools-file-node-data");
+    if (await dataFolderNode.count()) {
+        await dataFolderNode.click();
+    }
+
+    await expect(fixtureNode).toBeVisible({ timeout: 30_000 });
+    return fixtureNode;
 }
 
 async function installReviewChromeMocks(page: Page) {
@@ -480,6 +494,7 @@ async function installWorkspacePayloadMocks(page: Page) {
             contentType: "application/json",
             body: JSON.stringify({
                 ok: hasExpectedWorkspace,
+                expected: null,
                 finalized: hasExpectedWorkspace,
                 explanation: hasExpectedWorkspace
                     ? "Correct."
@@ -536,12 +551,10 @@ test("python file I/O exercise check uses the visible editor workspace and fixtu
 
     const editor = page.getByTestId("code-editor-e2e-input").last();
     const mainNode = page.getByTestId("tools-file-node-main.py");
-    const dataFolderNode = page.getByTestId(FIXTURE_FOLDER_TEST_ID);
-    const dataNode = page.getByTestId(FIXTURE_NODE_TEST_ID);
+    const dataNode = await ensureFixtureFileVisible(page);
     const runButton = page.getByTestId("code-runner-run-button").first();
 
     await expect(mainNode).toBeVisible({ timeout: 30_000 });
-    await expect(dataFolderNode).toBeVisible({ timeout: 30_000 });
     await expect(dataNode).toBeVisible({ timeout: 30_000 });
     await expect(mainNode).toHaveAttribute("data-node-active", "true");
     await expect(mainNode).toHaveAttribute("data-node-entry", "true");

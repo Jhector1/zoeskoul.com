@@ -37,6 +37,22 @@ const FullIDE = dynamic(() => import("@/components/ide/fullide/FullIDE"), {
     loading: () => null,
 });
 
+let codeToolPaneEditorPreloadPromise: Promise<void> | null = null;
+
+export function preloadCodeToolPaneEditorAssets() {
+    if (codeToolPaneEditorPreloadPromise) {
+        return codeToolPaneEditorPreloadPromise;
+    }
+
+    codeToolPaneEditorPreloadPromise = Promise.all([
+        import("@/components/ide/fullide/FullIDE"),
+        import("@monaco-editor/react"),
+        import("monaco-editor"),
+    ]).then(() => undefined);
+
+    return codeToolPaneEditorPreloadPromise;
+}
+
 function reviewToolPaneDebugEnabled() {
     try {
         if (typeof window === "undefined") return process.env.NODE_ENV !== "production";
@@ -529,10 +545,16 @@ function reviewRuntimeWorkspaceIsUsable(runtime: any, workspace: WorkspaceStateV
         runtime?.workspaceOrigin === "empty" ||
         runtime?.userEdited === false
     ) {
-        return reviewWorkspaceHasNonEmptyFile(workspace);
+        /**
+         * Route-owned starter workspaces are deterministic, even when the entry
+         * file is intentionally blank because the learner must write the first
+         * line. Requiring a non-empty file made the Tools IDE wait forever and
+         * also hid blank fixture files such as message.txt.
+         */
+        return workspaceHasAnyFile(workspace);
     }
 
-    return reviewWorkspaceHasNonEmptyFile(workspace);
+    return workspaceHasAnyFile(workspace);
 }
 
 export function isUserOwnedReviewRuntimeState(value: any) {
@@ -706,7 +728,10 @@ export function pickDirectReviewRuntimeWorkspace(args: {
      * hydration never becomes visible.
      */
     if (
-        reviewWorkspaceHasNonEmptyFile(args.normalizedToolWorkspace) &&
+        (
+            reviewWorkspaceHasNonEmptyFile(args.normalizedToolWorkspace) ||
+            workspaceNeedsMultiFile(args.normalizedToolWorkspace)
+        ) &&
         workspaceMatchesLanguage(args.normalizedToolWorkspace, args.effectiveLanguage)
     ) {
         return args.normalizedToolWorkspace ?? null;
@@ -940,6 +965,7 @@ export default function CodeToolPane(props: {
     height: number;
     editorOwnerKey?: string | null;
     toolScopeKey?: string;
+    pendingExerciseBinding?: boolean;
     toolHydrated: boolean;
     toolLang: RunnerLanguage;
     toolCode: string;
@@ -962,6 +988,7 @@ export default function CodeToolPane(props: {
     const {
         toolScopeKey,
         editorOwnerKey,
+        pendingExerciseBinding = false,
         toolHydrated,
         toolLang,
         toolCode,
@@ -1300,6 +1327,7 @@ export default function CodeToolPane(props: {
     const lastIncomingRef = useRef<{ code: string; stdin: string } | null>(null);
     const persistTimerRef = useRef<number | null>(null);
     const pendingWorkspaceRef = useRef<WorkspaceStateV2 | null | undefined>(undefined);
+    const pendingWorkspaceForceUserEditRef = useRef(false);
     const pendingTerminalEvidenceRef = useRef<TerminalEvidence | null | undefined>(undefined);
     const latestTerminalEvidenceRef = useRef<TerminalEvidence | null>(null);
     const lastTerminalEvidenceKeyRef = useRef<string>("");
@@ -1436,6 +1464,13 @@ export default function CodeToolPane(props: {
         !finalReviewWorkspaceLanguage ||
         !effectiveLanguage ||
         languagesCompatible(finalReviewWorkspaceLanguage, effectiveLanguage);
+    const shouldHoldEditorForPendingExerciseBinding = Boolean(
+        pendingExerciseBinding &&
+        (
+            !isExerciseEditorMode ||
+            !reviewDirectWorkspaceReady
+        ),
+    );
     const reviewWorkspaceNeedsMultiFile = Boolean(
         isReviewRouteMode &&
         [
@@ -1458,17 +1493,34 @@ export default function CodeToolPane(props: {
 
     const shouldMountFullIde = Boolean(
         hasBindableEditorTarget ||
+        pendingExerciseBinding ||
         sqlDatasetId ||
         sqlResultShape === "table" ||
         !isReviewRouteMode
     );
 
+    useEffect(() => {
+        if (!shouldMountFullIde) return;
+
+        /**
+         * Warm the IDE shell and Monaco bundle while the review/exercise workspace
+         * is still loading so the editor is ready when the lesson content settles.
+         */
+        void preloadCodeToolPaneEditorAssets();
+    }, [shouldMountFullIde]);
+
     const canRenderEditor = Boolean(
         shouldMountFullIde &&
+        !shouldHoldEditorForPendingExerciseBinding &&
         finalReviewWorkspace &&
         !runtimeWorkspaceError &&
         finalWorkspaceMatchesLanguage &&
         forceWorkspaceHasContent(finalReviewWorkspace),
+    );
+    const shouldControlFullIdeWorkspace = Boolean(
+        !isReviewRouteMode ||
+        !ideReady ||
+        pendingExerciseBinding,
     );
     /**
      * Do not show the editor loading fallback when the tools rail is not bound
@@ -1477,8 +1529,9 @@ export default function CodeToolPane(props: {
      * broken.
      */
     const shouldWaitForWorkspace = Boolean(
-        hasEditorTarget &&
+        (hasEditorTarget || pendingExerciseBinding) &&
         (
+            pendingExerciseBinding ||
             runtimeWorkspacePending ||
             (
                 !isReviewRouteMode &&
@@ -1497,6 +1550,7 @@ export default function CodeToolPane(props: {
         !canRenderEditor &&
         !showLoadingMask &&
         isReviewRouteMode &&
+        !pendingExerciseBinding &&
         hasBindableEditorTarget;
 
     const [loadingTimedOut, setLoadingTimedOut] = useState(false);
@@ -1527,6 +1581,7 @@ export default function CodeToolPane(props: {
         lastEmittedRef.current = null;
         lastIncomingRef.current = null;
         pendingWorkspaceRef.current = undefined;
+        pendingWorkspaceForceUserEditRef.current = false;
         lastHandledWorkspaceKeyRef.current = "";
         lastHandledStructureKeyRef.current = "";
         lastUpstreamWorkspaceKeyRef.current = "";
@@ -1662,6 +1717,16 @@ export default function CodeToolPane(props: {
                 writeReviewWorkspaceDraft(workspaceOwnerIdentityKey, workspace);
                 setLocalWorkspaceDraft({ savedAt: Date.now(), workspace });
 
+                /**
+                 * In review-route mode the route runtime store is the source of truth.
+                 * Do not also push every editor save through the outer tool callbacks.
+                 * Those callbacks can re-register the right-rail tool and make Monaco
+                 * feel like it reloads or loses keystrokes while the learner is typing.
+                 */
+                if (isReviewRouteMode) {
+                    return;
+                }
+
                 onChangeWorkspace?.(workspace);
                 onChangeCode(next.code);
                 onChangeStdin(next.stdin);
@@ -1728,8 +1793,10 @@ export default function CodeToolPane(props: {
         }
 
         const pending = pendingWorkspaceRef.current;
+        const forceUserEdit = pendingWorkspaceForceUserEditRef.current;
         pendingWorkspaceRef.current = undefined;
-        emitWorkspaceUpstreamRef.current(pending);
+        pendingWorkspaceForceUserEditRef.current = false;
+        emitWorkspaceUpstreamRef.current(pending, forceUserEdit);
     }, [boundId, syncCodeInputSnapshot]);
 
     useEffect(() => {
@@ -1838,92 +1905,56 @@ export default function CodeToolPane(props: {
         lastHandledWorkspaceKeyRef.current = workspaceKey;
         lastHandledStructureKeyRef.current = nextStructureKey;
 
+        const shouldDeferReviewEditorContentEdit = Boolean(
+            isReviewRouteMode &&
+            isDirectUserWorkspaceEdit &&
+            !structureChanged &&
+            workspace &&
+            forceWorkspaceHasContent(workspace)
+        );
+
+        if (shouldDeferReviewEditorContentEdit) {
+            /**
+             * Keep Monaco local-first while the learner is actively typing.
+             *
+             * Do not push the workspace back into the route runtime from a typing
+             * timer. That feedback loop re-enters FullIDE/CodeRunner with a new
+             * controlled value and can make Monaco blink or briefly lose focus.
+             *
+             * The pending workspace is still flushed before Run/Check/submit, on
+             * page hide, and on unmount. The lightweight same-tab draft below is
+             * only a safety net for navigation/reload while typing.
+             */
+            pendingWorkspaceRef.current = workspace;
+            pendingWorkspaceForceUserEditRef.current = true;
+
+            if (persistTimerRef.current != null) {
+                window.clearTimeout(persistTimerRef.current);
+            }
+
+            persistTimerRef.current = window.setTimeout(() => {
+                persistTimerRef.current = null;
+
+                const pending = pendingWorkspaceRef.current;
+                if (pending && forceWorkspaceHasContent(pending)) {
+                    writeReviewWorkspaceDraft(workspaceOwnerIdentityKey, pending);
+                }
+            }, 500);
+            return;
+        }
+
         if (
             isEffectiveUserWorkspaceEdit &&
             isReviewRouteMode &&
-            resolvedEditorOwnerKey &&
             workspace &&
             forceWorkspaceHasContent(workspace)
         ) {
-            const ownerKey = resolvedEditorOwnerKey;
-            const nextWorkspace = workspace;
-            const next = extractWorkspaceSnapshot(nextWorkspace);
-
-            /**
-             * Critical:
-             * Write real FullIDE edits directly into the deterministic route runtime.
-             * This prevents the side editor from falling back to starter when the
-             * registry re-registers during sidebar/direct navigation.
-             */
-            patchEditorWorkspace(ownerKey, nextWorkspace);
-            writeReviewWorkspaceDraft(workspaceOwnerIdentityKey, nextWorkspace);
-            setLocalWorkspaceDraft({ savedAt: Date.now(), workspace: nextWorkspace });
-            patchExerciseRuntime(ownerKey, {
-                language: effectiveLanguage,
-                lang: effectiveLanguage,
-                workspace: nextWorkspace,
-                codeWorkspace: nextWorkspace,
-                ideWorkspace: nextWorkspace,
-                code: next.code,
-                source: next.code,
-                stdin: next.stdin,
-                codeStdin: next.stdin,
-                userEdited: true,
-                workspaceOrigin: "user",
-                submitted: false,
-                feedbackDismissed: true,
-                dismissFeedbackOnEdit: true,
-                updatedAt: Date.now(),
-            });
-
-            onChangeWorkspace?.(nextWorkspace);
-            onChangeCode(next.code);
-            onChangeStdin(next.stdin);
+            pendingWorkspaceRef.current = undefined;
+            pendingWorkspaceForceUserEditRef.current = false;
+            emitWorkspaceUpstreamRef.current(workspace, true);
+            return;
         }
 
-        if (
-            (!isReviewRouteMode || isEffectiveUserWorkspaceEdit) &&
-            boundId &&
-            workspace &&
-            forceWorkspaceHasContent(workspace)
-        ) {
-            const next = extractWorkspaceSnapshot(workspace);
-
-            syncCodeInputSnapshot?.(boundId, {
-                workspace,
-                codeWorkspace: workspace,
-                ideWorkspace: workspace,
-
-                code: next.code,
-                source: next.code,
-
-                stdin: next.stdin,
-                codeStdin: next.stdin,
-
-                language: effectiveLanguage,
-                lang: effectiveLanguage,
-
-                updateOrigin: isEffectiveUserWorkspaceEdit ? "user" : "sync",
-                workspaceOrigin: isEffectiveUserWorkspaceEdit ? "user" : "sync",
-
-                /**
-                 * Critical:
-                 * This protects the live Tools registry from being overwritten by
-                 * stale starter registerArgs when the exercise component rerenders
-                 * during sidebar navigation.
-                 */
-                preferSnapshot: isEffectiveUserWorkspaceEdit,
-
-                ...(isEffectiveUserWorkspaceEdit
-                    ? {
-                        submitted: false,
-                        feedbackDismissed: true,
-                        dismissFeedbackOnEdit: true,
-                        userEdited: true,
-                    }
-                    : {}),
-            });
-        }
 
         if (isReviewRouteMode) {
             if (persistTimerRef.current != null) {
@@ -1948,6 +1979,7 @@ export default function CodeToolPane(props: {
         }
 
         pendingWorkspaceRef.current = workspace;
+        pendingWorkspaceForceUserEditRef.current = isEffectiveUserWorkspaceEdit;
 
         if (persistTimerRef.current != null) {
             window.clearTimeout(persistTimerRef.current);
@@ -1956,8 +1988,10 @@ export default function CodeToolPane(props: {
         persistTimerRef.current = window.setTimeout(() => {
             persistTimerRef.current = null;
             const pending = pendingWorkspaceRef.current;
+            const forceUserEdit = pendingWorkspaceForceUserEditRef.current;
             pendingWorkspaceRef.current = undefined;
-            emitWorkspaceUpstreamRef.current(pending ?? null, isEffectiveUserWorkspaceEdit);
+            pendingWorkspaceForceUserEditRef.current = false;
+            emitWorkspaceUpstreamRef.current(pending ?? null, forceUserEdit);
         }, 220);
     }, [
         boundId,
@@ -2005,24 +2039,26 @@ export default function CodeToolPane(props: {
     }, [usesWorkspaceShell, flushPendingWorkspace]);
 
     const handleBeforeRun = useCallback(async () => {
+        const workspaceForRun = pendingWorkspaceRef.current ?? finalReviewWorkspace;
+
         flushPendingWorkspace();
 
         if (
             isReviewRouteMode &&
             resolvedEditorOwnerKey &&
-            finalReviewWorkspace &&
-            forceWorkspaceHasContent(finalReviewWorkspace)
+            workspaceForRun &&
+            forceWorkspaceHasContent(workspaceForRun)
         ) {
-            const next = extractWorkspaceSnapshot(finalReviewWorkspace);
+            const next = extractWorkspaceSnapshot(workspaceForRun);
 
-            patchEditorWorkspace(resolvedEditorOwnerKey, finalReviewWorkspace);
-            writeReviewWorkspaceDraft(workspaceOwnerIdentityKey, finalReviewWorkspace);
+            patchEditorWorkspace(resolvedEditorOwnerKey, workspaceForRun);
+            writeReviewWorkspaceDraft(workspaceOwnerIdentityKey, workspaceForRun);
             patchExerciseRuntime(resolvedEditorOwnerKey, {
                 language: effectiveLanguage,
                 lang: effectiveLanguage,
-                workspace: finalReviewWorkspace,
-                codeWorkspace: finalReviewWorkspace,
-                ideWorkspace: finalReviewWorkspace,
+                workspace: workspaceForRun,
+                codeWorkspace: workspaceForRun,
+                ideWorkspace: workspaceForRun,
                 code: next.code,
                 source: next.code,
                 stdin: next.stdin,
@@ -2122,40 +2158,53 @@ export default function CodeToolPane(props: {
 
         const getLatestTerminalEvidence = () =>
             latestTerminalEvidenceRef.current ?? pendingTerminalEvidenceRef.current ?? null;
-
-        const waitForTerminalFlushSettle = () =>
+        const waitForTerminalFlushSettle = (delayMs = 0) =>
             new Promise<void>((resolve) => {
+                const afterFrame = () => {
+                    if (delayMs > 0) {
+                        window.setTimeout(() => resolve(), delayMs);
+                        return;
+                    }
+
+                    resolve();
+                };
+
                 const raf =
                     typeof window !== "undefined"
                         ? window.requestAnimationFrame
                         : undefined;
 
                 if (typeof raf === "function") {
-                    raf(() => resolve());
+                    raf(() => afterFrame());
                     return;
                 }
 
-                window.setTimeout(() => resolve(), 0);
+                window.setTimeout(afterFrame, 0);
             });
 
         const flush = async () => {
             const sync = terminalSyncRef.current;
-            if (!sync) return false;
 
-            const result = await sync();
+            if (!sync) {
+                flushPendingWorkspace();
+                return false;
+            }
+
+            let result = false;
 
             /**
-             * Terminal snapshots can be emitted by FullIDE on the next render tick.
-             * Force pending workspace/evidence through both before and after that
-             * tick so Check never validates a stale workspace after mkdir/touch.
+             * A command sent through xterm is only guaranteed to be written to the
+             * PTY websocket. The shell can finish mkdir/touch/rm a little later.
+             * Retry the same snapshot path used by Check across a short settle
+             * window so validation sees terminal-created filesystem changes.
              */
-            flushPendingWorkspace();
-            await waitForTerminalFlushSettle();
-            flushPendingWorkspace();
+            for (const delay of [75, 150, 250, 350]) {
+                await waitForTerminalFlushSettle(delay);
+                result = (await sync()) || result;
+                flushPendingWorkspace();
+            }
 
-            await new Promise<void>((resolve) => {
-                window.setTimeout(() => resolve(), 50);
-            });
+            await waitForTerminalFlushSettle();
             flushPendingWorkspace();
 
             return result;
@@ -2282,7 +2331,11 @@ export default function CodeToolPane(props: {
                             },
                         }}
                         initialWorkspace={finalReviewWorkspace}
-                        externalWorkspace={finalReviewWorkspace}
+                        externalWorkspace={
+                            shouldControlFullIdeWorkspace
+                                ? finalReviewWorkspace
+                                : undefined
+                        }
                         exerciseStateKey={workspaceOwnerIdentityKey}
                         projectScope={{
                             kind: "review-tool" as any,
@@ -2306,6 +2359,15 @@ export default function CodeToolPane(props: {
                     />
                 ) : null}
 
+                {pendingExerciseBinding && !canRenderEditor ? (
+                    <div className="absolute inset-0 z-10 flex items-center justify-center bg-neutral-950/35">
+                        <div className="flex items-center gap-3 rounded-full border border-white/10 bg-black/40 px-4 py-2 text-sm font-semibold text-white/80">
+                            <span className="inline-block h-2.5 w-2.5 animate-pulse rounded-full bg-emerald-400" />
+                            Loading editor...
+                        </div>
+                    </div>
+                ) : null}
+
                 {showLoadingMask ? (
                     <div className="absolute inset-0 z-20 flex items-center justify-center bg-neutral-950/70 backdrop-blur-sm">
                         {loadingTimedOut ? (
@@ -2325,7 +2387,11 @@ export default function CodeToolPane(props: {
                         ) : (
                             <div className="flex items-center gap-3 rounded-full border border-white/10 bg-black/40 px-4 py-2 text-sm font-semibold text-white/80">
                                 <span className="inline-block h-2.5 w-2.5 animate-pulse rounded-full bg-emerald-400" />
-                                {cardRuntimeKey ? "Loading sketch workspace..." : "Loading editor..."}
+                                {pendingExerciseBinding
+                                    ? "Loading exercise..."
+                                    : cardRuntimeKey
+                                        ? "Loading sketch workspace..."
+                                        : "Loading editor..."}
                             </div>
                         )}
                     </div>

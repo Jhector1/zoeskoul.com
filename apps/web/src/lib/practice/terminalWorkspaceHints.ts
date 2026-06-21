@@ -103,9 +103,25 @@ export function collectTerminalWorkspaceCommands(
 
     for (const line of outputText.split(/\r?\n/g)) {
         const match = line.match(/(?:^|\])[^$\n#]*[$#]\s*(.+)$/);
-        const command = String(match?.[1] ?? "").trim();
+        const promptedCommand = String(match?.[1] ?? "").trim();
+        const bareLine = String(line ?? "").trim();
+        const command = promptedCommand || bareLine;
 
         if (command && !seen.has(command)) {
+            const tokens = tokenizeTerminalWorkspaceCommand(command);
+            const executable = tokens[0] ?? "";
+            const looksLikeWorkspaceMutation =
+                executable === "mkdir" ||
+                executable === "touch" ||
+                executable === "rm" ||
+                executable === "mv" ||
+                executable === "cp" ||
+                tokens.includes(">");
+
+            if (!promptedCommand && !looksLikeWorkspaceMutation) {
+                continue;
+            }
+
             seen.add(command);
             commands.push(command);
         }

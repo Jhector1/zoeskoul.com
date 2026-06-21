@@ -125,6 +125,25 @@ describe("resolveFullIDEConfigFromLearningIde", () => {
         expect(resolved.access.canUseMultiFile).toBe(true);
     });
 
+    it("keeps Run enabled for normal editor plus terminal exercises", () => {
+        const resolved = resolveFullIDEConfigFromLearningIde({
+            ideConfig: {
+                requires: {
+                    files: true,
+                    multiFile: true,
+                    terminal: true,
+                },
+            },
+        });
+
+        expect(resolved.services.explorer?.enabled).toBe(true);
+        expect(resolved.services.editor?.showEditor).toBe(true);
+        expect(resolved.services.runner?.showTerminal).toBe(true);
+        expect(resolved.services.runner?.enableWorkspaceTerminal).toBe(true);
+        expect(resolved.services.runner?.allowRun).toBe(true);
+        expect(resolved.services.runner?.showTerminalDockToggle).toBe(true);
+    });
+
     it("enables terminal and workspace terminal in terminal_workspace mode", () => {
         const resolved = resolveFullIDEConfigFromLearningIde({
             ideConfig: {

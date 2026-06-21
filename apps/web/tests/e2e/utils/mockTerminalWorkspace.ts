@@ -516,14 +516,72 @@ export async function expectTerminalContains(page: Page, text: string) {
         .toContain(text);
 }
 
+
+async function forceTerminalWorkspaceSyncForE2E(page: Page) {
+    /**
+     * Sending input through xterm only means the command reached the PTY. The
+     * shell can create/remove files shortly after that. Before returning from
+     * sendTerminal, force the same terminal workspace sync path used by Check.
+     */
+    await page.waitForTimeout(200);
+
+    await page
+        .evaluate(async () => {
+            const win = window as typeof window & {
+                __pwForceTerminalWorkspaceSync?: () => Promise<boolean>;
+                __zoeFlushAnyTerminalBeforeSubmit?: () => Promise<boolean | void>;
+            };
+
+            for (let i = 0; i < 5; i += 1) {
+                const forced =
+                    typeof win.__pwForceTerminalWorkspaceSync === "function"
+                        ? await win.__pwForceTerminalWorkspaceSync()
+                        : false;
+
+                if (typeof win.__zoeFlushAnyTerminalBeforeSubmit === "function") {
+                    await win.__zoeFlushAnyTerminalBeforeSubmit();
+                }
+
+                if (forced) return true;
+                await new Promise((resolve) => window.setTimeout(resolve, 150));
+            }
+
+            return false;
+        })
+        .catch(() => false);
+}
+
 export async function sendTerminal(page: Page, command: string) {
     await expectTerminalVisible(page);
-    await page.getByTestId("interactive-terminal").click();
+
+    const sentThroughHook = await page
+        .evaluate(async (rawCommand) => {
+            const win = window as typeof window & {
+                __pwDispatchTerminalInputThroughApp?: (data: string) => Promise<boolean>;
+            };
+
+            const send = win.__pwDispatchTerminalInputThroughApp;
+            if (typeof send !== "function") return false;
+
+            const normalized = String(rawCommand ?? "").replace(/\r?\n/g, "\r");
+            const data = normalized.endsWith("\r") ? normalized : `${normalized}\r`;
+            return send(data);
+        }, command)
+        .catch(() => false);
+
+    if (sentThroughHook) {
+        await forceTerminalWorkspaceSyncForE2E(page);
+        return;
+    }
+
+    await page.getByTestId("interactive-terminal").click({ force: true });
     await page.keyboard.insertText(command);
 
     if (!command.endsWith("\n")) {
         await page.keyboard.press("Enter");
     }
+
+    await forceTerminalWorkspaceSyncForE2E(page);
 }
 
 export async function readMockTerminalWorkspaceMetrics(page: Page) {
