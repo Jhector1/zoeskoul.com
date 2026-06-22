@@ -1,0 +1,340 @@
+{
+  "topicId": "module-6-name-badge-package",
+  "subjectSlug": "python--python-data-functions--draft",
+  "moduleSlug": "python-6-functions-and-modularity",
+  "sectionSlug": "python--python-data-functions--draft-python-6-module-project",
+  "prefix": "py6",
+  "minutes": 26,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "python",
+    "supportsTerminal": false,
+    "supportsMultiFile": false,
+    "supportsFileSystem": false,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "topic": {
+    "labelKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.label",
+    "summaryKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.cards.sketch0.title",
+      "sketchId": "sketch1",
+      "height": 420,
+      "tryIt": {
+        "id": "try-module-6-name-badge-package-sketch0",
+        "titleKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.tryIt.try_module_6_name_badge_package_sketch0.title",
+        "promptKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.tryIt.try_module_6_name_badge_package_sketch0.prompt",
+        "exerciseKey": "exercise1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.cards.sketch1.title",
+      "sketchId": "try-it-yourself",
+      "height": 420
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "exercise1",
+            "titleKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.projectSteps.exercise1.title",
+            "exerciseKey": "exercise1",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "exercise2",
+            "titleKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.projectSteps.exercise2.title",
+            "exerciseKey": "exercise2",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "exercise3",
+            "titleKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.projectSteps.exercise3.title",
+            "exerciseKey": "exercise3",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.sketch1.title",
+      "bodyKey": "sketches.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.sketch1.bodyMarkdown"
+    },
+    {
+      "id": "try-it-yourself",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.try-it-yourself.title",
+      "bodyKey": "sketches.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.try-it-yourself.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "exercise1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.exercise1",
+      "language": "python",
+      "starterCode": "def format_name(name):\n    # Capitalize each word in the name\n    pass",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def format_name(name):\n    # Capitalize each word in the name\n    pass",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def format_name(name):\n    return name.title()",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def format_name(name):\n    # Capitalize each word in the name\n    pass",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def format_name(name):\n    # Capitalize each word in the name\n    pass",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def format_name(name):\n    return name.title()",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def format_name(name):\n    return name.title()",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "format_name",
+            "args": [
+              "john doe"
+            ],
+            "argKinds": [],
+            "expected": "John Doe",
+            "message": "Return the expected result for format_name(name)."
+          },
+          {
+            "type": "function_returns",
+            "functionName": "format_name",
+            "args": [
+              "jane smith"
+            ],
+            "argKinds": [],
+            "expected": "Jane Smith",
+            "message": "Return the expected result for format_name(name)."
+          },
+          {
+            "type": "no_stdout",
+            "message": "This task should return a value instead of printing output."
+          }
+        ]
+      }
+    },
+    {
+      "id": "exercise2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.exercise2",
+      "language": "python",
+      "starterCode": "def format_name(name):\n    return name.title()\n# Project step 2: Add a Title to a Name\n# Keep the working code above from the previous step.\n# Next, Write a function `add_title` that takes a `name` and a `title` and returns a string combining both\n# Add only the focused change for this step below or inside the existing work.",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def format_name(name):\n    return name.title()\n# Project step 2: Add a Title to a Name\n# Keep the working code above from the previous step.\n# Next, Write a function `add_title` that takes a `name` and a `title` and returns a string combining both\n# Add only the focused change for this step below or inside the existing work.",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def add_title(name, title):\n    return f\"{title} {name}\"",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def format_name(name):\n    return name.title()\n# Project step 2: Add a Title to a Name\n# Keep the working code above from the previous step.\n# Next, Write a function `add_title` that takes a `name` and a `title` and returns a string combining both\n# Add only the focused change for this step below or inside the existing work.",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def format_name(name):\n    return name.title()\n# Project step 2: Add a Title to a Name\n# Keep the working code above from the previous step.\n# Next, Write a function `add_title` that takes a `name` and a `title` and returns a string combining both\n# Add only the focused change for this step below or inside the existing work.",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def add_title(name, title):\n    return f\"{title} {name}\"",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def add_title(name, title):\n    return f\"{title} {name}\"",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "add_title",
+            "args": [
+              "John Doe",
+              "Dr."
+            ],
+            "argKinds": [],
+            "expected": "Dr. John Doe",
+            "message": "Return the expected result for add_title(name, title)."
+          },
+          {
+            "type": "function_returns",
+            "functionName": "add_title",
+            "args": [
+              "Jane Smith",
+              "Ms."
+            ],
+            "argKinds": [],
+            "expected": "Ms. Jane Smith",
+            "message": "Return the expected result for add_title(name, title)."
+          },
+          {
+            "type": "no_stdout",
+            "message": "This task should return a value instead of printing output."
+          }
+        ]
+      }
+    },
+    {
+      "id": "exercise3",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.exercise3",
+      "language": "python",
+      "starterCode": "def add_title(name, title):\n    return f\"{title} {name}\"\n# Project step 3: Print the Badge\n# Keep the working code above from the previous step.\n# Next, Write a function `print_badge` that takes a `badge` string and prints it\n# Add only the focused change for this step below or inside the existing work.",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def add_title(name, title):\n    return f\"{title} {name}\"\n# Project step 3: Print the Badge\n# Keep the working code above from the previous step.\n# Next, Write a function `print_badge` that takes a `badge` string and prints it\n# Add only the focused change for this step below or inside the existing work.",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def print_badge(badge):\n    print(badge)",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def add_title(name, title):\n    return f\"{title} {name}\"\n# Project step 3: Print the Badge\n# Keep the working code above from the previous step.\n# Next, Write a function `print_badge` that takes a `badge` string and prints it\n# Add only the focused change for this step below or inside the existing work.",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def add_title(name, title):\n    return f\"{title} {name}\"\n# Project step 3: Print the Badge\n# Keep the working code above from the previous step.\n# Next, Write a function `print_badge` that takes a `badge` string and prints it\n# Add only the focused change for this step below or inside the existing work.",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "12\n",
+            "stdout": "13",
+            "match": "includes"
+          },
+          {
+            "stdin": "20\n",
+            "stdout": "21",
+            "match": "includes"
+          }
+        ],
+        "solutionCode": "def print_badge(badge):\n    print(badge)",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def print_badge(badge):\n    print(badge)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    }
+  ]
+}

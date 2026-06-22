@@ -1,0 +1,245 @@
+{
+  "title": "Project: Terminal Map",
+  "summary": "Build a small folder map for a field-notes project by checking your location, creating nested folders, and adding files with core Linux terminal commands.",
+  "minutes": 22,
+  "sketchBlocks": [
+    {
+      "id": "sketch-1",
+      "title": "Start by checking where you are",
+      "bodyMarkdown": "When you work in the Linux terminal, your commands happen in a **current folder**. Before creating anything, it helps to confirm your location with `pwd` and see what is already there with `ls`.\n\n- `pwd` shows your current path\n- `ls` lists the files and folders in the current location\n\nHere is a simple example:\n\n```bash\npwd\nls\n```\n\nStep by step:\n\n1. `pwd` prints the folder you are currently in.\n2. `ls` shows what that folder contains.\n3. Together, they help you avoid creating files in the wrong place.\n\nIf `pwd` shows a lesson workspace folder and `ls` shows only a few starter items, you know you are in the right place to begin your project."
+    },
+    {
+      "id": "sketch-2",
+      "title": "Build nested folders with mkdir and move with cd",
+      "bodyMarkdown": "A folder map becomes useful when you organize related work into smaller folders. In the terminal, `mkdir` creates folders and `cd` moves you into them.\n\nA common pattern is:\n\n```bash\nmkdir -p map/regions/north\ncd map\nls\n```\n\nLine by line:\n\n1. `mkdir -p map/regions/north` creates the full nested path in one command.\n2. `cd map` moves into the `map` folder.\n3. `ls` lets you confirm that `regions` is inside it.\n\nThe `-p` option is helpful because it creates parent folders that do not exist yet. That saves time when you want a deeper structure."
+    },
+    {
+      "id": "sketch-3",
+      "title": "Add marker files to complete the map",
+      "bodyMarkdown": "Folders show structure, but files often show purpose. You can create empty marker files with `touch`.\n\nExample:\n\n```bash\ncd map/regions/north\ntouch landmarks.txt supplies.txt\nls\n```\n\nWhat each line does:\n\n1. `cd map/regions/north` moves into the target folder.\n2. `touch landmarks.txt supplies.txt` creates two empty files.\n3. `ls` confirms the files are there.\n\nThis is a practical way to sketch a project layout before adding real content. In this topic, your final map will use folders and files together so the workspace clearly shows your navigation and creation skills."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "module-1-terminal-map-project-terminal-task-1",
+      "kind": "code_input",
+      "title": "Create the park survey request folder",
+      "prompt": "You are helping a park survey team prepare a terminal map. Create module-1-terminal-map-project-park-survey/requests and add module-1-terminal-map-project-park-survey/requests/north-trail.txt so the team has a concrete request log to hand off.",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Use the terminal to make one small workspace change at a time, then inspect the result in the file explorer.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      },
+      "starterCode": "# Use the terminal for this Linux project task.",
+      "fixedLanguage": "bash",
+      "recipeType": "shell_task",
+      "mode": "terminal_workspace",
+      "entryFilePath": "main.sh",
+      "solutionCode": "mkdir -p module-1-terminal-map-project-park-survey/requests\nprintf 'North trail request log\\n' > module-1-terminal-map-project-park-survey/requests/north-trail.txt\nls module-1-terminal-map-project-park-survey",
+      "instructions": "You are helping a park survey team prepare a terminal map. Create module-1-terminal-map-project-park-survey/requests and add module-1-terminal-map-project-park-survey/requests/north-trail.txt so the team has a concrete request log to hand off.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Use the terminal for this Linux project task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "mkdir -p module-1-terminal-map-project-park-survey/requests\nprintf 'North trail request log\\n' > module-1-terminal-map-project-park-survey/requests/north-trail.txt\nls module-1-terminal-map-project-park-survey\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "module-1-terminal-map-project-park-survey/requests/north-trail.txt",
+          "content": "North trail request log\n",
+          "language": "text"
+        }
+      ],
+      "workspaceExpectations": {
+        "requiredFolders": [
+          "module-1-terminal-map-project-park-survey",
+          "module-1-terminal-map-project-park-survey/requests"
+        ],
+        "requiredFiles": [
+          "module-1-terminal-map-project-park-survey/requests/north-trail.txt"
+        ]
+      },
+      "terminalExpectations": {
+        "forbiddenCommands": [
+          {
+            "pattern": "(^|\\s)sudo(\\s|$)",
+            "message": "Do not use sudo for beginner workspace tasks."
+          }
+        ]
+      }
+    },
+    {
+      "id": "module-1-terminal-map-project-terminal-task-2",
+      "kind": "code_input",
+      "title": "Add the map notes folder",
+      "prompt": "Continue the same park survey workspace. Keep the request log from step 1, then add module-1-terminal-map-project-park-survey/maps/current-location.txt as the team's navigation note deliverable.",
+      "hint": "Read the Linux task \"Add the map notes folder\" and identify the folders or files you must create or organize.",
+      "help": {
+        "concept": "This Linux terminal exercise checks the final workspace state for \"Add the map notes folder\".",
+        "hint_1": "Use the terminal to make one small workspace change at a time, then inspect the result in the file explorer.",
+        "hint_2": "If a path is required, match the exact folder and file names before clicking Check Answer."
+      },
+      "starterCode": "# Use the terminal for this Linux project task.",
+      "fixedLanguage": "bash",
+      "recipeType": "shell_task",
+      "mode": "terminal_workspace",
+      "entryFilePath": "main.sh",
+      "solutionCode": "mkdir -p module-1-terminal-map-project-park-survey/maps\nprintf 'Current location checked with pwd and ls\\n' > module-1-terminal-map-project-park-survey/maps/current-location.txt\nls module-1-terminal-map-project-park-survey",
+      "instructions": "Continue the same park survey workspace. Keep the request log from step 1, then add module-1-terminal-map-project-park-survey/maps/current-location.txt as the team's navigation note deliverable.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Use the terminal for this Linux project task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "module-1-terminal-map-project-park-survey/requests/north-trail.txt",
+          "content": "North trail request log\n",
+          "language": "text"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "mkdir -p module-1-terminal-map-project-park-survey/maps\nprintf 'Current location checked with pwd and ls\\n' > module-1-terminal-map-project-park-survey/maps/current-location.txt\nls module-1-terminal-map-project-park-survey\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "module-1-terminal-map-project-park-survey/requests/north-trail.txt",
+          "content": "North trail request log\n",
+          "language": "text"
+        },
+        {
+          "path": "module-1-terminal-map-project-park-survey/maps/current-location.txt",
+          "content": "Current location checked with pwd and ls\n",
+          "language": "text"
+        }
+      ],
+      "workspaceExpectations": {
+        "requiredFolders": [
+          "module-1-terminal-map-project-park-survey",
+          "module-1-terminal-map-project-park-survey/requests",
+          "module-1-terminal-map-project-park-survey/maps"
+        ],
+        "requiredFiles": [
+          "module-1-terminal-map-project-park-survey/requests/north-trail.txt",
+          "module-1-terminal-map-project-park-survey/maps/current-location.txt"
+        ]
+      },
+      "terminalExpectations": {
+        "forbiddenCommands": [
+          {
+            "pattern": "(^|\\s)sudo(\\s|$)",
+            "message": "Do not use sudo for beginner workspace tasks."
+          }
+        ]
+      }
+    },
+    {
+      "id": "module-1-terminal-map-project-terminal-task-3",
+      "kind": "code_input",
+      "title": "Prepare the handoff marker",
+      "prompt": "Finish the cumulative park survey terminal map. Keep the request and map notes from the earlier steps, then create module-1-terminal-map-project-park-survey/handoff/terminal-map-ready.txt as the useful final deliverable.",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      },
+      "starterCode": "# Use the terminal for this Linux project task.",
+      "fixedLanguage": "bash",
+      "recipeType": "shell_task",
+      "mode": "terminal_workspace",
+      "entryFilePath": "main.sh",
+      "solutionCode": "mkdir -p module-1-terminal-map-project-park-survey/handoff\nprintf 'Terminal map ready for the park survey team\\n' > module-1-terminal-map-project-park-survey/handoff/terminal-map-ready.txt\nfind module-1-terminal-map-project-park-survey -maxdepth 2 -type f | sort",
+      "instructions": "Finish the cumulative park survey terminal map. Keep the request and map notes from the earlier steps, then create module-1-terminal-map-project-park-survey/handoff/terminal-map-ready.txt as the useful final deliverable.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Use the terminal for this Linux project task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "module-1-terminal-map-project-park-survey/requests/north-trail.txt",
+          "content": "North trail request log\n",
+          "language": "text"
+        },
+        {
+          "path": "module-1-terminal-map-project-park-survey/maps/current-location.txt",
+          "content": "Current location checked with pwd and ls\n",
+          "language": "text"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "mkdir -p module-1-terminal-map-project-park-survey/handoff\nprintf 'Terminal map ready for the park survey team\\n' > module-1-terminal-map-project-park-survey/handoff/terminal-map-ready.txt\nfind module-1-terminal-map-project-park-survey -maxdepth 2 -type f | sort\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "module-1-terminal-map-project-park-survey/requests/north-trail.txt",
+          "content": "North trail request log\n",
+          "language": "text"
+        },
+        {
+          "path": "module-1-terminal-map-project-park-survey/maps/current-location.txt",
+          "content": "Current location checked with pwd and ls\n",
+          "language": "text"
+        },
+        {
+          "path": "module-1-terminal-map-project-park-survey/handoff/terminal-map-ready.txt",
+          "content": "Terminal map ready for the park survey team\n",
+          "language": "text"
+        }
+      ],
+      "workspaceExpectations": {
+        "requiredFolders": [
+          "module-1-terminal-map-project-park-survey",
+          "module-1-terminal-map-project-park-survey/requests",
+          "module-1-terminal-map-project-park-survey/maps",
+          "module-1-terminal-map-project-park-survey/handoff"
+        ],
+        "requiredFiles": [
+          "module-1-terminal-map-project-park-survey/requests/north-trail.txt",
+          "module-1-terminal-map-project-park-survey/maps/current-location.txt",
+          "module-1-terminal-map-project-park-survey/handoff/terminal-map-ready.txt"
+        ]
+      },
+      "terminalExpectations": {
+        "forbiddenCommands": [
+          {
+            "pattern": "(^|\\s)sudo(\\s|$)",
+            "message": "Do not use sudo for beginner workspace tasks."
+          }
+        ]
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Terminal Map field-notes build",
+    "stepIds": [
+      "module-1-terminal-map-project-terminal-task-1",
+      "module-1-terminal-map-project-terminal-task-2",
+      "module-1-terminal-map-project-terminal-task-3"
+    ]
+  }
+}

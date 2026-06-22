@@ -86,13 +86,19 @@
   },
   "authoringGuidance": [
     "This course must use profileId bash and catalogSlug linux.",
-    "Interactive tasks use kind code_input, language bash, recipe shell_task, and mode terminal_workspace.",
+    "Interactive tasks use kind code_input, fixedLanguage bash, recipeType shell_task, and mode terminal_workspace.",
     "Learners use the ZoeSkoul terminal and file explorer. The code editor is hidden for Course 1 terminal labs.",
     "Do not ask learners to write Bash scripts yet; that belongs in the Bash Scripting course.",
     "Do not require Judge0 Bash execution for Course 1.",
-    "Use workspaceExpectations requiredFiles, requiredFolders, and forbiddenFiles to grade terminal tasks.",
+    "Use workspaceExpectations.requiredFiles, requiredFolders, forbiddenFiles, and entryFilePath for file-tree outcomes.",
+    "Use terminalExpectations.requiredCommands, forbiddenCommands, outputContains, outputRegex, cwdContains, and cwdEndsWith for command/output outcomes.",
+    "Do not use workspace_expectations as a recipe name; Linux terminal grading compiles through shell_task plus expectation payloads.",
+    "Use per-exercise terminal workspaces for independent quiz/check questions; only deliberate project/capstone flows should share a workspace.",
     "Avoid sudo, chmod, chown, package installation, SSH, external networking, and system service commands in Course 1.",
-    "Keep every destructive command constrained to the workspace and explain what it removes."
+    "Keep every destructive command constrained to the workspace and explain what it removes.",
+    "Topic practice metadata is the source of truth for conceptual-only, Try It, runtime mode, terminal session scope, and progressive project flow.",
+    "Hands-on lesson topics should keep tryItPlacement all_sketches so every teaching sketch can resolve to a unique Try It message.",
+    "Module projects and final capstones should use projectFlow progressive and terminalSessionScope project when their steps intentionally build on one workspace."
   ],
   "assessmentAndDelivery": {
     "suggestedBeginnerRhythm": "Two short lessons per week, with one workspace project at the end of each module.",
@@ -113,8 +119,8 @@
   "modules": [
     {
       "moduleNumber": 1,
-      "moduleSlug": "linux-1-terminal-navigation",
-      "prefix": "lin1",
+      "moduleSlug": "linux-module-1-terminal-navigation",
+      "prefix": "linux_module_1",
       "title": "Terminal Navigation Basics",
       "purpose": "Learn what the terminal is, how to know where you are, how to list files, and how to move between folders.",
       "learningObjectives": [
@@ -136,7 +142,7 @@
       "moduleProject": "Build a simple terminal map that proves you can create and navigate a nested workspace.",
       "sections": [
         {
-          "sectionSlug": "linux-terminal-fundamentals-linux-1-orientation",
+          "sectionSlug": "linux-module-1-orientation",
           "title": "Terminal Orientation",
           "summary": "Start with the terminal prompt, current directory, listing files, and moving between folders.",
           "topics": [
@@ -146,6 +152,18 @@
               "summary": "Understand the terminal as a place to type commands and see the computer respond.",
               "minutes": 15,
               "technical": true,
+              "practice": {
+                "conceptualOnly": true,
+                "requiresTryIt": false,
+                "runtimeMode": "terminal_workspace",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice"
+                ],
+                "tryIt": false,
+                "tryItPlacement": "none"
+              },
               "learningGoals": [
                 "Understand the terminal as a place to type commands and see the computer respond."
               ]
@@ -158,7 +176,20 @@
               "technical": true,
               "learningGoals": [
                 "Use pwd and ls to inspect your current folder and see what is inside it."
-              ]
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "terminal_workspace",
+                "terminalSessionScope": "exercise",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
             },
             {
               "topicId": "moving-around",
@@ -168,12 +199,25 @@
               "technical": true,
               "learningGoals": [
                 "Use cd, .., ., and ~ to move between folders safely."
-              ]
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "terminal_workspace",
+                "terminalSessionScope": "exercise",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
             }
           ]
         },
         {
-          "sectionSlug": "linux-terminal-fundamentals-linux-1-module-project",
+          "sectionSlug": "linux-module-1-project",
           "role": "module_project",
           "title": "Module Project",
           "summary": "Build a simple terminal map that proves you can create and navigate a nested workspace.",
@@ -186,7 +230,18 @@
               "technical": true,
               "learningGoals": [
                 "Build a small folder map using pwd, ls, cd, mkdir, and touch."
-              ]
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "terminal_workspace",
+                "terminalSessionScope": "project",
+                "projectFlow": "progressive",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ]
+              }
             }
           ]
         }
@@ -194,8 +249,8 @@
     },
     {
       "moduleNumber": 2,
-      "moduleSlug": "linux-2-files-and-folders",
-      "prefix": "lin2",
+      "moduleSlug": "linux-module-2-files-and-folders",
+      "prefix": "linux_module_2",
       "title": "Files, Folders, and Viewing Content",
       "purpose": "Create, copy, move, rename, delete, and inspect files from the terminal.",
       "learningObjectives": [
@@ -217,7 +272,7 @@
       "moduleProject": "Organize a messy notes folder into a clean school workspace.",
       "sections": [
         {
-          "sectionSlug": "linux-terminal-fundamentals-linux-2-file-workflow",
+          "sectionSlug": "linux-module-2-file-workflow",
           "title": "File Workflow",
           "summary": "Practice the commands developers use every day to build and organize project folders.",
           "topics": [
@@ -229,7 +284,20 @@
               "technical": true,
               "learningGoals": [
                 "Use mkdir, mkdir -p, and touch to create a useful project structure."
-              ]
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "terminal_workspace",
+                "terminalSessionScope": "exercise",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
             },
             {
               "topicId": "copy-move-rename",
@@ -239,7 +307,20 @@
               "technical": true,
               "learningGoals": [
                 "Use cp and mv to duplicate, organize, and rename files safely."
-              ]
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "terminal_workspace",
+                "terminalSessionScope": "exercise",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
             },
             {
               "topicId": "viewing-file-contents",
@@ -249,12 +330,25 @@
               "technical": true,
               "learningGoals": [
                 "Inspect text files with cat, head, tail, and wc."
-              ]
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "terminal_workspace",
+                "terminalSessionScope": "exercise",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
             }
           ]
         },
         {
-          "sectionSlug": "linux-terminal-fundamentals-linux-2-module-project",
+          "sectionSlug": "linux-module-2-project",
           "role": "module_project",
           "title": "Module Project",
           "summary": "Organize a messy notes folder into a clean school workspace.",
@@ -267,7 +361,18 @@
               "technical": true,
               "learningGoals": [
                 "Organize a messy folder into notes, homework, code, and backups."
-              ]
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "terminal_workspace",
+                "terminalSessionScope": "project",
+                "projectFlow": "progressive",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ]
+              }
             }
           ]
         }
@@ -275,8 +380,8 @@
     },
     {
       "moduleNumber": 3,
-      "moduleSlug": "linux-3-final-capstone",
-      "prefix": "lin3",
+      "moduleSlug": "linux-module-3-final-capstone",
+      "prefix": "linux_module_3",
       "role": "capstone",
       "title": "Final Capstone: File Room Handoff",
       "purpose": "Use the terminal to clean up a small real-world workspace and leave it ready for someone else.",
@@ -299,7 +404,7 @@
       "moduleProject": "Prepare a clean event handoff folder with sorted files, a backup, a removed temporary file, and a ready marker.",
       "sections": [
         {
-          "sectionSlug": "linux-terminal-fundamentals-linux-3-final-capstone",
+          "sectionSlug": "linux-module-3-capstone",
           "role": "capstone",
           "title": "Final Capstone",
           "summary": "Clean up a small event workspace and leave a clear handoff for the next person.",
@@ -312,11 +417,39 @@
               "technical": true,
               "learningGoals": [
                 "Use the terminal to sort a messy event folder, protect important notes, remove temporary clutter, and mark the workspace ready."
-              ]
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "terminal_workspace",
+                "terminalSessionScope": "project",
+                "projectFlow": "progressive",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ]
+              }
             }
           ]
         }
       ]
     }
-  ]
+  ],
+  "workspaceProfileId": "terminal-workspace-runner",
+  "workspacePolicyId": "linux-terminal-workspace",
+  "courseGenerationPolicy": {
+    "studentActionStyle": "terminal-workspace",
+    "forbidUnavailableWorkspaceActions": true,
+    "preferredTerms": {
+      "editor": "terminal",
+      "run button": "terminal command",
+      "output panel": "terminal output"
+    },
+    "notes": [
+      "Linux Terminal Fundamentals uses terminal-only code_input tasks.",
+      "Generate fixedLanguage bash, recipeType shell_task, mode terminal_workspace for every Course 1 Linux code_input.",
+      "Use workspaceExpectations for file tree outcomes and terminalExpectations for command/output outcomes.",
+      "Use per-exercise terminal workspaces for independent quiz/check exercises."
+    ]
+  }
 }

@@ -1,5 +1,6 @@
 import {
     type HiddenShellCheck,
+    type TerminalExpectations,
     ManifestCodeInput,
     ManifestStarterFile,
     ManifestWorkspaceExpectations,
@@ -13,7 +14,10 @@ import type {
     CourseProfile,
 } from "../types.js";
 import { bashShape } from "../shapes/bashShape.js";
-import { pythonProfile } from "../python/profile.js";
+import {
+    createCodeInputProjectCapability,
+    sharedPracticeProfileConfig,
+} from "../shared/generationPolicy.js";
 
 function normalizeText(value: unknown): string {
     return typeof value === "string" ? value.trim() : "";
@@ -70,6 +74,120 @@ function normalizeBashWorkspaceExpectations(
     } catch (error) {
         throw new Error(`Invalid Bash workspaceExpectations: ${(error as Error).message}`);
     }
+}
+
+
+function normalizeTerminalCommandExpectations(
+    value: unknown,
+    label: string,
+): TerminalExpectations["requiredCommands"] | undefined {
+    if (typeof value === "undefined") return undefined;
+
+    if (!Array.isArray(value)) {
+        throw new Error(`Invalid Bash terminalExpectations: ${label} must be an array.`);
+    }
+
+    return value.map((entry, index) => {
+        if (!entry || typeof entry !== "object" || Array.isArray(entry)) {
+            throw new Error(
+                `Invalid Bash terminalExpectations: ${label}[${index}] must be an object.`,
+            );
+        }
+
+        const record = entry as Record<string, unknown>;
+        const pattern = normalizeText(record.pattern);
+
+        if (!pattern) {
+            throw new Error(
+                `Invalid Bash terminalExpectations: ${label}[${index}].pattern must be non-empty.`,
+            );
+        }
+
+        const message = normalizeText(record.message);
+
+        return {
+            pattern,
+            ...(message ? { message } : {}),
+        };
+    });
+}
+
+function normalizeTerminalStringList(
+    value: unknown,
+    label: string,
+): string[] | undefined {
+    if (typeof value === "undefined") return undefined;
+
+    if (!Array.isArray(value)) {
+        throw new Error(`Invalid Bash terminalExpectations: ${label} must be an array.`);
+    }
+
+    const items = value.map((entry, index) => {
+        const text = normalizeText(entry);
+        if (!text) {
+            throw new Error(
+                `Invalid Bash terminalExpectations: ${label}[${index}] must be a non-empty string.`,
+            );
+        }
+        return text;
+    });
+
+    return items.length ? items : undefined;
+}
+
+function normalizeBashTerminalExpectations(
+    value: unknown,
+): TerminalExpectations | undefined {
+    if (typeof value === "undefined") return undefined;
+
+    if (!value || typeof value !== "object" || Array.isArray(value)) {
+        throw new Error("Invalid Bash terminalExpectations: expected an object.");
+    }
+
+    const record = value as Record<string, unknown>;
+    const supportedKeys = new Set([
+        "requiredCommands",
+        "forbiddenCommands",
+        "outputContains",
+        "outputRegex",
+        "cwdContains",
+        "cwdEndsWith",
+    ]);
+
+    for (const key of Object.keys(record)) {
+        if (!supportedKeys.has(key)) {
+            throw new Error(
+                `Invalid Bash terminalExpectations: unsupported key "${key}".`,
+            );
+        }
+    }
+
+    const requiredCommands = normalizeTerminalCommandExpectations(
+        record.requiredCommands,
+        "requiredCommands",
+    );
+    const forbiddenCommands = normalizeTerminalCommandExpectations(
+        record.forbiddenCommands,
+        "forbiddenCommands",
+    );
+    const outputContains = normalizeTerminalStringList(
+        record.outputContains,
+        "outputContains",
+    );
+    const outputRegex = normalizeTerminalStringList(record.outputRegex, "outputRegex");
+    const cwdContains = normalizeText(record.cwdContains);
+    const cwdEndsWith = normalizeText(record.cwdEndsWith);
+
+    const result: TerminalExpectations = {
+        ...(requiredCommands?.length ? { requiredCommands } : {}),
+        ...(forbiddenCommands?.length ? { forbiddenCommands } : {}),
+        ...(outputContains?.length ? { outputContains } : {}),
+        ...(outputRegex?.length ? { outputRegex } : {}),
+        ...(cwdContains ? { cwdContains } : {}),
+        ...(cwdEndsWith ? { cwdEndsWith } : {}),
+    };
+
+    return Object.keys(result).length ? result : undefined;
 }
 
 function normalizeBashHiddenShellCheck(
@@ -162,6 +280,10 @@ const bashCodeInputCapability: CodeInputProfileCapability = {
             "Invalid Bash entryFilePath",
         );
         const starterFiles = normalizeBashStarterFiles(args.exercise.starterFiles);
+        const solutionFiles = normalizeBashStarterFiles(
+            (args.exercise as { solutionFiles?: ProgrammingCodeInputStarterFileDraft[] })
+                .solutionFiles,
+        );
         const hasEntryFile = starterFiles.some(
             (file) => file.path === authoredEntryFilePath,
         );
@@ -189,8 +311,34 @@ const bashCodeInputCapability: CodeInputProfileCapability = {
                 },
                 ...starterFiles,
             ];
+        const normalizedSolutionFiles = solutionFiles.length > 0
+            ? solutionFiles.map((file) =>
+                file.path === authoredEntryFilePath
+                    ? {
+                        ...file,
+                        language: "bash",
+                        isEntry: true,
+                        entry: true,
+                    }
+                    : {
+                        ...file,
+                        language: "bash",
+                    },
+            )
+            : [
+                {
+                    path: authoredEntryFilePath,
+                    content: args.exercise.solutionCode || starterCode,
+                    language: "bash" as const,
+                    isEntry: true,
+                    entry: true,
+                },
+            ];
         const workspaceExpectations = normalizeBashWorkspaceExpectations(
             args.exercise.workspaceExpectations,
+        );
+        const terminalExpectations = normalizeBashTerminalExpectations(
+            (args.exercise as { terminalExpectations?: unknown }).terminalExpectations,
         );
         const hiddenShellCheck = normalizeBashHiddenShellCheck(
             (args.exercise as { hiddenShellCheck?: unknown }).hiddenShellCheck,
@@ -202,6 +350,12 @@ const bashCodeInputCapability: CodeInputProfileCapability = {
                 ? args.exercise.mode
                 : "terminal_workspace";
         const instructions = normalizeText(args.exercise.instructions || args.exercise.prompt);
+
+        if (terminalExpectations && mode !== "terminal_workspace") {
+            throw new Error(
+                `Bash code_input exercise "${args.exercise.id}" may only use terminalExpectations with mode "terminal_workspace".`,
+            );
+        }
 
         if (hiddenShellCheck && mode !== "terminal_workspace") {
             throw new Error(
@@ -218,7 +372,9 @@ const bashCodeInputCapability: CodeInputProfileCapability = {
             language: "bash",
             starterCode,
             starterFiles: normalizedStarterFiles,
+            solutionFiles: normalizedSolutionFiles,
             ...(workspaceExpectations ? { workspaceExpectations } : {}),
+            ...(terminalExpectations ? { terminalExpectations } : {}),
             ...(hiddenShellCheck ? { hiddenShellCheck } : {}),
             workspace: {
                 language: "bash",
@@ -260,10 +416,18 @@ export const bashProfile: CourseProfile = {
             supportsFileSystem: true,
             supportsStdInStdOut: true,
             supportsPackageInstall: false,
+            fileActions: {
+                enabled: true,
+                createFile: true,
+                createFolder: true,
+                rename: true,
+                delete: true,
+                dragDrop: false,
+            },
         };
     },
-    practice: pythonProfile.practice,
-    project: pythonProfile.project,
+    practice: sharedPracticeProfileConfig,
+    project: createCodeInputProjectCapability(),
     renderExerciseKindPromptRules() {
         return [
             '- For Bash/Linux code_input, use recipeType "shell_task".',
@@ -289,8 +453,10 @@ export const bashProfile: CourseProfile = {
                 : "If the exercise policy requires code_input, put those code_input items inside quizDraft.",
             'Every Bash/Linux code_input must use fixedLanguage "bash", recipeType "shell_task", and mode "terminal_workspace".',
             'Every Bash/Linux code_input should include entryFilePath "main.sh" and starterCode or starterFiles with a main.sh entry file.',
-            "For file-changing terminal tasks, grade with workspaceExpectations.requiredFolders, requiredFiles, forbiddenFiles, or forbiddenFolders.",
-            "For output-only terminal tasks such as pwd, ls, cat, head, tail, or wc, grade with terminalExpectations.requiredCommands and outputRegex.",
+            'Use workspaceExpectations for file-tree outcomes: requiredFolders, requiredFiles, forbiddenFiles, and entryFilePath.',
+            'Use terminalExpectations only for command/output outcomes: requiredCommands, forbiddenCommands, outputContains, outputRegex, cwdContains, and cwdEndsWith.',
+            'Do not use checker.defaultRecipe "workspace_expectations"; Linux terminal tasks compile through recipeType "shell_task" and pass expectations into the shell_task expected payload.',
+            'Use per-exercise terminal workspaces for independent quiz/check questions; only use project/capstone scope when one activity intentionally shares a workspace across all steps.',
             "Do not replace missing Bash/Linux code_input exercises with extra fill_blank_choice items.",
             "Do not ask learners to write Bash scripts in Course 1; ask them to run terminal commands that shape or inspect the workspace.",
         ];
@@ -299,7 +465,76 @@ export const bashProfile: CourseProfile = {
     getRecipeRegistry() {
         return {};
     },
-    validateTopicBundle() {
-        return [];
+    validateTopicBundle(bundle) {
+        const issues: string[] = [];
+        const courseSlug = (bundle as { courseSlug?: string }).courseSlug;
+        const isLinuxTerminalFundamentals =
+            bundle.subjectSlug === "linux-terminal-fundamentals" ||
+            courseSlug === "linux-terminal-fundamentals" ||
+            bundle.subjectSlug?.includes("linux-terminal-fundamentals");
+
+        for (const exercise of bundle.exercises ?? []) {
+            if (exercise.kind !== "code_input") continue;
+
+            if (exercise.language !== "bash") {
+                issues.push(
+                    `Bash/Linux code_input "${exercise.id}" must declare language "bash".`,
+                );
+            }
+
+            if (exercise.recipe?.type !== "shell_task") {
+                issues.push(
+                    `Bash/Linux code_input "${exercise.id}" must use recipe.type "shell_task".`,
+                );
+                continue;
+            }
+
+            if (isLinuxTerminalFundamentals && exercise.recipe.mode !== "terminal_workspace") {
+                issues.push(
+                    `Linux Terminal Fundamentals code_input "${exercise.id}" must use shell_task mode "terminal_workspace".`,
+                );
+            }
+
+            const workspaceExpectations =
+                exercise.workspaceExpectations ?? exercise.workspace?.workspaceExpectations;
+            const terminalExpectations = exercise.terminalExpectations;
+            const hasWorkspaceExpectations = Boolean(workspaceExpectations);
+            const hasTerminalExpectations = Boolean(terminalExpectations);
+            const hasHiddenShellCheck = Boolean(exercise.hiddenShellCheck);
+            const hasSourceChecks =
+                Array.isArray(exercise.sourceChecks) && exercise.sourceChecks.length > 0;
+
+            if (
+                exercise.recipe.mode === "terminal_workspace" &&
+                !hasWorkspaceExpectations &&
+                !hasTerminalExpectations &&
+                !hasHiddenShellCheck &&
+                !hasSourceChecks
+            ) {
+                issues.push(
+                    `Bash/Linux terminal_workspace code_input "${exercise.id}" must include workspaceExpectations, terminalExpectations, hiddenShellCheck, or sourceChecks.`,
+                );
+            }
+
+            if (
+                terminalExpectations &&
+                exercise.recipe.mode !== "terminal_workspace"
+            ) {
+                issues.push(
+                    `Bash/Linux code_input "${exercise.id}" may only use terminalExpectations with mode "terminal_workspace".`,
+                );
+            }
+
+            if (
+                workspaceExpectations &&
+                "forbiddenFolders" in (workspaceExpectations as Record<string, unknown>)
+            ) {
+                issues.push(
+                    `Bash/Linux code_input "${exercise.id}" uses unsupported workspaceExpectations.forbiddenFolders; use forbiddenFiles or a hiddenShellCheck instead.`,
+                );
+            }
+        }
+
+        return issues;
     },
 };

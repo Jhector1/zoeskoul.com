@@ -1,0 +1,6 @@
+{
+  "policyId": "shared-validation-workspace-language",
+  "notes": [
+    "Learner-facing workspace language must match the resolved workspace/runtime capabilities for the topic."
+  ]
+}

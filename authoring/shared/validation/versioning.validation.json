@@ -1,0 +1,6 @@
+{
+  "policyId": "shared-validation-versioning",
+  "notes": [
+    "Publish-target courses must keep versioning consistent across subject.plan.json and course.spec.json."
+  ]
+}

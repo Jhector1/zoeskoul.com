@@ -4,31 +4,23 @@
     "profileId": "python",
     "catalogSlug": "python",
     "genKey": "python_part1",
-    "order": 30,
+    "order": 0,
     "accessPolicy": "paid",
     "status": "active",
-    "imagePublicId": "python_data_function_qeemap.png",
+    "imagePublicId": null,
     "imageAlt": null,
     "titleKey": "subjects.python--python-data-functions--draft.title",
     "descriptionKey": "subjects.python--python-data-functions--draft.description",
     "meta": {
       "curriculum": {
         "plannedModuleCount": 4,
-        "isTerminalRelease": true,
+        "isTerminalRelease": false,
         "moreComingMessageKey": "subjects.python--python-data-functions--draft.moreComingSoon"
       },
       "completionPolicy": {
         "requireAllPublishedModules": true,
         "rewardEnabledByDefault": true,
         "certificateEnabledByDefault": true
-      },
-      "versioning": {
-        "family": "python",
-        "version": 2,
-        "status": "active",
-        "defaultForNewEnrollments": true,
-        "supersedes": "python",
-        "supersededBy": null
       }
     }
   },
@@ -52,7 +44,7 @@
         "supportsPackageInstall": false
       },
       "meta": {
-        "estimatedMinutes": 153,
+        "estimatedMinutes": 177,
         "prereqKeys": [
           "modules.python--python-data-functions--draft.python-4.title"
         ],
@@ -111,7 +103,8 @@
         },
         {
           "slug": "python--python-data-functions--draft-python-5-module-project",
-          "order": 99,
+          "order": 3,
+          "role": "module_project",
           "titleKey": "sections.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.python--python-data-functions--draft-python-5-module-project.title",
           "descriptionKey": "sections.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.python--python-data-functions--draft-python-5-module-project.description",
           "meta": {
@@ -120,7 +113,8 @@
             "bulletKeys": [
               "sections.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.python--python-data-functions--draft-python-5-module-project.bullets.0",
               "sections.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.python--python-data-functions--draft-python-5-module-project.bullets.1",
-              "sections.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.python--python-data-functions--draft-python-5-module-project.bullets.2"
+              "sections.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.python--python-data-functions--draft-python-5-module-project.bullets.2",
+              "sections.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.python--python-data-functions--draft-python-5-module-project.bullets.3"
             ]
           },
           "topics": [
@@ -142,13 +136,13 @@
         "kind": "code",
         "language": "python",
         "supportsTerminal": false,
-        "supportsMultiFile": true,
+        "supportsMultiFile": false,
         "supportsFileSystem": false,
         "supportsStdInStdOut": true,
         "supportsPackageInstall": false
       },
       "meta": {
-        "estimatedMinutes": 170,
+        "estimatedMinutes": 196,
         "prereqKeys": [
           "modules.python--python-data-functions--draft.python-5.title"
         ],
@@ -209,7 +203,8 @@
         },
         {
           "slug": "python--python-data-functions--draft-python-6-module-project",
-          "order": 99,
+          "order": 3,
+          "role": "module_project",
           "titleKey": "sections.python--python-data-functions--draft.python-6-functions-and-modularity.python--python-data-functions--draft-python-6-module-project.title",
           "descriptionKey": "sections.python--python-data-functions--draft.python-6-functions-and-modularity.python--python-data-functions--draft-python-6-module-project.description",
           "meta": {
@@ -218,7 +213,8 @@
             "bulletKeys": [
               "sections.python--python-data-functions--draft.python-6-functions-and-modularity.python--python-data-functions--draft-python-6-module-project.bullets.0",
               "sections.python--python-data-functions--draft.python-6-functions-and-modularity.python--python-data-functions--draft-python-6-module-project.bullets.1",
-              "sections.python--python-data-functions--draft.python-6-functions-and-modularity.python--python-data-functions--draft-python-6-module-project.bullets.2"
+              "sections.python--python-data-functions--draft.python-6-functions-and-modularity.python--python-data-functions--draft-python-6-module-project.bullets.2",
+              "sections.python--python-data-functions--draft.python-6-functions-and-modularity.python--python-data-functions--draft-python-6-module-project.bullets.3"
             ]
           },
           "topics": [
@@ -246,7 +242,7 @@
         "supportsPackageInstall": false
       },
       "meta": {
-        "estimatedMinutes": 143,
+        "estimatedMinutes": 171,
         "prereqKeys": [
           "modules.python--python-data-functions--draft.python-6.title"
         ],
@@ -307,7 +303,8 @@
         },
         {
           "slug": "python--python-data-functions--draft-python-7-module-project",
-          "order": 99,
+          "order": 3,
+          "role": "module_project",
           "titleKey": "sections.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.python--python-data-functions--draft-python-7-module-project.title",
           "descriptionKey": "sections.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.python--python-data-functions--draft-python-7-module-project.description",
           "meta": {
@@ -316,7 +313,8 @@
             "bulletKeys": [
               "sections.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.python--python-data-functions--draft-python-7-module-project.bullets.0",
               "sections.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.python--python-data-functions--draft-python-7-module-project.bullets.1",
-              "sections.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.python--python-data-functions--draft-python-7-module-project.bullets.2"
+              "sections.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.python--python-data-functions--draft-python-7-module-project.bullets.2",
+              "sections.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.python--python-data-functions--draft-python-7-module-project.bullets.3"
             ]
           },
           "topics": [
@@ -329,6 +327,7 @@
       "slug": "python-8-real-world-project",
       "prefix": "py8",
       "order": 8,
+      "role": "capstone",
       "titleKey": "modules.python--python-data-functions--draft.python-8-real-world-project.title",
       "descriptionKey": "modules.python--python-data-functions--draft.python-8-real-world-project.description",
       "weekStart": null,
@@ -338,15 +337,15 @@
         "kind": "code",
         "language": "python",
         "supportsTerminal": false,
-        "supportsMultiFile": true,
-        "supportsFileSystem": true,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false,
         "supportsStdInStdOut": true,
         "supportsPackageInstall": false
       },
       "meta": {
-        "estimatedMinutes": 120,
+        "estimatedMinutes": 36,
         "prereqKeys": [
-          "modules.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.title"
+          "modules.python--python-data-functions--draft.python-7.title"
         ],
         "outcomeKeys": [
           "modules.python--python-data-functions--draft.python-8-real-world-project.outcomes.0",
@@ -362,6 +361,7 @@
         {
           "slug": "python--python-data-functions--draft-python-8-course-capstone",
           "order": 1,
+          "role": "capstone",
           "titleKey": "sections.python--python-data-functions--draft.python-8-real-world-project.python--python-data-functions--draft-python-8-course-capstone.title",
           "descriptionKey": "sections.python--python-data-functions--draft.python-8-real-world-project.python--python-data-functions--draft-python-8-course-capstone.description",
           "meta": {
@@ -370,7 +370,8 @@
             "bulletKeys": [
               "sections.python--python-data-functions--draft.python-8-real-world-project.python--python-data-functions--draft-python-8-course-capstone.bullets.0",
               "sections.python--python-data-functions--draft.python-8-real-world-project.python--python-data-functions--draft-python-8-course-capstone.bullets.1",
-              "sections.python--python-data-functions--draft.python-8-real-world-project.python--python-data-functions--draft-python-8-course-capstone.bullets.2"
+              "sections.python--python-data-functions--draft.python-8-real-world-project.python--python-data-functions--draft-python-8-course-capstone.bullets.2",
+              "sections.python--python-data-functions--draft.python-8-real-world-project.python--python-data-functions--draft-python-8-course-capstone.bullets.3"
             ]
           },
           "topics": [

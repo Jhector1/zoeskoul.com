@@ -1,6 +1,6 @@
 import type {
     CourseBlueprint,
-    CourseSpec, ManifestRuntimeDefaults,
+    CourseSpec, ManifestRuntimeDefaults, ManifestIdeServiceConfig,
     PracticeConfig,
     PlannedModule,
     PlannedSection,
@@ -15,6 +15,83 @@ import {
 } from "../spec/resolveModuleRuntimePolicy.js";
 import {resolveWorkspacePolicy} from "../policy/resolveWorkspacePolicy.js";
 import {workspaceToRuntimeDefaults} from "../policy/workspaceToRuntimeDefaults.js";
+import { workspaceToServiceDefaults } from "../policy/workspaceToServiceDefaults.js";
+import { mergeManifestIdeServiceConfigs } from "@zoeskoul/curriculum-contracts";
+
+
+type CodeInputTargetOverrides = {
+    projectCodeInputMin?: number;
+    projectCodeInputTarget?: number;
+    projectCodeInputMax?: number;
+};
+
+function hasExplicitCodeInputTargetOverrides(targets: CodeInputTargetOverrides | undefined): boolean {
+    return (
+        typeof targets?.projectCodeInputMin === "number" ||
+        typeof targets?.projectCodeInputTarget === "number" ||
+        typeof targets?.projectCodeInputMax === "number"
+    );
+}
+
+function hasBooleanOverride(...values: Array<boolean | undefined>) {
+    return values.find((value) => typeof value === "boolean");
+}
+
+function normalizeConceptText(value: unknown): string {
+    return String(value ?? "")
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, " ")
+        .replace(/\s+/g, " ")
+        .trim();
+}
+
+function isConceptualOnlyTopic(args: {
+    topic: PlannedTopic;
+    section: PlannedSection;
+    topicPolicy?: { teachingMode?: string; conceptualOnly?: boolean };
+    topicPractice?: PracticeConfig;
+    inheritedPractice?: PracticeConfig;
+    authoringPolicyConceptualSignals?: string[];
+}): boolean {
+    const explicitConceptualOnly = hasBooleanOverride(
+        args.topicPractice?.conceptualOnly,
+        args.topicPolicy?.conceptualOnly,
+        args.inheritedPractice?.conceptualOnly,
+    );
+
+    if (explicitConceptualOnly === true) return true;
+    if (explicitConceptualOnly === false) return false;
+    if (args.topicPolicy?.teachingMode === "conceptual-only") return true;
+    if (args.topic.technical === false) return true;
+
+    if (args.section.role === "module_project" || args.section.role === "capstone") {
+        return false;
+    }
+
+    const text = normalizeConceptText(
+        `${args.topic.topicId} ${args.topic.title} ${args.topic.summary ?? ""}`,
+    );
+    const defaultSignals = [
+        "what is",
+        "orientation",
+        "introduction",
+        "overview",
+        "course map",
+        "tour",
+    ];
+    const configuredSignals = (args.authoringPolicyConceptualSignals ?? [])
+        .map((signal) => normalizeConceptText(signal))
+        .filter(Boolean);
+    const conceptualSignals = configuredSignals.length > 0
+        ? configuredSignals
+        : defaultSignals;
+
+    return (
+        /^what .* is\b/.test(text) ||
+        conceptualSignals.some((signal) => text.includes(signal))
+    );
+}
+
 function findSpecModule(args: {
     spec?: CourseSpec | null;
     moduleSlug: string;
@@ -63,6 +140,7 @@ export function buildTopicSeedFromPlanNode(args: {
     const adapter = getProfileAdapter(args.blueprint.profileId);
     const profile = getCurriculumProfile(args.blueprint.profileId);
     const topicPolicy = args.spec?.topicPolicies?.[args.topic.topicId];
+    const authoringPolicy = args.spec?.resolvedAuthoringPolicy;
     const specModule = findSpecModule({
         spec: args.spec,
         moduleSlug: args.module.moduleSlug,
@@ -113,6 +191,15 @@ export function buildTopicSeedFromPlanNode(args: {
     const moduleRuntimeDefaults =
         sourceRuntimeDefaults ?? adapterRuntimeDefaults ?? null;
 
+    const adapterServiceDefaults =
+        adapter.getTopicSeedServiceDefaults?.({
+            blueprint: args.blueprint,
+            module: {
+                slug: args.module.moduleSlug,
+                order: args.module.order,
+            },
+        }) ?? null;
+
     const baseSeed = adapter.buildTopicSeed({
         blueprint: args.blueprint,
         module: {
@@ -127,6 +214,7 @@ export function buildTopicSeedFromPlanNode(args: {
             quizFocus: args.module.quizFocus ?? [],
             moduleProject: args.module.moduleProject,
             runtimeDefaults: moduleRuntimeDefaults,
+            serviceDefaults: null,
             exercisePolicy,
             role: args.module.role,
         },
@@ -157,6 +245,18 @@ export function buildTopicSeedFromPlanNode(args: {
         profileId: args.blueprint.profileId,
     });
 
+    const workspaceServiceDefaults = workspaceToServiceDefaults({
+        policy: workspacePolicy,
+    });
+
+    const mergedServiceDefaults: ManifestIdeServiceConfig | null =
+        mergeManifestIdeServiceConfigs(
+            args.blueprint.idePolicy?.defaultServices,
+            args.blueprint.idePolicy?.moduleServiceDefaults?.[args.module.moduleSlug],
+            adapterServiceDefaults,
+            workspaceServiceDefaults,
+        );
+
     const mergedRuntimeDefaults: ManifestRuntimeDefaults =
         workspaceRuntimeDefaults.kind === "sql" && moduleRuntimeDefaults?.kind === "sql"
             ? {
@@ -182,7 +282,51 @@ export function buildTopicSeedFromPlanNode(args: {
                 topicKind,
             })
             : null;
+    const supportsCodeInputPractice = profile.allowedExerciseKinds.includes("code_input");
     const defaultPractice = profile.practice;
+    const policyPracticeDefaults = authoringPolicy?.practiceDefaults;
+
+    const inheritedPractice = mergePracticeDefaults(
+        policyPracticeDefaults,
+        args.spec?.practiceDefaults,
+        specModule?.practiceDefaults,
+        args.module.practiceDefaults,
+        specSection?.practiceDefaults,
+        args.section.practiceDefaults,
+    );
+
+    const topicPractice = mergePracticeDefaults(
+        specTopic?.practice,
+        args.topic.practice,
+        topicPolicy
+            ? {
+                ...(typeof topicPolicy.conceptualOnly === "boolean"
+                    ? { conceptualOnly: topicPolicy.conceptualOnly }
+                    : {}),
+                ...(typeof topicPolicy.requiresTryIt === "boolean"
+                    ? { requiresTryIt: topicPolicy.requiresTryIt }
+                    : {}),
+                ...(topicPolicy.runtimeMode
+                    ? { runtimeMode: topicPolicy.runtimeMode }
+                    : {}),
+                ...(Array.isArray(topicPolicy.expectedPracticeKinds)
+                    ? { expectedPracticeKinds: topicPolicy.expectedPracticeKinds }
+                    : {}),
+                ...(topicPolicy.terminalSessionScope
+                    ? { terminalSessionScope: topicPolicy.terminalSessionScope }
+                    : {}),
+            }
+            : undefined,
+    );
+
+    const conceptualOnly = isConceptualOnlyTopic({
+        topic: args.topic,
+        section: args.section,
+        topicPolicy,
+        topicPractice,
+        inheritedPractice,
+        authoringPolicyConceptualSignals: authoringPolicy?.topicDefaults?.conceptualSignals,
+    });
 
     const generationTargets = {
         quizBankMin: topicTargets.quizBankMin ?? policyTargets.quizBankMin ?? 6,
@@ -229,28 +373,15 @@ export function buildTopicSeedFromPlanNode(args: {
         );
     }
 
-    const hasExplicitTopicCodeInputTargets =
-        typeof topicTargets.projectCodeInputMin === "number" ||
-        typeof topicTargets.projectCodeInputTarget === "number" ||
-        typeof topicTargets.projectCodeInputMax === "number";
-
+    const hasExplicitTopicCodeInputTargets = hasExplicitCodeInputTargetOverrides(topicTargets);
     if (
-        args.blueprint.profileId === "python" &&
-        args.topic.technical === false &&
-        !hasExplicitTopicCodeInputTargets
+        conceptualOnly &&
+        !hasExplicitTopicCodeInputTargets &&
+        !topicKind
     ) {
-        generationTargets.projectCodeInputTarget = Math.min(
-            generationTargets.projectCodeInputTarget,
-            1,
-        );
-        generationTargets.projectCodeInputMax = Math.min(
-            generationTargets.projectCodeInputMax,
-            1,
-        );
-        generationTargets.projectCodeInputMin = Math.min(
-            generationTargets.projectCodeInputMin,
-            generationTargets.projectCodeInputTarget,
-        );
+        generationTargets.projectCodeInputMin = 0;
+        generationTargets.projectCodeInputTarget = 0;
+        generationTargets.projectCodeInputMax = 0;
     }
 
     const totalGeneratedExercises =
@@ -267,24 +398,14 @@ export function buildTopicSeedFromPlanNode(args: {
             },
         },
     });
-    const inheritedPractice = mergePracticeDefaults(
-        args.spec?.practiceDefaults,
-        specModule?.practiceDefaults,
-        args.module.practiceDefaults,
-        specSection?.practiceDefaults,
-        args.section.practiceDefaults,
-    );
-
-    const topicPractice = mergePracticeDefaults(
-        specTopic?.practice,
-        args.topic.practice,
-    );
-
     const resolvedPractice = resolvePractice({
         inheritedPractice,
         topicPractice,
         defaultPractice,
         projectConfig,
+        authoringPolicy,
+        conceptualOnly,
+        supportsCodeInputPractice,
     });
 
     return {
@@ -307,10 +428,11 @@ export function buildTopicSeedFromPlanNode(args: {
 
         exercisePolicy,
         workspacePolicy,
-        authoringPolicy: args.spec?.resolvedAuthoringPolicy,
+        authoringPolicy,
         generationTargets,
         plannedExerciseCounts,
         moduleRuntimeDefaults: mergedRuntimeDefaults,
+        moduleServiceDefaults: mergedServiceDefaults,
         moduleRole: args.module.role,
         sectionRole: args.section.role,
         practice: resolvedPractice,
@@ -347,16 +469,38 @@ function resolvePractice(args: {
         };
         projectFlowDefault?: "standalone" | "progressive";
     } | null;
+    authoringPolicy?: CourseSpec["resolvedAuthoringPolicy"];
+    conceptualOnly: boolean;
+    supportsCodeInputPractice: boolean;
 }): PracticeConfig | undefined {
     const merged = {
         ...(args.inheritedPractice ?? {}),
         ...(args.topicPractice ?? {}),
     } as PracticeConfig;
 
+    if (
+        !args.supportsCodeInputPractice &&
+        !args.projectConfig &&
+        Object.keys(merged).length === 0
+    ) {
+        return undefined;
+    }
+
     const tryItDefault = args.projectConfig?.tryItDefault ?? args.defaultPractice?.tryItDefault;
-    const tryIt = merged.tryIt ?? tryItDefault?.enabled;
+    const requiresTryItDefault =
+        args.authoringPolicy?.topicDefaults?.requiresTryIt ?? true;
+    const requiresTryIt =
+        merged.requiresTryIt ?? (args.conceptualOnly ? false : requiresTryItDefault);
+    const tryIt =
+        typeof merged.tryIt === "boolean"
+            ? merged.tryIt
+            : args.conceptualOnly
+                ? false
+                : requiresTryIt
+                    ? true
+                    : tryItDefault?.enabled;
     const placement =
-        merged.tryItPlacement ?? (tryIt === true ? tryItDefault?.placement ?? "first_sketch" : undefined);
+        merged.tryItPlacement ?? (tryIt === true ? tryItDefault?.placement ?? "all_sketches" : undefined);
     const effectiveTryIt = placement === "none" ? false : tryIt;
     const tryItSketchIndex =
         effectiveTryIt === true || typeof merged.tryItSketchIndex === "number"
@@ -366,6 +510,8 @@ function resolvePractice(args: {
 
     const resolved: PracticeConfig = {
         ...merged,
+        conceptualOnly: args.conceptualOnly,
+        requiresTryIt,
         ...(typeof effectiveTryIt === "boolean" ? { tryIt: effectiveTryIt } : {}),
         ...(placement ? { tryItPlacement: placement } : {}),
         ...(typeof tryItSketchIndex === "number" ? { tryItSketchIndex } : {}),

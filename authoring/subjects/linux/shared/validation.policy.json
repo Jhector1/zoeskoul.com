@@ -11,13 +11,20 @@
   "validationRequirements": {
     "terminalWorkspaceUsesPty": true,
     "workspaceExpectationsRequiredForShellTasks": true,
-    "judge0BashNotRequiredForCourse1": true
+    "judge0BashNotRequiredForCourse1": true,
+    "shellTaskRecipeRequiredForCodeInput": true,
+    "terminalWorkspaceModeRequiredForCourse1": true,
+    "workspaceExpectationsRequiredForFileTasks": true,
+    "terminalExpectationsAllowedForOutputChecks": true,
+    "workspaceExpectationsIsNotARecipeName": true
   },
   "rules": {
     "executionValidation": [
-      "shell_task terminal_workspace exercises validate folders/files from the workspace snapshot.",
-      "Do not require stdout tests for terminal navigation tasks.",
-      "Do not call Judge0 for Course 1 shell_task terminal_workspace checks."
+      "Every Linux Course 1 code_input must use recipeType shell_task and mode terminal_workspace.",
+      "File-changing tasks validate folders/files from the workspace snapshot with workspaceExpectations.",
+      "Output-only command tasks may validate command history/current output with terminalExpectations.",
+      "Do not use workspace_expectations as a recipe name; it is an expectation payload under shell_task.",
+      "Do not require stdout tests or Judge0 Bash execution for Course 1 terminal_workspace checks."
     ],
     "pedagogy": [
       "Keep tasks visible in the file explorer.",

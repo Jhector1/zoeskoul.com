@@ -19,6 +19,7 @@ import { mergeCritiqueReports } from "./mergeCritiqueReports.js";
 import { buildExercisePolicyCritiqueIssues } from "./buildExercisePolicyCritiqueIssues.js";
 import { buildMultiChoiceCompletenessIssues } from "./buildMultiChoiceCompletenessIssues.js";
 import { buildFillBlankSingleBlankIssues } from "./buildFillBlankSingleBlankIssues.js";
+import { buildSharedPracticeCompletenessIssues } from "./buildSharedPracticeCompletenessIssues.js";
 
 function makeBaseRepairReport(topicId: string): RepairReport {
     return {
@@ -93,6 +94,10 @@ export async function evaluateTopicDraft(args: {
     const fillBlankSingleBlankIssues = buildFillBlankSingleBlankIssues({
         draft,
     });
+    const sharedPracticeCompletenessIssues = buildSharedPracticeCompletenessIssues({
+        draft,
+        seed: args.seed,
+    });
 
     const profileCritiqueReport = await args.profileServices.critiqueDraft({
         seed: args.seed,
@@ -107,6 +112,7 @@ export async function evaluateTopicDraft(args: {
             ...policyCritiqueIssues,
             ...multiChoiceCompletenessIssues,
             ...fillBlankSingleBlankIssues,
+            ...sharedPracticeCompletenessIssues,
         ],
     });
 

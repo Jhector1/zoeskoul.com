@@ -1,0 +1,396 @@
+{
+  "topicId": "what-the-terminal-is",
+  "subjectSlug": "linux-terminal-fundamentals",
+  "moduleSlug": "linux-module-1-terminal-navigation",
+  "sectionSlug": "linux-terminal-fundamentals-linux-module-1-orientation",
+  "prefix": "linux_module_1",
+  "minutes": 15,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "bash",
+    "supportsTerminal": true,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "topic": {
+    "labelKey": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.what-the-terminal-is.label",
+    "summaryKey": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.what-the-terminal-is.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.what-the-terminal-is.cards.sketch0.title",
+      "sketchId": "sketch1",
+      "height": 420,
+      "tryIt": {
+        "id": "try-what-the-terminal-is-sketch0",
+        "titleKey": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.try_what_the_terminal_is_sketch0.title",
+        "promptKey": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.try_what_the_terminal_is_sketch0.prompt",
+        "exerciseKey": "ci-create-linux-start",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.what-the-terminal-is.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.what-the-terminal-is.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "ci_create_linux_start",
+            "titleKey": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.what-the-terminal-is.projectSteps.ci_create_linux_start.title",
+            "exerciseKey": "ci-create-linux-start",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "ci_create_first_lab",
+            "titleKey": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.what-the-terminal-is.projectSteps.ci_create_first_lab.title",
+            "exerciseKey": "ci-create-first-lab",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "try_terminal_see_workspace",
+            "titleKey": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.what-the-terminal-is.projectSteps.try_terminal_see_workspace.title",
+            "exerciseKey": "try-terminal-see-workspace",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.linux-terminal-fundamentals.linux-module-1-terminal-navigation.what-the-terminal-is.sketch1.title",
+      "bodyKey": "sketches.linux-terminal-fundamentals.linux-module-1-terminal-navigation.what-the-terminal-is.sketch1.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "exercise4",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.what-the-terminal-is.quiz.exercise4",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "exercise5",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.what-the-terminal-is.quiz.exercise5",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "exercise8",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.what-the-terminal-is.quiz.exercise8",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "c",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "exercise9",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.what-the-terminal-is.quiz.exercise9",
+      "tokenIds": [
+        "t1",
+        "t2"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2"
+        ]
+      }
+    },
+    {
+      "id": "exercise1",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.what-the-terminal-is.quiz.exercise1",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "print an observable result"
+      }
+    },
+    {
+      "id": "exercise2",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.what-the-terminal-is.quiz.exercise2",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "print an observable result"
+      }
+    },
+    {
+      "id": "ci-create-linux-start",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.what-the-terminal-is.quiz.ci-create-linux-start",
+      "language": "bash",
+      "starterCode": "# Use the terminal for this Linux task.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Use the terminal for this Linux task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "README.md",
+          "content": "# Terminal warm-up\n",
+          "language": "bash"
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^pwd$"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "(^|\\s)sudo(\\s|$)",
+            "message": "Do not use sudo for beginner workspace tasks."
+          }
+        ],
+        "outputContains": [
+          "/workspace"
+        ]
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "starterCode": "# Use the terminal for this Linux task.",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "# Use the terminal for this Linux task.\n",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "README.md",
+            "content": "# Terminal warm-up\n",
+            "language": "bash"
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "Run `pwd` and look for the workspace path."
+      }
+    },
+    {
+      "id": "ci-create-first-lab",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.what-the-terminal-is.quiz.ci-create-first-lab",
+      "language": "bash",
+      "starterCode": "# Use the terminal for this Linux task.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Use the terminal for this Linux task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "README.md",
+          "content": "# Terminal warm-up\n",
+          "language": "bash"
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^ls$"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "(^|\\s)sudo(\\s|$)",
+            "message": "Do not use sudo for beginner workspace tasks."
+          }
+        ],
+        "outputContains": [
+          "README.md"
+        ]
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "starterCode": "# Use the terminal for this Linux task.",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "# Use the terminal for this Linux task.\n",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "README.md",
+            "content": "# Terminal warm-up\n",
+            "language": "bash"
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "Run `ls` and confirm `README.md` is listed."
+      }
+    },
+    {
+      "id": "try-terminal-see-workspace",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.what-the-terminal-is.quiz.try-terminal-see-workspace",
+      "language": "bash",
+      "starterCode": "# Use the terminal for this Linux task.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Use the terminal for this Linux task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "README.md",
+          "content": "# Terminal warm-up\n",
+          "language": "bash"
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^pwd$"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "(^|\\s)sudo(\\s|$)",
+            "message": "Do not use sudo for beginner workspace tasks."
+          }
+        ],
+        "outputContains": [
+          "/workspace"
+        ]
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "starterCode": "# Use the terminal for this Linux task.",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "# Use the terminal for this Linux task.\n",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "README.md",
+            "content": "# Terminal warm-up\n",
+            "language": "bash"
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "Run `pwd` and look for the workspace path."
+      }
+    }
+  ]
+}

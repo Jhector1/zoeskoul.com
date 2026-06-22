@@ -1,0 +1,197 @@
+{
+  "topics": {
+    "linux-terminal-fundamentals": {
+      "linux-module-1-terminal-navigation": {
+        "moving-around": {
+          "label": "Moving Around with cd",
+          "summary": "Use cd, .., ., and ~ to move between folders safely.",
+          "cards": {
+            "sketch0": {
+              "title": "`cd` changes the current folder"
+            },
+            "sketch1": {
+              "title": "`..` means the parent folder"
+            },
+            "sketch2": {
+              "title": "Longer paths help you move in one jump"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Terminal Navigation Project"
+            }
+          },
+          "projectSteps": {
+            "ci_build_cd_practice": {
+              "title": "Go to the platform folder"
+            },
+            "ci_create_up_one_lab": {
+              "title": "Move back to the parent folder"
+            },
+            "ci_create_path_trail": {
+              "title": "Find the final marker"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_moving_around_sketch0": {
+              "title": "Try it yourself",
+              "prompt": "Use `cd` to enter `city-tour/station/platform`, then run `pwd`."
+            }
+          },
+          "quiz": {
+            "quiz1": {
+              "title": "Purpose of the cd Command",
+              "prompt": "What is the primary purpose of the `cd` command in Linux?",
+              "hint": "Think about what 'cd' stands for.",
+              "help": {
+                "concept": "The `cd` command is used to change the current working directory in the terminal.",
+                "hint_1": "The `cd` command helps you navigate the file system.",
+                "hint_2": "The `cd` command stands for 'change directory'."
+              },
+              "options": {
+                "a": "To list files in a directory",
+                "b": "To change the current directory",
+                "c": "To copy files",
+                "d": "To delete files"
+              }
+            },
+            "quiz6": {
+              "title": "Staying in the Current Directory",
+              "prompt": "Which command will keep you in the current directory?",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "options": {
+                "a": "cd .",
+                "b": "cd /",
+                "c": "cd ~"
+              }
+            },
+            "quiz2": {
+              "title": "Navigating with cd",
+              "prompt": "Which of the following commands will move you to the home directory?",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "options": {
+                "a": "cd /home",
+                "b": "cd ~",
+                "c": "cd",
+                "d": "cd /"
+              }
+            },
+            "quiz3": {
+              "title": "Order of Commands to Navigate Directories",
+              "prompt": "Arrange the commands in the order you would use them to navigate from `/home/user` to `/home/user/Documents/Projects`.",
+              "hint": "Think about moving step by step through the directories.",
+              "help": {
+                "concept": "To navigate directories, use `cd` followed by the directory name in sequence.",
+                "hint_1": "Start from `/home/user` and move into `Documents`, then `Projects`.",
+                "hint_2": "The sequence should reflect moving into each directory one by one."
+              },
+              "tokens": {
+                "t1": "cd Documents",
+                "t2": "cd Projects"
+              }
+            },
+            "quiz4": {
+              "title": "Using Relative Paths",
+              "prompt": "Complete the command to move up one directory level from the current directory.",
+              "hint": "Use the relative path symbol for moving up one level.",
+              "help": {
+                "concept": "The `..` symbol is used to move up one directory level.",
+                "hint_1": "The `..` symbol represents the parent directory.",
+                "hint_2": "Use `cd ..` to move up one level."
+              },
+              "template": "cd [blank1]",
+              "choices": [
+                "..",
+                "~",
+                "/",
+                "."
+              ]
+            },
+            "quiz5": {
+              "title": "Navigating to Home Directory",
+              "prompt": "Fill in the blank to navigate to the home directory using the `cd` command.",
+              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+              "help": {
+                "concept": "The blank should be filled with the term that makes the statement accurate.",
+                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+                "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+              },
+              "template": "cd [blank1]",
+              "choices": [
+                "~",
+                "..",
+                "/",
+                "."
+              ]
+            },
+            "ci-build-cd-practice": {
+              "title": "Go to the platform folder",
+              "prompt": "Use `cd` to enter `city-tour/station/platform`, then run `pwd`.",
+              "hint": "Read the Linux task \"Go to the platform folder\" and identify the folders or files you must create or organize.",
+              "help": {
+                "concept": "This Linux terminal exercise checks the final workspace state for \"Go to the platform folder\".",
+                "hint_1": "Use the terminal to make one small workspace change at a time, then inspect the result in the file explorer.",
+                "hint_2": "If a path is required, match the exact folder and file names before clicking Check Answer."
+              },
+              "starterCode": "# Use the terminal for this Linux task."
+            },
+            "ci-create-up-one-lab": {
+              "title": "Move back to the parent folder",
+              "prompt": "Go into `return-trip/start`, run `cd ..`, then run `pwd`.",
+              "hint": "Read the Linux task \"Move back to the parent folder\" and identify the folders or files you must create or organize.",
+              "help": {
+                "concept": "This Linux terminal exercise checks the final workspace state for \"Move back to the parent folder\".",
+                "hint_1": "Use the terminal to make one small workspace change at a time, then inspect the result in the file explorer.",
+                "hint_2": "If a path is required, match the exact folder and file names before clicking Check Answer."
+              },
+              "starterCode": "# Use the terminal for this Linux task."
+            },
+            "ci-create-path-trail": {
+              "title": "Find the final marker",
+              "prompt": "Use `cd` to enter `trail/start/middle`, then run `ls` and look for `final-marker.txt`.",
+              "hint": "Read the Linux task \"Find the final marker\" and identify the folders or files you must create or organize.",
+              "help": {
+                "concept": "This Linux terminal exercise checks the final workspace state for \"Find the final marker\".",
+                "hint_1": "Use the terminal to make one small workspace change at a time, then inspect the result in the file explorer.",
+                "hint_2": "If a path is required, match the exact folder and file names before clicking Check Answer."
+              },
+              "starterCode": "# Use the terminal for this Linux task."
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "linux-terminal-fundamentals": {
+      "linux-module-1-terminal-navigation": {
+        "moving-around": {
+          "cd-enters-folders": {
+            "title": "`cd` changes the current folder",
+            "bodyMarkdown": "`cd` moves your terminal into another folder. After you move, run `pwd` so you can confirm where you landed.\n\nWorked example:\n```bash\ncd city-tour\npwd\n```\n\nLine by line: the first line moves into the `city-tour` folder. The second line prints the new current path so you can verify the move."
+          },
+          "dot-dot-parent": {
+            "title": "`..` means the parent folder",
+            "bodyMarkdown": "Use `cd ..` when you need to move up one folder from your current location.\n\nWorked example:\n```bash\ncd station\ncd ..\n```\n\nStep by step: the first command moves into `station`. The second command moves back to the parent folder that contains `station`."
+          },
+          "home-shortcut": {
+            "title": "Longer paths help you move in one jump",
+            "bodyMarkdown": "A path like `city-tour/station/platform` lets you move through nested folders in one command. Use `pwd` or `ls` after moving if you want to double-check your location."
+          }
+        }
+      }
+    }
+  }
+}

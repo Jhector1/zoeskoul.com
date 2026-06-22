@@ -164,12 +164,14 @@ export default function IdeEditorPane({
                 terminalHistoryScopeKey,
                 projectId,
                 terminalSessionScope: services.runner.terminalSessionScope,
+                terminalCwd: services.runner.terminalCwd,
             }),
         [
             exerciseStateKey,
             terminalHistoryScopeKey,
             projectId,
             services.runner.terminalSessionScope,
+            services.runner.terminalCwd,
         ],
     );
 
@@ -244,7 +246,7 @@ export default function IdeEditorPane({
                                     ? {
                                         enabled: services.runner.enableWorkspaceTerminal,
                                         projectId: projectId ?? undefined,
-                                        cwd: "/workspace",
+                                        cwd: services.runner.terminalCwd ?? "/workspace",
                                         // Keep the visible exercise binding unchanged while
                                         // allowing PTY reuse to widen to topic/module scope.
                                         workspaceKey: terminalWorkspaceKey,

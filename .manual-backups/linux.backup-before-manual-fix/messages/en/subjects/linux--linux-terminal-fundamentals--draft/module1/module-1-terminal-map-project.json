@@ -1,0 +1,107 @@
+{
+  "topics": {
+    "linux--linux-terminal-fundamentals--draft": {
+      "linux-module-1-terminal-navigation": {
+        "module-1-terminal-map-project": {
+          "label": "Project: Terminal Map",
+          "summary": "Build a small folder map for a field-notes project by checking your location, creating nested folders, and adding files with core Linux terminal commands.",
+          "cards": {
+            "sketch0": {
+              "title": "Start by checking where you are"
+            },
+            "sketch1": {
+              "title": "Build nested folders with mkdir and move with cd"
+            },
+            "sketch2": {
+              "title": "Add marker files to complete the map"
+            },
+            "project": {
+              "title": "Terminal Map field-notes build"
+            }
+          },
+          "projectSteps": {
+            "module_1_terminal_map_project_terminal_task_1": {
+              "title": "Create the park survey request folder"
+            },
+            "module_1_terminal_map_project_terminal_task_2": {
+              "title": "Add the map notes folder"
+            },
+            "module_1_terminal_map_project_terminal_task_3": {
+              "title": "Prepare the handoff marker"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_module_1_terminal_map_project_sketch0": {
+              "title": "Try: Create the park survey request folder",
+              "prompt": "You are helping a park survey team prepare a terminal map. Create module-1-terminal-map-project-park-survey/requests and add module-1-terminal-map-project-park-survey/requests/north-trail.txt so the team has a concrete request log to hand off. Produce the result for create the park survey request folder so it reinforces Project: Terminal Map. Keep this workspace ready for the connected project work that follows."
+            },
+            "try_module_1_terminal_map_project_sketch1": {
+              "title": "Try: Add the map notes folder",
+              "prompt": "Continue the same park survey workspace. Keep the request log from step 1, then add module-1-terminal-map-project-park-survey/maps/current-location.txt as the team's navigation note deliverable. Produce the result for add the map notes folder so it reinforces Project: Terminal Map. Keep this workspace ready for the connected project work that follows."
+            },
+            "try_module_1_terminal_map_project_sketch2": {
+              "title": "Try: Prepare the handoff marker",
+              "prompt": "Finish the cumulative park survey terminal map. Keep the request and map notes from the earlier steps, then create module-1-terminal-map-project-park-survey/handoff/terminal-map-ready.txt as the useful final deliverable. Produce the result for prepare the handoff marker so it reinforces Project: Terminal Map. Keep this workspace ready for the connected project work that follows."
+            }
+          },
+          "quiz": {
+            "module-1-terminal-map-project-terminal-task-1": {
+              "title": "Create the park survey request folder",
+              "prompt": "Start the module project. In step 1 of 3, You are helping a park survey team prepare a terminal map. Create module-1-terminal-map-project-park-survey/requests and add module-1-terminal-map-project-park-survey/requests/north-trail.txt so the team has a concrete request log to hand off.",
+              "hint": "This is the first project step. Build a clean starting version, then run it before moving on.",
+              "help": {
+                "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                "hint_1": "This is the first project step. Build a clean starting version, then run it before moving on.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "# Use the terminal for this Linux project task."
+            },
+            "module-1-terminal-map-project-terminal-task-2": {
+              "title": "Add the map notes folder",
+              "prompt": "Continue the same module project from the previous working step. In step 2 of 3, Continue the same park survey workspace. Keep the request log from step 1, then add module-1-terminal-map-project-park-survey/maps/current-location.txt as the team's navigation note deliverable.",
+              "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+              "help": {
+                "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "hint_2": "Run the previous working code first, then make only the focused change for this step."
+              },
+              "starterCode": "mkdir -p module-1-terminal-map-project-park-survey/requests\nprintf 'North trail request log\\n' > module-1-terminal-map-project-park-survey/requests/north-trail.txt\nls module-1-terminal-map-project-park-survey\n# Project step 2: Add the map notes folder\n# Keep the working code above from the previous step.\n# Next, Continue the same park survey workspace\n# Add only the focused change for this step below or inside the existing work.\n"
+            },
+            "module-1-terminal-map-project-terminal-task-3": {
+              "title": "Prepare the handoff marker",
+              "prompt": "Continue the same module project from the previous working step. In step 3 of 3, Finish the cumulative park survey terminal map. Keep the request and map notes from the earlier steps, then create module-1-terminal-map-project-park-survey/handoff/terminal-map-ready.txt as the useful final deliverable.",
+              "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+              "help": {
+                "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "hint_2": "Run the previous working code first, then make only the focused change for this step."
+              },
+              "starterCode": "mkdir -p module-1-terminal-map-project-park-survey/maps\nprintf 'Current location checked with pwd and ls\\n' > module-1-terminal-map-project-park-survey/maps/current-location.txt\nls module-1-terminal-map-project-park-survey\n# Project step 3: Prepare the handoff marker\n# Keep the working code above from the previous step.\n# Next, Finish the cumulative park survey terminal map\n# Add only the focused change for this step below or inside the existing work.\n"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "linux--linux-terminal-fundamentals--draft": {
+      "linux-module-1-terminal-navigation": {
+        "module-1-terminal-map-project": {
+          "sketch-1": {
+            "title": "Start by checking where you are",
+            "bodyMarkdown": "When you work in the Linux terminal, your commands happen in a **current folder**. Before creating anything, it helps to confirm your location with `pwd` and see what is already there with `ls`.\n\n- `pwd` shows your current path\n- `ls` lists the files and folders in the current location\n\nHere is a simple example:\n\n```bash\npwd\nls\n```\n\nStep by step:\n\n1. `pwd` prints the folder you are currently in.\n2. `ls` shows what that folder contains.\n3. Together, they help you avoid creating files in the wrong place.\n\nIf `pwd` shows a lesson workspace folder and `ls` shows only a few starter items, you know you are in the right place to begin your project."
+          },
+          "sketch-2": {
+            "title": "Build nested folders with mkdir and move with cd",
+            "bodyMarkdown": "A folder map becomes useful when you organize related work into smaller folders. In the terminal, `mkdir` creates folders and `cd` moves you into them.\n\nA common pattern is:\n\n```bash\nmkdir -p map/regions/north\ncd map\nls\n```\n\nLine by line:\n\n1. `mkdir -p map/regions/north` creates the full nested path in one command.\n2. `cd map` moves into the `map` folder.\n3. `ls` lets you confirm that `regions` is inside it.\n\nThe `-p` option is helpful because it creates parent folders that do not exist yet. That saves time when you want a deeper structure."
+          },
+          "sketch-3": {
+            "title": "Add marker files to complete the map",
+            "bodyMarkdown": "Folders show structure, but files often show purpose. You can create empty marker files with `touch`.\n\nExample:\n\n```bash\ncd map/regions/north\ntouch landmarks.txt supplies.txt\nls\n```\n\nWhat each line does:\n\n1. `cd map/regions/north` moves into the target folder.\n2. `touch landmarks.txt supplies.txt` creates two empty files.\n3. `ls` confirms the files are there.\n\nThis is a practical way to sketch a project layout before adding real content. In this topic, your final map will use folders and files together so the workspace clearly shows your navigation and creation skills."
+          }
+        }
+      }
+    }
+  }
+}

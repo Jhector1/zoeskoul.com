@@ -1,0 +1,92 @@
+{
+  "title": "Project: Notes Organizer",
+  "summary": "Organize a messy folder into notes, homework, code, and backups using core Linux terminal commands.",
+  "minutes": 24,
+  "sketchBlocks": [
+    {
+      "id": "notes-organizer-plan",
+      "title": "Plan the folder cleanup before moving files",
+      "bodyMarkdown": "A good terminal project starts with a quick plan: **look at what you have, create the folders you need, then move files into place**. That keeps your workspace organized and helps you avoid deleting or moving the wrong thing.\n\nIn this project, you are acting like a student cleaning up a messy school folder. You will sort files into folders such as `notes`, `homework`, `code`, and `backups`.\n\nA common first step is to inspect the current workspace:\n\n```bash\npwd\nls\n```\n\n- `pwd` shows your current folder.\n- `ls` lists what is inside it.\n\nIf you see loose files like `biology_notes.txt`, `math_hw.txt`, and `app.py`, you can make destination folders first:\n\n```bash\nmkdir notes homework code backups\n```\n\nThis is better than moving files first and guessing where they should go. The main idea is: **inspect, create structure, then organize**."
+    },
+    {
+      "id": "notes-organizer-move-copy",
+      "title": "Use move and copy commands for safe organization",
+      "bodyMarkdown": "Two of the most useful file commands are `mv` and `cp`.\n\n- `mv` moves a file to a new folder or renames it.\n- `cp` makes a copy and keeps the original.\n\nExample:\n\n```bash\nmv biology_notes.txt notes/\ncp biology_notes.txt backups/biology_notes_backup.txt\n```\n\nLine by line:\n\n- `mv biology_notes.txt notes/` puts the original file into the `notes` folder.\n- `cp biology_notes.txt backups/biology_notes_backup.txt` creates a second copy in `backups` with a clearer name.\n\nThis matters in a real cleanup project because sometimes you want the file in its proper folder **and** a backup copy before making more changes. Use `mv` when the file should live in one new place. Use `cp` when you want an extra copy."
+    },
+    {
+      "id": "notes-organizer-check-content",
+      "title": "Check your results by viewing file contents",
+      "bodyMarkdown": "After organizing files, you should verify that the right content ended up in the right place. Linux gives you simple viewing commands for that.\n\n```bash\ncat notes/history_notes.txt\nwc -l notes/history_notes.txt\n```\n\nWhat each line does:\n\n- `cat notes/history_notes.txt` prints the whole file so you can read it.\n- `wc -l notes/history_notes.txt` counts the number of lines in the file.\n\nYou can also inspect only part of a file with `head` or `tail` when a file is longer.\n\nFor example, if a homework file was moved into `homework/`, using `cat` confirms it still contains the expected text. The big idea is: **organizing files is only half the job; checking their contents confirms the cleanup worked correctly**."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "project-step-1-build-folders",
+      "kind": "fill_blank_choice",
+      "title": "Milestone 1: Build the school workspace folders",
+      "prompt": "You are cleaning up a messy school workspace. In the terminal, inspect the current folder, then create four folders at the top level of the workspace: `notes`, `homework`, `code`, and `backups`. Keep the existing loose files where they are for now. This step matters because a clear folder structure gives you safe destinations before you move anything.",
+      "hint": "Create the destination folders first, all in the current workspace.",
+      "help": {
+        "concept": "`mkdir` creates folders in the current directory, and `pwd` or `ls` helps you confirm where you are before changing the workspace.",
+        "hint_1": "Use `ls` to see the starting files, then make four folders named exactly as the prompt says.",
+        "hint_2": "You can create all four folders with one `mkdir` command if you list each folder name after it."
+      },
+      "template": "A file-writing code exercise should also ____ so automated tests can check it.",
+      "choices": [
+        "print an observable result",
+        "hide all output",
+        "delete the file immediately",
+        "skip the program"
+      ],
+      "correctValue": "print an observable result"
+    },
+    {
+      "id": "project-step-2-sort-and-backup",
+      "kind": "fill_blank_choice",
+      "title": "Milestone 2: Sort files and make one backup",
+      "prompt": "Continue the same Notes Organizer story. Start from a workspace that already has the folders `notes`, `homework`, `code`, and `backups`. Move `biology_notes.txt` and `history_notes.txt` into `notes/`, move `math_hw.txt` into `homework/`, and move `app.py` into `code/`. Then make a backup copy of `history_notes.txt` inside `backups/` named `history_notes_backup.txt`. This step matters because real organization often combines moving files into categories with keeping one safety copy.",
+      "hint": "Use `mv` for sorting and `cp` for the backup copy.",
+      "help": {
+        "concept": "`mv` changes a file's location, while `cp` creates a second copy. In this task, most files should be moved, but one notes file should also be copied into `backups`.",
+        "hint_1": "After the moves, the top level should mainly contain the four folders, not the original loose files.",
+        "hint_2": "Copy the file after it is inside `notes/`, using its new path as the source for the backup."
+      },
+      "template": "A file-writing code exercise should also ____ so automated tests can check it.",
+      "choices": [
+        "print an observable result",
+        "hide all output",
+        "delete the file immediately",
+        "skip the program"
+      ],
+      "correctValue": "print an observable result"
+    },
+    {
+      "id": "project-step-3-verify-and-clean",
+      "kind": "fill_blank_choice",
+      "title": "Milestone 3: Verify the notes and remove an extra file",
+      "prompt": "Finish the Notes Organizer project from the already sorted workspace. First, use terminal commands to display the contents of `notes/history_notes.txt` and count its lines. Then remove the extra backup file `backups/history_notes_backup.txt`, leaving the organized folders and the original notes file in place. This step matters because a complete cleanup includes checking file contents and safely deleting an unneeded extra copy.",
+      "hint": "Use one command to show the file and another to count lines before removing the backup.",
+      "help": {
+        "concept": "`cat` prints file contents, `wc -l` counts lines, and `rm` removes a file. This task combines inspection with a careful deletion inside the workspace.",
+        "hint_1": "The file you need to inspect is inside `notes/`, and the file you need to delete is inside `backups/`.",
+        "hint_2": "Run the viewing commands on `notes/history_notes.txt`, then remove only `backups/history_notes_backup.txt`, not the original notes file."
+      },
+      "template": "A file-writing code exercise should also ____ so automated tests can check it.",
+      "choices": [
+        "print an observable result",
+        "hide all output",
+        "delete the file immediately",
+        "skip the program"
+      ],
+      "correctValue": "print an observable result"
+    }
+  ],
+  "projectDraft": {
+    "title": "Notes Organizer Project",
+    "stepIds": [
+      "project-step-1-build-folders",
+      "project-step-2-sort-and-backup",
+      "project-step-3-verify-and-clean"
+    ]
+  }
+}

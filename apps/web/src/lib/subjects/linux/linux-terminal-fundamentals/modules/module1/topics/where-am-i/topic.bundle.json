@@ -1,9 +1,9 @@
 {
   "topicId": "where-am-i",
   "subjectSlug": "linux-terminal-fundamentals",
-  "moduleSlug": "linux-1-terminal-navigation",
-  "sectionSlug": "linux-terminal-fundamentals-linux-1-orientation",
-  "prefix": "lin1",
+  "moduleSlug": "linux-module-1-terminal-navigation",
+  "sectionSlug": "linux-terminal-fundamentals-linux-module-1-orientation",
+  "prefix": "linux_module_1",
   "minutes": 16,
   "runtimeDefaults": {
     "kind": "code",
@@ -14,32 +14,22 @@
     "supportsStdInStdOut": true,
     "supportsPackageInstall": false
   },
-  "serviceDefaults": {
-    "runnerBackend": "pty",
-    "layoutMode": "terminal_workspace",
-    "terminalSessionScope": "exercise",
-    "requires": {
-      "files": true,
-      "multiFile": true,
-      "terminal": true
-    }
-  },
   "topic": {
-    "labelKey": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.where-am-i.label",
-    "summaryKey": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.where-am-i.summary"
+    "labelKey": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.label",
+    "summaryKey": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.summary"
   },
   "cards": [
     {
       "id": "sketch0",
       "kind": "sketch",
-      "titleKey": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.where-am-i.cards.sketch0.title",
-      "sketchId": "pwd-current-place",
+      "titleKey": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.cards.sketch0.title",
+      "sketchId": "where-am-i-basics",
       "height": 420,
       "tryIt": {
         "id": "try-where-am-i-sketch0",
-        "titleKey": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.where-am-i.tryIt.try_where_am_i_sketch0.title",
-        "promptKey": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.where-am-i.tryIt.try_where_am_i_sketch0.prompt",
-        "exerciseKey": "try-location-print-path",
+        "titleKey": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.tryIt.try_where_am_i_sketch0.title",
+        "promptKey": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.tryIt.try_where_am_i_sketch0.prompt",
+        "exerciseKey": "where-am-i-try-it-1",
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -51,14 +41,14 @@
     {
       "id": "sketch1",
       "kind": "sketch",
-      "titleKey": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.where-am-i.cards.sketch1.title",
-      "sketchId": "ls-shows-nearby-files",
+      "titleKey": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.cards.sketch1.title",
+      "sketchId": "list-files-with-ls",
       "height": 420,
       "tryIt": {
         "id": "try-where-am-i-sketch1",
-        "titleKey": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.where-am-i.tryIt.try_where_am_i_sketch1.title",
-        "promptKey": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.where-am-i.tryIt.try_where_am_i_sketch1.prompt",
-        "exerciseKey": "try-location-list-desk",
+        "titleKey": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.tryIt.try_where_am_i_sketch1.title",
+        "promptKey": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.tryIt.try_where_am_i_sketch1.prompt",
+        "exerciseKey": "where-am-i-try-it-2",
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -70,14 +60,14 @@
     {
       "id": "sketch2",
       "kind": "sketch",
-      "titleKey": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.where-am-i.cards.sketch2.title",
-      "sketchId": "paths-start-from-here",
+      "titleKey": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.cards.sketch2.title",
+      "sketchId": "pwd-and-ls-together",
       "height": 420,
       "tryIt": {
         "id": "try-where-am-i-sketch2",
-        "titleKey": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.where-am-i.tryIt.try_where_am_i_sketch2.title",
-        "promptKey": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.where-am-i.tryIt.try_where_am_i_sketch2.prompt",
-        "exerciseKey": "try-location-show-hidden-desk",
+        "titleKey": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.tryIt.try_where_am_i_sketch2.title",
+        "promptKey": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.tryIt.try_where_am_i_sketch2.prompt",
+        "exerciseKey": "where-am-i-try-it-3",
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -89,103 +79,46 @@
     {
       "id": "quiz",
       "kind": "quiz",
-      "titleKey": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.where-am-i.cards.quiz.title",
+      "titleKey": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.cards.quiz.title",
       "quiz": {
         "difficulty": "easy",
         "n": 4,
         "min": 4,
-        "max": 4,
+        "max": 6,
         "selectionMode": "random",
         "allowReveal": true,
         "preferKind": null,
         "maxAttempts": null
       }
-    },
-    {
-      "id": "project",
-      "kind": "project",
-      "titleKey": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.where-am-i.cards.project.title",
-      "project": {
-        "difficulty": "easy",
-        "allowReveal": true,
-        "preferKind": "code_input",
-        "maxAttempts": null,
-        "steps": [
-          {
-            "id": "ci_create_navigation_lab",
-            "titleKey": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.where-am-i.projectSteps.ci_create_navigation_lab.title",
-            "exerciseKey": "ci-create-navigation-lab",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "maxAttempts": null
-          },
-          {
-            "id": "ci_create_visible_hidden_practice",
-            "titleKey": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.where-am-i.projectSteps.ci_create_visible_hidden_practice.title",
-            "exerciseKey": "ci-create-visible-hidden-practice",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "maxAttempts": null
-          },
-          {
-            "id": "ci_create_long_list_lab",
-            "titleKey": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.where-am-i.projectSteps.ci_create_long_list_lab.title",
-            "exerciseKey": "ci-create-long-list-lab",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "maxAttempts": null
-          }
-        ]
-      }
     }
   ],
   "sketches": [
     {
-      "id": "pwd-current-place",
+      "id": "where-am-i-basics",
       "archetype": "paragraph",
-      "titleKey": "sketches.linux-terminal-fundamentals.linux-1-terminal-navigation.where-am-i.pwd-current-place.title",
-      "bodyKey": "sketches.linux-terminal-fundamentals.linux-1-terminal-navigation.where-am-i.pwd-current-place.bodyMarkdown"
+      "titleKey": "sketches.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.where-am-i-basics.title",
+      "bodyKey": "sketches.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.where-am-i-basics.bodyMarkdown"
     },
     {
-      "id": "ls-shows-nearby-files",
+      "id": "list-files-with-ls",
       "archetype": "paragraph",
-      "titleKey": "sketches.linux-terminal-fundamentals.linux-1-terminal-navigation.where-am-i.ls-shows-nearby-files.title",
-      "bodyKey": "sketches.linux-terminal-fundamentals.linux-1-terminal-navigation.where-am-i.ls-shows-nearby-files.bodyMarkdown"
+      "titleKey": "sketches.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.list-files-with-ls.title",
+      "bodyKey": "sketches.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.list-files-with-ls.bodyMarkdown"
     },
     {
-      "id": "paths-start-from-here",
+      "id": "pwd-and-ls-together",
       "archetype": "paragraph",
-      "titleKey": "sketches.linux-terminal-fundamentals.linux-1-terminal-navigation.where-am-i.paths-start-from-here.title",
-      "bodyKey": "sketches.linux-terminal-fundamentals.linux-1-terminal-navigation.where-am-i.paths-start-from-here.bodyMarkdown"
+      "titleKey": "sketches.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.pwd-and-ls-together.title",
+      "bodyKey": "sketches.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.pwd-and-ls-together.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "sc-pwd-meaning",
+      "id": "sc-pwd-purpose",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.where-am-i.quiz.sc-pwd-meaning",
-      "optionIds": [
-        "a",
-        "b",
-        "c",
-        "d"
-      ],
-      "expected": {
-        "kind": "single_choice",
-        "optionId": "b"
-      }
-    },
-    {
-      "id": "sc-list-files",
-      "kind": "single_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.where-am-i.quiz.sc-list-files",
+      "messageBase": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.practice.sc-pwd-purpose",
       "optionIds": [
         "a",
         "b",
@@ -198,11 +131,11 @@
       }
     },
     {
-      "id": "sc-hidden-files",
+      "id": "sc-ls-purpose",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.where-am-i.quiz.sc-hidden-files",
+      "messageBase": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.practice.sc-ls-purpose",
       "optionIds": [
         "a",
         "b",
@@ -211,15 +144,15 @@
       ],
       "expected": {
         "kind": "single_choice",
-        "optionId": "a"
+        "optionId": "c"
       }
     },
     {
-      "id": "mc-inspection",
+      "id": "mc-safe-inspection",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.where-am-i.quiz.mc-inspection",
+      "messageBase": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.practice.mc-safe-inspection",
       "optionIds": [
         "a",
         "b",
@@ -230,600 +163,367 @@
         "kind": "multi_choice",
         "optionIds": [
           "a",
-          "b",
-          "c"
+          "b"
         ]
       }
     },
     {
-      "id": "ci-create-navigation-lab",
+      "id": "dr-orient-yourself",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.practice.dr-orient-yourself",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
+    },
+    {
+      "id": "fb-pwd-expansion",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.practice.fb-pwd-expansion",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "working"
+      }
+    },
+    {
+      "id": "fb-ls-meaning",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.practice.fb-ls-meaning",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "ls"
+      }
+    },
+    {
+      "id": "where-am-i-try-it-1",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.where-am-i.quiz.ci-create-navigation-lab",
+      "messageBase": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-1",
       "language": "bash",
-      "entryFilePath": "main.sh",
-      "starterCode": "#!/usr/bin/env bash\n# Check the workspace location\n# Use the terminal for this task.\n",
+      "starterCode": "# Use the terminal for this Linux task.",
       "starterFiles": [
         {
           "path": "main.sh",
-          "content": "#!/usr/bin/env bash\n# Check the workspace location\n# Use the terminal for this task.\n",
+          "content": "# Use the terminal for this Linux task.\n",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
-          "path": "README.md",
-          "content": "# Check the workspace location\n\nRun `pwd` and confirm the terminal shows the workspace path.\n",
-          "language": "text"
+          "path": "orientation-demo/readme.txt",
+          "content": "Use pwd to print your current folder.\n",
+          "language": "bash"
         }
       ],
-      "workspace": {
-        "language": "bash",
-        "entryFilePath": "main.sh",
-        "starterCode": "#!/usr/bin/env bash\n# Check the workspace location\n# Use the terminal for this task.\n",
-        "starterFiles": [
-          {
-            "path": "main.sh",
-            "content": "#!/usr/bin/env bash\n# Check the workspace location\n# Use the terminal for this task.\n",
-            "language": "bash",
-            "isEntry": true,
-            "entry": true
-          },
-          {
-            "path": "README.md",
-            "content": "# Check the workspace location\n\nRun `pwd` and confirm the terminal shows the workspace path.\n",
-            "language": "text"
-          }
-        ],
-        "workspaceExpectations": {
-          "requiredFiles": [
-            "README.md"
-          ]
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "pwd\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
         },
-        "terminalExpectations": {
-          "requiredCommands": [
-            {
-              "pattern": "^pwd$",
-              "message": "Run: pwd"
-            }
-          ],
-          "outputRegex": [
-            "/workspace"
-          ]
+        {
+          "path": "orientation-demo/readme.txt",
+          "content": "Use pwd to print your current folder.\n",
+          "language": "bash"
         }
-      },
-      "showExpectedExample": false,
-      "recipe": {
-        "type": "shell_task",
-        "mode": "terminal_workspace",
-        "instructions": "Run `pwd` and confirm the terminal shows the workspace path."
-      },
+      ],
       "terminalExpectations": {
         "requiredCommands": [
           {
             "pattern": "^pwd$",
-            "message": "Run: pwd"
+            "message": "Run `pwd` to show the current folder."
           }
         ],
-        "outputRegex": [
-          "/workspace"
+        "forbiddenCommands": [
+          {
+            "pattern": "(^|\\s)sudo(\\s|$)",
+            "message": "Do not use sudo for beginner workspace tasks."
+          }
         ]
       },
-      "workspaceExpectations": {
-        "requiredFiles": [
-          "README.md"
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "starterCode": "# Use the terminal for this Linux task.",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "# Use the terminal for this Linux task.\n",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "orientation-demo/readme.txt",
+            "content": "Use pwd to print your current folder.\n",
+            "language": "bash"
+          }
         ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "Run pwd to check where the terminal is. This task only uses pwd."
+      },
+      "ideConfig": {
+        "runnerBackend": "pty",
+        "layoutMode": "terminal_workspace",
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalSessionScope": "exercise"
       }
     },
     {
-      "id": "ci-create-visible-hidden-practice",
+      "id": "where-am-i-try-it-2",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.where-am-i.quiz.ci-create-visible-hidden-practice",
+      "messageBase": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-2",
       "language": "bash",
-      "entryFilePath": "main.sh",
-      "starterCode": "#!/usr/bin/env bash\n# List a nearby folder\n# Use the terminal for this task.\n",
+      "starterCode": "# Use the terminal for this Linux task.",
       "starterFiles": [
         {
           "path": "main.sh",
-          "content": "#!/usr/bin/env bash\n# List a nearby folder\n# Use the terminal for this task.\n",
+          "content": "# Use the terminal for this Linux task.\n",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
-          "path": "README.md",
-          "content": "# List a nearby folder\n\nRun `ls campus` and look for `map.txt` and `room.txt`.\n",
-          "language": "text"
+          "path": "orientation-demo/notes.txt",
+          "content": "orientation notes\n",
+          "language": "bash"
         },
         {
-          "path": "campus/map.txt",
-          "content": "North hallway\nSouth lab\n",
-          "language": "text"
-        },
-        {
-          "path": "campus/room.txt",
-          "content": "Room 204\n",
-          "language": "text"
+          "path": "orientation-demo/archive/README.txt",
+          "content": "archive folder\n",
+          "language": "bash"
         }
       ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "ls\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "orientation-demo/notes.txt",
+          "content": "orientation notes\n",
+          "language": "bash"
+        },
+        {
+          "path": "orientation-demo/archive/README.txt",
+          "content": "archive folder\n",
+          "language": "bash"
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^ls$",
+            "message": "Run `ls` to list the current folder."
+          }
+        ],
+        "outputContains": [
+          "orientation-demo"
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "(^|\\s)sudo(\\s|$)",
+            "message": "Do not use sudo for beginner workspace tasks."
+          }
+        ]
+      },
       "workspace": {
         "language": "bash",
         "entryFilePath": "main.sh",
-        "starterCode": "#!/usr/bin/env bash\n# List a nearby folder\n# Use the terminal for this task.\n",
+        "starterCode": "# Use the terminal for this Linux task.",
         "starterFiles": [
           {
             "path": "main.sh",
-            "content": "#!/usr/bin/env bash\n# List a nearby folder\n# Use the terminal for this task.\n",
+            "content": "# Use the terminal for this Linux task.\n",
             "language": "bash",
             "isEntry": true,
             "entry": true
           },
           {
-            "path": "README.md",
-            "content": "# List a nearby folder\n\nRun `ls campus` and look for `map.txt` and `room.txt`.\n",
-            "language": "text"
+            "path": "orientation-demo/notes.txt",
+            "content": "orientation notes\n",
+            "language": "bash"
           },
           {
-            "path": "campus/map.txt",
-            "content": "North hallway\nSouth lab\n",
-            "language": "text"
-          },
-          {
-            "path": "campus/room.txt",
-            "content": "Room 204\n",
-            "language": "text"
+            "path": "orientation-demo/archive/README.txt",
+            "content": "archive folder\n",
+            "language": "bash"
           }
-        ],
-        "workspaceExpectations": {
-          "requiredFolders": [
-            "campus"
-          ],
-          "requiredFiles": [
-            "campus/map.txt",
-            "campus/room.txt"
-          ]
-        },
-        "terminalExpectations": {
-          "requiredCommands": [
-            {
-              "pattern": "^ls\\s+campus$",
-              "message": "Run: ls campus"
-            }
-          ],
-          "outputContains": [
-            "map.txt",
-            "room.txt"
-          ]
-        }
+        ]
       },
       "showExpectedExample": false,
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "Run `ls campus` and look for `map.txt` and `room.txt`."
+        "instructions": "Run ls to inspect what is in the current folder. This task only uses ls."
       },
-      "terminalExpectations": {
-        "requiredCommands": [
-          {
-            "pattern": "^ls\\s+campus$",
-            "message": "Run: ls campus"
-          }
-        ],
-        "outputContains": [
-          "map.txt",
-          "room.txt"
-        ]
-      },
-      "workspaceExpectations": {
-        "requiredFolders": [
-          "campus"
-        ],
-        "requiredFiles": [
-          "campus/map.txt",
-          "campus/room.txt"
-        ]
+      "ideConfig": {
+        "runnerBackend": "pty",
+        "layoutMode": "terminal_workspace",
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalSessionScope": "exercise"
       }
     },
     {
-      "id": "ci-create-long-list-lab",
+      "id": "where-am-i-try-it-3",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.where-am-i.quiz.ci-create-long-list-lab",
+      "messageBase": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-3",
       "language": "bash",
-      "entryFilePath": "main.sh",
-      "starterCode": "#!/usr/bin/env bash\n# Reveal the hidden room note\n# Use the terminal for this task.\n",
+      "starterCode": "# Use the terminal for this Linux task.",
       "starterFiles": [
         {
           "path": "main.sh",
-          "content": "#!/usr/bin/env bash\n# Reveal the hidden room note\n# Use the terminal for this task.\n",
+          "content": "# Use the terminal for this Linux task.\n",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
-          "path": "README.md",
-          "content": "# Reveal the hidden room note\n\nRun `ls -a campus` and look for `.room-number`.\n",
-          "language": "text"
+          "path": "reports/summary.txt",
+          "content": "weekly summary\n",
+          "language": "bash"
         },
         {
-          "path": "campus/map.txt",
-          "content": "North hallway\nSouth lab\n",
-          "language": "text"
-        },
-        {
-          "path": "campus/.room-number",
-          "content": "204\n",
-          "language": "text"
+          "path": "reports/archive/README.txt",
+          "content": "archive\n",
+          "language": "bash"
         }
       ],
-      "workspace": {
-        "language": "bash",
-        "entryFilePath": "main.sh",
-        "starterCode": "#!/usr/bin/env bash\n# Reveal the hidden room note\n# Use the terminal for this task.\n",
-        "starterFiles": [
-          {
-            "path": "main.sh",
-            "content": "#!/usr/bin/env bash\n# Reveal the hidden room note\n# Use the terminal for this task.\n",
-            "language": "bash",
-            "isEntry": true,
-            "entry": true
-          },
-          {
-            "path": "README.md",
-            "content": "# Reveal the hidden room note\n\nRun `ls -a campus` and look for `.room-number`.\n",
-            "language": "text"
-          },
-          {
-            "path": "campus/map.txt",
-            "content": "North hallway\nSouth lab\n",
-            "language": "text"
-          },
-          {
-            "path": "campus/.room-number",
-            "content": "204\n",
-            "language": "text"
-          }
-        ],
-        "workspaceExpectations": {
-          "requiredFolders": [
-            "campus"
-          ],
-          "requiredFiles": [
-            "campus/map.txt",
-            "campus/.room-number"
-          ]
-        },
-        "terminalExpectations": {
-          "requiredCommands": [
-            {
-              "pattern": "^ls\\s+-a\\s+campus$",
-              "message": "Run: ls -a campus"
-            }
-          ],
-          "outputContains": [
-            ".room-number"
-          ]
-        }
-      },
-      "showExpectedExample": false,
-      "recipe": {
-        "type": "shell_task",
-        "mode": "terminal_workspace",
-        "instructions": "Run `ls -a campus` and look for `.room-number`."
-      },
-      "terminalExpectations": {
-        "requiredCommands": [
-          {
-            "pattern": "^ls\\s+-a\\s+campus$",
-            "message": "Run: ls -a campus"
-          }
-        ],
-        "outputContains": [
-          ".room-number"
-        ]
-      },
-      "workspaceExpectations": {
-        "requiredFolders": [
-          "campus"
-        ],
-        "requiredFiles": [
-          "campus/map.txt",
-          "campus/.room-number"
-        ]
-      }
-    },
-    {
-      "id": "try-location-print-path",
-      "kind": "code_input",
-      "purpose": "practice",
-      "weight": 1,
-      "messageBase": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.where-am-i.quiz.try-location-print-path",
-      "language": "bash",
-      "entryFilePath": "main.sh",
-      "starterCode": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
-      "starterFiles": [
+      "solutionFiles": [
         {
           "path": "main.sh",
-          "content": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+          "content": "pwd\nls\n",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
-          "path": "README.md",
-          "content": "# Print your current path\n\nRun `pwd` and check the path before moving anywhere.\n",
-          "language": "text"
+          "path": "reports/summary.txt",
+          "content": "weekly summary\n",
+          "language": "bash"
+        },
+        {
+          "path": "reports/archive/README.txt",
+          "content": "archive\n",
+          "language": "bash"
         }
       ],
-      "workspace": {
-        "language": "bash",
-        "entryFilePath": "main.sh",
-        "starterCode": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
-        "starterFiles": [
-          {
-            "path": "main.sh",
-            "content": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
-            "language": "bash",
-            "isEntry": true,
-            "entry": true
-          },
-          {
-            "path": "README.md",
-            "content": "# Print your current path\n\nRun `pwd` and check the path before moving anywhere.\n",
-            "language": "text"
-          }
-        ],
-        "terminalExpectations": {
-          "requiredCommands": [
-            {
-              "pattern": "^pwd$",
-              "message": "Run: pwd"
-            }
-          ],
-          "outputRegex": [
-            "/workspace"
-          ]
-        },
-        "workspaceExpectations": {
-          "requiredFiles": [
-            "README.md"
-          ]
-        }
-      },
-      "showExpectedExample": false,
-      "recipe": {
-        "type": "shell_task",
-        "mode": "terminal_workspace",
-        "instructions": "Run `pwd` and confirm the path ends inside the workspace."
-      },
-      "workspaceExpectations": {
-        "requiredFiles": [
-          "README.md"
-        ]
-      },
       "terminalExpectations": {
         "requiredCommands": [
           {
             "pattern": "^pwd$",
-            "message": "Run: pwd"
+            "message": "Run `pwd` before listing files."
+          },
+          {
+            "pattern": "^ls$",
+            "message": "Run `ls` after pwd."
           }
         ],
-        "outputRegex": [
-          "/workspace"
+        "outputContains": [
+          "reports"
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "(^|\\s)sudo(\\s|$)",
+            "message": "Do not use sudo for beginner workspace tasks."
+          }
         ]
-      }
-    },
-    {
-      "id": "try-location-list-desk",
-      "kind": "code_input",
-      "purpose": "practice",
-      "weight": 1,
-      "messageBase": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.where-am-i.quiz.try-location-list-desk",
-      "language": "bash",
-      "entryFilePath": "main.sh",
-      "starterCode": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
-      "starterFiles": [
-        {
-          "path": "main.sh",
-          "content": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "README.md",
-          "content": "# Look inside a folder\n\nRun `ls desk`.\n",
-          "language": "text"
-        },
-        {
-          "path": "desk/notes.txt",
-          "content": "Bring notebook\n",
-          "language": "text"
-        },
-        {
-          "path": "desk/schedule.txt",
-          "content": "Lab at 10\n",
-          "language": "text"
-        }
-      ],
+      },
       "workspace": {
         "language": "bash",
         "entryFilePath": "main.sh",
-        "starterCode": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+        "starterCode": "# Use the terminal for this Linux task.",
         "starterFiles": [
           {
             "path": "main.sh",
-            "content": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+            "content": "# Use the terminal for this Linux task.\n",
             "language": "bash",
             "isEntry": true,
             "entry": true
           },
           {
-            "path": "README.md",
-            "content": "# Look inside a folder\n\nRun `ls desk`.\n",
-            "language": "text"
+            "path": "reports/summary.txt",
+            "content": "weekly summary\n",
+            "language": "bash"
           },
           {
-            "path": "desk/notes.txt",
-            "content": "Bring notebook\n",
-            "language": "text"
-          },
-          {
-            "path": "desk/schedule.txt",
-            "content": "Lab at 10\n",
-            "language": "text"
+            "path": "reports/archive/README.txt",
+            "content": "archive\n",
+            "language": "bash"
           }
-        ],
-        "terminalExpectations": {
-          "requiredCommands": [
-            {
-              "pattern": "^ls\\s+desk$",
-              "message": "Run: ls desk"
-            }
-          ],
-          "outputContains": [
-            "notes.txt",
-            "schedule.txt"
-          ]
-        },
-        "workspaceExpectations": {
-          "requiredFiles": [
-            "desk/notes.txt",
-            "desk/schedule.txt"
-          ]
-        }
+        ]
       },
       "showExpectedExample": false,
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "Run `ls desk` and look for `notes.txt` and `schedule.txt`."
+        "instructions": "Run pwd, then ls, to orient yourself before changing anything."
       },
-      "workspaceExpectations": {
-        "requiredFiles": [
-          "desk/notes.txt",
-          "desk/schedule.txt"
-        ]
-      },
-      "terminalExpectations": {
-        "requiredCommands": [
-          {
-            "pattern": "^ls\\s+desk$",
-            "message": "Run: ls desk"
-          }
-        ],
-        "outputContains": [
-          "notes.txt",
-          "schedule.txt"
-        ]
-      }
-    },
-    {
-      "id": "try-location-show-hidden-desk",
-      "kind": "code_input",
-      "purpose": "practice",
-      "weight": 1,
-      "messageBase": "topics.linux-terminal-fundamentals.linux-1-terminal-navigation.where-am-i.quiz.try-location-show-hidden-desk",
-      "language": "bash",
-      "entryFilePath": "main.sh",
-      "starterCode": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
-      "starterFiles": [
-        {
-          "path": "main.sh",
-          "content": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true
+      "ideConfig": {
+        "runnerBackend": "pty",
+        "layoutMode": "terminal_workspace",
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
         },
-        {
-          "path": "README.md",
-          "content": "# Show hidden desk notes\n\nRun `ls -a desk`.\n",
-          "language": "text"
-        },
-        {
-          "path": "desk/.locker",
-          "content": "blue\n",
-          "language": "text"
-        },
-        {
-          "path": "desk/notes.txt",
-          "content": "Bring notebook\n",
-          "language": "text"
-        }
-      ],
-      "workspace": {
-        "language": "bash",
-        "entryFilePath": "main.sh",
-        "starterCode": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
-        "starterFiles": [
-          {
-            "path": "main.sh",
-            "content": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
-            "language": "bash",
-            "isEntry": true,
-            "entry": true
-          },
-          {
-            "path": "README.md",
-            "content": "# Show hidden desk notes\n\nRun `ls -a desk`.\n",
-            "language": "text"
-          },
-          {
-            "path": "desk/.locker",
-            "content": "blue\n",
-            "language": "text"
-          },
-          {
-            "path": "desk/notes.txt",
-            "content": "Bring notebook\n",
-            "language": "text"
-          }
-        ],
-        "terminalExpectations": {
-          "requiredCommands": [
-            {
-              "pattern": "^ls\\s+-a\\s+desk$",
-              "message": "Run: ls -a desk"
-            }
-          ],
-          "outputContains": [
-            ".locker"
-          ]
-        },
-        "workspaceExpectations": {
-          "requiredFiles": [
-            "desk/.locker",
-            "desk/notes.txt"
-          ]
-        }
-      },
-      "showExpectedExample": false,
-      "recipe": {
-        "type": "shell_task",
-        "mode": "terminal_workspace",
-        "instructions": "Run `ls -a desk` and look for `.locker`."
-      },
-      "workspaceExpectations": {
-        "requiredFiles": [
-          "desk/.locker",
-          "desk/notes.txt"
-        ]
-      },
-      "terminalExpectations": {
-        "requiredCommands": [
-          {
-            "pattern": "^ls\\s+-a\\s+desk$",
-            "message": "Run: ls -a desk"
-          }
-        ],
-        "outputContains": [
-          ".locker"
-        ]
+        "terminalSessionScope": "exercise"
       }
     }
-  ]
+  ],
+  "topicMeta": {
+    "learningGoals": [
+      "Try it yourself: save a pwd check",
+      "Try it yourself: save an ls check",
+      "Try it yourself: combine pwd and ls"
+    ]
+  },
+  "serviceDefaults": {
+    "runnerBackend": "pty",
+    "layoutMode": "terminal_workspace",
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": true
+    }
+  }
 }

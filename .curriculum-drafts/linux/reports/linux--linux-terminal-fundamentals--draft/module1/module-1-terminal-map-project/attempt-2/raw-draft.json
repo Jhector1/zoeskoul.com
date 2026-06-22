@@ -1,0 +1,92 @@
+{
+  "title": "Project: Terminal Map",
+  "summary": "Build a small folder map using pwd, ls, cd, mkdir, and touch.",
+  "minutes": 22,
+  "sketchBlocks": [
+    {
+      "id": "module-1-terminal-map-project-sketch-1",
+      "title": "Plan a folder map before you build it",
+      "bodyMarkdown": "A terminal project gets easier when you picture the structure first. In this project, you are acting like someone organizing a tiny field-notes workspace for a park map.\n\nYou will build a nested folder structure, then move into it and inspect it. The key idea is that `mkdir` creates folders, `touch` creates empty files, and `ls` helps you confirm what exists.\n\nHere is a small example structure:\n\n```bash\nmkdir -p park-map/trails park-map/notes\ntouch park-map/notes/todo.txt\nls park-map\n```\n\nLine by line:\n\n- First, `mkdir -p park-map/trails park-map/notes` creates the main folder and both subfolders in one step.\n- Second, `touch park-map/notes/todo.txt` creates an empty note file inside `notes`.\n- Third, `ls park-map` lists what is inside `park-map`, so you can verify the structure.\n\nThis matters because a good terminal user does not guess. They create a structure, then check it."
+    },
+    {
+      "id": "module-1-terminal-map-project-sketch-2",
+      "title": "Move through the map safely",
+      "bodyMarkdown": "After you create folders, you need to move through them with `cd` and confirm your location with `pwd`.\n\nA short navigation example looks like this:\n\n```bash\ncd park-map\npwd\ncd trails\npwd\ncd ..\n```\n\nStep by step:\n\n- `cd park-map` moves into the `park-map` folder.\n- `pwd` prints your current location so you can confirm where you are.\n- `cd trails` moves one level deeper into the `trails` folder.\n- The next `pwd` shows that deeper location.\n- `cd ..` moves back up one folder level.\n\nThe symbols matter:\n\n- `.` means the current folder.\n- `..` means the parent folder.\n- `~` means your home location.\n\nFor this project, the most useful safe move is `cd ..` when you need to go back up one level."
+    },
+    {
+      "id": "module-1-terminal-map-project-sketch-3",
+      "title": "Inspect the finished workspace",
+      "bodyMarkdown": "A finished terminal task is not just about creating files. You also need to inspect the result.\n\nYou can use `ls` to list items and `pwd` to confirm location. For example:\n\n```bash\ncd park-map/notes\npwd\nls\n```\n\nLine by line:\n\n- `cd park-map/notes` moves directly into the `notes` folder.\n- `pwd` prints the full current location.\n- `ls` lists the contents of `notes` so you can check whether the expected file is there.\n\nInspection is part of the skill. If you can create a structure but cannot verify it, you are still missing an important terminal habit."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "module-1-terminal-map-project-terminal-task-1",
+      "kind": "fill_blank_choice",
+      "title": "Create the park map folders",
+      "prompt": "You are organizing a tiny park survey workspace. Create a folder named `park-map` with two subfolders inside it: `trails` and `notes`. Then create an empty file named `todo.txt` inside `park-map/notes`. Use the terminal to build the structure so the file explorer shows the finished map.",
+      "hint": "Use one command that can create nested folders, then create the empty note file inside `notes`.",
+      "help": {
+        "concept": "This task checks whether you can build a nested workspace structure with `mkdir -p` and create an empty file with `touch`. The goal is the folder tree, not printed output.",
+        "hint_1": "Create `park-map`, `park-map/trails`, and `park-map/notes` first. `mkdir -p` can create the parent and child folders together.",
+        "hint_2": "After the folders exist, create `todo.txt` specifically inside `park-map/notes`, not beside `park-map`."
+      },
+      "template": "A file-writing code exercise should also ____ so automated tests can check it.",
+      "choices": [
+        "print an observable result",
+        "hide all output",
+        "delete the file immediately",
+        "skip the program"
+      ],
+      "correctValue": "print an observable result"
+    },
+    {
+      "id": "module-1-terminal-map-project-terminal-task-2",
+      "kind": "fill_blank_choice",
+      "title": "Add a landmarks area to the same map",
+      "prompt": "Continue the same park survey project from the previous step. Keep the existing `park-map`, `trails`, `notes`, and `todo.txt` structure. Add a new subfolder named `landmarks` inside `park-map`, then create an empty file named `signs.txt` inside `park-map/landmarks`. Do not remove or rename anything you already built.",
+      "hint": "This step starts from the earlier finished map, so only add the new folder and file.",
+      "help": {
+        "concept": "This task checks progressive workspace building. You should preserve the earlier structure and extend it with one more subfolder and one file.",
+        "hint_1": "Assume `park-map`, `trails`, `notes`, and `notes/todo.txt` already exist from the previous step.",
+        "hint_2": "Create `park-map/landmarks` and then create `park-map/landmarks/signs.txt` inside that new folder."
+      },
+      "template": "A file-writing code exercise should also ____ so automated tests can check it.",
+      "choices": [
+        "print an observable result",
+        "hide all output",
+        "delete the file immediately",
+        "skip the program"
+      ],
+      "correctValue": "print an observable result"
+    },
+    {
+      "id": "module-1-terminal-map-project-terminal-task-3",
+      "kind": "fill_blank_choice",
+      "title": "Navigate into notes and confirm the map",
+      "prompt": "Continue the same park survey project from the previous step. Keep the full existing structure. Move into `park-map/notes`, then use commands that prove two things: you are currently inside the `notes` folder, and `todo.txt` is inside it. The checker will look for both your location and the inspection commands you used.",
+      "hint": "You need to change into `park-map/notes`, then use one command to show your location and one to list what is there.",
+      "help": {
+        "concept": "This task checks navigation and inspection together. `cd` changes location, `pwd` confirms where you are, and `ls` shows the contents of the current folder.",
+        "hint_1": "Start from the completed map from the previous step, including `landmarks/signs.txt` and `notes/todo.txt`. Then move specifically into `park-map/notes`.",
+        "hint_2": "After changing folders, run `pwd` to confirm the current location and `ls` to show that `todo.txt` is present in the current folder."
+      },
+      "template": "A file-writing code exercise should also ____ so automated tests can check it.",
+      "choices": [
+        "print an observable result",
+        "hide all output",
+        "delete the file immediately",
+        "skip the program"
+      ],
+      "correctValue": "print an observable result"
+    }
+  ],
+  "projectDraft": {
+    "title": "Park Survey Terminal Map",
+    "stepIds": [
+      "module-1-terminal-map-project-terminal-task-1",
+      "module-1-terminal-map-project-terminal-task-2",
+      "module-1-terminal-map-project-terminal-task-3"
+    ]
+  }
+}

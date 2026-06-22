@@ -357,6 +357,53 @@ function extractPromptCommandsFromTerminalOutput(outputText: string): string[] {
     return commands;
 }
 
+function extractCwdFromTerminalOutput(outputText: string): string {
+    const normalized = stripAnsiForTerminalEvidence(outputText)
+        .replace(/\r\n/g, "\n")
+        .replace(/\r/g, "\n");
+
+    const lines = normalized
+        .split("\n")
+        .map((line) => line.trim())
+        .filter(Boolean);
+
+    /**
+     * Strongest signal: the absolute path printed immediately after a `pwd`
+     * command. Walk from the bottom so the latest terminal state wins.
+     */
+    for (let index = lines.length - 1; index >= 1; index -= 1) {
+        const line = lines[index];
+        if (!line.startsWith("/")) continue;
+
+        const previousLine = lines[index - 1] ?? "";
+        const promptMatch = previousLine.match(
+            /(?:^|\s)(?:\[[^\]]+\][^$#\n]*|\S+)?[$#]\s+(.+)$/,
+        );
+        const command = promptMatch?.[1]?.trim() ?? "";
+
+        if (command === "pwd") {
+            return line;
+        }
+    }
+
+    /**
+     * Fallback: infer the current directory from the last visible shell prompt.
+     * For prompts such as `[zoeskoul]~/navigation-practice$`, keep the prompt
+     * path string so cwd suffix checks still work.
+     */
+    for (let index = lines.length - 1; index >= 0; index -= 1) {
+        const line = lines[index];
+        const promptMatch = line.match(/^\[[^\]]+\]([^$#\n]*)[$#]\s*(?:.*)?$/);
+        const promptPath = promptMatch?.[1]?.trim() ?? "";
+
+        if (promptPath) {
+            return promptPath;
+        }
+    }
+
+    return "";
+}
+
 function collectTerminalEvidenceCommands(
     terminalEvidence: TerminalEvidenceInput | undefined,
     outputText: string,
@@ -399,10 +446,12 @@ function validateTerminalExpectations(args: {
         args.terminalEvidence,
         outputText,
     );
-    const cwd =
+    const transcriptCwd = extractCwdFromTerminalOutput(outputText);
+    const evidenceCwd =
         typeof args.terminalEvidence?.cwd === "string"
-            ? args.terminalEvidence.cwd
+            ? args.terminalEvidence.cwd.trim()
             : "";
+    const normalizedCwd = transcriptCwd || evidenceCwd;
 
     for (const expectation of asTerminalCommandExpectations(
         expectations.requiredCommands,
@@ -516,7 +565,7 @@ function validateTerminalExpectations(args: {
     if (
         typeof expectations.cwdContains === "string" &&
         expectations.cwdContains &&
-        !cwd.includes(expectations.cwdContains)
+        !normalizedCwd.includes(expectations.cwdContains)
     ) {
         const message = `Run pwd after moving into a folder containing: ${expectations.cwdContains}`;
 
@@ -532,7 +581,7 @@ function validateTerminalExpectations(args: {
     if (
         typeof expectations.cwdEndsWith === "string" &&
         expectations.cwdEndsWith &&
-        !cwd.endsWith(expectations.cwdEndsWith)
+        !normalizedCwd.endsWith(expectations.cwdEndsWith)
     ) {
         const message = `Run pwd after moving into ${expectations.cwdEndsWith}.`;
 

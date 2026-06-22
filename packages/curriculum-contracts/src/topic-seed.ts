@@ -9,8 +9,10 @@ import {
     WorkspaceProfile,
 } from "./workspace.js";
 import {ManifestRuntimeDefaults} from "./manifest";
+import type { ManifestIdeServiceConfig } from "./ide-services.js";
 
 export type TopicSeedRuntimeDefaults = ManifestRuntimeDefaults;
+export type TopicSeedServiceDefaults = ManifestIdeServiceConfig;
 
 export type SqlDatasetGrounding = {
     defaultDatasetId?: string;
@@ -35,6 +37,7 @@ export type TopicSeed = {
     technical?: boolean;
 
     moduleRuntimeDefaults?: TopicSeedRuntimeDefaults | null;
+    moduleServiceDefaults?: TopicSeedServiceDefaults | null;
     moduleDataset?: SqlDatasetArtifact | null;
     sqlGrounding?: SqlDatasetGrounding | null;
 

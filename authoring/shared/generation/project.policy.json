@@ -1,0 +1,14 @@
+{
+  "policyId": "shared-generation-project",
+  "notes": [
+    "Project and capstone topics should inherit progressive, connected practice behavior unless authoring overrides it.",
+    "Project-specific runtime details still belong to the concrete profile/runtime layer.",
+    "Module projects and final capstones should use real-world scenarios, cumulative steps, and reusable learner work."
+  ],
+  "projectRequirements": {
+    "requireRealWorldStory": true,
+    "requireCumulativeChaining": true,
+    "requireCompleteSolutionFiles": true,
+    "reuseTryItInProjects": true
+  }
+}

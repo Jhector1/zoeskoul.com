@@ -1,0 +1,20 @@
+{
+  "topicId": "module-5-gradebook-project",
+  "ok": false,
+  "issues": [
+    {
+      "code": "PYTHON_FIXED_TESTS_NEED_RUNNABLE_OUTPUT",
+      "category": "tests",
+      "severity": "error",
+      "exerciseId": "exercise1",
+      "message": "Exercise \"exercise1\" uses fixed_tests, but solutionCode does not look like a runnable program with observable output. Use semantic checks for return-value tasks."
+    },
+    {
+      "code": "PYTHON_FIXED_TESTS_NEED_RUNNABLE_OUTPUT",
+      "category": "tests",
+      "severity": "error",
+      "exerciseId": "exercise2",
+      "message": "Exercise \"exercise2\" uses fixed_tests, but solutionCode does not look like a runnable program with observable output. Use semantic checks for return-value tasks."
+    }
+  ]
+}

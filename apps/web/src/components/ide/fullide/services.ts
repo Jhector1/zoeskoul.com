@@ -25,6 +25,7 @@ export type FullIDERunnerServices = {
     showSqlDialectPicker: boolean;
     enableWorkspaceTerminal: boolean;
     terminalSessionScope: TerminalSessionScope;
+    terminalCwd?: string;
 };
 
 export type FullIDEProjectServices = {

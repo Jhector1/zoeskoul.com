@@ -24,11 +24,13 @@ import { buildTopicSeedFromPlanNode } from "../seeds/buildTopicSeedFromPlanNode.
 
 export async function critiqueTopicDraft(args: {
     blueprint: CourseBlueprint;
+    draftSubjectSlug?: string;
     provider: AiProvider;
     topicId: string;
     onProgress?: CompileProgressCallback;
 }) {
     validateBlueprint(args.blueprint);
+    const draftSubjectSlug = args.draftSubjectSlug ?? args.blueprint.subjectSlug;
 
     const totalStages = 4;
     let currentStage = 0;
@@ -107,7 +109,7 @@ export async function critiqueTopicDraft(args: {
     });
 
     const saved = await readTopicReports({
-        subjectSlug: args.blueprint.subjectSlug,
+        subjectSlug: draftSubjectSlug,
         moduleOrder: node.moduleIndex,
         topicId: node.topic.topicId,
     });
@@ -162,7 +164,7 @@ export async function critiqueTopicDraft(args: {
     });
 
     await writeTopicReports({
-        subjectSlug: args.blueprint.subjectSlug,
+        subjectSlug: draftSubjectSlug,
         moduleOrder: node.moduleIndex,
         topicId: node.topic.topicId,
         repairedDraft: preparedDraft,
@@ -182,13 +184,13 @@ export async function critiqueTopicDraft(args: {
 
     return {
         mode: "draft" as const,
-        subjectSlug: args.blueprint.subjectSlug,
+        subjectSlug: draftSubjectSlug,
         topicId: node.topic.topicId,
         moduleSlug: node.module.moduleSlug,
         sectionSlug: node.section.sectionSlug,
         moduleOrder: node.moduleIndex,
         reportDir: path.join(
-            getDraftReportsRoot(args.blueprint.subjectSlug),
+            getDraftReportsRoot(draftSubjectSlug),
             `module${node.moduleIndex}`,
             node.topic.topicId,
         ),

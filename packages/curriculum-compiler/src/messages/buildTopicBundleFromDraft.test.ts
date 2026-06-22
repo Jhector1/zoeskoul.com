@@ -826,7 +826,7 @@ describe("buildTopicBundleFromDraft messageBase integration", () => {
         });
     });
 
-    it("reuses the last code_input when there are more sketches than exercises", () => {
+    it("does not reuse the last code_input when there are more sketches than exercises", () => {
         const bundle = buildTopicBundleFromDraft({
             shape: makePythonShapePack(),
             seed: {
@@ -840,9 +840,7 @@ describe("buildTopicBundleFromDraft messageBase integration", () => {
             draft: makeMultiSketchTryItDraft(4),
         });
 
-        expect(bundle.cards.find((card) => card.id === "sketch3")).toMatchObject({
-            tryIt: { exerciseKey: "ex11" },
-        });
+        expect((bundle.cards.find((card) => card.id === "sketch3") as any)?.tryIt).toBeUndefined();
     });
 
     it("emits no tryIt when topic practice disables it", () => {
@@ -1596,6 +1594,110 @@ describe("buildTopicBundleFromDraft messageBase integration", () => {
         const step2 = bundle.exercises.find((exercise) => exercise.id === "step-2") as any;
         expect(step2.starterCode).toBe("print('fresh start')");
     });
+
+    it("chains multi-file project workspaces forward for progressive project steps", () => {
+        const bundle = buildTopicBundleFromDraft({
+            shape: makePythonShapePack(),
+            seed: {
+                ...makePythonSeed(),
+                sectionRole: "module_project",
+                practice: {
+                    projectFlow: "progressive",
+                },
+            } as any,
+            draft: {
+                title: "Operations project",
+                summary: "Build a reusable file organizer.",
+                minutes: 20,
+                sketchBlocks: [],
+                quizDraft: [
+                    {
+                        id: "step-1",
+                        kind: "code_input",
+                        title: "Create helpers",
+                        prompt: "Add the first helper module.",
+                        starterCode: "from helpers import greet\nprint(greet())\n",
+                        starterFiles: [
+                            {
+                                path: "main.py",
+                                content: "from helpers import greet\nprint(greet())\n",
+                                language: "python",
+                                isEntry: true,
+                            },
+                            {
+                                path: "helpers.py",
+                                content: "def greet():\n    return 'draft'\n",
+                                language: "python",
+                            },
+                        ],
+                        solutionFiles: [
+                            {
+                                path: "main.py",
+                                content: "from helpers import greet\nprint(greet())\n",
+                                language: "python",
+                                isEntry: true,
+                            },
+                            {
+                                path: "helpers.py",
+                                content: "def greet():\n    return 'step 1'\n",
+                                language: "python",
+                            },
+                        ],
+                        solutionCode: "from helpers import greet\nprint(greet())\n",
+                        tests: [
+                            { stdout: "step 1\n", match: "exact" },
+                            { stdout: "step 1\n", match: "exact" },
+                        ],
+                        hint: "Hint",
+                        help: {
+                            concept: "Concept",
+                            hint_1: "Hint 1",
+                            hint_2: "Hint 2",
+                        },
+                    },
+                    {
+                        id: "step-2",
+                        kind: "code_input",
+                        title: "Add report writer",
+                        prompt: "Add a report writer that uses the helper module.",
+                        starterCode: "print('fresh start')\n",
+                        starterFiles: [
+                            {
+                                path: "reports.py",
+                                content: "def write_report():\n    return 'todo'\n",
+                                language: "python",
+                            },
+                        ],
+                        solutionCode:
+                            "from helpers import greet\nfrom reports import write_report\nprint(greet(), write_report())\n",
+                        tests: [
+                            { stdout: "step 1 ready\n", match: "includes" },
+                            { stdout: "report ready\n", match: "includes" },
+                        ],
+                        hint: "Hint",
+                        help: {
+                            concept: "Concept",
+                            hint_1: "Hint 1",
+                            hint_2: "Hint 2",
+                        },
+                    },
+                ],
+            } as any,
+        });
+
+        const step2 = bundle.exercises.find((exercise) => exercise.id === "step-2") as any;
+        expect(step2.starterFiles.map((file: any) => file.path)).toEqual([
+            "main.py",
+            "helpers.py",
+            "reports.py",
+        ]);
+        expect(step2.solutionFiles.map((file: any) => file.path)).toEqual([
+            "main.py",
+            "helpers.py",
+            "reports.py",
+        ]);
+    });
+
     it("preserves nested starter files and fixture files for online editor folders", () => {
         const bundle = buildTopicBundleFromDraft({
             shape: makePythonShapePack(),

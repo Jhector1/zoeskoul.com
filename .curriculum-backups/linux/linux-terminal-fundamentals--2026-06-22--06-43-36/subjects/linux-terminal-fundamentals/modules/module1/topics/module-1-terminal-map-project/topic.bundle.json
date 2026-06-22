@@ -1,0 +1,348 @@
+{
+  "topicId": "module-1-terminal-map-project",
+  "subjectSlug": "linux-terminal-fundamentals",
+  "moduleSlug": "linux-module-1-terminal-navigation",
+  "sectionSlug": "linux-terminal-fundamentals-linux-module-1-project",
+  "prefix": "linux_module_1",
+  "minutes": 22,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "bash",
+    "supportsTerminal": true,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "topic": {
+    "labelKey": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.module-1-terminal-map-project.label",
+    "summaryKey": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.module-1-terminal-map-project.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.module-1-terminal-map-project.cards.sketch0.title",
+      "sketchId": "project-goal",
+      "height": 420,
+      "tryIt": {
+        "id": "try-module-1-terminal-map-project-sketch0",
+        "titleKey": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.module-1-terminal-map-project.tryIt.try_module_1_terminal_map_project_sketch0.title",
+        "promptKey": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.module-1-terminal-map-project.tryIt.try_module_1_terminal_map_project_sketch0.prompt",
+        "exerciseKey": "ci-terminal-map-base",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.module-1-terminal-map-project.cards.sketch1.title",
+      "sketchId": "project-workflow",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.module-1-terminal-map-project.cards.sketch2.title",
+      "sketchId": "project-checking",
+      "height": 420
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.module-1-terminal-map-project.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "ci_terminal_map_base",
+            "titleKey": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.module-1-terminal-map-project.projectSteps.ci_terminal_map_base.title",
+            "exerciseKey": "ci-terminal-map-base",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "ci_terminal_map_markers",
+            "titleKey": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.module-1-terminal-map-project.projectSteps.ci_terminal_map_markers.title",
+            "exerciseKey": "ci-terminal-map-markers",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "ci_terminal_map_final",
+            "titleKey": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.module-1-terminal-map-project.projectSteps.ci_terminal_map_final.title",
+            "exerciseKey": "ci-terminal-map-final",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "project-goal",
+      "archetype": "paragraph",
+      "titleKey": "sketches.linux-terminal-fundamentals.linux-module-1-terminal-navigation.module-1-terminal-map-project.project-goal.title",
+      "bodyKey": "sketches.linux-terminal-fundamentals.linux-module-1-terminal-navigation.module-1-terminal-map-project.project-goal.bodyMarkdown"
+    },
+    {
+      "id": "project-workflow",
+      "archetype": "paragraph",
+      "titleKey": "sketches.linux-terminal-fundamentals.linux-module-1-terminal-navigation.module-1-terminal-map-project.project-workflow.title",
+      "bodyKey": "sketches.linux-terminal-fundamentals.linux-module-1-terminal-navigation.module-1-terminal-map-project.project-workflow.bodyMarkdown"
+    },
+    {
+      "id": "project-checking",
+      "archetype": "paragraph",
+      "titleKey": "sketches.linux-terminal-fundamentals.linux-module-1-terminal-navigation.module-1-terminal-map-project.project-checking.title",
+      "bodyKey": "sketches.linux-terminal-fundamentals.linux-module-1-terminal-navigation.module-1-terminal-map-project.project-checking.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "ci-terminal-map-base",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.module-1-terminal-map-project.quiz.ci-terminal-map-base",
+      "language": "bash",
+      "starterCode": "# Use the terminal for this Linux task.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Use the terminal for this Linux task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "field-kit/north/door.txt",
+          "content": "north\n",
+          "language": "bash"
+        },
+        {
+          "path": "field-kit/south/window.txt",
+          "content": "south\n",
+          "language": "bash"
+        },
+        {
+          "path": "field-kit/logs/notes.txt",
+          "content": "logs\n",
+          "language": "bash"
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^ls\\s+field-kit$"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "(^|\\s)sudo(\\s|$)",
+            "message": "Do not use sudo for beginner workspace tasks."
+          }
+        ],
+        "outputContains": [
+          "north",
+          "south",
+          "logs"
+        ]
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "starterCode": "# Use the terminal for this Linux task.",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "# Use the terminal for this Linux task.\n",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "field-kit/north/door.txt",
+            "content": "north\n",
+            "language": "bash"
+          },
+          {
+            "path": "field-kit/south/window.txt",
+            "content": "south\n",
+            "language": "bash"
+          },
+          {
+            "path": "field-kit/logs/notes.txt",
+            "content": "logs\n",
+            "language": "bash"
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "Run `ls field-kit` and confirm you see `north`, `south`, and `logs`."
+      }
+    },
+    {
+      "id": "ci-terminal-map-markers",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.module-1-terminal-map-project.quiz.ci-terminal-map-markers",
+      "language": "bash",
+      "starterCode": "ls field-kit\n# Project step 2: Check the north note\n# Keep the working code above from the previous step.\n# Next, Use `cd` to enter `field-kit/north`, then run `pwd` and `ls`\n# Add only the focused change for this step below or inside the existing work.\n",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Use the terminal for this Linux task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "field-kit/north/door.txt",
+          "content": "north\n",
+          "language": "bash"
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^cd\\s+field-kit/north$"
+          },
+          {
+            "pattern": "^pwd$"
+          },
+          {
+            "pattern": "^ls$"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "(^|\\s)sudo(\\s|$)",
+            "message": "Do not use sudo for beginner workspace tasks."
+          }
+        ],
+        "outputContains": [
+          "/workspace/field-kit/north",
+          "door.txt"
+        ]
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "starterCode": "ls field-kit\n# Project step 2: Check the north note\n# Keep the working code above from the previous step.\n# Next, Use `cd` to enter `field-kit/north`, then run `pwd` and `ls`\n# Add only the focused change for this step below or inside the existing work.\n",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "# Use the terminal for this Linux task.\n",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "field-kit/north/door.txt",
+            "content": "north\n",
+            "language": "bash"
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "Use `cd` to enter `field-kit/north`, then run `pwd` and `ls`."
+      }
+    },
+    {
+      "id": "ci-terminal-map-final",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.module-1-terminal-map-project.quiz.ci-terminal-map-final",
+      "language": "bash",
+      "starterCode": "cd field-kit/north\npwd\nls\n# Project step 3: Confirm the south note from the map\n# Keep the working code above from the previous step.\n# Next, Use the field kit map to reach `field-kit/south`, then run `pwd` and `ls`\n# Add only the focused change for this step below or inside the existing work.\n",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Use the terminal for this Linux task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "field-kit/south/window.txt",
+          "content": "south\n",
+          "language": "bash"
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^cd\\s+field-kit/south$"
+          },
+          {
+            "pattern": "^pwd$"
+          },
+          {
+            "pattern": "^ls$"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "(^|\\s)sudo(\\s|$)",
+            "message": "Do not use sudo for beginner workspace tasks."
+          }
+        ],
+        "outputContains": [
+          "/workspace/field-kit/south",
+          "window.txt"
+        ]
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "starterCode": "cd field-kit/north\npwd\nls\n# Project step 3: Confirm the south note from the map\n# Keep the working code above from the previous step.\n# Next, Use the field kit map to reach `field-kit/south`, then run `pwd` and `ls`\n# Add only the focused change for this step below or inside the existing work.\n",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "# Use the terminal for this Linux task.\n",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "field-kit/south/window.txt",
+            "content": "south\n",
+            "language": "bash"
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "Use the field kit map to reach `field-kit/south`, then run `pwd` and `ls`."
+      }
+    }
+  ]
+}

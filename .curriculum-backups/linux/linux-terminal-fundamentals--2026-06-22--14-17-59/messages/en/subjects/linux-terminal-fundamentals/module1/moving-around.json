@@ -1,0 +1,208 @@
+{
+  "topics": {
+    "linux-terminal-fundamentals": {
+      "linux-module-1-terminal-navigation": {
+        "moving-around": {
+          "label": "Moving Around with cd",
+          "summary": "Use cd, .., ., and ~ to move between folders safely.",
+          "cards": {
+            "sketch0": {
+              "title": "What `cd` changes"
+            },
+            "sketch1": {
+              "title": "Using `..`, `.`, and `~`"
+            },
+            "sketch2": {
+              "title": "Reading paths safely before you move"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Build a simple navigation map for a client workspace"
+            }
+          },
+          "projectSteps": {
+            "moving_around_terminal_task_1": {
+              "title": "Prepare terminal workspace 1"
+            },
+            "moving_around_terminal_task_2": {
+              "title": "Prepare terminal workspace 2"
+            },
+            "moving_around_terminal_task_3": {
+              "title": "Prepare terminal workspace 3"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_moving_around_sketch0": {
+              "title": "Try: Prepare terminal workspace 1",
+              "prompt": "Create a folder named moving-around-workspace-1, then create moving-around-workspace-1/notes.txt as the marker file for Moving Around with cd. Produce the result for prepare terminal workspace 1 so it reinforces Moving Around with cd."
+            },
+            "try_moving_around_sketch1": {
+              "title": "Try: Prepare terminal workspace 2",
+              "prompt": "Create a folder named moving-around-workspace-2, then create moving-around-workspace-2/notes.txt as the marker file for Moving Around with cd. Produce the result for prepare terminal workspace 2 so it reinforces Moving Around with cd."
+            },
+            "try_moving_around_sketch2": {
+              "title": "Try: Prepare terminal workspace 3",
+              "prompt": "Create a folder named moving-around-workspace-3, then create moving-around-workspace-3/notes.txt as the marker file for Moving Around with cd. Produce the result for prepare terminal workspace 3 so it reinforces Moving Around with cd."
+            }
+          },
+          "quiz": {
+            "q1": {
+              "title": "What `cd` does",
+              "prompt": "Which command changes your current folder in the Linux Terminal?",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "options": {
+                "a": "pwd",
+                "b": "cd",
+                "c": "ls",
+                "d": "cat"
+              }
+            },
+            "moving-around-single-choice-2": {
+              "title": "Choose the best description",
+              "prompt": "Which statement best matches Moving Around with cd?",
+              "hint": "Look for the answer that describes the main concept from the lesson.",
+              "help": {
+                "concept": "This question checks the main idea from Moving Around with cd.",
+                "hint_1": "Use the lesson explanation, then eliminate answers that do not match it.",
+                "hint_2": "Pick the answer that matches the course concept, not a random detail."
+              },
+              "options": {
+                "a": "It describes the main concept from the lesson.",
+                "b": "It is unrelated to the course topic.",
+                "c": "It skips the learner goal.",
+                "d": "It replaces the concept with an unsafe shortcut."
+              }
+            },
+            "moving-around-multi-choice-1": {
+              "title": "Select safe learning habits",
+              "prompt": "Which actions are good habits while learning this topic?",
+              "hint": "Good habits keep the learner focused on the lesson goal and visible results.",
+              "help": {
+                "concept": "This question checks the main idea from Moving Around with cd.",
+                "hint_1": "Use the lesson explanation, then eliminate answers that do not match it.",
+                "hint_2": "Pick the answer that matches the course concept, not a random detail."
+              },
+              "options": {
+                "a": "Read the prompt carefully before acting",
+                "b": "Check your result after making a change",
+                "c": "Ignore the exact names in the task",
+                "d": "Use unrelated shortcuts without understanding them"
+              }
+            },
+            "moving-around-drag-reorder-1": {
+              "title": "Order a safe practice flow",
+              "prompt": "Put these learning steps in a safe order.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "Read the goal",
+                "t2": "Try one step",
+                "t3": "Check the result",
+                "t4": "Reflect on what changed"
+              }
+            },
+            "q2": {
+              "title": "Move up one level",
+              "prompt": "Complete the command that moves from the current folder to its parent folder.",
+              "hint": "Use the special path that means 'parent folder.'",
+              "help": {
+                "concept": "In Linux paths, `..` refers to the directory one level above your current location.",
+                "hint_1": "This is not a command by itself here; it is the target used after `cd`.",
+                "hint_2": "The parent-folder shortcut uses two dots."
+              },
+              "template": "cd [blank1]",
+              "choices": [
+                "..",
+                ".",
+                "~",
+                "ls"
+              ]
+            },
+            "q3": {
+              "title": "Navigate into a project folder",
+              "prompt": "You are organizing a junior analyst workspace. In the terminal, create a folder named `client-site`, move into it, and confirm the location with `pwd`. This practice matters because `cd` changes where later commands will act.",
+              "hint": "First make the folder, then change into it, then print the current path.",
+              "help": {
+                "concept": "A common navigation workflow is create a folder with `mkdir`, enter it with `cd`, and verify the new working directory with `pwd`.",
+                "hint_1": "You need one command to create the folder and another to move into it.",
+                "hint_2": "After entering `client-site`, run the command that prints the current working directory so the terminal output shows the new location."
+              },
+              "template": "A file-writing code exercise should also ____ so automated tests can check it.",
+              "choices": [
+                "print an observable result",
+                "hide all output",
+                "delete the file immediately",
+                "skip the program"
+              ]
+            },
+            "moving-around-terminal-task-1": {
+              "title": "Prepare terminal workspace 1",
+              "prompt": "Create a folder named moving-around-workspace-1, then create moving-around-workspace-1/notes.txt as the marker file for Moving Around with cd.",
+              "hint": "Read the Linux task \"Prepare terminal workspace 1\" and identify the folders or files you must create or organize.",
+              "help": {
+                "concept": "This Linux terminal exercise checks the final workspace state for \"Prepare terminal workspace 1\".",
+                "hint_1": "Use the terminal to make one small workspace change at a time, then inspect the result in the file explorer.",
+                "hint_2": "If a path is required, match the exact folder and file names before clicking Check Answer."
+              },
+              "starterCode": "# Use the terminal for this Linux task."
+            },
+            "moving-around-terminal-task-2": {
+              "title": "Prepare terminal workspace 2",
+              "prompt": "Create a folder named moving-around-workspace-2, then create moving-around-workspace-2/notes.txt as the marker file for Moving Around with cd.",
+              "hint": "Read the Linux task \"Prepare terminal workspace 2\" and identify the folders or files you must create or organize.",
+              "help": {
+                "concept": "This Linux terminal exercise checks the final workspace state for \"Prepare terminal workspace 2\".",
+                "hint_1": "Use the terminal to make one small workspace change at a time, then inspect the result in the file explorer.",
+                "hint_2": "If a path is required, match the exact folder and file names before clicking Check Answer."
+              },
+              "starterCode": "# Use the terminal for this Linux task."
+            },
+            "moving-around-terminal-task-3": {
+              "title": "Prepare terminal workspace 3",
+              "prompt": "Create a folder named moving-around-workspace-3, then create moving-around-workspace-3/notes.txt as the marker file for Moving Around with cd.",
+              "hint": "Read the Linux task \"Prepare terminal workspace 3\" and identify the folders or files you must create or organize.",
+              "help": {
+                "concept": "This Linux terminal exercise checks the final workspace state for \"Prepare terminal workspace 3\".",
+                "hint_1": "Use the terminal to make one small workspace change at a time, then inspect the result in the file explorer.",
+                "hint_2": "If a path is required, match the exact folder and file names before clicking Check Answer."
+              },
+              "starterCode": "# Use the terminal for this Linux task."
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "linux-terminal-fundamentals": {
+      "linux-module-1-terminal-navigation": {
+        "moving-around": {
+          "sketch-1": {
+            "title": "What `cd` changes",
+            "bodyMarkdown": "`cd` means **change directory**. A directory is just another word for a folder. When you run `cd`, you move your terminal's current location to a different folder.\n\nA good habit is to check where you are before and after moving:\n\n```bash\npwd\ncd projects\npwd\n```\n\nStep by step:\n\n- `pwd` prints your current folder.\n- `cd projects` moves into the `projects` folder if it exists in your current location.\n- The second `pwd` confirms the new location.\n\nExample:\n\n```bash\n/home/learner\ncd projects\n/home/learner/projects\n```\n\nThis matters because many terminal commands act on your **current folder**. If you are in the wrong place, `ls`, `touch`, `mkdir`, `cp`, or `mv` may affect the wrong files."
+          },
+          "sketch-2": {
+            "title": "Using `..`, `.`, and `~`",
+            "bodyMarkdown": "Some `cd` targets are shortcuts:\n\n- `..` means **the parent folder**\n- `.` means **the current folder**\n- `~` means **your home folder**\n\nWorked example:\n\n```bash\npwd\ncd ..\npwd\ncd ~\npwd\n```\n\nLine by line:\n\n- The first `pwd` shows where you start.\n- `cd ..` moves up one level.\n- The next `pwd` shows the parent folder.\n- `cd ~` jumps to your home folder from anywhere.\n- The last `pwd` confirms that jump.\n\n`cd .` usually keeps you in the same place. It can still be useful when you are practicing path ideas and want to show “stay here.”"
+          },
+          "sketch-3": {
+            "title": "Reading paths safely before you move",
+            "bodyMarkdown": "A path tells the terminal **which folder** you want. Before using `cd`, it helps to inspect the current folder with `ls`.\n\nExample:\n\n```bash\npwd\nls\ncd reports\nls\n```\n\nWhat happens:\n\n- `pwd` shows your starting location.\n- `ls` lists folders and files there.\n- `cd reports` moves into the `reports` folder.\n- `ls` now shows what is inside `reports`.\n\nIf `reports` is not listed before you try `cd reports`, the command will fail because that folder is not in your current location. Checking with `ls` first helps you move confidently and avoid mistakes."
+          }
+        }
+      }
+    }
+  }
+}

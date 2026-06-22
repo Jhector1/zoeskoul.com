@@ -1,6 +1,6 @@
 {
   "subjectSlug": "python--python-data-functions--draft",
-  "generatedAt": "2026-05-27T12:52:40.442Z",
+  "generatedAt": "2026-06-22T03:45:53.015Z",
   "topics": [
     {
       "moduleSlug": "python-5-lists-tuples-and-dictionaries",
@@ -46,6 +46,14 @@
       "moduleSlug": "python-5-lists-tuples-and-dictionaries",
       "sectionSlug": "python-5-dictionaries",
       "topicId": "nested-data-structures",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "python-5-lists-tuples-and-dictionaries",
+      "sectionSlug": "python-5-module-project",
+      "topicId": "module-5-gradebook-project",
       "status": "success",
       "attempts": 0,
       "retryCodes": []
@@ -107,52 +115,16 @@
       "retryCodes": []
     },
     {
-      "moduleSlug": "python-7-files-exceptions-and-data-cleaning",
-      "sectionSlug": "python-7-file-io",
-      "topicId": "reading-text-files",
-      "status": "success",
-      "attempts": 0,
-      "retryCodes": []
-    },
-    {
-      "moduleSlug": "python-7-files-exceptions-and-data-cleaning",
-      "sectionSlug": "python-7-file-io",
-      "topicId": "writing-text-files",
-      "status": "success",
-      "attempts": 0,
-      "retryCodes": []
-    },
-    {
-      "moduleSlug": "python-7-files-exceptions-and-data-cleaning",
-      "sectionSlug": "python-7-file-io",
-      "topicId": "working-with-paths",
-      "status": "success",
-      "attempts": 0,
-      "retryCodes": []
-    },
-    {
-      "moduleSlug": "python-7-files-exceptions-and-data-cleaning",
-      "sectionSlug": "python-7-exceptions-and-cleaning",
-      "topicId": "try-except-basics",
-      "status": "success",
-      "attempts": 0,
-      "retryCodes": []
-    },
-    {
-      "moduleSlug": "python-7-files-exceptions-and-data-cleaning",
-      "sectionSlug": "python-7-exceptions-and-cleaning",
-      "topicId": "validating-and-cleaning-input",
-      "status": "success",
-      "attempts": 0,
-      "retryCodes": []
-    },
-    {
-      "moduleSlug": "python-7-files-exceptions-and-data-cleaning",
-      "sectionSlug": "python-7-exceptions-and-cleaning",
-      "topicId": "simple-csv-processing",
-      "status": "success",
-      "attempts": 1,
-      "retryCodes": []
+      "moduleSlug": "python-6-functions-and-modularity",
+      "sectionSlug": "python-6-module-project",
+      "topicId": "module-6-name-badge-package",
+      "status": "failed",
+      "attempts": 3,
+      "retryCodes": [
+        "GOLDEN_VALIDATION_FAILED",
+        "CRITIQUE_VALIDATION_FAILED",
+        "SEMANTIC_VALIDATION_FAILED"
+      ]
     }
   ]
 }

@@ -2,9 +2,9 @@ import type { ProfileTrustPolicy } from "../../shared/profileServices.js";
 import type { FamilyProfileServices } from "../../shared/createProfileServices.js";
 import {
     makeEmptyCritiqueReport,
-    makeEmptyRepairReport,
     makeEmptySemanticValidationReport,
 } from "../../shared/noopReports.js";
+import { repairDraftToPlannedExerciseCounts } from "../../shared/repairExercisePolicyDraft.js";
 import { validateGoldenTopicBundle } from "../../shared/validateGoldenTopicBundle.js";
 import { validateProgrammingTeachingSketches } from "../../shared/validateProgrammingTeachingSketches.js";
 
@@ -20,10 +20,10 @@ export const codeFamilyTrustPolicy: ProfileTrustPolicy = {
 
 export const codeFamilyServices: FamilyProfileServices = {
     async repairDraft(args) {
-        return {
+        return repairDraftToPlannedExerciseCounts({
+            seed: args.seed,
             draft: args.draft,
-            report: makeEmptyRepairReport(args.seed.topicId),
-        };
+        });
     },
 
     async critiqueDraft(args) {
@@ -57,6 +57,7 @@ export const codeFamilyServices: FamilyProfileServices = {
         report.issues.push(
             ...validateProgrammingTeachingSketches({
                 profileId: "code-family",
+                seed: args.seed,
                 draft: args.draft,
             }),
         );

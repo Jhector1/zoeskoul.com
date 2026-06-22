@@ -1,0 +1,6 @@
+{
+  "policyId": "shared-validation-course-structure",
+  "notes": [
+    "Modules, sections, and topics must keep stable ordering and identity across authoring, plans, and emitted artifacts."
+  ]
+}

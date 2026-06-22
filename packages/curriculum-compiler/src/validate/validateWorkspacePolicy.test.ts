@@ -248,9 +248,44 @@ describe("validateWorkspacePolicy", () => {
 
         expect(() =>
             validateWorkspacePolicy({
-                text: JSON.stringify(repaired.draft),
+                text: repaired.draft,
                 policy,
                 location: "python/repaired",
+            }),
+        ).not.toThrow();
+    });
+
+    it("ignores internal shell-task policy messages when scanning learner-facing Linux draft text", () => {
+        const policy = resolveWorkspacePolicy({
+            blueprint: makeBlueprint({
+                subjectSlug: "linux",
+                courseSlug: "linux-terminal-fundamentals",
+                catalogSlug: "linux",
+                profileId: "bash",
+                workspaceProfileId: "terminal-workspace-runner",
+                workspacePolicyId: "linux-terminal-workspace",
+                courseGenerationPolicy: {
+                    avoidTerms: ["Use sudo"],
+                },
+            }),
+        });
+
+        expect(() =>
+            validateWorkspacePolicy({
+                text: {
+                    title: "Create a practice folder",
+                    prompt: "Use the terminal to create a folder named terminal-practice.",
+                    terminalExpectations: {
+                        forbiddenCommands: [
+                            {
+                                pattern: "(^|\\s)sudo(\\s|$)",
+                                message: "Do not use sudo for beginner workspace tasks.",
+                            },
+                        ],
+                    },
+                },
+                policy,
+                location: "linux/repaired",
             }),
         ).not.toThrow();
     });

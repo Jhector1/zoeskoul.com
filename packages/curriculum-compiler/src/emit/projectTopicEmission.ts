@@ -7,16 +7,12 @@ import type { CourseProfile } from "@zoeskoul/curriculum-profiles";
 
 type DraftExercise = TopicAuthoringDraft["quizDraft"][number];
 
-function clampIndex(index: number, length: number) {
-    return Math.min(index, length - 1);
-}
-
 function pickExerciseIdByIndex(
     exercises: DraftExercise[],
     sketchIndex: number,
 ) {
     if (exercises.length === 0) return undefined;
-    return exercises[clampIndex(sketchIndex, exercises.length)]?.id;
+    return exercises[sketchIndex]?.id;
 }
 
 function profilePlacement(profile: CourseProfile) {
@@ -32,7 +28,7 @@ export function resolveTryItPlacement(seed: TopicSeed, profile: CourseProfile) {
     return (
         seed.practice?.tryItPlacement ??
         profilePlacement(profile) ??
-        "first_sketch"
+        "all_sketches"
     );
 }
 
@@ -66,14 +62,14 @@ export function resolveTryItExerciseIdForSketch(args: {
 
     const explicitIds = seed.practice?.tryItExerciseIds;
     if (Array.isArray(explicitIds) && explicitIds.length > 0) {
-        const explicitId = explicitIds[clampIndex(sketchIndex, explicitIds.length)]?.trim();
+        const explicitId = explicitIds[sketchIndex]?.trim();
         if (explicitId && allIds.has(explicitId)) {
             return explicitId;
         }
     }
 
     const explicitId = seed.practice?.tryItExerciseId?.trim();
-    if (explicitId && allIds.has(explicitId)) {
+    if (explicitId && allIds.has(explicitId) && sketchIndex === 0) {
         return explicitId;
     }
 

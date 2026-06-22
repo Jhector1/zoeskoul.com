@@ -1,0 +1,122 @@
+{
+  "title": "Module 6 Name Badge Package",
+  "summary": "Refactor a small badge builder step by step so helper functions and helper files grow from the previous working version.",
+  "minutes": 26,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Introduction to Helper Functions",
+      "bodyMarkdown": "In this module, we will explore how to refactor a simple badge builder program by using helper functions. Helper functions allow us to break down complex tasks into smaller, reusable pieces. This not only makes our code more organized but also easier to maintain and test.\n\n### Example\nConsider a simple function that prints a name badge:\n\n```python\ndef print_badge(name):\n    print(f\"Hello, my name is {name}!\")\n```\n\nThis function takes a name as an argument and prints a formatted string. By using helper functions, we can extend this functionality to include more features, such as adding a title or a company name.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+    },
+    {
+      "id": "try-it-yourself",
+      "title": "Try it yourself",
+      "bodyMarkdown": "Try it yourself: change one value in the example, predict the new output, then run the code to check your prediction."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "exercise1",
+      "kind": "code_input",
+      "title": "Create a Function to Format Names",
+      "prompt": "Write a function `format_name` that takes a first name and a last name as arguments and returns them formatted as 'Last, First'.",
+      "starterCode": "def format_name(first_name, last_name):\n    # Combine the names in 'Last, First' format\n    pass",
+      "solutionCode": "def format_name(first_name, last_name):\n    return f\"{last_name}, {first_name}\"",
+      "recipeType": "semantic",
+      "hint": "Use string formatting to combine the names.",
+      "help": {
+        "concept": "String formatting allows you to create a new string by combining variables and text.",
+        "hint_1": "Use f-strings or the `format` method to format the names.",
+        "hint_2": "Ensure the last name comes first, followed by a comma and the first name."
+      },
+      "semanticChecks": [
+        {
+          "type": "function_returns",
+          "functionName": "format_name",
+          "args": [
+            1,
+            1
+          ],
+          "expected": "Doe, John",
+          "message": "Return the expected result for format_name(first_name, last_name)."
+        },
+        {
+          "type": "function_returns",
+          "functionName": "format_name",
+          "args": [
+            1,
+            1
+          ],
+          "expected": "Smith, Jane",
+          "message": "Return the expected result for format_name(first_name, last_name)."
+        },
+        {
+          "type": "no_stdout",
+          "message": "This task should return a value instead of printing output."
+        }
+      ]
+    },
+    {
+      "id": "exercise2",
+      "kind": "code_input",
+      "title": "Create a Badge with Title",
+      "prompt": "Extend the `print_badge` function to include a title. The function should take a name and a title, and print 'Title: Name'.",
+      "starterCode": "def print_badge(name, title):\n    # Print the badge with title\n    pass",
+      "solutionCode": "def print_badge(name, title):\n    print(f\"{title}: {name}\")",
+      "tests": [
+        {
+          "stdout": "13",
+          "stdin": "12\n",
+          "match": "includes"
+        },
+        {
+          "stdout": "21",
+          "stdin": "20\n",
+          "match": "includes"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Click Run and compare the output panel with the expected result."
+      }
+    },
+    {
+      "id": "exercise3",
+      "kind": "code_input",
+      "title": "Combine Name and Title Formatting",
+      "prompt": "Write a function `create_badge` that combines `format_name` and `print_badge` to print a formatted badge with a title.",
+      "starterCode": "def create_badge(first_name, last_name, title):\n    # Use format_name and print_badge to create a badge\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nfirst_name = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nlast_name = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\ntitle = _parse_arg(_inputs[2]) if len(_inputs) > 2 else \"\"\n\nprint(create_badge(first_name, last_name, title))",
+      "solutionCode": "def create_badge(first_name, last_name, title):\n    formatted_name = format_name(first_name, last_name)\n    print_badge(formatted_name, title)\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nfirst_name = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nlast_name = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\ntitle = _parse_arg(_inputs[2]) if len(_inputs) > 2 else \"\"\n\nprint(create_badge(first_name, last_name, title))",
+      "tests": [
+        {
+          "stdout": "Dr.: Doe, John\n",
+          "stdin": "1\n1\n1\n",
+          "match": "exact"
+        },
+        {
+          "stdout": "Ms.: Smith, Jane\n",
+          "stdin": "1\n1\n1\n",
+          "match": "exact"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Name Badge Builder",
+    "stepIds": [
+      "exercise1",
+      "exercise2",
+      "exercise3"
+    ]
+  }
+}

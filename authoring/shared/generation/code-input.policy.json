@@ -1,0 +1,7 @@
+{
+  "policyId": "shared-generation-code-input",
+  "notes": [
+    "Hands-on topics should satisfy practice expectations through real code_input or equivalent runtime-backed exercises.",
+    "Conceptual-only topics should be explicit in authoring rather than relying only on profile-specific heuristics."
+  ]
+}

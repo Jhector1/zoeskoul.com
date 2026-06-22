@@ -1,5 +1,6 @@
 import type {
     ManifestCodeInput,
+    ManifestStarterFile,
     ManifestFileFixture,
     ManifestStarterFiles,
     TopicBundleManifest,
@@ -53,6 +54,37 @@ function normalizeWorkspaceFiles(
         .filter((file) => file.path.trim().length > 0);
 }
 
+function normalizeStarterFileRecords(
+    files: ManifestStarterFiles | undefined,
+): Array<ManifestStarterFile & { path: string }> {
+    if (!files) return [];
+
+    if (Array.isArray(files)) {
+        return files
+            .map((file) => {
+                if (!file || typeof file !== "object") {
+                    return null;
+                }
+
+                const path = typeof file.path === "string" ? file.path.trim() : "";
+                if (!path) return null;
+
+                return {
+                    ...file,
+                    path,
+                };
+            })
+            .filter((file): file is ManifestStarterFile & { path: string } => Boolean(file));
+    }
+
+    return Object.entries(files)
+        .map(([path, value]) => ({
+            path,
+            ...(typeof value === "string" ? { content: value } : value),
+        }))
+        .filter((file) => typeof file.path === "string" && file.path.trim().length > 0);
+}
+
 function collectExerciseWorkspaceFiles(
     exercise: ManifestCodeInput,
 ): Array<{ path: string; content: string }> {
@@ -93,6 +125,61 @@ function normalizeTestFiles(
         .filter((file): file is { path: string; content: string } => Boolean(file));
 
     return normalized.length > 0 ? normalized : undefined;
+}
+
+function buildSolutionCompletenessIssues(
+    exercise: ManifestCodeInput,
+): GoldenValidationIssue[] {
+    const starterFiles = normalizeStarterFileRecords(
+        exercise.starterFiles ?? exercise.workspace?.starterFiles,
+    );
+    const solutionFiles = normalizeStarterFileRecords(
+        exercise.solutionFiles ??
+            (exercise.recipe.type === "fixed_tests" || exercise.recipe.type === "semantic"
+                ? exercise.recipe.solutionFiles
+                : undefined),
+    );
+    const starterPaths = starterFiles
+        .map((file) => String(file.path ?? "").trim())
+        .filter(Boolean);
+    const solutionPathSet = new Set(
+        solutionFiles.map((file) => String(file.path ?? "").trim()).filter(Boolean),
+    );
+    const issues: GoldenValidationIssue[] = [];
+    const isMultiFile = starterPaths.length > 1 || solutionPathSet.size > 1;
+
+    // Single-file exercises can be fully revealed/filled from solutionCode.
+    // Do not require solutionFiles just because the workspace also includes
+    // read-only input fixtures such as names.txt or data.csv.
+    if (!isMultiFile) {
+        return issues;
+    }
+
+    if (solutionFiles.length === 0) {
+        issues.push({
+            code: "CODE_PROFILE_MULTI_FILE_SOLUTION_MISSING",
+            category: "recipe",
+            severity: "error",
+            exerciseId: exercise.id,
+            message:
+                `Exercise "${exercise.id}" uses a multi-file workspace but does not publish complete solutionFiles for reveal/fill.`,
+        });
+        return issues;
+    }
+
+    const missingPaths = starterPaths.filter((path) => !solutionPathSet.has(path));
+    if (missingPaths.length > 0) {
+        issues.push({
+            code: "CODE_PROFILE_MULTI_FILE_SOLUTION_INCOMPLETE",
+            category: "recipe",
+            severity: "error",
+            exerciseId: exercise.id,
+            message:
+                `Exercise "${exercise.id}" solutionFiles are missing starter workspace paths: ${missingPaths.join(", ")}.`,
+        });
+    }
+
+    return issues;
 }
 
 export async function validateCodeProfileGolden(args: {
@@ -160,6 +247,8 @@ export async function validateCodeProfileGolden(args: {
                 message: `Exercise "${exercise.id}" uses recipe type "${exercise.recipe.type}", which is not allowed for profile "${args.profileId}".`,
             });
         }
+
+        issues.push(...buildSolutionCompletenessIssues(exercise));
 
         if (exercise.fixedSqlDialect) {
             issues.push({

@@ -5,7 +5,7 @@ import {
 } from "@/lib/ide/learningIdeConfig";
 
 describe("mergeLearningIdeConfigs", () => {
-    it("preserves layoutMode, requires, runnerBackend, and sqlPane additively", () => {
+    it("preserves layoutMode, requires, runnerBackend, terminalCwd, and sqlPane additively", () => {
         const merged = mergeLearningIdeConfigs(
             {
                 runnerBackend: "pty",
@@ -19,6 +19,7 @@ describe("mergeLearningIdeConfigs", () => {
             },
             {
                 layoutMode: "terminal_workspace",
+                terminalCwd: "/workspace/navigation-practice",
                 requires: {
                     terminal: true,
                 },
@@ -31,6 +32,7 @@ describe("mergeLearningIdeConfigs", () => {
         expect(merged).toEqual({
             runnerBackend: "pty",
             layoutMode: "terminal_workspace",
+            terminalCwd: "/workspace/navigation-practice",
             requires: {
                 files: true,
                 multiFile: true,
@@ -167,6 +169,17 @@ describe("resolveFullIDEConfigFromLearningIde", () => {
         });
 
         expect(resolved.services.runner?.terminalSessionScope).toBe("project");
+    });
+
+    it("passes through an explicit terminalCwd override", () => {
+        const resolved = resolveFullIDEConfigFromLearningIde({
+            ideConfig: {
+                layoutMode: "terminal_workspace",
+                terminalCwd: "/workspace/park-terminal-map",
+            },
+        });
+
+        expect(resolved.services.runner?.terminalCwd).toBe("/workspace/park-terminal-map");
     });
 
     it("respects explicit fileActions overrides in normal editor mode", () => {

@@ -1,182 +1,149 @@
 {
   "topics": {
     "linux-terminal-fundamentals": {
-      "linux-1-terminal-navigation": {
+      "linux-module-1-terminal-navigation": {
         "what-the-terminal-is": {
           "label": "What the Terminal Is",
-          "summary": "Type simple commands and read the terminal response.",
+          "summary": "Understand the terminal as a place to type commands and see the computer respond.",
           "cards": {
             "sketch0": {
-              "title": "The terminal is a conversation with the computer"
+              "title": "The terminal is a conversation with your computer"
             },
             "sketch1": {
-              "title": "The prompt waits for your next command"
+              "title": "Commands are instructions, and output is the response"
             },
             "sketch2": {
-              "title": "Begin with safe commands"
+              "title": "Why people use the terminal"
             },
             "quiz": {
-              "title": "Quiz"
-            },
-            "project": {
-              "title": "First terminal check-in"
+              "title": "Practice"
             }
           },
-          "projectSteps": {
-            "ci_create_linux_start": {
-              "title": "Run your first location check"
+          "practice": {
+            "sc-terminal-purpose": {
+              "title": "What the terminal does",
+              "prompt": "You are helping organize a club workspace with folders and files. What best describes the terminal?",
+              "hint": "Think about whether the terminal is a place to type instructions or a place that stores files by itself.",
+              "help": {
+                "concept": "The terminal is an interface for entering commands and seeing the computer's responses. It is not the same thing as a folder, file, or operating system.",
+                "hint_1": "Decide which choice describes interaction: you type something, and the computer responds.",
+                "hint_2": "Look for the option that describes a text-based tool for running commands."
+              },
+              "options": {
+                "a": "A text-based place to type commands and see the computer respond",
+                "b": "A folder that automatically stores every file you create",
+                "c": "A special file that lists all commands on the computer",
+                "d": "A background process that runs without user input"
+              }
             },
-            "ci_make_command_practice": {
-              "title": "Check the session user"
+            "sc-pwd-vs-ls": {
+              "title": "Choose the right command goal",
+              "prompt": "A learner types a command because they want to know which folder they are currently in before listing files. Which command matches that goal?",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "options": {
+                "a": "pwd",
+                "b": "ls",
+                "c": "cat",
+                "d": "touch"
+              }
             },
-            "ci_create_first_lab": {
-              "title": "List the starting workspace"
+            "mc-terminal-workflow": {
+              "title": "What belongs in a basic terminal workflow",
+              "prompt": "Choose all actions that fit the idea of using the terminal to inspect a workspace safely at the start of a task.",
+              "hint": "Think about commands that help you check your location and see what is in the current folder.",
+              "help": {
+                "concept": "Early terminal workflow often starts with inspection commands such as `pwd` and `ls` so you understand your current location and contents before making changes.",
+                "hint_1": "Look for actions that help you orient yourself before creating, moving, or deleting anything.",
+                "hint_2": "Two of these choices are direct checks: one shows your current folder and one lists items in it."
+              },
+              "options": {
+                "a": "Run `pwd` to confirm the current folder",
+                "b": "Run `ls` to see files and folders in the current location",
+                "c": "Use `sudo` to get full control before checking anything",
+                "d": "Install a package so the terminal can show folder names"
+              }
+            },
+            "dr-terminal-check-sequence": {
+              "title": "Order a simple terminal check",
+              "prompt": "Put these steps in the best order for a beginner who opens the terminal and wants to understand the workspace before doing anything else.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "Open the terminal",
+                "t2": "Run `pwd`",
+                "t3": "Run `ls`"
+              }
+            },
+            "fb-pwd-meaning": {
+              "title": "Complete the command meaning",
+              "prompt": "Fill in the missing command for this situation: you want the terminal to show your current folder location.",
+              "hint": "Choose the command that prints the working directory.",
+              "help": {
+                "concept": "`the missing term` is the command used to display the current working directory in the terminal.",
+                "hint_1": "This command is short for print working directory.",
+                "hint_2": "It is the command you use when you want the terminal to answer “Where am I?”"
+              },
+              "template": "To show your current folder location, type `[blank1]`.",
+              "choices": [
+                "pwd",
+                "ls",
+                "cat",
+                "mkdir"
+              ]
+            },
+            "fb-ls-purpose": {
+              "title": "Complete the command purpose",
+              "prompt": "Fill in the missing command for this situation: you are inside a project folder and want to see the names of files and folders there.",
+              "hint": "Pick the command that lists items in the current directory.",
+              "help": {
+                "concept": "`the missing term` lists the contents of the current directory, such as files and folders.",
+                "hint_1": "This command helps you answer “What is here?”",
+                "hint_2": "It is not the command for showing your location; it is the one for listing names."
+              },
+              "template": "To list the names of files and folders in the current directory, type `[blank1]`.",
+              "choices": [
+                "pwd",
+                "touch",
+                "ls",
+                "mv"
+              ]
             }
           },
           "tryIt": {
+            "exercises": {
+              "what-the-terminal-is-try-it-1": {
+                "prompt": "You just opened a shared workspace. Run `pwd` to see which folder you are in.",
+                "title": "Terminal task: run pwd"
+              },
+              "what-the-terminal-is-try-it-2": {
+                "title": "Terminal task: run ls",
+                "prompt": "You are checking what is in the current workspace. Run `ls` to list the files and folders here."
+              },
+              "what-the-terminal-is-try-it-3": {
+                "title": "Terminal task: ask where and what",
+                "prompt": "Before you touch anything in a new workspace, get oriented. Run `pwd`, then `ls`."
+              }
+            },
             "try_what_the_terminal_is_sketch0": {
-              "title": "Ask where you are",
-              "prompt": "Run `pwd` and look for the workspace path."
+              "title": "Try it yourself: run pwd",
+              "prompt": "Run `pwd` and notice how the terminal answers with your current folder."
             },
             "try_what_the_terminal_is_sketch1": {
-              "title": "Print the terminal user",
-              "prompt": "Run `whoami` to see the user for this terminal session."
+              "title": "Try it yourself: run ls",
+              "prompt": "Run `ls` and notice how the terminal lists what is in the current folder."
             },
             "try_what_the_terminal_is_sketch2": {
-              "title": "List the starting files",
-              "prompt": "Run `ls` and confirm `README.md` is listed."
-            }
-          },
-          "quiz": {
-            "sc-terminal-purpose": {
-              "title": "What is the terminal mainly for?",
-              "prompt": "It lets you type commands for the computer to run.",
-              "hint": "It lets you type commands for the computer to run.",
-              "help": {
-                "concept": "It lets you type commands for the computer to run.",
-                "hint_1": "It lets you type commands for the computer to run.",
-                "hint_2": "Review the command names from the lesson, then choose the option that matches the task."
-              },
-              "options": {
-                "a": "A text-based place to run commands",
-                "b": "Only a place to draw pictures",
-                "c": "A folder that stores downloads",
-                "d": "A command that deletes files"
-              }
-            },
-            "sc-whoami": {
-              "title": "Which command prints the current user?",
-              "prompt": "Think: who am I as a Linux user?",
-              "hint": "Think: who am I as a Linux user?",
-              "help": {
-                "concept": "Think: who am I as a Linux user?",
-                "hint_1": "Think: who am I as a Linux user?",
-                "hint_2": "Review the command names from the lesson, then choose the option that matches the task."
-              },
-              "options": {
-                "a": "pwd",
-                "b": "whoami",
-                "c": "clear",
-                "d": "mkdir"
-              }
-            },
-            "sc-clear": {
-              "title": "What does clear do?",
-              "prompt": "It changes the screen, not your files.",
-              "hint": "It changes the screen, not your files.",
-              "help": {
-                "concept": "It changes the screen, not your files.",
-                "hint_1": "It changes the screen, not your files.",
-                "hint_2": "Review the command names from the lesson, then choose the option that matches the task."
-              },
-              "options": {
-                "a": "Deletes all files",
-                "b": "Moves to the home folder",
-                "c": "Clears the terminal screen",
-                "d": "Creates a folder"
-              }
-            },
-            "mc-safe-first": {
-              "title": "Choose all safe beginner commands from this lesson.",
-              "prompt": "Look for commands that ask simple questions without changing files.",
-              "hint": "Choose commands that inspect the session or workspace.",
-              "help": {
-                "concept": "Early terminal practice should start with commands that show information.",
-                "hint_1": "Choose commands that inspect the session or workspace.",
-                "hint_2": "Review the command names from the lesson, then choose the option that matches the task."
-              },
-              "options": {
-                "a": "pwd",
-                "b": "whoami",
-                "c": "ls",
-                "d": "rm -rf /"
-              }
-            },
-            "ci-create-linux-start": {
-              "title": "Run your first location check",
-              "prompt": "Run `pwd` to ask the terminal where this workspace starts. Check your answer after you see `/workspace`.",
-              "hint": "Type `pwd`, press Enter, then check the terminal output.",
-              "help": {
-                "concept": "The terminal can answer simple questions before you change any files.",
-                "hint_1": "Type `pwd`, press Enter, then check the terminal output.",
-                "hint_2": "The expected path includes `/workspace`."
-              },
-              "placeholder": "Type commands in the terminal."
-            },
-            "ci-make-command-practice": {
-              "title": "Check the session user",
-              "prompt": "Run `whoami` to see the Linux user name for this terminal session.",
-              "hint": "Type `whoami`, press Enter, and check the response.",
-              "help": {
-                "concept": "`whoami` prints the user account running the terminal session.",
-                "hint_1": "Type `whoami`, press Enter, and check the response.",
-                "hint_2": "Submit after the command appears in the terminal history."
-              },
-              "placeholder": "Type commands in the terminal."
-            },
-            "ci-create-first-lab": {
-              "title": "List the starting workspace",
-              "prompt": "Run `ls` to see what is already in the workspace. You should see `README.md`.",
-              "hint": "Type `ls`, press Enter, and look for `README.md` in the output.",
-              "help": {
-                "concept": "`ls` lists the files and folders in your current workspace.",
-                "hint_1": "Type `ls`, press Enter, and look for `README.md` in the output.",
-                "hint_2": "Submit after `README.md` appears in the terminal output."
-              },
-              "placeholder": "Type commands in the terminal."
-            },
-            "try-terminal-see-workspace": {
-              "title": "Ask where you are",
-              "prompt": "Run `pwd` and look for the workspace path.",
-              "hint": "Type `pwd`, press Enter, then check for `/workspace`.",
-              "help": {
-                "concept": "`pwd` prints the folder where the terminal is currently working.",
-                "hint_1": "Type `pwd`, press Enter, then check for `/workspace`.",
-                "hint_2": "Run the command in the terminal, check the response, then submit."
-              },
-              "placeholder": "Type commands in the terminal."
-            },
-            "try-terminal-print-user": {
-              "title": "Print the terminal user",
-              "prompt": "Run `whoami` to see the user for this terminal session.",
-              "hint": "Type `whoami`, press Enter, then submit.",
-              "help": {
-                "concept": "`whoami` prints the current Linux user.",
-                "hint_1": "Type `whoami`, press Enter, then submit.",
-                "hint_2": "Run the command in the terminal, check the response, then submit."
-              },
-              "placeholder": "Type commands in the terminal."
-            },
-            "try-terminal-list-start": {
-              "title": "List the starting files",
-              "prompt": "Run `ls` and confirm `README.md` is listed.",
-              "hint": "Type `ls`, press Enter, and look for `README.md`.",
-              "help": {
-                "concept": "`ls` lists the files and folders in the current folder.",
-                "hint_1": "Type `ls`, press Enter, and look for `README.md`.",
-                "hint_2": "Run the command in the terminal, check the response, then submit."
-              },
-              "placeholder": "Type commands in the terminal."
+              "title": "Try it yourself: run pwd then ls",
+              "prompt": "Run `pwd`, then `ls`, to check where you are before you start working."
             }
           }
         }
@@ -185,19 +152,19 @@
   },
   "sketches": {
     "linux-terminal-fundamentals": {
-      "linux-1-terminal-navigation": {
+      "linux-module-1-terminal-navigation": {
         "what-the-terminal-is": {
-          "terminal-is-conversation": {
-            "title": "The terminal listens for one command at a time",
-            "bodyMarkdown": "A terminal is a direct way to ask Linux to do work. You type a command, press Enter, and read the response.\n\nStart with commands that answer simple questions:\n\n```bash\nwhoami\npwd\nls\n```\n\nThese commands are safe first steps because they show information without changing the workspace."
+          "terminal-basics": {
+            "title": "The terminal is a conversation with your computer",
+            "bodyMarkdown": "The terminal is a text-based place where you **type commands** and the computer **responds with output**. Instead of clicking folders and buttons, you tell the computer what to do with short instructions.\n\nA command usually has two parts:\n\n1. the command name\n2. the result the computer shows back to you\n\nFor example:\n\n```bash\npwd\n```\n\nIf you run `pwd`, the computer prints your current location in the workspace. Line by line, here is what is happening:\n\n- `pwd` is the command you type\n- it stands for **print working directory**\n- the terminal responds by showing the folder you are currently in\n\nAnother example:\n\n```bash\nls\n```\n\n- `ls` is the command you type\n- it lists what is in the current folder\n- the terminal responds with file and folder names\n\nImagine you are helping organize a small project folder for a school club. In a file explorer, you might click around to see where you are. In the terminal, you can ask directly with `pwd` and `ls`. The terminal is not magic—it is just a faster, text-based way to inspect and control your workspace."
           },
-          "prompt-and-command": {
-            "title": "The prompt is your starting line",
-            "bodyMarkdown": "The prompt marks where the next command goes. Type one command, press Enter, then read the response before typing the next one.\n\nSafe first commands:\n\n```bash\npwd\nwhoami\nls\n```\n\nUse `ls` often. It tells you what is in the current folder."
+          "commands-and-output": {
+            "title": "Commands are instructions, and output is the response",
+            "bodyMarkdown": "When you use the terminal, you are giving the computer a specific instruction. The computer then shows a result, often as text.\n\nHere is a simple worked example:\n\n```bash\nls\n```\n\nSuppose the current folder contains two items named `notes.txt` and `photos`. The terminal output might look like this:\n\n```bash\nnotes.txt\nphotos\n```\n\nThat means:\n\n- you typed `ls`\n- the computer checked the current folder\n- it printed the names of the items inside it\n\nNow compare that with:\n\n```bash\npwd\n```\n\nPossible output:\n\n```bash\n/home/learner/project\n```\n\nThis tells you **where you are**, not **what is inside**. That difference matters:\n\n- `pwd` answers: “What folder am I in?”\n- `ls` answers: “What is in this folder?”\n\nIf you are organizing a newsletter workspace, `pwd` helps you confirm you are in the `drafts` folder, while `ls` helps you see whether files like `intro.txt` or `outline.txt` are there."
           },
-          "safe-first-habits": {
-            "title": "Small commands are easier to trust",
-            "bodyMarkdown": "Good terminal habits start with checking before changing. Look around with `pwd` and `ls`, then decide what to do next.\n\nFor now, stay inside the lesson workspace and avoid delete commands. You will practice file changes later with small files that are safe to throw away."
+          "why-terminal-matters": {
+            "title": "Why people use the terminal",
+            "bodyMarkdown": "People use the terminal because it gives clear, direct control over files and folders. It is especially useful when you want to inspect a workspace quickly or repeat the same kinds of actions.\n\nFor a beginner, the most important idea is this: the terminal helps you **navigate** and **inspect** your workspace with commands.\n\nHere is a short sequence:\n\n```bash\npwd\nls\n```\n\nStep by step:\n\n- `pwd` shows your current folder\n- `ls` shows what is inside that folder\n\nTogether, these commands help you stay oriented.\n\nImagine you are a junior assistant preparing folders for an event team. You might need to confirm that you are inside `event-plan` before checking whether `schedule.txt` and `guests.txt` exist. In the terminal, that workflow is quick and precise.\n\nThe terminal does not replace thinking. You still decide what you want to inspect or change. The terminal is simply the tool that carries out your commands and reports back."
           }
         }
       }

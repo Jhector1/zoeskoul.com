@@ -297,7 +297,7 @@ describe("buildTopicAuthoringDraftPrompt", () => {
         expect(prompt.system).toContain("Include at least one concrete worked example");
         expect(prompt.system).toContain("Extra teaching rules for programming-family profiles:");
         expect(prompt.system).toContain("explain it step by step or line by line");
-        expect(prompt.system).toContain("Include a small 'Try it yourself' follow-up");
+        expect(prompt.system).toContain("Do not add a literal 'Try it yourself' sentence to sketchBlocks");
     });
 
     it("is deterministic for the same prompt builder inputs", () => {
@@ -371,5 +371,9 @@ describe("Linux/Bash prompt policy wording", () => {
         expect(source).toContain("quizDraft is an authoring array, not the final learner quiz");
         expect(source).toContain("generate exactly 3 code_input exercises inside quizDraft");
         expect(source).toContain("put required code_input authoring items inside quizDraft");
+        expect(source).toContain('recipeType "shell_task"');
+        expect(source).toContain('mode "terminal_workspace"');
+        expect(source).toContain('Do not use checker.defaultRecipe "workspace_expectations"');
+        expect(source).toContain("per-exercise terminal workspaces");
     });
 });

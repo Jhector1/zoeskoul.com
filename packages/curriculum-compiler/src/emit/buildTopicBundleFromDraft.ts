@@ -14,6 +14,13 @@ import {
 } from "@zoeskoul/curriculum-profiles";
 import { buildExerciseMessageKeys } from "../messages/buildMessageKeys.js";
 import { validateTopicMessageBases } from "../messages/validateTopicMessageBases.js";
+import {
+    buildExerciseLocalMessageBaseForEmission,
+    effectiveSketchBlocks,
+    projectStepIdFromExerciseId,
+    resolveTopicProjectKind,
+    tryItMessageId,
+} from "./exerciseMessageBase.js";
 import { applyProgressiveProjectFlow } from "./progressiveProjectFlow.js";
 import {
     resolveTryItExerciseIdForSketch,
@@ -53,14 +60,6 @@ function quizExercises(draft: TopicAuthoringDraft) {
     return draft.quizDraft.filter((exercise) => exercise.kind !== "code_input");
 }
 
-function projectStepIdFromExerciseId(id: string) {
-    return id
-        .trim()
-        .toLowerCase()
-        .replace(/[^a-z0-9]+/g, "_")
-        .replace(/^_+|_+$/g, "");
-}
-
 function topicMessageRoot(subjectSlug: string, moduleSlug: string, topicId: string) {
     return `topics.${subjectSlug}.${moduleSlug}.${topicId}`;
 }
@@ -81,12 +80,7 @@ export function buildTopicBundleFromDraft(args: {
             ? assertProfileSupportsCodeInput(profile)
             : null;
     const kp = shape.subjectManifest.keyPatterns;
-    const topicKind =
-        seed.moduleRole === "capstone" || seed.sectionRole === "capstone"
-            ? "capstone"
-            : seed.sectionRole === "module_project"
-                ? "module_project"
-                : null;
+    const topicKind = resolveTopicProjectKind(seed);
     const isProjectOnlyTopic = topicKind !== null && !!profile.project;
     const projectConfig =
         isProjectOnlyTopic && topicKind
@@ -112,15 +106,20 @@ export function buildTopicBundleFromDraft(args: {
                 topicKind,
             }) === true,
         )
+        : [];
+    const projectStepIds = isProjectOnlyTopic
+        ? buildProjectStepIds(
+            draft,
+            sourceProjectExercises,
+            targets?.projectCodeInputTarget ?? 3,
+        )
+        : [];
+    const tryItExercises = isProjectOnlyTopic
+        ? []
         : draft.quizDraft.filter((exercise) => exercise.kind === "code_input");
-    const projectStepIds = buildProjectStepIds(
-        draft,
-        sourceProjectExercises,
-        targets?.projectCodeInputTarget ?? 3,
-    );
-    const tryItExercises = sourceProjectExercises;
 
     const quizOnlyExercises = isProjectOnlyTopic ? [] : quizExercises(draft);
+    const sketchBlocks = effectiveSketchBlocks({ draft, topicKind });
 
     const quizVisibleDefault = targets?.quizVisibleDefault ?? 4;
     const quizVisibleMax = targets?.quizVisibleMax ?? 6;
@@ -129,9 +128,16 @@ export function buildTopicBundleFromDraft(args: {
         projectConfig?.preferredProjectExerciseKind ??
         profile.practice?.preferredTryItExerciseKind ??
         null;
-    const tryItSketchIndexes = new Set(resolveTryItSketchIndexes(draft, seed, profile));
-    const sketchCards: ManifestCard[] = draft.sketchBlocks.map((block, index) => {
-        const tryItEnabled = seed.practice?.tryIt === true;
+    const tryItSketchIndexes = new Set(
+        isProjectOnlyTopic ? [] : resolveTryItSketchIndexes(
+            { ...draft, sketchBlocks },
+            seed,
+            profile,
+        ),
+    );
+    const tryItExerciseIdToMessageId = new Map<string, string>();
+    const sketchCards: ManifestCard[] = sketchBlocks.map((block, index) => {
+        const tryItEnabled = seed.practice?.tryIt === true && !isProjectOnlyTopic;
         const tryItExerciseId =
             tryItEnabled && tryItSketchIndexes.has(index)
                 ? resolveTryItExerciseIdForSketch({
@@ -143,6 +149,13 @@ export function buildTopicBundleFromDraft(args: {
                     sketchIndex: index,
                 })
                 : undefined;
+
+        if (tryItExerciseId) {
+            tryItExerciseIdToMessageId.set(
+                tryItExerciseId,
+                tryItMessageId(seed.topicId, index),
+            );
+        }
 
         return {
             id: `sketch${index}`,
@@ -163,12 +176,12 @@ export function buildTopicBundleFromDraft(args: {
                             seed.subjectSlug,
                             logicalModuleSlug,
                             seed.topicId,
-                        )}.tryIt.try_${seed.topicId.replace(/-/g, "_")}_sketch${index}.title`,
+                        )}.tryIt.${tryItMessageId(seed.topicId, index)}.title`,
                         promptKey: `${topicMessageRoot(
                             seed.subjectSlug,
                             logicalModuleSlug,
                             seed.topicId,
-                        )}.tryIt.try_${seed.topicId.replace(/-/g, "_")}_sketch${index}.prompt`,
+                        )}.tryIt.${tryItMessageId(seed.topicId, index)}.prompt`,
                         exerciseKey: tryItExerciseId,
                         difficulty: "easy" as const,
                         preferKind: manifestPreferredKind(preferredTryItKind),
@@ -213,7 +226,7 @@ export function buildTopicBundleFromDraft(args: {
             : [];
 
     const projectCard: ManifestCard[] =
-        projectStepIds.length > 0
+        isProjectOnlyTopic && projectStepIds.length > 0
             ? [
                 {
                     id: "project",
@@ -267,7 +280,7 @@ export function buildTopicBundleFromDraft(args: {
             ]
             : [];
 
-    const sketches: ManifestSketch[] = draft.sketchBlocks.map((block) => ({
+    const sketches: ManifestSketch[] = sketchBlocks.map((block) => ({
         id: block.id,
         archetype: "paragraph" as const,
         titleKey: kp.sketchTitleKey(
@@ -293,7 +306,13 @@ export function buildTopicBundleFromDraft(args: {
     validateTopicMessageBases(
         emittedDraftExercises.map((exercise) => ({
             id: exercise.id,
-            messageBase: (exercise as { messageBase?: string }).messageBase,
+            messageBase: buildExerciseLocalMessageBaseForEmission({
+                exercise,
+                seed,
+                topicKind,
+                projectStepIdSet,
+                tryItExerciseIdToMessageId,
+            }),
         })),
     );
     const progressiveExercises = applyProgressiveProjectFlow({
@@ -309,6 +328,13 @@ export function buildTopicBundleFromDraft(args: {
                 ? optionIdsFromCount(exercise.options.length)
                 : [];
 
+        const localMessageBase = buildExerciseLocalMessageBaseForEmission({
+            exercise,
+            seed,
+            topicKind,
+            projectStepIdSet,
+            tryItExerciseIdToMessageId,
+        });
         const messageKeys = buildExerciseMessageKeys({
             scope: {
                 subjectSlug: seed.subjectSlug,
@@ -316,7 +342,7 @@ export function buildTopicBundleFromDraft(args: {
                 topicId: seed.topicId,
             },
             exerciseId: exercise.id,
-            messageBase: (exercise as { messageBase?: string }).messageBase,
+            messageBase: localMessageBase,
             optionIds: optionIdsForKeys,
         });
 
@@ -473,6 +499,7 @@ export function buildTopicBundleFromDraft(args: {
         prefix,
         minutes: seed.minutes,
         runtimeDefaults: seed.moduleRuntimeDefaults ?? null,
+        serviceDefaults: seed.moduleServiceDefaults ?? null,
         topic: {
             labelKey: kp.topicLabelKey(
                 seed.subjectSlug,

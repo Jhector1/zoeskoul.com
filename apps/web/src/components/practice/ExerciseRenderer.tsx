@@ -317,6 +317,43 @@ function getManifestExerciseLanguage(
     ) as RunnerLanguage;
 }
 
+function resolveCodeInputIdeConfig(
+    exercise: CodeInputExerciseWithSqlExtras,
+): LearningIdeConfig | null {
+    const explicit = (exercise as any).ideConfig;
+    if (explicit && typeof explicit === "object") {
+        return explicit as LearningIdeConfig;
+    }
+
+    const recipe = (exercise as any).recipe;
+    if (
+        recipe &&
+        typeof recipe === "object" &&
+        recipe.type === "shell_task" &&
+        recipe.mode === "terminal_workspace"
+    ) {
+        return {
+            runnerBackend: "pty",
+            layoutMode: "terminal_workspace",
+            terminalSessionScope:
+                (exercise as any)?.serviceOverrides?.terminalSessionScope ??
+                (exercise as any)?.runtime?.terminalSessionScope ??
+                "exercise",
+            fileActions: {
+                enabled: false,
+            },
+            requires: {
+                files: true,
+                multiFile: true,
+                terminal: true,
+            },
+        };
+    }
+
+    return null;
+}
+
+
 function workspaceHasNonBlankFile(workspace: WorkspaceStateV2 | null | undefined) {
     if (!workspace || workspace.version !== 2 || !Array.isArray(workspace.nodes)) {
         return false;
@@ -1197,7 +1234,7 @@ function CodeInputWithTools(props: {
             code: normalizedActive.code,
             workspace: normalizedActive.workspace,
             stdin: activeStdin,
-            ideConfig: exercise.ideConfig ?? null,
+            ideConfig: resolveCodeInputIdeConfig(exercise),
             ownerCardId,
             /**
              * The current rendered exercise contract is authoritative for this
@@ -1225,7 +1262,7 @@ function CodeInputWithTools(props: {
             exerciseKey,
             activeLanguage,
             activeStdin,
-            exercise.ideConfig,
+            exercise,
             normalizedActive.code,
             normalizedActive.workspace,
             ownerCardId,

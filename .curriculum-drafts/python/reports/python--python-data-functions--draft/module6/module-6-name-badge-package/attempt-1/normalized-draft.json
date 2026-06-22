@@ -1,0 +1,103 @@
+{
+  "title": "Module 6 Name Badge Package",
+  "summary": "Refactor a small badge builder step by step so helper functions and helper files grow from the previous working version.",
+  "minutes": 26,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Introduction to Helper Functions",
+      "bodyMarkdown": "In this module, we'll explore how to refactor a simple badge builder program by breaking it down into smaller, reusable functions. This approach not only makes the code more organized but also easier to maintain and extend.\n\n### Example\nConsider a function that formats a name badge:\n\n```python\ndef format_badge(name, title):\n    return f\"{name}, {title}\"\n```\n\nThis function takes a name and a title as parameters and returns a formatted string. By using functions like this, we can separate the logic of formatting from other parts of the program."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "exercise1",
+      "kind": "code_input",
+      "title": "Create a Function to Format Names",
+      "prompt": "Write a function `format_name` that takes a first name and a last name as parameters and returns them combined in the format 'Last, First'.",
+      "starterCode": "def format_name(first_name, last_name):\n    # Combine the names in 'Last, First' format\n    pass",
+      "solutionCode": "def format_name(first_name, last_name):\n    return f\"{last_name}, {first_name}\"",
+      "tests": [
+        {
+          "stdin": "",
+          "stdout": "Doe, John\n",
+          "match": "exact"
+        },
+        {
+          "stdin": "",
+          "stdout": "Smith, Jane\n",
+          "match": "exact"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Use string formatting to combine the names.",
+      "help": {
+        "concept": "String formatting in Python allows you to combine strings and variables efficiently.",
+        "hint_1": "Use an f-string to format the names.",
+        "hint_2": "The format should be 'Last, First'."
+      }
+    },
+    {
+      "id": "exercise2",
+      "kind": "code_input",
+      "title": "Refactor to Use a Helper Function",
+      "prompt": "Refactor the badge creation process to use a helper function `create_badge` that takes a name and a title, and returns a formatted badge string.",
+      "starterCode": "def create_badge(name, title):\n    # Format the badge using the name and title\n    pass\n\n# Example usage\nbadge = create_badge(\"John Doe\", \"Engineer\")\nprint(badge)",
+      "solutionCode": "def create_badge(name, title):\n    return f\"{name}, {title}\"\n\n# Example usage\nbadge = create_badge(\"John Doe\", \"Engineer\")\nprint(badge)",
+      "tests": [
+        {
+          "stdin": "",
+          "stdout": "John Doe, Engineer\n",
+          "match": "exact"
+        },
+        {
+          "stdin": "",
+          "stdout": "Jane Smith, Manager\n",
+          "match": "exact"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Define a helper function to handle the badge formatting.",
+      "help": {
+        "concept": "Helper functions encapsulate specific tasks, making code more modular and reusable.",
+        "hint_1": "Create a function that formats the badge string.",
+        "hint_2": "Use the helper function within the main badge creation logic."
+      }
+    },
+    {
+      "id": "exercise3",
+      "kind": "code_input",
+      "title": "Integrate Helper Functions into a Program",
+      "prompt": "Integrate the `format_name` and `create_badge` functions into a program that reads a list of names and titles, and prints formatted badges for each.",
+      "starterCode": "def format_name(first_name, last_name):\n    return f\"{last_name}, {first_name}\"\n\ndef create_badge(name, title):\n    return f\"{name}, {title}\"\n\n# List of names and titles\npeople = [(\"John\", \"Doe\", \"Engineer\"), (\"Jane\", \"Smith\", \"Manager\")]\n\n# Process each person\nfor first_name, last_name, title in people:\n    # Format the name and create a badge\n    pass",
+      "solutionCode": "def format_name(first_name, last_name):\n    return f\"{last_name}, {first_name}\"\n\ndef create_badge(name, title):\n    return f\"{name}, {title}\"\n\n# List of names and titles\npeople = [(\"John\", \"Doe\", \"Engineer\"), (\"Jane\", \"Smith\", \"Manager\")]\n\n# Process each person\nfor first_name, last_name, title in people:\n    full_name = format_name(first_name, last_name)\n    badge = create_badge(full_name, title)\n    print(badge)",
+      "tests": [
+        {
+          "stdin": "",
+          "stdout": "Doe, John, Engineer\nSmith, Jane, Manager\n",
+          "match": "exact"
+        },
+        {
+          "stdin": "",
+          "stdout": "Brown, Charlie, Developer\nWhite, Alice, Designer\n",
+          "match": "exact"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Use a loop to process each name and title pair.",
+      "help": {
+        "concept": "Combining functions and loops allows you to process multiple items efficiently.",
+        "hint_1": "Iterate over the list of names and titles.",
+        "hint_2": "Call the helper functions for each pair."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Name Badge Builder",
+    "stepIds": [
+      "exercise1",
+      "exercise2",
+      "exercise3"
+    ]
+  }
+}

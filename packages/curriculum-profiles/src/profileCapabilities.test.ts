@@ -100,17 +100,23 @@ describe("profile code_input capabilities", () => {
         expect(pythonProfile.project).toBeDefined();
     });
 
-    it("exposes a practice capability for the Python profile and leaves SQL opted out", () => {
+    it("exposes the inherited shared practice capability for code/query profiles", () => {
         const pythonProfile = getCurriculumProfile("python");
         const sqlProfile = getCurriculumProfile("sql");
 
         expect(pythonProfile.practice?.tryItDefault).toEqual({
             enabled: true,
+            placement: "all_sketches",
             sketchIndex: 0,
             allowReveal: true,
         });
         expect(pythonProfile.practice?.preferredTryItExerciseKind).toBe("code_input");
-        expect(sqlProfile.practice).toBeUndefined();
+        expect(sqlProfile.practice?.tryItDefault).toEqual({
+            enabled: true,
+            placement: "all_sketches",
+            sketchIndex: 0,
+            allowReveal: true,
+        });
     });
 
     it("returns the expected Python module_project config defaults", () => {

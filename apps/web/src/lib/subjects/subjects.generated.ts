@@ -23,7 +23,7 @@ import sql from "./sql/sql/subject.manifest.json";
 import { TOPIC_MANIFESTS as sqlTopicManifests } from "./sql/sql/topics.generated";
 
 
-export type GeneratedSubjectGenKey = "linux_terminal_fundamentals" | "python_part1" | "sql_for_beginners";
+export type GeneratedSubjectGenKey = "bash_course" | "python_part1" | "sql_for_beginners";
 
 export const SUBJECT_MANIFESTS: Record<string, SubjectManifest> = {
   "linux-terminal-fundamentals": linuxTerminalFundamentals as SubjectManifest,
@@ -46,7 +46,7 @@ export const SUBJECT_GENERATOR_SOURCES: Record<
 > = {
   "linux-terminal-fundamentals": {
     subjectSlug: "linux-terminal-fundamentals",
-    genKey: "linux_terminal_fundamentals",
+    genKey: "bash_course",
     manifest: linuxTerminalFundamentals as SubjectManifest,
     topicManifests: linuxTerminalFundamentalsTopicManifests as TopicManifestRefMap,
   },
@@ -92,7 +92,7 @@ export const SUBJECT_GENERATOR_SOURCES_BY_GENKEY: Record<
   GeneratedSubjectGenKey,
   Array<(typeof SUBJECT_GENERATOR_SOURCES)[keyof typeof SUBJECT_GENERATOR_SOURCES]>
 > = {
-  "linux_terminal_fundamentals": [SUBJECT_GENERATOR_SOURCES["linux-terminal-fundamentals"]],
+  "bash_course": [SUBJECT_GENERATOR_SOURCES["linux-terminal-fundamentals"]],
   "python_part1": [SUBJECT_GENERATOR_SOURCES["applied-python-projects"], SUBJECT_GENERATOR_SOURCES["python-data-functions"], SUBJECT_GENERATOR_SOURCES["python-v2"], SUBJECT_GENERATOR_SOURCES["python"]],
   "sql_for_beginners": [SUBJECT_GENERATOR_SOURCES["sql-v2"], SUBJECT_GENERATOR_SOURCES["sql"]],
 };

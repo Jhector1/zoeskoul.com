@@ -5,6 +5,7 @@ import {
     finishProgressBar,
     renderProgressBar,
 } from "../utils/renderProgressBar.js";
+import { resolveDraftCritiqueTarget } from "./resolveDraftCritiqueTarget.js";
 
 function getReportsRootFromTopics(
     topics: Array<{ reportDir: string }>,
@@ -68,13 +69,17 @@ function summarizeTopicResults(
 
 export async function runCritiqueSubjectDraft(blueprintPath: string) {
     const blueprint = await loadBlueprint(blueprintPath);
+    const target = await resolveDraftCritiqueTarget(blueprintPath);
     let sawProgress = false;
 
-    console.log(`Critiquing saved drafts for subject ${blueprint.subjectSlug}...`);
+    console.log(
+        `Critiquing saved drafts for subject ${target.draftSubjectSlug ?? blueprint.subjectSlug}...`,
+    );
 
     try {
         const result = await critiqueSubjectDraft({
             blueprint,
+            draftSubjectSlug: target.draftSubjectSlug,
             provider: openAiProvider,
             onProgress: (info) => {
                 sawProgress = true;

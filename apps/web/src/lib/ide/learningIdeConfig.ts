@@ -33,6 +33,7 @@ export type LearningIdeConfig = {
     requires?: LearningIdeServiceRequirements;
     layoutMode?: LearningIdeLayoutMode;
     terminalSessionScope?: TerminalSessionScope;
+    terminalCwd?: string;
     fileActions?: LearningIdeFileActions;
     sqlPane?: SqlPaneOptions;
 };
@@ -87,6 +88,7 @@ export function mergeLearningIdeConfigs(
             ...(config.terminalSessionScope
                 ? { terminalSessionScope: config.terminalSessionScope }
                 : {}),
+            ...(config.terminalCwd ? { terminalCwd: config.terminalCwd } : {}),
             ...(config.fileActions
                 ? { fileActions: { ...previousFileActions, ...config.fileActions } }
                 : {}),
@@ -133,6 +135,7 @@ export function resolveFullIDEConfigFromLearningIde(args?: {
     const enableWorkspaceTerminal =
         runnerBackend === "pty" || (runnerBackend === "auto" && wantsTerminal);
     const terminalSessionScope = ideConfig?.terminalSessionScope ?? "exercise";
+    const terminalCwd = ideConfig?.terminalCwd?.trim() || undefined;
     const requestedFileActions = resolveIdeFileActions(ideConfig?.fileActions ?? null);
     const fileActions: ResolvedIdeFileActions = terminalWorkspaceMode
         ? {
@@ -156,6 +159,7 @@ export function resolveFullIDEConfigFromLearningIde(args?: {
         },
         runner: {
             terminalSessionScope,
+            ...(terminalCwd ? { terminalCwd } : {}),
         },
         ...(wantsFiles || terminalWorkspaceMode
             ? {
@@ -192,6 +196,7 @@ export function resolveFullIDEConfigFromLearningIde(args?: {
                     showTerminalDockToggle: !terminalWorkspaceMode,
                     allowRun: !terminalWorkspaceMode,
                     terminalSessionScope,
+                    ...(terminalCwd ? { terminalCwd } : {}),
                 },
             }
             : {}),

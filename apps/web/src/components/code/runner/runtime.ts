@@ -362,19 +362,26 @@ export function resolveTerminalWorkspaceKey(args: {
     terminalHistoryScopeKey?: string | null;
     projectId?: string | null;
     terminalSessionScope?: TerminalSessionScope;
+    terminalCwd?: string | null;
 }): string | undefined {
     const exerciseStateKey = normalizeTerminalKeyPart(args.exerciseStateKey);
     const terminalHistoryScopeKey = normalizeTerminalKeyPart(args.terminalHistoryScopeKey);
     const projectId = normalizeTerminalKeyPart(args.projectId);
+    const terminalCwd = normalizeTerminalKeyPart(args.terminalCwd);
     const scope = args.terminalSessionScope ?? "exercise";
     const projectKey = projectId ? `project:${projectId}` : "";
 
+    const withTerminalCwd = (base: string | undefined) => {
+        if (!base) return undefined;
+        return terminalCwd ? `${base}::cwd:${terminalCwd}` : base;
+    };
+
     if (scope === "project") {
-        return projectKey || terminalHistoryScopeKey || exerciseStateKey || undefined;
+        return withTerminalCwd(projectKey || terminalHistoryScopeKey || exerciseStateKey || undefined);
     }
 
     if (scope === "exercise") {
-        return exerciseStateKey || projectKey || terminalHistoryScopeKey || undefined;
+        return withTerminalCwd(exerciseStateKey || projectKey || terminalHistoryScopeKey || undefined);
     }
 
     if (scope === "module") {
@@ -383,15 +390,15 @@ export function resolveTerminalWorkspaceKey(args: {
             : undefined;
 
         if (moduleScopedKey) {
-            return moduleScopedKey;
+            return withTerminalCwd(moduleScopedKey);
         }
 
-        return terminalHistoryScopeKey || exerciseStateKey || projectKey || undefined;
+        return withTerminalCwd(terminalHistoryScopeKey || exerciseStateKey || projectKey || undefined);
     }
 
     if (scope === "topic") {
         if (isTopicOrModuleHistoryScopeKey(terminalHistoryScopeKey)) {
-            return terminalHistoryScopeKey;
+            return withTerminalCwd(terminalHistoryScopeKey);
         }
 
         const topicScopedKey = exerciseStateKey
@@ -399,13 +406,13 @@ export function resolveTerminalWorkspaceKey(args: {
             : undefined;
 
         if (topicScopedKey) {
-            return topicScopedKey;
+            return withTerminalCwd(topicScopedKey);
         }
 
-        return exerciseStateKey || terminalHistoryScopeKey || projectKey || undefined;
+        return withTerminalCwd(exerciseStateKey || terminalHistoryScopeKey || projectKey || undefined);
     }
 
-    return exerciseStateKey || projectKey || terminalHistoryScopeKey || undefined;
+    return withTerminalCwd(exerciseStateKey || projectKey || terminalHistoryScopeKey || undefined);
 }
 
 export function buildTerminalAutoOpenKey(args: {

@@ -7,11 +7,19 @@ import {
     type SubjectShapePack,
 } from "@zoeskoul/curriculum-profiles";
 import { buildExerciseMessageKeys } from "../messages/buildMessageKeys.js";
+import {
+    buildExerciseLocalMessageBaseForEmission,
+    effectiveSketchBlocks,
+    projectStepIdFromExerciseId,
+    resolveTopicProjectKind,
+    tryItMessageId,
+} from "./exerciseMessageBase.js";
 import { applyProgressiveProjectFlow } from "./progressiveProjectFlow.js";
 import {
     resolveTryItExerciseIdForSketch,
     resolveTryItSketchIndexes,
 } from "./projectTopicEmission.js";
+import { buildTryItPrompt, buildTryItTitle } from "./tryItText.js";
 
 function optionIdFromIndex(index: number) {
     return String.fromCharCode(97 + index);
@@ -49,14 +57,6 @@ function uniqueNonEmpty(values: string[]) {
     return Array.from(new Set(values.map((x) => x.trim()).filter(Boolean)));
 }
 
-function projectStepIdFromExerciseId(id: string) {
-    return id
-        .trim()
-        .toLowerCase()
-        .replace(/[^a-z0-9]+/g, "_")
-        .replace(/^_+|_+$/g, "");
-}
-
 function buildProjectStepIds(
     draft: TopicAuthoringDraft,
     sourceExercises: TopicAuthoringDraft["quizDraft"],
@@ -83,12 +83,7 @@ export function buildMessagesFromDraft(args: {
 }) {
     const { seed, draft } = args;
     const profile = getCurriculumProfile(seed.profileId);
-    const topicKind =
-        seed.moduleRole === "capstone" || seed.sectionRole === "capstone"
-            ? "capstone"
-            : seed.sectionRole === "module_project"
-                ? "module_project"
-                : null;
+    const topicKind = resolveTopicProjectKind(seed);
     const isProjectOnlyTopic = topicKind !== null && !!profile.project;
     const projectConfig =
         isProjectOnlyTopic && topicKind
@@ -111,7 +106,9 @@ export function buildMessagesFromDraft(args: {
     setNested(out, [...topicPath, "label"], draft.title);
     setNested(out, [...topicPath, "summary"], draft.summary);
 
-    draft.sketchBlocks.forEach((block, index) => {
+    const sketchBlocks = effectiveSketchBlocks({ draft, topicKind });
+
+    sketchBlocks.forEach((block, index) => {
         setNested(out, [...topicPath, "cards", `sketch${index}`, "title"], block.title);
     });
 
@@ -124,17 +121,21 @@ export function buildMessagesFromDraft(args: {
                     topicKind,
                 }) === true,
             )
-            : draft.quizDraft.filter((exercise) => exercise.kind === "code_input");
-    const projectStepIds = buildProjectStepIds(
-        draft,
-        sourceProjectExercises,
-        seed.generationTargets?.projectCodeInputTarget ??
-        projectConfig?.targetStepCount ??
-        3,
-    );
+            : [];
+    const projectStepIds = isProjectOnlyTopic
+        ? buildProjectStepIds(
+            draft,
+            sourceProjectExercises,
+            seed.generationTargets?.projectCodeInputTarget ??
+            projectConfig?.targetStepCount ??
+            3,
+        )
+        : [];
 
 
-    const tryItExercises = sourceProjectExercises;
+    const tryItExercises = isProjectOnlyTopic
+        ? []
+        : draft.quizDraft.filter((exercise) => exercise.kind === "code_input");
     const emittedDraftExercises = isProjectOnlyTopic
         ? draft.quizDraft.filter((exercise) => projectStepIds.includes(exercise.id))
         : draft.quizDraft;
@@ -146,7 +147,7 @@ export function buildMessagesFromDraft(args: {
     });
 
     if (!isProjectOnlyTopic && hasQuizExercises(draft)) {
-        setNested(out, [...topicPath, "cards", "quiz", "title"], "Quiz");
+        setNested(out, [...topicPath, "cards", "quiz", "title"], "Practice");
     }
 
     if (projectStepIds.length > 0) {
@@ -172,8 +173,14 @@ export function buildMessagesFromDraft(args: {
         }
     }
 
-    if (seed.practice?.tryIt === true) {
-        const sketchIndexes = resolveTryItSketchIndexes(draft, seed, profile);
+    const tryItExerciseIdToMessageId = new Map<string, string>();
+
+    if (seed.practice?.tryIt === true && !isProjectOnlyTopic) {
+        const sketchIndexes = resolveTryItSketchIndexes(
+            { ...draft, sketchBlocks },
+            seed,
+            profile,
+        );
         const preferredTryItKind =
             projectConfig?.preferredProjectExerciseKind ??
             profile.practice?.preferredTryItExerciseKind ??
@@ -193,6 +200,9 @@ export function buildMessagesFromDraft(args: {
 
             if (!exercise) continue;
 
+            const tryItId = tryItMessageId(seed.topicId, sketchIndex);
+            tryItExerciseIdToMessageId.set(exercise.id, tryItId);
+
             setNested(
                 out,
                 [...topicPath, "tryIt", "allowReveal"],
@@ -206,25 +216,31 @@ export function buildMessagesFromDraft(args: {
                 [
                     ...topicPath,
                     "tryIt",
-                    `try_${seed.topicId.replace(/-/g, "_")}_sketch${sketchIndex}`,
+                    tryItId,
                     "title",
                 ],
-                "Try it yourself",
+                buildTryItTitle(exercise.title),
             );
             setNested(
                 out,
                 [
                     ...topicPath,
                     "tryIt",
-                    `try_${seed.topicId.replace(/-/g, "_")}_sketch${sketchIndex}`,
+                    tryItId,
                     "prompt",
                 ],
-                exercise.prompt,
+                buildTryItPrompt({
+                    exerciseTitle: exercise.title,
+                    exercisePrompt: exercise.prompt,
+                    topicTitle: draft.title,
+                    seed,
+                    sketchTitle: sketchBlocks[sketchIndex]?.title,
+                }),
             );
         }
     }
 
-    for (const block of draft.sketchBlocks) {
+    for (const block of sketchBlocks) {
         setNested(out, [...sketchPath, block.id, "title"], block.title);
         setNested(out, [...sketchPath, block.id, "bodyMarkdown"], block.bodyMarkdown);
     }
@@ -235,6 +251,14 @@ export function buildMessagesFromDraft(args: {
                 ? exercise.options.map((_, index) => optionIdFromIndex(index))
                 : [];
 
+        const projectStepIdSet = new Set(projectStepIds);
+        const localMessageBase = buildExerciseLocalMessageBaseForEmission({
+            exercise,
+            seed,
+            topicKind,
+            projectStepIdSet,
+            tryItExerciseIdToMessageId,
+        });
         const messageKeys = buildExerciseMessageKeys({
             scope: {
                 subjectSlug: seed.subjectSlug,
@@ -242,7 +266,7 @@ export function buildMessagesFromDraft(args: {
                 topicId: seed.topicId,
             },
             exerciseId: exercise.id,
-            messageBase: (exercise as { messageBase?: string }).messageBase,
+            messageBase: localMessageBase,
             optionIds,
         });
 

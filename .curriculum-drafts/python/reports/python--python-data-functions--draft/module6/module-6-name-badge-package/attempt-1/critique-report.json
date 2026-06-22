@@ -1,0 +1,13 @@
+{
+  "topicId": "module-6-name-badge-package",
+  "ok": false,
+  "issues": [
+    {
+      "code": "PYTHON_FIXED_TEST_REPAIR_UNSAFE",
+      "category": "pedagogy",
+      "severity": "error",
+      "exerciseId": "exercise3",
+      "message": "Exercise \"exercise3\" is invalid as fixed_tests code_input because it has fewer than 2 meaningful validations. Replace it with a non-code exercise, regenerate it as stdin-based code_input, or provide distinct file-fixture tests."
+    }
+  ]
+}

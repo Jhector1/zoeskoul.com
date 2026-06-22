@@ -56,9 +56,52 @@ describe("resolveAuthoringPolicyChain", () => {
         expect(policy.uiTerms?.editor).toBe("code editor");
         expect(policy.uiTerms?.runButton).toBe("Run");
         expect(policy.uiTerms?.output).toBe("output panel");
+        expect(policy.practiceDefaults).toMatchObject({
+            tryIt: true,
+            requiresTryIt: true,
+            tryItPlacement: "all_sketches",
+        });
+        expect(policy.topicDefaults).toMatchObject({
+            requiresTryIt: true,
+        });
         expect(policy.forbiddenActions).toEqual(
             expect.arrayContaining(["pip install", ".py", "VS Code"]),
         );
+    });
+
+
+    it("resolves Linux shared profile/workspace/validation to shell_task terminal workspace policy", async () => {
+        const policy = await resolveAuthoringPolicyChain({
+            subjectSlug: "linux",
+            courseSlug: "linux-terminal-fundamentals",
+            includeProjectPolicy: true,
+        });
+
+        expect(policy.sources).toEqual(
+            expect.arrayContaining([
+                expect.stringContaining("authoring/subjects/linux/shared/profile.json"),
+                expect.stringContaining("authoring/subjects/linux/shared/workspace.policy.json"),
+                expect.stringContaining("authoring/subjects/linux/shared/validation.policy.json"),
+                expect.stringContaining("authoring/subjects/linux/courses/linux-terminal-fundamentals/validation.policy.json"),
+            ]),
+        );
+        expect(policy.runtime).toMatchObject({
+            kind: "shell",
+            backend: "pty",
+        });
+        expect(policy.workspaceProfileId).toBe("terminal-workspace-runner");
+        expect(policy.checker?.defaultRecipe).toBe("shell_task");
+        expect(policy.checker?.defaultMode).toBe("terminal_workspace");
+        expect(policy.validationRequirements).toMatchObject({
+            usesShellTaskRecipe: true,
+            usesTerminalWorkspaceLayout: true,
+            workspaceExpectationsRequired: true,
+            judge0NotRequired: true,
+        });
+        expect(policy.preferredTerms).toMatchObject({
+            editor: "terminal",
+            "run button": "terminal command",
+        });
     });
 
     it("warns when a course policy repeats workspace terms without an override reason", async () => {

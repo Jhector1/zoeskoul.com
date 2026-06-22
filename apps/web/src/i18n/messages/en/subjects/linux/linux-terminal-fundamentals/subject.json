@@ -2,15 +2,15 @@
   "subjects": {
     "linux-terminal-fundamentals": {
       "title": "Linux Terminal Fundamentals",
-      "description": "A practical first Linux course for moving around the terminal, organizing files, reading text, and finishing a real workspace cleanup.",
-      "moreComingSoon": "More Linux lessons are coming soon."
+      "description": "A beginner-friendly Linux course focused on terminal navigation, files, folders, safe command habits, and workspace-based practice.",
+      "moreComingSoon": "More Linux Terminal Fundamentals lessons are coming soon."
     }
   },
   "modules": {
     "linux-terminal-fundamentals": {
-      "linux-1-terminal-navigation": {
+      "linux-module-1-terminal-navigation": {
         "title": "Terminal Navigation Basics",
-        "description": "Get comfortable with the prompt, your current folder, file lists, and safe movement through a workspace.",
+        "description": "Learn what the terminal is, how to know where you are, how to list files, and how to move between folders.",
         "outcomes": [
           "Explain what a terminal command does.",
           "Use pwd and ls to inspect the current location.",
@@ -18,13 +18,13 @@
           "Create a simple folder map using terminal commands."
         ],
         "why": [
-          "Every terminal task starts with knowing where you are.",
-          "Small, visible changes build confidence before scripts, Git, SSH, or servers."
+          "Builds confidence with terminal navigation basics.",
+          "Prepares learners for the next skills in the course."
         ]
       },
-      "linux-2-files-and-folders": {
+      "linux-module-2-files-and-folders": {
         "title": "Files, Folders, and Viewing Content",
-        "description": "Create useful folder structures, clean up files, and read text without leaving the terminal.",
+        "description": "Create, copy, move, rename, delete, and inspect files from the terminal.",
         "outcomes": [
           "Create folders and files with mkdir, mkdir -p, and touch.",
           "Copy, move, and rename files using cp and mv.",
@@ -32,84 +32,75 @@
           "Inspect text files with cat, head, tail, and wc."
         ],
         "why": [
-          "File organization is a daily skill for development and server work.",
-          "Reading and cleaning files from the terminal makes larger tasks less intimidating."
+          "Builds confidence with files, folders, and viewing content.",
+          "Prepares learners for the next skills in the course."
         ]
       },
-      "linux-3-file-room-capstone": {
+      "linux-module-3-final-capstone": {
         "title": "Final Capstone: File Room Handoff",
-        "description": "Clean up a messy event workspace and leave it ready for the next person.",
+        "description": "Use the terminal to clean up a small real-world workspace and leave it ready for someone else.",
         "outcomes": [
-          "Inspect a messy workspace before changing it.",
+          "Inspect a workspace before changing it.",
           "Create a clean folder structure for a real task.",
-          "Move, rename, copy, and remove files safely.",
-          "Use file-reading commands to check your work before finishing."
+          "Move, copy, rename, and remove files safely.",
+          "Verify the finished workspace with terminal commands."
         ],
         "why": [
-          "Brings the first course together in one realistic terminal job.",
-          "Builds the habit of checking, organizing, and handing off work clearly."
+          "Builds confidence with final capstone: file room handoff.",
+          "Prepares learners for the next skills in the course."
         ]
       }
     }
   },
   "sections": {
     "linux-terminal-fundamentals": {
-      "linux-1-terminal-navigation": {
-        "linux-terminal-fundamentals-linux-1-orientation": {
+      "linux-module-1-terminal-navigation": {
+        "linux-terminal-fundamentals-linux-module-1-orientation": {
           "title": "Terminal Orientation",
-          "description": "Start with the terminal prompt, current directory, listing files, and moving between folders.",
+          "description": "Learn what the terminal is, where am i? pwd and ls, moving around with cd through focused examples and practice.",
           "weeks": null,
           "bullets": [
-            "What the terminal is",
-            "Current folder with pwd",
-            "List files with ls",
-            "Move with cd"
+            "What the Terminal Is",
+            "Where Am I? pwd and ls",
+            "Moving Around with cd"
           ]
         },
-        "linux-terminal-fundamentals-linux-1-module-project": {
+        "linux-terminal-fundamentals-linux-module-1-project": {
           "title": "Module Project",
-          "description": "Build a small field kit map with clear folders and check files.",
+          "description": "Learn project: terminal map through focused examples and practice.",
           "weeks": null,
           "bullets": [
-            "Create nested folders",
-            "Place files in the right folders",
-            "Verify structure with ls and pwd"
+            "Project: Terminal Map"
           ]
         }
       },
-      "linux-2-files-and-folders": {
-        "linux-terminal-fundamentals-linux-2-file-workflow": {
+      "linux-module-2-files-and-folders": {
+        "linux-terminal-fundamentals-linux-module-2-file-workflow": {
           "title": "File Workflow",
-          "description": "Practice the commands developers use every day to build and organize project folders.",
+          "description": "Learn creating folders and files, copy, move, and rename, viewing file contents through focused examples and practice.",
           "weeks": null,
           "bullets": [
-            "Create folders and files",
-            "Copy and rename safely",
-            "View file contents",
-            "Check simple file stats"
+            "Creating Folders and Files",
+            "Copy, Move, and Rename",
+            "Viewing File Contents"
           ]
         },
-        "linux-terminal-fundamentals-linux-2-module-project": {
+        "linux-terminal-fundamentals-linux-module-2-project": {
           "title": "Module Project",
-          "description": "Clean a downloaded school folder into notes, assignments, scripts, and backups.",
+          "description": "Learn project: notes organizer through focused examples and practice.",
           "weeks": null,
           "bullets": [
-            "Move files into purpose-based folders",
-            "Copy important files into backups",
-            "Remove old temporary files"
+            "Project: Notes Organizer"
           ]
         }
       },
-      "linux-3-file-room-capstone": {
-        "linux-terminal-fundamentals-linux-3-capstone": {
-          "title": "Capstone Project",
-          "description": "Take a messy event folder and leave behind a clean handoff.",
+      "linux-module-3-final-capstone": {
+        "linux-terminal-fundamentals-linux-module-3-capstone": {
+          "title": "Final Capstone",
+          "description": "Learn capstone: file room handoff through focused examples and practice.",
           "weeks": null,
           "bullets": [
-            "Inspect the incoming files",
-            "Create a clean folder map",
-            "Move and back up important files",
-            "Remove temporary clutter safely"
+            "Capstone: File Room Handoff"
           ]
         }
       }

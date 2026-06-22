@@ -1,0 +1,113 @@
+{
+  "topics": {
+    "linux-terminal-fundamentals": {
+      "linux-module-3-final-capstone": {
+        "final-capstone-file-room-handoff": {
+          "label": "Capstone: File Room Handoff",
+          "summary": "Use the terminal to sort a messy event folder, protect important notes, remove temporary clutter, and mark the workspace ready.",
+          "cards": {
+            "sketch0": {
+              "title": "Organizing a Messy Workspace"
+            },
+            "project": {
+              "title": "File Room Handoff Project"
+            }
+          },
+          "projectSteps": {
+            "final_capstone_file_room_handoff_terminal_folder_1": {
+              "title": "Create a practice folder"
+            },
+            "final_capstone_file_room_handoff_terminal_file_2": {
+              "title": "Create a marker file"
+            },
+            "final_capstone_file_room_handoff_terminal_copy_3": {
+              "title": "Copy a starter note"
+            },
+            "final_capstone_file_room_handoff_terminal_folder_4": {
+              "title": "Create a practice folder"
+            },
+            "final_capstone_file_room_handoff_terminal_file_5": {
+              "title": "Create a marker file"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_final_capstone_file_room_handoff_sketch0": {
+              "title": "Try it yourself",
+              "prompt": "Use the terminal to create a folder named terminal-practice."
+            }
+          },
+          "quiz": {
+            "final-capstone-file-room-handoff-terminal-folder-1": {
+              "title": "Create a practice folder",
+              "prompt": "Start the final capstone project. In step 1 of 5, Use the terminal to create a folder named terminal-practice.",
+              "hint": "This is the first project step. Build a clean starting version, then run it before moving on.",
+              "help": {
+                "concept": "The final capstone is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                "hint_1": "This is the first project step. Build a clean starting version, then run it before moving on.",
+                "hint_2": "If a path is required, match the exact folder and file names before clicking Check Answer."
+              },
+              "starterCode": "# Use the terminal for this Linux task."
+            },
+            "final-capstone-file-room-handoff-terminal-file-2": {
+              "title": "Create a marker file",
+              "prompt": "Continue the final capstone project from the previous working step. In step 2 of 5, Use the terminal to create a folder named terminal-practice and a file named terminal-practice/ready.txt.",
+              "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+              "help": {
+                "concept": "The final capstone is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "hint_2": "Run the previous working code first, then make only the focused change for this step."
+              },
+              "starterCode": "mkdir -p terminal-practice\n# Capstone step 2: Create a marker file\n# Keep the working code above from the previous step.\n# Next, Use the terminal to create a folder named terminal-practice and a file named terminal-practice/ready.txt\n# Add only the focused change for this step below or inside the existing work.\n"
+            },
+            "final-capstone-file-room-handoff-terminal-copy-3": {
+              "title": "Copy a starter note",
+              "prompt": "Continue the final capstone project from the previous working step. In step 3 of 5, Use the terminal to copy sample/note.txt to terminal-practice/note-copy.txt.",
+              "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+              "help": {
+                "concept": "The final capstone is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "hint_2": "Run the previous working code first, then make only the focused change for this step."
+              },
+              "starterCode": "mkdir -p terminal-practice\ntouch terminal-practice/ready.txt\n# Capstone step 3: Copy a starter note\n# Keep the working code above from the previous step.\n# Next, Use the terminal to copy sample/note.txt to terminal-practice/note-copy.txt\n# Add only the focused change for this step below or inside the existing work.\n"
+            },
+            "final-capstone-file-room-handoff-terminal-folder-4": {
+              "title": "Create a practice folder",
+              "prompt": "Continue the final capstone project from the previous working step. In step 4 of 5, Use the terminal to create a folder named terminal-practice.",
+              "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+              "help": {
+                "concept": "The final capstone is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "hint_2": "Run the previous working code first, then make only the focused change for this step."
+              },
+              "starterCode": "mkdir -p terminal-practice\ncp sample/note.txt terminal-practice/note-copy.txt\n# Capstone step 4: Create a practice folder\n# Keep the working code above from the previous step.\n# Next, Use the terminal to create a folder named terminal-practice\n# Add only the focused change for this step below or inside the existing work.\n"
+            },
+            "final-capstone-file-room-handoff-terminal-file-5": {
+              "title": "Create a marker file",
+              "prompt": "Continue the final capstone project from the previous working step. In step 5 of 5, Use the terminal to create a folder named terminal-practice and a file named terminal-practice/ready.txt.",
+              "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+              "help": {
+                "concept": "The final capstone is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "hint_2": "Run the previous working code first, then make only the focused change for this step."
+              },
+              "starterCode": "mkdir -p terminal-practice\n# Capstone step 5: Create a marker file\n# Keep the working code above from the previous step.\n# Next, Use the terminal to create a folder named terminal-practice and a file named terminal-practice/ready.txt\n# Add only the focused change for this step below or inside the existing work.\n"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "linux-terminal-fundamentals": {
+      "linux-module-3-final-capstone": {
+        "final-capstone-file-room-handoff": {
+          "sketch1": {
+            "title": "Organizing a Messy Workspace",
+            "bodyMarkdown": "In this capstone project, you'll use your Linux terminal skills to organize a messy event folder. The goal is to create a clean and structured workspace that can be easily handed off to someone else. You'll practice using commands like `mkdir`, `touch`, `cp`, `mv`, and `rm` to manage files and directories effectively.\n\n### Example\n\nSuppose you have a directory with various files and subdirectories. You can use the following commands to organize it:\n\n```bash\n# Create a new directory for sorted files\nmkdir sorted_files\n\n# Move all text files to the new directory\nmv *.txt sorted_files/\n\n# Create a backup of the sorted files\ncp -r sorted_files sorted_files_backup\n\n# Remove temporary files\nrm *.tmp\n```\n\n**Line by line explanation:**\n1. `mkdir sorted_files` creates a new directory named `sorted_files`.\n2. `mv *.txt sorted_files/` moves all `.txt` files into the `sorted_files` directory.\n3. `cp -r sorted_files sorted_files_backup` creates a backup of the `sorted_files` directory.\n4. `rm *.tmp` removes all files with the `.tmp` extension."
+          }
+        }
+      }
+    }
+  }
+}

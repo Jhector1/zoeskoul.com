@@ -1,0 +1,179 @@
+{
+  "topicId": "where-am-i",
+  "subjectSlug": "linux-terminal-fundamentals",
+  "moduleSlug": "linux-module-1-terminal-navigation",
+  "sectionSlug": "linux-terminal-fundamentals-linux-module-1-orientation",
+  "prefix": "linux_module_1",
+  "minutes": 16,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "bash",
+    "supportsTerminal": true,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "topic": {
+    "labelKey": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.label",
+    "summaryKey": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.cards.sketch0.title",
+      "sketchId": "where-am-i-basics",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.cards.sketch1.title",
+      "sketchId": "list-files-with-ls",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.cards.sketch2.title",
+      "sketchId": "pwd-and-ls-together",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "where-am-i-basics",
+      "archetype": "paragraph",
+      "titleKey": "sketches.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.where-am-i-basics.title",
+      "bodyKey": "sketches.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.where-am-i-basics.bodyMarkdown"
+    },
+    {
+      "id": "list-files-with-ls",
+      "archetype": "paragraph",
+      "titleKey": "sketches.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.list-files-with-ls.title",
+      "bodyKey": "sketches.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.list-files-with-ls.bodyMarkdown"
+    },
+    {
+      "id": "pwd-and-ls-together",
+      "archetype": "paragraph",
+      "titleKey": "sketches.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.pwd-and-ls-together.title",
+      "bodyKey": "sketches.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.pwd-and-ls-together.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "sc-pwd-purpose",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.quiz.sc-pwd-purpose",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "sc-ls-purpose",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.quiz.sc-ls-purpose",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "c"
+      }
+    },
+    {
+      "id": "mc-safe-inspection",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.quiz.mc-safe-inspection",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "dr-orient-yourself",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.quiz.dr-orient-yourself",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
+    },
+    {
+      "id": "fb-pwd-expansion",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.quiz.fb-pwd-expansion",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "working"
+      }
+    },
+    {
+      "id": "fb-ls-meaning",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.quiz.fb-ls-meaning",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "ls"
+      }
+    }
+  ]
+}

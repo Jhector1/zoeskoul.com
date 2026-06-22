@@ -1,0 +1,7 @@
+{
+  "policyId": "shared-generation-browser-workspace",
+  "notes": [
+    "Use the resolved workspace policy as the source of truth for learner-facing tool language.",
+    "Do not describe unavailable tools or workflows in authoring drafts."
+  ]
+}

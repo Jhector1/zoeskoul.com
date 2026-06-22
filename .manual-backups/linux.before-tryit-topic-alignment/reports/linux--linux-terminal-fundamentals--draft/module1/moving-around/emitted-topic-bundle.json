@@ -1,0 +1,458 @@
+{
+  "topicId": "moving-around",
+  "subjectSlug": "linux--linux-terminal-fundamentals--draft",
+  "moduleSlug": "linux-module-1-terminal-navigation",
+  "sectionSlug": "linux--linux-terminal-fundamentals--draft-linux-module-1-orientation",
+  "prefix": "linux_module_1",
+  "minutes": 18,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "bash",
+    "supportsTerminal": true,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "topic": {
+    "labelKey": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.label",
+    "summaryKey": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.cards.sketch0.title",
+      "sketchId": "sketch-1",
+      "height": 420,
+      "tryIt": {
+        "id": "try-moving-around-sketch0",
+        "titleKey": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.tryIt.try_moving_around_sketch0.title",
+        "promptKey": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.tryIt.try_moving_around_sketch0.prompt",
+        "exerciseKey": "moving-around-try-it-1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.cards.sketch1.title",
+      "sketchId": "sketch-2",
+      "height": 420,
+      "tryIt": {
+        "id": "try-moving-around-sketch1",
+        "titleKey": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.tryIt.try_moving_around_sketch1.title",
+        "promptKey": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.tryIt.try_moving_around_sketch1.prompt",
+        "exerciseKey": "moving-around-try-it-2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.cards.sketch2.title",
+      "sketchId": "sketch-3",
+      "height": 420,
+      "tryIt": {
+        "id": "try-moving-around-sketch2",
+        "titleKey": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.tryIt.try_moving_around_sketch2.title",
+        "promptKey": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.tryIt.try_moving_around_sketch2.prompt",
+        "exerciseKey": "moving-around-try-it-3",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch-1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.sketch-1.title",
+      "bodyKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.sketch-1.bodyMarkdown"
+    },
+    {
+      "id": "sketch-2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.sketch-2.title",
+      "bodyKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.sketch-2.bodyMarkdown"
+    },
+    {
+      "id": "sketch-3",
+      "archetype": "paragraph",
+      "titleKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.sketch-3.title",
+      "bodyKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.sketch-3.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "q1",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.practice.q1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "moving-around-single-choice-2",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.practice.moving-around-single-choice-2",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "moving-around-multi-choice-1",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.practice.moving-around-multi-choice-1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "moving-around-drag-reorder-1",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.practice.moving-around-drag-reorder-1",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "q2",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.practice.q2",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": ".."
+      }
+    },
+    {
+      "id": "q3",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.practice.q3",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "print an observable result"
+      }
+    },
+    {
+      "id": "moving-around-try-it-1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-1",
+      "language": "bash",
+      "starterCode": "# Use the terminal for this Linux task.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Use the terminal for this Linux task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "mkdir -p navigation-practice/start\ncd navigation-practice/start\nprintf 'Moved into the start folder.\\n' > you-are-here.txt\npwd\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "navigation-practice/start/you-are-here.txt",
+          "content": "Moved into the start folder.\n",
+          "language": "bash"
+        }
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "navigation-practice/start/you-are-here.txt"
+        ],
+        "requiredFolders": [
+          "navigation-practice",
+          "navigation-practice/start"
+        ]
+      },
+      "terminalExpectations": {
+        "forbiddenCommands": [
+          {
+            "pattern": "(^|\\s)sudo(\\s|$)",
+            "message": "Do not use sudo for beginner workspace tasks."
+          }
+        ]
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "starterCode": "# Use the terminal for this Linux task.",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "# Use the terminal for this Linux task.\n",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "navigation-practice/start/you-are-here.txt"
+          ],
+          "requiredFolders": [
+            "navigation-practice",
+            "navigation-practice/start"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "Practice changing into a folder. Create navigation-practice/start/you-are-here.txt as a marker for the folder you moved into."
+      }
+    },
+    {
+      "id": "moving-around-try-it-2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-2",
+      "language": "bash",
+      "starterCode": "# Use the terminal for this Linux task.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Use the terminal for this Linux task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "mkdir -p navigation-practice/parent-check\nprintf 'Practiced moving up one folder with cd ...\\n' > navigation-practice/parent-check/up-one-level.txt\nls navigation-practice\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "navigation-practice/parent-check/up-one-level.txt",
+          "content": "Practiced moving up one folder with cd ...\n",
+          "language": "bash"
+        }
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "navigation-practice/parent-check/up-one-level.txt"
+        ],
+        "requiredFolders": [
+          "navigation-practice",
+          "navigation-practice/parent-check"
+        ]
+      },
+      "terminalExpectations": {
+        "forbiddenCommands": [
+          {
+            "pattern": "(^|\\s)sudo(\\s|$)",
+            "message": "Do not use sudo for beginner workspace tasks."
+          }
+        ]
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "starterCode": "# Use the terminal for this Linux task.",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "# Use the terminal for this Linux task.\n",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "navigation-practice/parent-check/up-one-level.txt"
+          ],
+          "requiredFolders": [
+            "navigation-practice",
+            "navigation-practice/parent-check"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "Practice the idea of cd ... Create navigation-practice/parent-check/up-one-level.txt to mark that you understand moving to a parent folder."
+      }
+    },
+    {
+      "id": "moving-around-try-it-3",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-3",
+      "language": "bash",
+      "starterCode": "# Use the terminal for this Linux task.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Use the terminal for this Linux task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "mkdir -p navigation-practice/home-shortcut\nprintf 'Use cd ~ to return to the home folder.\\n' > navigation-practice/home-shortcut/home-note.txt\nls navigation-practice/home-shortcut\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "navigation-practice/home-shortcut/home-note.txt",
+          "content": "Use cd ~ to return to the home folder.\n",
+          "language": "bash"
+        }
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "navigation-practice/home-shortcut/home-note.txt"
+        ],
+        "requiredFolders": [
+          "navigation-practice",
+          "navigation-practice/home-shortcut"
+        ]
+      },
+      "terminalExpectations": {
+        "forbiddenCommands": [
+          {
+            "pattern": "(^|\\s)sudo(\\s|$)",
+            "message": "Do not use sudo for beginner workspace tasks."
+          }
+        ]
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "starterCode": "# Use the terminal for this Linux task.",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "# Use the terminal for this Linux task.\n",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "navigation-practice/home-shortcut/home-note.txt"
+          ],
+          "requiredFolders": [
+            "navigation-practice",
+            "navigation-practice/home-shortcut"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "Practice the idea of cd ~. Create navigation-practice/home-shortcut/home-note.txt to mark the shortcut you would use to return home."
+      }
+    }
+  ],
+  "topicMeta": {
+    "learningGoals": [
+      "Try it yourself: enter a practice folder",
+      "Try it yourself: mark a parent-folder move",
+      "Try it yourself: mark a home-folder shortcut"
+    ]
+  }
+}

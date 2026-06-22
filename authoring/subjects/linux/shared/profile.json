@@ -3,11 +3,36 @@
   "language": "bash",
   "runtime": {
     "kind": "shell",
-    "backend": "pty"
+    "backend": "pty",
+    "terminalOnly": true,
+    "defaultSessionScope": "exercise"
   },
   "workspaceProfileId": "terminal-workspace-runner",
   "workspacePolicyId": "linux-terminal-workspace",
   "checker": {
-    "defaultRecipe": "workspace_expectations"
+    "defaultRecipe": "shell_task",
+    "defaultMode": "terminal_workspace",
+    "fileTaskExpectations": "workspaceExpectations",
+    "outputTaskExpectations": "terminalExpectations",
+    "judge0Required": false
+  },
+  "authoringContract": {
+    "codeInputKind": "code_input",
+    "fixedLanguage": "bash",
+    "recipeType": "shell_task",
+    "mode": "terminal_workspace",
+    "defaultEntryFilePath": "main.sh",
+    "grading": {
+      "fileTree": "workspaceExpectations",
+      "commandAndOutput": "terminalExpectations",
+      "optionalCustomCheck": "hiddenShellCheck"
+    },
+    "doNotUse": [
+      "workspace_expectations as a recipe name",
+      "fixed_tests",
+      "template_io",
+      "semantic",
+      "Judge0 Bash for Course 1"
+    ]
   }
 }

@@ -1,0 +1,353 @@
+{
+  "topicId": "module-5-gradebook-project",
+  "subjectSlug": "python--python-data-functions--draft",
+  "moduleSlug": "python-5-lists-tuples-and-dictionaries",
+  "sectionSlug": "python--python-data-functions--draft-python-5-module-project",
+  "prefix": "py5",
+  "minutes": 24,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "python",
+    "supportsTerminal": false,
+    "supportsMultiFile": false,
+    "supportsFileSystem": false,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "topic": {
+    "labelKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.module-5-gradebook-project.label",
+    "summaryKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.module-5-gradebook-project.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.module-5-gradebook-project.cards.sketch0.title",
+      "sketchId": "sketch1",
+      "height": 420,
+      "tryIt": {
+        "id": "try-module-5-gradebook-project-sketch0",
+        "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.module-5-gradebook-project.tryIt.try_module_5_gradebook_project_sketch0.title",
+        "promptKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.module-5-gradebook-project.tryIt.try_module_5_gradebook_project_sketch0.prompt",
+        "exerciseKey": "exercise1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.module-5-gradebook-project.cards.sketch1.title",
+      "sketchId": "try-it-yourself",
+      "height": 420
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.module-5-gradebook-project.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "exercise1",
+            "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.module-5-gradebook-project.projectSteps.exercise1.title",
+            "exerciseKey": "exercise1",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "exercise2",
+            "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.module-5-gradebook-project.projectSteps.exercise2.title",
+            "exerciseKey": "exercise2",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "exercise3",
+            "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.module-5-gradebook-project.projectSteps.exercise3.title",
+            "exerciseKey": "exercise3",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.module-5-gradebook-project.sketch1.title",
+      "bodyKey": "sketches.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.module-5-gradebook-project.sketch1.bodyMarkdown"
+    },
+    {
+      "id": "try-it-yourself",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.module-5-gradebook-project.try-it-yourself.title",
+      "bodyKey": "sketches.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.module-5-gradebook-project.try-it-yourself.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "exercise1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.module-5-gradebook-project.quiz.exercise1",
+      "language": "python",
+      "starterCode": "def create_student_list():\n    # Create a list of student names\n    return []",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def create_student_list():\n    # Create a list of student names\n    return []",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def create_student_list():\n    return ['Alice', 'Bob', 'Charlie']",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def create_student_list():\n    # Create a list of student names\n    return []",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def create_student_list():\n    # Create a list of student names\n    return []",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def create_student_list():\n    return ['Alice', 'Bob', 'Charlie']",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def create_student_list():\n    return ['Alice', 'Bob', 'Charlie']",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "create_student_list",
+            "args": [],
+            "argKinds": [],
+            "expected": [
+              "Alice",
+              "Bob",
+              "Charlie"
+            ],
+            "expectedKind": "value"
+          }
+        ]
+      }
+    },
+    {
+      "id": "exercise2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.module-5-gradebook-project.quiz.exercise2",
+      "language": "python",
+      "starterCode": "def create_student_list():\n    return ['Alice', 'Bob', 'Charlie']\n# Project step 2: Add Grades to Students\n# Keep the working code above from the previous step.\n# Next, Write a function `add_grades` that takes a list of student names and a list of grades, and returns a dictionary mapping each student to their grade\n# Add only the focused change for this step below or inside the existing work.",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def create_student_list():\n    return ['Alice', 'Bob', 'Charlie']\n# Project step 2: Add Grades to Students\n# Keep the working code above from the previous step.\n# Next, Write a function `add_grades` that takes a list of student names and a list of grades, and returns a dictionary mapping each student to their grade\n# Add only the focused change for this step below or inside the existing work.",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def add_grades(students, grades):\n    return dict(zip(students, grades))",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def create_student_list():\n    return ['Alice', 'Bob', 'Charlie']\n# Project step 2: Add Grades to Students\n# Keep the working code above from the previous step.\n# Next, Write a function `add_grades` that takes a list of student names and a list of grades, and returns a dictionary mapping each student to their grade\n# Add only the focused change for this step below or inside the existing work.",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def create_student_list():\n    return ['Alice', 'Bob', 'Charlie']\n# Project step 2: Add Grades to Students\n# Keep the working code above from the previous step.\n# Next, Write a function `add_grades` that takes a list of student names and a list of grades, and returns a dictionary mapping each student to their grade\n# Add only the focused change for this step below or inside the existing work.",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def add_grades(students, grades):\n    return dict(zip(students, grades))",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def add_grades(students, grades):\n    return dict(zip(students, grades))",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "add_grades",
+            "args": [
+              [
+                "Alice",
+                "Bob",
+                "Charlie"
+              ],
+              [
+                85,
+                90,
+                78
+              ]
+            ],
+            "argKinds": [
+              "value",
+              "value"
+            ],
+            "expected": [
+              [
+                "Alice",
+                85
+              ],
+              [
+                "Bob",
+                90
+              ],
+              [
+                "Charlie",
+                78
+              ]
+            ],
+            "expectedKind": "dict_entries"
+          }
+        ]
+      }
+    },
+    {
+      "id": "exercise3",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.module-5-gradebook-project.quiz.exercise3",
+      "language": "python",
+      "starterCode": "def add_grades(students, grades):\n    return dict(zip(students, grades))\n# Project step 3: Calculate Average Grade\n# Keep the working code above from the previous step.\n# Next, Write a function `calculate_average` that takes a dictionary of student grades and returns the average grade\n# Add only the focused change for this step below or inside the existing work.",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def add_grades(students, grades):\n    return dict(zip(students, grades))\n# Project step 3: Calculate Average Grade\n# Keep the working code above from the previous step.\n# Next, Write a function `calculate_average` that takes a dictionary of student grades and returns the average grade\n# Add only the focused change for this step below or inside the existing work.",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def calculate_average(grades):\n    return sum(grades.values()) / len(grades)",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def add_grades(students, grades):\n    return dict(zip(students, grades))\n# Project step 3: Calculate Average Grade\n# Keep the working code above from the previous step.\n# Next, Write a function `calculate_average` that takes a dictionary of student grades and returns the average grade\n# Add only the focused change for this step below or inside the existing work.",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def add_grades(students, grades):\n    return dict(zip(students, grades))\n# Project step 3: Calculate Average Grade\n# Keep the working code above from the previous step.\n# Next, Write a function `calculate_average` that takes a dictionary of student grades and returns the average grade\n# Add only the focused change for this step below or inside the existing work.",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def calculate_average(grades):\n    return sum(grades.values()) / len(grades)",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def calculate_average(grades):\n    return sum(grades.values()) / len(grades)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "calculate_average",
+            "args": [
+              [
+                [
+                  "Alice",
+                  85
+                ],
+                [
+                  "Bob",
+                  90
+                ],
+                [
+                  "Charlie",
+                  78
+                ]
+              ]
+            ],
+            "argKinds": [
+              "dict_entries"
+            ],
+            "expected": 84.33333333333333,
+            "expectedKind": "value"
+          }
+        ]
+      }
+    }
+  ]
+}

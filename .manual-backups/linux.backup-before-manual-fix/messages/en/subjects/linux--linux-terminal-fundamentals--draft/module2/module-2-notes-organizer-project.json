@@ -1,0 +1,107 @@
+{
+  "topics": {
+    "linux--linux-terminal-fundamentals--draft": {
+      "linux-module-2-files-and-folders": {
+        "module-2-notes-organizer-project": {
+          "label": "Project: Notes Organizer",
+          "summary": "Organize a messy folder into notes, homework, code, and backups using core Linux terminal commands.",
+          "cards": {
+            "sketch0": {
+              "title": "Plan the folder cleanup before moving files"
+            },
+            "sketch1": {
+              "title": "Use move and copy commands for safe organization"
+            },
+            "sketch2": {
+              "title": "Check your results by viewing file contents"
+            },
+            "project": {
+              "title": "Notes Organizer Project"
+            }
+          },
+          "projectSteps": {
+            "module_2_notes_organizer_project_terminal_task_1": {
+              "title": "Create the park survey request folder"
+            },
+            "module_2_notes_organizer_project_terminal_task_2": {
+              "title": "Add the map notes folder"
+            },
+            "module_2_notes_organizer_project_terminal_task_3": {
+              "title": "Prepare the handoff marker"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_module_2_notes_organizer_project_sketch0": {
+              "title": "Try: Create the park survey request folder",
+              "prompt": "You are helping a park survey team prepare a terminal map. Create module-2-notes-organizer-project-park-survey/requests and add module-2-notes-organizer-project-park-survey/requests/north-trail.txt so the team has a concrete request log to hand off. Produce the result for create the park survey request folder so it reinforces Project: Notes Organizer. Keep this workspace ready for the connected project work that follows."
+            },
+            "try_module_2_notes_organizer_project_sketch1": {
+              "title": "Try: Add the map notes folder",
+              "prompt": "Continue the same park survey workspace. Keep the request log from step 1, then add module-2-notes-organizer-project-park-survey/maps/current-location.txt as the team's navigation note deliverable. Produce the result for add the map notes folder so it reinforces Project: Notes Organizer. Keep this workspace ready for the connected project work that follows."
+            },
+            "try_module_2_notes_organizer_project_sketch2": {
+              "title": "Try: Prepare the handoff marker",
+              "prompt": "Finish the cumulative park survey terminal map. Keep the request and map notes from the earlier steps, then create module-2-notes-organizer-project-park-survey/handoff/terminal-map-ready.txt as the useful final deliverable. Produce the result for prepare the handoff marker so it reinforces Project: Notes Organizer. Keep this workspace ready for the connected project work that follows."
+            }
+          },
+          "quiz": {
+            "module-2-notes-organizer-project-terminal-task-1": {
+              "title": "Create the park survey request folder",
+              "prompt": "Start the module project. In step 1 of 3, You are helping a park survey team prepare a terminal map. Create module-2-notes-organizer-project-park-survey/requests and add module-2-notes-organizer-project-park-survey/requests/north-trail.txt so the team has a concrete request log to hand off.",
+              "hint": "This is the first project step. Build a clean starting version, then run it before moving on.",
+              "help": {
+                "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                "hint_1": "This is the first project step. Build a clean starting version, then run it before moving on.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "# Use the terminal for this Linux project task."
+            },
+            "module-2-notes-organizer-project-terminal-task-2": {
+              "title": "Add the map notes folder",
+              "prompt": "Continue the same module project from the previous working step. In step 2 of 3, Continue the same park survey workspace. Keep the request log from step 1, then add module-2-notes-organizer-project-park-survey/maps/current-location.txt as the team's navigation note deliverable.",
+              "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+              "help": {
+                "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "hint_2": "Run the previous working code first, then make only the focused change for this step."
+              },
+              "starterCode": "mkdir -p module-2-notes-organizer-project-park-survey/requests\nprintf 'North trail request log\\n' > module-2-notes-organizer-project-park-survey/requests/north-trail.txt\nls module-2-notes-organizer-project-park-survey\n# Project step 2: Add the map notes folder\n# Keep the working code above from the previous step.\n# Next, Continue the same park survey workspace\n# Add only the focused change for this step below or inside the existing work.\n"
+            },
+            "module-2-notes-organizer-project-terminal-task-3": {
+              "title": "Prepare the handoff marker",
+              "prompt": "Continue the same module project from the previous working step. In step 3 of 3, Finish the cumulative park survey terminal map. Keep the request and map notes from the earlier steps, then create module-2-notes-organizer-project-park-survey/handoff/terminal-map-ready.txt as the useful final deliverable.",
+              "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+              "help": {
+                "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "hint_2": "Run the previous working code first, then make only the focused change for this step."
+              },
+              "starterCode": "mkdir -p module-2-notes-organizer-project-park-survey/maps\nprintf 'Current location checked with pwd and ls\\n' > module-2-notes-organizer-project-park-survey/maps/current-location.txt\nls module-2-notes-organizer-project-park-survey\n# Project step 3: Prepare the handoff marker\n# Keep the working code above from the previous step.\n# Next, Finish the cumulative park survey terminal map\n# Add only the focused change for this step below or inside the existing work.\n"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "linux--linux-terminal-fundamentals--draft": {
+      "linux-module-2-files-and-folders": {
+        "module-2-notes-organizer-project": {
+          "notes-organizer-plan": {
+            "title": "Plan the folder cleanup before moving files",
+            "bodyMarkdown": "A good terminal project starts with a quick plan: **look at what you have, create the folders you need, then move files into place**. That keeps your workspace organized and helps you avoid deleting or moving the wrong thing.\n\nIn this project, you are acting like a student cleaning up a messy school folder. You will sort files into folders such as `notes`, `homework`, `code`, and `backups`.\n\nA common first step is to inspect the current workspace:\n\n```bash\npwd\nls\n```\n\n- `pwd` shows your current folder.\n- `ls` lists what is inside it.\n\nIf you see loose files like `biology_notes.txt`, `math_hw.txt`, and `app.py`, you can make destination folders first:\n\n```bash\nmkdir notes homework code backups\n```\n\nThis is better than moving files first and guessing where they should go. The main idea is: **inspect, create structure, then organize**."
+          },
+          "notes-organizer-move-copy": {
+            "title": "Use move and copy commands for safe organization",
+            "bodyMarkdown": "Two of the most useful file commands are `mv` and `cp`.\n\n- `mv` moves a file to a new folder or renames it.\n- `cp` makes a copy and keeps the original.\n\nExample:\n\n```bash\nmv biology_notes.txt notes/\ncp biology_notes.txt backups/biology_notes_backup.txt\n```\n\nLine by line:\n\n- `mv biology_notes.txt notes/` puts the original file into the `notes` folder.\n- `cp biology_notes.txt backups/biology_notes_backup.txt` creates a second copy in `backups` with a clearer name.\n\nThis matters in a real cleanup project because sometimes you want the file in its proper folder **and** a backup copy before making more changes. Use `mv` when the file should live in one new place. Use `cp` when you want an extra copy."
+          },
+          "notes-organizer-check-content": {
+            "title": "Check your results by viewing file contents",
+            "bodyMarkdown": "After organizing files, you should verify that the right content ended up in the right place. Linux gives you simple viewing commands for that.\n\n```bash\ncat notes/history_notes.txt\nwc -l notes/history_notes.txt\n```\n\nWhat each line does:\n\n- `cat notes/history_notes.txt` prints the whole file so you can read it.\n- `wc -l notes/history_notes.txt` counts the number of lines in the file.\n\nYou can also inspect only part of a file with `head` or `tail` when a file is longer.\n\nFor example, if a homework file was moved into `homework/`, using `cat` confirms it still contains the expected text. The big idea is: **organizing files is only half the job; checking their contents confirms the cleanup worked correctly**."
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "topics": {
+    "linux-terminal-fundamentals": {
+      "linux-module-1-terminal-navigation": {
+        "module-1-terminal-map-project": {
+          "label": "Project: Terminal Map",
+          "summary": "Build a small folder map for a field-notes project by checking your location, creating nested folders, and adding files with core Linux terminal commands.",
+          "cards": {
+            "sketch0": {
+              "title": "Terminal Map field-notes project synopsis"
+            },
+            "project": {
+              "title": "Terminal Map field-notes project"
+            }
+          },
+          "moduleProject": {
+            "steps": {
+              "module-1-terminal-map-project-terminal-task-1": {
+                "title": "Create the survey request folder",
+                "prompt": "You are helping a park survey team build a terminal map. Create park-terminal-map/requests/north-trail.txt so the team has a request log to start from.",
+                "hint": "This is a cumulative project step. Start from the previous workspace and add only the requested change.",
+                "help": {
+                  "concept": "Project steps are connected. Preserve earlier deliverables and add one useful new piece of work.",
+                  "hint_1": "Use ls or find to check the current workspace before changing it.",
+                  "hint_2": "Do not delete files from earlier steps unless the prompt explicitly asks you to clean up a temporary file."
+                },
+                "starterCode": "# Use the terminal for this Linux project step.\n"
+              },
+              "module-1-terminal-map-project-terminal-task-2": {
+                "title": "Add the current-location notes",
+                "prompt": "Continue from the request folder. Keep park-terminal-map/requests/north-trail.txt, then add park-terminal-map/maps/current-location.txt for the navigation note.",
+                "hint": "This is a cumulative project step. Start from the previous workspace and add only the requested change.",
+                "help": {
+                  "concept": "Project steps are connected. Preserve earlier deliverables and add one useful new piece of work.",
+                  "hint_1": "Use ls or find to check the current workspace before changing it.",
+                  "hint_2": "Do not delete files from earlier steps unless the prompt explicitly asks you to clean up a temporary file."
+                },
+                "starterCode": "# Use the terminal for this Linux project step.\n"
+              },
+              "module-1-terminal-map-project-terminal-task-3": {
+                "title": "Prepare the terminal-map handoff",
+                "prompt": "Finish the terminal map handoff. Keep the request and map notes, then create park-terminal-map/handoff/terminal-map-ready.txt as the final deliverable.",
+                "hint": "This is a cumulative project step. Start from the previous workspace and add only the requested change.",
+                "help": {
+                  "concept": "Project steps are connected. Preserve earlier deliverables and add one useful new piece of work.",
+                  "hint_1": "Use ls or find to check the current workspace before changing it.",
+                  "hint_2": "Do not delete files from earlier steps unless the prompt explicitly asks you to clean up a temporary file."
+                },
+                "starterCode": "# Use the terminal for this Linux project step.\n"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "linux-terminal-fundamentals": {
+      "linux-module-1-terminal-navigation": {
+        "module-1-terminal-map-project": {
+          "project-synopsis": {
+            "title": "Terminal Map field-notes project",
+            "bodyMarkdown": "You are the terminal helper for a park survey team. Build a folder map that starts with a request log, adds navigation notes, and ends with a clear handoff marker.\n\nYou will complete this as connected project steps. Each step starts from the previous working workspace, so do not delete earlier deliverables."
+          }
+        }
+      }
+    }
+  }
+}

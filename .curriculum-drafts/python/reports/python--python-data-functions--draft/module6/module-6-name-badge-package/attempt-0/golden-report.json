@@ -1,0 +1,20 @@
+{
+  "topicId": "module-6-name-badge-package",
+  "ok": false,
+  "issues": [
+    {
+      "code": "CODE_PROFILE_SOLUTION_SEMANTIC_MISMATCH",
+      "category": "tests",
+      "severity": "error",
+      "exerciseId": "exercise2",
+      "message": "Exercise \"exercise2\" solutionCode does not satisfy its semantic checks."
+    },
+    {
+      "code": "CODE_PROFILE_SOLUTION_SEMANTIC_MISMATCH",
+      "category": "tests",
+      "severity": "error",
+      "exerciseId": "exercise3",
+      "message": "Exercise \"exercise3\" solutionCode does not satisfy its semantic checks."
+    }
+  ]
+}

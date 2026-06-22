@@ -4,6 +4,7 @@ import type {
     CourseBlueprint,
     CoursePlan,
     ManifestRuntimeDefaults,
+    ManifestIdeServiceConfig,
 
     SubjectManifest,
     SubjectModuleManifest,
@@ -19,6 +20,8 @@ import {
 import { resolveLogicalSectionSlug } from "./resolveLogicalSectionSlug.js";
 import {resolveWorkspacePolicy} from "../policy/resolveWorkspacePolicy.js";
 import {workspaceToRuntimeDefaults} from "../policy/workspaceToRuntimeDefaults.js";
+import { workspaceToServiceDefaults } from "../policy/workspaceToServiceDefaults.js";
+import { mergeManifestIdeServiceConfigs } from "@zoeskoul/curriculum-contracts";
 import { resolveModuleOutcomes } from "./resolveModuleOutcomes.js";
 
 function resolveSubjectManifestOrder(blueprint: CourseBlueprint): number {
@@ -62,6 +65,13 @@ export function buildSubjectManifestFromPlan(args: {
             profileId: blueprint.profileId,
             runtimePolicy: resolvedRuntimePolicy,
         });
+
+        const serviceDefaults: ManifestIdeServiceConfig | null =
+            mergeManifestIdeServiceConfigs(
+                blueprint.idePolicy?.defaultServices,
+                blueprint.idePolicy?.moduleServiceDefaults?.[module.moduleSlug],
+                workspaceToServiceDefaults({ policy: workspacePolicy }),
+            );
 
         const runtimeDefaults: ManifestRuntimeDefaults =
             workspaceRuntimeDefaults.kind === "sql" && topicRuntimeDefaults?.kind === "sql"
@@ -110,6 +120,7 @@ export function buildSubjectManifestFromPlan(args: {
                             ),
                         ),
                     },
+                    serviceDefaults,
                     topics: section.topics.map((topic) => topic.topicId),
                 };
             },
@@ -136,6 +147,7 @@ export function buildSubjectManifestFromPlan(args: {
                 blueprint.moduleAccessOverrideDefault ??
                 null,
             runtimeDefaults,
+            serviceDefaults,
             meta: {
                 estimatedMinutes: module.sections
                     .flatMap((section) => section.topics)
@@ -184,6 +196,7 @@ export function buildSubjectManifestFromPlan(args: {
             imageAlt: null,
             titleKey: kp.subjectTitleKey(blueprint.subjectSlug),
             descriptionKey: kp.subjectDescriptionKey(blueprint.subjectSlug),
+            serviceDefaults: mergeManifestIdeServiceConfigs(blueprint.idePolicy?.defaultServices),
             meta: {
                 curriculum: {
                     plannedModuleCount: plan.modules.length,

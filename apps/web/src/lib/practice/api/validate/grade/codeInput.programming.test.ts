@@ -1065,6 +1065,50 @@ describe("gradeProgrammingCodeInput", () => {
         expect(mockedSharedRunner).not.toHaveBeenCalled();
     });
 
+    it("passes terminal_workspace shell tasks when transcript pwd shows the final cwd", async () => {
+        const expected: ProgrammingExpected = {
+            kind: "code_input",
+            strategy: "programming",
+            checkMode: "stdout",
+            tests: [{ stdin: "", stdout: "", match: "includes" }],
+            semanticChecks: [],
+            terminalExpectations: {
+                requiredCommands: [
+                    { pattern: "^ls$", message: "Run ls first." },
+                    {
+                        pattern: "^cd\\s+navigation-practice$",
+                        message: "Move into navigation-practice.",
+                    },
+                    { pattern: "^pwd$", message: "Run pwd after moving." },
+                ],
+                cwdEndsWith: "navigation-practice",
+            },
+        } as any;
+
+        const result = await gradeProgrammingCodeInput({
+            expected,
+            terminalWorkspaceShellTask: true,
+            code: "",
+            language: "bash",
+            terminalEvidence: {
+                commands: ["ls", "cd navigation-practice", "pwd"],
+                outputText: [
+                    "[zoeskoul]~$ ls",
+                    "build  main.sh  navigation-practice",
+                    "[zoeskoul]~$ cd navigation-practice",
+                    "[zoeskoul]~/navigation-practice$ pwd",
+                    "/workspace/navigation-practice",
+                    "[zoeskoul]~/navigation-practice$",
+                ].join("\n"),
+                cwd: "/workspace",
+            },
+            showDebug: false,
+        });
+
+        expect(result.ok).toBe(true);
+        expect(mockedSharedRunner).not.toHaveBeenCalled();
+    });
+
     it("passes terminal_workspace shell tasks when outputContains matches terminal output", async () => {
         const expected: ProgrammingExpected = {
             kind: "code_input",

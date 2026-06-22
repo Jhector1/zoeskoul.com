@@ -2,6 +2,8 @@ export type ManifestIdeServicePreset = "runner" | "lesson" | "workspace";
 
 export type ManifestIdeRunnerBackend = "auto" | "judge0" | "pty";
 
+export type ManifestIdeLayoutMode = "default" | "terminal_workspace";
+
 export type ManifestIdeServiceRequirements = {
   files?: boolean;
   terminal?: boolean;
@@ -13,6 +15,7 @@ export type ManifestIdeServiceRequirements = {
 export type ManifestIdeServiceConfig = {
   preset?: ManifestIdeServicePreset;
   runnerBackend?: ManifestIdeRunnerBackend;
+  layoutMode?: ManifestIdeLayoutMode;
   requires?: ManifestIdeServiceRequirements;
 };
 
@@ -29,6 +32,7 @@ export function mergeManifestIdeServiceConfigs(
       ...(merged ?? {}),
       ...(config.preset ? { preset: config.preset } : {}),
       ...(config.runnerBackend ? { runnerBackend: config.runnerBackend } : {}),
+      ...(config.layoutMode ? { layoutMode: config.layoutMode } : {}),
       requires: {
         ...previousRequires,
         ...(config.requires ?? {})

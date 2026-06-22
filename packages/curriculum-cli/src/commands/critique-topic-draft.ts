@@ -4,6 +4,7 @@ import {
     finishProgressBar,
     renderProgressBar,
 } from "../utils/renderProgressBar.js";
+import { resolveDraftCritiqueTarget } from "./resolveDraftCritiqueTarget.js";
 
 function makeProgressLabel(info: {
     stage: string;
@@ -39,15 +40,17 @@ export async function runCritiqueTopicDraft(
     topicId: string,
 ) {
     const blueprint = await loadBlueprint(blueprintPath);
+    const target = await resolveDraftCritiqueTarget(blueprintPath);
     let sawProgress = false;
 
     console.log(
-        `Critiquing saved draft for topic ${topicId} in subject ${blueprint.subjectSlug}...`,
+        `Critiquing saved draft for topic ${topicId} in subject ${target.draftSubjectSlug ?? blueprint.subjectSlug}...`,
     );
 
     try {
         const result = await critiqueTopicDraft({
             blueprint,
+            draftSubjectSlug: target.draftSubjectSlug,
             provider: openAiProvider,
             topicId,
             onProgress: (info) => {

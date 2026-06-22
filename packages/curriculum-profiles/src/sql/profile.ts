@@ -3,12 +3,15 @@ import type {
     CodeInputHelpFallback,
     CodeInputProfileCapability,
     CourseProfile,
-    ProjectProfileCapability,
 } from "../types.js";
 import type { PlannedModule } from "@zoeskoul/curriculum-contracts";
 import { buildSqlQueryRecipe } from "./recipes/buildSqlQueryRecipe.js";
 import { resolveSqlRuntimeDefaults } from "./runtimeDefaults.js";
 import { sqlShape } from "../shapes/sqlShape.js";
+import {
+    createCodeInputProjectCapability,
+    sharedPracticeProfileConfig,
+} from "../shared/generationPolicy.js";
 
 function normalizeText(value: unknown): string {
     return typeof value === "string" ? value.trim() : "";
@@ -255,53 +258,7 @@ const sqlCodeInputCapability: CodeInputProfileCapability = {
     },
 };
 
-const sqlProjectCapability: ProjectProfileCapability = {
-    getProjectConfig(args) {
-        return args.topicKind === "capstone"
-            ? {
-                preferredProjectExerciseKind: "code_input",
-                minStepCount: 5,
-                targetStepCount: 5,
-                allowReveal: true,
-                showExpectedExample: true,
-                tryItDefault: {
-                    enabled: true,
-                    sketchIndex: 0,
-                    allowReveal: true,
-                },projectFlowDefault: "progressive",
-                projectTitle: "Final Capstone Project",
-                projectStepLabel: "Capstone step",
-                startPromptPrefix: "Start the final capstone project.",
-                continuePromptPrefix:
-                    "Continue the final capstone project from the previous working step.",
-                helpConcept:
-                    "The final capstone is progressive. Each step starts from the previous working solution and adds one focused feature.",
-            }
-            : {
-                preferredProjectExerciseKind: "code_input",
-                minStepCount: 3,
-                targetStepCount: 3,
-                allowReveal: true,
-                showExpectedExample: true,
-                tryItDefault: {
-                    enabled: true,
-                    sketchIndex: 0,
-                    allowReveal: true,
-                },
-                projectFlowDefault: "progressive",
-                projectTitle: "Module Project",
-                projectStepLabel: "Project step",
-                startPromptPrefix: "Start the module project.",
-                continuePromptPrefix:
-                    "Continue the same module project from the previous working step.",
-                helpConcept:
-                    "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
-            };
-    },
-    isProjectExercise(args) {
-        return args.exercise.kind === "code_input";
-    },
-};
+const sqlProjectCapability = createCodeInputProjectCapability();
 
 export { getSqlModuleDataset, getSqlModuleDatasetPolicy } from "./datasetPolicy.js";
 
@@ -319,6 +276,7 @@ export const sqlProfile: CourseProfile = {
         "code_input",
     ],
     allowedRecipeTypes: ["fixed_tests", "template_io", "sql_query"],
+    practice: sharedPracticeProfileConfig,
 
     buildModuleRuntimeDefaults(moduleOrder?: number, module?: PlannedModule) {
         return resolveSqlRuntimeDefaults({

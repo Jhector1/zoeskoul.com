@@ -87,6 +87,12 @@ export type AuthoringPolicyLayer = {
     policyId?: string;
     workspaceProfileId?: string;
     workspacePolicyId?: string;
+    practiceDefaults?: import("./practice.js").PracticeConfig;
+    topicDefaults?: {
+        conceptualOnly?: boolean;
+        requiresTryIt?: boolean;
+        conceptualSignals?: string[];
+    };
     uiTerms?: Record<string, string>;
     forbiddenActions?: string[];
     preferredTerms?: Record<string, string>;
@@ -123,6 +129,11 @@ export type ModulePedagogyPolicy = {
 
 export type TopicPedagogyPolicy = {
     teachingMode?: "normal" | "ui-guided" | "conceptual-only" | "simulated-files";
+    conceptualOnly?: boolean;
+    requiresTryIt?: boolean;
+    runtimeMode?: import("./practice.js").PracticeRuntimeMode;
+    expectedPracticeKinds?: string[];
+    terminalSessionScope?: import("./practice.js").TerminalSessionScope;
     generationTargets?: {
         quizBankMin?: number;
         quizBankTarget?: number;

@@ -4,8 +4,10 @@
   "workspacePolicyId": "linux-terminal-workspace",
   "uiTerms": {
     "terminal": "terminal",
+    "editor": "terminal",
     "explorer": "file explorer",
-    "checkButton": "Check Answer"
+    "checkButton": "Check Answer",
+    "runButton": "terminal command"
   },
   "preferredTerms": {
     "editor": "terminal",
@@ -15,7 +17,8 @@
   "learnerInstructions": [
     "Use the terminal to complete the task.",
     "Use pwd and ls to inspect your current location.",
-    "Use the file explorer to confirm folders and files appear.",
+    "Use mkdir, touch, cp, mv, rm, cat, head, tail, and wc only when the lesson asks for them.",
+    "Use the file explorer only to confirm folders and files appear; do not rely on the editor for Course 1 terminal tasks.",
     "Click Check Answer when the workspace matches the goal."
   ],
   "forbiddenActions": [
@@ -24,5 +27,16 @@
     "Use sudo",
     "Change system directories",
     "Depend on external network access"
-  ]
+  ],
+  "notes": [
+    "Linux Terminal Fundamentals is terminal-only: the editor should be hidden for Course 1 code_input tasks.",
+    "Independent quiz/check questions should use per-exercise terminal workspaces so starter files are fresh for each exercise.",
+    "Only a deliberate project/capstone flow should share one workspace across multiple steps."
+  ],
+  "validationRequirements": {
+    "terminalOnly": true,
+    "terminalSessionScopeDefault": "exercise",
+    "fileExplorerVisible": true,
+    "editorHiddenForCourse1": true
+  }
 }

@@ -1,0 +1,167 @@
+{
+  "title": "Module 6 Name Badge Package",
+  "summary": "Refactor a small badge builder step by step so helper functions and helper files grow from the previous working version.",
+  "minutes": 26,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Introduction to Helper Functions",
+      "bodyMarkdown": "In programming, helper functions are small, reusable functions that perform specific tasks. They help keep your code organized and reduce repetition. For example, if you have a program that generates name badges, you might have a helper function to format names consistently.\n\n```python\ndef format_name(first_name, last_name):\n    return f\"{first_name.title()} {last_name.title()}\"\n```\n\nThis function takes a first and last name, capitalizes them, and returns the formatted full name. By using this helper function, you ensure that all names in your program are formatted the same way.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+    },
+    {
+      "id": "sketch2",
+      "title": "Using Helper Functions in a Program",
+      "bodyMarkdown": "Let's see how we can use the `format_name` function in a larger program. Suppose we have a list of names and we want to print each name in a formatted way.\n\n```python\nnames = [\n    ('john', 'doe'),\n    ('jane', 'smith'),\n    ('alice', 'johnson')\n]\n\nfor first_name, last_name in names:\n    formatted_name = format_name(first_name, last_name)\n    print(formatted_name)\n```\n\nIn this example, we loop through a list of tuples containing first and last names. For each tuple, we call `format_name` and print the result. This keeps our main program logic clean and focused on the task of printing names.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+    },
+    {
+      "id": "try-it-yourself",
+      "title": "Try it yourself",
+      "bodyMarkdown": "Try it yourself: change one value in the example, predict the new output, then run the code to check your prediction."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "exercise1",
+      "kind": "code_input",
+      "title": "Create a Helper Function",
+      "prompt": "Write a function `create_badge` that takes a name and a title, and returns a formatted badge string in the format: 'Name: [name], Title: [title]'.",
+      "starterCode": "def create_badge(name, title):\n    # TODO: Return a formatted badge string\n    pass",
+      "solutionCode": "def create_badge(name, title):\n    return f\"Name: {name}, Title: {title}\"",
+      "recipeType": "semantic",
+      "semanticChecks": [
+        {
+          "type": "function_returns",
+          "functionName": "create_badge",
+          "args": [
+            "Alice",
+            "Engineer"
+          ],
+          "argKinds": [
+            "value",
+            "value"
+          ],
+          "expected": "Name: Alice, Title: Engineer",
+          "expectedKind": "value"
+        }
+      ],
+      "hint": "Read the task \"Create a Helper Function\" and identify the required result.",
+      "help": {
+        "concept": "This coding exercise checks whether your code produces the requested result for: \"Create a Helper Function\".",
+        "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+        "hint_2": "Click Run and compare the output panel with the expected result."
+      }
+    },
+    {
+      "id": "exercise2",
+      "kind": "code_input",
+      "title": "Format a List of Names",
+      "prompt": "Write a function `format_names_list` that takes a list of tuples, each containing a first and last name, and returns a list of formatted full names.",
+      "starterCode": "def format_names_list(names):\n    # TODO: Return a list of formatted names\n    pass",
+      "solutionCode": "def format_names_list(names):\n    return [format_name(first, last) for first, last in names]",
+      "recipeType": "semantic",
+      "semanticChecks": [
+        {
+          "type": "function_returns",
+          "functionName": "format_names_list",
+          "args": [
+            [
+              [
+                "first",
+                "john"
+              ],
+              [
+                "last",
+                "doe"
+              ]
+            ],
+            [
+              [
+                "first",
+                "jane"
+              ],
+              [
+                "last",
+                "smith"
+              ]
+            ]
+          ],
+          "argKinds": [
+            "list_of_dict_entries",
+            "dict_entries"
+          ],
+          "expected": [
+            "John Doe",
+            "Jane Smith"
+          ],
+          "expectedKind": "value"
+        }
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "exercise3",
+      "kind": "code_input",
+      "title": "Generate Badges for a List of Names",
+      "prompt": "Write a function `generate_badges` that takes a list of tuples, each containing a name and a title, and returns a list of formatted badge strings.",
+      "starterCode": "def generate_badges(names_and_titles):\n    # TODO: Return a list of formatted badge strings\n    pass",
+      "solutionCode": "def generate_badges(names_and_titles):\n    return [create_badge(name, title) for name, title in names_and_titles]",
+      "recipeType": "semantic",
+      "semanticChecks": [
+        {
+          "type": "function_returns",
+          "functionName": "generate_badges",
+          "args": [
+            [
+              [
+                "name",
+                "Alice"
+              ],
+              [
+                "title",
+                "Engineer"
+              ]
+            ],
+            [
+              [
+                "name",
+                "Bob"
+              ],
+              [
+                "title",
+                "Designer"
+              ]
+            ]
+          ],
+          "argKinds": [
+            "list_of_dict_entries",
+            "dict_entries"
+          ],
+          "expected": [
+            "Name: Alice, Title: Engineer",
+            "Name: Bob, Title: Designer"
+          ],
+          "expectedKind": "value"
+        }
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Click Run and compare the output panel with the expected result."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Name Badge Generator",
+    "stepIds": [
+      "exercise1",
+      "exercise2",
+      "exercise3"
+    ]
+  }
+}

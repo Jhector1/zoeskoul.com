@@ -258,6 +258,16 @@ function firstNonBlankString(...values: unknown[]) {
   return "";
 }
 
+function firstRecord(...values: unknown[]) {
+  for (const value of values) {
+    if (isRecord(value)) {
+      return value;
+    }
+  }
+
+  return null;
+}
+
 function pickEntryFileFromFiles(files: unknown, fallback = "main.py") {
   if (Array.isArray(files)) {
     const entry = files.find(
@@ -436,6 +446,10 @@ function mergeProjectStepFallbackExercise(
     starterCode: fallbackWorkspace.starterCode,
     starterFiles: fallbackWorkspace.starterFiles,
     workspace: fallbackWorkspace,
+    ideConfig: firstRecord(
+        projectStepManifest.ideConfig,
+        isRecord(projectStepManifest.workspace) ? projectStepManifest.workspace.ideConfig : null,
+    ),
     solutionCode: firstNonBlankString(projectStepManifest.solutionCode),
     solutionFiles:
         projectStepManifest.solutionFiles ??
@@ -515,6 +529,10 @@ function mergeProjectStepFallbackExercise(
     starterCode: mergedStarterCode,
     starterFiles: mergedStarterFiles,
     workspace: mergedWorkspace,
+    ideConfig: firstRecord(
+        exAny.ideConfig,
+        fallbackExercise.ideConfig,
+    ),
 
     solutionCode: firstNonBlankString(exAny.solutionCode, fallbackExercise.solutionCode),
     solutionFiles: exAny.solutionFiles ?? fallbackExercise.solutionFiles,

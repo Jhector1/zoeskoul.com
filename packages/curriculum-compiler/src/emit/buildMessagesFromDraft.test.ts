@@ -209,10 +209,13 @@ describe("buildMessagesFromDraft", () => {
         expect(
             messages.topics?.["python-v2"]?.["python-v2-1"]?.["helper-modules"]?.tryIt
                 ?.try_helper_modules_sketch0,
-        ).toEqual({
-            title: "Try it yourself",
-            prompt: "Create tools/names.py and import clean_name in main.py.",
+        ).toMatchObject({
+            title: "Try it yourself: Build the helper",
         });
+        expect(
+            messages.topics?.["python-v2"]?.["python-v2-1"]?.["helper-modules"]?.tryIt
+                ?.try_helper_modules_sketch0?.prompt,
+        ).toContain("Create tools/names.py and import clean_name in main.py.");
         expect(
             messages.topics?.["python-v2"]?.["python-v2-1"]?.["helper-modules"]?.tryIt
                 ?.allowReveal,
@@ -279,10 +282,13 @@ describe("buildMessagesFromDraft", () => {
         expect(
             messages.topics?.["python-v2"]?.["python-v2-1"]?.["helper-modules"]?.tryIt
                 ?.try_helper_modules_sketch0,
-        ).toEqual({
-            title: "Try it yourself",
-            prompt: "Create tools/names.py and import clean_name in main.py.",
+        ).toMatchObject({
+            title: "Try it yourself: Build the helper",
         });
+        expect(
+            messages.topics?.["python-v2"]?.["python-v2-1"]?.["helper-modules"]?.tryIt
+                ?.try_helper_modules_sketch0?.prompt,
+        ).toContain("Create tools/names.py and import clean_name in main.py.");
         expect(
             messages.topics?.["python-v2"]?.["python-v2-1"]?.["helper-modules"]?.tryIt
                 ?.allowReveal,
@@ -347,10 +353,13 @@ describe("buildMessagesFromDraft", () => {
         expect(
             messages.topics?.["python-v2"]?.["python-v2-1"]?.["helper-modules"]?.tryIt
                 ?.try_helper_modules_sketch0,
-        ).toEqual({
-            title: "Try it yourself",
-            prompt: "Pick the right answer.",
+        ).toMatchObject({
+            title: "Try it yourself: Quiz",
         });
+        expect(
+            messages.topics?.["python-v2"]?.["python-v2-1"]?.["helper-modules"]?.tryIt
+                ?.try_helper_modules_sketch0?.prompt,
+        ).toContain("Pick the right answer.");
     });
 
     it("uses profile-driven module project and capstone card titles", () => {
@@ -674,10 +683,13 @@ describe("buildMessagesFromDraft", () => {
         expect(
             messages.topics?.["python-v2"]?.["python-v2-1"]?.["helper-modules"]?.tryIt
                 ?.try_helper_modules_sketch0,
-        ).toEqual({
-            title: "Try it yourself",
-            prompt: "Pick the next project behavior.",
+        ).toMatchObject({
+            title: "Try it yourself: Choose a direction",
         });
+        expect(
+            messages.topics?.["python-v2"]?.["python-v2-1"]?.["helper-modules"]?.tryIt
+                ?.try_helper_modules_sketch0?.prompt,
+        ).toContain("Pick the next project behavior.");
     });
 
     it("leaves topics without tryIt unchanged", () => {
@@ -738,14 +750,18 @@ describe("buildMessagesFromDraft", () => {
 
         expect(messages.topics?.["python-v2"]?.["python-v2-1"]?.["attributes-and-init"]?.tryIt)
             .toMatchObject({
-                try_attributes_and_init_sketch0: { title: "Try it yourself", prompt: "Prompt ex1" },
-                try_attributes_and_init_sketch1: { title: "Try it yourself", prompt: "Prompt ex6" },
-                try_attributes_and_init_sketch2: { title: "Try it yourself", prompt: "Prompt ex11" },
+                try_attributes_and_init_sketch0: { title: "Try it yourself: Exercise 1" },
+                try_attributes_and_init_sketch1: { title: "Try it yourself: Exercise 6" },
+                try_attributes_and_init_sketch2: { title: "Try it yourself: Exercise 11" },
                 allowReveal: true,
             });
+        expect(
+            messages.topics?.["python-v2"]?.["python-v2-1"]?.["attributes-and-init"]?.tryIt
+                ?.try_attributes_and_init_sketch0?.prompt,
+        ).toContain("Prompt ex1.");
     });
 
-    it("reuses the last exercise prompt when there are more sketches than code_input exercises", () => {
+    it("does not reuse a Try It exercise when there are more sketches than code_input exercises", () => {
         const messages = buildMessagesFromDraft({
             shape: makeShape(),
             seed: makeSeed({
@@ -761,10 +777,7 @@ describe("buildMessagesFromDraft", () => {
         expect(
             messages.topics?.["python-v2"]?.["python-v2-1"]?.["attributes-and-init"]?.tryIt
                 ?.try_attributes_and_init_sketch3,
-        ).toEqual({
-            title: "Try it yourself",
-            prompt: "Prompt ex11",
-        });
+        ).toBeUndefined();
     });
 
     it("emits no try-it messages when tryIt is false", () => {
@@ -798,10 +811,10 @@ describe("buildMessagesFromDraft", () => {
         }) as any;
 
         const tryIt = messages.topics?.["python-v2"]?.["python-v2-1"]?.["attributes-and-init"]?.tryIt;
-        expect(tryIt?.try_attributes_and_init_sketch0).toEqual({
-            title: "Try it yourself",
-            prompt: "Prompt ex1",
+        expect(tryIt?.try_attributes_and_init_sketch0).toMatchObject({
+            title: "Try it yourself: Exercise 1",
         });
+        expect(tryIt?.try_attributes_and_init_sketch0?.prompt).toContain("Prompt ex1.");
         expect(tryIt?.try_attributes_and_init_sketch1).toBeUndefined();
         expect(tryIt?.try_attributes_and_init_sketch2).toBeUndefined();
     });
@@ -823,10 +836,14 @@ describe("buildMessagesFromDraft", () => {
         expect(
             messages.topics?.["python-v2"]?.["python-v2-1"]?.["attributes-and-init"]?.tryIt,
         ).toMatchObject({
-            try_attributes_and_init_sketch0: { prompt: "Prompt ex6" },
-            try_attributes_and_init_sketch1: { prompt: "Prompt ex1" },
-            try_attributes_and_init_sketch2: { prompt: "Prompt ex11" },
+            try_attributes_and_init_sketch0: { title: "Try it yourself: Exercise 6" },
+            try_attributes_and_init_sketch1: { title: "Try it yourself: Exercise 1" },
+            try_attributes_and_init_sketch2: { title: "Try it yourself: Exercise 11" },
         });
+        expect(
+            messages.topics?.["python-v2"]?.["python-v2-1"]?.["attributes-and-init"]?.tryIt
+                ?.try_attributes_and_init_sketch0?.prompt,
+        ).toContain("Prompt ex6.");
     });
 
     it("keeps manifest and messages aligned on selected try-it exercises", () => {
@@ -851,7 +868,7 @@ describe("buildMessagesFromDraft", () => {
         }) as any;
 
         const promptByExerciseId = Object.fromEntries(
-            draft.quizDraft.map((exercise: any) => [exercise.id, exercise.prompt]),
+            draft.quizDraft.map((exercise: any) => [exercise.id, `${exercise.prompt}.`]),
         );
         for (const sketchIndex of [0, 1, 2]) {
             const exerciseKey = bundle.cards.find((card: any) => card.id === `sketch${sketchIndex}`)?.tryIt?.exerciseKey;
@@ -859,7 +876,11 @@ describe("buildMessagesFromDraft", () => {
                 messages.topics?.["python-v2"]?.["python-v2-1"]?.["attributes-and-init"]?.tryIt?.[
                     `try_attributes_and_init_sketch${sketchIndex}`
                 ]?.prompt,
-            ).toBe(promptByExerciseId[exerciseKey]);
+            ).toContain(promptByExerciseId[exerciseKey]);
+            expect(
+                messages.topics?.["python-v2"]?.["python-v2-1"]?.["attributes-and-init"]?.tryIt
+                    ?.exercises?.[exerciseKey]?.title,
+            ).toBe(draft.quizDraft.find((exercise: any) => exercise.id === exerciseKey)?.title);
         }
     });
 });

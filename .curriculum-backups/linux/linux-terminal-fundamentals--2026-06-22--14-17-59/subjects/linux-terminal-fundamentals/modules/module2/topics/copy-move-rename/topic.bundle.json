@@ -1,0 +1,551 @@
+{
+  "topicId": "copy-move-rename",
+  "subjectSlug": "linux-terminal-fundamentals",
+  "moduleSlug": "linux-module-2-files-and-folders",
+  "sectionSlug": "linux-terminal-fundamentals-linux-module-2-file-workflow",
+  "prefix": "linux_module_2",
+  "minutes": 20,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "bash",
+    "supportsTerminal": true,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "topic": {
+    "labelKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.label",
+    "summaryKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.cards.sketch0.title",
+      "sketchId": "sketch-1",
+      "height": 420,
+      "tryIt": {
+        "id": "try-copy-move-rename-sketch0",
+        "titleKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.tryIt.try_copy_move_rename_sketch0.title",
+        "promptKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.tryIt.try_copy_move_rename_sketch0.prompt",
+        "exerciseKey": "copy-move-rename-terminal-task-1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.cards.sketch1.title",
+      "sketchId": "sketch-2",
+      "height": 420,
+      "tryIt": {
+        "id": "try-copy-move-rename-sketch1",
+        "titleKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.tryIt.try_copy_move_rename_sketch1.title",
+        "promptKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.tryIt.try_copy_move_rename_sketch1.prompt",
+        "exerciseKey": "copy-move-rename-terminal-task-2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.cards.sketch2.title",
+      "sketchId": "sketch-3",
+      "height": 420,
+      "tryIt": {
+        "id": "try-copy-move-rename-sketch2",
+        "titleKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.tryIt.try_copy_move_rename_sketch2.title",
+        "promptKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.tryIt.try_copy_move_rename_sketch2.prompt",
+        "exerciseKey": "copy-move-rename-terminal-task-3",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "copy_move_rename_terminal_task_1",
+            "titleKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.projectSteps.copy_move_rename_terminal_task_1.title",
+            "exerciseKey": "copy-move-rename-terminal-task-1",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "copy_move_rename_terminal_task_2",
+            "titleKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.projectSteps.copy_move_rename_terminal_task_2.title",
+            "exerciseKey": "copy-move-rename-terminal-task-2",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "copy_move_rename_terminal_task_3",
+            "titleKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.projectSteps.copy_move_rename_terminal_task_3.title",
+            "exerciseKey": "copy-move-rename-terminal-task-3",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch-1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.sketch-1.title",
+      "bodyKey": "sketches.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.sketch-1.bodyMarkdown"
+    },
+    {
+      "id": "sketch-2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.sketch-2.title",
+      "bodyKey": "sketches.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.sketch-2.bodyMarkdown"
+    },
+    {
+      "id": "sketch-3",
+      "archetype": "paragraph",
+      "titleKey": "sketches.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.sketch-3.title",
+      "bodyKey": "sketches.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.sketch-3.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "sc-which-command-renames",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.quiz.sc-which-command-renames",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "mc-copy-vs-move",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.quiz.mc-copy-vs-move",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "mc-safe-command-choice",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.quiz.mc-safe-command-choice",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "dr-copy-then-rename-flow",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.quiz.dr-copy-then-rename-flow",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "ci-copy-class-notes",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.quiz.ci-copy-class-notes",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "print an observable result"
+      }
+    },
+    {
+      "id": "ci-move-report-into-folder",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.quiz.ci-move-report-into-folder",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "print an observable result"
+      }
+    },
+    {
+      "id": "copy-move-rename-terminal-task-1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.quiz.copy-move-rename-terminal-task-1",
+      "language": "bash",
+      "starterCode": "# Use the terminal for this Linux project task.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Use the terminal for this Linux project task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "mkdir -p copy-move-rename-park-survey/requests\nprintf 'North trail request log\\n' > copy-move-rename-park-survey/requests/north-trail.txt\nls copy-move-rename-park-survey\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "copy-move-rename-park-survey/requests/north-trail.txt",
+          "content": "North trail request log\n",
+          "language": "bash"
+        }
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "copy-move-rename-park-survey/requests/north-trail.txt"
+        ],
+        "requiredFolders": [
+          "copy-move-rename-park-survey",
+          "copy-move-rename-park-survey/requests"
+        ]
+      },
+      "terminalExpectations": {
+        "forbiddenCommands": [
+          {
+            "pattern": "(^|\\s)sudo(\\s|$)",
+            "message": "Do not use sudo for beginner workspace tasks."
+          }
+        ]
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "starterCode": "# Use the terminal for this Linux project task.",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "# Use the terminal for this Linux project task.\n",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "copy-move-rename-park-survey/requests/north-trail.txt"
+          ],
+          "requiredFolders": [
+            "copy-move-rename-park-survey",
+            "copy-move-rename-park-survey/requests"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "You are helping a park survey team prepare a terminal map. Create copy-move-rename-park-survey/requests and add copy-move-rename-park-survey/requests/north-trail.txt so the team has a concrete request log to hand off."
+      }
+    },
+    {
+      "id": "copy-move-rename-terminal-task-2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.quiz.copy-move-rename-terminal-task-2",
+      "language": "bash",
+      "starterCode": "# Use the terminal for this Linux project task.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Use the terminal for this Linux project task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "copy-move-rename-park-survey/requests/north-trail.txt",
+          "content": "North trail request log\n",
+          "language": "bash"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "mkdir -p copy-move-rename-park-survey/maps\nprintf 'Current location checked with pwd and ls\\n' > copy-move-rename-park-survey/maps/current-location.txt\nls copy-move-rename-park-survey\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "copy-move-rename-park-survey/requests/north-trail.txt",
+          "content": "North trail request log\n",
+          "language": "bash"
+        },
+        {
+          "path": "copy-move-rename-park-survey/maps/current-location.txt",
+          "content": "Current location checked with pwd and ls\n",
+          "language": "bash"
+        }
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "copy-move-rename-park-survey/requests/north-trail.txt",
+          "copy-move-rename-park-survey/maps/current-location.txt"
+        ],
+        "requiredFolders": [
+          "copy-move-rename-park-survey",
+          "copy-move-rename-park-survey/requests",
+          "copy-move-rename-park-survey/maps"
+        ]
+      },
+      "terminalExpectations": {
+        "forbiddenCommands": [
+          {
+            "pattern": "(^|\\s)sudo(\\s|$)",
+            "message": "Do not use sudo for beginner workspace tasks."
+          }
+        ]
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "starterCode": "# Use the terminal for this Linux project task.",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "# Use the terminal for this Linux project task.\n",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "copy-move-rename-park-survey/requests/north-trail.txt",
+            "content": "North trail request log\n",
+            "language": "bash"
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "copy-move-rename-park-survey/requests/north-trail.txt",
+            "copy-move-rename-park-survey/maps/current-location.txt"
+          ],
+          "requiredFolders": [
+            "copy-move-rename-park-survey",
+            "copy-move-rename-park-survey/requests",
+            "copy-move-rename-park-survey/maps"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "Continue the same park survey workspace. Keep the request log from step 1, then add copy-move-rename-park-survey/maps/current-location.txt as the team's navigation note deliverable."
+      }
+    },
+    {
+      "id": "copy-move-rename-terminal-task-3",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.quiz.copy-move-rename-terminal-task-3",
+      "language": "bash",
+      "starterCode": "# Use the terminal for this Linux project task.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Use the terminal for this Linux project task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "copy-move-rename-park-survey/requests/north-trail.txt",
+          "content": "North trail request log\n",
+          "language": "bash"
+        },
+        {
+          "path": "copy-move-rename-park-survey/maps/current-location.txt",
+          "content": "Current location checked with pwd and ls\n",
+          "language": "bash"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "mkdir -p copy-move-rename-park-survey/handoff\nprintf 'Terminal map ready for the park survey team\\n' > copy-move-rename-park-survey/handoff/terminal-map-ready.txt\nfind copy-move-rename-park-survey -maxdepth 2 -type f | sort\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "copy-move-rename-park-survey/requests/north-trail.txt",
+          "content": "North trail request log\n",
+          "language": "bash"
+        },
+        {
+          "path": "copy-move-rename-park-survey/maps/current-location.txt",
+          "content": "Current location checked with pwd and ls\n",
+          "language": "bash"
+        },
+        {
+          "path": "copy-move-rename-park-survey/handoff/terminal-map-ready.txt",
+          "content": "Terminal map ready for the park survey team\n",
+          "language": "bash"
+        }
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "copy-move-rename-park-survey/requests/north-trail.txt",
+          "copy-move-rename-park-survey/maps/current-location.txt",
+          "copy-move-rename-park-survey/handoff/terminal-map-ready.txt"
+        ],
+        "requiredFolders": [
+          "copy-move-rename-park-survey",
+          "copy-move-rename-park-survey/requests",
+          "copy-move-rename-park-survey/maps",
+          "copy-move-rename-park-survey/handoff"
+        ]
+      },
+      "terminalExpectations": {
+        "forbiddenCommands": [
+          {
+            "pattern": "(^|\\s)sudo(\\s|$)",
+            "message": "Do not use sudo for beginner workspace tasks."
+          }
+        ]
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "starterCode": "# Use the terminal for this Linux project task.",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "# Use the terminal for this Linux project task.\n",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "copy-move-rename-park-survey/requests/north-trail.txt",
+            "content": "North trail request log\n",
+            "language": "bash"
+          },
+          {
+            "path": "copy-move-rename-park-survey/maps/current-location.txt",
+            "content": "Current location checked with pwd and ls\n",
+            "language": "bash"
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "copy-move-rename-park-survey/requests/north-trail.txt",
+            "copy-move-rename-park-survey/maps/current-location.txt",
+            "copy-move-rename-park-survey/handoff/terminal-map-ready.txt"
+          ],
+          "requiredFolders": [
+            "copy-move-rename-park-survey",
+            "copy-move-rename-park-survey/requests",
+            "copy-move-rename-park-survey/maps",
+            "copy-move-rename-park-survey/handoff"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "Finish the cumulative park survey terminal map. Keep the request and map notes from the earlier steps, then create copy-move-rename-park-survey/handoff/terminal-map-ready.txt as the useful final deliverable."
+      }
+    }
+  ]
+}

@@ -303,6 +303,7 @@ export async function validatePythonSemantic(args: {
     const boundary = validatePythonPromptBoundary(args);
     const pedagogy = validateProgrammingTeachingSketches({
         profileId: "python",
+        seed: args.seed,
         draft: args.draft,
     });
 

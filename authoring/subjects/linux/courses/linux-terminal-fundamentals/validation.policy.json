@@ -35,6 +35,25 @@
     "usesTerminalWorkspaceLayout": true,
     "workspaceExpectationsRequired": true,
     "terminalExpectationsAllowedForOutputChecks": true,
-    "judge0NotRequired": true
+    "judge0NotRequired": true,
+    "terminalWorkspaceModeRequired": true,
+    "workspaceExpectationsIsNotARecipeName": true,
+    "terminalOnly": true,
+    "terminalSessionScopeDefault": "exercise"
+  },
+  "rules": {
+    "executionValidation": [
+      "Course 1 Linux code_input tasks must use fixedLanguage bash, recipeType shell_task, and mode terminal_workspace.",
+      "Use workspaceExpectations for requiredFiles, requiredFolders, forbiddenFiles, and entryFilePath.",
+      "Use terminalExpectations for requiredCommands, forbiddenCommands, outputContains, outputRegex, cwdContains, and cwdEndsWith.",
+      "Do not use checker.defaultRecipe workspace_expectations; Linux terminal grading is shell_task plus expectations.",
+      "Independent quiz/check exercises should use per-exercise terminal workspaces so starter files are not reused from a previous exercise.",
+      "Do not call Judge0 for Linux Terminal Fundamentals terminal tasks."
+    ],
+    "pedagogy": [
+      "Keep tasks visible in the terminal and file explorer.",
+      "Do not ask learners to edit Bash scripts in Course 1 unless the topic explicitly introduces scripting.",
+      "Keep destructive commands constrained to the workspace and explain safe paths."
+    ]
   }
 }

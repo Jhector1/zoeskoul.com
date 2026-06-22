@@ -1,0 +1,47 @@
+{
+  "topicId": "moving-around",
+  "repairs": [
+    {
+      "code": "BASH_EXERCISE_POLICY_KIND_UNDER_TARGET_FILLED",
+      "category": "other",
+      "severity": "medium",
+      "field": "quizDraft",
+      "message": "Added a fallback single_choice exercise so the draft matches the shared planned exercise policy."
+    },
+    {
+      "code": "BASH_EXERCISE_POLICY_KIND_UNDER_TARGET_FILLED",
+      "category": "other",
+      "severity": "medium",
+      "field": "quizDraft",
+      "message": "Added a fallback multi_choice exercise so the draft matches the shared planned exercise policy."
+    },
+    {
+      "code": "BASH_EXERCISE_POLICY_KIND_UNDER_TARGET_FILLED",
+      "category": "other",
+      "severity": "medium",
+      "field": "quizDraft",
+      "message": "Added a fallback drag_reorder exercise so the draft matches the shared planned exercise policy."
+    },
+    {
+      "code": "BASH_EXERCISE_POLICY_KIND_UNDER_TARGET_FILLED",
+      "category": "other",
+      "severity": "high",
+      "field": "quizDraft",
+      "message": "Added a fallback code_input exercise so the draft matches the shared planned exercise policy."
+    },
+    {
+      "code": "BASH_EXERCISE_POLICY_KIND_UNDER_TARGET_FILLED",
+      "category": "other",
+      "severity": "high",
+      "field": "quizDraft",
+      "message": "Added a fallback code_input exercise so the draft matches the shared planned exercise policy."
+    },
+    {
+      "code": "BASH_EXERCISE_POLICY_KIND_UNDER_TARGET_FILLED",
+      "category": "other",
+      "severity": "high",
+      "field": "quizDraft",
+      "message": "Added a fallback code_input exercise so the draft matches the shared planned exercise policy."
+    }
+  ]
+}

@@ -1,0 +1,520 @@
+{
+  "topicId": "what-the-terminal-is",
+  "subjectSlug": "linux--linux-terminal-fundamentals--draft",
+  "moduleSlug": "linux-module-1-terminal-navigation",
+  "sectionSlug": "linux--linux-terminal-fundamentals--draft-linux-module-1-orientation",
+  "prefix": "linux_module_1",
+  "minutes": 15,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "bash",
+    "supportsTerminal": true,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "topic": {
+    "labelKey": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.label",
+    "summaryKey": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.cards.sketch0.title",
+      "sketchId": "terminal-basics",
+      "height": 420,
+      "tryIt": {
+        "id": "try-what-the-terminal-is-sketch0",
+        "titleKey": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.try_what_the_terminal_is_sketch0.title",
+        "promptKey": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.try_what_the_terminal_is_sketch0.prompt",
+        "exerciseKey": "what-the-terminal-is-try-it-1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.cards.sketch1.title",
+      "sketchId": "commands-and-output",
+      "height": 420,
+      "tryIt": {
+        "id": "try-what-the-terminal-is-sketch1",
+        "titleKey": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.try_what_the_terminal_is_sketch1.title",
+        "promptKey": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.try_what_the_terminal_is_sketch1.prompt",
+        "exerciseKey": "what-the-terminal-is-try-it-2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.cards.sketch2.title",
+      "sketchId": "why-terminal-matters",
+      "height": 420,
+      "tryIt": {
+        "id": "try-what-the-terminal-is-sketch2",
+        "titleKey": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.try_what_the_terminal_is_sketch2.title",
+        "promptKey": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.try_what_the_terminal_is_sketch2.prompt",
+        "exerciseKey": "what-the-terminal-is-try-it-3",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "terminal-basics",
+      "archetype": "paragraph",
+      "titleKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.terminal-basics.title",
+      "bodyKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.terminal-basics.bodyMarkdown"
+    },
+    {
+      "id": "commands-and-output",
+      "archetype": "paragraph",
+      "titleKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.commands-and-output.title",
+      "bodyKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.commands-and-output.bodyMarkdown"
+    },
+    {
+      "id": "why-terminal-matters",
+      "archetype": "paragraph",
+      "titleKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.why-terminal-matters.title",
+      "bodyKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.why-terminal-matters.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "sc-terminal-purpose",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.practice.sc-terminal-purpose",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "sc-pwd-vs-ls",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.practice.sc-pwd-vs-ls",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "mc-terminal-workflow",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.practice.mc-terminal-workflow",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "dr-terminal-check-sequence",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.practice.dr-terminal-check-sequence",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
+    },
+    {
+      "id": "fb-pwd-meaning",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.practice.fb-pwd-meaning",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "pwd"
+      }
+    },
+    {
+      "id": "fb-ls-purpose",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.practice.fb-ls-purpose",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "ls"
+      }
+    },
+    {
+      "id": "what-the-terminal-is-try-it-1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-the-terminal-is-try-it-1",
+      "language": "bash",
+      "starterCode": "# Use the terminal for this Linux task.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Use the terminal for this Linux task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "terminal-tour/location-readme.txt",
+          "content": "Run pwd to ask the terminal where you are.\n",
+          "language": "bash"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "pwd\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "terminal-tour/location-readme.txt",
+          "content": "Run pwd to ask the terminal where you are.\n",
+          "language": "bash"
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^pwd$",
+            "message": "Run `pwd` to print the current working directory."
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "(^|\\s)sudo(\\s|$)",
+            "message": "Do not use sudo for beginner workspace tasks."
+          }
+        ]
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "starterCode": "# Use the terminal for this Linux task.",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "# Use the terminal for this Linux task.\n",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "terminal-tour/location-readme.txt",
+            "content": "Run pwd to ask the terminal where you are.\n",
+            "language": "bash"
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "Run pwd in the terminal. Do not create files yet."
+      },
+      "ideConfig": {
+        "runnerBackend": "pty",
+        "layoutMode": "terminal_workspace",
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalSessionScope": "exercise"
+      }
+    },
+    {
+      "id": "what-the-terminal-is-try-it-2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-the-terminal-is-try-it-2",
+      "language": "bash",
+      "starterCode": "# Use the terminal for this Linux task.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Use the terminal for this Linux task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "terminal-tour/notes.txt",
+          "content": "notes\n",
+          "language": "bash"
+        },
+        {
+          "path": "terminal-tour/photos/README.txt",
+          "content": "photo folder\n",
+          "language": "bash"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "ls\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "terminal-tour/notes.txt",
+          "content": "notes\n",
+          "language": "bash"
+        },
+        {
+          "path": "terminal-tour/photos/README.txt",
+          "content": "photo folder\n",
+          "language": "bash"
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^ls$",
+            "message": "Run `ls` to list what is in the current folder."
+          }
+        ],
+        "outputContains": [
+          "terminal-tour"
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "(^|\\s)sudo(\\s|$)",
+            "message": "Do not use sudo for beginner workspace tasks."
+          }
+        ]
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "starterCode": "# Use the terminal for this Linux task.",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "# Use the terminal for this Linux task.\n",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "terminal-tour/notes.txt",
+            "content": "notes\n",
+            "language": "bash"
+          },
+          {
+            "path": "terminal-tour/photos/README.txt",
+            "content": "photo folder\n",
+            "language": "bash"
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "Run ls in the terminal to see the current folder contents. Do not create files yet."
+      },
+      "ideConfig": {
+        "runnerBackend": "pty",
+        "layoutMode": "terminal_workspace",
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalSessionScope": "exercise"
+      }
+    },
+    {
+      "id": "what-the-terminal-is-try-it-3",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-the-terminal-is-try-it-3",
+      "language": "bash",
+      "starterCode": "# Use the terminal for this Linux task.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Use the terminal for this Linux task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "event-plan/schedule.txt",
+          "content": "10:00 setup\n",
+          "language": "bash"
+        },
+        {
+          "path": "event-plan/guests.txt",
+          "content": "Guests\n",
+          "language": "bash"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "pwd\nls\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "event-plan/schedule.txt",
+          "content": "10:00 setup\n",
+          "language": "bash"
+        },
+        {
+          "path": "event-plan/guests.txt",
+          "content": "Guests\n",
+          "language": "bash"
+        }
+      ],
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^pwd$",
+            "message": "Run `pwd` first."
+          },
+          {
+            "pattern": "^ls$",
+            "message": "Run `ls` after pwd."
+          }
+        ],
+        "outputContains": [
+          "event-plan"
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "(^|\\s)sudo(\\s|$)",
+            "message": "Do not use sudo for beginner workspace tasks."
+          }
+        ]
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "starterCode": "# Use the terminal for this Linux task.",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "# Use the terminal for this Linux task.\n",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "event-plan/schedule.txt",
+            "content": "10:00 setup\n",
+            "language": "bash"
+          },
+          {
+            "path": "event-plan/guests.txt",
+            "content": "Guests\n",
+            "language": "bash"
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "Run pwd, then ls, to inspect your workspace. Do not create files yet."
+      },
+      "ideConfig": {
+        "runnerBackend": "pty",
+        "layoutMode": "terminal_workspace",
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalSessionScope": "exercise"
+      }
+    }
+  ],
+  "topicMeta": {
+    "learningGoals": [
+      "Try it yourself: make the terminal answer you",
+      "Try it yourself: capture command output",
+      "Try it yourself: record a terminal use case"
+    ]
+  }
+}

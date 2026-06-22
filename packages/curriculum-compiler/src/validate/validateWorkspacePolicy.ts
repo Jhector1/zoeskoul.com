@@ -1,6 +1,17 @@
 import type { ResolvedWorkspacePolicy } from "../policy/resolveWorkspacePolicy.js";
 import { RetryableTopicValidationError } from "./RetryableTopicValidationError.js";
 
+const NON_LEARNER_FACING_KEYS = new Set([
+    "terminalExpectations",
+    "workspaceExpectations",
+    "starterCode",
+    "solutionCode",
+    "starterFiles",
+    "fixedTests",
+    "hiddenShellCheck",
+    "checker",
+]);
+
 function escapeRegExp(value: string) {
     return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
@@ -44,8 +55,32 @@ function findMatch(text: string, terms: string[]) {
     return null;
 }
 
+function collectLearnerFacingText(value: unknown, path: string[] = []): string[] {
+    if (typeof value === "string") {
+        return [value];
+    }
+
+    if (Array.isArray(value)) {
+        return value.flatMap((item, index) =>
+            collectLearnerFacingText(item, [...path, String(index)]),
+        );
+    }
+
+    if (!value || typeof value !== "object") {
+        return [];
+    }
+
+    return Object.entries(value).flatMap(([key, child]) => {
+        if (NON_LEARNER_FACING_KEYS.has(key)) {
+            return [];
+        }
+
+        return collectLearnerFacingText(child, [...path, key]);
+    });
+}
+
 export function validateWorkspacePolicy(args: {
-    text: string;
+    text: string | unknown;
     policy: ResolvedWorkspacePolicy;
     location: string;
     retryable?: boolean;
@@ -54,7 +89,11 @@ export function validateWorkspacePolicy(args: {
         ...args.policy.forbiddenActionLanguage,
         ...args.policy.avoidTerms,
     ];
-    const match = findMatch(args.text, forbiddenTerms);
+    const learnerFacingText =
+        typeof args.text === "string"
+            ? args.text
+            : collectLearnerFacingText(args.text).join("\n");
+    const match = findMatch(learnerFacingText, forbiddenTerms);
 
     if (match) {
         const preferredReplacement = args.policy.preferredTerms[match.term];

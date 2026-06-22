@@ -1,0 +1,8 @@
+{
+  "reportDir": "/Users/admin/Documents/NextJSProject/zoeskoul.com/.curriculum-drafts/python/reports/python--python-data-functions--draft/module6/module-6-name-badge-package",
+  "status": "failed",
+  "attempts": 3,
+  "finalAttempt": 2,
+  "errorCode": "SEMANTIC_VALIDATION_FAILED",
+  "errorMessage": "Semantic validation failed for topic \"module-6-name-badge-package\"\nModule: python-6-functions-and-modularity\nSection: python-6-module-project\nReport dir: /Users/admin/Documents/NextJSProject/zoeskoul.com/.curriculum-drafts/python/reports/python--python-data-functions--draft/module6/module-6-name-badge-package\n- Exercise \"exercise3\" exposes _parse_arg / ast.literal_eval harness code. Function-return tasks should use semantic function_returns checks, not visible stdin parsing wrappers."
+}

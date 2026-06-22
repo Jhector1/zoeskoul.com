@@ -4,6 +4,7 @@ export * from "./manifest.js";
 export * from "./subject-manifest.js";
 export * from "./catalog-manifest.js";
 export * from "./plan.js";
+export * from "./planSlugs.js";
 export * from "./topic-seed.js";
 export * from "./topic-recipe.js";
 export * from "./profile-adapter.js";

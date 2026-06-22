@@ -431,7 +431,7 @@ export async function compileTopic(args: {
             });
 
             validateWorkspacePolicy({
-                text: JSON.stringify(draft),
+                text: draft,
                 policy: workspacePolicy,
                 location: `${node.module.moduleSlug}/${node.topic.topicId}`,
                 retryable: true,

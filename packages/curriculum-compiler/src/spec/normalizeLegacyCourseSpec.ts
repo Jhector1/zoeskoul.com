@@ -34,6 +34,12 @@ function normalizePractice(value: unknown): PracticeConfig | undefined {
     const practice = value as Record<string, unknown>;
     const result: PracticeConfig = {
         ...(typeof practice.tryIt === "boolean" ? { tryIt: practice.tryIt } : {}),
+        ...(typeof practice.requiresTryIt === "boolean"
+            ? { requiresTryIt: practice.requiresTryIt }
+            : {}),
+        ...(typeof practice.conceptualOnly === "boolean"
+            ? { conceptualOnly: practice.conceptualOnly }
+            : {}),
         ...(practice.tryItPlacement === "first_sketch" ||
         practice.tryItPlacement === "all_sketches" ||
         practice.tryItPlacement === "none"
@@ -53,6 +59,24 @@ function normalizePractice(value: unknown): PracticeConfig | undefined {
         ...(typeof practice.tryItSketchIndex === "number" &&
         Number.isFinite(practice.tryItSketchIndex)
             ? { tryItSketchIndex: practice.tryItSketchIndex }
+            : {}),
+        ...(practice.runtimeMode === "terminal_workspace" ||
+        practice.runtimeMode === "editor_workspace" ||
+        practice.runtimeMode === "sql_workspace"
+            ? { runtimeMode: practice.runtimeMode }
+            : {}),
+        ...(Array.isArray(practice.expectedPracticeKinds)
+            ? {
+                expectedPracticeKinds: practice.expectedPracticeKinds
+                    .filter((item): item is string => typeof item === "string")
+                    .map((item) => item.trim())
+                    .filter(Boolean),
+            }
+            : {}),
+        ...(practice.terminalSessionScope === "exercise" ||
+        practice.terminalSessionScope === "topic" ||
+        practice.terminalSessionScope === "project"
+            ? { terminalSessionScope: practice.terminalSessionScope }
             : {}),
         ...(practice.projectFlow === "progressive" ||
         practice.projectFlow === "standalone"

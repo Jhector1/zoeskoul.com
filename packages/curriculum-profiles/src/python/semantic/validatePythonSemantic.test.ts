@@ -76,7 +76,14 @@ describe("validatePythonSemantic", () => {
     });
     it("flags SQL recipe/runtime fields inside Python code_input exercises", async () => {
         const result = await validatePythonSemantic({
-            seed: { topicId: "python-topic" } as any,
+            seed: {
+                topicId: "python-topic",
+                practice: {
+                    conceptualOnly: false,
+                    requiresTryIt: true,
+                    tryIt: true,
+                },
+            } as any,
             draft: {
                 title: "Topic",
                 summary: "Summary",
@@ -317,7 +324,7 @@ describe("validatePythonSemantic", () => {
         expect(result.ok).toBe(false);
     });
 
-    it("flags Python drafts that do not teach with an example and try-it-yourself sketch", async () => {
+    it("flags Python drafts that do not teach with a worked example even when practice exists", async () => {
         const result = await validatePythonSemantic({
             seed: { topicId: "python-topic" } as any,
             draft: {
@@ -356,15 +363,74 @@ describe("validatePythonSemantic", () => {
         expect(result.issues.map((issue) => issue.code)).toEqual(
             expect.arrayContaining([
                 "PROGRAMMING_WORKED_EXAMPLE_MISSING",
-                "PROGRAMMING_TRY_IT_YOURSELF_MISSING",
             ]),
         );
         expect(result.ok).toBe(false);
     });
 
-    it("passes Python drafts with a worked example, line-by-line explanation, and try-it-yourself sketch", async () => {
+    it("accepts real code_input practice instead of requiring a try-it-yourself sketch", async () => {
         const result = await validatePythonSemantic({
             seed: { topicId: "python-topic" } as any,
+            draft: {
+                title: "Topic",
+                summary: "Summary",
+                minutes: 10,
+                sketchBlocks: [
+                    {
+                        id: "sketch-1",
+                        title: "Worked example",
+                        bodyMarkdown: [
+                            "Worked example:",
+                            "```python",
+                            "n = int(input())",
+                            "print(n + 1)",
+                            "```",
+                        ].join("\n"),
+                    },
+                    {
+                        id: "sketch-2",
+                        title: "Explain it",
+                        bodyMarkdown:
+                            "Line by line: the first line reads the number, and the second line prints the answer after adding one.",
+                    },
+                ],
+                quizDraft: [
+                    {
+                        id: "code-1",
+                        kind: "code_input",
+                        title: "Code",
+                        prompt: "Read a number and print the number plus one.",
+                        hint: "Convert the input before adding.",
+                        help: {
+                            concept: "Use int(input()) for numeric input.",
+                            hint_1: "Store the input in a variable.",
+                            hint_2: "Print the final result.",
+                        },
+                        starterCode: "n = int(input())\n",
+                        solutionCode: "n = int(input())\nprint(n + 1)\n",
+                        tests: [{ stdin: "3\n", stdout: "4\n", match: "exact" }],
+                        recipeType: "fixed_tests",
+                    },
+                ],
+            } as any,
+        });
+
+        expect(result.issues.map((issue) => issue.code)).not.toContain(
+            "PROGRAMMING_TRY_IT_COVERAGE_MISSING",
+        );
+        expect(result.ok).toBe(true);
+    });
+
+    it("passes Python drafts with a worked example, line-by-line explanation, and try-it-yourself sketch", async () => {
+        const result = await validatePythonSemantic({
+            seed: {
+                topicId: "python-topic",
+                practice: {
+                    conceptualOnly: false,
+                    requiresTryIt: true,
+                    tryIt: true,
+                },
+            } as any,
             draft: {
                 title: "Topic",
                 summary: "Summary",

@@ -1,0 +1,208 @@
+{
+  "topics": {
+    "linux-terminal-fundamentals": {
+      "linux-module-2-files-and-folders": {
+        "creating-folders-and-files": {
+          "label": "Creating Folders and Files",
+          "summary": "Use mkdir, mkdir -p, and touch to build a clean project structure in the Linux terminal.",
+          "cards": {
+            "sketch0": {
+              "title": "Create one folder with mkdir"
+            },
+            "sketch1": {
+              "title": "Create nested folders with mkdir -p"
+            },
+            "sketch2": {
+              "title": "Create empty files with touch"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Organize Maya's study workspace"
+            }
+          },
+          "projectSteps": {
+            "creating_folders_and_files_terminal_task_1": {
+              "title": "Create the park survey request folder"
+            },
+            "creating_folders_and_files_terminal_task_2": {
+              "title": "Add the map notes folder"
+            },
+            "creating_folders_and_files_terminal_task_3": {
+              "title": "Prepare the handoff marker"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_creating_folders_and_files_sketch0": {
+              "title": "Try: Create the park survey request folder",
+              "prompt": "You are helping a park survey team prepare a terminal map. Create creating-folders-and-files-park-survey/requests and add creating-folders-and-files-park-survey/requests/north-trail.txt so the team has a concrete request log to hand off. Produce the result for create the park survey request folder so it reinforces Creating Folders and Files."
+            },
+            "try_creating_folders_and_files_sketch1": {
+              "title": "Try: Add the map notes folder",
+              "prompt": "Continue the same park survey workspace. Keep the request log from step 1, then add creating-folders-and-files-park-survey/maps/current-location.txt as the team's navigation note deliverable. Produce the result for add the map notes folder so it reinforces Creating Folders and Files."
+            },
+            "try_creating_folders_and_files_sketch2": {
+              "title": "Try: Prepare the handoff marker",
+              "prompt": "Finish the cumulative park survey terminal map. Keep the request and map notes from the earlier steps, then create creating-folders-and-files-park-survey/handoff/terminal-map-ready.txt as the useful final deliverable. Produce the result for prepare the handoff marker so it reinforces Creating Folders and Files."
+            }
+          },
+          "quiz": {
+            "sc-mkdir-basic-purpose": {
+              "title": "Identify the command purpose",
+              "prompt": "What is the main job of `mkdir` in the Linux terminal?",
+              "hint": "Think about whether it creates a folder, creates a file, or shows existing items.",
+              "help": {
+                "concept": "`mkdir` stands for make directory, and a directory is another name for a folder.",
+                "hint_1": "This command changes the workspace structure by adding a container for files.",
+                "hint_2": "It does not display contents and it does not create a regular text file."
+              },
+              "options": {
+                "a": "Create a new folder",
+                "b": "Create an empty file",
+                "c": "List files in the current folder",
+                "d": "Move into a different folder"
+              }
+            },
+            "mc-when-to-use-mkdir-p": {
+              "title": "Choose the best uses for mkdir -p",
+              "prompt": "Which commands correctly use `mkdir -p` to create nested folders for a class project? Choose all that apply.",
+              "hint": "Look for commands that create a path with parent folders included.",
+              "help": {
+                "concept": "`mkdir -p` is used when you want to create a full folder path, including parent folders that may not exist yet.",
+                "hint_1": "A nested path has slashes, such as `course/week1/notes`.",
+                "hint_2": "Pick the commands where one command can create multiple folder levels safely."
+              },
+              "options": {
+                "a": "mkdir -p school/math/week1",
+                "b": "mkdir -p reports/drafts",
+                "c": "touch -p school/math/week1",
+                "d": "mkdir school/math/week1"
+              }
+            },
+            "mc-valid-project-setup": {
+              "title": "Pick the commands that set up files and folders correctly",
+              "prompt": "You are starting a reading project. Which commands would correctly create the requested items? Choose all that apply.",
+              "hint": "Look for commands that match the item type: folders with one command, files with another.",
+              "help": {
+                "concept": "Use `mkdir` or `mkdir -p` for folders and `touch` for files. Matching the command to the item type is the key idea.",
+                "hint_1": "A folder like `reading` needs a directory command.",
+                "hint_2": "A file like `reading/list.txt` can be created with `touch` once the folder path exists, or by using a full path after creating the folder."
+              },
+              "options": {
+                "a": "mkdir reading",
+                "b": "touch reading/list.txt",
+                "c": "mkdir -p reading/week1",
+                "d": "touch week1"
+              }
+            },
+            "dr-folder-setup-order": {
+              "title": "Order the setup steps",
+              "prompt": "Put these terminal actions in a sensible order for creating a new notes workspace and checking it.",
+              "hint": "Create the folder before moving into it, and create the file after you are inside the folder.",
+              "help": {
+                "concept": "A safe terminal workflow is to create a folder, move into it if needed, create files there, and then inspect the result.",
+                "hint_1": "You cannot create `todo.txt` inside `notes` until `notes` exists or you specify a full path.",
+                "hint_2": "The verification step belongs at the end, after the folder and file have been created."
+              },
+              "tokens": {
+                "t1": "mkdir notes",
+                "t2": "cd notes",
+                "t3": "touch todo.txt",
+                "t4": "ls"
+              }
+            },
+            "ci-create-single-folder": {
+              "title": "Create a project folder",
+              "prompt": "You are organizing a student workspace for Maya. In the terminal, create a folder named `projects` in the current workspace. Then use a command that lets you verify it exists. The final workspace should contain the `projects` folder, and your terminal history should show that you checked the result.",
+              "hint": "Use the command that creates one folder, then list the current location.",
+              "help": {
+                "concept": "`mkdir` creates a folder in the current directory, and `ls` is a quick way to confirm the folder now appears in the workspace.",
+                "hint_1": "Create exactly one folder named `projects` where you are now.",
+                "hint_2": "After creating `projects`, run a listing command in the same location so the checker can see that you verified it."
+              },
+              "template": "A file-writing code exercise should also ____ so automated tests can check it.",
+              "choices": [
+                "print an observable result",
+                "hide all output",
+                "delete the file immediately",
+                "skip the program"
+              ]
+            },
+            "fb-touch-purpose": {
+              "title": "Complete the command idea",
+              "prompt": "Fill in the missing command so the sentence matches Linux terminal behavior.",
+              "hint": "Use the command that creates an empty file if it does not already exist.",
+              "help": {
+                "concept": "`the missing term` is commonly used to create empty files quickly from the terminal.",
+                "hint_1": "This command works on files, not folders.",
+                "hint_2": "It is the command you would use for something like `notes.txt` or `todo.txt`."
+              },
+              "template": "To create an empty file named `notes.txt`, use `[blank1] notes.txt`.",
+              "choices": [
+                "mkdir",
+                "touch",
+                "ls",
+                "cd"
+              ]
+            },
+            "creating-folders-and-files-terminal-task-1": {
+              "title": "Create the park survey request folder",
+              "prompt": "You are helping a park survey team prepare a terminal map. Create creating-folders-and-files-park-survey/requests and add creating-folders-and-files-park-survey/requests/north-trail.txt so the team has a concrete request log to hand off.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Use the terminal to make one small workspace change at a time, then inspect the result in the file explorer.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "# Use the terminal for this Linux project task."
+            },
+            "creating-folders-and-files-terminal-task-2": {
+              "title": "Add the map notes folder",
+              "prompt": "Continue the same park survey workspace. Keep the request log from step 1, then add creating-folders-and-files-park-survey/maps/current-location.txt as the team's navigation note deliverable.",
+              "hint": "Read the Linux task \"Add the map notes folder\" and identify the folders or files you must create or organize.",
+              "help": {
+                "concept": "This Linux terminal exercise checks the final workspace state for \"Add the map notes folder\".",
+                "hint_1": "Use the terminal to make one small workspace change at a time, then inspect the result in the file explorer.",
+                "hint_2": "If a path is required, match the exact folder and file names before clicking Check Answer."
+              },
+              "starterCode": "# Use the terminal for this Linux project task."
+            },
+            "creating-folders-and-files-terminal-task-3": {
+              "title": "Prepare the handoff marker",
+              "prompt": "Finish the cumulative park survey terminal map. Keep the request and map notes from the earlier steps, then create creating-folders-and-files-park-survey/handoff/terminal-map-ready.txt as the useful final deliverable.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "# Use the terminal for this Linux project task."
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "linux-terminal-fundamentals": {
+      "linux-module-2-files-and-folders": {
+        "creating-folders-and-files": {
+          "sketch-1": {
+            "title": "Create one folder with mkdir",
+            "bodyMarkdown": "`mkdir` creates a new folder in your current location. This is useful when you want to start organizing a project instead of keeping everything in one place.\n\nFor example, if you are setting up school notes, you might create a folder named `notes`:\n\n```bash\nmkdir notes\nls\n```\n\nStep by step:\n- `mkdir notes` creates a folder called `notes`.\n- `ls` lists what is in the current folder so you can confirm that `notes` now exists.\n\nIf `notes` appears in the list, the command worked. A common habit is to run `ls` right after creating something so you can verify the workspace changed the way you expected."
+          },
+          "sketch-2": {
+            "title": "Create nested folders with mkdir -p",
+            "bodyMarkdown": "Sometimes you need several folders inside each other. `mkdir -p` creates the whole path at once.\n\nExample:\n\n```bash\nmkdir -p school/history/week1\nls school\n```\n\nStep by step:\n- `mkdir -p school/history/week1` creates `school`, then `history` inside it, then `week1` inside that.\n- The `-p` option prevents you from having to create each level one by one.\n- `ls school` lets you inspect the first folder in that path.\n\nWithout `-p`, trying to create a deep path all at once usually fails if the parent folders do not exist yet."
+          },
+          "sketch-3": {
+            "title": "Create empty files with touch",
+            "bodyMarkdown": "`touch` creates an empty file when that file does not already exist. This is a fast way to set up placeholders such as notes, drafts, or checklists.\n\nExample:\n\n```bash\ntouch todo.txt ideas.txt\nls\n```\n\nStep by step:\n- `touch todo.txt ideas.txt` creates two empty files.\n- `ls` shows both file names in the current folder.\n\nYou can also combine folders and files in a small project setup. For example, after creating a `school` folder, you might create `school/reading-list.txt` so the folder already contains a file you plan to use."
+          }
+        }
+      }
+    }
+  }
+}

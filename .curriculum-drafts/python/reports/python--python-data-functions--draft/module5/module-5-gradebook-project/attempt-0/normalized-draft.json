@@ -1,0 +1,118 @@
+{
+  "title": "Module 5 Gradebook Project",
+  "summary": "Build a small gradebook project in focused steps that keep the previous working version and add one collection idea at a time.",
+  "minutes": 24,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Introduction to the Gradebook Project",
+      "bodyMarkdown": "In this project, you'll build a simple gradebook using Python's data structures like lists and dictionaries. This will help you understand how to organize and manipulate data efficiently. We'll start by creating a list of students and their grades, then move on to more complex operations like calculating averages and updating records."
+    },
+    {
+      "id": "sketch2",
+      "title": "Using Lists and Dictionaries",
+      "bodyMarkdown": "Lists and dictionaries are powerful tools in Python for storing collections of data. A list is an ordered collection of items, which can be accessed by their index. For example:\n\n```python\nstudents = ['Alice', 'Bob', 'Charlie']\n```\n\nA dictionary, on the other hand, stores data in key-value pairs, allowing for more descriptive data storage. For example:\n\n```python\ngrades = {'Alice': 85, 'Bob': 90, 'Charlie': 78}\n```\n\nIn this project, you'll use both lists and dictionaries to manage student data effectively."
+    },
+    {
+      "id": "sketch3",
+      "title": "Step-by-Step Project Development",
+      "bodyMarkdown": "We'll build the gradebook project step by step. Each step will introduce a new concept or operation, such as adding a new student, updating grades, or calculating the class average. By the end of the project, you'll have a functional gradebook that can handle various student data operations."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "exercise1",
+      "kind": "code_input",
+      "title": "Create a List of Students",
+      "prompt": "Create a list named `students` containing the names 'Alice', 'Bob', and 'Charlie'.",
+      "starterCode": "# Create a list of students\nstudents = ",
+      "solutionCode": "# Create a list of students\nstudents = ['Alice', 'Bob', 'Charlie']",
+      "tests": [
+        {
+          "stdin": "",
+          "stdout": "['Alice', 'Bob', 'Charlie']\n",
+          "match": "exact"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Use square brackets to define a list.",
+      "help": {
+        "concept": "Lists are used to store multiple items in a single variable.",
+        "hint_1": "Lists are defined using square brackets.",
+        "hint_2": "Ensure the list contains the names 'Alice', 'Bob', and 'Charlie'."
+      }
+    },
+    {
+      "id": "exercise2",
+      "kind": "code_input",
+      "title": "Add a New Student",
+      "prompt": "Add a new student 'David' to the existing `students` list.",
+      "starterCode": "# Existing list of students\nstudents = ['Alice', 'Bob', 'Charlie']\n\n# Add a new student\n",
+      "solutionCode": "# Existing list of students\nstudents = ['Alice', 'Bob', 'Charlie']\n\n# Add a new student\nstudents.append('David')",
+      "tests": [
+        {
+          "stdin": "",
+          "stdout": "['Alice', 'Bob', 'Charlie', 'David']\n",
+          "match": "exact"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Use the append method to add a new item to the list.",
+      "help": {
+        "concept": "The append method adds an item to the end of a list.",
+        "hint_1": "Use `students.append('David')` to add a new student.",
+        "hint_2": "Ensure 'David' is added to the end of the list."
+      }
+    },
+    {
+      "id": "exercise3",
+      "kind": "code_input",
+      "title": "Calculate Average Grade",
+      "prompt": "Write a function `calculate_average` that takes a dictionary of student grades and returns the average grade.",
+      "starterCode": "def calculate_average(grades):\n    # Calculate the average grade\n    pass",
+      "solutionCode": "def calculate_average(grades):\n    total = sum(grades.values())\n    return total / len(grades)",
+      "recipeType": "semantic",
+      "semanticChecks": [
+        {
+          "type": "function_returns",
+          "functionName": "calculate_average",
+          "args": [
+            [
+              [
+                "Alice",
+                85
+              ],
+              [
+                "Bob",
+                90
+              ],
+              [
+                "Charlie",
+                78
+              ]
+            ]
+          ],
+          "argKinds": [
+            "dict_entries"
+          ],
+          "expected": 84.33333333333333,
+          "expectedKind": "value"
+        }
+      ],
+      "hint": "Sum the grades and divide by the number of students.",
+      "help": {
+        "concept": "To calculate an average, sum all values and divide by the count.",
+        "hint_1": "Use `sum()` to get the total of all grades.",
+        "hint_2": "Divide the total by the number of students to get the average."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Gradebook Project",
+    "stepIds": [
+      "exercise1",
+      "exercise2",
+      "exercise3"
+    ]
+  }
+}

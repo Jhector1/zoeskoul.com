@@ -88,10 +88,15 @@ function renderRetryGuidance(seed: TopicSeed, retry?: TopicRetryContext) {
         "- For Bash/Linux missing code_input, use fixedLanguage bash, recipeType shell_task, mode terminal_workspace, and workspaceExpectations or terminalExpectations.",
         "",
         "",
-        "If the failure mentions PROGRAMMING_TRY_IT_YOURSELF_MISSING or missing a \"Try it yourself\" learner prompt:",
-        "- Add a sketchBlocks item or update an existing sketchBlocks item with a short learner action.",
-        "- Use learner-facing wording such as: `Try it yourself: change one value, run the code, and predict the new output.`",
-        "- The learner action must be in sketchBlocks, not only in quiz hints or exercise help.",
+        "If the failure mentions PROGRAMMING_TRY_IT_COVERAGE_MISSING or missing Try It coverage:",
+        "- Make sure the topic includes a real practice exercise that can serve as the embedded try-it activity.",
+        "- Do not add a literal `Try it yourself:` sentence to sketchBlocks just to satisfy practice requirements.",
+        "- Keep sketchBlocks focused on explanation and worked examples; the embedded try-it UI comes from practice metadata and exercises.",
+        "",
+        "If the failure mentions PROGRAMMING_LINE_BY_LINE_EXPLANATION_MISSING or missing a step-by-step explanation:",
+        "- Keep the code example, but add explicit prose that walks through it line by line or step by step.",
+        "- Name the lines directly with wording such as `First`, `Second`, `This line`, or `Line by line`.",
+        "- For shell examples, explain what the command does and what the shown output means.",
         "",
         "If the failure mentions PYTHON_SQL_CLAUSE_LEAKAGE, PYTHON_SQL_QUERY_LEAKAGE, PYTHON_SQL_FENCE_LEAKAGE, PYTHON_SQL_MUTATION_LEAKAGE, or PYTHON_SQL_NAMED_LEAKAGE:",
         "- Remove every SQL/database term from the Python draft.",
@@ -200,37 +205,82 @@ function renderAuthoringPolicy(seed: TopicSeed) {
 
 function renderStructuredLessonIntent(seed: TopicSeed) {
     const lines: string[] = [];
-
-    if (seed.practice?.tryIt === true) {
-        lines.push("Structured lesson intent for this topic:");
-        lines.push("- This topic should support a real embedded Try it yourself exercise.");
-        lines.push("- Use sketchBlocks to teach the idea clearly, then make the first suitable code_input exercise work as the embedded try-it task.");
-        if (seed.practice.tryItExerciseId) {
-            lines.push(`- Preferred try-it exercise id: ${seed.practice.tryItExerciseId}.`);
+    const practice = seed.practice;
+    const conceptualOnly = practice?.conceptualOnly === true;
+    const requiresTryIt = practice?.requiresTryIt === true;
+    const projectRequirements = seed.authoringPolicy?.projectRequirements as
+        | {
+            requireRealWorldStory?: boolean;
+            requireCumulativeChaining?: boolean;
+            requireCompleteSolutionFiles?: boolean;
+            reuseTryItInProjects?: boolean;
+            requireUniqueTryItMessages?: boolean;
         }
-        if (typeof seed.practice.tryItSketchIndex === "number") {
-            lines.push(`- Preferred try-it sketch index: ${seed.practice.tryItSketchIndex}.`);
+        | undefined;
+
+    if (conceptualOnly) {
+        lines.push("Structured lesson intent for this topic:");
+        lines.push("- This topic is explicitly conceptual-only in authoring.");
+        lines.push("- Keep it quiz-friendly and explanatory; do not force code_input or embedded Try It coverage.");
+    }
+
+    if (!conceptualOnly && requiresTryIt) {
+        lines.push("Structured lesson intent for this topic:");
+        lines.push("- This topic should support real embedded Try It practice through quizDraft exercises.");
+        if (practice?.tryItPlacement === "all_sketches") {
+            lines.push("- Every sketch block must map to its own concrete Try It exercise; do not rely on one exercise for the whole topic.");
+        } else {
+            lines.push("- Use sketchBlocks to teach the idea clearly, then make the configured code_input exercise work as the embedded try-it task.");
+        }
+        lines.push("- Do not add literal `Try it yourself` prose to sketchBlocks unless the topic truly needs it for comprehension.");
+        lines.push("- Give every Try It its own concrete instructional message with the real task, expected output, and why it matters in this topic.");
+        if (practice?.tryItExerciseId) {
+            lines.push(`- Preferred try-it exercise id: ${practice.tryItExerciseId}.`);
+        }
+        if (typeof practice?.tryItSketchIndex === "number") {
+            lines.push(`- Preferred try-it sketch index: ${practice.tryItSketchIndex}.`);
         }
     }
 
-    if (seed.practice?.projectFlow === "progressive") {
+    if (practice?.projectFlow === "progressive") {
         if (lines.length === 0) lines.push("Structured lesson intent for this topic:");
         lines.push("- Project-style code_input exercises should flow step to step.");
         lines.push("- Each later starterCode should begin from the previous working solution, then add focused TODO comments for the new change.");
+        lines.push("- When the workspace uses multiple files, each later step should start from the previous full working workspace, not only one copied snippet.");
         lines.push("- Do not make project steps feel like unrelated standalone drills.");
     }
 
     if (seed.sectionRole === "module_project") {
         if (lines.length === 0) lines.push("Structured lesson intent for this topic:");
         lines.push("- This topic belongs to a module project section.");
+        lines.push("- Use exactly one sketchBlock to introduce the project synopsis, learner role, scenario, and useful deliverable.");
+        lines.push("- Put the actual work in project code_input steps, not in extra teaching sketches or embedded Try It cards.");
         lines.push("- Use a small story, one connected build, and step titles that sound like project milestones.");
+        lines.push("- Reuse relevant Try It work as project starter state when it fits the scenario.");
     }
 
     if (seed.sectionRole === "capstone" || seed.moduleRole === "capstone") {
         if (lines.length === 0) lines.push("Structured lesson intent for this topic:");
         lines.push("- This topic is the final capstone/final project for the course.");
+        lines.push("- Use exactly one sketchBlock to introduce the final capstone synopsis, learner role, scenario, and final handoff deliverable.");
+        lines.push("- Put the actual capstone work in final capstone project steps, not in extra teaching sketches or embedded Try It cards.");
         lines.push("- Make it feel like a full project, not a normal practice card.");
         lines.push("- Use stronger project framing, integrated skills, and a polished final-output goal.");
+    }
+
+    if (projectRequirements?.requireRealWorldStory) {
+        if (lines.length === 0) lines.push("Structured lesson intent for this topic:");
+        lines.push("- Use a believable real-world story with a learner role, concrete files/tables/folders, and a useful final deliverable.");
+    }
+
+    if (projectRequirements?.requireCumulativeChaining) {
+        if (lines.length === 0) lines.push("Structured lesson intent for this topic:");
+        lines.push("- In cumulative projects, each later step must start from the prior working output instead of resetting to a disconnected standalone task.");
+    }
+
+    if (projectRequirements?.requireCompleteSolutionFiles) {
+        if (lines.length === 0) lines.push("Structured lesson intent for this topic:");
+        lines.push("- For multi-file exercises, provide complete solutionFiles for every relevant file, not only the visible entry file.");
     }
 
     return lines.join("\n");
@@ -273,6 +323,9 @@ export function buildTopicAuthoringDraftPrompt(args: {
             "",
             "Every exercise must include a real solution.",
             "Do not leave any solution field empty.",
+            "Every Try It exercise prompt must be unique, specific, and tied to the topic context.",
+            "If a code_input exercise uses multiple files, include complete solutionFiles for every relevant file in the finished workspace.",
+            "For progressive module projects and capstones, each later step must start from the previous step's working solution or workspace state.",
             "",
             renderRetryGuidance(args.seed, args.retry),
 
@@ -292,12 +345,14 @@ export function buildTopicAuthoringDraftPrompt(args: {
             "Teaching-quality rules for sketchBlocks in every subject:",
             "- Include at least one concrete worked example, not just abstract definitions.",
             "- Explain the main idea clearly in beginner-friendly language.",
-            "- Include a short learner action such as 'Try it yourself', 'Try this', or 'Your turn' whenever the topic can support it.",
+            "- Keep sketchBlocks focused on explanation; embedded try-it practice will be rendered separately from exercises when supported.",
+            "- For hands-on topics using all_sketches Try It placement, include enough concrete exercises so every sketch can resolve to a unique Try It activity.",
             "",
             "Extra teaching rules for programming-family profiles:",
             "- Show at least one fenced code example in sketchBlocks.",
             "- If a code example spans multiple lines, explain it step by step or line by line.",
-            "- Include a small 'Try it yourself' follow-up that invites the learner to modify, run, or extend the example.",
+            "- Keep code examples aligned with the current topic's learning goals and avoid introducing later-course commands early.",
+            "- Do not add a literal 'Try it yourself' sentence to sketchBlocks just because the topic has embedded practice.",
             "",
             "Every quizDraft item must ALWAYS contain:",
             '- "id"',

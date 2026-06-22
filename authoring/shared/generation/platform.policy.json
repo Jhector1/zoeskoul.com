@@ -1,0 +1,33 @@
+{
+  "policyId": "shared-generation-platform",
+  "notes": [
+    "General generation behavior is inherited by every course unless subject or course authoring overrides it explicitly.",
+    "Profiles should only define runtime, recipe, starter workspace, and checker behavior that is truly profile-specific."
+  ],
+  "practiceDefaults": {
+    "tryIt": true,
+    "requiresTryIt": true,
+    "tryItPlacement": "all_sketches"
+  },
+  "topicDefaults": {
+    "requiresTryIt": true,
+    "conceptualSignals": [
+      "what is",
+      "orientation",
+      "introduction",
+      "overview",
+      "course map",
+      "tour"
+    ]
+  },
+  "validationRequirements": {
+    "handsOnTopicsRequireTryItCoverage": true,
+    "conceptualOnlyTopicsMayBeQuizOnly": true,
+    "requireUniqueTryItMessages": true,
+    "requireTryItForEverySketch": true
+  },
+  "projectRequirements": {
+    "reuseTryItInProjects": true,
+    "requireCompleteSolutionFiles": true
+  }
+}

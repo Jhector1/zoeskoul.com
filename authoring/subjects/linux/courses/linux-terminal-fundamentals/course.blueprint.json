@@ -26,10 +26,29 @@
     "codeInputWeight": 0.5
   },
   "constraints": {
-    "moduleCount": 2,
+    "moduleCount": 3,
     "topicsPerModuleMin": 4,
-    "topicsPerModuleMax": 4
+    "topicsPerModuleMax": 4,
+    "moduleSlugFormat": "<subjectSlug>-module-<number>-<short-topic-area>",
+    "sectionSlugFormat": "<subjectSlug>-module-<number>-<short-section-role>",
+    "prefixFormat": "<subject_slug_with_underscores>_module_<number>"
   },
   "courseSlug": "linux-terminal-fundamentals",
-  "trackSlug": "linux"
+  "trackSlug": "linux",
+  "workspaceProfileId": "terminal-workspace-runner",
+  "workspacePolicyId": "linux-terminal-workspace",
+  "courseGenerationPolicy": {
+    "studentActionStyle": "terminal-workspace",
+    "forbidUnavailableWorkspaceActions": true,
+    "preferredTerms": {
+      "editor": "terminal",
+      "run button": "terminal command",
+      "output panel": "terminal output"
+    },
+    "notes": [
+      "Use shell_task terminal_workspace code_input items for Linux terminal practice.",
+      "Use workspaceExpectations for file-tree checks and terminalExpectations for output/command checks.",
+      "Use per-exercise terminal workspaces for independent quiz/check exercises."
+    ]
+  }
 }

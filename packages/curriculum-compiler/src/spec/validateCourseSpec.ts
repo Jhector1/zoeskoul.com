@@ -204,6 +204,18 @@ function validateSection(
                 ) {
                     issues.push(`${topicPath}.practice.tryIt must be a boolean when provided`);
                 }
+                if (
+                    typeof topic.practice.requiresTryIt !== "undefined" &&
+                    typeof topic.practice.requiresTryIt !== "boolean"
+                ) {
+                    issues.push(`${topicPath}.practice.requiresTryIt must be a boolean when provided`);
+                }
+                if (
+                    typeof topic.practice.conceptualOnly !== "undefined" &&
+                    typeof topic.practice.conceptualOnly !== "boolean"
+                ) {
+                    issues.push(`${topicPath}.practice.conceptualOnly must be a boolean when provided`);
+                }
 
                 if (
                     typeof topic.practice.tryItExerciseId !== "undefined" &&
@@ -238,6 +250,29 @@ function validateSection(
                     )
                 ) {
                     issues.push(`${topicPath}.practice.tryItSketchIndex must be a non-negative number when provided`);
+                }
+                if (
+                    typeof topic.practice.runtimeMode !== "undefined" &&
+                    topic.practice.runtimeMode !== "terminal_workspace" &&
+                    topic.practice.runtimeMode !== "editor_workspace" &&
+                    topic.practice.runtimeMode !== "sql_workspace"
+                ) {
+                    issues.push(`${topicPath}.practice.runtimeMode must be "terminal_workspace", "editor_workspace", or "sql_workspace" when provided`);
+                }
+                if (
+                    typeof topic.practice.expectedPracticeKinds !== "undefined" &&
+                    (!Array.isArray(topic.practice.expectedPracticeKinds) ||
+                        topic.practice.expectedPracticeKinds.some((value) => !isNonEmptyString(value)))
+                ) {
+                    issues.push(`${topicPath}.practice.expectedPracticeKinds must be an array of non-empty strings when provided`);
+                }
+                if (
+                    typeof topic.practice.terminalSessionScope !== "undefined" &&
+                    topic.practice.terminalSessionScope !== "exercise" &&
+                    topic.practice.terminalSessionScope !== "topic" &&
+                    topic.practice.terminalSessionScope !== "project"
+                ) {
+                    issues.push(`${topicPath}.practice.terminalSessionScope must be "exercise", "topic", or "project" when provided`);
                 }
 
                 if (

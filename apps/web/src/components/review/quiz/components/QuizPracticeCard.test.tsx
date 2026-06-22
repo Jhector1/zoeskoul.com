@@ -221,6 +221,74 @@ describe("QuizPracticeCard project-step fallback", () => {
         expect(html).toContain("from tools.names import clean_name");
     });
 
+    it("preserves project step ideConfig on fallback exercises", () => {
+        renderToStaticMarkup(
+            <QuizPracticeCard
+                q={{
+                    id: "practice-terminal-cwd",
+                    kind: "practice",
+                    fetch: {
+                        subject: "linux-terminal-fundamentals",
+                        module: "linux-module-1-terminal-navigation",
+                        section: "linux-terminal-fundamentals-linux-module-1-project",
+                        topic: "module-1-terminal-map-project",
+                        exerciseKey: "module-1-terminal-map-project-terminal-task-2",
+                    },
+                } as any}
+                projectStepManifest={{
+                    id: "module-1-terminal-map-project-terminal-task-2",
+                    exerciseKey: "module-1-terminal-map-project-terminal-task-2",
+                    title: "Find the requests folder",
+                    prompt: "From inside park-terminal-map, list what is there, move into requests, and use pwd to confirm you found the request notes.",
+                    language: "bash",
+                    starterCode: "# Use the terminal for this Linux project step.\n",
+                    workspace: {
+                        language: "bash",
+                        entryFile: "main.sh",
+                        starterFiles: {
+                            "main.sh": "# Use the terminal for this Linux project step.\n",
+                        },
+                    },
+                    ideConfig: {
+                        runnerBackend: "pty",
+                        layoutMode: "terminal_workspace",
+                        terminalSessionScope: "exercise",
+                        terminalCwd: "/workspace/park-terminal-map",
+                        requires: {
+                            files: true,
+                            multiFile: true,
+                            terminal: true,
+                        },
+                    },
+                }}
+                ps={{
+                    loading: true,
+                    error: null,
+                    busy: false,
+                    item: null,
+                    exercise: null,
+                    attempts: 0,
+                    maxAttempts: 3,
+                } as any}
+                toolsActive
+                unlocked
+                isCompleted={false}
+                locked={false}
+                unlimitedAttempts
+                strictSequential={false}
+                seqOrder={1}
+                padRef={{ current: null } as any}
+                onUpdateItem={vi.fn()}
+                onSubmit={vi.fn()}
+                onHelp={vi.fn()}
+            />,
+        );
+
+        const lastProps = mocked.exerciseRendererProps.at(-1);
+        expect(lastProps?.exercise?.ideConfig?.terminalCwd).toBe("/workspace/park-terminal-map");
+        expect(lastProps?.exercise?.ideConfig?.terminalSessionScope).toBe("exercise");
+    });
+
     it("routes file-based Python exercises through Tools", () => {
         const exercise = makeCodeInputExercise(
             {

@@ -1,0 +1,220 @@
+{
+  "title": "Viewing File Contents",
+  "summary": "Inspect text files with cat, head, tail, and wc.",
+  "minutes": 18,
+  "sketchBlocks": [
+    {
+      "id": "sketch-1",
+      "title": "Read a whole file with cat",
+      "bodyMarkdown": "`cat` prints the contents of a text file to the terminal. It is useful when the file is short and you want to see everything at once.\n\nExample:\n\n```bash\ncat notes.txt\n```\n\nIf `notes.txt` contains:\n\n```text\nBuy folders\nReview chapter 2\nEmail project partner\n```\n\nthen `cat notes.txt` shows all three lines in the terminal.\n\nStep by step:\n- `cat` is the command.\n- `notes.txt` is the file you want to read.\n- The terminal prints the file exactly as it is stored.\n\nUse `cat` for quick inspection of small text files. For longer files, `head` and `tail` are often easier to use."
+    },
+    {
+      "id": "sketch-2",
+      "title": "Preview the beginning or end with head and tail",
+      "bodyMarkdown": "Sometimes you do not need the whole file. `head` shows the first part of a file, and `tail` shows the last part.\n\nExample:\n\n```bash\nhead reading-log.txt\ntail reading-log.txt\n```\n\nIf `reading-log.txt` has many lines, `head` helps you check how it starts, while `tail` helps you check the newest or last entries.\n\nFor a beginner-friendly way to think about them:\n- `head` = top of the file\n- `tail` = bottom of the file\n\nWorked example:\n\n```text\nMonday\nTuesday\nWednesday\nThursday\nFriday\nSaturday\nSunday\n```\n\n- `head` would show the first lines, starting with `Monday`.\n- `tail` would show the last lines, ending with `Sunday`.\n\nThese commands are especially helpful when a file is too long to read comfortably with `cat`."
+    },
+    {
+      "id": "sketch-3",
+      "title": "Count lines, words, and characters with wc",
+      "bodyMarkdown": "`wc` gives counts for a file. It is often used to count lines, words, and characters in text.\n\nExample:\n\n```bash\nwc announcement.txt\n```\n\nA result might look like this:\n\n```text\n3 12 68 announcement.txt\n```\n\nThat means:\n- `3` lines\n- `12` words\n- `68` characters\n\nYou do not need to memorize every number position right away. The main idea is that `wc` summarizes how much text is in the file.\n\nWorked example:\n\nIf `announcement.txt` contains three short sentences, `wc announcement.txt` quickly tells you the file is short without printing the whole text.\n\nThis is useful when checking note length, comparing files, or confirming that a file has the amount of content you expect."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "mc-cat-uses",
+      "kind": "multi_choice",
+      "title": "When cat is a good fit",
+      "prompt": "A student assistant is checking files in a class notes folder. Which tasks are good uses for `cat`? Choose all that apply.",
+      "options": [
+        "Read every line of a short checklist file",
+        "See only the last lines of a long log file",
+        "Display the full contents of a short reminder note",
+        "Count how many words are in an essay draft"
+      ],
+      "correctOptionIds": [
+        "a",
+        "c"
+      ],
+      "hint": "Think about when seeing the entire text at once is helpful.",
+      "help": {
+        "concept": "`cat` prints the full contents of a file to the terminal, so it works best for short text files when you want to read everything.",
+        "hint_1": "Look for tasks where the learner wants the whole file, not just the beginning, end, or a count.",
+        "hint_2": "Two choices involve reading all text directly. The others are better matched to `wc`, `head`, or `tail`."
+      }
+    },
+    {
+      "id": "fb-head-purpose",
+      "kind": "fill_blank_choice",
+      "title": "Pick the right preview command",
+      "prompt": "A teacher saved a long file named `chapter_notes.txt`, and you only want to inspect the beginning of it.",
+      "template": "[blank1] chapter_notes.txt",
+      "choices": [
+        "cat",
+        "head",
+        "tail",
+        "wc"
+      ],
+      "correctValue": "head",
+      "hint": "Choose the command that shows the top of a file.",
+      "help": {
+        "concept": "`the missing term` shows the first part of a file, which is useful when you want a quick preview of how the file starts.",
+        "hint_1": "This command is the opposite partner of `tail`.",
+        "hint_2": "Use the command that matches the idea of the top or start of the file."
+      }
+    },
+    {
+      "id": "code-cat-menu",
+      "kind": "fill_blank_choice",
+      "title": "View a cafe menu file",
+      "prompt": "You are helping a campus cafe manager check a short menu file. In the terminal, display the full contents of `menu.txt` so the terminal output shows every line of the file. This matters because `cat` is the fastest way to read a short text file all at once.",
+      "template": "A file-writing code exercise should also ____ so automated tests can check it.",
+      "choices": [
+        "print an observable result",
+        "hide all output",
+        "delete the file immediately",
+        "skip the program"
+      ],
+      "correctValue": "print an observable result",
+      "hint": "Use the command that prints an entire file to the terminal.",
+      "help": {
+        "concept": "For short text files, `cat` displays the whole file directly in the terminal so you can inspect every line at once.",
+        "hint_1": "You do not need to change folders or edit the file. Run one command on `menu.txt`.",
+        "hint_2": "Use the command name from this topic that prints the complete contents of a file."
+      }
+    },
+    {
+      "id": "sc-tail-purpose",
+      "kind": "single_choice",
+      "title": "Choose the best command for the last lines",
+      "prompt": "A club keeps adding new entries to `updates.txt`. Which command is best when you want to quickly see the end of that file?",
+      "options": [
+        "cat",
+        "head",
+        "tail",
+        "wc"
+      ],
+      "correctOptionIds": [
+        "c"
+      ],
+      "hint": "Think about the command that shows the bottom of a file.",
+      "help": {
+        "concept": "`tail` is used to inspect the last part of a file, which is helpful for recent entries or endings.",
+        "hint_1": "`cat` shows everything, but this question asks for the end only.",
+        "hint_2": "Pick the command paired with `head`, but for the bottom instead of the top."
+      }
+    },
+    {
+      "id": "dr-inspect-order",
+      "kind": "drag_reorder",
+      "title": "Inspect a file in a sensible order",
+      "prompt": "Arrange these actions in a sensible order for checking a text file in the terminal after entering a project folder.",
+      "tokens": [
+        "ls",
+        "cat notes.txt",
+        "wc notes.txt"
+      ],
+      "correctOrder": [
+        "ls",
+        "cat notes.txt",
+        "wc notes.txt"
+      ],
+      "hint": "Start by seeing what files are there, then inspect the file, then summarize it.",
+      "help": {
+        "concept": "A practical terminal workflow is to inspect the folder first, read the file, and then use a counting command if needed.",
+        "hint_1": "`ls` helps you confirm the file exists before reading it.",
+        "hint_2": "After locating the file, use the full-view command before the counting command."
+      }
+    },
+    {
+      "id": "mc-wc-meaning",
+      "kind": "multi_choice",
+      "title": "What wc tells you",
+      "prompt": "You run `wc draft.txt` while reviewing a student announcement. Which kinds of information can `wc` report about the file? Choose all that apply.",
+      "options": [
+        "How many lines are in the file",
+        "How many words are in the file",
+        "How many characters are in the file",
+        "The exact last sentence in the file"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "hint": "Think about counts, not the actual text content.",
+      "help": {
+        "concept": "`wc` summarizes the amount of text in a file by reporting counts such as lines, words, and characters.",
+        "hint_1": "Look for measurements of file content size rather than commands that display text.",
+        "hint_2": "Three choices are count-based summaries that `wc` can provide."
+      }
+    },
+    {
+      "id": "fb-wc-command",
+      "kind": "fill_blank_choice",
+      "title": "Complete the counting command",
+      "prompt": "A writing tutor wants a quick summary count for `essay.txt` without printing the whole file.",
+      "template": "[blank1] essay.txt",
+      "choices": [
+        "cat",
+        "head",
+        "tail",
+        "wc"
+      ],
+      "correctValue": "wc",
+      "hint": "Choose the command that reports counts for a file.",
+      "help": {
+        "concept": "`the missing term` is used when you want counts such as lines, words, and characters instead of the full text.",
+        "hint_1": "This command does not preview the top or bottom of the file.",
+        "hint_2": "Pick the command from this topic that summarizes file size in text counts."
+      }
+    },
+    {
+      "id": "code-head-report",
+      "kind": "fill_blank_choice",
+      "title": "Preview the start of a report",
+      "prompt": "You are checking a long event report for a school office. In the terminal, show the beginning of `report.txt` so you can confirm the file starts with the correct section. This matters because `head` lets you preview the top of a long file without printing everything.",
+      "template": "A file-writing code exercise should also ____ so automated tests can check it.",
+      "choices": [
+        "print an observable result",
+        "hide all output",
+        "delete the file immediately",
+        "skip the program"
+      ],
+      "correctValue": "print an observable result",
+      "hint": "Use the command that shows the first part of a file.",
+      "help": {
+        "concept": "`head` is useful for long files when you only need to inspect the beginning.",
+        "hint_1": "Run one viewing command on `report.txt`; you do not need to rename or move anything.",
+        "hint_2": "Use the command from this topic that matches the idea of the top of the file."
+      }
+    },
+    {
+      "id": "code-wc-flyer",
+      "kind": "fill_blank_choice",
+      "title": "Count the text in a flyer draft",
+      "prompt": "You are helping a student group review a flyer draft. In the terminal, run the command that reports counts for `flyer.txt` so you can judge how much text it contains. This matters because `wc` gives a quick summary without reading every line manually.",
+      "template": "A file-writing code exercise should also ____ so automated tests can check it.",
+      "choices": [
+        "print an observable result",
+        "hide all output",
+        "delete the file immediately",
+        "skip the program"
+      ],
+      "correctValue": "print an observable result",
+      "hint": "Use the command that reports line, word, and character counts.",
+      "help": {
+        "concept": "`wc` summarizes a text file by counting its contents instead of printing the full text.",
+        "hint_1": "You only need one command, and it should target `flyer.txt`.",
+        "hint_2": "Use the command from this topic that produces counts rather than the file text itself."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Inspect files for a cleaned-up school workspace",
+    "stepIds": [
+      "code-cat-menu",
+      "code-head-report",
+      "code-wc-flyer"
+    ]
+  }
+}

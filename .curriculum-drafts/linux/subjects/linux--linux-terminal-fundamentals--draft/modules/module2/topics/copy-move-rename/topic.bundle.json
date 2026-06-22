@@ -1,9 +1,9 @@
 {
   "topicId": "copy-move-rename",
-  "subjectSlug": "linux--linux-terminal-fundamentals--draft",
-  "moduleSlug": "linux-2-files-and-folders",
-  "sectionSlug": "linux--linux-terminal-fundamentals--draft-linux-2-file-workflow",
-  "prefix": "lin2",
+  "subjectSlug": "linux-terminal-fundamentals",
+  "moduleSlug": "linux-module-2-files-and-folders",
+  "sectionSlug": "linux-terminal-fundamentals-linux-module-2-file-workflow",
+  "prefix": "linux_module_2",
   "minutes": 20,
   "runtimeDefaults": {
     "kind": "code",
@@ -14,31 +14,22 @@
     "supportsStdInStdOut": true,
     "supportsPackageInstall": false
   },
-  "serviceDefaults": {
-    "runnerBackend": "pty",
-    "layoutMode": "terminal_workspace",
-    "requires": {
-      "files": true,
-      "multiFile": true,
-      "terminal": true
-    }
-  },
   "topic": {
-    "labelKey": "topics.linux--linux-terminal-fundamentals--draft.linux-2-files-and-folders.copy-move-rename.label",
-    "summaryKey": "topics.linux--linux-terminal-fundamentals--draft.linux-2-files-and-folders.copy-move-rename.summary"
+    "labelKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.label",
+    "summaryKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.summary"
   },
   "cards": [
     {
       "id": "sketch0",
       "kind": "sketch",
-      "titleKey": "topics.linux--linux-terminal-fundamentals--draft.linux-2-files-and-folders.copy-move-rename.cards.sketch0.title",
-      "sketchId": "cp-copies",
+      "titleKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.cards.sketch0.title",
+      "sketchId": "sketch-1",
       "height": 420,
       "tryIt": {
         "id": "try-copy-move-rename-sketch0",
-        "titleKey": "topics.linux--linux-terminal-fundamentals--draft.linux-2-files-and-folders.copy-move-rename.tryIt.try_copy_move_rename_sketch0.title",
-        "promptKey": "topics.linux--linux-terminal-fundamentals--draft.linux-2-files-and-folders.copy-move-rename.tryIt.try_copy_move_rename_sketch0.prompt",
-        "exerciseKey": "try-copy-menu-backup",
+        "titleKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.tryIt.try_copy_move_rename_sketch0.title",
+        "promptKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.tryIt.try_copy_move_rename_sketch0.prompt",
+        "exerciseKey": "copy-move-rename-try-it-1",
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -50,14 +41,14 @@
     {
       "id": "sketch1",
       "kind": "sketch",
-      "titleKey": "topics.linux--linux-terminal-fundamentals--draft.linux-2-files-and-folders.copy-move-rename.cards.sketch1.title",
-      "sketchId": "mv-moves-renames",
+      "titleKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.cards.sketch1.title",
+      "sketchId": "sketch-2",
       "height": 420,
       "tryIt": {
         "id": "try-copy-move-rename-sketch1",
-        "titleKey": "topics.linux--linux-terminal-fundamentals--draft.linux-2-files-and-folders.copy-move-rename.tryIt.try_copy_move_rename_sketch1.title",
-        "promptKey": "topics.linux--linux-terminal-fundamentals--draft.linux-2-files-and-folders.copy-move-rename.tryIt.try_copy_move_rename_sketch1.prompt",
-        "exerciseKey": "try-rename-desk-file",
+        "titleKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.tryIt.try_copy_move_rename_sketch1.title",
+        "promptKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.tryIt.try_copy_move_rename_sketch1.prompt",
+        "exerciseKey": "copy-move-rename-try-it-2",
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -69,14 +60,14 @@
     {
       "id": "sketch2",
       "kind": "sketch",
-      "titleKey": "topics.linux--linux-terminal-fundamentals--draft.linux-2-files-and-folders.copy-move-rename.cards.sketch2.title",
-      "sketchId": "rm-safe-habits",
+      "titleKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.cards.sketch2.title",
+      "sketchId": "sketch-3",
       "height": 420,
       "tryIt": {
         "id": "try-copy-move-rename-sketch2",
-        "titleKey": "topics.linux--linux-terminal-fundamentals--draft.linux-2-files-and-folders.copy-move-rename.tryIt.try_copy_move_rename_sketch2.title",
-        "promptKey": "topics.linux--linux-terminal-fundamentals--draft.linux-2-files-and-folders.copy-move-rename.tryIt.try_copy_move_rename_sketch2.prompt",
-        "exerciseKey": "try-remove-trash-temp",
+        "titleKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.tryIt.try_copy_move_rename_sketch2.title",
+        "promptKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.tryIt.try_copy_move_rename_sketch2.prompt",
+        "exerciseKey": "copy-move-rename-try-it-3",
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -88,120 +79,46 @@
     {
       "id": "quiz",
       "kind": "quiz",
-      "titleKey": "topics.linux--linux-terminal-fundamentals--draft.linux-2-files-and-folders.copy-move-rename.cards.quiz.title",
+      "titleKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.cards.quiz.title",
       "quiz": {
         "difficulty": "easy",
         "n": 4,
         "min": 4,
-        "max": 4,
+        "max": 6,
         "selectionMode": "random",
         "allowReveal": true,
         "preferKind": null,
         "maxAttempts": null
       }
-    },
-    {
-      "id": "project",
-      "kind": "project",
-      "titleKey": "topics.linux--linux-terminal-fundamentals--draft.linux-2-files-and-folders.copy-move-rename.cards.project.title",
-      "project": {
-        "difficulty": "easy",
-        "allowReveal": true,
-        "preferKind": "code_input",
-        "maxAttempts": null,
-        "steps": [
-          {
-            "id": "ci_copy_draft",
-            "titleKey": "topics.linux--linux-terminal-fundamentals--draft.linux-2-files-and-folders.copy-move-rename.projectSteps.ci_copy_draft.title",
-            "exerciseKey": "ci-copy-draft",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "maxAttempts": null
-          },
-          {
-            "id": "ci_rename_keep",
-            "titleKey": "topics.linux--linux-terminal-fundamentals--draft.linux-2-files-and-folders.copy-move-rename.projectSteps.ci_rename_keep.title",
-            "exerciseKey": "ci-rename-keep",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "maxAttempts": null
-          },
-          {
-            "id": "ci_remove_temp",
-            "titleKey": "topics.linux--linux-terminal-fundamentals--draft.linux-2-files-and-folders.copy-move-rename.projectSteps.ci_remove_temp.title",
-            "exerciseKey": "ci-remove-temp",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "maxAttempts": null
-          }
-        ]
-      }
     }
   ],
   "sketches": [
     {
-      "id": "cp-copies",
+      "id": "sketch-1",
       "archetype": "paragraph",
-      "titleKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-2-files-and-folders.copy-move-rename.cp-copies.title",
-      "bodyKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-2-files-and-folders.copy-move-rename.cp-copies.bodyMarkdown"
+      "titleKey": "sketches.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.sketch-1.title",
+      "bodyKey": "sketches.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.sketch-1.bodyMarkdown"
     },
     {
-      "id": "mv-moves-renames",
+      "id": "sketch-2",
       "archetype": "paragraph",
-      "titleKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-2-files-and-folders.copy-move-rename.mv-moves-renames.title",
-      "bodyKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-2-files-and-folders.copy-move-rename.mv-moves-renames.bodyMarkdown"
+      "titleKey": "sketches.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.sketch-2.title",
+      "bodyKey": "sketches.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.sketch-2.bodyMarkdown"
     },
     {
-      "id": "rm-safe-habits",
+      "id": "sketch-3",
       "archetype": "paragraph",
-      "titleKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-2-files-and-folders.copy-move-rename.rm-safe-habits.title",
-      "bodyKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-2-files-and-folders.copy-move-rename.rm-safe-habits.bodyMarkdown"
+      "titleKey": "sketches.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.sketch-3.title",
+      "bodyKey": "sketches.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.sketch-3.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "sc-cp",
+      "id": "sc-which-command-renames",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-2-files-and-folders.copy-move-rename.quiz.sc-cp",
-      "optionIds": [
-        "a",
-        "b",
-        "c",
-        "d"
-      ],
-      "expected": {
-        "kind": "single_choice",
-        "optionId": "a"
-      }
-    },
-    {
-      "id": "sc-mv-rename",
-      "kind": "single_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-2-files-and-folders.copy-move-rename.quiz.sc-mv-rename",
-      "optionIds": [
-        "a",
-        "b",
-        "c",
-        "d"
-      ],
-      "expected": {
-        "kind": "single_choice",
-        "optionId": "a"
-      }
-    },
-    {
-      "id": "sc-rm",
-      "kind": "single_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-2-files-and-folders.copy-move-rename.quiz.sc-rm",
+      "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.practice.sc-which-command-renames",
       "optionIds": [
         "a",
         "b",
@@ -214,11 +131,11 @@
       }
     },
     {
-      "id": "mc-safe-copy-move",
+      "id": "mc-copy-vs-move",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-2-files-and-folders.copy-move-rename.quiz.mc-safe-copy-move",
+      "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.practice.mc-copy-vs-move",
       "optionIds": [
         "a",
         "b",
@@ -229,408 +146,184 @@
         "kind": "multi_choice",
         "optionIds": [
           "a",
-          "c",
-          "d"
+          "b"
         ]
       }
     },
     {
-      "id": "ci-copy-draft",
+      "id": "mc-safe-command-choice",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.practice.mc-safe-command-choice",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "dr-copy-then-rename-flow",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.practice.dr-copy-then-rename-flow",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "ci-copy-class-notes",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.practice.ci-copy-class-notes",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "print an observable result"
+      }
+    },
+    {
+      "id": "ci-move-report-into-folder",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.practice.ci-move-report-into-folder",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "print an observable result"
+      }
+    },
+    {
+      "id": "copy-move-rename-try-it-1",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-2-files-and-folders.copy-move-rename.quiz.ci-copy-draft",
+      "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-1",
       "language": "bash",
-      "entryFilePath": "main.sh",
-      "starterCode": "#!/usr/bin/env bash\n# Back up a report\n# Work from the terminal and shape the workspace with Linux commands.\n",
+      "starterCode": "# Use the terminal for this Linux task.",
       "starterFiles": [
         {
           "path": "main.sh",
-          "content": "#!/usr/bin/env bash\n# Back up a report\n# Work from the terminal and shape the workspace with Linux commands.\n",
+          "content": "# Use the terminal for this Linux task.\n",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
-          "path": "README.md",
-          "content": "# Back up a report\n\nUse shell commands to inspect, create, move, copy, or remove files as needed.\n",
-          "language": "text"
+          "path": "sample-inbox/agenda.txt",
+          "content": "Agenda\n",
+          "language": "bash"
         },
         {
-          "path": "inbox/report.txt",
-          "content": "daily report\n",
-          "language": "text"
+          "path": "warmup/backups/.keep",
+          "content": "",
+          "language": "bash"
         }
       ],
-      "workspace": {
-        "language": "bash",
-        "entryFilePath": "main.sh",
-        "starterCode": "#!/usr/bin/env bash\n# Back up a report\n# Work from the terminal and shape the workspace with Linux commands.\n",
-        "starterFiles": [
-          {
-            "path": "main.sh",
-            "content": "#!/usr/bin/env bash\n# Back up a report\n# Work from the terminal and shape the workspace with Linux commands.\n",
-            "language": "bash",
-            "isEntry": true,
-            "entry": true
-          },
-          {
-            "path": "README.md",
-            "content": "# Back up a report\n\nUse shell commands to inspect, create, move, copy, or remove files as needed.\n",
-            "language": "text"
-          },
-          {
-            "path": "inbox/report.txt",
-            "content": "daily report\n",
-            "language": "text"
-          }
-        ],
-        "workspaceExpectations": {
-          "requiredFolders": [
-            "inbox",
-            "archive"
-          ],
-          "requiredFiles": [
-            "inbox/report.txt",
-            "archive/report-copy.txt"
-          ]
-        }
-      },
-      "showExpectedExample": false,
-      "recipe": {
-        "type": "shell_task",
-        "mode": "terminal_workspace",
-        "instructions": "Copy `inbox/report.txt` to `archive/report-copy.txt`."
-      },
-      "workspaceExpectations": {
-        "requiredFolders": [
-          "inbox",
-          "archive"
-        ],
-        "requiredFiles": [
-          "inbox/report.txt",
-          "archive/report-copy.txt"
-        ]
-      }
-    },
-    {
-      "id": "ci-rename-keep",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-2-files-and-folders.copy-move-rename.quiz.ci-rename-keep",
-      "language": "bash",
-      "entryFilePath": "main.sh",
-      "starterCode": "#!/usr/bin/env bash\n# Rename today\u2019s note\n# Work from the terminal and shape the workspace with Linux commands.\n",
-      "starterFiles": [
+      "solutionFiles": [
         {
           "path": "main.sh",
-          "content": "#!/usr/bin/env bash\n# Rename today\u2019s note\n# Work from the terminal and shape the workspace with Linux commands.\n",
+          "content": "cp sample-inbox/agenda.txt warmup/backups/agenda.txt\nls warmup/backups\n",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
-          "path": "README.md",
-          "content": "# Rename today\u2019s note\n\nUse shell commands to inspect, create, move, copy, or remove files as needed.\n",
-          "language": "text"
+          "path": "sample-inbox/agenda.txt",
+          "content": "Agenda\n",
+          "language": "bash"
         },
         {
-          "path": "inbox/today.txt",
-          "content": "call back at 3\n",
-          "language": "text"
+          "path": "warmup/backups/.keep",
+          "content": "",
+          "language": "bash"
+        },
+        {
+          "path": "warmup/backups/agenda.txt",
+          "content": "Agenda\n",
+          "language": "bash"
         }
       ],
-      "workspace": {
-        "language": "bash",
-        "entryFilePath": "main.sh",
-        "starterCode": "#!/usr/bin/env bash\n# Rename today\u2019s note\n# Work from the terminal and shape the workspace with Linux commands.\n",
-        "starterFiles": [
-          {
-            "path": "main.sh",
-            "content": "#!/usr/bin/env bash\n# Rename today\u2019s note\n# Work from the terminal and shape the workspace with Linux commands.\n",
-            "language": "bash",
-            "isEntry": true,
-            "entry": true
-          },
-          {
-            "path": "README.md",
-            "content": "# Rename today\u2019s note\n\nUse shell commands to inspect, create, move, copy, or remove files as needed.\n",
-            "language": "text"
-          },
-          {
-            "path": "inbox/today.txt",
-            "content": "call back at 3\n",
-            "language": "text"
-          }
-        ],
-        "workspaceExpectations": {
-          "requiredFolders": [
-            "inbox"
-          ],
-          "requiredFiles": [
-            "inbox/priority.txt"
-          ],
-          "forbiddenFiles": [
-            "inbox/today.txt"
-          ]
-        }
-      },
-      "showExpectedExample": false,
-      "recipe": {
-        "type": "shell_task",
-        "mode": "terminal_workspace",
-        "instructions": "Rename `inbox/today.txt` to `inbox/priority.txt`."
-      },
-      "workspaceExpectations": {
-        "requiredFolders": [
-          "inbox"
-        ],
-        "requiredFiles": [
-          "inbox/priority.txt"
-        ],
-        "forbiddenFiles": [
-          "inbox/today.txt"
-        ]
-      }
-    },
-    {
-      "id": "ci-remove-temp",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-2-files-and-folders.copy-move-rename.quiz.ci-remove-temp",
-      "language": "bash",
-      "entryFilePath": "main.sh",
-      "starterCode": "#!/usr/bin/env bash\n# Throw away a temp file\n# Work from the terminal and shape the workspace with Linux commands.\n",
-      "starterFiles": [
-        {
-          "path": "main.sh",
-          "content": "#!/usr/bin/env bash\n# Throw away a temp file\n# Work from the terminal and shape the workspace with Linux commands.\n",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "README.md",
-          "content": "# Throw away a temp file\n\nUse shell commands to inspect, create, move, copy, or remove files as needed.\n",
-          "language": "text"
-        },
-        {
-          "path": "inbox/discard.tmp",
-          "content": "temporary\n",
-          "language": "text"
-        },
-        {
-          "path": "inbox/keep.txt",
-          "content": "keep me\n",
-          "language": "text"
-        }
-      ],
-      "workspace": {
-        "language": "bash",
-        "entryFilePath": "main.sh",
-        "starterCode": "#!/usr/bin/env bash\n# Throw away a temp file\n# Work from the terminal and shape the workspace with Linux commands.\n",
-        "starterFiles": [
-          {
-            "path": "main.sh",
-            "content": "#!/usr/bin/env bash\n# Throw away a temp file\n# Work from the terminal and shape the workspace with Linux commands.\n",
-            "language": "bash",
-            "isEntry": true,
-            "entry": true
-          },
-          {
-            "path": "README.md",
-            "content": "# Throw away a temp file\n\nUse shell commands to inspect, create, move, copy, or remove files as needed.\n",
-            "language": "text"
-          },
-          {
-            "path": "inbox/discard.tmp",
-            "content": "temporary\n",
-            "language": "text"
-          },
-          {
-            "path": "inbox/keep.txt",
-            "content": "keep me\n",
-            "language": "text"
-          }
-        ],
-        "workspaceExpectations": {
-          "requiredFolders": [
-            "inbox"
-          ],
-          "forbiddenFiles": [
-            "inbox/discard.tmp"
-          ]
-        }
-      },
-      "showExpectedExample": false,
-      "recipe": {
-        "type": "shell_task",
-        "mode": "terminal_workspace",
-        "instructions": "Remove `inbox/discard.tmp`."
-      },
-      "workspaceExpectations": {
-        "requiredFolders": [
-          "inbox"
-        ],
-        "forbiddenFiles": [
-          "inbox/discard.tmp"
-        ]
-      }
-    },
-    {
-      "id": "try-copy-menu-backup",
-      "kind": "code_input",
-      "purpose": "practice",
-      "weight": 1,
-      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-2-files-and-folders.copy-move-rename.quiz.try-copy-menu-backup",
-      "language": "bash",
-      "entryFilePath": "main.sh",
-      "starterCode": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
-      "starterFiles": [
-        {
-          "path": "main.sh",
-          "content": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "README.md",
-          "content": "# Copy a menu backup\n\nCopy `drafts/menu.txt` to `backup/menu.txt`.\n",
-          "language": "text"
-        },
-        {
-          "path": "drafts/menu.txt",
-          "content": "sandwich\nsalad\n",
-          "language": "text"
-        }
-      ],
-      "workspace": {
-        "language": "bash",
-        "entryFilePath": "main.sh",
-        "starterCode": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
-        "starterFiles": [
-          {
-            "path": "main.sh",
-            "content": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
-            "language": "bash",
-            "isEntry": true,
-            "entry": true
-          },
-          {
-            "path": "README.md",
-            "content": "# Copy a menu backup\n\nCopy `drafts/menu.txt` to `backup/menu.txt`.\n",
-            "language": "text"
-          },
-          {
-            "path": "drafts/menu.txt",
-            "content": "sandwich\nsalad\n",
-            "language": "text"
-          }
-        ],
-        "terminalExpectations": {
-          "requiredCommands": [
-            {
-              "pattern": "^cp\\s+drafts/menu\\.txt\\s+backup/menu\\.txt$",
-              "message": "Copy the menu file"
-            }
-          ]
-        },
-        "workspaceExpectations": {
-          "requiredFiles": [
-            "drafts/menu.txt",
-            "backup/menu.txt"
-          ]
-        }
-      },
-      "showExpectedExample": false,
-      "recipe": {
-        "type": "shell_task",
-        "mode": "terminal_workspace",
-        "instructions": "Copy `drafts/menu.txt` to `backup/menu.txt`."
-      },
       "workspaceExpectations": {
         "requiredFiles": [
-          "drafts/menu.txt",
-          "backup/menu.txt"
+          "sample-inbox/agenda.txt",
+          "warmup/backups/agenda.txt"
+        ],
+        "requiredFolders": [
+          "sample-inbox",
+          "warmup",
+          "warmup/backups"
         ]
       },
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^cp\\s+drafts/menu\\.txt\\s+backup/menu\\.txt$",
-            "message": "Copy the menu file"
+            "pattern": "^cp\\s+sample-inbox/agenda\\.txt\\s+warmup/backups/agenda\\.txt$",
+            "message": "Run the cp command shown in the prompt."
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "(^|\\s)sudo(\\s|$)",
+            "message": "Do not use sudo for beginner workspace tasks."
           }
         ]
-      }
-    },
-    {
-      "id": "try-rename-desk-file",
-      "kind": "code_input",
-      "purpose": "practice",
-      "weight": 1,
-      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-2-files-and-folders.copy-move-rename.quiz.try-rename-desk-file",
-      "language": "bash",
-      "entryFilePath": "main.sh",
-      "starterCode": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
-      "starterFiles": [
-        {
-          "path": "main.sh",
-          "content": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "README.md",
-          "content": "# Rename a desk file\n\nRename the file in `desk`.\n",
-          "language": "text"
-        },
-        {
-          "path": "desk/old-name.txt",
-          "content": "final notes\n",
-          "language": "text"
-        }
-      ],
+      },
       "workspace": {
         "language": "bash",
         "entryFilePath": "main.sh",
-        "starterCode": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+        "starterCode": "# Use the terminal for this Linux task.",
         "starterFiles": [
           {
             "path": "main.sh",
-            "content": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+            "content": "# Use the terminal for this Linux task.\n",
             "language": "bash",
             "isEntry": true,
             "entry": true
           },
           {
-            "path": "README.md",
-            "content": "# Rename a desk file\n\nRename the file in `desk`.\n",
-            "language": "text"
+            "path": "sample-inbox/agenda.txt",
+            "content": "Agenda\n",
+            "language": "bash"
           },
           {
-            "path": "desk/old-name.txt",
-            "content": "final notes\n",
-            "language": "text"
+            "path": "warmup/backups/.keep",
+            "content": "",
+            "language": "bash"
           }
         ],
-        "terminalExpectations": {
-          "requiredCommands": [
-            {
-              "pattern": "^mv\\s+desk/old-name\\.txt\\s+desk/final-name\\.txt$",
-              "message": "Rename the desk file"
-            }
-          ]
-        },
         "workspaceExpectations": {
           "requiredFiles": [
-            "desk/final-name.txt"
+            "sample-inbox/agenda.txt",
+            "warmup/backups/agenda.txt"
           ],
-          "forbiddenFiles": [
-            "desk/old-name.txt"
+          "requiredFolders": [
+            "sample-inbox",
+            "warmup",
+            "warmup/backups"
           ]
         }
       },
@@ -638,100 +331,126 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "Rename `desk/old-name.txt` to `desk/final-name.txt`."
+        "instructions": "Use cp to copy agenda.txt into the existing warmup/backups folder."
       },
-      "workspaceExpectations": {
-        "requiredFiles": [
-          "desk/final-name.txt"
-        ],
-        "forbiddenFiles": [
-          "desk/old-name.txt"
-        ]
-      },
-      "terminalExpectations": {
-        "requiredCommands": [
-          {
-            "pattern": "^mv\\s+desk/old-name\\.txt\\s+desk/final-name\\.txt$",
-            "message": "Rename the desk file"
-          }
-        ]
+      "ideConfig": {
+        "runnerBackend": "pty",
+        "layoutMode": "terminal_workspace",
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalSessionScope": "exercise"
       }
     },
     {
-      "id": "try-remove-trash-temp",
+      "id": "copy-move-rename-try-it-2",
       "kind": "code_input",
-      "purpose": "practice",
+      "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-2-files-and-folders.copy-move-rename.quiz.try-remove-trash-temp",
+      "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-2",
       "language": "bash",
-      "entryFilePath": "main.sh",
-      "starterCode": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+      "starterCode": "# Use the terminal for this Linux task.",
       "starterFiles": [
         {
           "path": "main.sh",
-          "content": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+          "content": "# Use the terminal for this Linux task.\n",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
-          "path": "README.md",
-          "content": "# Remove a temp file\n\nDelete only `trash/remove.tmp`.\n",
-          "language": "text"
+          "path": "sample-inbox/guest-list.txt",
+          "content": "Guest list\n",
+          "language": "bash"
         },
         {
-          "path": "trash/remove.tmp",
-          "content": "delete me\n",
-          "language": "text"
-        },
-        {
-          "path": "trash/keep.txt",
-          "content": "keep me\n",
-          "language": "text"
+          "path": "warmup/guests/.keep",
+          "content": "",
+          "language": "bash"
         }
       ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "mv sample-inbox/guest-list.txt warmup/guests/guest-list.txt\nls warmup/guests\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "warmup/guests/.keep",
+          "content": "",
+          "language": "bash"
+        },
+        {
+          "path": "warmup/guests/guest-list.txt",
+          "content": "Guest list\n",
+          "language": "bash"
+        }
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "warmup/guests/guest-list.txt"
+        ],
+        "requiredFolders": [
+          "sample-inbox",
+          "warmup",
+          "warmup/guests"
+        ],
+        "forbiddenFiles": [
+          "sample-inbox/guest-list.txt"
+        ]
+      },
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^mv\\s+sample-inbox/guest-list\\.txt\\s+warmup/guests/guest-list\\.txt$",
+            "message": "Run the mv command shown in the prompt."
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "(^|\\s)sudo(\\s|$)",
+            "message": "Do not use sudo for beginner workspace tasks."
+          }
+        ]
+      },
       "workspace": {
         "language": "bash",
         "entryFilePath": "main.sh",
-        "starterCode": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+        "starterCode": "# Use the terminal for this Linux task.",
         "starterFiles": [
           {
             "path": "main.sh",
-            "content": "#!/usr/bin/env bash\n# Use the terminal for this task.\n",
+            "content": "# Use the terminal for this Linux task.\n",
             "language": "bash",
             "isEntry": true,
             "entry": true
           },
           {
-            "path": "README.md",
-            "content": "# Remove a temp file\n\nDelete only `trash/remove.tmp`.\n",
-            "language": "text"
+            "path": "sample-inbox/guest-list.txt",
+            "content": "Guest list\n",
+            "language": "bash"
           },
           {
-            "path": "trash/remove.tmp",
-            "content": "delete me\n",
-            "language": "text"
-          },
-          {
-            "path": "trash/keep.txt",
-            "content": "keep me\n",
-            "language": "text"
+            "path": "warmup/guests/.keep",
+            "content": "",
+            "language": "bash"
           }
         ],
-        "terminalExpectations": {
-          "requiredCommands": [
-            {
-              "pattern": "^rm\\s+trash/remove\\.tmp$",
-              "message": "Remove only remove.tmp"
-            }
-          ]
-        },
         "workspaceExpectations": {
           "requiredFiles": [
-            "trash/keep.txt"
+            "warmup/guests/guest-list.txt"
+          ],
+          "requiredFolders": [
+            "sample-inbox",
+            "warmup",
+            "warmup/guests"
           ],
           "forbiddenFiles": [
-            "trash/remove.tmp"
+            "sample-inbox/guest-list.txt"
           ]
         }
       },
@@ -739,24 +458,142 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "Remove `trash/remove.tmp` and keep `trash/keep.txt`."
+        "instructions": "Use mv to move guest-list.txt into the existing warmup/guests folder."
       },
+      "ideConfig": {
+        "runnerBackend": "pty",
+        "layoutMode": "terminal_workspace",
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalSessionScope": "exercise"
+      }
+    },
+    {
+      "id": "copy-move-rename-try-it-3",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-3",
+      "language": "bash",
+      "starterCode": "# Use the terminal for this Linux task.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Use the terminal for this Linux task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "sample-inbox/draft-report.txt",
+          "content": "Draft report\n",
+          "language": "bash"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "mv sample-inbox/draft-report.txt sample-inbox/final-report.txt\nls sample-inbox\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "sample-inbox/final-report.txt",
+          "content": "Draft report\n",
+          "language": "bash"
+        }
+      ],
       "workspaceExpectations": {
         "requiredFiles": [
-          "trash/keep.txt"
+          "sample-inbox/final-report.txt"
+        ],
+        "requiredFolders": [
+          "sample-inbox"
         ],
         "forbiddenFiles": [
-          "trash/remove.tmp"
+          "sample-inbox/draft-report.txt"
         ]
       },
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^rm\\s+trash/remove\\.tmp$",
-            "message": "Remove only remove.tmp"
+            "pattern": "^mv\\s+sample-inbox/draft-report\\.txt\\s+sample-inbox/final-report\\.txt$",
+            "message": "Run the mv rename command shown in the prompt."
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "(^|\\s)sudo(\\s|$)",
+            "message": "Do not use sudo for beginner workspace tasks."
           }
         ]
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "starterCode": "# Use the terminal for this Linux task.",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "# Use the terminal for this Linux task.\n",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "sample-inbox/draft-report.txt",
+            "content": "Draft report\n",
+            "language": "bash"
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "sample-inbox/final-report.txt"
+          ],
+          "requiredFolders": [
+            "sample-inbox"
+          ],
+          "forbiddenFiles": [
+            "sample-inbox/draft-report.txt"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "Use mv to rename draft-report.txt to final-report.txt in the same folder."
+      },
+      "ideConfig": {
+        "runnerBackend": "pty",
+        "layoutMode": "terminal_workspace",
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalSessionScope": "exercise"
       }
     }
-  ]
+  ],
+  "topicMeta": {
+    "learningGoals": [
+      "Try it yourself: copy an agenda backup",
+      "Try it yourself: move a guest list into place",
+      "Try it yourself: rename a draft report"
+    ]
+  },
+  "serviceDefaults": {
+    "runnerBackend": "pty",
+    "layoutMode": "terminal_workspace",
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": true
+    }
+  }
 }

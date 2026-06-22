@@ -1,0 +1,99 @@
+{
+  "topics": {
+    "linux-terminal-fundamentals": {
+      "linux-module-2-files-and-folders": {
+        "module-2-notes-organizer-project": {
+          "label": "Project: Notes Organizer",
+          "summary": "Organize a messy folder into notes, homework, code, and backups.",
+          "cards": {
+            "sketch0": {
+              "title": "Understanding the Project"
+            },
+            "sketch1": {
+              "title": "Creating Directories"
+            },
+            "sketch2": {
+              "title": "Moving Files"
+            },
+            "project": {
+              "title": "Notes Organizer Project"
+            }
+          },
+          "projectSteps": {
+            "module_2_notes_organizer_project_terminal_folder_1": {
+              "title": "Create a practice folder"
+            },
+            "module_2_notes_organizer_project_terminal_file_2": {
+              "title": "Create a marker file"
+            },
+            "module_2_notes_organizer_project_terminal_copy_3": {
+              "title": "Copy a starter note"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_module_2_notes_organizer_project_sketch0": {
+              "title": "Try it yourself",
+              "prompt": "Use the terminal to create a folder named terminal-practice."
+            }
+          },
+          "quiz": {
+            "module-2-notes-organizer-project-terminal-folder-1": {
+              "title": "Create a practice folder",
+              "prompt": "Start the module project. In step 1 of 3, Use the terminal to create a folder named terminal-practice.",
+              "hint": "This is the first project step. Build a clean starting version, then run it before moving on.",
+              "help": {
+                "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                "hint_1": "This is the first project step. Build a clean starting version, then run it before moving on.",
+                "hint_2": "If a path is required, match the exact folder and file names before clicking Check Answer."
+              },
+              "starterCode": "# Use the terminal for this Linux task."
+            },
+            "module-2-notes-organizer-project-terminal-file-2": {
+              "title": "Create a marker file",
+              "prompt": "Continue the same module project from the previous working step. In step 2 of 3, Use the terminal to create a folder named terminal-practice and a file named terminal-practice/ready.txt.",
+              "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+              "help": {
+                "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "hint_2": "Run the previous working code first, then make only the focused change for this step."
+              },
+              "starterCode": "mkdir -p terminal-practice\n# Project step 2: Create a marker file\n# Keep the working code above from the previous step.\n# Next, Use the terminal to create a folder named terminal-practice and a file named terminal-practice/ready.txt\n# Add only the focused change for this step below or inside the existing work.\n"
+            },
+            "module-2-notes-organizer-project-terminal-copy-3": {
+              "title": "Copy a starter note",
+              "prompt": "Continue the same module project from the previous working step. In step 3 of 3, Use the terminal to copy sample/note.txt to terminal-practice/note-copy.txt.",
+              "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+              "help": {
+                "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "hint_2": "Run the previous working code first, then make only the focused change for this step."
+              },
+              "starterCode": "mkdir -p terminal-practice\ntouch terminal-practice/ready.txt\n# Project step 3: Copy a starter note\n# Keep the working code above from the previous step.\n# Next, Use the terminal to copy sample/note.txt to terminal-practice/note-copy.txt\n# Add only the focused change for this step below or inside the existing work.\n"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "linux-terminal-fundamentals": {
+      "linux-module-2-files-and-folders": {
+        "module-2-notes-organizer-project": {
+          "1": {
+            "title": "Understanding the Project",
+            "bodyMarkdown": "In this project, you'll organize a messy folder into a structured workspace using Linux terminal commands. You'll create directories, move files, and verify your changes using commands like `mkdir`, `mv`, `ls`, and `pwd`. This project will help you practice managing files and directories efficiently in a Linux environment."
+          },
+          "2": {
+            "title": "Creating Directories",
+            "bodyMarkdown": "To start organizing, you'll need to create directories for different types of files. Use the `mkdir` command to create new directories. For example, `mkdir notes` will create a directory named 'notes'. If you need to create nested directories, use `mkdir -p`. For instance, `mkdir -p school/homework` creates both 'school' and 'homework' directories if they don't exist."
+          },
+          "3": {
+            "title": "Moving Files",
+            "bodyMarkdown": "Once directories are created, you can move files into them using the `mv` command. For example, `mv document.txt notes/` moves 'document.txt' into the 'notes' directory. This command helps in organizing files into their respective folders."
+          }
+        }
+      }
+    }
+  }
+}

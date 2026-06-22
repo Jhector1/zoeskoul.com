@@ -166,7 +166,7 @@ describe("buildTopicSeedFromPlanNode", () => {
         expect(seed.plannedExerciseCounts?.counts.code_input).toBe(1);
     });
 
-    it("caps conceptual Python topics to at most one code_input by default", () => {
+    it("applies shared conceptual-only generation policy to every profile", () => {
         const seed = buildTopicSeedFromPlanNode({
             blueprint: {
                 profileId: "python",
@@ -215,9 +215,54 @@ describe("buildTopicSeedFromPlanNode", () => {
         });
 
         expect(seed.technical).toBe(false);
-        expect(seed.generationTargets.projectCodeInputTarget).toBe(1);
-        expect(seed.generationTargets.projectCodeInputMax).toBe(1);
-        expect(seed.plannedExerciseCounts?.counts.code_input).toBeLessThanOrEqual(1);
+        expect(seed.generationTargets.projectCodeInputMin).toBe(0);
+        expect(seed.generationTargets.projectCodeInputTarget).toBe(0);
+        expect(seed.generationTargets.projectCodeInputMax).toBe(0);
+        expect(seed.plannedExerciseCounts?.counts.code_input).toBe(0);
+    });
+
+    it("treats orientation-style topics as conceptual-only even when a new course marks technical true", () => {
+        const seed = buildTopicSeedFromPlanNode({
+            blueprint: {
+                profileId: "bash",
+                teachingStyle: {
+                    quizWeight: 0.5,
+                    codeInputWeight: 0.5,
+                },
+            } as any,
+            spec: {
+                modules: [],
+            } as any,
+            module: {
+                moduleSlug: "linux-module-1-terminal-navigation",
+                title: "Terminal Navigation",
+                order: 1,
+                purpose: "Intro",
+                learningObjectives: ["Obj 1"],
+                guidedExercises: ["Ex 1"],
+                quizFocus: ["Focus 1"],
+                moduleProject: "Proj",
+            } as any,
+            section: {
+                sectionSlug: "linux-module-1-orientation",
+                title: "Orientation",
+                order: 1,
+            } as any,
+            topic: {
+                topicId: "what-the-terminal-is",
+                order: 1,
+                title: "What the Terminal Is",
+                summary: "Understand what the terminal is before using commands.",
+                minutes: 15,
+                technical: true,
+                learningGoals: ["Explain what the terminal is"],
+            } as any,
+        });
+
+        expect(seed.generationTargets.projectCodeInputMin).toBe(0);
+        expect(seed.generationTargets.projectCodeInputTarget).toBe(0);
+        expect(seed.generationTargets.projectCodeInputMax).toBe(0);
+        expect(seed.plannedExerciseCounts?.counts.code_input).toBe(0);
     });
 
     it("honors explicit Python intro-topic overrides that keep code_input to one", () => {
@@ -288,8 +333,10 @@ describe("buildTopicSeedFromPlanNode", () => {
         expect(seed.generationTargets.quizVisibleMax).toBe(0);
         expect(seed.generationTargets.projectCodeInputTarget).toBe(3);
         expect(seed.practice).toEqual({
+            conceptualOnly: false,
+            requiresTryIt: true,
             tryIt: true,
-            tryItPlacement: "first_sketch",
+            tryItPlacement: "all_sketches",
             tryItSketchIndex: 0,
             projectFlow: "progressive",
         });
@@ -309,8 +356,10 @@ describe("buildTopicSeedFromPlanNode", () => {
         expect(seed.generationTargets.projectCodeInputTarget).toBe(5);
         expect(seed.generationTargets.projectCodeInputMax).toBeGreaterThanOrEqual(5);
         expect(seed.practice).toEqual({
+            conceptualOnly: false,
+            requiresTryIt: true,
             tryIt: true,
-            tryItPlacement: "first_sketch",
+            tryItPlacement: "all_sketches",
             tryItSketchIndex: 0,
             projectFlow: "progressive",
         });
@@ -327,8 +376,10 @@ describe("buildTopicSeedFromPlanNode", () => {
         const seed = buildTopicSeedFromPlanNode(makeBaseArgs());
 
         expect(seed.practice).toEqual({
+            conceptualOnly: false,
+            requiresTryIt: true,
             tryIt: true,
-            tryItPlacement: "first_sketch",
+            tryItPlacement: "all_sketches",
             tryItSketchIndex: 0,
         });
     });
@@ -346,6 +397,8 @@ describe("buildTopicSeedFromPlanNode", () => {
         );
 
         expect(seed.practice).toEqual({
+            conceptualOnly: false,
+            requiresTryIt: true,
             tryIt: true,
             tryItPlacement: "all_sketches",
             tryItSketchIndex: 0,
@@ -370,6 +423,8 @@ describe("buildTopicSeedFromPlanNode", () => {
         );
 
         expect(seed.practice).toEqual({
+            conceptualOnly: false,
+            requiresTryIt: true,
             tryIt: true,
             tryItPlacement: "first_sketch",
             tryItSketchIndex: 0,
@@ -394,6 +449,8 @@ describe("buildTopicSeedFromPlanNode", () => {
         );
 
         expect(seed.practice).toEqual({
+            conceptualOnly: false,
+            requiresTryIt: true,
             tryIt: false,
             tryItPlacement: "all_sketches",
         });
@@ -503,9 +560,11 @@ describe("buildTopicSeedFromPlanNode", () => {
         expect(seed.moduleRole).toBe("capstone");
         expect(seed.sectionRole).toBe("capstone");
         expect(seed.practice).toEqual({
+            conceptualOnly: false,
+            requiresTryIt: true,
             tryIt: true,
             tryItExerciseId: "cp-1",
-            tryItPlacement: "first_sketch",
+            tryItPlacement: "all_sketches",
             tryItSketchIndex: 0,
             projectFlow: "progressive",
         });
@@ -528,10 +587,56 @@ describe("buildTopicSeedFromPlanNode", () => {
         );
 
         expect(seed.practice).toEqual({
+            conceptualOnly: false,
+            requiresTryIt: true,
             tryIt: true,
-            tryItPlacement: "first_sketch",
+            tryItPlacement: "all_sketches",
             tryItSketchIndex: 2,
             projectFlow: "standalone",
         });
+    });
+
+    it("lets explicit conceptualOnly authoring disable shared try-it defaults", () => {
+        const seed = buildTopicSeedFromPlanNode(
+            makeBaseArgs({
+                topic: {
+                    technical: true,
+                    practice: {
+                        conceptualOnly: true,
+                        requiresTryIt: false,
+                    },
+                },
+            }),
+        );
+
+        expect(seed.generationTargets.projectCodeInputTarget).toBe(0);
+        expect(seed.practice).toEqual({
+            conceptualOnly: true,
+            requiresTryIt: false,
+            tryIt: false,
+        });
+    });
+
+    it("inherits shared hands-on try-it expectations across python, bash, and sql profiles", () => {
+        for (const profileId of ["python", "bash", "sql"] as const) {
+            const seed = buildTopicSeedFromPlanNode(
+                makeBaseArgs({
+                    blueprint: {
+                        profileId,
+                    },
+                    topic: {
+                        technical: true,
+                        title: `${profileId} hands-on topic`,
+                        summary: "Practice a real runtime-backed skill.",
+                    },
+                }),
+            );
+
+            expect(seed.practice).toMatchObject({
+                conceptualOnly: false,
+                requiresTryIt: true,
+                tryIt: true,
+            });
+        }
     });
 });

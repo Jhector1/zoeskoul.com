@@ -1,0 +1,136 @@
+{
+  "title": "Module 6 Name Badge Package",
+  "summary": "Refactor a small badge builder step by step so helper functions and helper files grow from the previous working version.",
+  "minutes": 26,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Introduction to Helper Functions",
+      "bodyMarkdown": "In this module, we'll explore how to refactor a simple badge builder program by breaking it down into smaller, reusable functions. This approach not only makes the code more organized but also easier to maintain and extend.\n\n### Example\nConsider a function that formats a name badge:\n\n```python\ndef format_badge(name, title):\n    return f\"{name}, {title}\"\n```\n\nThis function takes a name and a title as parameters and returns a formatted string. By using functions like this, we can separate the logic of formatting from other parts of the program.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+    },
+    {
+      "id": "try-it-yourself",
+      "title": "Try it yourself",
+      "bodyMarkdown": "Try it yourself: change one value in the example, predict the new output, then run the code to check your prediction."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "exercise1",
+      "kind": "code_input",
+      "title": "Create a Function to Format Names",
+      "prompt": "Write a function `format_name` that takes a first name and a last name as parameters and returns them combined in the format 'Last, First'.",
+      "starterCode": "def format_name(first_name, last_name):\n    # Combine the names in 'Last, First' format\n    pass",
+      "solutionCode": "def format_name(first_name, last_name):\n    return f\"{last_name}, {first_name}\"",
+      "recipeType": "semantic",
+      "hint": "Read the task \"Create a Function to Format Names\" and identify the required result.",
+      "help": {
+        "concept": "This coding exercise checks whether your code produces the requested result for: \"Create a Function to Format Names\".",
+        "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+        "hint_2": "Click Run and compare the output panel with the expected result."
+      },
+      "semanticChecks": [
+        {
+          "type": "function_returns",
+          "functionName": "format_name",
+          "args": [
+            1,
+            1
+          ],
+          "expected": "Doe, John",
+          "message": "Return the expected result for format_name(first_name, last_name)."
+        },
+        {
+          "type": "function_returns",
+          "functionName": "format_name",
+          "args": [
+            1,
+            1
+          ],
+          "expected": "Smith, Jane",
+          "message": "Return the expected result for format_name(first_name, last_name)."
+        },
+        {
+          "type": "no_stdout",
+          "message": "This task should return a value instead of printing output."
+        }
+      ]
+    },
+    {
+      "id": "exercise2",
+      "kind": "code_input",
+      "title": "Refactor to Use a Helper Function",
+      "prompt": "Refactor the badge creation process to use a helper function `create_badge` that takes a name and a title, and returns a formatted badge string.",
+      "starterCode": "def create_badge(name, title):\n    # Format the badge using the name and title\n    pass",
+      "solutionCode": "def create_badge(name, title):\n    return f\"{name}, {title}\"",
+      "recipeType": "semantic",
+      "hint": "Read the task \"Refactor to Use a Helper Function\" and identify the required result.",
+      "help": {
+        "concept": "This coding exercise checks whether your code produces the requested result for: \"Refactor to Use a Helper Function\".",
+        "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+        "hint_2": "Click Run and compare the output panel with the expected result."
+      },
+      "semanticChecks": [
+        {
+          "type": "function_returns",
+          "functionName": "create_badge",
+          "args": [
+            1,
+            1
+          ],
+          "expected": "John Doe, Engineer",
+          "message": "Return the expected result for create_badge(name, title)."
+        },
+        {
+          "type": "function_returns",
+          "functionName": "create_badge",
+          "args": [
+            1,
+            1
+          ],
+          "expected": "Jane Smith, Manager",
+          "message": "Return the expected result for create_badge(name, title)."
+        },
+        {
+          "type": "no_stdout",
+          "message": "This task should return a value instead of printing output."
+        }
+      ]
+    },
+    {
+      "id": "exercise3",
+      "kind": "code_input",
+      "title": "Integrate Helper Functions into a Program",
+      "prompt": "Integrate the `format_name` and `create_badge` functions into a program that reads a list of names and titles, and prints formatted badges for each.",
+      "starterCode": "def format_name(first_name, last_name):\n    return f\"{last_name}, {first_name}\"\n\ndef create_badge(name, title):\n    return f\"{name}, {title}\"\n\n# List of names and titles\npeople = [(\"John\", \"Doe\", \"Engineer\"), (\"Jane\", \"Smith\", \"Manager\")]\n\n# Process each person\nfor first_name, last_name, title in people:\n    # Format the name and create a badge\n    pass",
+      "solutionCode": "def format_name(first_name, last_name):\n    return f\"{last_name}, {first_name}\"\n\ndef create_badge(name, title):\n    return f\"{name}, {title}\"\n\n# List of names and titles\npeople = [(\"John\", \"Doe\", \"Engineer\"), (\"Jane\", \"Smith\", \"Manager\")]\n\n# Process each person\nfor first_name, last_name, title in people:\n    full_name = format_name(first_name, last_name)\n    badge = create_badge(full_name, title)\n    print(badge)",
+      "tests": [
+        {
+          "stdout": "Doe, John, Engineer\nSmith, Jane, Manager",
+          "stdin": "",
+          "match": "exact"
+        },
+        {
+          "stdout": "Doe, John, Engineer\nSmith, Jane, Manager",
+          "stdin": "",
+          "match": "exact"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Read the task \"Integrate Helper Functions into a Program\" and identify the required result.",
+      "help": {
+        "concept": "This coding exercise checks whether your code produces the requested result for: \"Integrate Helper Functions into a Program\".",
+        "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+        "hint_2": "Click Run and compare the output panel with the expected result."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Name Badge Builder",
+    "stepIds": [
+      "exercise1",
+      "exercise2",
+      "exercise3"
+    ]
+  }
+}

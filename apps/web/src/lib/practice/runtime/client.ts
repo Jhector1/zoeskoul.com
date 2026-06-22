@@ -60,8 +60,23 @@ function isRecord(value: unknown): value is Record<string, unknown> {
     return Boolean(value) && typeof value === "object" && !Array.isArray(value);
 }
 
+const BARE_I18N_KEY_RE = /^[a-zA-Z0-9_.:-]+$/;
+
 function isTaggedPracticeAlias(value: unknown) {
     return typeof value === "string" && value.trim().startsWith("@:");
+}
+
+function isBarePracticeI18nAlias(value: unknown) {
+    if (typeof value !== "string") return false;
+
+    const trimmed = value.trim();
+
+    return (
+        trimmed.length > 0 &&
+        trimmed.includes(".") &&
+        !trimmed.includes(" ") &&
+        BARE_I18N_KEY_RE.test(trimmed)
+    );
 }
 
 function pickLivePracticeContractValue(args: {
@@ -75,9 +90,12 @@ function pickLivePracticeContractValue(args: {
     }
 
     if (
-        isTaggedPracticeAlias(currentValue) &&
         resolvedValue !== undefined &&
-        !isTaggedPracticeAlias(resolvedValue)
+        !isTaggedPracticeAlias(resolvedValue) &&
+        (
+            isTaggedPracticeAlias(currentValue) ||
+            isBarePracticeI18nAlias(currentValue)
+        )
     ) {
         return resolvedValue;
     }

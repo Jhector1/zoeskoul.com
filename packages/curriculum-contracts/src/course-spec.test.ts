@@ -33,6 +33,8 @@ describe("curriculum contracts", () => {
         expectTypeOf<CourseSpec>().toMatchTypeOf<{
             practiceDefaults?: {
                 tryIt?: boolean;
+                requiresTryIt?: boolean;
+                conceptualOnly?: boolean;
                 tryItPlacement?: "first_sketch" | "all_sketches" | "none";
             };
             modules: Array<{
@@ -45,8 +47,12 @@ describe("curriculum contracts", () => {
                     };
                     topics: Array<{
                         practice?: {
+                            conceptualOnly?: boolean;
+                            requiresTryIt?: boolean;
                             tryItExerciseIds?: string[];
                             tryItPlacement?: "first_sketch" | "all_sketches" | "none";
+                            runtimeMode?: "terminal_workspace" | "editor_workspace" | "sql_workspace";
+                            terminalSessionScope?: "exercise" | "topic" | "project";
                         };
                     }>;
                 }>;

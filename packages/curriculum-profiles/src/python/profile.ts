@@ -17,9 +17,12 @@ import type {
     CodeInputHelpFallback,
     CodeInputProfileCapability,
     CourseProfile,
-    ProjectProfileCapability,
 } from "../types.js";
 import { pythonShape } from "../shapes/pythonShape.js";
+import {
+    createCodeInputProjectCapability,
+    sharedPracticeProfileConfig,
+} from "../shared/generationPolicy.js";
 
 export const PYTHON_MINIMUM_FIXED_TESTS = 2;
 
@@ -461,54 +464,7 @@ const pythonCodeInputCapability: CodeInputProfileCapability = {
         };
     },};
 
-const pythonProjectCapability: ProjectProfileCapability = {
-    getProjectConfig(args) {
-        if (args.topicKind === "capstone") {
-            return {
-                preferredProjectExerciseKind: "code_input",
-                minStepCount: 5,
-                targetStepCount: 5,
-                allowReveal: true,
-                tryItDefault: {
-                    enabled: true,
-                    sketchIndex: 0,
-                    allowReveal: true,
-                },
-                projectFlowDefault: "progressive",
-                projectTitle: "Final Capstone Project",
-                projectStepLabel: "Capstone step",
-                startPromptPrefix: "Start the final capstone project.",
-                continuePromptPrefix:
-                    "Continue the final capstone project from the previous working step.",
-                helpConcept:
-                    "The final capstone is progressive. Each step starts from the previous working solution and adds one focused feature.",
-            };
-        }
-
-        return {
-            preferredProjectExerciseKind: "code_input",
-            minStepCount: 3,
-            targetStepCount: 3,
-            allowReveal: true,
-            tryItDefault: {
-                enabled: true,
-                sketchIndex: 0,
-                allowReveal: true,
-            },
-            projectFlowDefault: "progressive",
-            projectTitle: "Module Project",
-            projectStepLabel: "Project step",
-            startPromptPrefix: "Start the module project.",
-            continuePromptPrefix:
-                "Continue the same module project from the previous working step.",
-            helpConcept:
-                "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
-        };
-    },
-    isProjectExercise(args) {
-        return args.exercise.kind === "code_input";
-    },
-};
+const pythonProjectCapability = createCodeInputProjectCapability();
 
 export const pythonProfile: CourseProfile = {
     id: "python",
@@ -527,14 +483,7 @@ export const pythonProfile: CourseProfile = {
     buildModuleRuntimeDefaults() {
         return { kind: "code", language: "python" };
     },
-    practice: {
-        tryItDefault: {
-            enabled: true,
-            sketchIndex: 0,
-            allowReveal: true,
-        },
-        preferredTryItExerciseKind: "code_input",
-    },
+    practice: sharedPracticeProfileConfig,
     project: pythonProjectCapability,
     renderExerciseKindPromptRules(args) {
         const introTopicHaystack = `${args.seed.title} ${args.seed.summary}`.toLowerCase();

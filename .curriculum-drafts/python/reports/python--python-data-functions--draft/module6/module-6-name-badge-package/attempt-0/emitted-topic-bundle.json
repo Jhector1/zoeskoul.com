@@ -1,0 +1,378 @@
+{
+  "topicId": "module-6-name-badge-package",
+  "subjectSlug": "python--python-data-functions--draft",
+  "moduleSlug": "python-6-functions-and-modularity",
+  "sectionSlug": "python--python-data-functions--draft-python-6-module-project",
+  "prefix": "py6",
+  "minutes": 26,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "python",
+    "supportsTerminal": false,
+    "supportsMultiFile": false,
+    "supportsFileSystem": false,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "topic": {
+    "labelKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.label",
+    "summaryKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.cards.sketch0.title",
+      "sketchId": "sketch1",
+      "height": 420,
+      "tryIt": {
+        "id": "try-module-6-name-badge-package-sketch0",
+        "titleKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.tryIt.try_module_6_name_badge_package_sketch0.title",
+        "promptKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.tryIt.try_module_6_name_badge_package_sketch0.prompt",
+        "exerciseKey": "exercise1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.cards.sketch1.title",
+      "sketchId": "sketch2",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.cards.sketch2.title",
+      "sketchId": "try-it-yourself",
+      "height": 420
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "exercise1",
+            "titleKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.projectSteps.exercise1.title",
+            "exerciseKey": "exercise1",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "exercise2",
+            "titleKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.projectSteps.exercise2.title",
+            "exerciseKey": "exercise2",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "exercise3",
+            "titleKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.projectSteps.exercise3.title",
+            "exerciseKey": "exercise3",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.sketch1.title",
+      "bodyKey": "sketches.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.sketch1.bodyMarkdown"
+    },
+    {
+      "id": "sketch2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.sketch2.title",
+      "bodyKey": "sketches.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.sketch2.bodyMarkdown"
+    },
+    {
+      "id": "try-it-yourself",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.try-it-yourself.title",
+      "bodyKey": "sketches.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.try-it-yourself.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "exercise1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.exercise1",
+      "language": "python",
+      "starterCode": "def create_badge(name, title):\n    # TODO: Return a formatted badge string\n    pass",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def create_badge(name, title):\n    # TODO: Return a formatted badge string\n    pass",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def create_badge(name, title):\n    return f\"Name: {name}, Title: {title}\"",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def create_badge(name, title):\n    # TODO: Return a formatted badge string\n    pass",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def create_badge(name, title):\n    # TODO: Return a formatted badge string\n    pass",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def create_badge(name, title):\n    return f\"Name: {name}, Title: {title}\"",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def create_badge(name, title):\n    return f\"Name: {name}, Title: {title}\"",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "create_badge",
+            "args": [
+              "Alice",
+              "Engineer"
+            ],
+            "argKinds": [
+              "value",
+              "value"
+            ],
+            "expected": "Name: Alice, Title: Engineer",
+            "expectedKind": "value"
+          }
+        ]
+      }
+    },
+    {
+      "id": "exercise2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.exercise2",
+      "language": "python",
+      "starterCode": "def create_badge(name, title):\n    return f\"Name: {name}, Title: {title}\"\n# Project step 2: Format a List of Names\n# Keep the working code above from the previous step.\n# Next, Write a function `format_names_list` that takes a list of tuples, each containing a first and last name, and returns a list of formatted full names\n# Add only the focused change for this step below or inside the existing work.",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def create_badge(name, title):\n    return f\"Name: {name}, Title: {title}\"\n# Project step 2: Format a List of Names\n# Keep the working code above from the previous step.\n# Next, Write a function `format_names_list` that takes a list of tuples, each containing a first and last name, and returns a list of formatted full names\n# Add only the focused change for this step below or inside the existing work.",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def format_names_list(names):\n    return [format_name(first, last) for first, last in names]",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def create_badge(name, title):\n    return f\"Name: {name}, Title: {title}\"\n# Project step 2: Format a List of Names\n# Keep the working code above from the previous step.\n# Next, Write a function `format_names_list` that takes a list of tuples, each containing a first and last name, and returns a list of formatted full names\n# Add only the focused change for this step below or inside the existing work.",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def create_badge(name, title):\n    return f\"Name: {name}, Title: {title}\"\n# Project step 2: Format a List of Names\n# Keep the working code above from the previous step.\n# Next, Write a function `format_names_list` that takes a list of tuples, each containing a first and last name, and returns a list of formatted full names\n# Add only the focused change for this step below or inside the existing work.",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def format_names_list(names):\n    return [format_name(first, last) for first, last in names]",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def format_names_list(names):\n    return [format_name(first, last) for first, last in names]",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "format_names_list",
+            "args": [
+              [
+                [
+                  "first",
+                  "john"
+                ],
+                [
+                  "last",
+                  "doe"
+                ]
+              ],
+              [
+                [
+                  "first",
+                  "jane"
+                ],
+                [
+                  "last",
+                  "smith"
+                ]
+              ]
+            ],
+            "argKinds": [
+              "list_of_dict_entries",
+              "dict_entries"
+            ],
+            "expected": [
+              "John Doe",
+              "Jane Smith"
+            ],
+            "expectedKind": "value"
+          }
+        ]
+      }
+    },
+    {
+      "id": "exercise3",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.exercise3",
+      "language": "python",
+      "starterCode": "def format_names_list(names):\n    return [format_name(first, last) for first, last in names]\n# Project step 3: Generate Badges for a List of Names\n# Keep the working code above from the previous step.\n# Next, Write a function `generate_badges` that takes a list of tuples, each containing a name and a title, and returns a list of formatted badge strings\n# Add only the focused change for this step below or inside the existing work.",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def format_names_list(names):\n    return [format_name(first, last) for first, last in names]\n# Project step 3: Generate Badges for a List of Names\n# Keep the working code above from the previous step.\n# Next, Write a function `generate_badges` that takes a list of tuples, each containing a name and a title, and returns a list of formatted badge strings\n# Add only the focused change for this step below or inside the existing work.",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def generate_badges(names_and_titles):\n    return [create_badge(name, title) for name, title in names_and_titles]",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def format_names_list(names):\n    return [format_name(first, last) for first, last in names]\n# Project step 3: Generate Badges for a List of Names\n# Keep the working code above from the previous step.\n# Next, Write a function `generate_badges` that takes a list of tuples, each containing a name and a title, and returns a list of formatted badge strings\n# Add only the focused change for this step below or inside the existing work.",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def format_names_list(names):\n    return [format_name(first, last) for first, last in names]\n# Project step 3: Generate Badges for a List of Names\n# Keep the working code above from the previous step.\n# Next, Write a function `generate_badges` that takes a list of tuples, each containing a name and a title, and returns a list of formatted badge strings\n# Add only the focused change for this step below or inside the existing work.",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def generate_badges(names_and_titles):\n    return [create_badge(name, title) for name, title in names_and_titles]",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def generate_badges(names_and_titles):\n    return [create_badge(name, title) for name, title in names_and_titles]",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "generate_badges",
+            "args": [
+              [
+                [
+                  "name",
+                  "Alice"
+                ],
+                [
+                  "title",
+                  "Engineer"
+                ]
+              ],
+              [
+                [
+                  "name",
+                  "Bob"
+                ],
+                [
+                  "title",
+                  "Designer"
+                ]
+              ]
+            ],
+            "argKinds": [
+              "list_of_dict_entries",
+              "dict_entries"
+            ],
+            "expected": [
+              "Name: Alice, Title: Engineer",
+              "Name: Bob, Title: Designer"
+            ],
+            "expectedKind": "value"
+          }
+        ]
+      }
+    }
+  ]
+}

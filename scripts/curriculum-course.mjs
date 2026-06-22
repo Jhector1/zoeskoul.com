@@ -451,6 +451,31 @@ function cli(args) {
   run("node", ["packages/curriculum-cli/dist/index.js", ...args]);
 }
 
+function runDraftGoldensForCourse() {
+  const draftGoldensTarget = resolveDraftSubjectTarget();
+  const resolvedCourseSlug = draftGoldensTarget.courseSlug;
+  assertCourseExists(resolvedCourseSlug);
+
+  loadEnvFiles();
+
+  if (!process.env.DRAFT_SUBJECT_SLUG) {
+    process.env.DRAFT_SUBJECT_SLUG = draftGoldensTarget.draftSubjectSlug;
+  }
+
+  process.env.DRAFT_COURSE_SLUG = resolvedCourseSlug;
+
+  run("pnpm", [
+    "--filter",
+    "@zoeskoul/curriculum-compiler",
+    "exec",
+    "vitest",
+    "run",
+    "--root",
+    "../..",
+    "packages/curriculum-compiler/src/validate/draftSubjectCodeInputGoldens.test.ts",
+  ]);
+}
+
 function buildCompileCourseArgs(resolvedCourseSlug) {
   return [
     "compile-course",
@@ -561,29 +586,7 @@ switch (action) {
     break;
   }
   case "draft-goldens": {
-    const draftGoldensTarget = resolveDraftSubjectTarget();
-    const resolvedCourseSlug = draftGoldensTarget.courseSlug;
-    assertCourseExists(resolvedCourseSlug);
-
-    loadEnvFiles();
-
-    if (!process.env.DRAFT_SUBJECT_SLUG) {
-      process.env.DRAFT_SUBJECT_SLUG = draftGoldensTarget.draftSubjectSlug;
-    }
-
-    process.env.DRAFT_COURSE_SLUG = resolvedCourseSlug;
-
-    run("pnpm", [
-      "--filter",
-      "@zoeskoul/curriculum-compiler",
-      "exec",
-      "vitest",
-      "run",
-      "--root",
-      "../..",
-      "packages/curriculum-compiler/src/validate/draftSubjectCodeInputGoldens.test.ts",
-    ]);
-
+    runDraftGoldensForCourse();
     break;
   }
   case "check": {
@@ -607,7 +610,7 @@ switch (action) {
       cli(args);
     }
 
-    run("pnpm", ["curr:test:golden"]);
+    runDraftGoldensForCourse();
     break;
   }
 

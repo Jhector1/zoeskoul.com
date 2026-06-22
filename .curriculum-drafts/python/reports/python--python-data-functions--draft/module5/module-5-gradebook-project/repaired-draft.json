@@ -1,0 +1,150 @@
+{
+  "title": "Module 5 Gradebook Project",
+  "summary": "Build a small gradebook project in focused steps that keep the previous working version and add one collection idea at a time.",
+  "minutes": 24,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Understanding Lists and Dictionaries",
+      "bodyMarkdown": "In Python, lists and dictionaries are powerful tools for organizing data. A list is an ordered collection of items, which can be of any type. You can access elements by their index, modify them, and iterate over them. Here's a simple example:\n\n```python\nstudents = ['Alice', 'Bob', 'Charlie']\nprint(students[0])  # Outputs: Alice\n```\n\nDictionaries, on the other hand, store data in key-value pairs. They are unordered, and you access values by their keys. Here's how you can use a dictionary:\n\n```python\ngrades = {'Alice': 85, 'Bob': 90, 'Charlie': 78}\nprint(grades['Bob'])  # Outputs: 90\n```\n\nUnderstanding how to use these structures is crucial for building applications that manage data effectively.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+    },
+    {
+      "id": "try-it-yourself",
+      "title": "Try it yourself",
+      "bodyMarkdown": "Try it yourself: change one value in the example, predict the new output, then run the code to check your prediction."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "exercise1",
+      "kind": "code_input",
+      "title": "Create a List of Students",
+      "prompt": "Write a function `create_student_list` that returns a list of student names. The function should take no parameters and return a list containing 'Alice', 'Bob', and 'Charlie'.",
+      "starterCode": "def create_student_list():\n    # Create a list of student names\n    return []",
+      "solutionCode": "def create_student_list():\n    return ['Alice', 'Bob', 'Charlie']",
+      "recipeType": "semantic",
+      "semanticChecks": [
+        {
+          "type": "function_returns",
+          "functionName": "create_student_list",
+          "args": [],
+          "argKinds": [],
+          "expected": [
+            "Alice",
+            "Bob",
+            "Charlie"
+          ],
+          "expectedKind": "value"
+        }
+      ],
+      "hint": "Read the task \"Create a List of Students\" and identify the required result.",
+      "help": {
+        "concept": "This coding exercise checks whether your code produces the requested result for: \"Create a List of Students\".",
+        "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+        "hint_2": "Click Run and compare the output panel with the expected result."
+      }
+    },
+    {
+      "id": "exercise2",
+      "kind": "code_input",
+      "title": "Add Grades to Students",
+      "prompt": "Write a function `add_grades` that takes a list of student names and a list of grades, and returns a dictionary mapping each student to their grade.",
+      "starterCode": "def add_grades(students, grades):\n    # Create a dictionary mapping students to grades\n    return {}",
+      "solutionCode": "def add_grades(students, grades):\n    return dict(zip(students, grades))",
+      "recipeType": "semantic",
+      "semanticChecks": [
+        {
+          "type": "function_returns",
+          "functionName": "add_grades",
+          "args": [
+            [
+              "Alice",
+              "Bob",
+              "Charlie"
+            ],
+            [
+              85,
+              90,
+              78
+            ]
+          ],
+          "argKinds": [
+            "value",
+            "value"
+          ],
+          "expected": [
+            [
+              "Alice",
+              85
+            ],
+            [
+              "Bob",
+              90
+            ],
+            [
+              "Charlie",
+              78
+            ]
+          ],
+          "expectedKind": "dict_entries"
+        }
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "exercise3",
+      "kind": "code_input",
+      "title": "Calculate Average Grade",
+      "prompt": "Write a function `calculate_average` that takes a dictionary of student grades and returns the average grade.",
+      "starterCode": "def calculate_average(grades):\n    # Calculate the average grade\n    return 0",
+      "solutionCode": "def calculate_average(grades):\n    return sum(grades.values()) / len(grades)",
+      "recipeType": "semantic",
+      "semanticChecks": [
+        {
+          "type": "function_returns",
+          "functionName": "calculate_average",
+          "args": [
+            [
+              [
+                "Alice",
+                85
+              ],
+              [
+                "Bob",
+                90
+              ],
+              [
+                "Charlie",
+                78
+              ]
+            ]
+          ],
+          "argKinds": [
+            "dict_entries"
+          ],
+          "expected": 84.33333333333333,
+          "expectedKind": "value"
+        }
+      ],
+      "hint": "Sum the grades and divide by the number of students to find the average.",
+      "help": {
+        "concept": "To calculate an average, sum all values and divide by the count of values.",
+        "hint_1": "Use the `values()` method to get all grades from the dictionary.",
+        "hint_2": "Divide the total sum of grades by the number of students."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Gradebook Project",
+    "stepIds": [
+      "exercise1",
+      "exercise2",
+      "exercise3"
+    ]
+  }
+}

@@ -43,8 +43,8 @@ export const bashProfileAdapter: CourseProfileAdapter = {
         };
     },
 
-    validateTopicRecipe(_recipe: TopicRecipe) {
-        return [];
+    validateTopicRecipe(recipe: TopicRecipe) {
+        return bashProfile.validateTopicBundle(recipe.topicBundle);
     },
 
     compileTopicRecipe(args: CompileTopicRecipeArgs) {

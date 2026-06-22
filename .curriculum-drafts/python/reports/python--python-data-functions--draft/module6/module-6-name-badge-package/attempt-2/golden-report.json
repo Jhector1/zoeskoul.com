@@ -1,0 +1,13 @@
+{
+  "topicId": "module-6-name-badge-package",
+  "ok": false,
+  "issues": [
+    {
+      "code": "CODE_PROFILE_SOLUTION_OUTPUT_MISMATCH",
+      "category": "tests",
+      "severity": "error",
+      "exerciseId": "exercise3",
+      "message": "Exercise \"exercise3\" solutionCode does not satisfy its published tests."
+    }
+  ]
+}

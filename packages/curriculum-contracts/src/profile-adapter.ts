@@ -19,6 +19,7 @@ export type BuildTopicSeedArgs = {
     moduleProject?: TopicSeed["moduleProject"];
     role?: TopicSeed["moduleRole"];
     runtimeDefaults?: TopicSeed["moduleRuntimeDefaults"];
+    serviceDefaults?: TopicSeed["moduleServiceDefaults"];
     exercisePolicy?: ResolvedExercisePolicy;
   };
   section: {
@@ -61,4 +62,11 @@ export type ProfileAdapter = {
       order: number;
     };
   }) => TopicSeed["moduleRuntimeDefaults"] | null;
+  getTopicSeedServiceDefaults?: (args: {
+    blueprint: CourseBlueprint;
+    module: {
+      slug: string;
+      order: number;
+    };
+  }) => TopicSeed["moduleServiceDefaults"] | null;
 };

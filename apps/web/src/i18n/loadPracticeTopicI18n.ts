@@ -4,7 +4,7 @@ import "server-only";
 import fs from "node:fs/promises";
 import path from "node:path";
 
-type PracticeTopicI18n = {
+type PracticeTopicI18n = Record<string, any> & {
     common: Record<string, any>;
     quiz: Record<string, any>;
 };
@@ -36,6 +36,34 @@ async function readJsonIfExists(filePath: string): Promise<Record<string, any> |
     } catch {
         return null;
     }
+}
+
+function findTopicMessagesNode(args: {
+    messages: Record<string, any>;
+    subjectSlug?: string | null;
+    topicBase: string;
+}) {
+    const topicsRoot = isObject(args.messages.topics) ? args.messages.topics : null;
+    if (!topicsRoot) return null;
+
+    const subjectCandidates = args.subjectSlug
+        ? [topicsRoot[args.subjectSlug]]
+        : Object.values(topicsRoot);
+
+    for (const subjectNode of subjectCandidates) {
+        if (!isObject(subjectNode)) continue;
+
+        for (const moduleNode of Object.values(subjectNode)) {
+            if (!isObject(moduleNode)) continue;
+
+            const topicNode = moduleNode[args.topicBase];
+            if (isObject(topicNode)) {
+                return topicNode;
+            }
+        }
+    }
+
+    return null;
 }
 
 function parseTopicBase(raw: string) {
@@ -147,6 +175,7 @@ export async function loadPracticeTopicI18n(args: {
     const promise = (async (): Promise<PracticeTopicI18n> => {
         const localeRoot = path.join(process.cwd(), "src", "i18n", "messages", locale);
         const enRoot = path.join(process.cwd(), "src", "i18n", "messages", "en");
+        const topicBase = parseTopicBase(topicSlug);
 
         const commonLocale = (await readJsonIfExists(path.join(localeRoot, "common.json"))) ?? {};
         const commonEn = (await readJsonIfExists(path.join(enRoot, "common.json"))) ?? {};
@@ -171,14 +200,24 @@ export async function loadPracticeTopicI18n(args: {
         const topicEn = topicFileEn ? (await readJsonIfExists(topicFileEn)) ?? {} : {};
 
         const mergedTopic = deepMerge(topicEn, topicLocale);
+        const topicNode = findTopicMessagesNode({
+            messages: mergedTopic,
+            subjectSlug,
+            topicBase,
+        });
+        const legacyQuiz = isObject(mergedTopic.quiz)
+            ? mergedTopic.quiz
+            : isObject(topicNode?.practice)
+              ? topicNode.practice
+              : {};
 
-        return {
+        return deepMerge(mergedTopic, {
             common: deepMerge(commonEn, {
                 ...commonLocale,
                 ...(isObject(mergedTopic.common) ? mergedTopic.common : {}),
             }),
-            quiz: isObject(mergedTopic.quiz) ? mergedTopic.quiz : {},
-        };
+            quiz: legacyQuiz,
+        });
     })();
 
     CACHE.set(cacheKey, promise);

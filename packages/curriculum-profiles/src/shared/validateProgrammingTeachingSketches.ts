@@ -1,4 +1,4 @@
-import type { TopicAuthoringDraft } from "@zoeskoul/curriculum-contracts";
+import type { TopicAuthoringDraft, TopicSeed } from "@zoeskoul/curriculum-contracts";
 import type { SemanticValidationIssue } from "./profileServices.js";
 
 function hasCodeFence(text: string): boolean {
@@ -32,15 +32,6 @@ function hasLineByLineExplanation(text: string): boolean {
     );
 }
 
-function hasTryItYourself(text: string): boolean {
-    return (
-        /\btry it yourself\b/i.test(text) ||
-        /\btry this\b/i.test(text) ||
-        /\byour turn\b/i.test(text) ||
-        /\btry on your own\b/i.test(text)
-    );
-}
-
 function hasMultilineCodeExample(text: string): boolean {
     return codeFenceBlocks(text).some((block: string) => {
         const lines = block
@@ -51,8 +42,15 @@ function hasMultilineCodeExample(text: string): boolean {
     });
 }
 
+function codeInputCount(draft: TopicAuthoringDraft): number {
+    return Array.isArray(draft.quizDraft)
+        ? draft.quizDraft.filter((exercise) => exercise?.kind === "code_input").length
+        : 0;
+}
+
 export function validateProgrammingTeachingSketches(args: {
     profileId: string;
+    seed?: TopicSeed;
     draft: TopicAuthoringDraft;
 }): SemanticValidationIssue[] {
     const issues: SemanticValidationIssue[] = [];
@@ -61,8 +59,9 @@ export function validateProgrammingTeachingSketches(args: {
         String(block.bodyMarkdown ?? ""),
     );
     const combined = bodies.join("\n\n");
+    const projectLike = isProjectLikeTopic(args.seed);
 
-    if (!bodies.some((body: string) => hasWorkedExample(body))) {
+    if (!projectLike && !bodies.some((body: string) => hasWorkedExample(body))) {
         issues.push({
             code: "PROGRAMMING_WORKED_EXAMPLE_MISSING",
             category: "pedagogy",
@@ -73,6 +72,7 @@ export function validateProgrammingTeachingSketches(args: {
     }
 
     if (
+        !projectLike &&
         hasMultilineCodeExample(combined) &&
         !bodies.some((body: string) => hasLineByLineExplanation(body))
     ) {
@@ -85,15 +85,56 @@ export function validateProgrammingTeachingSketches(args: {
         });
     }
 
-    if (!bodies.some((body: string) => hasTryItYourself(body))) {
+    const conceptualOnly = args.seed?.practice?.conceptualOnly === true;
+    const requiresTryIt = args.seed?.practice?.requiresTryIt === true;
+    const placement = args.seed?.practice?.tryItPlacement;
+    const requiredTryItCount = placement === "all_sketches" ? blocks.length : 1;
+    const actualCodeInputs = codeInputCount(args.draft);
+
+    if (!conceptualOnly && requiresTryIt && actualCodeInputs < 1) {
         issues.push({
-            code: "PROGRAMMING_TRY_IT_YOURSELF_MISSING",
+            code: "PROGRAMMING_TRY_IT_COVERAGE_MISSING",
             category: "pedagogy",
             severity: "error",
             message:
-                `Programming profile "${args.profileId}" is missing a "Try it yourself" style learner prompt in sketchBlocks.`,
+                `Programming profile "${args.profileId}" requires Try It coverage for this hands-on topic, but draft.quizDraft does not contain a code_input practice path.`,
+        });
+    }
+
+    if (
+        !conceptualOnly &&
+        requiresTryIt &&
+        placement === "all_sketches" &&
+        blocks.length > 0 &&
+        actualCodeInputs < requiredTryItCount
+    ) {
+        issues.push({
+            code: "PROGRAMMING_TRY_IT_PER_SKETCH_MISSING",
+            category: "pedagogy",
+            severity: "error",
+            message:
+                `Programming profile "${args.profileId}" uses all_sketches Try It policy, but has ${actualCodeInputs} code_input exercise(s) for ${blocks.length} sketch block(s).`,
         });
     }
 
     return issues;
+}
+
+function isProjectLikeTopic(seed: any): boolean {
+    const topicId = String(seed?.topicId ?? seed?.topic?.id ?? "").toLowerCase();
+    const sectionId = String(seed?.sectionId ?? seed?.section?.id ?? "").toLowerCase();
+    const topicType = String(seed?.topicType ?? seed?.topic?.type ?? seed?.type ?? "").toLowerCase();
+    const projectType = String(seed?.projectType ?? seed?.topic?.projectType ?? "").toLowerCase();
+
+    return (
+        topicType === "project" ||
+        topicType === "module_project" ||
+        topicType === "capstone" ||
+        projectType === "module_project" ||
+        projectType === "capstone" ||
+        topicId.includes("project") ||
+        topicId.includes("capstone") ||
+        sectionId.includes("project") ||
+        sectionId.includes("capstone")
+    );
 }

@@ -8,6 +8,7 @@ import { listTopicPlanNodes } from "../plan/listTopicPlanNodes.js";
 
 export async function critiqueSubjectDraft(args: {
     blueprint: CourseBlueprint;
+    draftSubjectSlug?: string;
     provider: AiProvider;
     onProgress?: CompileProgressCallback;
 }) {
@@ -64,6 +65,7 @@ export async function critiqueSubjectDraft(args: {
 
         const result = await critiqueTopicDraft({
             blueprint: args.blueprint,
+            draftSubjectSlug: args.draftSubjectSlug,
             provider: args.provider,
             topicId: node.topic.topicId,
         });
@@ -89,7 +91,7 @@ export async function critiqueSubjectDraft(args: {
 
     return {
         mode: "draft" as const,
-        subjectSlug: args.blueprint.subjectSlug,
+        subjectSlug: args.draftSubjectSlug ?? args.blueprint.subjectSlug,
         topics: results,
     };
 }
