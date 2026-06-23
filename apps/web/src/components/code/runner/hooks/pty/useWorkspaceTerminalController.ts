@@ -690,6 +690,7 @@ export function useWorkspaceTerminalController(
     const restartInFlightRef = React.useRef<Promise<void> | null>(null);
     const staleStartingTimerRef = React.useRef<number | null>(null);
     const recycleRestartTimerRef = React.useRef<number | null>(null);
+    const startupCwdFlushTimerRef = React.useRef<number | null>(null);
     const lastRecycleRestartAtRef = React.useRef(0);
     const interactiveReadyRef = React.useRef(false);
     const recoverStateRef = React.useRef<TerminalRecoverState>("none");
@@ -955,6 +956,13 @@ export function useWorkspaceTerminalController(
         }
     }, []);
 
+    const clearStartupCwdFlushTimer = React.useCallback(() => {
+        if (startupCwdFlushTimerRef.current != null) {
+            window.clearTimeout(startupCwdFlushTimerRef.current);
+            startupCwdFlushTimerRef.current = null;
+        }
+    }, []);
+
     const setTerminalRecovery = React.useCallback((recovery: TerminalRecovery) => {
         recoverStateRef.current = recovery.state;
         setRecoverState(recovery.state);
@@ -972,6 +980,7 @@ export function useWorkspaceTerminalController(
         snapshotInFlightRef.current = null;
         openInFlightRef.current = null;
         clearRecycleRestartTimer();
+        clearStartupCwdFlushTimer();
         pendingInputLineRef.current = "";
         escapeSequenceRef.current = "";
         terminalProcessExitedRef.current = false;
@@ -994,7 +1003,13 @@ export function useWorkspaceTerminalController(
         clearTerminalRecovery();
         setRestarting(false);
         setStopping(false);
-    }, [clearRecycleRestartTimer, clearTerminalRecovery, initialEvidenceCwd, setTerminalEvidenceNow]);
+    }, [
+        clearRecycleRestartTimer,
+        clearStartupCwdFlushTimer,
+        clearTerminalRecovery,
+        initialEvidenceCwd,
+        setTerminalEvidenceNow,
+    ]);
 
     const reset = React.useCallback(() => {
         clearQuietTimer();
@@ -1146,6 +1161,7 @@ export function useWorkspaceTerminalController(
         const nextCwd = pendingStartupCwdRef.current;
         pendingStartupInputRef.current = null;
         pendingStartupCwdRef.current = undefined;
+        clearStartupCwdFlushTimer();
         await sendInput(pending);
 
         if (nextCwd) {
@@ -1155,7 +1171,34 @@ export function useWorkspaceTerminalController(
                 cwd: nextCwd,
             }));
         }
-    }, [sendInput, setTerminalEvidenceNow]);
+    }, [clearStartupCwdFlushTimer, sendInput, setTerminalEvidenceNow]);
+
+    const scheduleStartupCwdFlush = React.useCallback(
+        (delayMs = 175): void => {
+            if (!pendingStartupInputRef.current) return;
+            clearStartupCwdFlushTimer();
+
+            startupCwdFlushTimerRef.current = window.setTimeout(() => {
+                startupCwdFlushTimerRef.current = null;
+
+                if (!pendingStartupInputRef.current) return;
+
+                if (
+                    !sessionIdRef.current ||
+                    !workspaceReadyRef.current ||
+                    terminalProcessExitedRef.current ||
+                    stoppingRef.current ||
+                    restartingRef.current
+                ) {
+                    scheduleStartupCwdFlush(Math.min(delayMs + 150, 900));
+                    return;
+                }
+
+                void flushPendingStartupInput();
+            }, delayMs);
+        },
+        [clearStartupCwdFlushTimer, flushPendingStartupInput],
+    );
 
     const open = React.useCallback(
         async (options: OpenWorkspaceTerminalOptions = {}): Promise<void> => {
@@ -1311,6 +1354,7 @@ export function useWorkspaceTerminalController(
                     }
 
                     workspaceReadyRef.current = true;
+                    scheduleStartupCwdFlush();
                     lastPushedEntriesRef.current = visibleEntries;
                     startedRef.current = true;
                     releaseAutomaticTerminalStart(terminalLeaseKey);
@@ -1381,6 +1425,7 @@ export function useWorkspaceTerminalController(
             clearStaleStartingTimer,
             clearTerminalRecovery,
             flushPendingStartupInput,
+            scheduleStartupCwdFlush,
             setTerminalRecovery,
             setTerminalEvidenceNow,
         ],
@@ -1476,6 +1521,7 @@ export function useWorkspaceTerminalController(
         clearQuietTimer();
         clearStaleStartingTimer();
         clearRecycleRestartTimer();
+        clearStartupCwdFlushTimer();
         clearTerminalRecovery();
         openInFlightRef.current = null;
         pendingInputLineRef.current = "";
@@ -1504,7 +1550,7 @@ export function useWorkspaceTerminalController(
         }
 
         closeSocket();
-    }, [terminalLeaseKey, cancel, clearQuietTimer, clearRecycleRestartTimer, clearStaleStartingTimer, clearTerminalRecovery, closeSocket]);
+    }, [terminalLeaseKey, cancel, clearQuietTimer, clearRecycleRestartTimer, clearStartupCwdFlushTimer, clearStaleStartingTimer, clearTerminalRecovery, closeSocket]);
 
     React.useEffect(() => {
         return () => {
@@ -1901,6 +1947,7 @@ export function useWorkspaceTerminalController(
 
                     if (workspaceReadyRef.current) {
                         void flushPendingStartupInput();
+                        scheduleStartupCwdFlush(125);
                     }
 
 
@@ -1953,6 +2000,7 @@ export function useWorkspaceTerminalController(
 
                 if (workspaceReadyRef.current) {
                     void flushPendingStartupInput();
+                    scheduleStartupCwdFlush(125);
                 }
 
                 if (awaitingPostEnterSnapshotRef.current) {
@@ -2042,6 +2090,7 @@ export function useWorkspaceTerminalController(
         pushChunk,
         schedulePostEnterSnapshot,
         flushPendingStartupInput,
+        scheduleStartupCwdFlush,
         clearStaleStartingTimer,
         scheduleRestartAfterRunnerRecycle,
         setTerminalRecovery,
@@ -2091,8 +2140,9 @@ export function useWorkspaceTerminalController(
             clearQuietTimer();
             clearStaleStartingTimer();
             clearRecycleRestartTimer();
+            clearStartupCwdFlushTimer();
         };
-    }, [clearQuietTimer, clearRecycleRestartTimer, clearStaleStartingTimer]);
+    }, [clearQuietTimer, clearRecycleRestartTimer, clearStartupCwdFlushTimer, clearStaleStartingTimer]);
 
     const getTerminalEvidenceNow = React.useCallback((): TerminalEvidence => {
         const pendingCommand = pendingInputLineRef.current.trim();

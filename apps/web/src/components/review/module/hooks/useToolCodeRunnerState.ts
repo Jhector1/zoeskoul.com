@@ -370,7 +370,23 @@ function hydrateWorkspaceShellWithCode(
 
 
 function ideConfigKey(config: LearningIdeConfig | null | undefined) {
-    return JSON.stringify(config ?? null);
+    const normalize = (input: unknown): unknown => {
+        if (Array.isArray(input)) {
+            return input.map(normalize);
+        }
+
+        if (input && typeof input === "object") {
+            return Object.fromEntries(
+                Object.entries(input as Record<string, unknown>)
+                    .sort(([a], [b]) => a.localeCompare(b))
+                    .map(([key, value]) => [key, normalize(value)]),
+            );
+        }
+
+        return input ?? null;
+    };
+
+    return JSON.stringify(normalize(config ?? null));
 }
 
 
@@ -1679,10 +1695,14 @@ export function useToolCodeRunnerState(args: {
                 existingExerciseForBind?.language !== nextSnap.lang ||
                 existingExerciseForBindWorkspaceKey !== nextSnap.workspaceKey ||
                 existingExerciseForBindCode !== nextSnap.code;
+            const existingRuntimeIdeConfigDiffers =
+                ideConfigKey(existingExerciseForBind?.ideConfig ?? null) !==
+                ideConfigKey(args2.ideConfig ?? null);
             const shouldPatchRuntimeForBind =
                 nextSnapIsLearnerOwned ||
                 !existingExerciseForBind ||
-                (!existingExerciseForBindIsUserWork && existingRuntimeDiffersFromBindContract);
+                (!existingExerciseForBindIsUserWork &&
+                    (existingRuntimeDiffersFromBindContract || existingRuntimeIdeConfigDiffers));
 
             if (shouldPatchRuntimeForBind) {
                 patchExercise(targetKey, {
@@ -1698,6 +1718,7 @@ export function useToolCodeRunnerState(args: {
                     starterHash: nextSnap.starterHash,
                     workspaceOrigin: nextSnapIsLearnerOwned ? "saved" : "starter",
                     userEdited: nextSnapIsLearnerOwned,
+                    ideConfig: args2.ideConfig ?? null,
                     sqlDialect: nextSnap.sqlDialect,
                     sqlDatasetId: nextSnap.sqlDatasetId,
                     sqlSchemaSql: nextSnap.sqlSchemaSql,

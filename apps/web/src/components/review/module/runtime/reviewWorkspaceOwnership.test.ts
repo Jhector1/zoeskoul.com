@@ -162,6 +162,42 @@ describe("review workspace ownership guards", () => {
         ).toBe(false);
     });
 
+    it("does not skip starter ensure when only terminal cwd changed", () => {
+        const starterWorkspace = makeWorkspaceFromFiles(
+            [
+                { path: "main.sh", content: "# use terminal\n" },
+                { path: "park-terminal-map/requests/north-trail.txt", content: "request\n" },
+            ],
+            "bash",
+            "main.sh",
+        );
+
+        expect(
+            shouldSkipEmbeddedEnsureExercise({
+                existing: {
+                    language: "bash",
+                    workspaceOrigin: "starter",
+                    userEdited: false,
+                    workspace: starterWorkspace,
+                    code: "# use terminal\n",
+                    ideConfig: {
+                        runnerBackend: "pty",
+                        layoutMode: "terminal_workspace",
+                        terminalCwd: "/workspace",
+                    },
+                },
+                manifestLanguage: "bash",
+                manifestStarterWorkspace: starterWorkspace,
+                manifestStarterCode: "# use terminal\n",
+                manifestIdeConfig: {
+                    runnerBackend: "pty",
+                    layoutMode: "terminal_workspace",
+                    terminalCwd: "/workspace/park-terminal-map",
+                },
+            }),
+        ).toBe(false);
+    });
+
     it("preserves an intentional user-cleared workspace instead of rehydrating starter code", () => {
         const userBlankWorkspace = makeWorkspace("");
 

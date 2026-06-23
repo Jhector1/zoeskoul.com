@@ -34,6 +34,7 @@ import {
 } from "@/lib/practice/help/steps";
 import { normalizeCurrentPracticeItem } from "@/lib/practice/runtime";
 import { deriveEntryCode } from "@/components/review/module/runtime/exerciseWorkspaceResolver";
+import { mergeLearningIdeConfigs } from "@/lib/ide/learningIdeConfig";
 
 function uniqueTruthyStrings(values: Array<unknown>) {
   return Array.from(
@@ -529,8 +530,8 @@ function mergeProjectStepFallbackExercise(
     starterCode: mergedStarterCode,
     starterFiles: mergedStarterFiles,
     workspace: mergedWorkspace,
-    ideConfig: firstRecord(
-        exAny.ideConfig,
+    ideConfig: mergeLearningIdeConfigs(
+        firstRecord(exAny.ideConfig),
         fallbackExercise.ideConfig,
     ),
 
@@ -968,6 +969,10 @@ export default function QuizPracticeCard(props: {
           manifestLanguage,
           manifestStarterWorkspace,
           manifestStarterCode: practiceStarterCode,
+          manifestIdeConfig:
+            ((livePracticeManifest as any)?.ideConfig ??
+              (livePracticeItem as any)?.ideConfig ??
+              null) as any,
         })
     ) {
       lastEnsureRuntimeExerciseKeyRef.current = ensureKey;

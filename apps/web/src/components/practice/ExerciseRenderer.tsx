@@ -634,6 +634,26 @@ export function resolvePreferredExerciseWorkspace(args: {
     return savedWorkspace;
 }
 
+function stableIdeConfigKeyForExerciseRenderer(value: unknown): string {
+    const normalize = (input: unknown): unknown => {
+        if (Array.isArray(input)) {
+            return input.map(normalize);
+        }
+
+        if (input && typeof input === "object") {
+            return Object.fromEntries(
+                Object.entries(input as Record<string, unknown>)
+                    .sort(([a], [b]) => a.localeCompare(b))
+                    .map(([key, val]) => [key, normalize(val)]),
+            );
+        }
+
+        return input ?? null;
+    };
+
+    return JSON.stringify(normalize(value ?? null));
+}
+
 function workspaceContentKeyForExerciseRenderer(workspace: WorkspaceStateV2 | null | undefined) {
     if (!workspace || workspace.version !== 2 || !Array.isArray(workspace.nodes)) {
         return JSON.stringify(workspace ?? null);
@@ -682,13 +702,33 @@ export function shouldSkipEmbeddedEnsureExercise(args: {
     manifestLanguage: string;
     manifestStarterWorkspace: WorkspaceStateV2 | null | undefined;
     manifestStarterCode?: string | null | undefined;
+    manifestIdeConfig?: LearningIdeConfig | null | undefined;
 }) {
-    const { existing, manifestLanguage, manifestStarterWorkspace, manifestStarterCode } = args;
+    const {
+        existing,
+        manifestLanguage,
+        manifestStarterWorkspace,
+        manifestStarterCode,
+        manifestIdeConfig,
+    } = args;
     if (!existing) return false;
 
     const existingWorkspace = getWorkspaceFromAnyState(existing);
 
     if (!stateLanguageMatches(existing, manifestLanguage, existingWorkspace)) {
+        return false;
+    }
+
+    /**
+     * The same starter files can be reused by consecutive project steps while
+     * only the terminal contract changes. In that case the runtime exercise must
+     * be re-ensured so terminalCwd/layoutMode/runnerBackend follow the current
+     * manifest instead of staying on the previous step's cwd.
+     */
+    if (
+        stableIdeConfigKeyForExerciseRenderer(existing?.ideConfig ?? null) !==
+        stableIdeConfigKeyForExerciseRenderer(manifestIdeConfig ?? null)
+    ) {
         return false;
     }
 
@@ -1018,6 +1058,7 @@ function CodeInputWithTools(props: {
             String((exercise as any).id ?? ""),
             String((exercise as any).exerciseKey ?? ""),
             String((exercise as any).language ?? ""),
+            stableIdeConfigKeyForExerciseRenderer(resolveCodeInputIdeConfig(exCode)),
             workspaceHasNonBlankFile(manifestStarterWorkspace)
                 ? "starter:nonblank"
                 : "starter:blank",
@@ -1033,6 +1074,7 @@ function CodeInputWithTools(props: {
                 manifestLanguage,
                 manifestStarterWorkspace,
                 manifestStarterCode: (exercise as any).starterCode,
+                manifestIdeConfig: resolveCodeInputIdeConfig(exCode),
             })
         ) {
             lastEmbeddedEnsureExerciseKeyRef.current = ensureKey;
@@ -1514,6 +1556,7 @@ export default function ExerciseRenderer({
             String((ex as any).id ?? ""),
             String((ex as any).exerciseKey ?? ""),
             String((ex as any).language ?? ""),
+            stableIdeConfigKeyForExerciseRenderer(resolveCodeInputIdeConfig(exCode)),
             workspaceHasNonBlankFile(manifestStarterWorkspace)
                 ? "starter:nonblank"
                 : "starter:blank",
@@ -1529,6 +1572,7 @@ export default function ExerciseRenderer({
                 manifestLanguage,
                 manifestStarterWorkspace,
                 manifestStarterCode: (ex as any).starterCode,
+                manifestIdeConfig: resolveCodeInputIdeConfig(exCode),
             })
         ) {
             lastEmbeddedEnsureExerciseKeyRef.current = ensureKey;

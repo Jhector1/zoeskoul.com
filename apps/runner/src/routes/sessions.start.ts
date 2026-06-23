@@ -11,6 +11,7 @@ function statusForError(message: string) {
   if (
     message.includes("Workspace limit") ||
     message.includes("Unsafe path") ||
+    message.includes("Unsafe cwd") ||
     message.includes("Unsupported file type") ||
     message.includes("Duplicate path")
   ) {
@@ -29,7 +30,28 @@ export const startSessionRoute: RequestHandler = async (req, res) => {
     const actorKey = getRequiredActorKey(req);
     consumeStartToken(actorKey);
 
-    const body = interactiveRunReqSchema.parse(req.body);
+    const parsed = interactiveRunReqSchema.parse(req.body);
+
+    /**
+     * Some deployed @zoeskoul/code-contracts builds predate shell cwd support.
+     * Zod strips unknown keys by default, so a valid browser payload like
+     * `{ kind: "shell", cwd: "/workspace/park-terminal-map" }` can arrive here
+     * with cwd missing after parse. Preserve the authored cwd at the runner edge
+     * so terminal-workspace project steps open in their manifest directory.
+     */
+    const raw = req.body as Record<string, unknown>;
+    const rawCwd = typeof raw?.cwd === "string" ? raw.cwd.trim() : "";
+    const rawWorkspaceKey =
+      typeof raw?.workspaceKey === "string" ? raw.workspaceKey.trim() : "";
+    const body =
+      parsed.kind === "shell"
+        ? {
+            ...parsed,
+            ...(rawCwd ? { cwd: rawCwd } : {}),
+            ...(rawWorkspaceKey ? { workspaceKey: rawWorkspaceKey } : {}),
+          }
+        : parsed;
+
     const out = await startDockerSession(body, actorKey);
 
     if (out.ok) {

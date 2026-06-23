@@ -318,7 +318,7 @@ export async function startDockerSession(
       AttachStdin: true,
       AttachStdout: true,
       AttachStderr: true,
-      WorkingDir: "/workspace",
+      WorkingDir: sessionCwd,
       User: `${env.execUid}:${env.execGid}`,
       Labels: {
         "com.zoeskoul.runner": "true",
