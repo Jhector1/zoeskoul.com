@@ -894,6 +894,11 @@ export default function QuizPracticeCard(props: {
       (livePracticeItem as any)?.workspace ??
       null,
   );
+  const practiceIdeConfigKey = JSON.stringify(
+      (livePracticeManifest as any)?.ideConfig ??
+      (livePracticeItem as any)?.ideConfig ??
+      null,
+  );
 
   const runtimeExerciseCode = useMemo(() => {
     return (
@@ -926,6 +931,7 @@ export default function QuizPracticeCard(props: {
       practiceStarterCode,
       practiceStarterFilesKey,
       practiceWorkspaceKey,
+      practiceIdeConfigKey,
     ].join("|");
 
     const existing = useReviewRuntimeStore.getState().exercises[exerciseKeyForTools];
@@ -1005,6 +1011,7 @@ export default function QuizPracticeCard(props: {
     practiceStarterCode,
     practiceStarterFilesKey,
     practiceWorkspaceKey,
+    practiceIdeConfigKey,
     projectStepManifest,
   ]);
 

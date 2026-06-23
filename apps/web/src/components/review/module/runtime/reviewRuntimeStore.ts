@@ -326,6 +326,34 @@ function terminalEvidenceContentKey(value: unknown) {
     });
 }
 
+function stableContentKey(value: unknown): string {
+    const normalize = (input: unknown): unknown => {
+        if (Array.isArray(input)) {
+            return input.map(normalize);
+        }
+
+        if (input && typeof input === "object") {
+            return Object.fromEntries(
+                Object.entries(input as Record<string, unknown>)
+                    .sort(([a], [b]) => a.localeCompare(b))
+                    .map(([key, entry]) => [key, normalize(entry)]),
+            );
+        }
+
+        return input ?? null;
+    };
+
+    try {
+        return JSON.stringify(normalize(value ?? null));
+    } catch {
+        return String(value ?? "null");
+    }
+}
+
+function ideConfigContentKey(value: unknown): string {
+    return stableContentKey(value ?? null);
+}
+
 
 function workspacePathForNode(
     nodes: WorkspaceStateV2["nodes"],
@@ -1954,6 +1982,8 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
                 String(nextExercise.starterHash ?? "") &&
                 terminalEvidenceContentKey((existing as any)?.terminalEvidence) ===
                 terminalEvidenceContentKey((nextExercise as any).terminalEvidence) &&
+                ideConfigContentKey(existing?.ideConfig ?? null) ===
+                ideConfigContentKey(nextExercise.ideConfig ?? null) &&
                 workspaceContentKey(existing.workspace ?? null) ===
                 workspaceContentKey(workspaceForState)
             );
@@ -1962,6 +1992,8 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
                 key: exerciseKey,
                 existingWorkspaceKey: workspaceContentKey(existing?.workspace ?? null),
                 nextWorkspaceKey: workspaceContentKey(nextExercise.workspace ?? null),
+                existingIdeConfigKey: ideConfigContentKey(existing?.ideConfig ?? null),
+                nextIdeConfigKey: ideConfigContentKey(nextExercise.ideConfig ?? null),
                 existingCodeLength: String(existing?.code ?? "").length,
                 nextCodeLength: String(nextExercise.code ?? "").length,
                 existingStatus: existing?.workspaceStatus,

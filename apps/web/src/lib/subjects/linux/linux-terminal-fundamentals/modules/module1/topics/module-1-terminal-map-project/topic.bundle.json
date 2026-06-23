@@ -221,7 +221,7 @@
       "ideConfig": {
         "runnerBackend": "pty",
         "layoutMode": "terminal_workspace",
-        "terminalCwd": "/workspace/park-terminal-map",
+        "terminalCwd": "/workspace",
         "requires": {
           "files": true,
           "multiFile": true,
@@ -373,7 +373,7 @@
       "ideConfig": {
         "runnerBackend": "pty",
         "layoutMode": "terminal_workspace",
-        "terminalCwd": "/workspace/park-terminal-map/requests",
+        "terminalCwd": "/workspace/park-terminal-map",
         "requires": {
           "files": true,
           "multiFile": true,
@@ -525,6 +525,7 @@
       "ideConfig": {
         "runnerBackend": "pty",
         "layoutMode": "terminal_workspace",
+        "terminalCwd": "/workspace/park-terminal-map/requests",
         "requires": {
           "files": true,
           "multiFile": true,

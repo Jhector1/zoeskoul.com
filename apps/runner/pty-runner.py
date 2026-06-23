@@ -83,6 +83,28 @@ def assert_safe_rel_path(p: str) -> str:
     return normalized
 
 
+def resolve_start_cwd() -> str:
+    raw = str(os.environ.get("START_CWD", "") or "").replace("\\", "/").strip()
+
+    if not raw or raw == "/workspace":
+        return "/workspace"
+
+    if not raw.startswith("/workspace/") or "\x00" in raw:
+        return "/workspace"
+
+    rel = raw[len("/workspace/") :]
+    try:
+        safe = assert_safe_rel_path(rel)
+    except SystemExit:
+        return "/workspace"
+
+    target = os.path.join("/workspace", safe)
+    if not os.path.isdir(target):
+        return "/workspace"
+
+    return target
+
+
 def ensure_prepare_dirs(dirs: list[str]) -> None:
     for d in dirs:
         safe = assert_safe_rel_path(d)
@@ -219,7 +241,7 @@ def exec_in_pty(argv: list[str], env: dict[str, str], rows: int, cols: int) -> t
                 make_tty_sane(0)
             except OSError:
                 pass
-            os.chdir("/workspace")
+            os.chdir(resolve_start_cwd())
             os.execvpe(argv[0], argv, env)
         except Exception as e:
             print(str(e), file=sys.stderr)

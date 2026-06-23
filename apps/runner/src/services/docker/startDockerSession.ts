@@ -72,6 +72,31 @@ function normalizePath(input: string) {
     .trim();
 }
 
+function normalizeWorkspaceCwd(cwd: string | undefined) {
+  const normalized = normalizePath(cwd ?? "");
+  if (!normalized || normalized === "/workspace") {
+    return "/workspace";
+  }
+
+  if (!normalized.startsWith("/workspace/")) {
+    throw new Error(`Unsafe cwd: ${cwd}`);
+  }
+
+  const rel = normalized.slice("/workspace/".length);
+  if (!rel) {
+    return "/workspace";
+  }
+
+  const parts = rel.split("/");
+  for (const part of parts) {
+    if (!part || part === "." || part === "..") {
+      throw new Error(`Unsafe cwd: ${cwd}`);
+    }
+  }
+
+  return `/workspace/${parts.join("/")}`;
+}
+
 function entryKind(entry: WorkspaceSyncEntry) {
   return entry.kind === "directory" ? "directory" : "file";
 }
@@ -273,6 +298,11 @@ export async function startDockerSession(
             },
           );
 
+    const sessionCwd =
+      normalized.kind === "shell"
+        ? normalizeWorkspaceCwd(normalized.cwd)
+        : "/workspace";
+
     sessionId = `sess_${crypto.randomUUID()}`;
     const containerName = `zoeskoul_${sessionId}`;
 
@@ -314,6 +344,7 @@ export async function startDockerSession(
         "HISTCONTROL=ignoredups:erasedups",
         "PROMPT_COMMAND=history -a; history -n",
         "UMASK=000",
+        `START_CWD=${sessionCwd}`,
       ],
       Cmd: ["python3", "/opt/runner/pty-runner.py"],
       HostConfig: {

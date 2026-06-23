@@ -52,6 +52,7 @@ const PRACTICE_AUTHORED_CONTRACT_FIELDS = [
     "solutionFiles",
     "expected",
     "messageBase",
+    "ideConfig",
     "language",
     "lang",
 ] as const;

@@ -128,6 +128,70 @@ describe("fetchResolvedPracticeItem localized starter code", () => {
         expect((normalized as any).code).toBe("-- live sql starter\n");
     });
 
+    it("keeps live ideConfig on the current practice item", () => {
+        const normalized = normalizeCurrentPracticeItem(
+            {
+                key: "signed-practice-key",
+                exercise: {
+                    id: "linux-q1",
+                    kind: "code_input",
+                    language: "bash",
+                },
+                code: "",
+                codeLang: "bash",
+                codeStdin: "",
+                stdin: "",
+                single: "",
+                multi: [],
+                num: "",
+                dragA: { x: 0, y: 0, z: 0 },
+                dragB: { x: 0, y: 0, z: 0 },
+                matRows: 0,
+                matCols: 0,
+                mat: [],
+                result: null,
+                submitted: false,
+                text: "",
+                help: {
+                    openedStepKeys: [],
+                    activeStepKey: null,
+                    entries: {},
+                    busyStepKey: null,
+                    error: null,
+                },
+                voiceTranscript: "",
+            } as any,
+            {
+                id: "linux-q1",
+                kind: "code_input",
+                language: "bash",
+            } as any,
+            {
+                language: "bash",
+                ideConfig: {
+                    runnerBackend: "pty",
+                    layoutMode: "terminal_workspace",
+                    terminalSessionScope: "exercise",
+                    terminalCwd: "/workspace/park-terminal-map",
+                    requires: {
+                        files: true,
+                        multiFile: true,
+                        terminal: true,
+                    },
+                },
+            },
+        );
+
+        expect((normalized.exercise as any).ideConfig).toMatchObject({
+            terminalSessionScope: "exercise",
+            terminalCwd: "/workspace/park-terminal-map",
+        });
+        expect((normalized as any).ideConfig).toMatchObject({
+            terminalSessionScope: "exercise",
+            terminalCwd: "/workspace/park-terminal-map",
+        });
+    });
+
     it("hydrates starter-backed runtime workspace snapshots for live multi-file practice items", () => {
         const normalized = normalizeCurrentPracticeItem(
             {

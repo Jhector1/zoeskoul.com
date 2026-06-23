@@ -38,6 +38,24 @@ function assertStrictRelPath(p: string) {
     return normalized;
 }
 
+function normalizeWorkspaceCwd(cwd: string | undefined) {
+    const normalized = normalizeRelPath(cwd ?? "");
+    if (!normalized) return "/workspace";
+    if (normalized === "/workspace") return "/workspace";
+    if (!normalized.startsWith("/workspace/")) {
+        throw new Error(`Unsafe cwd: ${cwd}`);
+    }
+
+    const rel = normalized.slice("/workspace/".length);
+    return `/workspace/${assertStrictRelPath(rel)}`;
+}
+
+function prepareDirsForWorkspaceCwd(cwd: string | undefined) {
+    const normalized = normalizeWorkspaceCwd(cwd);
+    if (normalized === "/workspace") return undefined;
+    return [normalized.slice("/workspace/".length)];
+}
+
 function getJavaMainClass(files: FileEntry[], entryFile: string): string {
     const entry = assertStrictRelPath(entryFile);
     const simpleName = entry.split("/").pop()?.replace(/\.java$/, "") || "Main";
@@ -96,6 +114,7 @@ export function getExecutionPlan(
         case "bash":
             if (shell) {
                 return {
+                    prepareDirs: prepareDirsForWorkspaceCwd(options.cwd),
                     runCmd: [
                         "/bin/bash",
                         "--noprofile",

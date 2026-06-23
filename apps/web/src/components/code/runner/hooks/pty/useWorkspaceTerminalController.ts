@@ -326,6 +326,10 @@ function normalizePath(input: string) {
     return String(input ?? "").replace(/\\/g, "/").trim();
 }
 
+function shellQuotePosix(value: string) {
+    return `'${String(value ?? "").replace(/'/g, `'\\''`)}'`;
+}
+
 function sortEntries(entries: WorkspaceSyncEntry[]): WorkspaceSyncEntry[] {
     return [...entries]
         .map((entry): WorkspaceSyncEntry => {
@@ -711,6 +715,8 @@ export function useWorkspaceTerminalController(
     const pendingInputLineRef = React.useRef("");
     const escapeSequenceRef = React.useRef("");
     const currentCwdRef = React.useRef<string | undefined>(initialEvidenceCwd);
+    const pendingStartupInputRef = React.useRef<string | null>(null);
+    const pendingStartupCwdRef = React.useRef<string | undefined>(undefined);
 
     const ensureHistoryLoaded = React.useCallback(async (): Promise<string> => {
         if (historyLoadPromiseRef.current) {
@@ -970,6 +976,8 @@ export function useWorkspaceTerminalController(
         escapeSequenceRef.current = "";
         terminalProcessExitedRef.current = false;
         terminalExitCodeRef.current = null;
+        pendingStartupInputRef.current = null;
+        pendingStartupCwdRef.current = undefined;
         startedRef.current = false;
         startingRef.current = false;
         stateRef.current = "idle";
@@ -1131,6 +1139,24 @@ export function useWorkspaceTerminalController(
         schedulePostEnterSnapshot(700);
     }, [schedulePostEnterSnapshot]);
 
+    const flushPendingStartupInput = React.useCallback(async (): Promise<void> => {
+        const pending = pendingStartupInputRef.current;
+        if (!pending) return;
+
+        const nextCwd = pendingStartupCwdRef.current;
+        pendingStartupInputRef.current = null;
+        pendingStartupCwdRef.current = undefined;
+        await sendInput(pending);
+
+        if (nextCwd) {
+            currentCwdRef.current = nextCwd;
+            setTerminalEvidenceNow((prev) => ({
+                ...prev,
+                cwd: nextCwd,
+            }));
+        }
+    }, [sendInput, setTerminalEvidenceNow]);
+
     const open = React.useCallback(
         async (options: OpenWorkspaceTerminalOptions = {}): Promise<void> => {
             const userInitiated = options.userInitiated === true;
@@ -1268,6 +1294,22 @@ export function useWorkspaceTerminalController(
                         files: fullEntries,
                     });
 
+                    const normalizedStartCwd = normalizePath(args.cwd ?? "");
+                    if (
+                        normalizedStartCwd &&
+                        normalizedStartCwd !== "/workspace"
+                    ) {
+                        /**
+                         * The runner starts the shell before the synced workspace is
+                         * guaranteed to exist, and some PTY backends can drop input
+                         * that arrives before the shell reaches its interactive
+                         * state. Queue the authored startup cd and flush it only
+                         * after the terminal is ready.
+                         */
+                        pendingStartupInputRef.current = `cd -- ${shellQuotePosix(normalizedStartCwd)}\n`;
+                        pendingStartupCwdRef.current = normalizedStartCwd;
+                    }
+
                     workspaceReadyRef.current = true;
                     lastPushedEntriesRef.current = visibleEntries;
                     startedRef.current = true;
@@ -1280,10 +1322,13 @@ export function useWorkspaceTerminalController(
                         latestTerminalState === "waiting_for_input"
                     ) {
                         setInputEnabled(true);
+                        await flushPendingStartupInput();
                     }
                 } catch (e: any) {
                     const message = e?.message ?? "Failed to start workspace terminal.";
                     const tooManySessions = isTooManySessionsMessage(message);
+                    pendingStartupInputRef.current = null;
+                    pendingStartupCwdRef.current = undefined;
 
                         pushChunk("err", `${message}\r\n`);
                     setTerminalRecovery(normalizeRecoverableTerminalError(message));
@@ -1335,7 +1380,9 @@ export function useWorkspaceTerminalController(
             closeSocket,
             clearStaleStartingTimer,
             clearTerminalRecovery,
+            flushPendingStartupInput,
             setTerminalRecovery,
+            setTerminalEvidenceNow,
         ],
     );
 
@@ -1433,6 +1480,8 @@ export function useWorkspaceTerminalController(
         openInFlightRef.current = null;
         pendingInputLineRef.current = "";
         escapeSequenceRef.current = "";
+        pendingStartupInputRef.current = null;
+        pendingStartupCwdRef.current = undefined;
         terminalProcessExitedRef.current = false;
         terminalExitCodeRef.current = null;
         workspaceReadyRef.current = false;
@@ -1491,6 +1540,8 @@ export function useWorkspaceTerminalController(
             openInFlightRef.current = null;
             recoverInFlightRef.current = null;
             pendingRecoveryInputRef.current = "";
+            pendingStartupInputRef.current = null;
+            pendingStartupCwdRef.current = undefined;
             openedLeaseKeyRef.current = null;
             clearQuietTimer();
             clearStaleStartingTimer();
@@ -1848,6 +1899,10 @@ export function useWorkspaceTerminalController(
                     setStarted(true);
                     setStarting(false);
 
+                    if (workspaceReadyRef.current) {
+                        void flushPendingStartupInput();
+                    }
+
 
                     if (awaitingPostEnterSnapshotRef.current) {
                         schedulePostEnterSnapshot(450);
@@ -1895,6 +1950,10 @@ export function useWorkspaceTerminalController(
                 setInputEnabled(true);
                 setStarted(true);
                 setStarting(false);
+
+                if (workspaceReadyRef.current) {
+                    void flushPendingStartupInput();
+                }
 
                 if (awaitingPostEnterSnapshotRef.current) {
                     schedulePostEnterSnapshot(250);
@@ -1982,6 +2041,7 @@ export function useWorkspaceTerminalController(
         events,
         pushChunk,
         schedulePostEnterSnapshot,
+        flushPendingStartupInput,
         clearStaleStartingTimer,
         scheduleRestartAfterRunnerRecycle,
         setTerminalRecovery,

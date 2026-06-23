@@ -155,6 +155,34 @@ function terminalEvidenceKeyOf(evidence: TerminalEvidence | null | undefined) {
     return JSON.stringify(evidence ?? null);
 }
 
+function stableJsonKey(value: unknown): string {
+    const normalize = (input: unknown): unknown => {
+        if (Array.isArray(input)) {
+            return input.map(normalize);
+        }
+
+        if (input && typeof input === "object") {
+            return Object.fromEntries(
+                Object.entries(input as Record<string, unknown>)
+                    .sort(([a], [b]) => a.localeCompare(b))
+                    .map(([key, entry]) => [key, normalize(entry)]),
+            );
+        }
+
+        return input ?? null;
+    };
+
+    try {
+        return JSON.stringify(normalize(value ?? null));
+    } catch {
+        return String(value ?? "null");
+    }
+}
+
+function learningIdeConfigContentKey(value: LearningIdeConfig | null | undefined) {
+    return stableJsonKey(value ?? null);
+}
+
 export function shouldUseLocalReviewDraft(args: {
     draft: ReviewWorkspaceDraft | null;
     runtimeWorkspace: WorkspaceStateV2 | null | undefined;
@@ -1286,6 +1314,10 @@ export default function CodeToolPane(props: {
 // So force workspace shell whenever review runtime has a ready workspace.
 // Otherwise single-file starter can get stuck in the legacy "single" loading path.
     const usesWorkspaceShell = paneIdeMode.usesWorkspaceShell;
+    const currentIdeConfigKey = useMemo(
+        () => learningIdeConfigContentKey(ideConfig),
+        [ideConfig],
+    );
     const workspaceOwnerKey = resolvedEditorOwnerKey ?? editorExerciseStateKey ?? toolScopeKey ?? boundId ?? "general";
     const workspaceStarterHash = String(
         (resolvedEditorOwnerKey ? (editorRuntime as any)?.starterHash : null) ??
@@ -1307,6 +1339,7 @@ export default function CodeToolPane(props: {
                 sqlSchemaSql: sqlSchemaSql ?? sqlSetupSql ?? "",
                 sqlSeedSql: sqlSeedSql ?? "",
                 workspaceShell: usesWorkspaceShell,
+                ideConfig: currentIdeConfigKey,
             }),
         [
             workspaceOwnerIdentityKey,
@@ -1317,6 +1350,7 @@ export default function CodeToolPane(props: {
             sqlSetupSql,
             effectiveLanguage,
             usesWorkspaceShell,
+            currentIdeConfigKey,
         ],
     );
     const runnerH = Math.max(usesWorkspaceShell ? 480 : 320, size.h);
@@ -2111,7 +2145,13 @@ export default function CodeToolPane(props: {
      *
      * route target -> runtime store workspace -> FullIDE
      */
-    const fullIdeKey = `${workspaceOwnerIdentityKey}:${effectiveLanguage}:${usesWorkspaceShell ? "workspace" : "single"}:${reviewWorkspaceNeedsMultiFile ? "multi" : "mono"}`;
+    const fullIdeKey = [
+        workspaceOwnerIdentityKey,
+        effectiveLanguage,
+        usesWorkspaceShell ? "workspace" : "single",
+        reviewWorkspaceNeedsMultiFile ? "multi" : "mono",
+        currentIdeConfigKey,
+    ].join(":");
     const fullIdeLanguage = asWorkspaceLanguage(effectiveLanguage);
     useEffect(() => {
         if (!boundId) return;
