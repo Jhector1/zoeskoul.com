@@ -103,6 +103,7 @@ const SPLIT_BAR_ACTIVE = "hover:bg-neutral-300/60 focus:bg-neutral-300/60";
 // Short guard only. A 60s module-level claim makes exercise navigation show
 // a blank "Idle" terminal until the learner clicks/presses something.
 const TERMINAL_AUTO_OPEN_COOLDOWN_MS = 2_500;
+const TERMINAL_AUTO_OPEN_DELAY_MS = 180;
 const terminalAutoOpenClaims = new Map<string, number>();
 
 function pruneTerminalAutoOpenClaims(now: number) {
@@ -713,15 +714,28 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
             return;
         }
 
-        terminalAutoOpenRequestedKeyRef.current = terminalAutoOpenKey;
+        let cancelled = false;
 
-        void workspaceTerm.open({ userInitiated: false }).finally(() => {
-            releaseTerminalAutoOpenClaim(terminalAutoOpenKey);
-
-            if (terminalAutoOpenRequestedKeyRef.current === terminalAutoOpenKey) {
-                terminalAutoOpenRequestedKeyRef.current = null;
+        const timer = window.setTimeout(() => {
+            if (cancelled) {
+                return;
             }
-        });
+
+            terminalAutoOpenRequestedKeyRef.current = terminalAutoOpenKey;
+
+            void workspaceTerm.open({ userInitiated: false }).finally(() => {
+                releaseTerminalAutoOpenClaim(terminalAutoOpenKey);
+
+                if (terminalAutoOpenRequestedKeyRef.current === terminalAutoOpenKey) {
+                    terminalAutoOpenRequestedKeyRef.current = null;
+                }
+            });
+        }, TERMINAL_AUTO_OPEN_DELAY_MS);
+
+        return () => {
+            cancelled = true;
+            window.clearTimeout(timer);
+        };
     }, [
         outputTab,
         workspaceTerminalEnabled,

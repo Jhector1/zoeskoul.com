@@ -17,7 +17,7 @@
             "steps": {
               "module-2-notes-organizer-project-terminal-task-1": {
                 "title": "Create the notes intake folders",
-                "prompt": "You are helping a study group organize notes. Create student-notes-organizer/inbox/math.txt and student-notes-organizer/inbox/history.txt as the raw notes arriving for review.",
+                "prompt": "A study group is dropping off two raw note files for sorting. Create `student-notes-organizer/inbox/math.txt` and `student-notes-organizer/inbox/history.txt` so both notes are ready in the intake folder.",
                 "hint": "This is a cumulative project step. Start from the previous workspace and add only the requested change.",
                 "help": {
                   "concept": "Project steps are connected. Preserve earlier deliverables and add one useful new piece of work.",
@@ -28,7 +28,7 @@
               },
               "module-2-notes-organizer-project-terminal-task-2": {
                 "title": "Sort notes and create a backup",
-                "prompt": "Continue from the intake folder. Move math.txt and history.txt into student-notes-organizer/classes, and copy history.txt into student-notes-organizer/backups/history.txt before the handoff.",
+                "prompt": "The study group wants the notes filed before handoff. Move `math.txt` and `history.txt` out of `student-notes-organizer/inbox` and into `student-notes-organizer/classes`, then make a backup copy of `history.txt` at `student-notes-organizer/backups/history.txt`.",
                 "hint": "This is a cumulative project step. Start from the previous workspace and add only the requested change.",
                 "help": {
                   "concept": "Project steps are connected. Preserve earlier deliverables and add one useful new piece of work.",
@@ -39,7 +39,7 @@
               },
               "module-2-notes-organizer-project-terminal-task-3": {
                 "title": "Finish the organizer handoff",
-                "prompt": "Finish the notes organizer. Keep the sorted class notes and backup, then create student-notes-organizer/handoff/notes-ready.txt as the final deliverable.",
+                "prompt": "The notes are sorted and backed up. Leave a clear handoff marker by creating `student-notes-organizer/handoff/notes-ready.txt` while keeping the class notes and backup in place.",
                 "hint": "This is a cumulative project step. Start from the previous workspace and add only the requested change.",
                 "help": {
                   "concept": "Project steps are connected. Preserve earlier deliverables and add one useful new piece of work.",

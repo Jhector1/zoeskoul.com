@@ -160,7 +160,7 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "You are helping a study group organize notes. Create student-notes-organizer/inbox/math.txt and student-notes-organizer/inbox/history.txt as the raw notes arriving for review."
+        "instructions": "Create `student-notes-organizer/inbox/math.txt` and `student-notes-organizer/inbox/history.txt` so the two incoming notes are ready in the intake folder."
       },
       "ideConfig": {
         "runnerBackend": "pty",
@@ -286,7 +286,7 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "Continue from the intake folder. Move math.txt and history.txt into student-notes-organizer/classes, and copy history.txt into student-notes-organizer/backups/history.txt before the handoff."
+        "instructions": "Move `math.txt` and `history.txt` from `student-notes-organizer/inbox` into `student-notes-organizer/classes`, then copy `history.txt` to `student-notes-organizer/backups/history.txt`."
       },
       "ideConfig": {
         "runnerBackend": "pty",
@@ -429,7 +429,7 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "Finish the notes organizer. Keep the sorted class notes and backup, then create student-notes-organizer/handoff/notes-ready.txt as the final deliverable."
+        "instructions": "Create `student-notes-organizer/handoff/notes-ready.txt` while keeping the sorted class notes and backup in place."
       },
       "ideConfig": {
         "runnerBackend": "pty",

@@ -24,6 +24,9 @@ import {
 
 export const runtime = "nodejs";
 
+const ENSURE_START_LOCK_WAIT_ATTEMPTS = 80;
+const ENSURE_START_LOCK_WAIT_DELAY_MS = 250;
+
 type WorkspaceSyncEntry =
     | { kind?: "file"; path: string; content: string }
     | { kind: "directory"; path: string };
@@ -356,8 +359,8 @@ export async function POST(req: NextRequest) {
             const existing = await waitForPtyLeaseByWorkspace({
                 actorKey,
                 workspaceKey,
-                attempts: 15,
-                delayMs: 150,
+                attempts: ENSURE_START_LOCK_WAIT_ATTEMPTS,
+                delayMs: ENSURE_START_LOCK_WAIT_DELAY_MS,
             });
 
             const reusable = await reusableLeaseOrNull({ actorKey, lease: existing });

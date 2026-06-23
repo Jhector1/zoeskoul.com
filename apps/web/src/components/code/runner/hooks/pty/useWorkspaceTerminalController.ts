@@ -35,9 +35,11 @@ type TerminalRecovery = {
 };
 
 const NO_TERMINAL_RECOVERY: TerminalRecovery = { state: "none", message: null };
-const STARTING_STALE_MS = 12_000;
+const STARTING_STALE_MS = 30_000;
 const SOCKET_OPEN_READY_STATE = 1;
 const CLIENT_START_COOLDOWN_MS = 2_500;
+const CLIENT_START_CONTENTION_RETRY_ATTEMPTS = 2;
+const CLIENT_START_CONTENTION_RETRY_DELAY_MS = 900;
 const CLIENT_AUTO_START_RETRY_COOLDOWN_MS = 1_000;
 const CLIENT_RECOVERY_RETRY_COOLDOWN_MS = 6_000;
 const TERMINAL_AUTO_REVIVE_STALE_MS = 60_000;
@@ -61,6 +63,7 @@ const terminalAutoStartAttempts = new Map<string, number>();
 
 const CLIENT_UNMOUNT_CANCEL_GRACE_MS = 5_000;
 const terminalUnmountCancelTimers = new Map<string, number>();
+const terminalLeaseMountGenerations = new Map<string, number>();
 
 function unmountCancelKey(workspaceKey: string, sessionId: string) {
     return `${workspaceKey}::${sessionId}`;
@@ -95,6 +98,16 @@ function scheduleUnmountCancel(args: { workspaceKey: string; sessionId: string }
     }, CLIENT_UNMOUNT_CANCEL_GRACE_MS);
 
     terminalUnmountCancelTimers.set(key, timer);
+}
+
+function claimLeaseMountGeneration(workspaceKey: string) {
+    const next = (terminalLeaseMountGenerations.get(workspaceKey) ?? 0) + 1;
+    terminalLeaseMountGenerations.set(workspaceKey, next);
+    return next;
+}
+
+function currentLeaseMountGeneration(workspaceKey: string) {
+    return terminalLeaseMountGenerations.get(workspaceKey) ?? 0;
 }
 
 type OpenWorkspaceTerminalOptions = {
@@ -258,6 +271,10 @@ async function ensureWorkspaceReadyForInput(args: {
 
 function isTooManySessionsMessage(message: string) {
     return /too many\s+(active\s+sessions|session\s+starts|sessions)/i.test(message);
+}
+
+function isTerminalStartContentionMessage(message: string) {
+    return /terminal\s+is\s+(already|still)\s+starting/i.test(message);
 }
 
 function isStaleRunnerSessionMessage(message: string) {
@@ -573,6 +590,16 @@ async function postJson<T>(url: string, body: unknown): Promise<T> {
     return data as T;
 }
 
+async function cancelWorkspaceSessionSilently(sessionId: string): Promise<void> {
+    try {
+        await fetch(`/api/run/pty/sessions/${encodeURIComponent(sessionId)}/cancel`, {
+            method: "POST",
+        });
+    } catch {
+        // Best effort only. This cleanup runs when a controller unmounts mid-start.
+    }
+}
+
 type SnapshotResponse = {
     ok: true;
     files: WorkspaceSyncEntry[];
@@ -718,6 +745,17 @@ export function useWorkspaceTerminalController(
     const currentCwdRef = React.useRef<string | undefined>(initialEvidenceCwd);
     const pendingStartupInputRef = React.useRef<string | null>(null);
     const pendingStartupCwdRef = React.useRef<string | undefined>(undefined);
+    const mountedRef = React.useRef(false);
+    const leaseMountGenerationRef = React.useRef(0);
+
+    React.useEffect(() => {
+        mountedRef.current = true;
+        leaseMountGenerationRef.current = claimLeaseMountGeneration(terminalLeaseKey);
+
+        return () => {
+            mountedRef.current = false;
+        };
+    }, [terminalLeaseKey]);
 
     const ensureHistoryLoaded = React.useCallback(async (): Promise<string> => {
         if (historyLoadPromiseRef.current) {
@@ -1274,6 +1312,7 @@ export function useWorkspaceTerminalController(
             }
 
             const run = (async (): Promise<void> => {
+                const attemptLeaseGeneration = leaseMountGenerationRef.current;
                 const visibleEntries = getWorkspaceEntries();
                 const historyContent = await ensureHistoryLoaded();
                 const fullEntries = augmentEntriesWithHistory(visibleEntries, historyContent);
@@ -1322,7 +1361,7 @@ export function useWorkspaceTerminalController(
                 try {
                     openedLeaseKeyRef.current = terminalLeaseKey;
 
-                    const nextSessionId = await start({
+                    const startRequest = {
                         kind: "shell",
                         mode: "interactive",
                         language: "bash",
@@ -1330,12 +1369,59 @@ export function useWorkspaceTerminalController(
                         cwd: args.cwd,
                         workspaceKey: terminalLeaseKey,
                         ...(fullEntries.length ? { files: fullEntries as any } : {}),
-                    } as any);
+                    } as any;
+
+                    let nextSessionId: string | null = null;
+
+                    for (let attempt = 0; attempt <= CLIENT_START_CONTENTION_RETRY_ATTEMPTS; attempt += 1) {
+                        try {
+                            nextSessionId = await start(startRequest);
+                            break;
+                        } catch (error: any) {
+                            const message = error?.message ?? String(error ?? "");
+
+                            if (
+                                attempt < CLIENT_START_CONTENTION_RETRY_ATTEMPTS &&
+                                isTerminalStartContentionMessage(message)
+                            ) {
+                                await sleep(CLIENT_START_CONTENTION_RETRY_DELAY_MS * (attempt + 1));
+                                continue;
+                            }
+
+                            throw error;
+                        }
+                    }
+
+                    if (!nextSessionId) {
+                        throw new Error("Terminal session did not finish starting. Restart the terminal to try again.");
+                    }
+
+                    const newerLeaseOwnerMounted =
+                        currentLeaseMountGeneration(terminalLeaseKey) !== attemptLeaseGeneration;
+                    if (!mountedRef.current || newerLeaseOwnerMounted) {
+                        /**
+                         * React can unmount this controller while an automatic terminal
+                         * start is still in flight. If no newer controller for the same
+                         * lease mounted, cancel the orphan session immediately so it does
+                         * not count against the runner limit.
+                         */
+                        if (!newerLeaseOwnerMounted) {
+                            await cancelWorkspaceSessionSilently(nextSessionId);
+                        }
+                        return;
+                    }
 
                     await ensureWorkspaceReadyForInput({
                         sessionId: nextSessionId,
                         files: fullEntries,
                     });
+
+                    if (
+                        !mountedRef.current ||
+                        currentLeaseMountGeneration(terminalLeaseKey) !== attemptLeaseGeneration
+                    ) {
+                        return;
+                    }
 
                     const normalizedStartCwd = normalizePath(args.cwd ?? "");
                     if (
@@ -1483,10 +1569,11 @@ export function useWorkspaceTerminalController(
                 setRestarting(true);
 
                 /**
-                 * User clicked Restart, so this is allowed to bypass recovery.
-                 * Automatic open is still blocked while recoverState !== "none".
+                 * This is automatic recovery, not an explicit learner click.
+                 * It must respect normal start-rate guards so one blocked start
+                 * does not fan out into repeated /sessions/start attempts.
                  */
-                await open({ userInitiated: true });
+                await open();
             } finally {
                 setStopping(false);
                 setRestarting(false);
@@ -1786,7 +1873,7 @@ export function useWorkspaceTerminalController(
 
                     openInFlightRef.current = null;
                     releaseAutomaticTerminalStart(terminalLeaseKey);
-                    await open({ userInitiated: true });
+                    await open();
                 })().catch((error: any) => {
                     setTerminalRecovery({
                         state: "restart_available",

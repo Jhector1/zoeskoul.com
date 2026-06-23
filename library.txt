@@ -168,50 +168,7 @@ ENABLE_JUDGE0=1 ./scripts/compose.sh up -d --force-recreate runner
 
 
 
-cd /opt/zoeskoul/zoe-infra/hosts/runnersleep 30
-                                       ./smoke-test.sh
-                                       Pulling sandbox runtime image into the execution Docker daemon: ghcr.io/jhector1/zoeskoul-runtime:prod
-                                       prod: Pulling from jhector1/zoeskoul-runtime
-                                       Digest: sha256:a9cfb00e78cb568b7305b38ac064777231bd3e3995b1e45b8e8c7aa5e7d299bb
-                                       Status: Image is up to date for ghcr.io/jhector1/zoeskoul-runtime:prod
-                                       ghcr.io/jhector1/zoeskoul-runtime:prod
-                                       Pulling runner stack images...
-                                       [+] pull 5/5
-                                        ✔ Image redis:7-alpine                        Pulled                                                                                                                                                              7.1s
-                                        ✔ Image ghcr.io/jhector1/zoeskoul-runner:prod Pulled                                                                                                                                                              7.1s
-                                        ✔ Image caddy:2-alpine                        Pulled                                                                                                                                                              6.5s
-                                        ✔ Image judge0/judge0:1.13.1                  Pulled                                                                                                                                                             10.3s
-                                        ✔ Image postgres:16-alpine                    Pulled                                                                                                                                                              7.0s
-                                       Starting/recreating runner stack...
-                                       [+] up 6/6
-                                        ✔ Container runner-judge0-db-1     Healthy                                                                                                                                                                        1.5s
-                                        ✔ Container runner-judge0-redis-1  Healthy                                                                                                                                                                        1.5s
-                                        ✔ Container runner-judge0-worker-1 Running                                                                                                                                                                        0.0s
-                                        ✔ Container runner-judge0-1        Healthy                                                                                                                                                                        2.6s
-                                        ✔ Container runner-runner-1        Healthy                                                                                                                                                                        2.6s
-                                        ✔ Container runner-caddy-1         Running                                                                                                                                                                        0.0s
-                                       Current services:
-                                       NAME                     IMAGE                                   COMMAND                  SERVICE         CREATED       STATUS                 PORTS
-                                       runner-caddy-1           caddy:2-alpine                          "caddy run --config …"   caddy           3 hours ago   Up 3 hours             0.0.0.0:80->80/tcp, [::]:80->80/tcp, 0.0.0.0:443->443/tcp, [::]:443->443/tcp, 443/udp, 2019/tcp
-                                       runner-judge0-1          judge0/judge0:1.13.1                    "/api/docker-entrypo…"   judge0          6 hours ago   Up 3 hours (healthy)   2358/tcp
-                                       runner-judge0-db-1       postgres:16-alpine                      "docker-entrypoint.s…"   judge0-db       6 hours ago   Up 3 hours (healthy)   5432/tcp
-                                       runner-judge0-redis-1    redis:7-alpine                          "docker-entrypoint.s…"   judge0-redis    6 hours ago   Up 3 hours (healthy)   6379/tcp
-                                       runner-judge0-worker-1   judge0/judge0:1.13.1                    "/api/docker-entrypo…"   judge0-worker   6 hours ago   Up 3 hours             2358/tcp
-                                       runner-runner-1          ghcr.io/jhector1/zoeskoul-runner:prod   "docker-entrypoint.s…"   runner          3 hours ago   Up 3 hours (healthy)   4001/tcp
-                                       Pruning unused images...
-                                       Done. Run ./smoke-test.sh next.
-                                       Checking docker services...
-                                       NAME                     IMAGE                                   COMMAND                  SERVICE         CREATED       STATUS                 PORTS
-                                       runner-caddy-1           caddy:2-alpine                          "caddy run --config …"   caddy           3 hours ago   Up 3 hours             0.0.0.0:80->80/tcp, [::]:80->80/tcp, 0.0.0.0:443->443/tcp, [::]:443->443/tcp, 443/udp, 2019/tcp
-                                       runner-judge0-1          judge0/judge0:1.13.1                    "/api/docker-entrypo…"   judge0          6 hours ago   Up 3 hours (healthy)   2358/tcp
-                                       runner-judge0-db-1       postgres:16-alpine                      "docker-entrypoint.s…"   judge0-db       6 hours ago   Up 3 hours (healthy)   5432/tcp
-                                       runner-judge0-redis-1    redis:7-alpine                          "docker-entrypoint.s…"   judge0-redis    6 hours ago   Up 3 hours (healthy)   6379/tcp
-                                       runner-judge0-worker-1   judge0/judge0:1.13.1                    "/api/docker-entrypo…"   judge0-worker   6 hours ago   Up 3 hours             2358/tcp
-                                       runner-runner-1          ghcr.io/jhector1/zoeskoul-runner:prod   "docker-entrypoint.s…"   runner          3 hours ago   Up 3 hours (healthy)   4001/tcp
-                                       Checking runner health internally...
-                                       Checking runner public HTTPS...
-                                       curl: (35) error:0A000126:SSL routines::unexpected eof while reading
-                                       jean@jean-VirtualBox:/opt/zoeskoul/zoe-infra/hosts/runner$
+cd /opt/zoeskoul/zoe-infra/hosts/runner
 docker compose down
 docker compose up -d
 sleep 30

@@ -136,11 +136,10 @@ export function useReviewReset({
         useReviewRuntimeStore.getState().clearRuntimeForTopic(tid);
         clearReviewWorkspaceDrafts();
 
-        setProgress((currentProgress: any) => {
-            const next = buildResetTopicProgress(currentProgress, tid);
-            flushNow(next);
-            return next;
-        });
+        const next = buildResetTopicProgress(progress, tid);
+
+        setProgress(next);
+        flushNow(next);
 
         setActiveTopicId(tid);
         setViewTopicId(tid);
@@ -159,6 +158,7 @@ export function useReviewReset({
         setViewTopicId,
         flushNow,
         cancelPendingChange,
+        progress,
         onAfterResetModule,
         onAfterResetTopic,
     ]);

@@ -167,22 +167,47 @@ function applyMoveOrCopyHint(args: {
     destinationPath: string;
 }) {
     const sourcePath = normalizeTerminalWorkspacePath(args.sourcePath);
+    const rawDestinationPath = normalizeTerminalWorkspacePath(args.destinationPath);
+
+    if (!sourcePath) return;
+
+    const sourceFiles = args.state.filesUnder(sourcePath);
+    const sourceFolders = args.state.foldersUnder(sourcePath);
+    const sourceHasConcreteEntry =
+        args.state.hasFile(sourcePath) ||
+        args.state.hasFolder(sourcePath) ||
+        sourceFiles.length > 0 ||
+        sourceFolders.length > 0;
+    const destinationLooksLikeFile =
+        !!rawDestinationPath && /\/?[^/]+\.[^/]+$/.test(rawDestinationPath);
+
+    /**
+     * Terminal workspace hints are a fallback for slightly stale UI state.
+     * They should not invent files from failed mv/cp commands.
+     *
+     * If the source path does not exist in the known workspace snapshot, treat
+     * the command as non-authoritative unless the destination is clearly a file
+     * path. That still lets us recover from stale UI snapshots in file-to-file
+     * move/copy flows, while avoiding fake "folder as file" paths like
+     * student-notes-organizer/classes after a typoed mv source.
+     */
+    if (!sourceHasConcreteEntry && !destinationLooksLikeFile) {
+        return;
+    }
+
     const destinationPath = destinationForShellMoveOrCopy({
         state: args.state,
         sourcePath: args.sourcePath,
         destinationPath: args.destinationPath,
     });
 
-    if (!sourcePath || !destinationPath) return;
-
-    const sourceFiles = args.state.filesUnder(sourcePath);
-    const sourceFolders = args.state.foldersUnder(sourcePath);
+    if (!destinationPath) return;
 
     const sourceLooksLikeFile =
         args.state.hasFile(sourcePath) ||
-        (!args.state.hasFolder(sourcePath) && /\/?[^/]+\.[^/]+$/.test(sourcePath));
+        (!sourceHasConcreteEntry && destinationLooksLikeFile);
 
-    if (args.command === "mv") {
+    if (args.command === "mv" && sourceHasConcreteEntry) {
         args.state.removePath(sourcePath);
     }
 

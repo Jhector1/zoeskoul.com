@@ -4,7 +4,10 @@ import * as React from "react";
 import type {RunResult, WorkspaceSyncEntry} from "@/lib/code/types";
 import type { WorkspaceStateV2 } from "@/components/ide/types";
 import type { TermLine, OnRun, RunnerState } from "../types";
-import { serializeWorkspaceForCodeRun } from "@/lib/code/workspaceSubmission";
+import {
+    replaceEntryFileContent,
+    serializeWorkspaceForCodeRun,
+} from "@/lib/code/workspaceSubmission";
 import { cleanTermText, toLines } from "../utils/text";
 import { inferInputPlan } from "../utils/input";
 import { expandPrompts, prettyPrompt, splitStdoutByPrompts } from "../utils/prompts";
@@ -622,7 +625,17 @@ export function useTerminalRunner(args: {
 
             try {
                 const runCode = getRunCode();
-                const workspaceSubmission = serializeWorkspaceForCodeRun(workspace);
+                const rawWorkspaceSubmission = serializeWorkspaceForCodeRun(workspace);
+                const workspaceSubmission = rawWorkspaceSubmission
+                    ? {
+                        ...rawWorkspaceSubmission,
+                        files: replaceEntryFileContent({
+                            entry: rawWorkspaceSubmission.entry,
+                            files: rawWorkspaceSubmission.files,
+                            content: runCode,
+                        }),
+                    }
+                    : null;
 
                 if (mountedRef.current) {
                     setRunState((prev) => (prev === "canceling" ? "canceling" : "running"));

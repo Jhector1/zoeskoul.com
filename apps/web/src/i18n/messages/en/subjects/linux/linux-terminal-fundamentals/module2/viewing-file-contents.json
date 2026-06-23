@@ -27,10 +27,10 @@
             "exercises": {
               "viewing-file-contents-try-it-1": {
                 "title": "Terminal task: read a file with cat",
-                "prompt": "Use only the viewing command from this sketch. Run `cat cafe/menu.txt` to print the whole file. Do not copy or create files.",
+                "prompt": "Read the full menu by running `cat cafe/menu.txt` in the terminal.",
                 "hint": "Use the exact folders and file names from the prompt, then run ls, cat, or find to verify your work.",
                 "help": {
-                  "concept": "A Try It task is a small hands-on step connected to the sketch you just read.",
+                  "concept": "A Try It task lets you practice the command from the lesson in a real workspace.",
                   "hint_1": "Create parent folders before creating or moving files.",
                   "hint_2": "Check your work with ls, cat, or find before clicking Check."
                 },
@@ -38,10 +38,10 @@
               },
               "viewing-file-contents-try-it-2": {
                 "title": "Terminal task: preview with head and tail",
-                "prompt": "Use the preview commands from this sketch. Run `head logs/event.log`, then run `tail logs/event.log`. Do not save the output yet.",
+                "prompt": "Preview the log by running `head logs/event.log`, then `tail logs/event.log`.",
                 "hint": "Use the exact folders and file names from the prompt, then run ls, cat, or find to verify your work.",
                 "help": {
-                  "concept": "A Try It task is a small hands-on step connected to the sketch you just read.",
+                  "concept": "A Try It task lets you practice the command from the lesson in a real workspace.",
                   "hint_1": "Create parent folders before creating or moving files.",
                   "hint_2": "Check your work with ls, cat, or find before clicking Check."
                 },
@@ -49,10 +49,10 @@
               },
               "viewing-file-contents-try-it-3": {
                 "title": "Terminal task: count lines with wc -l",
-                "prompt": "Use the counting command from this sketch. Run `wc -l logs/checklist.txt` to count the lines in the checklist. Do not create files.",
+                "prompt": "Count the lines in the checklist by running `wc -l logs/checklist.txt`.",
                 "hint": "Use the exact folders and file names from the prompt, then run ls, cat, or find to verify your work.",
                 "help": {
-                  "concept": "A Try It task is a small hands-on step connected to the sketch you just read.",
+                  "concept": "A Try It task lets you practice the command from the lesson in a real workspace.",
                   "hint_1": "Create parent folders before creating or moving files.",
                   "hint_2": "Check your work with ls, cat, or find before clicking Check."
                 },
@@ -155,14 +155,14 @@
             },
             "code-cat-menu": {
               "title": "View a cafe menu file",
-              "prompt": "You are helping a campus cafe manager check a short menu file. In the terminal, display the full contents of `menu.txt` so the terminal output shows every line of the file. This matters because `cat` is the fastest way to read a short text file all at once.",
+              "prompt": "You want to confirm every line in a short menu file. Which result shows that `cat` did the right job?",
               "hint": "Use the command that prints an entire file to the terminal.",
               "help": {
                 "concept": "For short text files, `cat` displays the whole file directly in the terminal so you can inspect every line at once.",
                 "hint_1": "You do not need to change folders or edit the file. Run one command on `menu.txt`.",
                 "hint_2": "Use the command name from this topic that prints the complete contents of a file."
               },
-              "template": "A file-writing code exercise should also ____ so automated tests can check it.",
+              "template": "A command that reads a whole file should ____ so you can see the contents clearly.",
               "choices": [
                 "print an observable result",
                 "hide all output",

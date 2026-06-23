@@ -310,7 +310,7 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "Use ls, cd navigation-practice, and pwd. Do not create files yet."
+        "instructions": "Run `ls`, then `cd navigation-practice`, then `pwd` to confirm the move."
       },
       "ideConfig": {
         "runnerBackend": "pty",
@@ -420,7 +420,7 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "Move into navigation-practice/start, then use cd .. to return to navigation-practice."
+        "instructions": "Move into `navigation-practice/start`, then use `cd ..` to return to `navigation-practice`."
       },
       "ideConfig": {
         "runnerBackend": "pty",
@@ -529,7 +529,7 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "Practice cd ~ by moving into navigation-practice/reports, then returning home."
+        "instructions": "Move into `navigation-practice/reports`, then use `cd ~` to return home."
       },
       "ideConfig": {
         "runnerBackend": "pty",

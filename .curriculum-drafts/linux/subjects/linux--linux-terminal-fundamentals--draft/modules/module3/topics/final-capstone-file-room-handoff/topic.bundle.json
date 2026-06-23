@@ -419,7 +419,7 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "Continue from the inspected inbox. Create agenda, guests, and venue folders, then move agenda.txt, guest-list.txt, and venue.txt into the matching folders."
+        "instructions": "Create `community-file-room/agenda`, `community-file-room/guests`, and `community-file-room/venue`, then move `agenda.txt`, `guest-list.txt`, and `venue.txt` from `community-file-room/inbox` into the matching folders."
       },
       "ideConfig": {
         "runnerBackend": "pty",
@@ -921,6 +921,9 @@
           "community-file-room/handoff/review-summary.txt",
           "community-file-room/venue/venue.txt"
         ],
+        "forbiddenFiles": [
+          "community-file-room/inbox/tmp-scratch.txt"
+        ],
         "requiredFolders": [
           "community-file-room",
           "community-file-room/agenda",
@@ -997,6 +1000,9 @@
             "community-file-room/handoff/review-summary.txt",
             "community-file-room/venue/venue.txt"
           ],
+          "forbiddenFiles": [
+            "community-file-room/inbox/tmp-scratch.txt"
+          ],
           "requiredFolders": [
             "community-file-room",
             "community-file-room/agenda",
@@ -1012,7 +1018,7 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "Finish the capstone. Remove the temporary scratch file, keep all organized handoff files, and create community-file-room/handoff/READY.txt."
+        "instructions": "Remove the temporary scratch file from the inbox, then create `community-file-room/handoff/READY.txt` to mark the handoff as ready."
       },
       "ideConfig": {
         "runnerBackend": "pty",

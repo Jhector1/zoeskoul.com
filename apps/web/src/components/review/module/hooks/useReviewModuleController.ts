@@ -885,6 +885,7 @@ export function useReviewModuleController({
     const moduleV = (progress as any)?.quizVersion ?? 0;
     const topicV = (viewProg as any)?.quizVersion ?? 0;
     const versionStr = `${moduleV}.${topicV}`;
+    const toolsResetKey = `${viewTid}:${versionStr}`;
 
     const scrollSync = useReviewScrollSync({
         subjectSlug,
@@ -1481,7 +1482,7 @@ export function useReviewModuleController({
              * versionStr here can clear the code-input registry while the
              * global tool binding still points at the same exercise.
              */
-            resetKey: viewTid,
+            resetKey: toolsResetKey,
             externalBoundId:
                 activeExerciseTarget?.exerciseStateKey ?? activeExerciseTarget?.exerciseId ?? null,
             ensureVisible: handleEnsureToolsVisible,
@@ -1490,7 +1491,7 @@ export function useReviewModuleController({
         }),
         [
             panels.toolsUiEnabled,
-            viewTid,
+            toolsResetKey,
             activeExerciseTarget?.exerciseStateKey,
             activeExerciseTarget?.exerciseId,
             handleEnsureToolsVisible,

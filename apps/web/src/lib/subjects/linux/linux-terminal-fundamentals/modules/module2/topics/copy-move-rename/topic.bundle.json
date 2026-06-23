@@ -331,7 +331,7 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "Use cp to copy agenda.txt into the existing warmup/backups folder."
+        "instructions": "Copy `sample-inbox/agenda.txt` to `warmup/backups/agenda.txt` and keep the original."
       },
       "ideConfig": {
         "runnerBackend": "pty",
@@ -458,7 +458,7 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "Use mv to move guest-list.txt into the existing warmup/guests folder."
+        "instructions": "Move `sample-inbox/guest-list.txt` to `warmup/guests/guest-list.txt`."
       },
       "ideConfig": {
         "runnerBackend": "pty",
@@ -566,7 +566,7 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "Use mv to rename draft-report.txt to final-report.txt in the same folder."
+        "instructions": "Rename `sample-inbox/draft-report.txt` to `sample-inbox/final-report.txt` in the same folder."
       },
       "ideConfig": {
         "runnerBackend": "pty",

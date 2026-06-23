@@ -17,7 +17,7 @@
             "steps": {
               "final-capstone-file-room-handoff-terminal-task-1": {
                 "title": "Inventory the file-room inbox",
-                "prompt": "You are preparing a community center file-room handoff. Start from the inbox files and create community-file-room/handoff/inventory.txt to prove you inspected what arrived.",
+                "prompt": "You are starting the final event handoff and need a quick record of what arrived. Check the inbox, then create `community-file-room/handoff/inventory.txt` to mark that the intake review happened.",
                 "hint": "This is a cumulative project step. Start from the previous workspace and add only the requested change.",
                 "help": {
                   "concept": "Project steps are connected. Preserve earlier deliverables and add one useful new piece of work.",
@@ -28,7 +28,7 @@
               },
               "final-capstone-file-room-handoff-terminal-task-2": {
                 "title": "Sort agenda, guests, and venue notes",
-                "prompt": "Continue from the inspected inbox. Create agenda, guests, and venue folders, then move agenda.txt, guest-list.txt, and venue.txt into the matching folders.",
+                "prompt": "The inbox still has loose event files. Create `community-file-room/agenda`, `community-file-room/guests`, and `community-file-room/venue`, then move `agenda.txt`, `guest-list.txt`, and `venue.txt` out of `community-file-room/inbox` into their matching folders.",
                 "hint": "This is a cumulative project step. Start from the previous workspace and add only the requested change.",
                 "help": {
                   "concept": "Project steps are connected. Preserve earlier deliverables and add one useful new piece of work.",
@@ -39,7 +39,7 @@
               },
               "final-capstone-file-room-handoff-terminal-task-3": {
                 "title": "Back up the agenda",
-                "prompt": "Protect the important agenda before final cleanup. Copy community-file-room/agenda/agenda.txt to community-file-room/backups/agenda.txt.",
+                "prompt": "Before anyone cleans up the workspace, save a copy of the agenda. Copy `community-file-room/agenda/agenda.txt` to `community-file-room/backups/agenda.txt`.",
                 "hint": "This is a cumulative project step. Start from the previous workspace and add only the requested change.",
                 "help": {
                   "concept": "Project steps are connected. Preserve earlier deliverables and add one useful new piece of work.",
@@ -50,7 +50,7 @@
               },
               "final-capstone-file-room-handoff-terminal-task-4": {
                 "title": "Create a review summary",
-                "prompt": "Use the organized files to create a handoff summary. Write community-file-room/handoff/review-summary.txt after checking the agenda and guest list.",
+                "prompt": "The next volunteer needs a short review note after you check the agenda and guest list. Create `community-file-room/handoff/review-summary.txt` as that summary file.",
                 "hint": "This is a cumulative project step. Start from the previous workspace and add only the requested change.",
                 "help": {
                   "concept": "Project steps are connected. Preserve earlier deliverables and add one useful new piece of work.",
@@ -61,7 +61,7 @@
               },
               "final-capstone-file-room-handoff-terminal-task-5": {
                 "title": "Clean temporary clutter and mark ready",
-                "prompt": "Finish the capstone. Remove the temporary scratch file, keep all organized handoff files, and create community-file-room/handoff/READY.txt.",
+                "prompt": "Finish the event handoff by removing the temporary scratch file from the inbox and creating `community-file-room/handoff/READY.txt` so the workspace clearly shows it is ready.",
                 "hint": "This is a cumulative project step. Start from the previous workspace and add only the requested change.",
                 "help": {
                   "concept": "Project steps are connected. Preserve earlier deliverables and add one useful new piece of work.",

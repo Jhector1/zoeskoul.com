@@ -120,6 +120,11 @@ export default function IdeEditorPane({
                                           onTerminalSyncReady
                                       }: Props) {
     const isWeb = language === "web";
+    const terminalWorkspaceOnly =
+        services.editor.showEditor === false &&
+        services.runner.enableWorkspaceTerminal &&
+        !isSql &&
+        !isWeb;
 
     const schemaSql = React.useMemo(() => {
         const file = nodes.find(
@@ -142,7 +147,7 @@ export default function IdeEditorPane({
     }, [nodes]);
 
     const editorLanguage = React.useMemo(
-        () => resolveEditorLanguage(language, activeFile?.name),
+        () => resolveEditorLanguage(language, activeFile?.name ?? null),
         [language, activeFile?.name],
     );
     const handleBoundCodeChange = React.useCallback(
@@ -190,7 +195,7 @@ export default function IdeEditorPane({
             ) : null}
 
             <div ref={panelRef} className="min-h-0 min-w-0 flex-1 overflow-hidden">
-                {activeFile ? (
+                {activeFile || terminalWorkspaceOnly ? (
                     <div className={cn("h-full overflow-hidden  pt-2", PANEL_CARD_CLASS)}>
                         <CodeRunner
                             frame="plain"
@@ -199,7 +204,7 @@ export default function IdeEditorPane({
                             language={language}
                             editorLanguage={editorLanguage}
                             onChangeLanguage={onChangeLanguage}
-                            code={activeFile.content}
+                            code={activeFile?.content ?? ""}
                             onChangeCode={handleBoundCodeChange}
                             sqlDialect={sqlDialect}
                             onChangeSqlDialect={onChangeSqlDialect}
@@ -220,7 +225,7 @@ export default function IdeEditorPane({
                             showTerminalDockToggle={
                                 services.runner.showTerminalDockToggle && isDesktop
                             }
-                            resetTerminalOnRun={true}
+                            resetTerminalOnRun={!terminalWorkspaceOnly}
                             exerciseStateKey={exerciseStateKey}
                             editorModelKey={
                                 exerciseStateKey

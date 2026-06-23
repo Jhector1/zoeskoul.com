@@ -285,7 +285,7 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "Use mkdir to create the school-notes folder. Do not use touch yet."
+        "instructions": "Create the `school-notes` folder with `mkdir`."
       },
       "ideConfig": {
         "runnerBackend": "pty",
@@ -370,7 +370,7 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "Use mkdir -p to create project-kit/src and project-kit/docs. Do not use touch yet."
+        "instructions": "Use `mkdir -p` to create `project-kit/src` and `project-kit/docs`."
       },
       "ideConfig": {
         "runnerBackend": "pty",
@@ -484,7 +484,7 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "The touch-lab folder already exists. Use touch to create todo.txt and agenda.txt inside it."
+        "instructions": "The `touch-lab` folder already exists. Create `todo.txt` and `agenda.txt` inside it with `touch`."
       },
       "ideConfig": {
         "runnerBackend": "pty",

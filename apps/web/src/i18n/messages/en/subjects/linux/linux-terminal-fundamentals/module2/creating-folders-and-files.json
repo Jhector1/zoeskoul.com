@@ -30,7 +30,7 @@
                 "prompt": "Set up a folder for class notes. Run `mkdir school-notes`.",
                 "hint": "Use the exact folders and file names from the prompt, then run ls, cat, or find to verify your work.",
                 "help": {
-                  "concept": "A Try It task is a small hands-on step connected to the sketch you just read.",
+                  "concept": "A Try It task lets you practice the command from the lesson in a real workspace.",
                   "hint_1": "Create parent folders before creating or moving files.",
                   "hint_2": "Check your work with ls, cat, or find before clicking Check."
                 },
@@ -41,7 +41,7 @@
                 "prompt": "Set up a simple project skeleton. Run `mkdir -p project-kit/src project-kit/docs`.",
                 "hint": "Use the exact folders and file names from the prompt, then run ls, cat, or find to verify your work.",
                 "help": {
-                  "concept": "A Try It task is a small hands-on step connected to the sketch you just read.",
+                  "concept": "A Try It task lets you practice the command from the lesson in a real workspace.",
                   "hint_1": "Create parent folders before creating or moving files.",
                   "hint_2": "Check your work with ls, cat, or find before clicking Check."
                 },
@@ -52,7 +52,7 @@
                 "prompt": "The `touch-lab` folder is ready for two planning files. Run `touch touch-lab/todo.txt touch-lab/agenda.txt`.",
                 "hint": "Use the exact folders and file names from the prompt, then run ls, cat, or find to verify your work.",
                 "help": {
-                  "concept": "A Try It task is a small hands-on step connected to the sketch you just read.",
+                  "concept": "A Try It task lets you practice the command from the lesson in a real workspace.",
                   "hint_1": "Create parent folders before creating or moving files.",
                   "hint_2": "Check your work with ls, cat, or find before clicking Check."
                 },
@@ -139,14 +139,14 @@
             },
             "ci-create-single-folder": {
               "title": "Create a project folder",
-              "prompt": "You are organizing a student workspace for Maya. In the terminal, create a folder named `projects` in the current workspace. Then use a command that lets you verify it exists. The final workspace should contain the `projects` folder, and your terminal history should show that you checked the result.",
-              "hint": "Use the command that creates one folder, then list the current location.",
+              "prompt": "You create a `projects` folder in the terminal and want to prove it worked. Which follow-up action makes the result visible?",
+              "hint": "Choose the action that shows the new folder after you create it.",
               "help": {
                 "concept": "`mkdir` creates a folder in the current directory, and `ls` is a quick way to confirm the folder now appears in the workspace.",
                 "hint_1": "Create exactly one folder named `projects` where you are now.",
                 "hint_2": "After creating `projects`, run a listing command in the same location so the checker can see that you verified it."
               },
-              "template": "A file-writing code exercise should also ____ so automated tests can check it.",
+              "template": "After creating a folder, it helps to ____ so you can verify the change.",
               "choices": [
                 "print an observable result",
                 "hide all output",

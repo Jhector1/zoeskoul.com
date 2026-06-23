@@ -284,7 +284,7 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "Run pwd in the terminal. Do not create files yet."
+        "instructions": "Run `pwd` to see where you are starting."
       },
       "ideConfig": {
         "runnerBackend": "pty",
@@ -388,7 +388,7 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "Run ls in the terminal to see the current folder contents. Do not create files yet."
+        "instructions": "Run `ls` to see what is in the current folder."
       },
       "ideConfig": {
         "runnerBackend": "pty",
@@ -496,7 +496,7 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "Run pwd, then ls, to inspect your workspace. Do not create files yet."
+        "instructions": "Run `pwd`, then `ls`, to get oriented in the workspace."
       },
       "ideConfig": {
         "runnerBackend": "pty",

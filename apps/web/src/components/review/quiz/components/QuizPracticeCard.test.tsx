@@ -293,7 +293,6 @@ describe("QuizPracticeCard project-step fallback", () => {
         const staleExercise = makeCodeInputExercise(
             {
                 id: "module-1-terminal-map-project-terminal-task-2",
-                exerciseKey: "module-1-terminal-map-project-terminal-task-2",
                 language: "bash" as any,
                 ideConfig: {
                     runnerBackend: "pty",

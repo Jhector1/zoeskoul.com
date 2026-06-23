@@ -121,29 +121,29 @@
           "tryIt": {
             "exercises": {
               "what-the-terminal-is-try-it-1": {
-                "prompt": "You just opened a shared workspace. Run `pwd` to see which folder you are in.",
+                "prompt": "You just opened a shared workspace. Run `pwd` to see where you are starting.",
                 "title": "Terminal task: run pwd"
               },
               "what-the-terminal-is-try-it-2": {
                 "title": "Terminal task: run ls",
-                "prompt": "You are checking what is in the current workspace. Run `ls` to list the files and folders here."
+                "prompt": "Take a quick look around. Run `ls` to see what is in the current folder."
               },
               "what-the-terminal-is-try-it-3": {
                 "title": "Terminal task: ask where and what",
-                "prompt": "Before you touch anything in a new workspace, get oriented. Run `pwd`, then `ls`."
+                "prompt": "Before you change anything, get oriented. Run `pwd`, then `ls`."
               }
             },
             "try_what_the_terminal_is_sketch0": {
               "title": "Try it yourself: run pwd",
-              "prompt": "Run `pwd` and notice how the terminal answers with your current folder."
+              "prompt": "Run `pwd` to see your current folder."
             },
             "try_what_the_terminal_is_sketch1": {
               "title": "Try it yourself: run ls",
-              "prompt": "Run `ls` and notice how the terminal lists what is in the current folder."
+              "prompt": "Run `ls` to list what is in the current folder."
             },
             "try_what_the_terminal_is_sketch2": {
               "title": "Try it yourself: run pwd then ls",
-              "prompt": "Run `pwd`, then `ls`, to check where you are before you start working."
+              "prompt": "Run `pwd`, then `ls`, to see where you are before you start working."
             }
           }
         }

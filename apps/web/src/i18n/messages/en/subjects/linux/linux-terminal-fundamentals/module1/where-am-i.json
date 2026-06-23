@@ -124,9 +124,9 @@
               "where-am-i-try-it-1": {
                 "title": "Terminal task: check your location with pwd",
                 "prompt": "You just opened a project folder. Run `pwd` to check your current location.",
-                "hint": "Use the exact folders and file names from the prompt, then run ls, cat, or find to verify your work.",
+                "hint": "Run the command named in the prompt. No files need to be created or changed here.",
                 "help": {
-                  "concept": "A Try It task is a small hands-on step connected to the sketch you just read.",
+                  "concept": "A Try It task lets you practice the command from the lesson in a real workspace.",
                   "hint_1": "Create parent folders before creating or moving files.",
                   "hint_2": "Check your work with ls, cat, or find before clicking Check."
                 },
@@ -135,9 +135,9 @@
               "where-am-i-try-it-2": {
                 "title": "Terminal task: list the current folder with ls",
                 "prompt": "You are about to start work in this folder. Run `ls` to see what is already here.",
-                "hint": "Use the exact folders and file names from the prompt, then run ls, cat, or find to verify your work.",
+                "hint": "Run the command named in the prompt. This task is only about checking what is already here.",
                 "help": {
-                  "concept": "A Try It task is a small hands-on step connected to the sketch you just read.",
+                  "concept": "A Try It task lets you practice the command from the lesson in a real workspace.",
                   "hint_1": "Create parent folders before creating or moving files.",
                   "hint_2": "Check your work with ls, cat, or find before clicking Check."
                 },
@@ -146,9 +146,9 @@
               "where-am-i-try-it-3": {
                 "title": "Terminal task: orient with pwd and ls",
                 "prompt": "Start like a careful teammate. Run `pwd`, then `ls`, to orient yourself before making changes.",
-                "hint": "Use the exact folders and file names from the prompt, then run ls, cat, or find to verify your work.",
+                "hint": "Use `pwd` first, then `ls`, just like the prompt asks.",
                 "help": {
-                  "concept": "A Try It task is a small hands-on step connected to the sketch you just read.",
+                  "concept": "A Try It task lets you practice the command from the lesson in a real workspace.",
                   "hint_1": "Create parent folders before creating or moving files.",
                   "hint_2": "Check your work with ls, cat, or find before clicking Check."
                 },

@@ -1,0 +1,462 @@
+{
+  "topicId": "module-2-notes-organizer-project",
+  "subjectSlug": "linux-terminal-fundamentals",
+  "moduleSlug": "linux-module-2-files-and-folders",
+  "sectionSlug": "linux-terminal-fundamentals-linux-module-2-project",
+  "prefix": "linux_module_2",
+  "minutes": 24,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "bash",
+    "supportsTerminal": true,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "topic": {
+    "labelKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.label",
+    "summaryKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.cards.sketch0.title",
+      "sketchId": "project-synopsis",
+      "height": 420
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "module_2_notes_organizer_project_terminal_task_1",
+            "titleKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-1.title",
+            "exerciseKey": "module-2-notes-organizer-project-terminal-task-1",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "module_2_notes_organizer_project_terminal_task_2",
+            "titleKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2.title",
+            "exerciseKey": "module-2-notes-organizer-project-terminal-task-2",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "module_2_notes_organizer_project_terminal_task_3",
+            "titleKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.title",
+            "exerciseKey": "module-2-notes-organizer-project-terminal-task-3",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "project-synopsis",
+      "archetype": "paragraph",
+      "titleKey": "sketches.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.project-synopsis.title",
+      "bodyKey": "sketches.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.project-synopsis.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "module-2-notes-organizer-project-terminal-task-1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-1",
+      "language": "bash",
+      "starterCode": "# Use the terminal for this Linux project step.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Use the terminal for this Linux project step.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "mkdir -p student-notes-organizer/inbox\nprintf 'Math review notes\\n' > student-notes-organizer/inbox/math.txt\nprintf 'History reading notes\\n' > student-notes-organizer/inbox/history.txt\nfind student-notes-organizer -maxdepth 2 -type f | sort\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "student-notes-organizer/inbox/math.txt",
+          "content": "Math review notes\n",
+          "language": "bash"
+        },
+        {
+          "path": "student-notes-organizer/inbox/history.txt",
+          "content": "History reading notes\n",
+          "language": "bash"
+        }
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "student-notes-organizer/inbox/history.txt",
+          "student-notes-organizer/inbox/math.txt"
+        ],
+        "requiredFolders": [
+          "student-notes-organizer",
+          "student-notes-organizer/inbox"
+        ]
+      },
+      "terminalExpectations": {
+        "forbiddenCommands": [
+          {
+            "pattern": "(^|\\s)sudo(\\s|$)",
+            "message": "Do not use sudo for beginner workspace tasks."
+          }
+        ]
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "starterCode": "# Use the terminal for this Linux project step.",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "# Use the terminal for this Linux project step.\n",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "student-notes-organizer/inbox/history.txt",
+            "student-notes-organizer/inbox/math.txt"
+          ],
+          "requiredFolders": [
+            "student-notes-organizer",
+            "student-notes-organizer/inbox"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "Set up the intake folder by creating `student-notes-organizer/inbox/math.txt` and `student-notes-organizer/inbox/history.txt`."
+      },
+      "ideConfig": {
+        "runnerBackend": "pty",
+        "layoutMode": "terminal_workspace",
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalSessionScope": "project"
+      }
+    },
+    {
+      "id": "module-2-notes-organizer-project-terminal-task-2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2",
+      "language": "bash",
+      "starterCode": "# Use the terminal for this Linux project step.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Use the terminal for this Linux project step.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "student-notes-organizer/inbox/math.txt",
+          "content": "Math review notes\n",
+          "language": "bash"
+        },
+        {
+          "path": "student-notes-organizer/inbox/history.txt",
+          "content": "History reading notes\n",
+          "language": "bash"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "mkdir -p student-notes-organizer/classes student-notes-organizer/backups\nmv student-notes-organizer/inbox/math.txt student-notes-organizer/classes/math.txt\nmv student-notes-organizer/inbox/history.txt student-notes-organizer/classes/history.txt\ncp student-notes-organizer/classes/history.txt student-notes-organizer/backups/history.txt\nfind student-notes-organizer -maxdepth 2 -type f | sort\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "student-notes-organizer/classes/math.txt",
+          "content": "Math review notes\n",
+          "language": "bash"
+        },
+        {
+          "path": "student-notes-organizer/classes/history.txt",
+          "content": "History reading notes\n",
+          "language": "bash"
+        },
+        {
+          "path": "student-notes-organizer/backups/history.txt",
+          "content": "History reading notes\n",
+          "language": "bash"
+        }
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "student-notes-organizer/backups/history.txt",
+          "student-notes-organizer/classes/history.txt",
+          "student-notes-organizer/classes/math.txt"
+        ],
+        "requiredFolders": [
+          "student-notes-organizer",
+          "student-notes-organizer/backups",
+          "student-notes-organizer/classes",
+          "student-notes-organizer/inbox"
+        ]
+      },
+      "terminalExpectations": {
+        "forbiddenCommands": [
+          {
+            "pattern": "(^|\\s)sudo(\\s|$)",
+            "message": "Do not use sudo for beginner workspace tasks."
+          }
+        ]
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "starterCode": "# Use the terminal for this Linux project step.",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "# Use the terminal for this Linux project step.\n",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "student-notes-organizer/inbox/math.txt",
+            "content": "Math review notes\n",
+            "language": "bash"
+          },
+          {
+            "path": "student-notes-organizer/inbox/history.txt",
+            "content": "History reading notes\n",
+            "language": "bash"
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "student-notes-organizer/backups/history.txt",
+            "student-notes-organizer/classes/history.txt",
+            "student-notes-organizer/classes/math.txt"
+          ],
+          "requiredFolders": [
+            "student-notes-organizer",
+            "student-notes-organizer/backups",
+            "student-notes-organizer/classes",
+            "student-notes-organizer/inbox"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "Sort the notes by moving `math.txt` and `history.txt` into `student-notes-organizer/classes`, then copy `history.txt` to `student-notes-organizer/backups/history.txt`."
+      },
+      "ideConfig": {
+        "runnerBackend": "pty",
+        "layoutMode": "terminal_workspace",
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalSessionScope": "project"
+      }
+    },
+    {
+      "id": "module-2-notes-organizer-project-terminal-task-3",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3",
+      "language": "bash",
+      "starterCode": "# Use the terminal for this Linux project step.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Use the terminal for this Linux project step.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "student-notes-organizer/classes/math.txt",
+          "content": "Math review notes\n",
+          "language": "bash"
+        },
+        {
+          "path": "student-notes-organizer/classes/history.txt",
+          "content": "History reading notes\n",
+          "language": "bash"
+        },
+        {
+          "path": "student-notes-organizer/backups/history.txt",
+          "content": "History reading notes\n",
+          "language": "bash"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "mkdir -p student-notes-organizer/handoff\nprintf 'Notes organizer ready for the study group\\n' > student-notes-organizer/handoff/notes-ready.txt\nfind student-notes-organizer -maxdepth 2 -type f | sort\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "student-notes-organizer/classes/math.txt",
+          "content": "Math review notes\n",
+          "language": "bash"
+        },
+        {
+          "path": "student-notes-organizer/classes/history.txt",
+          "content": "History reading notes\n",
+          "language": "bash"
+        },
+        {
+          "path": "student-notes-organizer/backups/history.txt",
+          "content": "History reading notes\n",
+          "language": "bash"
+        },
+        {
+          "path": "student-notes-organizer/handoff/notes-ready.txt",
+          "content": "Notes organizer ready for the study group\n",
+          "language": "bash"
+        }
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "student-notes-organizer/backups/history.txt",
+          "student-notes-organizer/classes/history.txt",
+          "student-notes-organizer/classes/math.txt",
+          "student-notes-organizer/handoff/notes-ready.txt"
+        ],
+        "requiredFolders": [
+          "student-notes-organizer",
+          "student-notes-organizer/backups",
+          "student-notes-organizer/classes",
+          "student-notes-organizer/handoff"
+        ]
+      },
+      "terminalExpectations": {
+        "forbiddenCommands": [
+          {
+            "pattern": "(^|\\s)sudo(\\s|$)",
+            "message": "Do not use sudo for beginner workspace tasks."
+          }
+        ]
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "starterCode": "# Use the terminal for this Linux project step.",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "# Use the terminal for this Linux project step.\n",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "student-notes-organizer/classes/math.txt",
+            "content": "Math review notes\n",
+            "language": "bash"
+          },
+          {
+            "path": "student-notes-organizer/classes/history.txt",
+            "content": "History reading notes\n",
+            "language": "bash"
+          },
+          {
+            "path": "student-notes-organizer/backups/history.txt",
+            "content": "History reading notes\n",
+            "language": "bash"
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "student-notes-organizer/backups/history.txt",
+            "student-notes-organizer/classes/history.txt",
+            "student-notes-organizer/classes/math.txt",
+            "student-notes-organizer/handoff/notes-ready.txt"
+          ],
+          "requiredFolders": [
+            "student-notes-organizer",
+            "student-notes-organizer/backups",
+            "student-notes-organizer/classes",
+            "student-notes-organizer/handoff"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "Finish the handoff by creating `student-notes-organizer/handoff/notes-ready.txt` while keeping the sorted notes and backup."
+      },
+      "ideConfig": {
+        "runnerBackend": "pty",
+        "layoutMode": "terminal_workspace",
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalSessionScope": "project"
+      }
+    }
+  ],
+  "topicMeta": {
+    "learningGoals": [
+      "Organize a messy notes workspace into useful folders.",
+      "Copy important notes before moving them.",
+      "Create a final handoff marker after checking the workspace."
+    ]
+  },
+  "serviceDefaults": {
+    "runnerBackend": "pty",
+    "layoutMode": "terminal_workspace",
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": true
+    }
+  }
+}

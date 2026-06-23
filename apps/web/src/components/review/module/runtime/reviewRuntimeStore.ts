@@ -2529,6 +2529,12 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
                 }),
             ),
 
+            editorRuntimes: Object.fromEntries(
+                Object.entries(state.editorRuntimes).filter(([, value]) => {
+                    return String((value as any)?.topicId ?? "") !== topicId;
+                }),
+            ),
+
             tool: {
                 ...state.tool,
                 boundExerciseKey:
@@ -2572,6 +2578,15 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
 
             cards: Object.fromEntries(
                 Object.entries(state.cards).filter(([, value]) => {
+                    return !(
+                        String((value as any)?.topicId ?? "") === topicId &&
+                        String((value as any)?.cardId ?? "") === cardId
+                    );
+                }),
+            ),
+
+            editorRuntimes: Object.fromEntries(
+                Object.entries(state.editorRuntimes).filter(([, value]) => {
                     return !(
                         String((value as any)?.topicId ?? "") === topicId &&
                         String((value as any)?.cardId ?? "") === cardId

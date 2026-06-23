@@ -30,7 +30,7 @@
                 "prompt": "The destination folder already exists. Use `cp` to copy `sample-inbox/agenda.txt` to `warmup/backups/agenda.txt` while keeping the original.",
                 "hint": "Use the exact folders and file names from the prompt, then run ls, cat, or find to verify your work.",
                 "help": {
-                  "concept": "A Try It task is a small hands-on step connected to the sketch you just read.",
+                  "concept": "A Try It task lets you practice the command from the lesson in a real workspace.",
                   "hint_1": "Create parent folders before creating or moving files.",
                   "hint_2": "Check your work with ls, cat, or find before clicking Check."
                 },
@@ -41,7 +41,7 @@
                 "prompt": "The destination folder already exists. Use `mv` to move `sample-inbox/guest-list.txt` to `warmup/guests/guest-list.txt`.",
                 "hint": "Use the exact folders and file names from the prompt, then run ls, cat, or find to verify your work.",
                 "help": {
-                  "concept": "A Try It task is a small hands-on step connected to the sketch you just read.",
+                  "concept": "A Try It task lets you practice the command from the lesson in a real workspace.",
                   "hint_1": "Create parent folders before creating or moving files.",
                   "hint_2": "Check your work with ls, cat, or find before clicking Check."
                 },
@@ -52,7 +52,7 @@
                 "prompt": "Use `mv` to rename `sample-inbox/draft-report.txt` to `sample-inbox/final-report.txt` in the same folder.",
                 "hint": "Use the exact folders and file names from the prompt, then run ls, cat, or find to verify your work.",
                 "help": {
-                  "concept": "A Try It task is a small hands-on step connected to the sketch you just read.",
+                  "concept": "A Try It task lets you practice the command from the lesson in a real workspace.",
                   "hint_1": "Create parent folders before creating or moving files.",
                   "hint_2": "Check your work with ls, cat, or find before clicking Check."
                 },
@@ -139,14 +139,14 @@
             },
             "ci-copy-class-notes": {
               "title": "Copy a class notes file",
-              "prompt": "You are helping organize a student's study workspace. In the terminal workspace, there is a file named `class-notes.txt`. Create a copy named `class-notes-backup.txt` in the same folder. Keep the original file too. Use the terminal to complete the task, then click Check Answer.",
+              "prompt": "You want a backup before editing class notes. Which outcome shows that `cp` was used correctly?",
               "hint": "Use `cp` with the original file first and the backup name second.",
               "help": {
                 "concept": "`cp` duplicates a file. The source stays in place, and a new file is created at the destination path.",
                 "hint_1": "You need two files at the end: the original `class-notes.txt` and a new `class-notes-backup.txt`.",
                 "hint_2": "Run a copy command where `class-notes.txt` is the source and `class-notes-backup.txt` is the destination name."
               },
-              "template": "A file-writing code exercise should also ____ so automated tests can check it.",
+              "template": "A correct backup step should ____ so you can see both the original and the copy.",
               "choices": [
                 "print an observable result",
                 "hide all output",
@@ -156,14 +156,14 @@
             },
             "ci-move-report-into-folder": {
               "title": "Move a report into the correct folder",
-              "prompt": "A student saved a report in the wrong place. In the terminal workspace, move `report.txt` into the `submissions` folder. When you finish, `report.txt` should be inside `submissions`, not in the starting folder. Use the terminal to complete the task.",
+              "prompt": "A report belongs in `submissions`, not in the current folder. Which result shows that `mv` was used correctly?",
               "hint": "Use `mv` with the file name and the destination folder.",
               "help": {
                 "concept": "`mv` relocates a file or folder. After moving, the item exists in the new location instead of the old one.",
                 "hint_1": "The destination folder already exists, so you do not need to create it.",
                 "hint_2": "Move `report.txt` so the final path becomes `submissions/report.txt`."
               },
-              "template": "A file-writing code exercise should also ____ so automated tests can check it.",
+              "template": "After moving a file, the best check is to ____ so the new location is visible.",
               "choices": [
                 "print an observable result",
                 "hide all output",

@@ -292,7 +292,7 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "Use cat to print cafe/menu.txt. Do not copy or create files for this Try It."
+        "instructions": "Read the whole file by running `cat cafe/menu.txt`."
       },
       "ideConfig": {
         "runnerBackend": "pty",
@@ -386,7 +386,7 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "Use head and tail to preview logs/event.log. Do not save output to a file yet."
+        "instructions": "Preview the log by running `head logs/event.log`, then `tail logs/event.log`."
       },
       "ideConfig": {
         "runnerBackend": "pty",
@@ -475,7 +475,7 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "Use wc -l to count the lines in logs/checklist.txt. Do not create a file for this Try It."
+        "instructions": "Count the lines in `logs/checklist.txt` with `wc -l`."
       },
       "ideConfig": {
         "runnerBackend": "pty",

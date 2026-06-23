@@ -17,6 +17,7 @@ import { useReviewTools } from "@/components/review/module/context/ReviewToolsCo
 import { RunnerLanguage } from "@zoeskoul/code-contracts";
 import {
     type LearningIdeConfig,
+    mergeLearningIdeConfigs,
     resolveFullIDEConfigFromLearningIde,
 } from "@/lib/ide/learningIdeConfig";
 import { useReviewRuntimeStore } from "@/components/review/module/runtime/reviewRuntimeStore";
@@ -181,6 +182,19 @@ function stableJsonKey(value: unknown): string {
 
 function learningIdeConfigContentKey(value: LearningIdeConfig | null | undefined) {
     return stableJsonKey(value ?? null);
+}
+
+export function resolveEffectiveCodeToolPaneIdeConfig(args: {
+    propIdeConfig?: LearningIdeConfig | null;
+    exerciseIdeConfig?: LearningIdeConfig | null;
+    cardIdeConfig?: LearningIdeConfig | null;
+    isReviewRouteMode: boolean;
+}): LearningIdeConfig | null {
+    const runtimeIdeConfig = args.isReviewRouteMode
+        ? args.exerciseIdeConfig ?? args.cardIdeConfig ?? null
+        : null;
+
+    return mergeLearningIdeConfigs(args.propIdeConfig ?? null, runtimeIdeConfig);
 }
 
 export function shouldUseLocalReviewDraft(args: {
@@ -1136,6 +1150,7 @@ export default function CodeToolPane(props: {
             ? editorOwnerKey.trim()
             : null;
     const resolvedEditorOwnerKey = explicitEditorOwnerKey ?? derivedEditorOwnerKey;
+    const isReviewRouteMode = Boolean(resolvedEditorOwnerKey && hasBindableEditorTarget);
     const editorRuntime = useReviewRuntimeStore((s) =>
         resolvedEditorOwnerKey ? s.editorRuntimes[resolvedEditorOwnerKey] ?? null : null,
     );
@@ -1160,6 +1175,22 @@ export default function CodeToolPane(props: {
                 ? useReviewRuntimeStore.getState().cards[cardRuntimeKey] ?? null
                 : null
         );
+    const cardRuntimeIdeConfig = (cardRuntime as { ideConfig?: LearningIdeConfig | null } | null)?.ideConfig ?? null;
+    const effectivePaneIdeConfig = useMemo(
+        () =>
+            resolveEffectiveCodeToolPaneIdeConfig({
+                propIdeConfig: ideConfig,
+                exerciseIdeConfig: exerciseRuntime?.ideConfig ?? null,
+                cardIdeConfig: cardRuntimeIdeConfig,
+                isReviewRouteMode,
+            }),
+        [
+            ideConfig,
+            exerciseRuntime?.ideConfig,
+            cardRuntimeIdeConfig,
+            isReviewRouteMode,
+        ],
+    );
     const terminalSyncRef = useRef<(() => Promise<boolean>) | null>(null);
 
     const handleTerminalSyncReady = useCallback(
@@ -1236,9 +1267,6 @@ export default function CodeToolPane(props: {
         forceWorkspaceHasContent(normalizedToolWorkspace),
     );
 
-    const isReviewRouteMode = Boolean(resolvedEditorOwnerKey && hasBindableEditorTarget);
-
-
     const runtimeLanguage =
         isReviewRouteMode && typeof exerciseRuntime?.language === "string"
             ? exerciseRuntime.language
@@ -1301,11 +1329,11 @@ export default function CodeToolPane(props: {
     const paneIdeMode = useMemo(
         () =>
             resolveCodeToolPaneFullIdeMode({
-                ideConfig,
+                ideConfig: effectivePaneIdeConfig,
                 reviewDirectWorkspaceReady,
                 effectiveLanguage,
             }),
-        [effectiveLanguage, ideConfig, reviewDirectWorkspaceReady],
+        [effectiveLanguage, effectivePaneIdeConfig, reviewDirectWorkspaceReady],
     );
     const ideShell = paneIdeMode.ideShell;
 
@@ -1315,8 +1343,8 @@ export default function CodeToolPane(props: {
 // Otherwise single-file starter can get stuck in the legacy "single" loading path.
     const usesWorkspaceShell = paneIdeMode.usesWorkspaceShell;
     const currentIdeConfigKey = useMemo(
-        () => learningIdeConfigContentKey(ideConfig),
-        [ideConfig],
+        () => learningIdeConfigContentKey(effectivePaneIdeConfig),
+        [effectivePaneIdeConfig],
     );
     const workspaceOwnerKey = resolvedEditorOwnerKey ?? editorExerciseStateKey ?? toolScopeKey ?? boundId ?? "general";
     const workspaceStarterHash = String(
@@ -2153,6 +2181,10 @@ export default function CodeToolPane(props: {
         currentIdeConfigKey,
     ].join(":");
     const fullIdeLanguage = asWorkspaceLanguage(effectiveLanguage);
+    const effectiveTerminalCwd =
+        typeof effectivePaneIdeConfig?.terminalCwd === "string" && effectivePaneIdeConfig.terminalCwd.trim()
+            ? effectivePaneIdeConfig.terminalCwd.trim()
+            : undefined;
     useEffect(() => {
         if (!boundId) return;
 
@@ -2368,6 +2400,7 @@ export default function CodeToolPane(props: {
                                 ...(ideShell.services.runner ?? {}),
                                 showThemeToggle: true,
                                 showSqlDialectPicker: false,
+                                ...(effectiveTerminalCwd ? { terminalCwd: effectiveTerminalCwd } : {}),
                             },
                         }}
                         initialWorkspace={finalReviewWorkspace}

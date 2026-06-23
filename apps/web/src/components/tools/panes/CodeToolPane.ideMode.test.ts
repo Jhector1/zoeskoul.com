@@ -1,5 +1,8 @@
 import { describe, expect, it } from "vitest";
-import { resolveCodeToolPaneFullIdeMode } from "@/components/tools/panes/CodeToolPane";
+import {
+    resolveCodeToolPaneFullIdeMode,
+    resolveEffectiveCodeToolPaneIdeConfig,
+} from "@/components/tools/panes/CodeToolPane";
 
 describe("resolveCodeToolPaneFullIdeMode", () => {
     it("uses the existing FullIDE workspace shell for terminal_workspace tasks", () => {
@@ -22,6 +25,32 @@ describe("resolveCodeToolPaneFullIdeMode", () => {
         expect(resolved.ideShell.services.editor?.showEditor).toBe(false);
         expect(resolved.ideShell.services.runner?.showTerminal).toBe(true);
         expect(resolved.ideShell.services.runner?.allowRun).toBe(false);
+    });
+
+
+    it("lets route runtime ideConfig override a stale tool ideConfig cwd", () => {
+        const resolved = resolveEffectiveCodeToolPaneIdeConfig({
+            isReviewRouteMode: true,
+            propIdeConfig: {
+                runnerBackend: "pty",
+                layoutMode: "terminal_workspace",
+                terminalCwd: "/workspace",
+                requires: {
+                    files: true,
+                    terminal: true,
+                },
+            },
+            exerciseIdeConfig: {
+                runnerBackend: "pty",
+                layoutMode: "terminal_workspace",
+                terminalCwd: "/workspace/park-terminal-map",
+                terminalSessionScope: "exercise",
+            },
+        });
+
+        expect(resolved?.terminalCwd).toBe("/workspace/park-terminal-map");
+        expect(resolved?.requires?.files).toBe(true);
+        expect(resolved?.terminalSessionScope).toBe("exercise");
     });
 
     it("keeps existing non-terminal file exercises editor-visible", () => {

@@ -27,10 +27,10 @@
             "exercises": {
               "moving-around-try-it-1": {
                 "title": "Terminal task: cd into a folder",
-                "prompt": "A teammate asks you to step into the `navigation-practice` folder. Run `ls`, then `cd navigation-practice`, then `pwd` to confirm you moved.",
-                "hint": "Use the exact folders and file names from the prompt, then run ls, cat, or find to verify your work.",
+                "prompt": "You need to enter the `navigation-practice` folder. Run `ls`, then `cd navigation-practice`, then `pwd` to confirm you moved.",
+                "hint": "List first, move second, then confirm your new location with `pwd`.",
                 "help": {
-                  "concept": "A Try It task is a small hands-on step connected to the sketch you just read.",
+                  "concept": "A Try It task lets you practice the command from the lesson in a real workspace.",
                   "hint_1": "Create parent folders before creating or moving files.",
                   "hint_2": "Check your work with ls, cat, or find before clicking Check."
                 },
@@ -39,9 +39,9 @@
               "moving-around-try-it-2": {
                 "title": "Terminal task: move up with cd ..",
                 "prompt": "Start inside `navigation-practice/start`, then move up one level. Run `cd navigation-practice/start`, `pwd`, `cd ..`, and `pwd` again.",
-                "hint": "Use the exact folders and file names from the prompt, then run ls, cat, or find to verify your work.",
+                "hint": "After `cd ..`, the second `pwd` should show the parent folder.",
                 "help": {
-                  "concept": "A Try It task is a small hands-on step connected to the sketch you just read.",
+                  "concept": "A Try It task lets you practice the command from the lesson in a real workspace.",
                   "hint_1": "Create parent folders before creating or moving files.",
                   "hint_2": "Check your work with ls, cat, or find before clicking Check."
                 },
@@ -50,9 +50,9 @@
               "moving-around-try-it-3": {
                 "title": "Terminal task: return home with cd ~",
                 "prompt": "Jump from a nested folder back to your home folder. Run `cd navigation-practice/reports`, `pwd`, `cd ~`, and `pwd` again.",
-                "hint": "Use the exact folders and file names from the prompt, then run ls, cat, or find to verify your work.",
+                "hint": "Use `~` as the shortcut back to your home folder, then confirm with `pwd`.",
                 "help": {
-                  "concept": "A Try It task is a small hands-on step connected to the sketch you just read.",
+                  "concept": "A Try It task lets you practice the command from the lesson in a real workspace.",
                   "hint_1": "Create parent folders before creating or moving files.",
                   "hint_2": "Check your work with ls, cat, or find before clicking Check."
                 },
@@ -156,14 +156,14 @@
             },
             "q3": {
               "title": "Navigate into a project folder",
-              "prompt": "You are organizing a junior analyst workspace. In the terminal, create a folder named `client-site`, move into it, and confirm the location with `pwd`. This practice matters because `cd` changes where later commands will act.",
-              "hint": "First make the folder, then change into it, then print the current path.",
+              "prompt": "A script changes folders before doing other work. What should it also do so you can confirm it ended up in the right place?",
+              "hint": "Look for the option that makes the folder change visible in the output.",
               "help": {
                 "concept": "A common navigation workflow is create a folder with `mkdir`, enter it with `cd`, and verify the new working directory with `pwd`.",
                 "hint_1": "You need one command to create the folder and another to move into it.",
                 "hint_2": "After entering `client-site`, run the command that prints the current working directory so the terminal output shows the new location."
               },
-              "template": "A file-writing code exercise should also ____ so automated tests can check it.",
+              "template": "A script that changes folders should also ____ so the result is easy to verify.",
               "choices": [
                 "print an observable result",
                 "hide all output",

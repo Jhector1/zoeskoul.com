@@ -1337,12 +1337,11 @@ export function ReviewToolsProvider({
       onUnbindFromToolsPanel?.();
 
       const current = useReviewRuntimeStore.getState().tool.boundExerciseKey;
-      if (externalBoundId) bindExerciseTool(externalBoundId);
-      else if (current) storeUnbindExerciseTool(current);
+      if (current) storeUnbindExerciseTool(current);
     }
 
     lastResetRef.current = resetKey;
-  }, [resetKey, externalBoundId, bindExerciseTool, storeUnbindExerciseTool, onUnbindFromToolsPanel]);
+  }, [resetKey, storeUnbindExerciseTool, onUnbindFromToolsPanel]);
 
   useEffect(() => {
     setBoundId(getInputIdForToolKey((externalBoundId ?? storeBoundId) ?? null) ?? null);
