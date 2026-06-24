@@ -57,6 +57,20 @@ function progressiveStarterCode(args) {
     ].join("\n");
     return ensureTrailingNewline([previousSolution, "", commentBlock].filter(Boolean).join("\n"));
 }
+function progressiveSolutionCode(args) {
+    const currentSolution = normalizeText(args.exercise.solutionCode);
+    if (args.stepNumber === 1 || !args.previousExercise) {
+        return currentSolution;
+    }
+    const previousSolution = normalizeText(args.previousExercise.solutionCode);
+    if (!previousSolution)
+        return currentSolution;
+    if (!currentSolution)
+        return previousSolution;
+    if (currentSolution.includes(previousSolution))
+        return currentSolution;
+    return ensureTrailingNewline([previousSolution, currentSolution].filter(Boolean).join("\n"));
+}
 function resolveEntryFilePath(exercise) {
     const explicit = normalizeText(exercise.entryFilePath);
     if (explicit)
@@ -148,13 +162,24 @@ function mergeProgressiveFiles(args) {
             }
         }
     }
+    const previousPaths = new Set(previousFiles.map((file) => file.path));
+    const currentSolutionPaths = new Set(currentSolutionFiles.map((file) => file.path));
+    const currentStarterFilesForStarter = currentStarterFiles.filter((file) => {
+        if (!file?.path)
+            return false;
+        if (file.path === entryFilePath)
+            return true;
+        if (previousPaths.has(file.path))
+            return true;
+        return !currentSolutionPaths.has(file.path);
+    });
     upsert(previousFiles, "append");
-    upsert(currentStarterFiles, "append");
     if (args.preferCurrentSolutionFiles) {
+        upsert(currentStarterFiles, "append");
         upsert(currentSolutionFiles, "override");
     }
     else {
-        upsert(currentSolutionFiles, "append");
+        upsert(currentStarterFilesForStarter, "append");
     }
     const existingEntry = merged.get(entryFilePath) ??
         currentSolutionFiles.find((file) => file.path === entryFilePath) ??
@@ -180,10 +205,12 @@ export function applyProgressiveProjectFlow(args) {
         args.projectStepIds.length < 1) {
         return args.exercises;
     }
+    const projectConfig = args.projectConfig;
     const stepIndexById = new Map(args.projectStepIds.map((id, index) => [id, index]));
-    const codeInputById = new Map(args.exercises
+    const originalCodeInputById = new Map(args.exercises
         .filter((exercise) => exercise.kind === "code_input")
         .map((exercise) => [exercise.id, exercise]));
+    const transformedCodeInputById = new Map();
     return args.exercises.map((exercise) => {
         const stepIndex = stepIndexById.get(exercise.id);
         if (typeof stepIndex !== "number")
@@ -193,52 +220,60 @@ export function applyProgressiveProjectFlow(args) {
             ...exercise,
             prompt: progressivePrompt({
                 exercise,
-                projectConfig: args.projectConfig,
+                projectConfig,
                 stepNumber,
                 totalSteps: args.projectStepIds.length,
             }),
             hint: progressiveHint(stepNumber),
             help: progressiveHelp({
                 exercise,
-                projectConfig: args.projectConfig,
+                projectConfig,
                 stepNumber,
             }),
         };
         if (exercise.kind !== "code_input") {
             return nextExercise;
         }
-        const previousExercise = stepIndex > 0
-            ? codeInputById.get(args.projectStepIds[stepIndex - 1])
+        const previousStepId = stepIndex > 0 ? args.projectStepIds[stepIndex - 1] : undefined;
+        const previousExercise = previousStepId
+            ? transformedCodeInputById.get(previousStepId) ?? originalCodeInputById.get(previousStepId)
             : undefined;
-        return {
+        const starterCode = progressiveStarterCode({
+            exercise,
+            previousExercise,
+            projectConfig,
+            stepNumber,
+        });
+        const solutionCode = progressiveSolutionCode({
+            exercise,
+            previousExercise,
+            stepNumber,
+        });
+        const transformedExercise = {
             ...nextExercise,
-            starterCode: progressiveStarterCode({
-                exercise,
-                previousExercise,
-                projectConfig: args.projectConfig,
-                stepNumber,
-            }),
+            starterCode,
+            solutionCode,
             ...(previousExercise
                 ? {
                     starterFiles: mergeProgressiveFiles({
                         previousExercise,
                         exercise,
-                        entryContent: progressiveStarterCode({
-                            exercise,
-                            previousExercise,
-                            projectConfig: args.projectConfig,
-                            stepNumber,
-                        }),
+                        entryContent: starterCode,
                         preferCurrentSolutionFiles: false,
                     }),
                     solutionFiles: mergeProgressiveFiles({
                         previousExercise,
-                        exercise,
-                        entryContent: normalizeText(exercise.solutionCode),
+                        exercise: {
+                            ...exercise,
+                            solutionCode,
+                        },
+                        entryContent: solutionCode,
                         preferCurrentSolutionFiles: true,
                     }),
                 }
                 : {}),
         };
+        transformedCodeInputById.set(exercise.id, transformedExercise);
+        return transformedExercise;
     });
 }

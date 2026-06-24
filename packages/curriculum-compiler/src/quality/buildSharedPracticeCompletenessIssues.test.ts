@@ -127,6 +127,7 @@ describe("buildSharedPracticeCompletenessIssues", () => {
     it("rejects generic project titles and missing real-world scenario context", () => {
         const issues = buildSharedPracticeCompletenessIssues({
             seed: makeSeed({
+                title: "Module Project",
                 sectionRole: "module_project",
                 authoringPolicy: {
                     projectRequirements: {

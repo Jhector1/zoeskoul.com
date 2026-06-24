@@ -1,0 +1,81 @@
+{
+  "subjectSlug": "linux--linux-terminal-fundamentals--draft",
+  "generatedAt": "2026-06-22T06:42:20.827Z",
+  "topics": [
+    {
+      "moduleSlug": "linux-module-1-terminal-navigation",
+      "sectionSlug": "linux-module-1-orientation",
+      "topicId": "what-the-terminal-is",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "linux-module-1-terminal-navigation",
+      "sectionSlug": "linux-module-1-orientation",
+      "topicId": "where-am-i",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "linux-module-1-terminal-navigation",
+      "sectionSlug": "linux-module-1-orientation",
+      "topicId": "moving-around",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "linux-module-1-terminal-navigation",
+      "sectionSlug": "linux-module-1-project",
+      "topicId": "module-1-terminal-map-project",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "linux-module-2-files-and-folders",
+      "sectionSlug": "linux-module-2-file-workflow",
+      "topicId": "creating-folders-and-files",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "linux-module-2-files-and-folders",
+      "sectionSlug": "linux-module-2-file-workflow",
+      "topicId": "copy-move-rename",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "linux-module-2-files-and-folders",
+      "sectionSlug": "linux-module-2-file-workflow",
+      "topicId": "viewing-file-contents",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "linux-module-2-files-and-folders",
+      "sectionSlug": "linux-module-2-project",
+      "topicId": "module-2-notes-organizer-project",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "linux-module-3-final-capstone",
+      "sectionSlug": "linux-module-3-capstone",
+      "topicId": "final-capstone-file-room-handoff",
+      "status": "success",
+      "attempts": 3,
+      "retryCodes": [
+        "CRITIQUE_VALIDATION_FAILED",
+        "CRITIQUE_VALIDATION_FAILED"
+      ]
+    }
+  ]
+}

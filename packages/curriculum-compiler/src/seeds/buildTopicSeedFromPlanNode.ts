@@ -282,8 +282,11 @@ export function buildTopicSeedFromPlanNode(args: {
                 topicKind,
             })
             : null;
-    const supportsCodeInputPractice = profile.allowedExerciseKinds.includes("code_input");
     const defaultPractice = profile.practice;
+    const preferredTryItExerciseKind = defaultPractice?.preferredTryItExerciseKind;
+    const supportsPractice = preferredTryItExerciseKind
+        ? profile.allowedExerciseKinds.includes(preferredTryItExerciseKind)
+        : profile.allowedExerciseKinds.length > 0;
     const policyPracticeDefaults = authoringPolicy?.practiceDefaults;
 
     const inheritedPractice = mergePracticeDefaults(
@@ -405,7 +408,7 @@ export function buildTopicSeedFromPlanNode(args: {
         projectConfig,
         authoringPolicy,
         conceptualOnly,
-        supportsCodeInputPractice,
+        supportsPractice,
     });
 
     return {
@@ -471,7 +474,7 @@ function resolvePractice(args: {
     } | null;
     authoringPolicy?: CourseSpec["resolvedAuthoringPolicy"];
     conceptualOnly: boolean;
-    supportsCodeInputPractice: boolean;
+    supportsPractice: boolean;
 }): PracticeConfig | undefined {
     const merged = {
         ...(args.inheritedPractice ?? {}),
@@ -479,7 +482,7 @@ function resolvePractice(args: {
     } as PracticeConfig;
 
     if (
-        !args.supportsCodeInputPractice &&
+        !args.supportsPractice &&
         !args.projectConfig &&
         Object.keys(merged).length === 0
     ) {

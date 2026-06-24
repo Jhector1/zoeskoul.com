@@ -1,5 +1,8 @@
 import type { TopicSeed } from "@zoeskoul/curriculum-contracts";
-import { getCurriculumProfile } from "@zoeskoul/curriculum-profiles";
+import {
+    baseCourseGenerationPolicy,
+    getCurriculumProfile,
+} from "@zoeskoul/curriculum-profiles";
 
 type PromptMode = "authoring" | "repair";
 
@@ -75,6 +78,12 @@ export function renderExerciseKindPromptRules(args: {
     const profile = getCurriculumProfile(args.seed.profileId);
     const lines: string[] = [
         "Exercise-kind contract (generic to specific):",
+        "- Base policy keeps exercise purposes distinct: Try It practice, regular practice, project steps, learner quizzes, and code_input runtime exercises are not interchangeable.",
+        `- Base quiz policy: learner quizzes may use ${baseCourseGenerationPolicy.quiz.allowedKinds.join(", ")}; code_input is not a learner-quiz item by default.`,
+        "- Put code_input items in practice or project-step authoring when required by the seed, not in the learner quiz card.",
+        "- Try It exercises must align with the exact concept just taught and must not introduce commands, APIs, syntax, or concepts not already taught in this topic or earlier topics.",
+        "- Project steps are progressive project work, not isolated practice drills; later steps must build on prior step output.",
+        "",
     ];
 
     for (const rule of GENERIC_EXERCISE_KIND_RULES) {

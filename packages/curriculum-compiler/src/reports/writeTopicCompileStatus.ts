@@ -8,6 +8,8 @@ export async function writeTopicCompileStatus(args: {
     finalAttempt: number;
     errorCode?: string;
     errorMessage?: string;
+    mode?: "generate" | "rebuild-from-drafts" | "upgrade-drafts";
+    sourceDraft?: string;
 }) {
     await fs.mkdir(args.reportDir, { recursive: true });
 

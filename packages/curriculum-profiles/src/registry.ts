@@ -5,6 +5,7 @@ import type {
     RecipeHandler,
 } from "./types.js";
 import type { ExerciseKind } from "@zoeskoul/curriculum-contracts";
+import { applyBaseCourseGenerationPolicy } from "./shared/generationPolicy.js";
 import { buildFixedTestsRecipe } from "./base/recipes/buildFixedTestsRecipe.js";
 import { buildSemanticRecipe } from "./base/recipes/buildSemanticRecipe.js";
 import { buildTemplateIoRecipe } from "./base/recipes/buildTemplateIoRecipe.js";
@@ -41,7 +42,9 @@ function unknownProfileError(profileId: string): Error {
 }
 
 export function listCurriculumProfiles(): CourseProfile[] {
-    return Array.from(profileRegistry.values());
+    return Array.from(profileRegistry.values()).map((profile) =>
+        applyBaseCourseGenerationPolicy(profile),
+    );
 }
 
 export function registerCurriculumProfile(profile: CourseProfile) {
@@ -68,7 +71,7 @@ export function assertCurriculumProfile(profileId: string): CourseProfile {
         throw unknownProfileError(profileId);
     }
 
-    return profile;
+    return applyBaseCourseGenerationPolicy(profile);
 }
 
 export function getCurriculumProfile(profileId: string): CourseProfile {

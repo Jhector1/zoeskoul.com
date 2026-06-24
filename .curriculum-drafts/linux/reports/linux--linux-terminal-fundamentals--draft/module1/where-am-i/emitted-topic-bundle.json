@@ -218,18 +218,18 @@
       "weight": 1,
       "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-1",
       "language": "bash",
-      "starterCode": "# Use the terminal for this Linux task.",
+      "starterCode": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-1.starterCode",
       "starterFiles": [
         {
           "path": "main.sh",
-          "content": "# Use the terminal for this Linux task.\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-1.starterCode",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "orientation-demo/readme.txt",
-          "content": "Use pwd to print your current folder.\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-1.starterFiles.orientation_demo_readme_txt.content",
           "language": "bash"
         }
       ],
@@ -251,31 +251,38 @@
         "requiredCommands": [
           {
             "pattern": "^pwd$",
-            "message": "Run `pwd` to show the current folder."
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-1.terminalExpectations.requiredCommands.0.message"
           }
         ],
         "forbiddenCommands": [
           {
             "pattern": "(^|\\s)sudo(\\s|$)",
-            "message": "Do not use sudo for beginner workspace tasks."
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-1.terminalExpectations.forbiddenCommands.0.message"
           }
         ]
       },
       "workspace": {
         "language": "bash",
         "entryFilePath": "main.sh",
-        "starterCode": "# Use the terminal for this Linux task.",
+        "starterCode": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-1.starterCode",
         "starterFiles": [
           {
             "path": "main.sh",
-            "content": "# Use the terminal for this Linux task.\n",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-1.starterCode",
             "language": "bash",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "orientation-demo/readme.txt",
-            "content": "Use pwd to print your current folder.\n",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-1.starterFiles.orientation_demo_readme_txt.content",
+            "language": "bash"
+          }
+        ],
+        "fixtureFiles": [
+          {
+            "path": "orientation-demo/readme.txt",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-1.starterFiles.orientation_demo_readme_txt.content",
             "language": "bash"
           }
         ]
@@ -284,7 +291,7 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "Run pwd to check where the terminal is. This task only uses pwd."
+        "instructions": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-1.prompt"
       },
       "ideConfig": {
         "runnerBackend": "pty",
@@ -295,7 +302,14 @@
           "terminal": true
         },
         "terminalSessionScope": "exercise"
-      }
+      },
+      "fixtureFiles": [
+        {
+          "path": "orientation-demo/readme.txt",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-1.starterFiles.orientation_demo_readme_txt.content",
+          "language": "bash"
+        }
+      ]
     },
     {
       "id": "where-am-i-try-it-2",
@@ -304,23 +318,23 @@
       "weight": 1,
       "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-2",
       "language": "bash",
-      "starterCode": "# Use the terminal for this Linux task.",
+      "starterCode": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-2.starterCode",
       "starterFiles": [
         {
           "path": "main.sh",
-          "content": "# Use the terminal for this Linux task.\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-2.starterCode",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "orientation-demo/notes.txt",
-          "content": "orientation notes\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-2.starterFiles.orientation_demo_notes_txt.content",
           "language": "bash"
         },
         {
           "path": "orientation-demo/archive/README.txt",
-          "content": "archive folder\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-2.starterFiles.orientation_demo_archive_readme_txt.content",
           "language": "bash"
         }
       ],
@@ -347,7 +361,7 @@
         "requiredCommands": [
           {
             "pattern": "^ls$",
-            "message": "Run `ls` to list the current folder."
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-2.terminalExpectations.requiredCommands.0.message"
           }
         ],
         "outputContains": [
@@ -356,30 +370,42 @@
         "forbiddenCommands": [
           {
             "pattern": "(^|\\s)sudo(\\s|$)",
-            "message": "Do not use sudo for beginner workspace tasks."
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-2.terminalExpectations.forbiddenCommands.0.message"
           }
         ]
       },
       "workspace": {
         "language": "bash",
         "entryFilePath": "main.sh",
-        "starterCode": "# Use the terminal for this Linux task.",
+        "starterCode": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-2.starterCode",
         "starterFiles": [
           {
             "path": "main.sh",
-            "content": "# Use the terminal for this Linux task.\n",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-2.starterCode",
             "language": "bash",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "orientation-demo/notes.txt",
-            "content": "orientation notes\n",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-2.starterFiles.orientation_demo_notes_txt.content",
             "language": "bash"
           },
           {
             "path": "orientation-demo/archive/README.txt",
-            "content": "archive folder\n",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-2.starterFiles.orientation_demo_archive_readme_txt.content",
+            "language": "bash"
+          }
+        ],
+        "fixtureFiles": [
+          {
+            "path": "orientation-demo/notes.txt",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-2.starterFiles.orientation_demo_notes_txt.content",
+            "language": "bash"
+          },
+          {
+            "path": "orientation-demo/archive/README.txt",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-2.starterFiles.orientation_demo_archive_readme_txt.content",
             "language": "bash"
           }
         ]
@@ -388,7 +414,7 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "Run ls to inspect what is in the current folder. This task only uses ls."
+        "instructions": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-2.prompt"
       },
       "ideConfig": {
         "runnerBackend": "pty",
@@ -399,7 +425,19 @@
           "terminal": true
         },
         "terminalSessionScope": "exercise"
-      }
+      },
+      "fixtureFiles": [
+        {
+          "path": "orientation-demo/notes.txt",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-2.starterFiles.orientation_demo_notes_txt.content",
+          "language": "bash"
+        },
+        {
+          "path": "orientation-demo/archive/README.txt",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-2.starterFiles.orientation_demo_archive_readme_txt.content",
+          "language": "bash"
+        }
+      ]
     },
     {
       "id": "where-am-i-try-it-3",
@@ -408,23 +446,23 @@
       "weight": 1,
       "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-3",
       "language": "bash",
-      "starterCode": "# Use the terminal for this Linux task.",
+      "starterCode": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-3.starterCode",
       "starterFiles": [
         {
           "path": "main.sh",
-          "content": "# Use the terminal for this Linux task.\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-3.starterCode",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "reports/summary.txt",
-          "content": "weekly summary\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-3.starterFiles.reports_summary_txt.content",
           "language": "bash"
         },
         {
           "path": "reports/archive/README.txt",
-          "content": "archive\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-3.starterFiles.reports_archive_readme_txt.content",
           "language": "bash"
         }
       ],
@@ -451,11 +489,11 @@
         "requiredCommands": [
           {
             "pattern": "^pwd$",
-            "message": "Run `pwd` before listing files."
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-3.terminalExpectations.requiredCommands.0.message"
           },
           {
             "pattern": "^ls$",
-            "message": "Run `ls` after pwd."
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-3.terminalExpectations.requiredCommands.1.message"
           }
         ],
         "outputContains": [
@@ -464,30 +502,42 @@
         "forbiddenCommands": [
           {
             "pattern": "(^|\\s)sudo(\\s|$)",
-            "message": "Do not use sudo for beginner workspace tasks."
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-3.terminalExpectations.forbiddenCommands.0.message"
           }
         ]
       },
       "workspace": {
         "language": "bash",
         "entryFilePath": "main.sh",
-        "starterCode": "# Use the terminal for this Linux task.",
+        "starterCode": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-3.starterCode",
         "starterFiles": [
           {
             "path": "main.sh",
-            "content": "# Use the terminal for this Linux task.\n",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-3.starterCode",
             "language": "bash",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "reports/summary.txt",
-            "content": "weekly summary\n",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-3.starterFiles.reports_summary_txt.content",
             "language": "bash"
           },
           {
             "path": "reports/archive/README.txt",
-            "content": "archive\n",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-3.starterFiles.reports_archive_readme_txt.content",
+            "language": "bash"
+          }
+        ],
+        "fixtureFiles": [
+          {
+            "path": "reports/summary.txt",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-3.starterFiles.reports_summary_txt.content",
+            "language": "bash"
+          },
+          {
+            "path": "reports/archive/README.txt",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-3.starterFiles.reports_archive_readme_txt.content",
             "language": "bash"
           }
         ]
@@ -496,7 +546,7 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "Run pwd, then ls, to orient yourself before changing anything."
+        "instructions": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-3.prompt"
       },
       "ideConfig": {
         "runnerBackend": "pty",
@@ -507,7 +557,19 @@
           "terminal": true
         },
         "terminalSessionScope": "exercise"
-      }
+      },
+      "fixtureFiles": [
+        {
+          "path": "reports/summary.txt",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-3.starterFiles.reports_summary_txt.content",
+          "language": "bash"
+        },
+        {
+          "path": "reports/archive/README.txt",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-3.starterFiles.reports_archive_readme_txt.content",
+          "language": "bash"
+        }
+      ]
     }
   ],
   "topicMeta": {
@@ -516,5 +578,14 @@
       "Try it yourself: save an ls check",
       "Try it yourself: combine pwd and ls"
     ]
+  },
+  "serviceDefaults": {
+    "runnerBackend": "pty",
+    "layoutMode": "terminal_workspace",
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": true
+    }
   }
 }

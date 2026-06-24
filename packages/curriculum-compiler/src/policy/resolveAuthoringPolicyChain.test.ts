@@ -70,6 +70,45 @@ describe("resolveAuthoringPolicyChain", () => {
     });
 
 
+    it("inherits universal base generation rules before subject/course overrides", async () => {
+        const policy = await resolveAuthoringPolicyChain({
+            subjectSlug: "python",
+            courseSlug: "python-v2",
+            includeProjectPolicy: true,
+        });
+
+        expect(policy.sources[0]).toContain("authoring/shared/generation/platform.policy.json");
+        expect(policy.practiceDefaults).toMatchObject({
+            tryIt: true,
+            requiresTryIt: true,
+            tryItPlacement: "all_sketches",
+        });
+        expect(policy.quizDefaults).toMatchObject({
+            allowCodeInput: false,
+            allowedKinds: [
+                "single_choice",
+                "multi_choice",
+                "drag_reorder",
+                "fill_blank_choice",
+            ],
+        });
+        expect(policy.projectRequirements).toMatchObject({
+            requireOneModuleProjectPerStandardModule: true,
+            requireFinalCapstone: true,
+            projectTopicSketchCount: 1,
+            projectFlowDefault: "progressive",
+            requireStepChaining: true,
+        });
+        expect(policy.exerciseKindRules).toMatchObject({
+            distinguishTryItPractice: true,
+            distinguishRegularPractice: true,
+            distinguishProjectSteps: true,
+            distinguishQuizExercises: true,
+            distinguishCodeInputExercises: true,
+            doNotTreatKindsAsInterchangeable: true,
+        });
+    });
+
     it("resolves Linux shared profile/workspace/validation to shell_task terminal workspace policy", async () => {
         const policy = await resolveAuthoringPolicyChain({
             subjectSlug: "linux",

@@ -59,8 +59,11 @@ describe("bashProfile", () => {
         expect(exercise?.recipe).toEqual({
             type: "shell_task",
             mode: "terminal_workspace",
-            instructions: "Copy notes/today.txt to backups/today.txt.",
+            instructions: "@:quiz.linux.copy.prompt",
         });
+        expect(exercise?.starterCode).toBe("@:quiz.linux.copy.starterCode");
+        expect(exercise?.workspace?.starterCode).toBe("@:quiz.linux.copy.starterCode");
+        expect((exercise?.starterFiles as any)?.[0]?.content).toBe("@:quiz.linux.copy.starterCode");
         expect(exercise?.workspaceExpectations).toEqual({
             requiredFiles: ["backups/today.txt"],
             requiredFolders: ["backups"],

@@ -3,7 +3,7 @@ import {
     getCurriculumProfile,
     registerCurriculumProfile,
     unregisterCurriculumProfile,
-    type CourseProfile, ProjectProfileConfig,
+    type CourseProfile,
 } from "@zoeskoul/curriculum-profiles";
 import { buildMessagesFromDraft } from "./buildMessagesFromDraft.js";
 import { buildTopicBundleFromDraft } from "./buildTopicBundleFromDraft.js";
@@ -83,31 +83,6 @@ function makeSeed(overrides: Record<string, unknown> = {}) {
         ...overrides,
     } as any;
 }
-function makeProjectConfig(
-    overrides: Partial<ProjectProfileConfig> = {},
-): ProjectProfileConfig {
-    return {
-        preferredProjectExerciseKind: "code_input",
-        minStepCount: 3,
-        targetStepCount: 3,
-        allowReveal: true,
-        tryItDefault: {
-            enabled: true,
-            sketchIndex: 0,
-            allowReveal: true,
-        },
-        projectFlowDefault: "progressive",
-        projectTitle: "Module Project",
-        projectStepLabel: "Project step",
-        startPromptPrefix: "Start the module project.",
-        continuePromptPrefix:
-            "Continue the same module project from the previous working step.",
-        helpConcept:
-            "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
-        ...overrides,
-    };
-}
-
 function makeMultiSketchTryItDraft(sketchCount = 3) {
     return {
         title: "Attributes and Init",
@@ -165,7 +140,6 @@ describe("buildMessagesFromDraft", () => {
         const messages = buildMessagesFromDraft({
             shape: makeShape(),
             seed: makeSeed({
-                sectionRole: "module_project",
                 practice: {
                     tryIt: true,
                     tryItExerciseId: "code-1",
@@ -432,11 +406,11 @@ describe("buildMessagesFromDraft", () => {
         expect(
             moduleProjectMessages.topics?.["python-v2"]?.["python-v2-1"]?.["helper-modules"]?.cards
                 ?.project?.title,
-        ).toBe("Module Project");
+        ).toBe("Real-World Module Project");
         expect(
             capstoneMessages.topics?.["python-v2"]?.["python-v2-1"]?.["helper-modules"]?.cards
                 ?.project?.title,
-        ).toBe("Final Capstone Project");
+        ).toBe("Real-World Final Capstone");
     });
 
     it("does not emit quiz title for capstone topics", () => {
@@ -493,6 +467,219 @@ describe("buildMessagesFromDraft", () => {
         ).toBeUndefined();
     });
 
+    it("emits code_input instructions into messages when authored", () => {
+        const messages = buildMessagesFromDraft({
+            shape: makeShape(),
+            seed: makeSeed(),
+            draft: {
+                title: "Topic",
+                summary: "Summary",
+                minutes: 10,
+                sketchBlocks: [],
+                quizDraft: [
+                    {
+                        id: "bash-1",
+                        kind: "code_input",
+                        title: "Use the terminal",
+                        prompt: "Prompt text",
+                        starterCode: "# start\n",
+                        solutionCode: "pwd\n",
+                        fixedLanguage: "bash",
+                        recipeType: "shell_task",
+                        instructions: "Run pwd in the terminal.",
+                        hint: "Hint",
+                        help: { concept: "Concept", hint_1: "Hint 1", hint_2: "Hint 2" },
+                    },
+                ],
+            } as any,
+        }) as any;
+
+        expect(
+            messages.topics?.["python-v2"]?.["python-v2-1"]?.["helper-modules"]?.practice?.[
+                "bash-1"
+            ]?.instructions,
+        ).toBe(
+            "Run pwd in the terminal.",
+        );
+    });
+
+    it("emits starter code and starter file content into messages", () => {
+        const messages = buildMessagesFromDraft({
+            shape: makeShape(),
+            seed: makeSeed(),
+            draft: {
+                title: "Topic",
+                summary: "Summary",
+                minutes: 10,
+                sketchBlocks: [],
+                quizDraft: [
+                    {
+                        id: "read-nested-file",
+                        kind: "code_input",
+                        title: "Read nested file",
+                        prompt: "Prompt text",
+                        starterCode: "# Write your answer below\n",
+                        starterFiles: [
+                            {
+                                path: "src/main.py",
+                                content: "# Write your answer below\n",
+                                isEntry: true,
+                            },
+                            {
+                                path: "helpers/formatting.py",
+                                content: "def clean(text):\n    return text.strip()\n",
+                            },
+                        ],
+                        solutionCode: "print('ok')\n",
+                        tests: [
+                            { stdout: "ok\n", match: "exact" },
+                            { stdout: "ok\n", match: "exact" },
+                        ],
+                        hint: "Hint",
+                        help: { concept: "Concept", hint_1: "Hint 1", hint_2: "Hint 2" },
+                    },
+                ],
+            } as any,
+        }) as any;
+
+        const exerciseMessages = messages.topics?.["python-v2"]?.["python-v2-1"]?.[
+            "helper-modules"
+        ]?.practice?.["read-nested-file"];
+
+        expect(exerciseMessages?.starterCode).toBe("# Write your answer below\n");
+        expect(exerciseMessages?.starterFiles?.src_main_py?.content).toBe(
+            "# Write your answer below\n",
+        );
+        expect(exerciseMessages?.starterFiles?.helpers_formatting_py?.content).toContain(
+            "def clean",
+        );
+    });
+
+    it("emits progressive project starter code into messages", () => {
+        const messages = buildMessagesFromDraft({
+            shape: makeShape(),
+            seed: makeSeed({
+                sectionRole: "module_project",
+                practice: {
+                    projectFlow: "progressive",
+                },
+            }),
+            draft: {
+                title: "Project topic",
+                summary: "Summary",
+                minutes: 15,
+                sketchBlocks: [],
+                quizDraft: [
+                    {
+                        id: "step-1",
+                        kind: "code_input",
+                        title: "Step 1",
+                        prompt: "Create the first working version.",
+                        starterCode: "# start\n",
+                        solutionCode: "print('step 1 done')\n",
+                        tests: [
+                            { stdout: "step 1 done\n", match: "exact" },
+                            { stdout: "step 1 done\n", match: "exact" },
+                        ],
+                        hint: "Hint",
+                        help: { concept: "Concept", hint_1: "Hint 1", hint_2: "Hint 2" },
+                    },
+                    {
+                        id: "step-2",
+                        kind: "code_input",
+                        title: "Step 2",
+                        prompt: "Add the next feature.",
+                        starterCode: "# fresh\n",
+                        solutionCode: "print('step 2 done')\n",
+                        tests: [
+                            { stdout: "step 2 done\n", match: "exact" },
+                            { stdout: "step 2 done\n", match: "exact" },
+                        ],
+                        hint: "Hint",
+                        help: { concept: "Concept", hint_1: "Hint 1", hint_2: "Hint 2" },
+                    },
+                ],
+            } as any,
+        }) as any;
+
+        const starterCode = messages.topics?.["python-v2"]?.["python-v2-1"]?.[
+            "helper-modules"
+        ]?.moduleProject?.steps?.step_2?.starterCode;
+
+        expect(starterCode).toContain("print('step 1 done')");
+        expect(starterCode).toContain("# Project step 2: Step 2");
+    });
+
+    it("uses the cumulative previous solution as the progressive starter for later project steps", () => {
+        const messages = buildMessagesFromDraft({
+            shape: makeShape(),
+            seed: makeSeed({
+                sectionRole: "module_project",
+                practice: {
+                    projectFlow: "progressive",
+                },
+            }),
+            draft: {
+                title: "Project topic",
+                summary: "Summary",
+                minutes: 15,
+                sketchBlocks: [],
+                quizDraft: [
+                    {
+                        id: "step-1",
+                        kind: "code_input",
+                        title: "Step 1",
+                        prompt: "Create the first working version.",
+                        starterCode: "# start\n",
+                        solutionCode: "print('step 1 done')\n",
+                        tests: [
+                            { stdout: "step 1 done\n", match: "exact" },
+                            { stdout: "step 1 done\n", match: "exact" },
+                        ],
+                        hint: "Hint",
+                        help: { concept: "Concept", hint_1: "Hint 1", hint_2: "Hint 2" },
+                    },
+                    {
+                        id: "step-2",
+                        kind: "code_input",
+                        title: "Step 2",
+                        prompt: "Add the second feature.",
+                        starterCode: "# fresh\n",
+                        solutionCode: "print('step 2 done')\n",
+                        tests: [
+                            { stdout: "step 2 done\n", match: "exact" },
+                            { stdout: "step 2 done\n", match: "exact" },
+                        ],
+                        hint: "Hint",
+                        help: { concept: "Concept", hint_1: "Hint 1", hint_2: "Hint 2" },
+                    },
+                    {
+                        id: "step-3",
+                        kind: "code_input",
+                        title: "Step 3",
+                        prompt: "Add the final feature.",
+                        starterCode: "# fresh\n",
+                        solutionCode: "print('step 3 done')\n",
+                        tests: [
+                            { stdout: "step 3 done\n", match: "exact" },
+                            { stdout: "step 3 done\n", match: "exact" },
+                        ],
+                        hint: "Hint",
+                        help: { concept: "Concept", hint_1: "Hint 1", hint_2: "Hint 2" },
+                    },
+                ],
+            } as any,
+        }) as any;
+
+        const starterCode = messages.topics?.["python-v2"]?.["python-v2-1"]?.[
+            "helper-modules"
+        ]?.moduleProject?.steps?.step_3?.starterCode;
+
+        expect(starterCode).toContain("print('step 1 done')");
+        expect(starterCode).toContain("print('step 2 done')");
+        expect(starterCode).toContain("# Project step 3: Step 3");
+    });
+
     it("still emits quiz title for normal lesson topics", () => {
         const messages = buildMessagesFromDraft({
             shape: makeShape(),
@@ -542,7 +729,7 @@ describe("buildMessagesFromDraft", () => {
         expect(
             messages.topics?.["python-v2"]?.["python-v2-1"]?.["helper-modules"]?.cards
                 ?.quiz?.title,
-        ).toBe("Quiz");
+        ).toBe("Practice");
     });
 
     it("uses the profile continuePromptPrefix for progressive step 2 prompts", () => {
@@ -601,9 +788,8 @@ describe("buildMessagesFromDraft", () => {
         }) as any;
 
         expect(
-            messages.topics?.["python-v2"]?.["python-v2-1"]?.["helper-modules"]?.quiz?.[
-                "step-2"
-            ]?.prompt,
+            messages.topics?.["python-v2"]?.["python-v2-1"]?.["helper-modules"]?.moduleProject
+                ?.steps?.step_2?.prompt,
         ).toContain("Continue the same module project from the previous working step.");
     });
 
@@ -612,21 +798,17 @@ describe("buildMessagesFromDraft", () => {
         registerCurriculumProfile({
             ...pythonProfile,
             id: "tryit-single-choice",
-            project: {
-                getProjectConfig(args) {
-                    return pythonProfile.project?.getProjectConfig(args) ?? makeProjectConfig();
-                },
-                isProjectExercise(args) {
-                    return args.exercise.kind === "single_choice";
-                },
+            practice: {
+                ...pythonProfile.practice!,
+                preferredTryItExerciseKind: "single_choice",
             },
+            project: undefined,
         } satisfies CourseProfile);
 
         const messages = buildMessagesFromDraft({
             shape: makeShape(),
             seed: makeSeed({
                 profileId: "tryit-single-choice",
-                sectionRole: "module_project",
                 practice: {
                     tryIt: true,
                     tryItSketchIndex: 0,
@@ -657,24 +839,6 @@ describe("buildMessagesFromDraft", () => {
                         },
                         options: ["A", "B"],
                         correctOptionIds: ["a"],
-                    },
-                    {
-                        id: "code-1",
-                        kind: "code_input",
-                        title: "Build the helper",
-                        prompt: "Create tools/names.py and import clean_name in main.py.",
-                        starterCode: "# start\n",
-                        solutionCode: "print('ok')\n",
-                        tests: [
-                            { stdout: "ok\n", match: "exact" },
-                            { stdout: "ok\n", match: "exact" },
-                        ],
-                        hint: "Hint",
-                        help: {
-                            concept: "Concept",
-                            hint_1: "Hint 1",
-                            hint_2: "Hint 2",
-                        },
                     },
                 ],
             } as any,

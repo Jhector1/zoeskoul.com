@@ -1,6 +1,6 @@
 {
   "subject": {
-    "slug": "linux-terminal-fundamentals",
+    "slug": "linux--linux-terminal-fundamentals--draft",
     "profileId": "bash",
     "catalogSlug": "linux",
     "genKey": "bash_course",
@@ -9,13 +9,14 @@
     "status": "active",
     "imagePublicId": null,
     "imageAlt": null,
-    "titleKey": "subjects.linux-terminal-fundamentals.title",
-    "descriptionKey": "subjects.linux-terminal-fundamentals.description",
+    "titleKey": "subjects.linux--linux-terminal-fundamentals--draft.title",
+    "descriptionKey": "subjects.linux--linux-terminal-fundamentals--draft.description",
+    "serviceDefaults": null,
     "meta": {
       "curriculum": {
         "plannedModuleCount": 3,
         "isTerminalRelease": false,
-        "moreComingMessageKey": "subjects.linux-terminal-fundamentals.moreComingSoon"
+        "moreComingMessageKey": "subjects.linux--linux-terminal-fundamentals--draft.moreComingSoon"
       },
       "completionPolicy": {
         "requireAllPublishedModules": true,
@@ -37,8 +38,8 @@
       "slug": "linux-module-1-terminal-navigation",
       "prefix": "linux_module_1",
       "order": 1,
-      "titleKey": "modules.linux-terminal-fundamentals.linux-module-1-terminal-navigation.title",
-      "descriptionKey": "modules.linux-terminal-fundamentals.linux-module-1-terminal-navigation.description",
+      "titleKey": "modules.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.title",
+      "descriptionKey": "modules.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.description",
       "weekStart": null,
       "weekEnd": null,
       "accessOverride": null,
@@ -51,37 +52,55 @@
         "supportsStdInStdOut": true,
         "supportsPackageInstall": false
       },
+      "serviceDefaults": {
+        "runnerBackend": "pty",
+        "layoutMode": "terminal_workspace",
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        }
+      },
       "meta": {
         "estimatedMinutes": 71,
         "prereqKeys": [
-          "modules.linux-terminal-fundamentals.linux-module-1-terminal-navigation.title"
+          "modules.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.title"
         ],
         "outcomeKeys": [
-          "modules.linux-terminal-fundamentals.linux-module-1-terminal-navigation.outcomes.0",
-          "modules.linux-terminal-fundamentals.linux-module-1-terminal-navigation.outcomes.1",
-          "modules.linux-terminal-fundamentals.linux-module-1-terminal-navigation.outcomes.2",
-          "modules.linux-terminal-fundamentals.linux-module-1-terminal-navigation.outcomes.3"
+          "modules.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.outcomes.0",
+          "modules.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.outcomes.1",
+          "modules.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.outcomes.2",
+          "modules.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.outcomes.3"
         ],
         "whyKeys": [
-          "modules.linux-terminal-fundamentals.linux-module-1-terminal-navigation.why.0",
-          "modules.linux-terminal-fundamentals.linux-module-1-terminal-navigation.why.1"
+          "modules.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.why.0",
+          "modules.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.why.1"
         ]
       },
       "sections": [
         {
-          "slug": "linux-terminal-fundamentals-linux-module-1-orientation",
+          "slug": "linux--linux-terminal-fundamentals--draft-linux-module-1-orientation",
           "order": 1,
-          "titleKey": "sections.linux-terminal-fundamentals.linux-module-1-terminal-navigation.linux-terminal-fundamentals-linux-module-1-orientation.title",
-          "descriptionKey": "sections.linux-terminal-fundamentals.linux-module-1-terminal-navigation.linux-terminal-fundamentals-linux-module-1-orientation.description",
+          "titleKey": "sections.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.linux--linux-terminal-fundamentals--draft-linux-module-1-orientation.title",
+          "descriptionKey": "sections.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.linux--linux-terminal-fundamentals--draft-linux-module-1-orientation.description",
           "meta": {
             "module": 1,
-            "weeksKey": "sections.linux-terminal-fundamentals.linux-module-1-terminal-navigation.linux-terminal-fundamentals-linux-module-1-orientation.weeks",
+            "weeksKey": "sections.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.linux--linux-terminal-fundamentals--draft-linux-module-1-orientation.weeks",
             "bulletKeys": [
-              "sections.linux-terminal-fundamentals.linux-module-1-terminal-navigation.linux-terminal-fundamentals-linux-module-1-orientation.bullets.0",
-              "sections.linux-terminal-fundamentals.linux-module-1-terminal-navigation.linux-terminal-fundamentals-linux-module-1-orientation.bullets.1",
-              "sections.linux-terminal-fundamentals.linux-module-1-terminal-navigation.linux-terminal-fundamentals-linux-module-1-orientation.bullets.2",
-              "sections.linux-terminal-fundamentals.linux-module-1-terminal-navigation.linux-terminal-fundamentals-linux-module-1-orientation.bullets.3"
+              "sections.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.linux--linux-terminal-fundamentals--draft-linux-module-1-orientation.bullets.0",
+              "sections.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.linux--linux-terminal-fundamentals--draft-linux-module-1-orientation.bullets.1",
+              "sections.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.linux--linux-terminal-fundamentals--draft-linux-module-1-orientation.bullets.2",
+              "sections.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.linux--linux-terminal-fundamentals--draft-linux-module-1-orientation.bullets.3"
             ]
+          },
+          "serviceDefaults": {
+            "runnerBackend": "pty",
+            "layoutMode": "terminal_workspace",
+            "requires": {
+              "files": true,
+              "multiFile": true,
+              "terminal": true
+            }
           },
           "topics": [
             "what-the-terminal-is",
@@ -90,20 +109,29 @@
           ]
         },
         {
-          "slug": "linux-terminal-fundamentals-linux-module-1-project",
+          "slug": "linux--linux-terminal-fundamentals--draft-linux-module-1-project",
           "order": 2,
           "role": "module_project",
-          "titleKey": "sections.linux-terminal-fundamentals.linux-module-1-terminal-navigation.linux-terminal-fundamentals-linux-module-1-project.title",
-          "descriptionKey": "sections.linux-terminal-fundamentals.linux-module-1-terminal-navigation.linux-terminal-fundamentals-linux-module-1-project.description",
+          "titleKey": "sections.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.linux--linux-terminal-fundamentals--draft-linux-module-1-project.title",
+          "descriptionKey": "sections.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.linux--linux-terminal-fundamentals--draft-linux-module-1-project.description",
           "meta": {
             "module": 1,
-            "weeksKey": "sections.linux-terminal-fundamentals.linux-module-1-terminal-navigation.linux-terminal-fundamentals-linux-module-1-project.weeks",
+            "weeksKey": "sections.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.linux--linux-terminal-fundamentals--draft-linux-module-1-project.weeks",
             "bulletKeys": [
-              "sections.linux-terminal-fundamentals.linux-module-1-terminal-navigation.linux-terminal-fundamentals-linux-module-1-project.bullets.0",
-              "sections.linux-terminal-fundamentals.linux-module-1-terminal-navigation.linux-terminal-fundamentals-linux-module-1-project.bullets.1",
-              "sections.linux-terminal-fundamentals.linux-module-1-terminal-navigation.linux-terminal-fundamentals-linux-module-1-project.bullets.2",
-              "sections.linux-terminal-fundamentals.linux-module-1-terminal-navigation.linux-terminal-fundamentals-linux-module-1-project.bullets.3"
+              "sections.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.linux--linux-terminal-fundamentals--draft-linux-module-1-project.bullets.0",
+              "sections.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.linux--linux-terminal-fundamentals--draft-linux-module-1-project.bullets.1",
+              "sections.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.linux--linux-terminal-fundamentals--draft-linux-module-1-project.bullets.2",
+              "sections.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.linux--linux-terminal-fundamentals--draft-linux-module-1-project.bullets.3"
             ]
+          },
+          "serviceDefaults": {
+            "runnerBackend": "pty",
+            "layoutMode": "terminal_workspace",
+            "requires": {
+              "files": true,
+              "multiFile": true,
+              "terminal": true
+            }
           },
           "topics": [
             "module-1-terminal-map-project"
@@ -115,8 +143,8 @@
       "slug": "linux-module-2-files-and-folders",
       "prefix": "linux_module_2",
       "order": 2,
-      "titleKey": "modules.linux-terminal-fundamentals.linux-module-2-files-and-folders.title",
-      "descriptionKey": "modules.linux-terminal-fundamentals.linux-module-2-files-and-folders.description",
+      "titleKey": "modules.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.title",
+      "descriptionKey": "modules.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.description",
       "weekStart": null,
       "weekEnd": null,
       "accessOverride": null,
@@ -129,37 +157,55 @@
         "supportsStdInStdOut": true,
         "supportsPackageInstall": false
       },
+      "serviceDefaults": {
+        "runnerBackend": "pty",
+        "layoutMode": "terminal_workspace",
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        }
+      },
       "meta": {
         "estimatedMinutes": 80,
         "prereqKeys": [
-          "modules.linux-terminal-fundamentals.linux-module-2-files-and-folders.title"
+          "modules.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.title"
         ],
         "outcomeKeys": [
-          "modules.linux-terminal-fundamentals.linux-module-2-files-and-folders.outcomes.0",
-          "modules.linux-terminal-fundamentals.linux-module-2-files-and-folders.outcomes.1",
-          "modules.linux-terminal-fundamentals.linux-module-2-files-and-folders.outcomes.2",
-          "modules.linux-terminal-fundamentals.linux-module-2-files-and-folders.outcomes.3"
+          "modules.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.outcomes.0",
+          "modules.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.outcomes.1",
+          "modules.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.outcomes.2",
+          "modules.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.outcomes.3"
         ],
         "whyKeys": [
-          "modules.linux-terminal-fundamentals.linux-module-2-files-and-folders.why.0",
-          "modules.linux-terminal-fundamentals.linux-module-2-files-and-folders.why.1"
+          "modules.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.why.0",
+          "modules.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.why.1"
         ]
       },
       "sections": [
         {
-          "slug": "linux-terminal-fundamentals-linux-module-2-file-workflow",
+          "slug": "linux--linux-terminal-fundamentals--draft-linux-module-2-file-workflow",
           "order": 1,
-          "titleKey": "sections.linux-terminal-fundamentals.linux-module-2-files-and-folders.linux-terminal-fundamentals-linux-module-2-file-workflow.title",
-          "descriptionKey": "sections.linux-terminal-fundamentals.linux-module-2-files-and-folders.linux-terminal-fundamentals-linux-module-2-file-workflow.description",
+          "titleKey": "sections.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.linux--linux-terminal-fundamentals--draft-linux-module-2-file-workflow.title",
+          "descriptionKey": "sections.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.linux--linux-terminal-fundamentals--draft-linux-module-2-file-workflow.description",
           "meta": {
             "module": 2,
-            "weeksKey": "sections.linux-terminal-fundamentals.linux-module-2-files-and-folders.linux-terminal-fundamentals-linux-module-2-file-workflow.weeks",
+            "weeksKey": "sections.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.linux--linux-terminal-fundamentals--draft-linux-module-2-file-workflow.weeks",
             "bulletKeys": [
-              "sections.linux-terminal-fundamentals.linux-module-2-files-and-folders.linux-terminal-fundamentals-linux-module-2-file-workflow.bullets.0",
-              "sections.linux-terminal-fundamentals.linux-module-2-files-and-folders.linux-terminal-fundamentals-linux-module-2-file-workflow.bullets.1",
-              "sections.linux-terminal-fundamentals.linux-module-2-files-and-folders.linux-terminal-fundamentals-linux-module-2-file-workflow.bullets.2",
-              "sections.linux-terminal-fundamentals.linux-module-2-files-and-folders.linux-terminal-fundamentals-linux-module-2-file-workflow.bullets.3"
+              "sections.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.linux--linux-terminal-fundamentals--draft-linux-module-2-file-workflow.bullets.0",
+              "sections.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.linux--linux-terminal-fundamentals--draft-linux-module-2-file-workflow.bullets.1",
+              "sections.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.linux--linux-terminal-fundamentals--draft-linux-module-2-file-workflow.bullets.2",
+              "sections.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.linux--linux-terminal-fundamentals--draft-linux-module-2-file-workflow.bullets.3"
             ]
+          },
+          "serviceDefaults": {
+            "runnerBackend": "pty",
+            "layoutMode": "terminal_workspace",
+            "requires": {
+              "files": true,
+              "multiFile": true,
+              "terminal": true
+            }
           },
           "topics": [
             "creating-folders-and-files",
@@ -168,20 +214,29 @@
           ]
         },
         {
-          "slug": "linux-terminal-fundamentals-linux-module-2-project",
+          "slug": "linux--linux-terminal-fundamentals--draft-linux-module-2-project",
           "order": 2,
           "role": "module_project",
-          "titleKey": "sections.linux-terminal-fundamentals.linux-module-2-files-and-folders.linux-terminal-fundamentals-linux-module-2-project.title",
-          "descriptionKey": "sections.linux-terminal-fundamentals.linux-module-2-files-and-folders.linux-terminal-fundamentals-linux-module-2-project.description",
+          "titleKey": "sections.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.linux--linux-terminal-fundamentals--draft-linux-module-2-project.title",
+          "descriptionKey": "sections.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.linux--linux-terminal-fundamentals--draft-linux-module-2-project.description",
           "meta": {
             "module": 2,
-            "weeksKey": "sections.linux-terminal-fundamentals.linux-module-2-files-and-folders.linux-terminal-fundamentals-linux-module-2-project.weeks",
+            "weeksKey": "sections.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.linux--linux-terminal-fundamentals--draft-linux-module-2-project.weeks",
             "bulletKeys": [
-              "sections.linux-terminal-fundamentals.linux-module-2-files-and-folders.linux-terminal-fundamentals-linux-module-2-project.bullets.0",
-              "sections.linux-terminal-fundamentals.linux-module-2-files-and-folders.linux-terminal-fundamentals-linux-module-2-project.bullets.1",
-              "sections.linux-terminal-fundamentals.linux-module-2-files-and-folders.linux-terminal-fundamentals-linux-module-2-project.bullets.2",
-              "sections.linux-terminal-fundamentals.linux-module-2-files-and-folders.linux-terminal-fundamentals-linux-module-2-project.bullets.3"
+              "sections.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.linux--linux-terminal-fundamentals--draft-linux-module-2-project.bullets.0",
+              "sections.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.linux--linux-terminal-fundamentals--draft-linux-module-2-project.bullets.1",
+              "sections.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.linux--linux-terminal-fundamentals--draft-linux-module-2-project.bullets.2",
+              "sections.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.linux--linux-terminal-fundamentals--draft-linux-module-2-project.bullets.3"
             ]
+          },
+          "serviceDefaults": {
+            "runnerBackend": "pty",
+            "layoutMode": "terminal_workspace",
+            "requires": {
+              "files": true,
+              "multiFile": true,
+              "terminal": true
+            }
           },
           "topics": [
             "module-2-notes-organizer-project"
@@ -194,8 +249,8 @@
       "prefix": "linux_module_3",
       "order": 3,
       "role": "capstone",
-      "titleKey": "modules.linux-terminal-fundamentals.linux-module-3-final-capstone.title",
-      "descriptionKey": "modules.linux-terminal-fundamentals.linux-module-3-final-capstone.description",
+      "titleKey": "modules.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.title",
+      "descriptionKey": "modules.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.description",
       "weekStart": null,
       "weekEnd": null,
       "accessOverride": null,
@@ -208,38 +263,56 @@
         "supportsStdInStdOut": true,
         "supportsPackageInstall": false
       },
+      "serviceDefaults": {
+        "runnerBackend": "pty",
+        "layoutMode": "terminal_workspace",
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        }
+      },
       "meta": {
         "estimatedMinutes": 35,
         "prereqKeys": [
-          "modules.linux-terminal-fundamentals.linux-module-3-final-capstone.title"
+          "modules.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.title"
         ],
         "outcomeKeys": [
-          "modules.linux-terminal-fundamentals.linux-module-3-final-capstone.outcomes.0",
-          "modules.linux-terminal-fundamentals.linux-module-3-final-capstone.outcomes.1",
-          "modules.linux-terminal-fundamentals.linux-module-3-final-capstone.outcomes.2",
-          "modules.linux-terminal-fundamentals.linux-module-3-final-capstone.outcomes.3"
+          "modules.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.outcomes.0",
+          "modules.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.outcomes.1",
+          "modules.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.outcomes.2",
+          "modules.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.outcomes.3"
         ],
         "whyKeys": [
-          "modules.linux-terminal-fundamentals.linux-module-3-final-capstone.why.0",
-          "modules.linux-terminal-fundamentals.linux-module-3-final-capstone.why.1"
+          "modules.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.why.0",
+          "modules.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.why.1"
         ]
       },
       "sections": [
         {
-          "slug": "linux-terminal-fundamentals-linux-module-3-capstone",
+          "slug": "linux--linux-terminal-fundamentals--draft-linux-module-3-capstone",
           "order": 1,
           "role": "capstone",
-          "titleKey": "sections.linux-terminal-fundamentals.linux-module-3-final-capstone.linux-terminal-fundamentals-linux-module-3-capstone.title",
-          "descriptionKey": "sections.linux-terminal-fundamentals.linux-module-3-final-capstone.linux-terminal-fundamentals-linux-module-3-capstone.description",
+          "titleKey": "sections.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.linux--linux-terminal-fundamentals--draft-linux-module-3-capstone.title",
+          "descriptionKey": "sections.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.linux--linux-terminal-fundamentals--draft-linux-module-3-capstone.description",
           "meta": {
             "module": 3,
-            "weeksKey": "sections.linux-terminal-fundamentals.linux-module-3-final-capstone.linux-terminal-fundamentals-linux-module-3-capstone.weeks",
+            "weeksKey": "sections.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.linux--linux-terminal-fundamentals--draft-linux-module-3-capstone.weeks",
             "bulletKeys": [
-              "sections.linux-terminal-fundamentals.linux-module-3-final-capstone.linux-terminal-fundamentals-linux-module-3-capstone.bullets.0",
-              "sections.linux-terminal-fundamentals.linux-module-3-final-capstone.linux-terminal-fundamentals-linux-module-3-capstone.bullets.1",
-              "sections.linux-terminal-fundamentals.linux-module-3-final-capstone.linux-terminal-fundamentals-linux-module-3-capstone.bullets.2",
-              "sections.linux-terminal-fundamentals.linux-module-3-final-capstone.linux-terminal-fundamentals-linux-module-3-capstone.bullets.3"
+              "sections.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.linux--linux-terminal-fundamentals--draft-linux-module-3-capstone.bullets.0",
+              "sections.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.linux--linux-terminal-fundamentals--draft-linux-module-3-capstone.bullets.1",
+              "sections.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.linux--linux-terminal-fundamentals--draft-linux-module-3-capstone.bullets.2",
+              "sections.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.linux--linux-terminal-fundamentals--draft-linux-module-3-capstone.bullets.3"
             ]
+          },
+          "serviceDefaults": {
+            "runnerBackend": "pty",
+            "layoutMode": "terminal_workspace",
+            "requires": {
+              "files": true,
+              "multiFile": true,
+              "terminal": true
+            }
           },
           "topics": [
             "final-capstone-file-room-handoff"

@@ -20,16 +20,15 @@ import type {
 } from "../types.js";
 import { pythonShape } from "../shapes/pythonShape.js";
 import {
-    createCodeInputProjectCapability,
-    sharedPracticeProfileConfig,
-} from "../shared/generationPolicy.js";
+    messageTag,
+    starterFileContentMessageTag,
+} from "../shared/messageTags.js";
 
 export const PYTHON_MINIMUM_FIXED_TESTS = 2;
 
 function normalizeText(value: unknown): string {
     return typeof value === "string" ? value.trim() : "";
 }
-
 
 function safeNormalizeWorkspacePath(path: string, label: string): string {
     try {
@@ -300,6 +299,7 @@ const pythonCodeInputCapability: CodeInputProfileCapability = {
                 args.exercise.semanticChecks.length > 0);
 
         const fallbackStarterCode = normalizeText(args.exercise.starterCode);
+        const starterCodeTag = messageTag(args.messageBase, "starterCode");
         const solutionCode = normalizeText(args.exercise.solutionCode);
 
         const authoredEntryFilePath = safeNormalizeWorkspacePath(
@@ -331,7 +331,7 @@ const pythonCodeInputCapability: CodeInputProfileCapability = {
             : [
                 {
                     path: authoredEntryFilePath,
-                    content: fallbackStarterCode,
+                    content: starterCodeTag,
                     language: manifestLanguage,
                     isEntry: true,
                     entry: true,
@@ -346,7 +346,7 @@ const pythonCodeInputCapability: CodeInputProfileCapability = {
             starterFiles = [
                 {
                     path: authoredEntryFilePath,
-                    content: fallbackStarterCode,
+                    content: starterCodeTag,
                     language: manifestLanguage,
                     isEntry: true,
                     entry: true,
@@ -355,16 +355,25 @@ const pythonCodeInputCapability: CodeInputProfileCapability = {
             ];
         }
 
-        starterFiles = starterFiles.map((file) =>
+        starterFiles = starterFiles.map((file, index) =>
             file.path === authoredEntryFilePath
                 ? {
                     ...file,
+                    content: starterCodeTag,
                     language: file.language ?? manifestLanguage,
                     isEntry: true,
                     entry: true,
                 }
                 : {
                     ...file,
+                    content:
+                        typeof file.content === "string"
+                            ? starterFileContentMessageTag({
+                                messageBase: args.messageBase,
+                                filePath: (file as { path?: string; name?: string }).path ?? (file as { path?: string; name?: string }).name,
+                                index,
+                            })
+                            : file.content,
                     language: file.language ?? manifestLanguage,
                     isEntry: file.isEntry === true ? false : file.isEntry,
                     entry: file.entry === true ? false : file.entry,
@@ -382,8 +391,8 @@ const pythonCodeInputCapability: CodeInputProfileCapability = {
 
         const starterCode =
             typeof entryStarterFile?.content === "string"
-                ? entryStarterFile.content
-                : fallbackStarterCode;
+                ? starterCodeTag
+                : starterCodeTag;
 
         const solutionFiles = authoredSolutionFiles.length > 0
             ? authoredSolutionFiles
@@ -439,7 +448,7 @@ const pythonCodeInputCapability: CodeInputProfileCapability = {
                         : {}),
                     ...(typeof (args.exercise as { instructions?: unknown }).instructions === "string" &&
                     String((args.exercise as { instructions?: unknown }).instructions).trim()
-                        ? { instructions: String((args.exercise as { instructions?: unknown }).instructions).trim() }
+                        ? { instructions: messageTag(args.messageBase, "instructions") }
                         : {}),
                 } as ManifestCodeInput["recipe"])
                 : useSemantic
@@ -464,7 +473,6 @@ const pythonCodeInputCapability: CodeInputProfileCapability = {
         };
     },};
 
-const pythonProjectCapability = createCodeInputProjectCapability();
 
 export const pythonProfile: CourseProfile = {
     id: "python",
@@ -483,8 +491,6 @@ export const pythonProfile: CourseProfile = {
     buildModuleRuntimeDefaults() {
         return { kind: "code", language: "python" };
     },
-    practice: sharedPracticeProfileConfig,
-    project: pythonProjectCapability,
     renderExerciseKindPromptRules(args) {
         const introTopicHaystack = `${args.seed.title} ${args.seed.summary}`.toLowerCase();
         const looksLikeIntroTopic =

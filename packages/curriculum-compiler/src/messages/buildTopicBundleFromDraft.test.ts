@@ -288,7 +288,7 @@ describe("buildTopicBundleFromDraft messageBase integration", () => {
 
         expect(bundle.exercises).toHaveLength(1);
         expect(bundle.exercises[0]?.messageBase).toBe(
-            "topics.sql.sql_module_0.what-sql-means.quiz.single-1",
+            "topics.sql.sql_module_0.what-sql-means.practice.single-1",
         );
     });
 
@@ -451,14 +451,19 @@ describe("buildTopicBundleFromDraft messageBase integration", () => {
         expect(exercise.recipe).toEqual({
             type: "shell_task",
             mode: "terminal_workspace",
-            instructions: "Use the terminal to create linux-lab/notes/today.txt.",
+            instructions:
+                "@:topics.python-for-beginners.python-1.read-and-add.practice.linux-course-1-terminal-lab.instructions",
         });
+        expect(exercise.starterCode).toBe(
+            "@:topics.python-for-beginners.python-1.read-and-add.practice.linux-course-1-terminal-lab.starterCode",
+        );
         expect(exercise.workspace).toMatchObject({
             entryFilePath: "README.md",
             starterFiles: [
                 {
                     path: "README.md",
-                    content: "Use the terminal to create linux-lab/notes/today.txt",
+                    content:
+                        "@:topics.python-for-beginners.python-1.read-and-add.practice.linux-course-1-terminal-lab.starterCode",
                     entry: true,
                 },
             ],
@@ -611,7 +616,6 @@ describe("buildTopicBundleFromDraft messageBase integration", () => {
             shape: makePythonShapePack(),
             seed: {
                 ...makePythonSeed(),
-                sectionRole: "module_project",
                 practice: {
                     tryIt: true,
                     tryItExerciseId: "code-1",
@@ -1039,8 +1043,9 @@ describe("buildTopicBundleFromDraft messageBase integration", () => {
         });
 
         const step2 = bundle.exercises.find((exercise) => exercise.id === "step-2") as any;
-        expect(step2.starterCode).toContain("print('step 1 done')");
-        expect(step2.starterCode).toContain("# Project step 2: Add second feature");
+        expect(step2.starterCode).toBe(
+            "@:topics.python-for-beginners.python-1.read-and-add.moduleProject.steps.step_2.starterCode",
+        );
     });
 
     it("uses the profile capstone label in progressive step starters", () => {
@@ -1100,7 +1105,9 @@ describe("buildTopicBundleFromDraft messageBase integration", () => {
         });
 
         const step2 = bundle.exercises.find((exercise) => exercise.id === "step-2") as any;
-        expect(step2.starterCode).toContain("# Capstone step 2: Capstone step 2");
+        expect(step2.starterCode).toBe(
+            "@:topics.python-for-beginners.python-1.read-and-add.finalCapstone.steps.step_2.starterCode",
+        );
     });
 
     it("marks capstone projects in manifest metadata", () => {
@@ -1376,7 +1383,7 @@ describe("buildTopicBundleFromDraft messageBase integration", () => {
         });
     });
 
-    it("uses profile.project to choose try-it exercises", () => {
+    it("does not attach try-it metadata to project-only synopsis cards", () => {
         const pythonProfile = getCurriculumProfile("python");
         registerCurriculumProfile({
             ...pythonProfile,
@@ -1454,7 +1461,7 @@ describe("buildTopicBundleFromDraft messageBase integration", () => {
         });
 
         const sketchCard = bundle.cards.find((card) => card.id === "sketch0") as any;
-        expect(sketchCard?.tryIt?.exerciseKey).toBe("project-choice");
+        expect(sketchCard?.tryIt).toBeUndefined();
     });
 
     it("lets a fake profile change the progressive project step label", () => {
@@ -1532,7 +1539,9 @@ describe("buildTopicBundleFromDraft messageBase integration", () => {
         });
 
         const step2 = bundle.exercises.find((exercise) => exercise.id === "step-2") as any;
-        expect(step2.starterCode).toContain("# Custom step 2: Step 2");
+        expect(step2.starterCode).toBe(
+            "@:topics.python-for-beginners.python-1.read-and-add.moduleProject.steps.step_2.starterCode",
+        );
     });
 
     it("leaves non-progressive starters unchanged", () => {
@@ -1592,7 +1601,9 @@ describe("buildTopicBundleFromDraft messageBase integration", () => {
         });
 
         const step2 = bundle.exercises.find((exercise) => exercise.id === "step-2") as any;
-        expect(step2.starterCode).toBe("print('fresh start')");
+        expect(step2.starterCode).toBe(
+            "@:topics.python-for-beginners.python-1.read-and-add.moduleProject.steps.step_2.starterCode",
+        );
     });
 
     it("chains multi-file project workspaces forward for progressive project steps", () => {
@@ -1698,6 +1709,135 @@ describe("buildTopicBundleFromDraft messageBase integration", () => {
         ]);
     });
 
+    it("does not include current step solution-only files in progressive starters", () => {
+        const bundle = buildTopicBundleFromDraft({
+            shape: makePythonShapePack(),
+            seed: {
+                ...makePythonSeed(),
+                sectionRole: "module_project",
+                practice: {
+                    projectFlow: "progressive",
+                },
+            } as any,
+            draft: {
+                title: "Operations project",
+                summary: "Build a cumulative workspace.",
+                minutes: 20,
+                sketchBlocks: [],
+                quizDraft: [
+                    {
+                        id: "step-1",
+                        kind: "code_input",
+                        title: "Create first file",
+                        prompt: "Create the first file.",
+                        starterCode: "# step 1\n",
+                        starterFiles: [
+                            {
+                                path: "main.py",
+                                content: "# step 1\n",
+                                language: "python",
+                                isEntry: true,
+                            },
+                        ],
+                        solutionFiles: [
+                            {
+                                path: "main.py",
+                                content:
+                                    "from pathlib import Path\nPath('out').mkdir(exist_ok=True)\nPath('out/one.txt').write_text('one')\n",
+                                language: "python",
+                                isEntry: true,
+                            },
+                            {
+                                path: "out/one.txt",
+                                content: "one",
+                                language: "text",
+                            },
+                        ],
+                        solutionCode:
+                            "from pathlib import Path\nPath('out').mkdir(exist_ok=True)\nPath('out/one.txt').write_text('one')\n",
+                        tests: [
+                            { stdout: "one", match: "includes" },
+                            { stdout: "created", match: "includes" },
+                        ],
+                        hint: "Hint",
+                        help: {
+                            concept: "Concept",
+                            hint_1: "Hint 1",
+                            hint_2: "Hint 2",
+                        },
+                    },
+                    {
+                        id: "step-2",
+                        kind: "code_input",
+                        title: "Create second file",
+                        prompt: "Create the second file.",
+                        starterCode: "# step 2\n",
+                        starterFiles: [
+                            {
+                                path: "main.py",
+                                content: "# step 2\n",
+                                language: "python",
+                                isEntry: true,
+                            },
+                            {
+                                path: "out/one.txt",
+                                content: "one",
+                                language: "text",
+                            },
+                            {
+                                path: "out/two.txt",
+                                content: "two",
+                                language: "text",
+                            },
+                        ],
+                        solutionFiles: [
+                            {
+                                path: "main.py",
+                                content:
+                                    "from pathlib import Path\nPath('out').mkdir(exist_ok=True)\nPath('out/two.txt').write_text('two')\n",
+                                language: "python",
+                                isEntry: true,
+                            },
+                            {
+                                path: "out/one.txt",
+                                content: "one",
+                                language: "text",
+                            },
+                            {
+                                path: "out/two.txt",
+                                content: "two",
+                                language: "text",
+                            },
+                        ],
+                        solutionCode:
+                            "from pathlib import Path\nPath('out').mkdir(exist_ok=True)\nPath('out/two.txt').write_text('two')\n",
+                        tests: [
+                            { stdout: "two", match: "includes" },
+                            { stdout: "created", match: "includes" },
+                        ],
+                        hint: "Hint",
+                        help: {
+                            concept: "Concept",
+                            hint_1: "Hint 1",
+                            hint_2: "Hint 2",
+                        },
+                    },
+                ],
+            } as any,
+        });
+
+        const step2 = bundle.exercises.find((exercise) => exercise.id === "step-2") as any;
+        expect(step2.starterFiles.map((file: any) => file.path)).toEqual([
+            "main.py",
+            "out/one.txt",
+        ]);
+        expect(step2.solutionFiles.map((file: any) => file.path)).toEqual([
+            "main.py",
+            "out/one.txt",
+            "out/two.txt",
+        ]);
+    });
+
     it("preserves nested starter files and fixture files for online editor folders", () => {
         const bundle = buildTopicBundleFromDraft({
             shape: makePythonShapePack(),
@@ -1787,12 +1927,14 @@ describe("buildTopicBundleFromDraft messageBase integration", () => {
             expect.arrayContaining([
                 expect.objectContaining({
                     path: "src/main.py",
-                    content: expect.stringContaining("# Write your answer below"),
+                    content:
+                        "@:topics.python-for-beginners.python-1.read-and-add.practice.read-nested-file.starterCode",
                     isEntry: true,
                 }),
                 expect.objectContaining({
                     path: "helpers/formatting.py",
-                    content: expect.stringContaining("def clean"),
+                    content:
+                        "@:topics.python-for-beginners.python-1.read-and-add.practice.read-nested-file.starterFiles.helpers_formatting_py.content",
                 }),
             ]),
         );

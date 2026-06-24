@@ -50,12 +50,24 @@ const courseSlug = positional[0];
 
 const force = flags.has("--force");
 const resume = flags.has("--resume");
+const draftOnly = flags.has("--draft-only");
+const rebuildFromDrafts = flags.has("--rebuild-from-drafts");
+const upgradeDrafts = flags.has("--upgrade-drafts");
+const preferCurrentDraftOutput = flags.has("--prefer-current-draft-output");
+const preferReports = flags.has("--prefer-reports");
+const noSyncReports = flags.has("--no-sync-reports");
 const forceLiveOverwrite = flags.has("--force-live-overwrite");
 const liveSubjectSlugFlag = flags.get("--live-subject");
 
 const allowedFlags = new Set([
   "--force",
   "--resume",
+  "--draft-only",
+  "--rebuild-from-drafts",
+  "--upgrade-drafts",
+  "--prefer-current-draft-output",
+  "--prefer-reports",
+  "--no-sync-reports",
   "--force-live-overwrite",
   "--live-subject",
 ]);
@@ -111,6 +123,13 @@ Course-specific examples:
 
 Flags:
   --resume                 Skip topics that already have completed draft artifacts
+  --draft-only             Compile course output into .curriculum-drafts only
+  --rebuild-from-drafts    Rebuild draft outputs without AI
+  --upgrade-drafts         Reserved for schema-only draft upgrades
+  --prefer-current-draft-output
+                           For rebuild mode, use current .curriculum-drafts subject/messages output as source of truth
+  --prefer-reports         For rebuild mode, use saved report drafts as source of truth
+  --no-sync-reports        For rebuild mode, do not write rebuild-source/report snapshots
   --force                  Allow publish/publish-auto to overwrite an existing subject release
   --live-subject <slug>    Compile/publish a course into an explicit live subject slug override
   --force-live-overwrite   Allow compile-course or publish to overwrite the configured live publish target with a non-target course
@@ -477,12 +496,20 @@ function runDraftGoldensForCourse() {
 }
 
 function buildCompileCourseArgs(resolvedCourseSlug) {
+  const shouldUseDraftOnly = draftOnly || rebuildFromDrafts || upgradeDrafts;
+
   return [
     "compile-course",
     subjectSlug,
     resolvedCourseSlug,
     ...(liveSubjectSlugFlag ? ["--live-subject", liveSubjectSlugFlag] : []),
     ...(resume ? ["--resume"] : []),
+    ...(shouldUseDraftOnly ? ["--draft-only"] : []),
+    ...(rebuildFromDrafts ? ["--rebuild-from-drafts"] : []),
+    ...(upgradeDrafts ? ["--upgrade-drafts"] : []),
+    ...(preferCurrentDraftOutput ? ["--prefer-current-draft-output"] : []),
+    ...(preferReports ? ["--prefer-reports"] : []),
+    ...(noSyncReports ? ["--no-sync-reports"] : []),
     ...(forceLiveOverwrite ? ["--force-live-overwrite"] : []),
   ];
 }

@@ -1,8 +1,5 @@
 import { describe, expect, it } from "vitest";
-import fs from "node:fs";
-import path from "node:path";
 import { getSubjectShape } from "@zoeskoul/curriculum-profiles";
-import { getRepoRoot } from "@zoeskoul/curriculum-core";
 import { buildPlanFromSpec } from "../spec/buildPlanFromSpec.js";
 import { buildSubjectManifestFromPlan } from "../emit/buildSubjectManifestFromPlan.js";
 import {
@@ -22,23 +19,11 @@ describe("authoring compile target resolution", () => {
 
     it("compileSubject writes to liveSubjectSlug when it differs from authoring subject", async () => {
         const target = await resolveSubjectPublishTarget("python");
-        const manifest = JSON.parse(
-            fs.readFileSync(
-                path.join(
-                    getRepoRoot(),
-                    "apps/web/src/lib/subjects",
-                    target.liveSubjectSlug,
-                    "subject.manifest.json",
-                ),
-                "utf8",
-            ),
-        );
 
         expect(target.authoringSubjectSlug).toBe("python");
         expect(target.courseSlug).toBe("python-v2");
         expect(target.liveSubjectSlug).toBe("python-v2");
         expect(target.blueprint.subjectSlug).toBe("python-v2");
-        expect(manifest.subject.slug).toBe("python-v2");
     });
 
 

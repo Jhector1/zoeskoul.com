@@ -1,0 +1,373 @@
+{
+  "title": "Moving Around with cd",
+  "summary": "Use cd, .., ., and ~ to move between folders safely.",
+  "minutes": 18,
+  "sketchBlocks": [
+    {
+      "id": "sketch-1",
+      "title": "What `cd` changes",
+      "bodyMarkdown": "`cd` means **change directory**. A directory is just another word for a folder. When you run `cd`, you move your terminal's current location to a different folder.\n\nA good habit is to check where you are before and after moving:\n\n```bash\npwd\ncd projects\npwd\n```\n\nStep by step:\n\n- `pwd` prints your current folder.\n- `cd projects` moves into the `projects` folder if it exists in your current location.\n- The second `pwd` confirms the new location.\n\nExample:\n\n```bash\n/home/learner\ncd projects\n/home/learner/projects\n```\n\nThis matters because many terminal commands act on your **current folder**. If you are in the wrong place, `ls`, `touch`, `mkdir`, `cp`, or `mv` may affect the wrong files."
+    },
+    {
+      "id": "sketch-2",
+      "title": "Using `..`, `.`, and `~`",
+      "bodyMarkdown": "Some `cd` targets are shortcuts:\n\n- `..` means **the parent folder**\n- `.` means **the current folder**\n- `~` means **your home folder**\n\nWorked example:\n\n```bash\npwd\ncd ..\npwd\ncd ~\npwd\n```\n\nLine by line:\n\n- The first `pwd` shows where you start.\n- `cd ..` moves up one level.\n- The next `pwd` shows the parent folder.\n- `cd ~` jumps to your home folder from anywhere.\n- The last `pwd` confirms that jump.\n\n`cd .` usually keeps you in the same place. It can still be useful when you are practicing path ideas and want to show “stay here.”"
+    },
+    {
+      "id": "sketch-3",
+      "title": "Reading paths safely before you move",
+      "bodyMarkdown": "A path tells the terminal **which folder** you want. Before using `cd`, it helps to inspect the current folder with `ls`.\n\nExample:\n\n```bash\npwd\nls\ncd reports\nls\n```\n\nWhat happens:\n\n- `pwd` shows your starting location.\n- `ls` lists folders and files there.\n- `cd reports` moves into the `reports` folder.\n- `ls` now shows what is inside `reports`.\n\nIf `reports` is not listed before you try `cd reports`, the command will fail because that folder is not in your current location. Checking with `ls` first helps you move confidently and avoid mistakes."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "q1",
+      "kind": "single_choice",
+      "title": "What `cd` does",
+      "prompt": "Which command changes your current folder in the Linux Terminal?",
+      "options": [
+        "pwd",
+        "cd",
+        "ls",
+        "cat"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "moving-around-single-choice-2",
+      "kind": "single_choice",
+      "title": "Choose the best description",
+      "prompt": "Which statement best matches Moving Around with cd?",
+      "hint": "Look for the answer that describes the main concept from the lesson.",
+      "help": {
+        "concept": "This question checks the main idea from Moving Around with cd.",
+        "hint_1": "Use the lesson explanation, then eliminate answers that do not match it.",
+        "hint_2": "Pick the answer that matches the course concept, not a random detail."
+      },
+      "options": [
+        "It describes the main concept from the lesson.",
+        "It is unrelated to the course topic.",
+        "It skips the learner goal.",
+        "It replaces the concept with an unsafe shortcut."
+      ],
+      "correctOptionIds": [
+        "a"
+      ]
+    },
+    {
+      "id": "moving-around-multi-choice-1",
+      "kind": "multi_choice",
+      "title": "Select safe learning habits",
+      "prompt": "Which actions are good habits while learning this topic?",
+      "hint": "Good habits keep the learner focused on the lesson goal and visible results.",
+      "help": {
+        "concept": "This question checks the main idea from Moving Around with cd.",
+        "hint_1": "Use the lesson explanation, then eliminate answers that do not match it.",
+        "hint_2": "Pick the answer that matches the course concept, not a random detail."
+      },
+      "options": [
+        "Read the prompt carefully before acting",
+        "Check your result after making a change",
+        "Ignore the exact names in the task",
+        "Use unrelated shortcuts without understanding them"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ]
+    },
+    {
+      "id": "moving-around-drag-reorder-1",
+      "kind": "drag_reorder",
+      "title": "Order a safe practice flow",
+      "prompt": "Put these learning steps in a safe order.",
+      "hint": "Read each piece and arrange them in the order the statement should be understood.",
+      "help": {
+        "concept": "The pieces should form a valid statement in a logical order.",
+        "hint_1": "Start with the piece that introduces the idea or action.",
+        "hint_2": "Place dependent pieces after the part they describe or complete."
+      },
+      "tokens": [
+        "Read the goal",
+        "Try one step",
+        "Check the result",
+        "Reflect on what changed"
+      ],
+      "correctOrder": [
+        "Read the goal",
+        "Try one step",
+        "Check the result",
+        "Reflect on what changed"
+      ]
+    },
+    {
+      "id": "q2",
+      "kind": "fill_blank_choice",
+      "title": "Move up one level",
+      "prompt": "Complete the command that moves from the current folder to its parent folder.",
+      "template": "cd [blank1]",
+      "choices": [
+        "..",
+        ".",
+        "~",
+        "ls"
+      ],
+      "correctValue": "..",
+      "hint": "Use the special path that means 'parent folder.'",
+      "help": {
+        "concept": "In Linux paths, `..` refers to the directory one level above your current location.",
+        "hint_1": "This is not a command by itself here; it is the target used after `cd`.",
+        "hint_2": "The parent-folder shortcut uses two dots."
+      }
+    },
+    {
+      "id": "q3",
+      "kind": "fill_blank_choice",
+      "title": "Navigate into a project folder",
+      "prompt": "You are organizing a junior analyst workspace. In the terminal, create a folder named `client-site`, move into it, and confirm the location with `pwd`. This practice matters because `cd` changes where later commands will act.",
+      "template": "A file-writing code exercise should also ____ so automated tests can check it.",
+      "choices": [
+        "print an observable result",
+        "hide all output",
+        "delete the file immediately",
+        "skip the program"
+      ],
+      "correctValue": "print an observable result",
+      "hint": "First make the folder, then change into it, then print the current path.",
+      "help": {
+        "concept": "A common navigation workflow is create a folder with `mkdir`, enter it with `cd`, and verify the new working directory with `pwd`.",
+        "hint_1": "You need one command to create the folder and another to move into it.",
+        "hint_2": "After entering `client-site`, run the command that prints the current working directory so the terminal output shows the new location."
+      }
+    },
+    {
+      "id": "moving-around-terminal-task-1",
+      "kind": "code_input",
+      "title": "Create the park survey request folder",
+      "prompt": "You are helping a park survey team prepare a terminal map. Create moving-around-park-survey/requests and add moving-around-park-survey/requests/north-trail.txt so the team has a concrete request log to hand off.",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Use the terminal to make one small workspace change at a time, then inspect the result in the file explorer.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      },
+      "starterCode": "# Use the terminal for this Linux project task.",
+      "fixedLanguage": "bash",
+      "recipeType": "shell_task",
+      "mode": "terminal_workspace",
+      "entryFilePath": "main.sh",
+      "solutionCode": "mkdir -p moving-around-park-survey/requests\nprintf 'North trail request log\\n' > moving-around-park-survey/requests/north-trail.txt\nls moving-around-park-survey",
+      "instructions": "You are helping a park survey team prepare a terminal map. Create moving-around-park-survey/requests and add moving-around-park-survey/requests/north-trail.txt so the team has a concrete request log to hand off.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Use the terminal for this Linux project task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "mkdir -p moving-around-park-survey/requests\nprintf 'North trail request log\\n' > moving-around-park-survey/requests/north-trail.txt\nls moving-around-park-survey\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "moving-around-park-survey/requests/north-trail.txt",
+          "content": "North trail request log\n",
+          "language": "text"
+        }
+      ],
+      "workspaceExpectations": {
+        "requiredFolders": [
+          "moving-around-park-survey",
+          "moving-around-park-survey/requests"
+        ],
+        "requiredFiles": [
+          "moving-around-park-survey/requests/north-trail.txt"
+        ]
+      },
+      "terminalExpectations": {
+        "forbiddenCommands": [
+          {
+            "pattern": "(^|\\s)sudo(\\s|$)",
+            "message": "Do not use sudo for beginner workspace tasks."
+          }
+        ]
+      }
+    },
+    {
+      "id": "moving-around-terminal-task-2",
+      "kind": "code_input",
+      "title": "Add the map notes folder",
+      "prompt": "Continue the same park survey workspace. Keep the request log from step 1, then add moving-around-park-survey/maps/current-location.txt as the team's navigation note deliverable.",
+      "hint": "Read the Linux task \"Add the map notes folder\" and identify the folders or files you must create or organize.",
+      "help": {
+        "concept": "This Linux terminal exercise checks the final workspace state for \"Add the map notes folder\".",
+        "hint_1": "Use the terminal to make one small workspace change at a time, then inspect the result in the file explorer.",
+        "hint_2": "If a path is required, match the exact folder and file names before clicking Check Answer."
+      },
+      "starterCode": "# Use the terminal for this Linux project task.",
+      "fixedLanguage": "bash",
+      "recipeType": "shell_task",
+      "mode": "terminal_workspace",
+      "entryFilePath": "main.sh",
+      "solutionCode": "mkdir -p moving-around-park-survey/maps\nprintf 'Current location checked with pwd and ls\\n' > moving-around-park-survey/maps/current-location.txt\nls moving-around-park-survey",
+      "instructions": "Continue the same park survey workspace. Keep the request log from step 1, then add moving-around-park-survey/maps/current-location.txt as the team's navigation note deliverable.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Use the terminal for this Linux project task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "moving-around-park-survey/requests/north-trail.txt",
+          "content": "North trail request log\n",
+          "language": "text"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "mkdir -p moving-around-park-survey/maps\nprintf 'Current location checked with pwd and ls\\n' > moving-around-park-survey/maps/current-location.txt\nls moving-around-park-survey\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "moving-around-park-survey/requests/north-trail.txt",
+          "content": "North trail request log\n",
+          "language": "text"
+        },
+        {
+          "path": "moving-around-park-survey/maps/current-location.txt",
+          "content": "Current location checked with pwd and ls\n",
+          "language": "text"
+        }
+      ],
+      "workspaceExpectations": {
+        "requiredFolders": [
+          "moving-around-park-survey",
+          "moving-around-park-survey/requests",
+          "moving-around-park-survey/maps"
+        ],
+        "requiredFiles": [
+          "moving-around-park-survey/requests/north-trail.txt",
+          "moving-around-park-survey/maps/current-location.txt"
+        ]
+      },
+      "terminalExpectations": {
+        "forbiddenCommands": [
+          {
+            "pattern": "(^|\\s)sudo(\\s|$)",
+            "message": "Do not use sudo for beginner workspace tasks."
+          }
+        ]
+      }
+    },
+    {
+      "id": "moving-around-terminal-task-3",
+      "kind": "code_input",
+      "title": "Prepare the handoff marker",
+      "prompt": "Finish the cumulative park survey terminal map. Keep the request and map notes from the earlier steps, then create moving-around-park-survey/handoff/terminal-map-ready.txt as the useful final deliverable.",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      },
+      "starterCode": "# Use the terminal for this Linux project task.",
+      "fixedLanguage": "bash",
+      "recipeType": "shell_task",
+      "mode": "terminal_workspace",
+      "entryFilePath": "main.sh",
+      "solutionCode": "mkdir -p moving-around-park-survey/handoff\nprintf 'Terminal map ready for the park survey team\\n' > moving-around-park-survey/handoff/terminal-map-ready.txt\nfind moving-around-park-survey -maxdepth 2 -type f | sort",
+      "instructions": "Finish the cumulative park survey terminal map. Keep the request and map notes from the earlier steps, then create moving-around-park-survey/handoff/terminal-map-ready.txt as the useful final deliverable.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Use the terminal for this Linux project task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "moving-around-park-survey/requests/north-trail.txt",
+          "content": "North trail request log\n",
+          "language": "text"
+        },
+        {
+          "path": "moving-around-park-survey/maps/current-location.txt",
+          "content": "Current location checked with pwd and ls\n",
+          "language": "text"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "mkdir -p moving-around-park-survey/handoff\nprintf 'Terminal map ready for the park survey team\\n' > moving-around-park-survey/handoff/terminal-map-ready.txt\nfind moving-around-park-survey -maxdepth 2 -type f | sort\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "moving-around-park-survey/requests/north-trail.txt",
+          "content": "North trail request log\n",
+          "language": "text"
+        },
+        {
+          "path": "moving-around-park-survey/maps/current-location.txt",
+          "content": "Current location checked with pwd and ls\n",
+          "language": "text"
+        },
+        {
+          "path": "moving-around-park-survey/handoff/terminal-map-ready.txt",
+          "content": "Terminal map ready for the park survey team\n",
+          "language": "text"
+        }
+      ],
+      "workspaceExpectations": {
+        "requiredFolders": [
+          "moving-around-park-survey",
+          "moving-around-park-survey/requests",
+          "moving-around-park-survey/maps",
+          "moving-around-park-survey/handoff"
+        ],
+        "requiredFiles": [
+          "moving-around-park-survey/requests/north-trail.txt",
+          "moving-around-park-survey/maps/current-location.txt",
+          "moving-around-park-survey/handoff/terminal-map-ready.txt"
+        ]
+      },
+      "terminalExpectations": {
+        "forbiddenCommands": [
+          {
+            "pattern": "(^|\\s)sudo(\\s|$)",
+            "message": "Do not use sudo for beginner workspace tasks."
+          }
+        ]
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Build a simple navigation map for a client workspace",
+    "stepIds": [
+      "moving-around-terminal-task-1",
+      "moving-around-terminal-task-2",
+      "moving-around-terminal-task-3"
+    ]
+  }
+}

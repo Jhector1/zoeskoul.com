@@ -1568,11 +1568,19 @@ export function useReviewModuleController({
         ? activeExerciseTarget?.exerciseStateKey ??
           (boundExerciseMatchesActiveCard ? tool.boundId : null)
         : null;
+    const rightRailExerciseRuntime = useReviewRuntimeStore((s) =>
+        rightRailExerciseKey ? s.exercises[rightRailExerciseKey] ?? null : null,
+    );
     const rightRailSqlProps = resolveRightRailSqlProps({
         routeCanUseBoundExercise,
         tool,
         topicSqlFallback: runtime.topicSqlFallback,
     });
+    const rightRailIdeConfig =
+        tool.toolIdeConfig ??
+        rightRailExerciseRuntime?.ideConfig ??
+        boundExerciseRuntime?.ideConfig ??
+        runtime.effectiveIdeConfig;
     return {
         toolsProvider,
 
@@ -1735,7 +1743,7 @@ export function useReviewModuleController({
                 toolStdin: tool.toolStdin,
                 toolWorkspace: tool.toolWorkspace,
 
-                ideConfig: tool.toolIdeConfig ?? runtime.effectiveIdeConfig,
+                ideConfig: rightRailIdeConfig,
                 onChangeCode: tool.setToolCode,
                 onChangeStdin: tool.setToolStdin,
                 onChangeWorkspace: tool.setToolWorkspace,

@@ -1,0 +1,18 @@
+{
+  "profileId": "bash",
+  "subjectSlug": "linux--linux-terminal-fundamentals--draft",
+  "courseSlug": "linux-terminal-fundamentals",
+  "moduleSlug": "linux-module-1-terminal-navigation",
+  "sectionSlug": "linux-module-1-project",
+  "topicId": "module-1-terminal-map-project",
+  "provider": "openai",
+  "model": "gpt-5.4",
+  "temperature": 0,
+  "modelSeed": 0,
+  "generatorVersion": "2026-05-23-topic-authoring-draft-generator-v1",
+  "schemaName": "TopicAuthoringDraft",
+  "schemaVersion": "2026-05-23-topic-authoring-draft-v1",
+  "strictSchema": true,
+  "retryAttempt": 0,
+  "maxRetries": 2
+}

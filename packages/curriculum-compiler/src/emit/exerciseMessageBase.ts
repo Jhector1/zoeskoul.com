@@ -32,6 +32,16 @@ export function resolveTopicProjectKind(seed: TopicSeed): TopicProjectKind {
         return "module_project";
     }
 
+    // Older draft/test seeds can mark project behavior through projectFlow
+    // before sectionRole/moduleRole is normalized. Treat those as module
+    // projects so bundle message refs stay aligned with messages output.
+    if (
+        seed.practice?.projectFlow === "progressive" ||
+        seed.practice?.projectFlow === "standalone"
+    ) {
+        return "module_project";
+    }
+
     return null;
 }
 
@@ -53,9 +63,19 @@ export function buildExerciseLocalMessageBaseForEmission(args: {
     projectStepIdSet: Set<string>;
     tryItExerciseIdToMessageId: Map<string, string>;
 }) {
-    const projectStepId = args.projectStepIdSet.has(args.exercise.id)
+    const explicitProjectStepId = args.projectStepIdSet.has(args.exercise.id)
         ? projectStepIdFromExerciseId(args.exercise.id)
         : null;
+
+    // Project-only topics should keep code_input learner text under the
+    // project/capstone message namespace even when an older caller did not
+    // precompute projectStepIdSet. That keeps topic.bundle.json refs aligned
+    // with buildMessagesFromDraft output after the bundle was moved to @: keys.
+    const fallbackProjectStepId = !explicitProjectStepId && args.topicKind && args.exercise.kind === "code_input"
+        ? projectStepIdFromExerciseId(args.exercise.id)
+        : null;
+
+    const projectStepId = explicitProjectStepId ?? fallbackProjectStepId;
 
     if (projectStepId) {
         return args.topicKind === "capstone"
@@ -68,5 +88,12 @@ export function buildExerciseLocalMessageBaseForEmission(args: {
         return `tryIt.exercises.${args.exercise.id}`;
     }
 
-    return `practice.${args.exercise.id}`;
+    const authoredMessageBaseValue = (args.exercise as { messageBase?: unknown })
+        .messageBase;
+    const authoredMessageBase =
+        typeof authoredMessageBaseValue === "string"
+            ? authoredMessageBaseValue.trim()
+            : "";
+
+    return authoredMessageBase || `practice.${args.exercise.id}`;
 }

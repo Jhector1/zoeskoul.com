@@ -5,6 +5,7 @@ export * from "./shapes/index.js";
 export * from "./shared/profileServices.js";
 export * from "./shared/createProfileServices.js";
 export * from "./shared/generationPolicy.js";
+export * from "./shared/messageTags.js";
 export * from "./shared/validateGoldenTopicBundle.js";
 export * from "./base/codeInputExpected.js";
 

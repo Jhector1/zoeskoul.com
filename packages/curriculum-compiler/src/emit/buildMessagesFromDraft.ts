@@ -4,6 +4,7 @@ import type {
 } from "@zoeskoul/curriculum-contracts";
 import {
     getCurriculumProfile,
+    starterFileContentMessageField,
     type SubjectShapePack,
 } from "@zoeskoul/curriculum-profiles";
 import { buildExerciseMessageKeys } from "../messages/buildMessageKeys.js";
@@ -53,8 +54,57 @@ function splitQualifiedBase(messageBase: string): string[] {
         .filter(Boolean);
 }
 
+function splitMessageField(field: string): string[] {
+    return String(field ?? "")
+        .split(".")
+        .map((x) => x.trim())
+        .filter(Boolean);
+}
+
 function uniqueNonEmpty(values: string[]) {
     return Array.from(new Set(values.map((x) => x.trim()).filter(Boolean)));
+}
+
+
+function writeTerminalExpectationMessageEntries(args: {
+    out: Record<string, unknown>;
+    basePath: string[];
+    terminalExpectations: unknown;
+}) {
+    const terminalExpectations = args.terminalExpectations;
+    if (!terminalExpectations || typeof terminalExpectations !== "object" || Array.isArray(terminalExpectations)) {
+        return;
+    }
+
+    const record = terminalExpectations as Record<string, unknown>;
+
+    const writeCommandMessages = (kind: "requiredCommands" | "forbiddenCommands") => {
+        const entries = record[kind];
+        if (!Array.isArray(entries)) return;
+
+        entries.forEach((entry, index) => {
+            if (!entry || typeof entry !== "object" || Array.isArray(entry)) return;
+            const message = (entry as Record<string, unknown>).message;
+            if (typeof message !== "string" || message.trim().length === 0 || message.startsWith("@:")) {
+                return;
+            }
+
+            setNested(
+                args.out,
+                [
+                    ...args.basePath,
+                    "terminalExpectations",
+                    kind,
+                    String(index),
+                    "message",
+                ],
+                message,
+            );
+        });
+    };
+
+    writeCommandMessages("requiredCommands");
+    writeCommandMessages("forbiddenCommands");
 }
 
 function buildProjectStepIds(
@@ -307,6 +357,35 @@ export function buildMessagesFromDraft(args: {
 
         if (exercise.kind === "code_input") {
             setNested(out, [...quizBase, "starterCode"], exercise.starterCode);
+            if (
+                typeof exercise.instructions === "string" &&
+                exercise.instructions.trim().length > 0
+            ) {
+                setNested(out, [...quizBase, "instructions"], exercise.instructions);
+            }
+
+            if (Array.isArray(exercise.starterFiles)) {
+                exercise.starterFiles.forEach((file, index) => {
+                    if (
+                        typeof file?.content !== "string" ||
+                        file.content.trim().length === 0
+                    ) {
+                        return;
+                    }
+
+                    const fieldPath = splitMessageField(
+                        starterFileContentMessageField(file.path, index),
+                    );
+                    setNested(out, [...quizBase, ...fieldPath], file.content);
+                });
+            }
+
+            writeTerminalExpectationMessageEntries({
+                out,
+                basePath: quizBase,
+                terminalExpectations: (exercise as { terminalExpectations?: unknown })
+                    .terminalExpectations,
+            });
         }
     }
 

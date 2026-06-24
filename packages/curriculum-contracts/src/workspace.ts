@@ -100,7 +100,12 @@ export type AuthoringPolicyLayer = {
     avoidTerms?: string[];
     notes?: string[];
     validationRequirements?: Record<string, unknown>;
+    quizDefaults?: {
+        allowCodeInput?: boolean;
+        allowedKinds?: import("./exercise-policy.js").ExerciseKindKey[];
+    };
     projectRequirements?: Record<string, unknown>;
+    exerciseKindRules?: Record<string, unknown>;
     allowedConcepts?: string[];
     disallowedConcepts?: string[];
     datasets?: string[];

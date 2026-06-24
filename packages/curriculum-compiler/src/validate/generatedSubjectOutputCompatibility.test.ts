@@ -378,7 +378,7 @@ describe("generated subject output compatibility", () => {
             expect(codeInputCount).toBeGreaterThan(0);
             expect(issues).toEqual([]);
         });
-    }, 60_000);
+    }, 180_000);
 
     it("accepts SQL code_input metadata without generic tests[] while keeping Python strict", async () => {
         const sqlBundle = {

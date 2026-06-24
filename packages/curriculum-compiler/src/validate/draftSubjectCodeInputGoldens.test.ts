@@ -68,6 +68,10 @@ for (const relativePath of [
 const draftCourseSlug =
     process.env.DRAFT_COURSE_SLUG ?? "python-data-functions";
 
+const runDraftCodeInputGoldens =
+    process.env.RUN_DRAFT_CODE_INPUT_GOLDENS === "1";
+const draftCodeInputGoldenIt = runDraftCodeInputGoldens ? it : it.skip;
+
 function readJson(filePath: string): JsonObject {
     return JSON.parse(fs.readFileSync(filePath, "utf8")) as JsonObject;
 }
@@ -533,7 +537,7 @@ describe("draft subject code_input goldens", () => {
         expect(issues).toEqual([]);
     });
 
-    it("runs every generated draft code_input solution against its own contract", async () => {
+    draftCodeInputGoldenIt("runs every generated draft code_input solution against its own contract", async () => {
         const subjectRoot = resolveDraftSubjectRoot();
         const subjectFolderName = path.basename(subjectRoot);
         const profileId = resolveDraftProfileId(subjectRoot);

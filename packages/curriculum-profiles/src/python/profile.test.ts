@@ -138,6 +138,44 @@ describe("pythonProfile", () => {
         ]);
         expect((manifest.recipe as any).solutionFiles).toEqual(manifest.solutionFiles);
         expect((manifest.recipe as any).sourceChecks).toEqual((manifest as any).sourceChecks);
+        expect(manifest.starterCode).toBe(
+            "@:topics.python.python-1.helper-modules.quiz.code-1.starterCode",
+        );
+        expect(manifest.workspace?.starterCode).toBe(
+            "@:topics.python.python-1.helper-modules.quiz.code-1.starterCode",
+        );
+        expect((manifest.starterFiles as any)?.[0]?.content).toBe(
+            "@:topics.python.python-1.helper-modules.quiz.code-1.starterCode",
+        );
+    });
+
+    it("emits shell-task instructions as an i18n message tag", () => {
+        const manifest = pythonProfile.codeInput!.buildManifest({
+            seed: {
+                topicId: "terminal-task",
+            },
+            messageBase: "topics.python.python-1.terminal-task.quiz.code-1",
+            exercise: {
+                id: "code-1",
+                kind: "code_input",
+                title: "Inspect a folder",
+                prompt: "Use the terminal to inspect the folder.",
+                starterCode: "# terminal\n",
+                solutionCode: "ls\n",
+                fixedLanguage: "bash",
+                recipeType: "shell_task",
+                mode: "terminal_workspace",
+                instructions: "Use the terminal to inspect the folder.",
+            },
+        } as any);
+
+        expect(manifest.recipe).toMatchObject({
+            type: "shell_task",
+            instructions: "@:topics.python.python-1.terminal-task.quiz.code-1.instructions",
+        });
+        expect(manifest.starterCode).toBe(
+            "@:topics.python.python-1.terminal-task.quiz.code-1.starterCode",
+        );
     });
 
     it("shows expected examples for Python fixed_tests code_input", () => {

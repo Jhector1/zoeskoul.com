@@ -4,7 +4,7 @@ import { afterEach, describe, expect, it } from "vitest";
 import { getRepoRoot } from "@zoeskoul/curriculum-core";
 import { buildPublishGateResult } from "./buildPublishGateResult.js";
 
-const subjectSlug = "publish-gate-quality-test";
+const subjectSlug = "python--publish-gate-quality-test--draft";
 const reportRoot = path.join(
     getRepoRoot(),
     ".curriculum-drafts",

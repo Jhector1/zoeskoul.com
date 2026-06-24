@@ -1209,6 +1209,16 @@ export function useWorkspaceTerminalController(
                 cwd: nextCwd,
             }));
         }
+
+        if (
+            mountedRef.current &&
+            sessionIdRef.current &&
+            !stoppingRef.current &&
+            !restartingRef.current &&
+            !terminalProcessExitedRef.current
+        ) {
+            setInputEnabled(true);
+        }
     }, [clearStartupCwdFlushTimer, sendInput, setTerminalEvidenceNow]);
 
     const scheduleStartupCwdFlush = React.useCallback(
@@ -1451,8 +1461,12 @@ export function useWorkspaceTerminalController(
                         latestTerminalState === "running" ||
                         latestTerminalState === "waiting_for_input"
                     ) {
-                        setInputEnabled(true);
-                        await flushPendingStartupInput();
+                        if (pendingStartupInputRef.current) {
+                            setInputEnabled(false);
+                            await flushPendingStartupInput();
+                        } else {
+                            setInputEnabled(true);
+                        }
                     }
                 } catch (e: any) {
                     const message = e?.message ?? "Failed to start workspace terminal.";
@@ -2028,7 +2042,9 @@ export function useWorkspaceTerminalController(
                     terminalExitCodeRef.current = null;
                     clearTerminalRecovery();
                     setBusy(true);
-                    setInputEnabled(workspaceReadyRef.current);
+                    setInputEnabled(
+                        workspaceReadyRef.current && !pendingStartupInputRef.current,
+                    );
                     setStarted(true);
                     setStarting(false);
 
@@ -2081,7 +2097,7 @@ export function useWorkspaceTerminalController(
                 clearTerminalRecovery();
                 setState("waiting_for_input");
                 setBusy(true);
-                setInputEnabled(true);
+                setInputEnabled(!pendingStartupInputRef.current);
                 setStarted(true);
                 setStarting(false);
 

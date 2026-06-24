@@ -156,8 +156,7 @@ sudo docker compose up -d judge0 worker
 
 
 
-pnpm curr:course -- draft-goldens linux linux-terminal-fundamentals
-
+ RUN_DRAFT_CODE_INPUT_GOLDENS=1 pnpm curr:course -- draft-goldens linux linux-terminal-fundamentals
 
 sudo scp -r deploy@5.78.159.224:/opt/edge-proxy ~/Downloads/
 

@@ -6,6 +6,8 @@ import {
 } from "../utils/renderProgressBar.js";
 import { selectModelFromConsole } from "../utils/selectModel.js";
 
+type CliRebuildDraftSourcePreference = "reports" | "current-output";
+
 export function parseCompileCourseArgs(args: string[]) {
     const liveSubjectIndex = args.indexOf("--live-subject");
     const liveSubjectSlug =
@@ -15,12 +17,50 @@ export function parseCompileCourseArgs(args: string[]) {
         throw new Error("--live-subject requires a live subject slug");
     }
 
-    return {
+    const preferCurrentDraftOutput = args.includes("--prefer-current-draft-output");
+    const preferReports = args.includes("--prefer-reports");
+    const rebuildDraftSource: CliRebuildDraftSourcePreference = preferCurrentDraftOutput
+        ? "current-output"
+        : "reports";
+
+    const options = {
         draftOnly: args.includes("--draft-only"),
         liveSubjectSlug,
         resume: args.includes("--resume"),
         forceLiveOverwrite: args.includes("--force-live-overwrite"),
+        rebuildFromDrafts: args.includes("--rebuild-from-drafts"),
+        upgradeDrafts: args.includes("--upgrade-drafts"),
+        preferCurrentDraftOutput,
+        preferReports,
+        syncReports: !args.includes("--no-sync-reports"),
+        rebuildDraftSource,
     };
+
+    if (options.preferCurrentDraftOutput && options.preferReports) {
+        throw new Error("--prefer-current-draft-output and --prefer-reports cannot be used together");
+    }
+
+    if ((options.preferCurrentDraftOutput || options.preferReports) && !options.rebuildFromDrafts) {
+        throw new Error("--prefer-current-draft-output and --prefer-reports require --rebuild-from-drafts");
+    }
+
+    if (args.includes("--no-sync-reports") && !options.rebuildFromDrafts) {
+        throw new Error("--no-sync-reports requires --rebuild-from-drafts");
+    }
+
+    if (options.rebuildFromDrafts && options.upgradeDrafts) {
+        throw new Error("--rebuild-from-drafts and --upgrade-drafts cannot be used together");
+    }
+
+    if (options.rebuildFromDrafts && !options.draftOnly) {
+        throw new Error("--rebuild-from-drafts requires --draft-only");
+    }
+
+    if (options.upgradeDrafts && !options.draftOnly) {
+        throw new Error("--upgrade-drafts requires --draft-only");
+    }
+
+    return options;
 }
 
 export async function runCompileCourse(
@@ -28,8 +68,11 @@ export async function runCompileCourse(
     courseSlug: string,
     args: string[] = [],
 ) {
-    await selectModelFromConsole();
     const options = parseCompileCourseArgs(args);
+
+    if (!options.rebuildFromDrafts && !options.upgradeDrafts) {
+        await selectModelFromConsole();
+    }
     let sawProgress = false;
 
     console.log(`Compiling course ${subjectSlug}/${courseSlug}...`);
@@ -43,6 +86,10 @@ export async function runCompileCourse(
             forceLiveOverwrite: options.forceLiveOverwrite,
             resume: options.resume,
             draftOnly: options.draftOnly,
+            rebuildFromDrafts: options.rebuildFromDrafts,
+            upgradeDrafts: options.upgradeDrafts,
+            rebuildDraftSource: options.rebuildDraftSource,
+            syncReports: options.syncReports,
             onProgress: (info) => {
                 sawProgress = true;
                 renderProgressBar({

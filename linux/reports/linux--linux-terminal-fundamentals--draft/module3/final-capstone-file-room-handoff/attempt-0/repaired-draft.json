@@ -1,0 +1,423 @@
+{
+  "title": "Capstone: File Room Handoff",
+  "summary": "Use the Linux terminal to turn a messy event workspace into a clean handoff package with sorted files, a backup copy, removed clutter, and a final ready marker.",
+  "minutes": 35,
+  "sketchBlocks": [
+    {
+      "id": "sketch-1",
+      "title": "Start by inspecting the workspace",
+      "bodyMarkdown": "In a real handoff task, the safest first step is to **look before you change anything**. In the Linux terminal, `pwd` shows where you are, and `ls` shows what is in the current folder.\n\nA simple inspection flow looks like this:\n\n```bash\npwd\nls\ncd event_drop\nls\n```\n\nStep by step:\n\n- `pwd` prints your current location.\n- `ls` lists the files and folders where you are now.\n- `cd event_drop` moves into the folder you need to organize.\n- `ls` again lets you see the messy contents before you sort them.\n\nThis matters because many terminal commands change files immediately. If you inspect first, you are less likely to move or remove the wrong item."
+    },
+    {
+      "id": "sketch-2",
+      "title": "Build a clear folder structure",
+      "bodyMarkdown": "Once you know what is in the workspace, create a structure that makes the handoff easy for the next person to understand. `mkdir` creates folders, and `touch` can create an empty marker file.\n\nExample:\n\n```bash\nmkdir handoff\ncd handoff\nmkdir notes photos archive\ntouch READY.txt\n```\n\nLine by line:\n\n- `mkdir handoff` creates the main folder for the final delivery.\n- `cd handoff` moves into it.\n- `mkdir notes photos archive` creates three subfolders in one command.\n- `touch READY.txt` creates an empty file that can act as a status marker.\n\nA good folder structure reduces confusion. Instead of leaving files scattered around, you group them by purpose."
+    },
+    {
+      "id": "sketch-3",
+      "title": "Move, copy, and rename files carefully",
+      "bodyMarkdown": "Terminal file work often uses three commands together:\n\n- `mv` to move or rename\n- `cp` to make a copy\n- `touch` to create a new file when needed\n\nWorked example:\n\n```bash\nmv notes.txt handoff/notes/event_notes.txt\ncp handoff/notes/event_notes.txt handoff/archive/event_notes_backup.txt\nmv photo-list.txt handoff/photos/photo_manifest.txt\n```\n\nWhat each line does:\n\n- The first `mv` both moves the file and renames it.\n- `cp` creates a backup copy in another folder.\n- The second `mv` places another file in the right folder with a clearer name.\n\nThis is useful in a handoff because the final workspace should be organized, readable, and safe if someone needs a backup copy later."
+    },
+    {
+      "id": "sketch-4",
+      "title": "Remove clutter without damaging important files",
+      "bodyMarkdown": "Use `rm` only when you are sure a file is temporary or no longer needed. In beginner terminal work, it is best to remove a specific file by name instead of using broad patterns.\n\nExample:\n\n```bash\nls\nrm temp.txt\nls\n```\n\nWhy this is safe:\n\n- The first `ls` confirms the file is really there.\n- `rm temp.txt` removes only that one file.\n- The second `ls` verifies that the clutter is gone.\n\nThis habit helps you avoid deleting the wrong thing. In a capstone cleanup task, removing one known temporary file is much safer than using more advanced destructive commands."
+    },
+    {
+      "id": "sketch-5",
+      "title": "Verify the final handoff package",
+      "bodyMarkdown": "A finished terminal task is not complete until you verify the result. You can use `ls`, `cat`, and `wc` to confirm that the workspace matches the goal.\n\nExample:\n\n```bash\nls handoff\nls handoff/notes\ncat handoff/READY.txt\nwc -w handoff/notes/event_notes.txt\n```\n\nHow to read this:\n\n- `ls handoff` checks the top-level handoff folders and files.\n- `ls handoff/notes` confirms the notes file is in the right place.\n- `cat handoff/READY.txt` shows the marker file contents.\n- `wc -w` counts words in a file, which is a quick way to confirm a note file is not empty.\n\nVerification is the final quality check. It helps you leave a workspace that another person can trust and use right away."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "final-capstone-file-room-handoff-terminal-task-1",
+      "kind": "code_input",
+      "title": "Create the park survey request folder",
+      "prompt": "You are helping a park survey team prepare a terminal map. Create final-capstone-file-room-handoff-park-survey/requests and add final-capstone-file-room-handoff-park-survey/requests/north-trail.txt so the team has a concrete request log to hand off.",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Use the terminal to make one small workspace change at a time, then inspect the result in the file explorer.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      },
+      "starterCode": "# Use the terminal for this Linux project task.",
+      "fixedLanguage": "bash",
+      "recipeType": "shell_task",
+      "mode": "terminal_workspace",
+      "entryFilePath": "main.sh",
+      "solutionCode": "mkdir -p final-capstone-file-room-handoff-park-survey/requests\nprintf 'North trail request log\\n' > final-capstone-file-room-handoff-park-survey/requests/north-trail.txt\nls final-capstone-file-room-handoff-park-survey",
+      "instructions": "You are helping a park survey team prepare a terminal map. Create final-capstone-file-room-handoff-park-survey/requests and add final-capstone-file-room-handoff-park-survey/requests/north-trail.txt so the team has a concrete request log to hand off.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Use the terminal for this Linux project task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "mkdir -p final-capstone-file-room-handoff-park-survey/requests\nprintf 'North trail request log\\n' > final-capstone-file-room-handoff-park-survey/requests/north-trail.txt\nls final-capstone-file-room-handoff-park-survey\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "final-capstone-file-room-handoff-park-survey/requests/north-trail.txt",
+          "content": "North trail request log\n",
+          "language": "text"
+        }
+      ],
+      "workspaceExpectations": {
+        "requiredFolders": [
+          "final-capstone-file-room-handoff-park-survey",
+          "final-capstone-file-room-handoff-park-survey/requests"
+        ],
+        "requiredFiles": [
+          "final-capstone-file-room-handoff-park-survey/requests/north-trail.txt"
+        ]
+      },
+      "terminalExpectations": {
+        "forbiddenCommands": [
+          {
+            "pattern": "(^|\\s)sudo(\\s|$)",
+            "message": "Do not use sudo for beginner workspace tasks."
+          }
+        ]
+      }
+    },
+    {
+      "id": "final-capstone-file-room-handoff-terminal-task-2",
+      "kind": "code_input",
+      "title": "Add the map notes folder",
+      "prompt": "Continue the same park survey workspace. Keep the request log from step 1, then add final-capstone-file-room-handoff-park-survey/maps/current-location.txt as the team's navigation note deliverable.",
+      "hint": "Read the Linux task \"Add the map notes folder\" and identify the folders or files you must create or organize.",
+      "help": {
+        "concept": "This Linux terminal exercise checks the final workspace state for \"Add the map notes folder\".",
+        "hint_1": "Use the terminal to make one small workspace change at a time, then inspect the result in the file explorer.",
+        "hint_2": "If a path is required, match the exact folder and file names before clicking Check Answer."
+      },
+      "starterCode": "# Use the terminal for this Linux project task.",
+      "fixedLanguage": "bash",
+      "recipeType": "shell_task",
+      "mode": "terminal_workspace",
+      "entryFilePath": "main.sh",
+      "solutionCode": "mkdir -p final-capstone-file-room-handoff-park-survey/maps\nprintf 'Current location checked with pwd and ls\\n' > final-capstone-file-room-handoff-park-survey/maps/current-location.txt\nls final-capstone-file-room-handoff-park-survey",
+      "instructions": "Continue the same park survey workspace. Keep the request log from step 1, then add final-capstone-file-room-handoff-park-survey/maps/current-location.txt as the team's navigation note deliverable.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Use the terminal for this Linux project task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "final-capstone-file-room-handoff-park-survey/requests/north-trail.txt",
+          "content": "North trail request log\n",
+          "language": "text"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "mkdir -p final-capstone-file-room-handoff-park-survey/maps\nprintf 'Current location checked with pwd and ls\\n' > final-capstone-file-room-handoff-park-survey/maps/current-location.txt\nls final-capstone-file-room-handoff-park-survey\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "final-capstone-file-room-handoff-park-survey/requests/north-trail.txt",
+          "content": "North trail request log\n",
+          "language": "text"
+        },
+        {
+          "path": "final-capstone-file-room-handoff-park-survey/maps/current-location.txt",
+          "content": "Current location checked with pwd and ls\n",
+          "language": "text"
+        }
+      ],
+      "workspaceExpectations": {
+        "requiredFolders": [
+          "final-capstone-file-room-handoff-park-survey",
+          "final-capstone-file-room-handoff-park-survey/requests",
+          "final-capstone-file-room-handoff-park-survey/maps"
+        ],
+        "requiredFiles": [
+          "final-capstone-file-room-handoff-park-survey/requests/north-trail.txt",
+          "final-capstone-file-room-handoff-park-survey/maps/current-location.txt"
+        ]
+      },
+      "terminalExpectations": {
+        "forbiddenCommands": [
+          {
+            "pattern": "(^|\\s)sudo(\\s|$)",
+            "message": "Do not use sudo for beginner workspace tasks."
+          }
+        ]
+      }
+    },
+    {
+      "id": "final-capstone-file-room-handoff-terminal-task-3",
+      "kind": "code_input",
+      "title": "Prepare the handoff marker",
+      "prompt": "Finish the cumulative park survey terminal map. Keep the request and map notes from the earlier steps, then create final-capstone-file-room-handoff-park-survey/handoff/terminal-map-ready.txt as the useful final deliverable.",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      },
+      "starterCode": "# Use the terminal for this Linux project task.",
+      "fixedLanguage": "bash",
+      "recipeType": "shell_task",
+      "mode": "terminal_workspace",
+      "entryFilePath": "main.sh",
+      "solutionCode": "mkdir -p final-capstone-file-room-handoff-park-survey/handoff\nprintf 'Terminal map ready for the park survey team\\n' > final-capstone-file-room-handoff-park-survey/handoff/terminal-map-ready.txt\nfind final-capstone-file-room-handoff-park-survey -maxdepth 2 -type f | sort",
+      "instructions": "Finish the cumulative park survey terminal map. Keep the request and map notes from the earlier steps, then create final-capstone-file-room-handoff-park-survey/handoff/terminal-map-ready.txt as the useful final deliverable.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Use the terminal for this Linux project task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "final-capstone-file-room-handoff-park-survey/requests/north-trail.txt",
+          "content": "North trail request log\n",
+          "language": "text"
+        },
+        {
+          "path": "final-capstone-file-room-handoff-park-survey/maps/current-location.txt",
+          "content": "Current location checked with pwd and ls\n",
+          "language": "text"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "mkdir -p final-capstone-file-room-handoff-park-survey/handoff\nprintf 'Terminal map ready for the park survey team\\n' > final-capstone-file-room-handoff-park-survey/handoff/terminal-map-ready.txt\nfind final-capstone-file-room-handoff-park-survey -maxdepth 2 -type f | sort\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "final-capstone-file-room-handoff-park-survey/requests/north-trail.txt",
+          "content": "North trail request log\n",
+          "language": "text"
+        },
+        {
+          "path": "final-capstone-file-room-handoff-park-survey/maps/current-location.txt",
+          "content": "Current location checked with pwd and ls\n",
+          "language": "text"
+        },
+        {
+          "path": "final-capstone-file-room-handoff-park-survey/handoff/terminal-map-ready.txt",
+          "content": "Terminal map ready for the park survey team\n",
+          "language": "text"
+        }
+      ],
+      "workspaceExpectations": {
+        "requiredFolders": [
+          "final-capstone-file-room-handoff-park-survey",
+          "final-capstone-file-room-handoff-park-survey/requests",
+          "final-capstone-file-room-handoff-park-survey/maps",
+          "final-capstone-file-room-handoff-park-survey/handoff"
+        ],
+        "requiredFiles": [
+          "final-capstone-file-room-handoff-park-survey/requests/north-trail.txt",
+          "final-capstone-file-room-handoff-park-survey/maps/current-location.txt",
+          "final-capstone-file-room-handoff-park-survey/handoff/terminal-map-ready.txt"
+        ]
+      },
+      "terminalExpectations": {
+        "forbiddenCommands": [
+          {
+            "pattern": "(^|\\s)sudo(\\s|$)",
+            "message": "Do not use sudo for beginner workspace tasks."
+          }
+        ]
+      }
+    },
+    {
+      "id": "final-capstone-file-room-handoff-terminal-task-4",
+      "kind": "code_input",
+      "title": "Prepare the handoff marker",
+      "prompt": "Finish the cumulative park survey terminal map. Keep the request and map notes from the earlier steps, then create final-capstone-file-room-handoff-park-survey/handoff/terminal-map-ready.txt as the useful final deliverable.",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      },
+      "starterCode": "# Use the terminal for this Linux project task.",
+      "fixedLanguage": "bash",
+      "recipeType": "shell_task",
+      "mode": "terminal_workspace",
+      "entryFilePath": "main.sh",
+      "solutionCode": "mkdir -p final-capstone-file-room-handoff-park-survey/handoff\nprintf 'Terminal map ready for the park survey team\\n' > final-capstone-file-room-handoff-park-survey/handoff/terminal-map-ready.txt\nfind final-capstone-file-room-handoff-park-survey -maxdepth 2 -type f | sort",
+      "instructions": "Finish the cumulative park survey terminal map. Keep the request and map notes from the earlier steps, then create final-capstone-file-room-handoff-park-survey/handoff/terminal-map-ready.txt as the useful final deliverable.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Use the terminal for this Linux project task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "final-capstone-file-room-handoff-park-survey/requests/north-trail.txt",
+          "content": "North trail request log\n",
+          "language": "text"
+        },
+        {
+          "path": "final-capstone-file-room-handoff-park-survey/maps/current-location.txt",
+          "content": "Current location checked with pwd and ls\n",
+          "language": "text"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "mkdir -p final-capstone-file-room-handoff-park-survey/handoff\nprintf 'Terminal map ready for the park survey team\\n' > final-capstone-file-room-handoff-park-survey/handoff/terminal-map-ready.txt\nfind final-capstone-file-room-handoff-park-survey -maxdepth 2 -type f | sort\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "final-capstone-file-room-handoff-park-survey/requests/north-trail.txt",
+          "content": "North trail request log\n",
+          "language": "text"
+        },
+        {
+          "path": "final-capstone-file-room-handoff-park-survey/maps/current-location.txt",
+          "content": "Current location checked with pwd and ls\n",
+          "language": "text"
+        },
+        {
+          "path": "final-capstone-file-room-handoff-park-survey/handoff/terminal-map-ready.txt",
+          "content": "Terminal map ready for the park survey team\n",
+          "language": "text"
+        }
+      ],
+      "workspaceExpectations": {
+        "requiredFolders": [
+          "final-capstone-file-room-handoff-park-survey",
+          "final-capstone-file-room-handoff-park-survey/requests",
+          "final-capstone-file-room-handoff-park-survey/maps",
+          "final-capstone-file-room-handoff-park-survey/handoff"
+        ],
+        "requiredFiles": [
+          "final-capstone-file-room-handoff-park-survey/requests/north-trail.txt",
+          "final-capstone-file-room-handoff-park-survey/maps/current-location.txt",
+          "final-capstone-file-room-handoff-park-survey/handoff/terminal-map-ready.txt"
+        ]
+      },
+      "terminalExpectations": {
+        "forbiddenCommands": [
+          {
+            "pattern": "(^|\\s)sudo(\\s|$)",
+            "message": "Do not use sudo for beginner workspace tasks."
+          }
+        ]
+      }
+    },
+    {
+      "id": "final-capstone-file-room-handoff-terminal-task-5",
+      "kind": "code_input",
+      "title": "Prepare the handoff marker",
+      "prompt": "Finish the cumulative park survey terminal map. Keep the request and map notes from the earlier steps, then create final-capstone-file-room-handoff-park-survey/handoff/terminal-map-ready.txt as the useful final deliverable.",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      },
+      "starterCode": "# Use the terminal for this Linux project task.",
+      "fixedLanguage": "bash",
+      "recipeType": "shell_task",
+      "mode": "terminal_workspace",
+      "entryFilePath": "main.sh",
+      "solutionCode": "mkdir -p final-capstone-file-room-handoff-park-survey/handoff\nprintf 'Terminal map ready for the park survey team\\n' > final-capstone-file-room-handoff-park-survey/handoff/terminal-map-ready.txt\nfind final-capstone-file-room-handoff-park-survey -maxdepth 2 -type f | sort",
+      "instructions": "Finish the cumulative park survey terminal map. Keep the request and map notes from the earlier steps, then create final-capstone-file-room-handoff-park-survey/handoff/terminal-map-ready.txt as the useful final deliverable.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Use the terminal for this Linux project task.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "final-capstone-file-room-handoff-park-survey/requests/north-trail.txt",
+          "content": "North trail request log\n",
+          "language": "text"
+        },
+        {
+          "path": "final-capstone-file-room-handoff-park-survey/maps/current-location.txt",
+          "content": "Current location checked with pwd and ls\n",
+          "language": "text"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "mkdir -p final-capstone-file-room-handoff-park-survey/handoff\nprintf 'Terminal map ready for the park survey team\\n' > final-capstone-file-room-handoff-park-survey/handoff/terminal-map-ready.txt\nfind final-capstone-file-room-handoff-park-survey -maxdepth 2 -type f | sort\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "final-capstone-file-room-handoff-park-survey/requests/north-trail.txt",
+          "content": "North trail request log\n",
+          "language": "text"
+        },
+        {
+          "path": "final-capstone-file-room-handoff-park-survey/maps/current-location.txt",
+          "content": "Current location checked with pwd and ls\n",
+          "language": "text"
+        },
+        {
+          "path": "final-capstone-file-room-handoff-park-survey/handoff/terminal-map-ready.txt",
+          "content": "Terminal map ready for the park survey team\n",
+          "language": "text"
+        }
+      ],
+      "workspaceExpectations": {
+        "requiredFolders": [
+          "final-capstone-file-room-handoff-park-survey",
+          "final-capstone-file-room-handoff-park-survey/requests",
+          "final-capstone-file-room-handoff-park-survey/maps",
+          "final-capstone-file-room-handoff-park-survey/handoff"
+        ],
+        "requiredFiles": [
+          "final-capstone-file-room-handoff-park-survey/requests/north-trail.txt",
+          "final-capstone-file-room-handoff-park-survey/maps/current-location.txt",
+          "final-capstone-file-room-handoff-park-survey/handoff/terminal-map-ready.txt"
+        ]
+      },
+      "terminalExpectations": {
+        "forbiddenCommands": [
+          {
+            "pattern": "(^|\\s)sudo(\\s|$)",
+            "message": "Do not use sudo for beginner workspace tasks."
+          }
+        ]
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "File Room Handoff Project",
+    "stepIds": [
+      "final-capstone-file-room-handoff-terminal-task-1",
+      "final-capstone-file-room-handoff-terminal-task-2",
+      "final-capstone-file-room-handoff-terminal-task-3",
+      "final-capstone-file-room-handoff-terminal-task-4",
+      "final-capstone-file-room-handoff-terminal-task-5"
+    ]
+  }
+}

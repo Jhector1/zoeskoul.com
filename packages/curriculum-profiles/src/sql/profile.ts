@@ -8,10 +8,7 @@ import type { PlannedModule } from "@zoeskoul/curriculum-contracts";
 import { buildSqlQueryRecipe } from "./recipes/buildSqlQueryRecipe.js";
 import { resolveSqlRuntimeDefaults } from "./runtimeDefaults.js";
 import { sqlShape } from "../shapes/sqlShape.js";
-import {
-    createCodeInputProjectCapability,
-    sharedPracticeProfileConfig,
-} from "../shared/generationPolicy.js";
+import { messageTag } from "../shared/messageTags.js";
 
 function normalizeText(value: unknown): string {
     return typeof value === "string" ? value.trim() : "";
@@ -210,7 +207,7 @@ const sqlCodeInputCapability: CodeInputProfileCapability = {
             );
         }
 
-        const starterCode = normalizeText(args.exercise.starterCode);
+        const starterCode = messageTag(args.messageBase, "starterCode");
 
         return {
             id: args.exercise.id,
@@ -258,7 +255,6 @@ const sqlCodeInputCapability: CodeInputProfileCapability = {
     },
 };
 
-const sqlProjectCapability = createCodeInputProjectCapability();
 
 export { getSqlModuleDataset, getSqlModuleDatasetPolicy } from "./datasetPolicy.js";
 
@@ -276,8 +272,6 @@ export const sqlProfile: CourseProfile = {
         "code_input",
     ],
     allowedRecipeTypes: ["fixed_tests", "template_io", "sql_query"],
-    practice: sharedPracticeProfileConfig,
-
     buildModuleRuntimeDefaults(moduleOrder?: number, module?: PlannedModule) {
         return resolveSqlRuntimeDefaults({
             moduleOrder,
@@ -319,7 +313,6 @@ export const sqlProfile: CourseProfile = {
         ];
     },
     codeInput: sqlCodeInputCapability,
-    project: sqlProjectCapability,
 
     getRecipeRegistry() {
         return { sql_query: buildSqlQueryRecipe };

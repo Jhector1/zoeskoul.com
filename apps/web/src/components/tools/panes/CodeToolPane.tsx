@@ -194,7 +194,30 @@ export function resolveEffectiveCodeToolPaneIdeConfig(args: {
         ? args.exerciseIdeConfig ?? args.cardIdeConfig ?? null
         : null;
 
-    return mergeLearningIdeConfigs(args.propIdeConfig ?? null, runtimeIdeConfig);
+    const merged = mergeLearningIdeConfigs(args.propIdeConfig ?? null, runtimeIdeConfig);
+
+    /**
+     * In review routes, the currently bound exercise/tool prop is the
+     * authoritative source for step-local terminal start settings. Runtime
+     * state can legitimately lag one step behind during navigation or restore
+     * from an older saved item, which would otherwise reopen the shell in the
+     * previous step's cwd.
+     */
+    if (
+        args.isReviewRouteMode &&
+        typeof args.propIdeConfig?.terminalCwd === "string" &&
+        args.propIdeConfig.terminalCwd.trim()
+    ) {
+        return {
+            ...(merged ?? {}),
+            terminalCwd: args.propIdeConfig.terminalCwd.trim(),
+            terminalSessionScope:
+                args.propIdeConfig.terminalSessionScope ??
+                merged?.terminalSessionScope,
+        };
+    }
+
+    return merged;
 }
 
 export function shouldUseLocalReviewDraft(args: {

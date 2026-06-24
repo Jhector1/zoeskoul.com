@@ -1,0 +1,1051 @@
+{
+  "topicId": "final-capstone-file-room-handoff",
+  "subjectSlug": "linux-terminal-fundamentals",
+  "moduleSlug": "linux-module-3-final-capstone",
+  "sectionSlug": "linux-terminal-fundamentals-linux-module-3-capstone",
+  "prefix": "linux_module_3",
+  "minutes": 35,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "bash",
+    "supportsTerminal": true,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "topic": {
+    "labelKey": "topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.label",
+    "summaryKey": "topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.cards.sketch0.title",
+      "sketchId": "capstone-synopsis",
+      "height": 420
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "displayKind": "capstone",
+        "uiKind": "capstone",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "final_capstone_file_room_handoff_terminal_task_1",
+            "titleKey": "topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.title",
+            "exerciseKey": "final-capstone-file-room-handoff-terminal-task-1",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "final_capstone_file_room_handoff_terminal_task_2",
+            "titleKey": "topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.title",
+            "exerciseKey": "final-capstone-file-room-handoff-terminal-task-2",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "final_capstone_file_room_handoff_terminal_task_3",
+            "titleKey": "topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.title",
+            "exerciseKey": "final-capstone-file-room-handoff-terminal-task-3",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "final_capstone_file_room_handoff_terminal_task_4",
+            "titleKey": "topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.title",
+            "exerciseKey": "final-capstone-file-room-handoff-terminal-task-4",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "final_capstone_file_room_handoff_terminal_task_5",
+            "titleKey": "topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.title",
+            "exerciseKey": "final-capstone-file-room-handoff-terminal-task-5",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "capstone-synopsis",
+      "archetype": "paragraph",
+      "titleKey": "sketches.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.capstone-synopsis.title",
+      "bodyKey": "sketches.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.capstone-synopsis.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "final-capstone-file-room-handoff-terminal-task-1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1",
+      "language": "bash",
+      "starterCode": "# Use the terminal for this Linux project step.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Use the terminal for this Linux project step.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "community-file-room/inbox/agenda.txt",
+          "content": "Community event agenda\n",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/inbox/guest-list.txt",
+          "content": "Guest list\n",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/inbox/tmp-scratch.txt",
+          "content": "Temporary scratch note\n",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/inbox/venue.txt",
+          "content": "Venue setup notes\n",
+          "language": "bash"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "mkdir -p community-file-room/handoff\nls community-file-room/inbox > community-file-room/handoff/inventory.txt\ncat community-file-room/handoff/inventory.txt\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "community-file-room/inbox/agenda.txt",
+          "content": "Community event agenda\n",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/inbox/guest-list.txt",
+          "content": "Guest list\n",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/inbox/tmp-scratch.txt",
+          "content": "Temporary scratch note\n",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/inbox/venue.txt",
+          "content": "Venue setup notes\n",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/handoff/inventory.txt",
+          "content": "agenda.txt\nguest-list.txt\ntmp-scratch.txt\nvenue.txt\n",
+          "language": "bash"
+        }
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "community-file-room/handoff/inventory.txt",
+          "community-file-room/inbox/agenda.txt",
+          "community-file-room/inbox/guest-list.txt",
+          "community-file-room/inbox/tmp-scratch.txt",
+          "community-file-room/inbox/venue.txt"
+        ],
+        "requiredFolders": [
+          "community-file-room",
+          "community-file-room/handoff",
+          "community-file-room/inbox"
+        ]
+      },
+      "terminalExpectations": {
+        "forbiddenCommands": [
+          {
+            "pattern": "(^|\\s)sudo(\\s|$)",
+            "message": "Do not use sudo for beginner workspace tasks."
+          }
+        ]
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "starterCode": "# Use the terminal for this Linux project step.",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "# Use the terminal for this Linux project step.\n",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "community-file-room/inbox/agenda.txt",
+            "content": "Community event agenda\n",
+            "language": "bash"
+          },
+          {
+            "path": "community-file-room/inbox/guest-list.txt",
+            "content": "Guest list\n",
+            "language": "bash"
+          },
+          {
+            "path": "community-file-room/inbox/tmp-scratch.txt",
+            "content": "Temporary scratch note\n",
+            "language": "bash"
+          },
+          {
+            "path": "community-file-room/inbox/venue.txt",
+            "content": "Venue setup notes\n",
+            "language": "bash"
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "community-file-room/handoff/inventory.txt",
+            "community-file-room/inbox/agenda.txt",
+            "community-file-room/inbox/guest-list.txt",
+            "community-file-room/inbox/tmp-scratch.txt",
+            "community-file-room/inbox/venue.txt"
+          ],
+          "requiredFolders": [
+            "community-file-room",
+            "community-file-room/handoff",
+            "community-file-room/inbox"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "You are preparing a community center file-room handoff. Start from the inbox files and create community-file-room/handoff/inventory.txt to prove you inspected what arrived."
+      },
+      "ideConfig": {
+        "runnerBackend": "pty",
+        "layoutMode": "terminal_workspace",
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalSessionScope": "project"
+      }
+    },
+    {
+      "id": "final-capstone-file-room-handoff-terminal-task-2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2",
+      "language": "bash",
+      "starterCode": "# Use the terminal for this Linux project step.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Use the terminal for this Linux project step.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "community-file-room/inbox/agenda.txt",
+          "content": "Community event agenda\n",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/inbox/guest-list.txt",
+          "content": "Guest list\n",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/inbox/tmp-scratch.txt",
+          "content": "Temporary scratch note\n",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/inbox/venue.txt",
+          "content": "Venue setup notes\n",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/handoff/inventory.txt",
+          "content": "agenda.txt\nguest-list.txt\ntmp-scratch.txt\nvenue.txt\n",
+          "language": "bash"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "mkdir -p community-file-room/agenda community-file-room/guests community-file-room/venue\nmv community-file-room/inbox/agenda.txt community-file-room/agenda/agenda.txt\nmv community-file-room/inbox/guest-list.txt community-file-room/guests/guest-list.txt\nmv community-file-room/inbox/venue.txt community-file-room/venue/venue.txt\nfind community-file-room -maxdepth 2 -type f | sort\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "community-file-room/inbox/tmp-scratch.txt",
+          "content": "Temporary scratch note\n",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/handoff/inventory.txt",
+          "content": "agenda.txt\nguest-list.txt\ntmp-scratch.txt\nvenue.txt\n",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/agenda/agenda.txt",
+          "content": "Community event agenda\n",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/guests/guest-list.txt",
+          "content": "Guest list\n",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/venue/venue.txt",
+          "content": "Venue setup notes\n",
+          "language": "bash"
+        }
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "community-file-room/agenda/agenda.txt",
+          "community-file-room/guests/guest-list.txt",
+          "community-file-room/handoff/inventory.txt",
+          "community-file-room/inbox/tmp-scratch.txt",
+          "community-file-room/venue/venue.txt"
+        ],
+        "requiredFolders": [
+          "community-file-room",
+          "community-file-room/agenda",
+          "community-file-room/guests",
+          "community-file-room/handoff",
+          "community-file-room/inbox",
+          "community-file-room/venue"
+        ]
+      },
+      "terminalExpectations": {
+        "forbiddenCommands": [
+          {
+            "pattern": "(^|\\s)sudo(\\s|$)",
+            "message": "Do not use sudo for beginner workspace tasks."
+          }
+        ]
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "starterCode": "# Use the terminal for this Linux project step.",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "# Use the terminal for this Linux project step.\n",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "community-file-room/inbox/agenda.txt",
+            "content": "Community event agenda\n",
+            "language": "bash"
+          },
+          {
+            "path": "community-file-room/inbox/guest-list.txt",
+            "content": "Guest list\n",
+            "language": "bash"
+          },
+          {
+            "path": "community-file-room/inbox/tmp-scratch.txt",
+            "content": "Temporary scratch note\n",
+            "language": "bash"
+          },
+          {
+            "path": "community-file-room/inbox/venue.txt",
+            "content": "Venue setup notes\n",
+            "language": "bash"
+          },
+          {
+            "path": "community-file-room/handoff/inventory.txt",
+            "content": "agenda.txt\nguest-list.txt\ntmp-scratch.txt\nvenue.txt\n",
+            "language": "bash"
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "community-file-room/agenda/agenda.txt",
+            "community-file-room/guests/guest-list.txt",
+            "community-file-room/handoff/inventory.txt",
+            "community-file-room/inbox/tmp-scratch.txt",
+            "community-file-room/venue/venue.txt"
+          ],
+          "requiredFolders": [
+            "community-file-room",
+            "community-file-room/agenda",
+            "community-file-room/guests",
+            "community-file-room/handoff",
+            "community-file-room/inbox",
+            "community-file-room/venue"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "Create `community-file-room/agenda`, `community-file-room/guests`, and `community-file-room/venue`, then move `agenda.txt`, `guest-list.txt`, and `venue.txt` from `community-file-room/inbox` into the matching folders."
+      },
+      "ideConfig": {
+        "runnerBackend": "pty",
+        "layoutMode": "terminal_workspace",
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalSessionScope": "project"
+      }
+    },
+    {
+      "id": "final-capstone-file-room-handoff-terminal-task-3",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3",
+      "language": "bash",
+      "starterCode": "# Use the terminal for this Linux project step.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Use the terminal for this Linux project step.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "community-file-room/inbox/tmp-scratch.txt",
+          "content": "Temporary scratch note\n",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/handoff/inventory.txt",
+          "content": "agenda.txt\nguest-list.txt\ntmp-scratch.txt\nvenue.txt\n",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/agenda/agenda.txt",
+          "content": "Community event agenda\n",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/guests/guest-list.txt",
+          "content": "Guest list\n",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/venue/venue.txt",
+          "content": "Venue setup notes\n",
+          "language": "bash"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "mkdir -p community-file-room/backups\ncp community-file-room/agenda/agenda.txt community-file-room/backups/agenda.txt\nfind community-file-room -maxdepth 2 -type f | sort\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "community-file-room/inbox/tmp-scratch.txt",
+          "content": "Temporary scratch note\n",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/handoff/inventory.txt",
+          "content": "agenda.txt\nguest-list.txt\ntmp-scratch.txt\nvenue.txt\n",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/agenda/agenda.txt",
+          "content": "Community event agenda\n",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/guests/guest-list.txt",
+          "content": "Guest list\n",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/venue/venue.txt",
+          "content": "Venue setup notes\n",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/backups/agenda.txt",
+          "content": "Community event agenda\n",
+          "language": "bash"
+        }
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "community-file-room/agenda/agenda.txt",
+          "community-file-room/backups/agenda.txt",
+          "community-file-room/guests/guest-list.txt",
+          "community-file-room/handoff/inventory.txt",
+          "community-file-room/inbox/tmp-scratch.txt",
+          "community-file-room/venue/venue.txt"
+        ],
+        "requiredFolders": [
+          "community-file-room",
+          "community-file-room/agenda",
+          "community-file-room/backups",
+          "community-file-room/guests",
+          "community-file-room/handoff",
+          "community-file-room/inbox",
+          "community-file-room/venue"
+        ]
+      },
+      "terminalExpectations": {
+        "forbiddenCommands": [
+          {
+            "pattern": "(^|\\s)sudo(\\s|$)",
+            "message": "Do not use sudo for beginner workspace tasks."
+          }
+        ]
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "starterCode": "# Use the terminal for this Linux project step.",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "# Use the terminal for this Linux project step.\n",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "community-file-room/inbox/tmp-scratch.txt",
+            "content": "Temporary scratch note\n",
+            "language": "bash"
+          },
+          {
+            "path": "community-file-room/handoff/inventory.txt",
+            "content": "agenda.txt\nguest-list.txt\ntmp-scratch.txt\nvenue.txt\n",
+            "language": "bash"
+          },
+          {
+            "path": "community-file-room/agenda/agenda.txt",
+            "content": "Community event agenda\n",
+            "language": "bash"
+          },
+          {
+            "path": "community-file-room/guests/guest-list.txt",
+            "content": "Guest list\n",
+            "language": "bash"
+          },
+          {
+            "path": "community-file-room/venue/venue.txt",
+            "content": "Venue setup notes\n",
+            "language": "bash"
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "community-file-room/agenda/agenda.txt",
+            "community-file-room/backups/agenda.txt",
+            "community-file-room/guests/guest-list.txt",
+            "community-file-room/handoff/inventory.txt",
+            "community-file-room/inbox/tmp-scratch.txt",
+            "community-file-room/venue/venue.txt"
+          ],
+          "requiredFolders": [
+            "community-file-room",
+            "community-file-room/agenda",
+            "community-file-room/backups",
+            "community-file-room/guests",
+            "community-file-room/handoff",
+            "community-file-room/inbox",
+            "community-file-room/venue"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "Protect the important agenda before final cleanup. Copy community-file-room/agenda/agenda.txt to community-file-room/backups/agenda.txt."
+      },
+      "ideConfig": {
+        "runnerBackend": "pty",
+        "layoutMode": "terminal_workspace",
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalSessionScope": "project"
+      }
+    },
+    {
+      "id": "final-capstone-file-room-handoff-terminal-task-4",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4",
+      "language": "bash",
+      "starterCode": "# Use the terminal for this Linux project step.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Use the terminal for this Linux project step.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "community-file-room/inbox/tmp-scratch.txt",
+          "content": "Temporary scratch note\n",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/handoff/inventory.txt",
+          "content": "agenda.txt\nguest-list.txt\ntmp-scratch.txt\nvenue.txt\n",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/agenda/agenda.txt",
+          "content": "Community event agenda\n",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/guests/guest-list.txt",
+          "content": "Guest list\n",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/venue/venue.txt",
+          "content": "Venue setup notes\n",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/backups/agenda.txt",
+          "content": "Community event agenda\n",
+          "language": "bash"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "cat community-file-room/agenda/agenda.txt > /dev/null\ncat community-file-room/guests/guest-list.txt > /dev/null\nprintf 'Agenda and guest list reviewed for handoff\\n' > community-file-room/handoff/review-summary.txt\nfind community-file-room -maxdepth 2 -type f | sort\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "community-file-room/inbox/tmp-scratch.txt",
+          "content": "Temporary scratch note\n",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/handoff/inventory.txt",
+          "content": "agenda.txt\nguest-list.txt\ntmp-scratch.txt\nvenue.txt\n",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/handoff/review-summary.txt",
+          "content": "Agenda and guest list reviewed for handoff\n",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/agenda/agenda.txt",
+          "content": "Community event agenda\n",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/guests/guest-list.txt",
+          "content": "Guest list\n",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/venue/venue.txt",
+          "content": "Venue setup notes\n",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/backups/agenda.txt",
+          "content": "Community event agenda\n",
+          "language": "bash"
+        }
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "community-file-room/agenda/agenda.txt",
+          "community-file-room/backups/agenda.txt",
+          "community-file-room/guests/guest-list.txt",
+          "community-file-room/handoff/inventory.txt",
+          "community-file-room/handoff/review-summary.txt",
+          "community-file-room/inbox/tmp-scratch.txt",
+          "community-file-room/venue/venue.txt"
+        ],
+        "requiredFolders": [
+          "community-file-room",
+          "community-file-room/agenda",
+          "community-file-room/backups",
+          "community-file-room/guests",
+          "community-file-room/handoff",
+          "community-file-room/inbox",
+          "community-file-room/venue"
+        ]
+      },
+      "terminalExpectations": {
+        "forbiddenCommands": [
+          {
+            "pattern": "(^|\\s)sudo(\\s|$)",
+            "message": "Do not use sudo for beginner workspace tasks."
+          }
+        ]
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "starterCode": "# Use the terminal for this Linux project step.",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "# Use the terminal for this Linux project step.\n",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "community-file-room/inbox/tmp-scratch.txt",
+            "content": "Temporary scratch note\n",
+            "language": "bash"
+          },
+          {
+            "path": "community-file-room/handoff/inventory.txt",
+            "content": "agenda.txt\nguest-list.txt\ntmp-scratch.txt\nvenue.txt\n",
+            "language": "bash"
+          },
+          {
+            "path": "community-file-room/agenda/agenda.txt",
+            "content": "Community event agenda\n",
+            "language": "bash"
+          },
+          {
+            "path": "community-file-room/guests/guest-list.txt",
+            "content": "Guest list\n",
+            "language": "bash"
+          },
+          {
+            "path": "community-file-room/venue/venue.txt",
+            "content": "Venue setup notes\n",
+            "language": "bash"
+          },
+          {
+            "path": "community-file-room/backups/agenda.txt",
+            "content": "Community event agenda\n",
+            "language": "bash"
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "community-file-room/agenda/agenda.txt",
+            "community-file-room/backups/agenda.txt",
+            "community-file-room/guests/guest-list.txt",
+            "community-file-room/handoff/inventory.txt",
+            "community-file-room/handoff/review-summary.txt",
+            "community-file-room/inbox/tmp-scratch.txt",
+            "community-file-room/venue/venue.txt"
+          ],
+          "requiredFolders": [
+            "community-file-room",
+            "community-file-room/agenda",
+            "community-file-room/backups",
+            "community-file-room/guests",
+            "community-file-room/handoff",
+            "community-file-room/inbox",
+            "community-file-room/venue"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "Use the organized files to create a handoff summary. Write community-file-room/handoff/review-summary.txt after checking the agenda and guest list."
+      },
+      "ideConfig": {
+        "runnerBackend": "pty",
+        "layoutMode": "terminal_workspace",
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalSessionScope": "project"
+      }
+    },
+    {
+      "id": "final-capstone-file-room-handoff-terminal-task-5",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5",
+      "language": "bash",
+      "starterCode": "# Use the terminal for this Linux project step.",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "# Use the terminal for this Linux project step.\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "community-file-room/inbox/tmp-scratch.txt",
+          "content": "Temporary scratch note\n",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/handoff/inventory.txt",
+          "content": "agenda.txt\nguest-list.txt\ntmp-scratch.txt\nvenue.txt\n",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/handoff/review-summary.txt",
+          "content": "Agenda and guest list reviewed for handoff\n",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/agenda/agenda.txt",
+          "content": "Community event agenda\n",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/guests/guest-list.txt",
+          "content": "Guest list\n",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/venue/venue.txt",
+          "content": "Venue setup notes\n",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/backups/agenda.txt",
+          "content": "Community event agenda\n",
+          "language": "bash"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "rm -f community-file-room/inbox/tmp-scratch.txt\nprintf 'File room handoff ready\\n' > community-file-room/handoff/READY.txt\nfind community-file-room -maxdepth 2 -type f | sort\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "community-file-room/handoff/inventory.txt",
+          "content": "agenda.txt\nguest-list.txt\ntmp-scratch.txt\nvenue.txt\n",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/handoff/review-summary.txt",
+          "content": "Agenda and guest list reviewed for handoff\n",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/handoff/READY.txt",
+          "content": "File room handoff ready\n",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/agenda/agenda.txt",
+          "content": "Community event agenda\n",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/guests/guest-list.txt",
+          "content": "Guest list\n",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/venue/venue.txt",
+          "content": "Venue setup notes\n",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/backups/agenda.txt",
+          "content": "Community event agenda\n",
+          "language": "bash"
+        }
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "community-file-room/agenda/agenda.txt",
+          "community-file-room/backups/agenda.txt",
+          "community-file-room/guests/guest-list.txt",
+          "community-file-room/handoff/READY.txt",
+          "community-file-room/handoff/inventory.txt",
+          "community-file-room/handoff/review-summary.txt",
+          "community-file-room/venue/venue.txt"
+        ],
+        "forbiddenFiles": [
+          "community-file-room/inbox/tmp-scratch.txt"
+        ],
+        "requiredFolders": [
+          "community-file-room",
+          "community-file-room/agenda",
+          "community-file-room/backups",
+          "community-file-room/guests",
+          "community-file-room/handoff",
+          "community-file-room/inbox",
+          "community-file-room/venue"
+        ]
+      },
+      "terminalExpectations": {
+        "forbiddenCommands": [
+          {
+            "pattern": "(^|\\s)sudo(\\s|$)",
+            "message": "Do not use sudo for beginner workspace tasks."
+          }
+        ]
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "starterCode": "# Use the terminal for this Linux project step.",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "# Use the terminal for this Linux project step.\n",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "community-file-room/inbox/tmp-scratch.txt",
+            "content": "Temporary scratch note\n",
+            "language": "bash"
+          },
+          {
+            "path": "community-file-room/handoff/inventory.txt",
+            "content": "agenda.txt\nguest-list.txt\ntmp-scratch.txt\nvenue.txt\n",
+            "language": "bash"
+          },
+          {
+            "path": "community-file-room/handoff/review-summary.txt",
+            "content": "Agenda and guest list reviewed for handoff\n",
+            "language": "bash"
+          },
+          {
+            "path": "community-file-room/agenda/agenda.txt",
+            "content": "Community event agenda\n",
+            "language": "bash"
+          },
+          {
+            "path": "community-file-room/guests/guest-list.txt",
+            "content": "Guest list\n",
+            "language": "bash"
+          },
+          {
+            "path": "community-file-room/venue/venue.txt",
+            "content": "Venue setup notes\n",
+            "language": "bash"
+          },
+          {
+            "path": "community-file-room/backups/agenda.txt",
+            "content": "Community event agenda\n",
+            "language": "bash"
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "community-file-room/agenda/agenda.txt",
+            "community-file-room/backups/agenda.txt",
+            "community-file-room/guests/guest-list.txt",
+            "community-file-room/handoff/READY.txt",
+            "community-file-room/handoff/inventory.txt",
+            "community-file-room/handoff/review-summary.txt",
+            "community-file-room/venue/venue.txt"
+          ],
+          "forbiddenFiles": [
+            "community-file-room/inbox/tmp-scratch.txt"
+          ],
+          "requiredFolders": [
+            "community-file-room",
+            "community-file-room/agenda",
+            "community-file-room/backups",
+            "community-file-room/guests",
+            "community-file-room/handoff",
+            "community-file-room/inbox",
+            "community-file-room/venue"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "Remove the temporary scratch file from the inbox, then create `community-file-room/handoff/READY.txt` to mark the handoff as ready."
+      },
+      "ideConfig": {
+        "runnerBackend": "pty",
+        "layoutMode": "terminal_workspace",
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalSessionScope": "project"
+      }
+    }
+  ],
+  "topicMeta": {
+    "learningGoals": [
+      "Inspect a messy file-room inbox before changing it.",
+      "Organize files into a clean handoff structure.",
+      "Back up important files and leave a final ready marker."
+    ]
+  },
+  "serviceDefaults": {
+    "runnerBackend": "pty",
+    "layoutMode": "terminal_workspace",
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": true
+    }
+  }
+}

@@ -1,8 +1,8 @@
 {
   "topicId": "module-2-notes-organizer-project",
-  "subjectSlug": "linux-terminal-fundamentals",
+  "subjectSlug": "linux--linux-terminal-fundamentals--draft",
   "moduleSlug": "linux-module-2-files-and-folders",
-  "sectionSlug": "linux-terminal-fundamentals-linux-module-2-project",
+  "sectionSlug": "linux--linux-terminal-fundamentals--draft-linux-module-2-project",
   "prefix": "linux_module_2",
   "minutes": 24,
   "runtimeDefaults": {
@@ -15,21 +15,21 @@
     "supportsPackageInstall": false
   },
   "topic": {
-    "labelKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.label",
-    "summaryKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.summary"
+    "labelKey": "topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.label",
+    "summaryKey": "topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.summary"
   },
   "cards": [
     {
       "id": "sketch0",
       "kind": "sketch",
-      "titleKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.cards.sketch0.title",
+      "titleKey": "topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.cards.sketch0.title",
       "sketchId": "project-synopsis",
       "height": 420
     },
     {
       "id": "project",
       "kind": "project",
-      "titleKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.cards.project.title",
+      "titleKey": "topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.cards.project.title",
       "project": {
         "difficulty": "easy",
         "allowReveal": true,
@@ -38,7 +38,7 @@
         "steps": [
           {
             "id": "module_2_notes_organizer_project_terminal_task_1",
-            "titleKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-1.title",
+            "titleKey": "topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-1.title",
             "exerciseKey": "module-2-notes-organizer-project-terminal-task-1",
             "difficulty": "easy",
             "preferKind": "code_input",
@@ -47,7 +47,7 @@
           },
           {
             "id": "module_2_notes_organizer_project_terminal_task_2",
-            "titleKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2.title",
+            "titleKey": "topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2.title",
             "exerciseKey": "module-2-notes-organizer-project-terminal-task-2",
             "difficulty": "easy",
             "preferKind": "code_input",
@@ -57,7 +57,7 @@
           },
           {
             "id": "module_2_notes_organizer_project_terminal_task_3",
-            "titleKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.title",
+            "titleKey": "topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.title",
             "exerciseKey": "module-2-notes-organizer-project-terminal-task-3",
             "difficulty": "easy",
             "preferKind": "code_input",
@@ -73,8 +73,8 @@
     {
       "id": "project-synopsis",
       "archetype": "paragraph",
-      "titleKey": "sketches.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.project-synopsis.title",
-      "bodyKey": "sketches.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.project-synopsis.bodyMarkdown"
+      "titleKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.project-synopsis.title",
+      "bodyKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.project-synopsis.bodyMarkdown"
     }
   ],
   "exercises": [
@@ -83,13 +83,13 @@
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-1",
+      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-1",
       "language": "bash",
-      "starterCode": "# Use the terminal for this Linux project step.",
+      "starterCode": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-1.starterCode",
       "starterFiles": [
         {
           "path": "main.sh",
-          "content": "# Use the terminal for this Linux project step.\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-1.starterCode",
           "language": "bash",
           "isEntry": true,
           "entry": true
@@ -128,18 +128,18 @@
         "forbiddenCommands": [
           {
             "pattern": "(^|\\s)sudo(\\s|$)",
-            "message": "Do not use sudo for beginner workspace tasks."
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-1.terminalExpectations.forbiddenCommands.0.message"
           }
         ]
       },
       "workspace": {
         "language": "bash",
         "entryFilePath": "main.sh",
-        "starterCode": "# Use the terminal for this Linux project step.",
+        "starterCode": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-1.starterCode",
         "starterFiles": [
           {
             "path": "main.sh",
-            "content": "# Use the terminal for this Linux project step.\n",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-1.starterCode",
             "language": "bash",
             "isEntry": true,
             "entry": true
@@ -160,7 +160,7 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "Create `student-notes-organizer/inbox/math.txt` and `student-notes-organizer/inbox/history.txt` so the two incoming notes are ready in the intake folder."
+        "instructions": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-1.prompt"
       },
       "ideConfig": {
         "runnerBackend": "pty",
@@ -170,7 +170,8 @@
           "multiFile": true,
           "terminal": true
         },
-        "terminalSessionScope": "project"
+        "terminalSessionScope": "project",
+        "terminalCwd": "/workspace"
       }
     },
     {
@@ -178,25 +179,25 @@
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2",
+      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2",
       "language": "bash",
-      "starterCode": "# Use the terminal for this Linux project step.",
+      "starterCode": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2.starterCode",
       "starterFiles": [
         {
           "path": "main.sh",
-          "content": "# Use the terminal for this Linux project step.\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2.starterCode",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "student-notes-organizer/inbox/math.txt",
-          "content": "Math review notes\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2.starterFiles.student_notes_organizer_inbox_math_txt.content",
           "language": "bash"
         },
         {
           "path": "student-notes-organizer/inbox/history.txt",
-          "content": "History reading notes\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2.starterFiles.student_notes_organizer_inbox_history_txt.content",
           "language": "bash"
         }
       ],
@@ -241,30 +242,30 @@
         "forbiddenCommands": [
           {
             "pattern": "(^|\\s)sudo(\\s|$)",
-            "message": "Do not use sudo for beginner workspace tasks."
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2.terminalExpectations.forbiddenCommands.0.message"
           }
         ]
       },
       "workspace": {
         "language": "bash",
         "entryFilePath": "main.sh",
-        "starterCode": "# Use the terminal for this Linux project step.",
+        "starterCode": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2.starterCode",
         "starterFiles": [
           {
             "path": "main.sh",
-            "content": "# Use the terminal for this Linux project step.\n",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2.starterCode",
             "language": "bash",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "student-notes-organizer/inbox/math.txt",
-            "content": "Math review notes\n",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2.starterFiles.student_notes_organizer_inbox_math_txt.content",
             "language": "bash"
           },
           {
             "path": "student-notes-organizer/inbox/history.txt",
-            "content": "History reading notes\n",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2.starterFiles.student_notes_organizer_inbox_history_txt.content",
             "language": "bash"
           }
         ],
@@ -280,13 +281,25 @@
             "student-notes-organizer/classes",
             "student-notes-organizer/inbox"
           ]
-        }
+        },
+        "fixtureFiles": [
+          {
+            "path": "student-notes-organizer/inbox/math.txt",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2.starterFiles.student_notes_organizer_inbox_math_txt.content",
+            "language": "bash"
+          },
+          {
+            "path": "student-notes-organizer/inbox/history.txt",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2.starterFiles.student_notes_organizer_inbox_history_txt.content",
+            "language": "bash"
+          }
+        ]
       },
       "showExpectedExample": false,
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "Move `math.txt` and `history.txt` from `student-notes-organizer/inbox` into `student-notes-organizer/classes`, then copy `history.txt` to `student-notes-organizer/backups/history.txt`."
+        "instructions": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2.prompt"
       },
       "ideConfig": {
         "runnerBackend": "pty",
@@ -296,38 +309,51 @@
           "multiFile": true,
           "terminal": true
         },
-        "terminalSessionScope": "project"
-      }
+        "terminalSessionScope": "project",
+        "terminalCwd": "/workspace"
+      },
+      "fixtureFiles": [
+        {
+          "path": "student-notes-organizer/inbox/math.txt",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2.starterFiles.student_notes_organizer_inbox_math_txt.content",
+          "language": "bash"
+        },
+        {
+          "path": "student-notes-organizer/inbox/history.txt",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2.starterFiles.student_notes_organizer_inbox_history_txt.content",
+          "language": "bash"
+        }
+      ]
     },
     {
       "id": "module-2-notes-organizer-project-terminal-task-3",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3",
+      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3",
       "language": "bash",
-      "starterCode": "# Use the terminal for this Linux project step.",
+      "starterCode": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.starterCode",
       "starterFiles": [
         {
           "path": "main.sh",
-          "content": "# Use the terminal for this Linux project step.\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.starterCode",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "student-notes-organizer/classes/math.txt",
-          "content": "Math review notes\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.starterFiles.student_notes_organizer_classes_math_txt.content",
           "language": "bash"
         },
         {
           "path": "student-notes-organizer/classes/history.txt",
-          "content": "History reading notes\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.starterFiles.student_notes_organizer_classes_history_txt.content",
           "language": "bash"
         },
         {
           "path": "student-notes-organizer/backups/history.txt",
-          "content": "History reading notes\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.starterFiles.student_notes_organizer_backups_history_txt.content",
           "language": "bash"
         }
       ],
@@ -378,35 +404,35 @@
         "forbiddenCommands": [
           {
             "pattern": "(^|\\s)sudo(\\s|$)",
-            "message": "Do not use sudo for beginner workspace tasks."
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.terminalExpectations.forbiddenCommands.0.message"
           }
         ]
       },
       "workspace": {
         "language": "bash",
         "entryFilePath": "main.sh",
-        "starterCode": "# Use the terminal for this Linux project step.",
+        "starterCode": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.starterCode",
         "starterFiles": [
           {
             "path": "main.sh",
-            "content": "# Use the terminal for this Linux project step.\n",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.starterCode",
             "language": "bash",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "student-notes-organizer/classes/math.txt",
-            "content": "Math review notes\n",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.starterFiles.student_notes_organizer_classes_math_txt.content",
             "language": "bash"
           },
           {
             "path": "student-notes-organizer/classes/history.txt",
-            "content": "History reading notes\n",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.starterFiles.student_notes_organizer_classes_history_txt.content",
             "language": "bash"
           },
           {
             "path": "student-notes-organizer/backups/history.txt",
-            "content": "History reading notes\n",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.starterFiles.student_notes_organizer_backups_history_txt.content",
             "language": "bash"
           }
         ],
@@ -423,13 +449,30 @@
             "student-notes-organizer/classes",
             "student-notes-organizer/handoff"
           ]
-        }
+        },
+        "fixtureFiles": [
+          {
+            "path": "student-notes-organizer/classes/math.txt",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.starterFiles.student_notes_organizer_classes_math_txt.content",
+            "language": "bash"
+          },
+          {
+            "path": "student-notes-organizer/classes/history.txt",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.starterFiles.student_notes_organizer_classes_history_txt.content",
+            "language": "bash"
+          },
+          {
+            "path": "student-notes-organizer/backups/history.txt",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.starterFiles.student_notes_organizer_backups_history_txt.content",
+            "language": "bash"
+          }
+        ]
       },
       "showExpectedExample": false,
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "Create `student-notes-organizer/handoff/notes-ready.txt` while keeping the sorted class notes and backup in place."
+        "instructions": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.prompt"
       },
       "ideConfig": {
         "runnerBackend": "pty",
@@ -439,8 +482,26 @@
           "multiFile": true,
           "terminal": true
         },
-        "terminalSessionScope": "project"
-      }
+        "terminalSessionScope": "project",
+        "terminalCwd": "/workspace"
+      },
+      "fixtureFiles": [
+        {
+          "path": "student-notes-organizer/classes/math.txt",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.starterFiles.student_notes_organizer_classes_math_txt.content",
+          "language": "bash"
+        },
+        {
+          "path": "student-notes-organizer/classes/history.txt",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.starterFiles.student_notes_organizer_classes_history_txt.content",
+          "language": "bash"
+        },
+        {
+          "path": "student-notes-organizer/backups/history.txt",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.starterFiles.student_notes_organizer_backups_history_txt.content",
+          "language": "bash"
+        }
+      ]
     }
   ],
   "topicMeta": {

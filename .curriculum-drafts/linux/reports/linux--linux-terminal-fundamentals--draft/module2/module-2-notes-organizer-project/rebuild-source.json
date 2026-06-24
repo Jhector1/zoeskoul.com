@@ -1,0 +1,11 @@
+{
+  "mode": "rebuild-from-drafts",
+  "source": "current-draft-output",
+  "sourceBundlePath": "/Users/admin/Documents/NextJSProject/zoeskoul.com/.curriculum-drafts/linux/subjects/linux--linux-terminal-fundamentals--draft/modules/module2/topics/module-2-notes-organizer-project/topic.bundle.json",
+  "sourceMessagesPaths": {
+    "en": "/Users/admin/Documents/NextJSProject/zoeskoul.com/.curriculum-drafts/linux/messages/en/subjects/linux--linux-terminal-fundamentals--draft/module2/module-2-notes-organizer-project.json"
+  },
+  "identityNormalized": false,
+  "identityReplacements": [],
+  "syncedReports": true
+}

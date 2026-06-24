@@ -1,0 +1,11 @@
+{
+  "mode": "rebuild-from-drafts",
+  "source": "current-draft-output",
+  "sourceBundlePath": "/Users/admin/Documents/NextJSProject/zoeskoul.com/.curriculum-drafts/linux/subjects/linux--linux-terminal-fundamentals--draft/modules/module3/topics/final-capstone-file-room-handoff/topic.bundle.json",
+  "sourceMessagesPaths": {
+    "en": "/Users/admin/Documents/NextJSProject/zoeskoul.com/.curriculum-drafts/linux/messages/en/subjects/linux--linux-terminal-fundamentals--draft/module3/final-capstone-file-room-handoff.json"
+  },
+  "identityNormalized": false,
+  "identityReplacements": [],
+  "syncedReports": true
+}

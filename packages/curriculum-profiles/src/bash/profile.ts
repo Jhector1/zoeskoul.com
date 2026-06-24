@@ -15,9 +15,9 @@ import type {
 } from "../types.js";
 import { bashShape } from "../shapes/bashShape.js";
 import {
-    createCodeInputProjectCapability,
-    sharedPracticeProfileConfig,
-} from "../shared/generationPolicy.js";
+    messageTag,
+    starterFileContentMessageTag,
+} from "../shared/messageTags.js";
 
 function normalizeText(value: unknown): string {
     return typeof value === "string" ? value.trim() : "";
@@ -190,6 +190,47 @@ function normalizeBashTerminalExpectations(
     return Object.keys(result).length ? result : undefined;
 }
 
+function withTerminalExpectationMessageRefs(args: {
+    terminalExpectations?: TerminalExpectations;
+    messageBase: string;
+}): TerminalExpectations | undefined {
+    if (!args.terminalExpectations) return undefined;
+
+    const withCommandRefs = (
+        entries: TerminalExpectations["requiredCommands"],
+        kind: "requiredCommands" | "forbiddenCommands",
+    ) => {
+        if (!entries?.length) return entries;
+
+        return entries.map((entry, index) => ({
+            ...entry,
+            ...(entry.message
+                ? {
+                    message: messageTag(
+                        args.messageBase,
+                        `terminalExpectations.${kind}.${index}.message`,
+                    ),
+                }
+                : {}),
+        }));
+    };
+
+    const requiredCommands = withCommandRefs(
+        args.terminalExpectations.requiredCommands,
+        "requiredCommands",
+    );
+    const forbiddenCommands = withCommandRefs(
+        args.terminalExpectations.forbiddenCommands,
+        "forbiddenCommands",
+    );
+
+    return {
+        ...args.terminalExpectations,
+        ...(requiredCommands?.length ? { requiredCommands } : {}),
+        ...(forbiddenCommands?.length ? { forbiddenCommands } : {}),
+    };
+}
+
 function normalizeBashHiddenShellCheck(
     value: unknown,
 ): HiddenShellCheck | undefined {
@@ -275,6 +316,7 @@ const bashCodeInputCapability: CodeInputProfileCapability = {
         }
 
         const starterCode = args.exercise.starterCode || 'echo "Hello from Bash!"\n';
+        const starterCodeTag = messageTag(args.messageBase, "starterCode");
         const authoredEntryFilePath = safeNormalizeWorkspacePath(
             (args.exercise as { entryFilePath?: string }).entryFilePath ?? "main.sh",
             "Invalid Bash entryFilePath",
@@ -287,20 +329,8 @@ const bashCodeInputCapability: CodeInputProfileCapability = {
         const hasEntryFile = starterFiles.some(
             (file) => file.path === authoredEntryFilePath,
         );
-        const normalizedStarterFiles = hasEntryFile
-            ? starterFiles.map((file) =>
-                file.path === authoredEntryFilePath
-                    ? {
-                        ...file,
-                        language: "bash",
-                        isEntry: true,
-                        entry: true,
-                    }
-                    : {
-                        ...file,
-                        language: "bash",
-                    },
-            )
+        const normalizedStarterFiles = (hasEntryFile
+            ? starterFiles
             : [
                 {
                     path: authoredEntryFilePath,
@@ -310,7 +340,28 @@ const bashCodeInputCapability: CodeInputProfileCapability = {
                     entry: true,
                 },
                 ...starterFiles,
-            ];
+            ]).map((file, index) =>
+                file.path === authoredEntryFilePath
+                    ? {
+                        ...file,
+                        content: starterCodeTag,
+                        language: "bash" as const,
+                        isEntry: true,
+                        entry: true,
+                    }
+                    : {
+                        ...file,
+                        content:
+                            typeof file.content === "string"
+                                ? starterFileContentMessageTag({
+                                    messageBase: args.messageBase,
+                                    filePath: (file as { path?: string; name?: string }).path ?? (file as { path?: string; name?: string }).name,
+                                    index,
+                                })
+                                : file.content,
+                        language: "bash" as const,
+                    },
+            );
         const normalizedSolutionFiles = solutionFiles.length > 0
             ? solutionFiles.map((file) =>
                 file.path === authoredEntryFilePath
@@ -340,6 +391,10 @@ const bashCodeInputCapability: CodeInputProfileCapability = {
         const terminalExpectations = normalizeBashTerminalExpectations(
             (args.exercise as { terminalExpectations?: unknown }).terminalExpectations,
         );
+        const terminalExpectationsWithMessageRefs = withTerminalExpectationMessageRefs({
+            terminalExpectations,
+            messageBase: args.messageBase,
+        });
         const hiddenShellCheck = normalizeBashHiddenShellCheck(
             (args.exercise as { hiddenShellCheck?: unknown }).hiddenShellCheck,
         );
@@ -349,7 +404,10 @@ const bashCodeInputCapability: CodeInputProfileCapability = {
             args.exercise.mode === "terminal_workspace"
                 ? args.exercise.mode
                 : "terminal_workspace";
-        const instructions = normalizeText(args.exercise.instructions || args.exercise.prompt);
+        const explicitInstructions = normalizeText(args.exercise.instructions);
+        const instructions = explicitInstructions
+            ? messageTag(args.messageBase, "instructions")
+            : messageTag(args.messageBase, "prompt");
 
         if (terminalExpectations && mode !== "terminal_workspace") {
             throw new Error(
@@ -370,16 +428,16 @@ const bashCodeInputCapability: CodeInputProfileCapability = {
             weight: 1,
             messageBase: args.messageBase,
             language: "bash",
-            starterCode,
+            starterCode: starterCodeTag,
             starterFiles: normalizedStarterFiles,
             solutionFiles: normalizedSolutionFiles,
             ...(workspaceExpectations ? { workspaceExpectations } : {}),
-            ...(terminalExpectations ? { terminalExpectations } : {}),
+            ...(terminalExpectationsWithMessageRefs ? { terminalExpectations: terminalExpectationsWithMessageRefs } : {}),
             ...(hiddenShellCheck ? { hiddenShellCheck } : {}),
             workspace: {
                 language: "bash",
                 entryFilePath: authoredEntryFilePath,
-                starterCode,
+                starterCode: starterCodeTag,
                 starterFiles: normalizedStarterFiles,
                 ...(workspaceExpectations ? { workspaceExpectations } : {}),
             },
@@ -426,8 +484,6 @@ export const bashProfile: CourseProfile = {
             },
         };
     },
-    practice: sharedPracticeProfileConfig,
-    project: createCodeInputProjectCapability(),
     renderExerciseKindPromptRules() {
         return [
             '- For Bash/Linux code_input, use recipeType "shell_task".',

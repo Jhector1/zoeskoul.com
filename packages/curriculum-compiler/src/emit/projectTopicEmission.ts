@@ -11,7 +11,7 @@ function pickExerciseIdByIndex(
     exercises: DraftExercise[],
     sketchIndex: number,
 ) {
-    if (exercises.length === 0) return undefined;
+    if (sketchIndex < 0 || sketchIndex >= exercises.length) return undefined;
     return exercises[sketchIndex]?.id;
 }
 

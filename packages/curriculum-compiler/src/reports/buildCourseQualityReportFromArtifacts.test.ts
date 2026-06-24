@@ -14,7 +14,7 @@ import { listTopicPlanNodes } from "../plan/listTopicPlanNodes.js";
 import { buildTopicSeedFromPlanNode } from "../seeds/buildTopicSeedFromPlanNode.js";
 import { buildCourseQualityReportFromArtifacts } from "./buildCourseQualityReportFromArtifacts.js";
 
-const subjectSlug = "python--course-quality-aggregation-test";
+const subjectSlug = "python--course-quality-aggregation-test--draft";
 const reportRoot = path.join(
     getRepoRoot(),
     ".curriculum-drafts",

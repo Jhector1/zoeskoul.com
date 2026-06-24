@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { useTaggedT } from "@/i18n/tagged";
 import type { CodeFeedback, CodeFeedbackTone } from "@/lib/code/feedback/types";
 import { cn } from "@/lib/cn";
 import Badge from "@/components/billing/Badge";
@@ -39,15 +40,19 @@ export default function CodeFeedbackCallout({
     feedback?: CodeFeedback | null;
     explanation?: string | null;
 }) {
-    const body = feedback?.message?.trim() || explanation?.trim();
+    const tagged = useTaggedT();
+    const rawBody = feedback?.message?.trim() || explanation?.trim();
+    const body = tagged.resolve(rawBody, rawBody);
     if (!body) return null;
 
-    const tone = resolveFeedbackTone({ feedback, explanation });
+    const rawTitle = feedback?.title ?? "Feedback";
+    const title = tagged.resolve(rawTitle, rawTitle);
+    const tone = resolveFeedbackTone({ feedback, explanation: body });
 
     return (
         <div className={cn("p-3", feedbackSurfaceClass(tone))}>
             <div className="flex flex-wrap items-center gap-2">
-                <div className="ui-title-sm">{feedback?.title ?? "Feedback"}</div>
+                <div className="ui-title-sm">{title}</div>
 
                 {typeof feedback?.line === "number" ? (
                     <Badge tone={feedbackBadgeTone(tone)}>

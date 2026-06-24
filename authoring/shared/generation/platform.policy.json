@@ -24,10 +24,38 @@
     "handsOnTopicsRequireTryItCoverage": true,
     "conceptualOnlyTopicsMayBeQuizOnly": true,
     "requireUniqueTryItMessages": true,
-    "requireTryItForEverySketch": true
+    "requireTryItForEverySketch": true,
+    "quizzesDoNotUseCodeInput": true,
+    "requireOneModuleProjectPerStandardModule": true,
+    "requireFinalCapstoneAtCourseEnd": true,
+    "projectTopicsUseOneSynopsisSketch": true,
+    "projectStepsMustBeChained": true
   },
   "projectRequirements": {
     "reuseTryItInProjects": true,
-    "requireCompleteSolutionFiles": true
+    "requireCompleteSolutionFiles": true,
+    "requireOneModuleProjectPerStandardModule": true,
+    "requireFinalCapstone": true,
+    "projectTopicSketchCount": 1,
+    "projectFlowDefault": "progressive",
+    "requireCumulativeChaining": true,
+    "requireStepChaining": true
+  },
+  "quizDefaults": {
+    "allowCodeInput": false,
+    "allowedKinds": [
+      "single_choice",
+      "multi_choice",
+      "drag_reorder",
+      "fill_blank_choice"
+    ]
+  },
+  "exerciseKindRules": {
+    "distinguishTryItPractice": true,
+    "distinguishRegularPractice": true,
+    "distinguishProjectSteps": true,
+    "distinguishQuizExercises": true,
+    "distinguishCodeInputExercises": true,
+    "doNotTreatKindsAsInterchangeable": true
   }
 }

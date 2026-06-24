@@ -33,6 +33,8 @@ export async function writeTopicReports(args: {
     semanticReport?: SemanticValidationReport;
     goldenReport?: GoldenValidationReport;
     topicBundle?: unknown;
+    topicMessagesByLocale?: Record<string, unknown>;
+    rebuildSource?: unknown;
     qualityReport?: CurriculumQualityReport;
 }) {
     const baseDir = path.join(
@@ -75,6 +77,19 @@ export async function writeTopicReports(args: {
 
     if (args.topicBundle !== undefined) {
         await writeJsonAtomic(path.join(baseDir, "emitted-topic-bundle.json"), args.topicBundle);
+    }
+
+    if (args.topicMessagesByLocale !== undefined) {
+        for (const [locale, messages] of Object.entries(args.topicMessagesByLocale)) {
+            await writeJsonAtomic(
+                path.join(baseDir, `emitted-topic-messages.${locale}.json`),
+                messages,
+            );
+        }
+    }
+
+    if (args.rebuildSource !== undefined) {
+        await writeJsonAtomic(path.join(baseDir, "rebuild-source.json"), args.rebuildSource);
     }
 
     if (args.qualityReport !== undefined) {

@@ -105,6 +105,34 @@ function asRecord(value: unknown): LooseManifestRecord | null {
     ? (value as LooseManifestRecord)
     : null;
 }
+
+function resolveReviewTargetI18nAliases<T>(
+  value: T,
+  resolveMessage?: (key: string) => string | undefined,
+): T {
+  if (!resolveMessage) return value;
+
+  if (typeof value === "string") {
+    const trimmed = value.trim();
+    if (!trimmed.startsWith("@:")) return value;
+    const key = trimmed.slice(2).trim();
+    const resolved = key ? resolveMessage(key) : undefined;
+    return (typeof resolved === "string" ? resolved : "") as T;
+  }
+
+  if (Array.isArray(value)) {
+    return value.map((item) => resolveReviewTargetI18nAliases(item, resolveMessage)) as T;
+  }
+
+  if (!value || typeof value !== "object") return value;
+
+  const out: Record<string, unknown> = {};
+  for (const [key, child] of Object.entries(value as Record<string, unknown>)) {
+    out[key] = resolveReviewTargetI18nAliases(child, resolveMessage);
+  }
+  return out as T;
+}
+
 function pickStarterCodeFromMessageBase(
     item: unknown,
     resolveMessage?: (key: string) => string | undefined,
@@ -606,9 +634,13 @@ export function buildReviewTargetRegistry(args: {
           targetSlug: cardTargetSlug,
         });
         const mergedCardManifest = mergeManifestParts(asRecord(rawSketch), asRecord(cardRecord.spec));
+        const localizedCardManifest = resolveReviewTargetI18nAliases(
+          mergedCardManifest,
+          resolveMessage,
+        );
         const cardRuntimeContext = buildRuntimeEntryContext({
           subjectSlug,
-          item: mergedCardManifest,
+          item: localizedCardManifest,
           topicRuntimeDefaults,
           moduleRuntimeDefaults,
           fallbackLanguage: topicFallbackLanguage,
@@ -651,26 +683,26 @@ export function buildReviewTargetRegistry(args: {
           tryIt: embeddedTryIt,
           toolScopeKey: `${cardKey}:general`,
           language: cardRuntimeContext.language,
-          starterFiles: pickStarterFiles(mergedCardManifest, subjectSlug, cardRuntimeContext.language, profileId, versionFamily),
-          solutionFiles: pickSolutionFiles(mergedCardManifest, subjectSlug, cardRuntimeContext.language, profileId, versionFamily),
+          starterFiles: pickStarterFiles(localizedCardManifest, subjectSlug, cardRuntimeContext.language, profileId, versionFamily),
+          solutionFiles: pickSolutionFiles(localizedCardManifest, subjectSlug, cardRuntimeContext.language, profileId, versionFamily),
           starterCode: pickStarterCode(
-              mergedCardManifest,
+              localizedCardManifest,
               subjectSlug,
               cardRuntimeContext.language,
               profileId,
               versionFamily,
               resolveMessage,
           ),
-          solutionCode: pickSolutionCode(mergedCardManifest, subjectSlug, cardRuntimeContext.language, profileId, versionFamily),
+          solutionCode: pickSolutionCode(localizedCardManifest, subjectSlug, cardRuntimeContext.language, profileId, versionFamily),
           runtimeDefaults: topicRuntimeDefaults,
           topicRuntimeDefaults,
           moduleRuntimeDefaults,
           sqlDatasetId: cardRuntimeContext.datasetResolution.datasetId,
           sqlDatasetResolutionSource: cardRuntimeContext.datasetResolution.source,
           sqlDatasetResolutionError: cardRuntimeContext.datasetResolution.error,
-          starterWorkspace: asRecord(mergedCardManifest?.workspace) ?? asRecord(cardRecord.spec)?.workspace ?? null,
-          toolManifest: mergedCardManifest ?? buildToolManifest(card),
-          item: mergedCardManifest,
+          starterWorkspace: asRecord(localizedCardManifest?.workspace) ?? asRecord(cardRecord.spec)?.workspace ?? null,
+          toolManifest: localizedCardManifest ?? buildToolManifest(card),
+          item: localizedCardManifest,
           profileId,
           versionFamily,
         };
@@ -717,9 +749,13 @@ export function buildReviewTargetRegistry(args: {
             asRecord(rawExercise),
             asRecord(exercise.step),
           );
+          const localizedExerciseManifest = resolveReviewTargetI18nAliases(
+            mergedExerciseManifest,
+            resolveMessage,
+          );
           const exerciseRuntimeContext = buildRuntimeEntryContext({
             subjectSlug,
-            item: mergedExerciseManifest,
+            item: localizedExerciseManifest,
             topicRuntimeDefaults,
             moduleRuntimeDefaults,
             fallbackLanguage: topicFallbackLanguage,
@@ -743,26 +779,26 @@ export function buildReviewTargetRegistry(args: {
             exerciseId: exercise.exerciseId,
             exerciseStateKey,
             language: exerciseRuntimeContext.language,
-            starterFiles: pickStarterFiles(mergedExerciseManifest, subjectSlug, exerciseRuntimeContext.language, profileId, versionFamily),
-            solutionFiles: pickSolutionFiles(mergedExerciseManifest, subjectSlug, exerciseRuntimeContext.language, profileId, versionFamily),
+            starterFiles: pickStarterFiles(localizedExerciseManifest, subjectSlug, exerciseRuntimeContext.language, profileId, versionFamily),
+            solutionFiles: pickSolutionFiles(localizedExerciseManifest, subjectSlug, exerciseRuntimeContext.language, profileId, versionFamily),
             starterCode: pickStarterCode(
-                mergedExerciseManifest,
+                localizedExerciseManifest,
                 subjectSlug,
                 exerciseRuntimeContext.language,
                 profileId,
                 versionFamily,
                 resolveMessage,
             ),
-            solutionCode: pickSolutionCode(mergedExerciseManifest, subjectSlug, exerciseRuntimeContext.language, profileId, versionFamily),
+            solutionCode: pickSolutionCode(localizedExerciseManifest, subjectSlug, exerciseRuntimeContext.language, profileId, versionFamily),
             runtimeDefaults: topicRuntimeDefaults,
             topicRuntimeDefaults,
             moduleRuntimeDefaults,
             sqlDatasetId: exerciseRuntimeContext.datasetResolution.datasetId,
             sqlDatasetResolutionSource: exerciseRuntimeContext.datasetResolution.source,
             sqlDatasetResolutionError: exerciseRuntimeContext.datasetResolution.error,
-            starterWorkspace: asRecord(mergedExerciseManifest?.workspace) ?? null,
-            toolManifest: mergedExerciseManifest,
-            item: mergedExerciseManifest,
+            starterWorkspace: asRecord(localizedExerciseManifest?.workspace) ?? null,
+            toolManifest: localizedExerciseManifest,
+            item: localizedExerciseManifest,
             profileId,
             versionFamily,
           };

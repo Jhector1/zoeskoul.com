@@ -28,13 +28,14 @@ describe("resolveCodeToolPaneFullIdeMode", () => {
     });
 
 
-    it("lets route runtime ideConfig override a stale tool ideConfig cwd", () => {
+    it("lets the current bound exercise cwd override stale runtime cwd in review mode", () => {
         const resolved = resolveEffectiveCodeToolPaneIdeConfig({
             isReviewRouteMode: true,
             propIdeConfig: {
                 runnerBackend: "pty",
                 layoutMode: "terminal_workspace",
-                terminalCwd: "/workspace",
+                terminalCwd: "/workspace/park-terminal-map",
+                terminalSessionScope: "exercise",
                 requires: {
                     files: true,
                     terminal: true,
@@ -43,8 +44,8 @@ describe("resolveCodeToolPaneFullIdeMode", () => {
             exerciseIdeConfig: {
                 runnerBackend: "pty",
                 layoutMode: "terminal_workspace",
-                terminalCwd: "/workspace/park-terminal-map",
-                terminalSessionScope: "exercise",
+                terminalCwd: "/workspace",
+                terminalSessionScope: "topic",
             },
         });
 

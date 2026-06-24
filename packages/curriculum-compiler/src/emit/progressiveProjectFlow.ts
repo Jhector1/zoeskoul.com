@@ -97,6 +97,26 @@ function progressiveStarterCode(args: {
     );
 }
 
+function progressiveSolutionCode(args: {
+    exercise: CodeExercise;
+    previousExercise?: CodeExercise | undefined;
+    stepNumber: number;
+}) {
+    const currentSolution = normalizeText(args.exercise.solutionCode);
+    if (args.stepNumber === 1 || !args.previousExercise) {
+        return currentSolution;
+    }
+
+    const previousSolution = normalizeText(args.previousExercise.solutionCode);
+    if (!previousSolution) return currentSolution;
+    if (!currentSolution) return previousSolution;
+    if (currentSolution.includes(previousSolution)) return currentSolution;
+
+    return ensureTrailingNewline(
+        [previousSolution, currentSolution].filter(Boolean).join("\n"),
+    );
+}
+
 function resolveEntryFilePath(exercise: CodeExercise) {
     const explicit = normalizeText((exercise as { entryFilePath?: string }).entryFilePath);
     if (explicit) return explicit;
@@ -216,12 +236,23 @@ function mergeProgressiveFiles(args: {
         }
     }
 
+    const previousPaths = new Set(previousFiles.map((file) => file.path));
+    const currentSolutionPaths = new Set(
+        currentSolutionFiles.map((file) => file.path),
+    );
+    const currentStarterFilesForStarter = currentStarterFiles.filter((file) => {
+        if (!file?.path) return false;
+        if (file.path === entryFilePath) return true;
+        if (previousPaths.has(file.path)) return true;
+        return !currentSolutionPaths.has(file.path);
+    });
+
     upsert(previousFiles, "append");
-    upsert(currentStarterFiles, "append");
     if (args.preferCurrentSolutionFiles) {
+        upsert(currentStarterFiles, "append");
         upsert(currentSolutionFiles, "override");
     } else {
-        upsert(currentSolutionFiles, "append");
+        upsert(currentStarterFilesForStarter, "append");
     }
 
     const existingEntry =
@@ -266,7 +297,7 @@ export function applyProgressiveProjectFlow(args: {
     const stepIndexById = new Map(
         args.projectStepIds.map((id, index) => [id, index]),
     );
-    const codeInputById = new Map(
+    const originalCodeInputById = new Map(
         args.exercises
             .filter(
                 (exercise): exercise is Extract<DraftExercise, { kind: "code_input" }> =>
@@ -274,6 +305,7 @@ export function applyProgressiveProjectFlow(args: {
             )
             .map((exercise) => [exercise.id, exercise]),
     );
+    const transformedCodeInputById = new Map<string, CodeExercise>();
 
     return args.exercises.map((exercise) => {
         const stepIndex = stepIndexById.get(exercise.id);
@@ -300,40 +332,49 @@ export function applyProgressiveProjectFlow(args: {
             return nextExercise;
         }
 
-        const previousExercise =
-            stepIndex > 0
-                ? codeInputById.get(args.projectStepIds[stepIndex - 1])
-                : undefined;
+        const previousStepId = stepIndex > 0 ? args.projectStepIds[stepIndex - 1] : undefined;
+        const previousExercise = previousStepId
+            ? transformedCodeInputById.get(previousStepId) ?? originalCodeInputById.get(previousStepId)
+            : undefined;
 
-        return {
-            ...nextExercise,
-            starterCode: progressiveStarterCode({
-                exercise,
-                previousExercise,
-                projectConfig,
-                stepNumber,
-            }),
+        const starterCode = progressiveStarterCode({
+            exercise,
+            previousExercise,
+            projectConfig,
+            stepNumber,
+        });
+        const solutionCode = progressiveSolutionCode({
+            exercise,
+            previousExercise,
+            stepNumber,
+        });
+
+        const transformedExercise: CodeExercise = {
+            ...(nextExercise as CodeExercise),
+            starterCode,
+            solutionCode,
             ...(previousExercise
                 ? {
                     starterFiles: mergeProgressiveFiles({
                         previousExercise,
                         exercise,
-                        entryContent: progressiveStarterCode({
-                            exercise,
-                            previousExercise,
-                            projectConfig,
-                            stepNumber,
-                        }),
+                        entryContent: starterCode,
                         preferCurrentSolutionFiles: false,
                     }),
                     solutionFiles: mergeProgressiveFiles({
                         previousExercise,
-                        exercise,
-                        entryContent: normalizeText(exercise.solutionCode),
+                        exercise: {
+                            ...exercise,
+                            solutionCode,
+                        },
+                        entryContent: solutionCode,
                         preferCurrentSolutionFiles: true,
                     }),
                 }
                 : {}),
         };
+
+        transformedCodeInputById.set(exercise.id, transformedExercise);
+        return transformedExercise;
     });
 }

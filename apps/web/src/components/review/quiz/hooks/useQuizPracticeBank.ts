@@ -1021,6 +1021,15 @@ function stablePracticeJson(value: any) {
   }
 }
 
+function stablePracticeItemJsonForNoopCompare(value: any) {
+  if (!value || typeof value !== "object") {
+    return stablePracticeJson(value);
+  }
+
+  const { updatedAt: _updatedAt, ...rest } = value as Record<string, unknown>;
+  return stablePracticeJson(rest);
+}
+
 function getPracticeExerciseLanguage(exercise: any) {
   if (!exercise || exercise.kind !== "code_input") return null;
 
@@ -1602,6 +1611,14 @@ export function useQuizPracticeBank(args: {
             item: nextItem,
             ok: explicitUserDismiss ? null : ps.ok,
           };
+
+          if (
+              nextState.ok === ps.ok &&
+              stablePracticeItemJsonForNoopCompare(nextItem) ===
+              stablePracticeItemJsonForNoopCompare(ps.item)
+          ) {
+            return prev;
+          }
 
           if (q) {
             return setPracticeForQuestion(prev, q, nextState);

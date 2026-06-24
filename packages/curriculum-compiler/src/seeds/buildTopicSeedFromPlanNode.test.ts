@@ -456,7 +456,7 @@ describe("buildTopicSeedFromPlanNode", () => {
         });
     });
 
-    it("preserves old behavior when the profile has no project capability", () => {
+    it("inherits base try-it policy when the profile has no project capability", () => {
         const seed = buildTopicSeedFromPlanNode(
             makeBaseArgs({
                 blueprint: {
@@ -470,7 +470,13 @@ describe("buildTopicSeedFromPlanNode", () => {
 
         expect(seed.generationTargets.quizBankTarget).toBe(8);
         expect(seed.generationTargets.projectCodeInputTarget).toBe(3);
-        expect(seed.practice).toBeUndefined();
+        expect(seed.practice).toEqual({
+            conceptualOnly: false,
+            requiresTryIt: true,
+            tryIt: true,
+            tryItPlacement: "all_sketches",
+            tryItSketchIndex: 0,
+        });
     });
 
     it("builds stable topic seeds for the same inputs", () => {

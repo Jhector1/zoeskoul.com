@@ -1649,6 +1649,7 @@ export default function ExerciseRenderer({
         finalized || (maxA !== Number.POSITIVE_INFINITY && attempts >= maxA && ok !== true);
 
     const lockInputs = readOnly || busy || ok === true || outOfAttempts;
+    const lastRuntimeWorkspaceSyncKeyRef = useRef<string | null>(null);
 
     function resetCheckPatch() {
         if (readOnly) return {};
@@ -1698,13 +1699,36 @@ export default function ExerciseRenderer({
         const currentCode = (current as any).code;
         const currentStdin = (current as any).codeStdin;
         const currentWorkspace = (current as any).workspace;
+        const currentWorkspaceKey = workspaceContentKeyForExerciseRenderer(
+            currentWorkspace?.version === 2 ? currentWorkspace : null,
+        );
+        const nextWorkspaceKey = workspaceContentKeyForExerciseRenderer(workspace);
 
         const needsSync =
             currentCode !== workspaceCode ||
             currentStdin !== workspaceStdin ||
-            currentWorkspace !== workspace;
+            currentWorkspaceKey !== nextWorkspaceKey;
 
-        if (!needsSync) return;
+        const runtimeSyncKey = JSON.stringify({
+            exerciseKey,
+            workspaceKey: nextWorkspaceKey,
+            code: workspaceCode,
+            stdin: workspaceStdin,
+            userEdited: store?.userEdited === true,
+            workspaceOrigin: store?.workspaceOrigin ?? "saved",
+            starterHash: store?.starterHash ?? null,
+            updatedAt: store?.updatedAt ?? null,
+        });
+
+        if (!needsSync) {
+            if (lastRuntimeWorkspaceSyncKeyRef.current === runtimeSyncKey) {
+                lastRuntimeWorkspaceSyncKeyRef.current = null;
+            }
+            return;
+        }
+
+        if (lastRuntimeWorkspaceSyncKeyRef.current === runtimeSyncKey) return;
+        lastRuntimeWorkspaceSyncKeyRef.current = runtimeSyncKey;
 
         updateCurrent({
             workspace,
@@ -1717,7 +1741,7 @@ export default function ExerciseRenderer({
             userEdited: store?.userEdited === true || store?.workspaceOrigin === "user" || store?.workspaceOrigin === "saved",
             workspaceOrigin: store?.workspaceOrigin ?? "saved",
             starterHash: store?.starterHash,
-            updatedAt: store?.updatedAt ?? Date.now(),
+            updatedAt: store?.updatedAt,
         } as any);
     }, [ex.kind, exerciseKey, current, updateCurrent]);
 
