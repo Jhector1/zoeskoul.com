@@ -1,0 +1,20 @@
+{
+  "mode": "rebuild-from-drafts",
+  "source": "current-draft-output",
+  "sourceBundlePath": "/Users/admin/Documents/NextJSProject/zoeskoul.com/.curriculum-drafts/python/subjects/python--python-v2--draft/modules/module1/topics/string-indexing-and-slicing/topic.bundle.json",
+  "sourceMessagesPaths": {
+    "en": "/Users/admin/Documents/NextJSProject/zoeskoul.com/.curriculum-drafts/python/messages/en/subjects/python--python-v2--draft/module1/string-indexing-and-slicing.json"
+  },
+  "identityNormalized": true,
+  "identityReplacements": [
+    [
+      "python-v2-1-string-foundations",
+      "python--python-v2--draft-python-v2-1-string-foundations"
+    ],
+    [
+      "python-v2",
+      "python--python-v2--draft"
+    ]
+  ],
+  "syncedReports": true
+}

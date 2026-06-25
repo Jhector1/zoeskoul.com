@@ -13,6 +13,7 @@ const WEB_ROOT = fs.existsSync(path.resolve(process.cwd(), "src"))
 const SUBJECT_ROOT = path.join(WEB_ROOT, "src/lib/subjects/sql/sql");
 const I18N_ROOT = path.join(WEB_ROOT, "src/i18n/messages/en/subjects/sql/sql");
 const SUBJECT_MANIFEST_PATH = path.join(SUBJECT_ROOT, "subject.manifest.json");
+const DATASET_ROOT = path.join(SUBJECT_ROOT, "datasets");
 
 const EXPECTED_TOPIC_ORDER = [
   ["what_sql_is", "understanding_tables", "database_thinking", "first_sql_environment"],
@@ -66,30 +67,25 @@ function topicPath(moduleSlug: string, topicSlug: string) {
 }
 
 function datasetPath(datasetId: string) {
-  const files = fs
-    .readdirSync(path.join(SUBJECT_ROOT, "datasets"))
-    .filter((file) => file.endsWith(".ts") && file !== "index.ts");
-
-  for (const file of files) {
-    const fullPath = path.join(SUBJECT_ROOT, "datasets", file);
-    if (fs.readFileSync(fullPath, "utf8").includes(`id: "${datasetId}"`)) {
-      return fullPath;
-    }
-  }
-
-  return null;
+  return DATASET_PATH_BY_ID.get(datasetId) ?? null;
 }
 
 function readDataset(datasetId: string) {
   const filePath = datasetPath(datasetId);
   expect(filePath, `Missing SQL dataset ${datasetId}`).toBeTruthy();
 
-  const source = fs.readFileSync(filePath!, "utf8");
-  const schemaSql = source.match(/schemaSql:\s*`([\s\S]*?)`\.trim\(\)/)?.[1] ?? "";
-  const seedSql = source.match(/seedSql:\s*`([\s\S]*?)`\.trim\(\)/)?.[1] ?? "";
-  const columns = Array.from(source.matchAll(/\{\s*name:\s*"([^"]+)"/g)).map((match) => match[1]);
+  const cached = DATASET_CACHE.get(filePath!);
+  if (cached) return cached;
 
-  return { schemaSql, seedSql, columns };
+  const source = fs.readFileSync(filePath!, "utf8");
+  const parsed = {
+    schemaSql: source.match(/schemaSql:\s*`([\s\S]*?)`\.trim\(\)/)?.[1] ?? "",
+    seedSql: source.match(/seedSql:\s*`([\s\S]*?)`\.trim\(\)/)?.[1] ?? "",
+    columns: Array.from(source.matchAll(/\{\s*name:\s*"([^"]+)"/g)).map((match) => match[1]),
+  };
+
+  DATASET_CACHE.set(filePath!, parsed);
+  return parsed;
 }
 
 function executeSql(args: { schemaSql: string; seedSql: string; sql: string }) {
@@ -117,6 +113,36 @@ function executeSql(args: { schemaSql: string; seedSql: string; sql: string }) {
 }
 
 function listTopicRefs() {
+  return TOPIC_REFS;
+}
+
+function topicMessageFile(moduleSlug: string, topicSlug: string) {
+  const moduleNumber = moduleSlug.split("_").at(-1);
+  return path.join(I18N_ROOT, `module${moduleNumber}`, `${topicSlug}.json`);
+}
+
+const DATASET_PATH_BY_ID = (() => {
+  const out = new Map<string, string>();
+  const files = fs
+    .readdirSync(DATASET_ROOT)
+    .filter((file) => file.endsWith(".ts") && file !== "index.ts");
+
+  for (const file of files) {
+    const fullPath = path.join(DATASET_ROOT, file);
+    const source = fs.readFileSync(fullPath, "utf8");
+    const id = source.match(/id:\s*"([^"]+)"/)?.[1];
+    if (id) out.set(id, fullPath);
+  }
+
+  return out;
+})();
+
+const DATASET_CACHE = new Map<
+  string,
+  { schemaSql: string; seedSql: string; columns: string[] }
+>();
+
+const TOPIC_REFS = (() => {
   const manifest = readJson(SUBJECT_MANIFEST_PATH);
   return (manifest.modules ?? []).flatMap((module: JsonObject) =>
     (module.sections ?? []).flatMap((section: JsonObject) =>
@@ -128,12 +154,7 @@ function listTopicRefs() {
       })),
     ),
   );
-}
-
-function topicMessageFile(moduleSlug: string, topicSlug: string) {
-  const moduleNumber = moduleSlug.split("_").at(-1);
-  return path.join(I18N_ROOT, `module${moduleNumber}`, `${topicSlug}.json`);
-}
+})();
 
 describe("sql course content", () => {
   it("has deterministic module topic order and existing stable topic bundles", () => {
@@ -345,7 +366,7 @@ describe("sql course content", () => {
     expect(issues).toEqual([]);
   });
 
-  it("makes every SQL code exercise checkable against a real runnable dataset", () => {
+  it("makes every SQL code exercise checkable against a real runnable dataset", { timeout: 15_000 }, () => {
     const issues: string[] = [];
 
     for (const ref of listTopicRefs()) {

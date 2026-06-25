@@ -2,7 +2,7 @@
   "topicId": "string-methods",
   "subjectSlug": "python-v2",
   "moduleSlug": "python-v2-1",
-  "sectionSlug": "python-v2-1-string-foundations",
+  "sectionSlug": "python-v2-python-v2-1-string-foundations",
   "prefix": "pyv2_1",
   "minutes": 25,
   "topic": {
@@ -312,7 +312,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-1.string-methods.quiz.code-1",
       "language": "python",
-      "starterCode": "text = input()\n# Convert text to lowercase and print it",
+      "starterCode": "@:topics.python-v2.python-v2-1.string-methods.quiz.code-1.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -363,7 +363,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "text = input()\n# Convert text to lowercase and print it",
+          "content": "@:topics.python-v2.python-v2-1.string-methods.quiz.code-1.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -381,11 +381,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "text = input()\n# Convert text to lowercase and print it",
+        "starterCode": "@:topics.python-v2.python-v2-1.string-methods.quiz.code-1.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "text = input()\n# Convert text to lowercase and print it",
+            "content": "@:topics.python-v2.python-v2-1.string-methods.quiz.code-1.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -429,7 +429,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-1.string-methods.quiz.code-2",
       "language": "python",
-      "starterCode": "text = input()\n# Remove outside spaces and print the result",
+      "starterCode": "@:topics.python-v2.python-v2-1.string-methods.quiz.code-2.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -480,7 +480,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "text = input()\n# Remove outside spaces and print the result",
+          "content": "@:topics.python-v2.python-v2-1.string-methods.quiz.code-2.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -498,11 +498,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "text = input()\n# Remove outside spaces and print the result",
+        "starterCode": "@:topics.python-v2.python-v2-1.string-methods.quiz.code-2.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "text = input()\n# Remove outside spaces and print the result",
+            "content": "@:topics.python-v2.python-v2-1.string-methods.quiz.code-2.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -546,7 +546,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-1.string-methods.quiz.code-3",
       "language": "python",
-      "starterCode": "text = input()\n# Replace cat with dog and print the result",
+      "starterCode": "@:topics.python-v2.python-v2-1.string-methods.quiz.code-3.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -596,7 +596,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "text = input()\n# Replace cat with dog and print the result",
+          "content": "@:topics.python-v2.python-v2-1.string-methods.quiz.code-3.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -614,11 +614,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "text = input()\n# Replace cat with dog and print the result",
+        "starterCode": "@:topics.python-v2.python-v2-1.string-methods.quiz.code-3.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "text = input()\n# Replace cat with dog and print the result",
+            "content": "@:topics.python-v2.python-v2-1.string-methods.quiz.code-3.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -661,7 +661,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-1.string-methods.quiz.code-4",
       "language": "python",
-      "starterCode": "text = input()\nparts = text.split(\",\")\n# Print each part on its own line",
+      "starterCode": "@:topics.python-v2.python-v2-1.string-methods.quiz.code-4.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -711,7 +711,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "text = input()\nparts = text.split(\",\")\n# Print each part on its own line",
+          "content": "@:topics.python-v2.python-v2-1.string-methods.quiz.code-4.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -729,11 +729,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "text = input()\nparts = text.split(\",\")\n# Print each part on its own line",
+        "starterCode": "@:topics.python-v2.python-v2-1.string-methods.quiz.code-4.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "text = input()\nparts = text.split(\",\")\n# Print each part on its own line",
+            "content": "@:topics.python-v2.python-v2-1.string-methods.quiz.code-4.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -776,7 +776,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-1.string-methods.quiz.code-5",
       "language": "python",
-      "starterCode": "text = input()\n# Remove outside spaces\n# Split by commas\n# Join with \" | \" and print",
+      "starterCode": "@:topics.python-v2.python-v2-1.string-methods.quiz.code-5.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -832,7 +832,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "text = input()\n# Remove outside spaces\n# Split by commas\n# Join with \" | \" and print",
+          "content": "@:topics.python-v2.python-v2-1.string-methods.quiz.code-5.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -850,11 +850,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "text = input()\n# Remove outside spaces\n# Split by commas\n# Join with \" | \" and print",
+        "starterCode": "@:topics.python-v2.python-v2-1.string-methods.quiz.code-5.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "text = input()\n# Remove outside spaces\n# Split by commas\n# Join with \" | \" and print",
+            "content": "@:topics.python-v2.python-v2-1.string-methods.quiz.code-5.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true

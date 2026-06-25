@@ -9,6 +9,35 @@ const runtimeDefaults = {
     language: "python",
 } as const;
 
+const E2E_I18N_STARTER_CODE_REF =
+    "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_ticket_check.starterCode";
+const E2E_I18N_STARTER_MESSAGE_BASE =
+    "topics.python-v2.python-v2-2.and-or-not.quiz.code_ticket_check";
+
+const e2eI18nStarterFiles = {
+    "main.py": E2E_I18N_STARTER_CODE_REF,
+};
+
+const e2eI18nSolutionFiles = {
+    "main.py":
+        "age = int(input())\n" +
+        "has_id = input().strip()\n\n" +
+        "if age >= 18 and has_id == \"yes\":\n" +
+        "    print(\"allowed\")\n" +
+        "else:\n" +
+        "    print(\"denied\")\n",
+};
+
+const terminalCloneRuntimeDefaults = {
+    kind: "code",
+    language: "bash",
+} as const;
+
+const E2E_TERMINAL_CWD = "/workspace/park-terminal-map";
+const E2E_TERMINAL_FEEDBACK_REF =
+    "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-2.terminalExpectations.requiredCommands.0.message";
+
+
 type DevRunnerBackend = "auto" | "judge0" | "pty";
 
 const defaultServiceDefaults = {
@@ -23,6 +52,19 @@ const defaultServiceDefaults = {
     },
 } as const;
 
+const terminalCloneServiceDefaults = {
+    ...defaultServiceDefaults,
+    runnerBackend: "pty" as DevRunnerBackend,
+    layoutMode: "terminal_workspace",
+    requires: {
+        ...defaultServiceDefaults.requires,
+        files: true,
+        multiFile: true,
+        terminal: true,
+    },
+} as const;
+
+
 function resolveDevRunnerBackend(
     searchParams: Record<string, string | string[] | undefined>,
 ): DevRunnerBackend {
@@ -36,7 +78,9 @@ function resolveDevRunnerBackend(
     return "judge0";
 }
 
-function serviceDefaultsForBackend(backend: DevRunnerBackend) {
+function serviceDefaultsForBackend(
+    backend: DevRunnerBackend,
+): NonNullable<ReviewModule["serviceDefaults"]> {
     return {
         ...defaultServiceDefaults,
         runnerBackend: backend,
@@ -215,6 +259,94 @@ const revealMultiFileDefinition = {
     solutionFiles: revealMultiFileSolutionFiles,
 };
 
+const e2eI18nStarterDefinition = {
+    id: "e2e-i18n-starter",
+    title: "I18N starter code should resolve",
+    kind: "code_input",
+    purpose: "project",
+    messageBase: E2E_I18N_STARTER_MESSAGE_BASE,
+    language: "python",
+    runtime: runtimeDefaults,
+    starterCode: E2E_I18N_STARTER_CODE_REF,
+    starterFiles: e2eI18nStarterFiles,
+    solutionFiles: e2eI18nSolutionFiles,
+    workspace: {
+        language: "python",
+        entryFile: "main.py",
+        entryFilePath: "main.py",
+        starterCode: E2E_I18N_STARTER_CODE_REF,
+        starterFiles: e2eI18nStarterFiles,
+        solutionFiles: e2eI18nSolutionFiles,
+    },
+    recipe: {
+        type: "fixed_tests",
+        tests: [
+            { stdin: "20\nyes\n", stdout: "allowed\n", match: "exact" },
+            { stdin: "16\nyes\n", stdout: "denied\n", match: "exact" },
+        ],
+        solutionCode: e2eI18nSolutionFiles["main.py"],
+        solutionFiles: e2eI18nSolutionFiles,
+    },
+    solutionCode: e2eI18nSolutionFiles["main.py"],
+};
+
+const e2eI18nProjectStep = {
+    id: "e2e-i18n-starter",
+    title: "I18N starter code should resolve",
+    exerciseKey: "e2e-i18n-starter",
+    topic: "e2e-review-topic",
+    difficulty: "easy",
+    preferKind: "code_input",
+    seedPolicy: "global",
+    maxAttempts: 3,
+    runtime: runtimeDefaults,
+    starterCode: E2E_I18N_STARTER_CODE_REF,
+    starterFiles: e2eI18nStarterFiles,
+    solutionCode: e2eI18nSolutionFiles["main.py"],
+    solutionFiles: e2eI18nSolutionFiles,
+    workspace: {
+        language: "python",
+        entryFile: "main.py",
+        entryFilePath: "main.py",
+        starterCode: E2E_I18N_STARTER_CODE_REF,
+        starterFiles: e2eI18nStarterFiles,
+        solutionFiles: e2eI18nSolutionFiles,
+    },
+} as any;
+
+const e2eI18nEmbeddedTryItCard = {
+    type: "text",
+    id: "e2e-i18n-tryit-reading",
+    title: "E2E i18n starter Try It",
+    markdown:
+        "This dev-only card intentionally uses an @: starterCode key so E2E can verify embedded Try It resolves localized starter code before Tools binding.",
+    tryIt: {
+        id: "try-e2e-i18n-starter",
+        title: "Resolve i18n starter code",
+        prompt: "The editor should contain the resolved Python starter, not a blank file and not an @: key.",
+        exerciseKey: "e2e-i18n-starter",
+        difficulty: "easy",
+        preferKind: "code_input",
+        seedPolicy: "global",
+        required: true,
+        allowReveal: true,
+        maxAttempts: 3,
+        spec: {
+            mode: "project",
+            subject: "python",
+            moduleSlug: "e2e-review-clone",
+            section: "e2e-section",
+            topic: "e2e-review-topic",
+            difficulty: "easy",
+            preferKind: "code_input",
+            allowReveal: true,
+            maxAttempts: 3,
+            runtime: runtimeDefaults,
+            steps: [e2eI18nProjectStep],
+        },
+    },
+} satisfies ReviewCard;
+
 const projectStep2StarterFiles = {
     "main.py": "total = int(input())\n# TODO: print shipping cost\n",
 };
@@ -330,6 +462,173 @@ const linuxTerminalStepBSolutionFiles = {
     "linux-start/command-practice.txt": "",
 };
 
+const linuxTerminalMapStarterFiles = {
+    "README.md": "Use the terminal from park-terminal-map.\n",
+    "park-terminal-map/handoff/brief.txt": "handoff fixture\n",
+    "park-terminal-map/maps/current.txt": "map fixture\n",
+    "park-terminal-map/requests/todo.txt": "request fixture\n",
+};
+
+const linuxTerminalMapSolutionFiles = {
+    ...linuxTerminalMapStarterFiles,
+};
+
+const linuxTerminalMapFixtureFiles = [
+    { path: "park-terminal-map/handoff/brief.txt", content: "handoff fixture\n" },
+    { path: "park-terminal-map/maps/current.txt", content: "map fixture\n" },
+    { path: "park-terminal-map/requests/todo.txt", content: "request fixture\n" },
+];
+
+const linuxTerminalCwdIdeConfig = {
+    runnerBackend: "pty",
+    layoutMode: "terminal_workspace",
+    terminalSessionScope: "exercise",
+    terminalCwd: E2E_TERMINAL_CWD,
+    fileActions: {
+        enabled: false,
+    },
+    requires: {
+        files: true,
+        multiFile: true,
+        terminal: true,
+    },
+} as const;
+
+const linuxTerminalCwdRecipe = {
+    type: "shell_task",
+    mode: "terminal_workspace",
+    instructions: "Run ls from inside park-terminal-map, then cd into requests.",
+    terminalExpectations: {
+        requiredCommands: [
+            {
+                command: "ls",
+                message: E2E_TERMINAL_FEEDBACK_REF,
+            },
+        ],
+    },
+    workspaceExpectations: [
+        { path: "park-terminal-map/requests", type: "directory" },
+    ],
+};
+
+const linuxTerminalCwdDefinition = {
+    id: "e2e-linux-terminal-cwd",
+    title: "From inside park-terminal-map",
+    kind: "code_input",
+    purpose: "project",
+    language: "bash",
+    runtime: terminalCloneRuntimeDefaults,
+    serviceOverrides: {
+        terminalSessionScope: "exercise",
+    },
+    ideConfig: linuxTerminalCwdIdeConfig,
+    recipe: linuxTerminalCwdRecipe,
+    workspace: {
+        language: "bash",
+        entryFile: "README.md",
+        entryFilePath: "README.md",
+        starterFiles: linuxTerminalMapStarterFiles,
+        solutionFiles: linuxTerminalMapSolutionFiles,
+        files: linuxTerminalMapFixtureFiles,
+        fixtureFiles: linuxTerminalMapFixtureFiles,
+        initialFiles: linuxTerminalMapFixtureFiles,
+        workspaceFiles: linuxTerminalMapFixtureFiles,
+        fixtures: linuxTerminalMapFixtureFiles,
+        fileFixtures: linuxTerminalMapFixtureFiles,
+    },
+    starterFiles: linuxTerminalMapStarterFiles,
+    solutionFiles: linuxTerminalMapSolutionFiles,
+    files: linuxTerminalMapFixtureFiles,
+    fixtureFiles: linuxTerminalMapFixtureFiles,
+    initialFiles: linuxTerminalMapFixtureFiles,
+    workspaceFiles: linuxTerminalMapFixtureFiles,
+    fixtures: linuxTerminalMapFixtureFiles,
+    fileFixtures: linuxTerminalMapFixtureFiles,
+    starterCode: linuxTerminalMapStarterFiles["README.md"],
+    solutionCode: linuxTerminalMapSolutionFiles["README.md"],
+};
+
+const linuxTerminalCwdProjectStep = {
+    id: "e2e-linux-terminal-cwd",
+    title: "From inside park-terminal-map",
+    exerciseKey: "e2e-linux-terminal-cwd",
+    topic: "e2e-terminal-topic",
+    difficulty: "easy",
+    preferKind: "code_input",
+    seedPolicy: "global",
+    maxAttempts: 3,
+    runtime: terminalCloneRuntimeDefaults,
+    serviceOverrides: {
+        terminalSessionScope: "exercise",
+    },
+    ideConfig: linuxTerminalCwdIdeConfig,
+    recipe: linuxTerminalCwdRecipe,
+    workspace: linuxTerminalCwdDefinition.workspace,
+    starterFiles: linuxTerminalMapStarterFiles,
+    solutionFiles: linuxTerminalMapSolutionFiles,
+    files: linuxTerminalMapFixtureFiles,
+    fixtureFiles: linuxTerminalMapFixtureFiles,
+    initialFiles: linuxTerminalMapFixtureFiles,
+    workspaceFiles: linuxTerminalMapFixtureFiles,
+    fixtures: linuxTerminalMapFixtureFiles,
+    fileFixtures: linuxTerminalMapFixtureFiles,
+    starterCode: linuxTerminalMapStarterFiles["README.md"],
+    solutionCode: linuxTerminalMapSolutionFiles["README.md"],
+} as any;
+
+const linuxTerminalCwdProjectCard = {
+    type: "project",
+    id: "review-clone-terminal-cwd-project",
+    title: "Review Clone Terminal CWD Project",
+    passScore: 1,
+    spec: {
+        mode: "project",
+        subject: "linux",
+        moduleSlug: "e2e-terminal-review-clone",
+        section: "e2e-terminal-section",
+        topic: "e2e-terminal-topic",
+        difficulty: "easy",
+        preferKind: "code_input",
+        allowReveal: true,
+        maxAttempts: 3,
+        runtime: terminalCloneRuntimeDefaults,
+        steps: [linuxTerminalCwdProjectStep],
+    },
+} satisfies ReviewCard;
+
+const linuxTerminalCwdEmbeddedTryItCard = {
+    type: "text",
+    id: "e2e-linux-terminal-cwd-reading",
+    title: "E2E terminal cwd embedded Try It",
+    markdown:
+        "This dev-only card intentionally uses a Linux terminal_workspace project step so E2E can verify terminalCwd and @: feedback resolution before Tools binding.",
+    tryIt: {
+        id: "try-e2e-linux-terminal-cwd",
+        title: "Terminal cwd should bind",
+        prompt: "The active terminal workspace should start inside park-terminal-map.",
+        exerciseKey: "e2e-linux-terminal-cwd",
+        difficulty: "easy",
+        preferKind: "code_input",
+        seedPolicy: "global",
+        required: true,
+        allowReveal: true,
+        maxAttempts: 3,
+        spec: {
+            mode: "project",
+            subject: "linux",
+            moduleSlug: "e2e-terminal-review-clone",
+            section: "e2e-terminal-section",
+            topic: "e2e-terminal-topic",
+            difficulty: "easy",
+            preferKind: "code_input",
+            allowReveal: true,
+            maxAttempts: 3,
+            runtime: terminalCloneRuntimeDefaults,
+            steps: [linuxTerminalCwdProjectStep],
+        },
+    },
+} satisfies ReviewCard;
+
 function makeProjectCard({
                              id,
                              title,
@@ -423,19 +722,15 @@ const reviewClonePracticeQuizCard = {
 
 function cloneReviewModuleWithServiceDefaults(
     mod: ReviewModule,
-    serviceDefaults: ReturnType<typeof serviceDefaultsForBackend>,
+    serviceDefaults: NonNullable<ReviewModule["serviceDefaults"]>,
 ): ReviewModule {
-    const topics = (mod.topics ?? []).map((topic) => {
-        if (topic.id !== "e2e-review-topic") return topic;
-
-        return {
-            ...topic,
-            meta: {
-                ...(topic.meta ?? {}),
-                serviceDefaults,
-            },
-        };
-    });
+    const topics = (mod.topics ?? []).map((topic) => ({
+        ...topic,
+        meta: {
+            ...(topic.meta ?? {}),
+            serviceDefaults,
+        },
+    }));
 
     const topicById = new Map(topics.map((topic) => [topic.id, topic]));
 
@@ -468,6 +763,7 @@ const reviewCloneTopic = {
                 projectStep3Definition,
                 fileIoDefinition,
                 revealMultiFileDefinition,
+                e2eI18nStarterDefinition,
             ],
         },
     },
@@ -479,7 +775,22 @@ const reviewCloneTopic = {
             markdown:
                 "This is a real review-module clone. It uses the real review shell, topic flow, progress hook, runtime store, tools rail, and editor hydration path.",
         },
+        e2eI18nEmbeddedTryItCard,
         reviewClonePracticeQuizCard,
+        makeProjectCard({
+            id: "review-clone-i18n-project",
+            title: "Review Clone I18N Starter Project",
+            steps: [
+                {
+                    id: "e2e-i18n-starter",
+                    title: "I18N starter code should resolve",
+                    starterFiles: e2eI18nStarterFiles,
+                    solutionFiles: e2eI18nSolutionFiles,
+                    starterCode: E2E_I18N_STARTER_CODE_REF,
+                    solutionCode: e2eI18nSolutionFiles["main.py"],
+                },
+            ],
+        }),
         makeProjectCard({
             id: "review-clone-project",
             title: "Review Clone Project A",
@@ -576,8 +887,8 @@ const linuxTerminalCloneTopic = {
     summary:
         "A dev-only topic used to test terminal_workspace review flows without catalog billing gates.",
     meta: {
-        runtimeDefaults,
-        serviceDefaults: defaultServiceDefaults,
+        runtimeDefaults: terminalCloneRuntimeDefaults,
+        serviceDefaults: terminalCloneServiceDefaults,
         rawManifest: {
             exercises: [
                 {
@@ -606,6 +917,7 @@ const linuxTerminalCloneTopic = {
                     starterCode: linuxTerminalStepBStarterFiles["README.md"],
                     solutionCode: linuxTerminalStepBSolutionFiles["README.md"],
                 },
+                linuxTerminalCwdDefinition,
             ],
         },
     },
@@ -617,6 +929,8 @@ const linuxTerminalCloneTopic = {
             markdown:
                 "This dev-only terminal clone exists to test terminal workspace review flows with deterministic routing and no billing gates.",
         },
+        linuxTerminalCwdEmbeddedTryItCard,
+        linuxTerminalCwdProjectCard,
         makeProjectCard({
             id: "review-clone-terminal-project",
             title: "Review Clone Terminal Project",
@@ -655,14 +969,14 @@ const linuxTerminalCloneSection = {
 
 const linuxTerminalCloneModule: ReviewModule = {
     id: "e2e-terminal-review-clone",
-    profileId: "python",
-    versionFamily: "python",
+    profileId: "generic",
+    versionFamily: "linux",
     title: "E2E Terminal Review Module Clone",
     subtitle:
         "Dev-only clone that keeps terminal workspace review tests off the paywalled catalog path.",
     startPracticeSectionSlug: "e2e-terminal-section",
-    runtimeDefaults,
-    serviceDefaults: defaultServiceDefaults,
+    runtimeDefaults: terminalCloneRuntimeDefaults,
+    serviceDefaults: terminalCloneServiceDefaults,
     topics: [linuxTerminalCloneTopic],
     sections: [linuxTerminalCloneSection],
     contentVersion: null,
@@ -755,7 +1069,7 @@ export default async function Page({
         : isLinuxTerminalClone
           ? cloneReviewModuleWithServiceDefaults(
                 linuxTerminalCloneModule,
-                selectedServiceDefaults,
+                terminalCloneServiceDefaults,
             )
         : cloneReviewModuleWithServiceDefaults(
             reviewCloneModule,
@@ -763,9 +1077,50 @@ export default async function Page({
         );
 
     return (
-        <ReviewModulePageClient
-            canUnlockAll={!progressiveLockMode}
-            mod={selectedModule}
-        />
+        <>
+            {isLinuxTerminalClone && process.env.NODE_ENV !== "production" ? (
+                <textarea
+                    data-testid="dev-clone-linux-terminal-contract-e2e-input"
+                    aria-label="E2E Linux terminal clone resolved contract"
+                    readOnly
+                    value={JSON.stringify({
+                        exerciseId: String((linuxTerminalCwdProjectStep as any)?.id ?? ""),
+                        exerciseKey: String(
+                            (linuxTerminalCwdProjectStep as any)?.exerciseKey ??
+                                (linuxTerminalCwdProjectStep as any)?.id ??
+                                "",
+                        ),
+                        language: "bash",
+                        runtimeDefaults: terminalCloneRuntimeDefaults,
+                        serviceDefaults: terminalCloneServiceDefaults,
+                        ideConfig: linuxTerminalCwdIdeConfig,
+                        recipe: {
+                            ...linuxTerminalCwdRecipe,
+                            terminalExpectations: {
+                                ...(linuxTerminalCwdRecipe as any).terminalExpectations,
+                                requiredCommands: [
+                                    {
+                                        command: "ls",
+                                        message: "Use ls inside park-terminal-map.",
+                                    },
+                                ],
+                            },
+                        },
+                        terminalCwd: E2E_TERMINAL_CWD,
+                    })}
+                    style={{
+                        position: "absolute",
+                        width: 1,
+                        height: 1,
+                        opacity: 0,
+                        pointerEvents: "none",
+                    }}
+                />
+            ) : null}
+            <ReviewModulePageClient
+                canUnlockAll={!progressiveLockMode}
+                mod={selectedModule}
+            />
+        </>
     );
 }

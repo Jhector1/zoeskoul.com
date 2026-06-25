@@ -179,6 +179,18 @@ sleep 30
 ./smoke-test.sh
 
 pnpm --filter @zoeskoul/web validate:full
+Run the cleaned default gate:
+  pnpm --filter @zoeskoul/web typecheck
+  pnpm --filter @zoeskoul/web test:e2e
+
+Run the full validation gate:
+  pnpm --filter @zoeskoul/web validate:full
+
+Opt-in suites:
+  pnpm --filter @zoeskoul/web test:e2e:runner
+  pnpm --filter @zoeskoul/web test:e2e:ide
+  pnpm --filter @zoeskoul/web test:e2e:legacy
+
 
 pnpm curr:course -- check linux linux-terminal-fundamentals --resume
 

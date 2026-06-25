@@ -1549,6 +1549,11 @@ export default function CodeToolPane(props: {
         !finalReviewWorkspaceLanguage ||
         !effectiveLanguage ||
         languagesCompatible(finalReviewWorkspaceLanguage, effectiveLanguage);
+    const shouldHoldEditorForToolHydration = Boolean(
+        isReviewRouteMode &&
+        hasBindableEditorTarget &&
+        !toolHydrated,
+    );
     const shouldHoldEditorForPendingExerciseBinding = Boolean(
         pendingExerciseBinding &&
         (
@@ -1596,6 +1601,7 @@ export default function CodeToolPane(props: {
 
     const canRenderEditor = Boolean(
         shouldMountFullIde &&
+        !shouldHoldEditorForToolHydration &&
         !shouldHoldEditorForPendingExerciseBinding &&
         finalReviewWorkspace &&
         !runtimeWorkspaceError &&
@@ -1616,6 +1622,7 @@ export default function CodeToolPane(props: {
     const shouldWaitForWorkspace = Boolean(
         (hasEditorTarget || pendingExerciseBinding) &&
         (
+            shouldHoldEditorForToolHydration ||
             pendingExerciseBinding ||
             runtimeWorkspacePending ||
             (

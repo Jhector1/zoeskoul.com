@@ -2,9 +2,9 @@
   "topicId": "module-2-study-checker-project",
   "subjectSlug": "python-v2",
   "moduleSlug": "python-v2-2",
-  "sectionSlug": "python-v2-2-module-project",
+  "sectionSlug": "python-v2-python-v2-2-module-project",
   "prefix": "pyv2_2",
-  "minutes": 45,
+  "minutes": 22,
   "runtimeDefaults": {
     "kind": "code",
     "language": "python",
@@ -105,11 +105,11 @@
       "messageBase": "topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.try-module-2-study-checker-project-sketch0",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "# Read one score and print Ready or Keep going.\n",
+      "starterCode": "@:topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.try-module-2-study-checker-project-sketch0.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# Read one score and print Ready or Keep going.\n",
+          "content": "@:topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.try-module-2-study-checker-project-sketch0.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -118,11 +118,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# Read one score and print Ready or Keep going.\n",
+        "starterCode": "@:topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.try-module-2-study-checker-project-sketch0.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# Read one score and print Ready or Keep going.\n",
+            "content": "@:topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.try-module-2-study-checker-project-sketch0.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -222,11 +222,11 @@
       "messageBase": "topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.mp-1-check-pass-fail",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "# Read one score and print Pass or Try again.\n",
+      "starterCode": "@:topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.mp-1-check-pass-fail.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# Read one score and print Pass or Try again.\n",
+          "content": "@:topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.mp-1-check-pass-fail.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -235,11 +235,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# Read one score and print Pass or Try again.\n",
+        "starterCode": "@:topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.mp-1-check-pass-fail.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# Read one score and print Pass or Try again.\n",
+            "content": "@:topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.mp-1-check-pass-fail.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -339,11 +339,11 @@
       "messageBase": "topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.mp-2-check-join-rule",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "score = int(input())\nif score >= 70:\n    print(\"Pass\")\nelse:\n    print(\"Try again\")\n\n# Keep the score rule idea.\n# Read member with input().\n# Print Join only when the score is at least 70 and member is yes.\n",
+      "starterCode": "@:topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.mp-2-check-join-rule.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "score = int(input())\nif score >= 70:\n    print(\"Pass\")\nelse:\n    print(\"Try again\")\n\n# Keep the score rule idea.\n# Read member with input().\n# Print Join only when the score is at least 70 and member is yes.\n",
+          "content": "@:topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.mp-2-check-join-rule.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -352,11 +352,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "score = int(input())\nif score >= 70:\n    print(\"Pass\")\nelse:\n    print(\"Try again\")\n\n# Keep the score rule idea.\n# Read member with input().\n# Print Join only when the score is at least 70 and member is yes.\n",
+        "starterCode": "@:topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.mp-2-check-join-rule.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "score = int(input())\nif score >= 70:\n    print(\"Pass\")\nelse:\n    print(\"Try again\")\n\n# Keep the score rule idea.\n# Read member with input().\n# Print Join only when the score is at least 70 and member is yes.\n",
+            "content": "@:topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.mp-2-check-join-rule.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -461,11 +461,11 @@
       "messageBase": "topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.mp-3-handle-missing-text",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "score = int(input())\nmember = input()\nif score >= 70 and member == \"yes\":\n    print(\"Join\")\nelse:\n    print(\"Wait\")\n\n# Keep the Join/Wait rule.\n# Read one more input named code.\n# If code is empty, print Missing code before the normal rule.\n",
+      "starterCode": "@:topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.mp-3-handle-missing-text.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "score = int(input())\nmember = input()\nif score >= 70 and member == \"yes\":\n    print(\"Join\")\nelse:\n    print(\"Wait\")\n\n# Keep the Join/Wait rule.\n# Read one more input named code.\n# If code is empty, print Missing code before the normal rule.\n",
+          "content": "@:topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.mp-3-handle-missing-text.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -474,11 +474,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "score = int(input())\nmember = input()\nif score >= 70 and member == \"yes\":\n    print(\"Join\")\nelse:\n    print(\"Wait\")\n\n# Keep the Join/Wait rule.\n# Read one more input named code.\n# If code is empty, print Missing code before the normal rule.\n",
+        "starterCode": "@:topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.mp-3-handle-missing-text.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "score = int(input())\nmember = input()\nif score >= 70 and member == \"yes\":\n    print(\"Join\")\nelse:\n    print(\"Wait\")\n\n# Keep the Join/Wait rule.\n# Read one more input named code.\n# If code is empty, print Missing code before the normal rule.\n",
+            "content": "@:topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.mp-3-handle-missing-text.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -583,11 +583,11 @@
       "messageBase": "topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.mp-4-build-final-study-checker",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "score = int(input())\nmember = input()\ncode = input()\nif code == \"\":\n    print(\"Missing code\")\nelif score >= 70 and member == \"yes\":\n    print(\"Join\")\nelse:\n    print(\"Wait\")\n\n# Keep the same inputs.\n# Add invalid-score and not-a-member checks before the normal score results.\n# Then print the final status message.\n",
+      "starterCode": "@:topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.mp-4-build-final-study-checker.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "score = int(input())\nmember = input()\ncode = input()\nif code == \"\":\n    print(\"Missing code\")\nelif score >= 70 and member == \"yes\":\n    print(\"Join\")\nelse:\n    print(\"Wait\")\n\n# Keep the same inputs.\n# Add invalid-score and not-a-member checks before the normal score results.\n# Then print the final status message.\n",
+          "content": "@:topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.mp-4-build-final-study-checker.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -596,11 +596,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "score = int(input())\nmember = input()\ncode = input()\nif code == \"\":\n    print(\"Missing code\")\nelif score >= 70 and member == \"yes\":\n    print(\"Join\")\nelse:\n    print(\"Wait\")\n\n# Keep the same inputs.\n# Add invalid-score and not-a-member checks before the normal score results.\n# Then print the final status message.\n",
+        "starterCode": "@:topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.mp-4-build-final-study-checker.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "score = int(input())\nmember = input()\ncode = input()\nif code == \"\":\n    print(\"Missing code\")\nelif score >= 70 and member == \"yes\":\n    print(\"Join\")\nelse:\n    print(\"Wait\")\n\n# Keep the same inputs.\n# Add invalid-score and not-a-member checks before the normal score results.\n# Then print the final status message.\n",
+            "content": "@:topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.mp-4-build-final-study-checker.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true

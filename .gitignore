@@ -82,3 +82,7 @@ Archive.zip
 packages.zip
 apps/web/src.zip
 apps/runner/Archive.zip
+.zip
+.zip.*
+**/.zip
+**/.zip.*

@@ -20,6 +20,13 @@ const DEV_REVIEW_CLONE_MODULE_ROWS: Record<string, ReviewModuleRow[]> = {
             title: "E2E SQL Review Clone",
         },
     ],
+    linux: [
+        {
+            slug: "e2e-terminal-review-clone",
+            order: 999_001,
+            title: "E2E Terminal Review Clone",
+        },
+    ],
 };
 
 export async function loadReviewModulesForSubject(

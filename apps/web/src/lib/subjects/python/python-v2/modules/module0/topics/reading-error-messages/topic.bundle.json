@@ -2,7 +2,7 @@
   "topicId": "reading-error-messages",
   "subjectSlug": "python-v2",
   "moduleSlug": "python-v2-0",
-  "sectionSlug": "python-v2-0-values-and-expressions",
+  "sectionSlug": "python-v2-python-v2-0-values-and-expressions",
   "prefix": "pyv2_0",
   "minutes": 18,
   "topic": {
@@ -315,7 +315,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-0.reading-error-messages.quiz.ci-fix-missing-paren",
       "language": "python",
-      "starterCode": "print(\"Hello\"",
+      "starterCode": "@:topics.python-v2.python-v2-0.reading-error-messages.quiz.ci-fix-missing-paren.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -354,7 +354,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "print(\"Hello\"",
+          "content": "@:topics.python-v2.python-v2-0.reading-error-messages.quiz.ci-fix-missing-paren.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -372,11 +372,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "print(\"Hello\"",
+        "starterCode": "@:topics.python-v2.python-v2-0.reading-error-messages.quiz.ci-fix-missing-paren.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "print(\"Hello\"",
+            "content": "@:topics.python-v2.python-v2-0.reading-error-messages.quiz.ci-fix-missing-paren.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -408,7 +408,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-0.reading-error-messages.quiz.ci-fix-missing-quote",
       "language": "python",
-      "starterCode": "print(\"Python is fun)",
+      "starterCode": "@:topics.python-v2.python-v2-0.reading-error-messages.quiz.ci-fix-missing-quote.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -447,7 +447,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "print(\"Python is fun)",
+          "content": "@:topics.python-v2.python-v2-0.reading-error-messages.quiz.ci-fix-missing-quote.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -465,11 +465,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "print(\"Python is fun)",
+        "starterCode": "@:topics.python-v2.python-v2-0.reading-error-messages.quiz.ci-fix-missing-quote.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "print(\"Python is fun)",
+            "content": "@:topics.python-v2.python-v2-0.reading-error-messages.quiz.ci-fix-missing-quote.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -501,7 +501,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-0.reading-error-messages.quiz.ci-fix-nameerror-string",
       "language": "python",
-      "starterCode": "print(banana)",
+      "starterCode": "@:topics.python-v2.python-v2-0.reading-error-messages.quiz.ci-fix-nameerror-string.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -540,7 +540,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "print(banana)",
+          "content": "@:topics.python-v2.python-v2-0.reading-error-messages.quiz.ci-fix-nameerror-string.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -558,11 +558,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "print(banana)",
+        "starterCode": "@:topics.python-v2.python-v2-0.reading-error-messages.quiz.ci-fix-nameerror-string.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "print(banana)",
+            "content": "@:topics.python-v2.python-v2-0.reading-error-messages.quiz.ci-fix-nameerror-string.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -594,7 +594,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-0.reading-error-messages.quiz.ci-fix-second-line-error",
       "language": "python",
-      "starterCode": "print(\"Start\")\nprint(\"Done\"",
+      "starterCode": "@:topics.python-v2.python-v2-0.reading-error-messages.quiz.ci-fix-second-line-error.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -633,7 +633,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "print(\"Start\")\nprint(\"Done\"",
+          "content": "@:topics.python-v2.python-v2-0.reading-error-messages.quiz.ci-fix-second-line-error.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -651,11 +651,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "print(\"Start\")\nprint(\"Done\"",
+        "starterCode": "@:topics.python-v2.python-v2-0.reading-error-messages.quiz.ci-fix-second-line-error.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "print(\"Start\")\nprint(\"Done\"",
+            "content": "@:topics.python-v2.python-v2-0.reading-error-messages.quiz.ci-fix-second-line-error.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -687,7 +687,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-0.reading-error-messages.quiz.ci-fix-three-line-program",
       "language": "python",
-      "starterCode": "print(\"One\")\nprint(\"Two)\nprint(\"Three\")",
+      "starterCode": "@:topics.python-v2.python-v2-0.reading-error-messages.quiz.ci-fix-three-line-program.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -726,7 +726,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "print(\"One\")\nprint(\"Two)\nprint(\"Three\")",
+          "content": "@:topics.python-v2.python-v2-0.reading-error-messages.quiz.ci-fix-three-line-program.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -744,11 +744,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "print(\"One\")\nprint(\"Two)\nprint(\"Three\")",
+        "starterCode": "@:topics.python-v2.python-v2-0.reading-error-messages.quiz.ci-fix-three-line-program.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "print(\"One\")\nprint(\"Two)\nprint(\"Three\")",
+            "content": "@:topics.python-v2.python-v2-0.reading-error-messages.quiz.ci-fix-three-line-program.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true

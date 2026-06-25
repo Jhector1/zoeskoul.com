@@ -2,7 +2,7 @@
   "topicId": "string-indexing-and-slicing",
   "subjectSlug": "python-v2",
   "moduleSlug": "python-v2-1",
-  "sectionSlug": "python-v2-1-string-foundations",
+  "sectionSlug": "python-v2-python-v2-1-string-foundations",
   "prefix": "pyv2_1",
   "minutes": 25,
   "topic": {
@@ -308,7 +308,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.code_first_and_last",
       "language": "python",
-      "starterCode": "word = input()\n# TODO: print the first character\n# TODO: print the last character",
+      "starterCode": "@:topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.code_first_and_last.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -353,7 +353,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "word = input()\n# TODO: print the first character\n# TODO: print the last character",
+          "content": "@:topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.code_first_and_last.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -371,11 +371,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "word = input()\n# TODO: print the first character\n# TODO: print the last character",
+        "starterCode": "@:topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.code_first_and_last.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "word = input()\n# TODO: print the first character\n# TODO: print the last character",
+            "content": "@:topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.code_first_and_last.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -413,7 +413,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.code_middle_slice",
       "language": "python",
-      "starterCode": "word = input()\n# TODO: print the required slice",
+      "starterCode": "@:topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.code_middle_slice.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -458,7 +458,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "word = input()\n# TODO: print the required slice",
+          "content": "@:topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.code_middle_slice.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -476,11 +476,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "word = input()\n# TODO: print the required slice",
+        "starterCode": "@:topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.code_middle_slice.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "word = input()\n# TODO: print the required slice",
+            "content": "@:topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.code_middle_slice.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -518,7 +518,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.code_prefix_suffix",
       "language": "python",
-      "starterCode": "word = input()\n# TODO: print the first three characters\n# TODO: print the rest of the word",
+      "starterCode": "@:topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.code_prefix_suffix.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -563,7 +563,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "word = input()\n# TODO: print the first three characters\n# TODO: print the rest of the word",
+          "content": "@:topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.code_prefix_suffix.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -581,11 +581,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "word = input()\n# TODO: print the first three characters\n# TODO: print the rest of the word",
+        "starterCode": "@:topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.code_prefix_suffix.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "word = input()\n# TODO: print the first three characters\n# TODO: print the rest of the word",
+            "content": "@:topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.code_prefix_suffix.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -623,7 +623,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.code_last_two",
       "language": "python",
-      "starterCode": "word = input()\n# TODO: print the last two characters",
+      "starterCode": "@:topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.code_last_two.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -668,7 +668,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "word = input()\n# TODO: print the last two characters",
+          "content": "@:topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.code_last_two.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -686,11 +686,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "word = input()\n# TODO: print the last two characters",
+        "starterCode": "@:topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.code_last_two.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "word = input()\n# TODO: print the last two characters",
+            "content": "@:topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.code_last_two.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -728,7 +728,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.code_wrap_edges",
       "language": "python",
-      "starterCode": "word = input()\n# TODO: print first character, then '-', then last character",
+      "starterCode": "@:topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.code_wrap_edges.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -778,7 +778,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "word = input()\n# TODO: print first character, then '-', then last character",
+          "content": "@:topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.code_wrap_edges.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -796,11 +796,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "word = input()\n# TODO: print first character, then '-', then last character",
+        "starterCode": "@:topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.code_wrap_edges.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "word = input()\n# TODO: print first character, then '-', then last character",
+            "content": "@:topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.code_wrap_edges.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true

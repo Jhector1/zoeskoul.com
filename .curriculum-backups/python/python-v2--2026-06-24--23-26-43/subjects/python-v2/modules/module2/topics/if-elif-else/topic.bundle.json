@@ -1,0 +1,1114 @@
+{
+  "topicId": "if-elif-else",
+  "subjectSlug": "python-v2",
+  "moduleSlug": "python-v2-2",
+  "sectionSlug": "python-v2-2-conditional-basics",
+  "prefix": "pyv2_2",
+  "minutes": 25,
+  "topic": {
+    "labelKey": "topics.python-v2.python-v2-2.if-elif-else.label",
+    "summaryKey": "topics.python-v2.python-v2-2.if-elif-else.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-v2-2.if-elif-else.cards.sketch0.title",
+      "sketchId": "sketch_if_basic",
+      "height": 420,
+      "tryIt": {
+        "id": "try-if-elif-else-sketch0",
+        "titleKey": "topics.python-v2.python-v2-2.if-elif-else.quiz.code_positive_negative_zero.title",
+        "promptKey": "topics.python-v2.python-v2-2.if-elif-else.quiz.code_positive_negative_zero.prompt",
+        "exerciseKey": "code_positive_negative_zero",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-v2-2.if-elif-else.cards.sketch1.title",
+      "sketchId": "sketch_if_else",
+      "height": 420,
+      "tryIt": {
+        "id": "try-if-elif-else-sketch1",
+        "titleKey": "topics.python-v2.python-v2-2.if-elif-else.quiz.code_pass_fail.title",
+        "promptKey": "topics.python-v2.python-v2-2.if-elif-else.quiz.code_pass_fail.prompt",
+        "exerciseKey": "code_pass_fail",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-v2-2.if-elif-else.cards.sketch2.title",
+      "sketchId": "sketch_elif_chain",
+      "height": 420,
+      "tryIt": {
+        "id": "try-if-elif-else-sketch2",
+        "titleKey": "topics.python-v2.python-v2-2.if-elif-else.quiz.code_grade_checker.title",
+        "promptKey": "topics.python-v2.python-v2-2.if-elif-else.quiz.code_grade_checker.prompt",
+        "exerciseKey": "code_grade_checker",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch3",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-v2-2.if-elif-else.cards.sketch3.title",
+      "sketchId": "sketch_order_matters",
+      "height": 420,
+      "tryIt": {
+        "id": "try-if-elif-else-sketch3",
+        "titleKey": "topics.python-v2.python-v2-2.if-elif-else.quiz.code_empty_or_text.title",
+        "promptKey": "topics.python-v2.python-v2-2.if-elif-else.quiz.code_empty_or_text.prompt",
+        "exerciseKey": "code_empty_or_text",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.python-v2.python-v2-2.if-elif-else.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python-v2.python-v2-2.if-elif-else.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "code_positive_negative_zero",
+            "titleKey": "topics.python-v2.python-v2-2.if-elif-else.projectSteps.code_positive_negative_zero.title",
+            "exerciseKey": "code_positive_negative_zero",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "code_pass_fail",
+            "titleKey": "topics.python-v2.python-v2-2.if-elif-else.projectSteps.code_pass_fail.title",
+            "exerciseKey": "code_pass_fail",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "code_grade_checker",
+            "titleKey": "topics.python-v2.python-v2-2.if-elif-else.projectSteps.code_grade_checker.title",
+            "exerciseKey": "code_grade_checker",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "code_empty_or_text",
+            "titleKey": "topics.python-v2.python-v2-2.if-elif-else.projectSteps.code_empty_or_text.title",
+            "exerciseKey": "code_empty_or_text",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "code_even_odd",
+            "titleKey": "topics.python-v2.python-v2-2.if-elif-else.projectSteps.code_even_odd.title",
+            "exerciseKey": "code_even_odd",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch_if_basic",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-v2-2.if-elif-else.sketch_if_basic.title",
+      "bodyKey": "sketches.python-v2.python-v2-2.if-elif-else.sketch_if_basic.bodyMarkdown"
+    },
+    {
+      "id": "sketch_if_else",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-v2-2.if-elif-else.sketch_if_else.title",
+      "bodyKey": "sketches.python-v2.python-v2-2.if-elif-else.sketch_if_else.bodyMarkdown"
+    },
+    {
+      "id": "sketch_elif_chain",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-v2-2.if-elif-else.sketch_elif_chain.title",
+      "bodyKey": "sketches.python-v2.python-v2-2.if-elif-else.sketch_elif_chain.bodyMarkdown"
+    },
+    {
+      "id": "sketch_order_matters",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-v2-2.if-elif-else.sketch_order_matters.title",
+      "bodyKey": "sketches.python-v2.python-v2-2.if-elif-else.sketch_order_matters.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "sc_if_runs_true",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.sc_if_runs_true",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "sc_elif_role",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.sc_elif_role",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "mc_valid_conditional_facts",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.mc_valid_conditional_facts",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "c",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "mc_truthy_values",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.mc_truthy_values",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "b",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "dr_branch_order",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.dr_branch_order",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "dr_specific_before_general",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.dr_specific_before_general",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
+    },
+    {
+      "id": "fb_else_keyword",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.fb_else_keyword",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "else"
+      }
+    },
+    {
+      "id": "fb_comparison_operator",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.fb_comparison_operator",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": ">="
+      }
+    },
+    {
+      "id": "code_positive_negative_zero",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.code_positive_negative_zero",
+      "language": "python",
+      "starterCode": "n = int(input())\n\n# TODO: print positive, negative, or zero",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "7\n",
+            "stdout": "positive\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "-2\n",
+            "stdout": "negative\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "0\n",
+            "stdout": "zero\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "n = int(input())\n\nif n > 0:\n    print(\"positive\")\nelif n < 0:\n    print(\"negative\")\nelse:\n    print(\"zero\")",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "n = int(input())\n\nif n > 0:\n    print(\"positive\")\nelif n < 0:\n    print(\"negative\")\nelse:\n    print(\"zero\")",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": "print(",
+            "message": "Use print(...) to show the required result.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "input(",
+            "message": "Read the needed value with input() instead of hard-coding the answer.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "if ",
+            "message": "Use an if statement to choose the correct output.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "elif ",
+            "message": "Use elif for the middle case in this exercise.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "else:",
+            "message": "Include an else branch for the remaining case.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "int(",
+            "message": "Convert the input to an integer before doing the number work.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\bn\\b",
+            "message": "Use the variable name `n` in your solution."
+          }
+        ]
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "n = int(input())\n\n# TODO: print positive, negative, or zero",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "n = int(input())\n\nif n > 0:\n    print(\"positive\")\nelif n < 0:\n    print(\"negative\")\nelse:\n    print(\"zero\")",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "n = int(input())\n\n# TODO: print positive, negative, or zero",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "n = int(input())\n\n# TODO: print positive, negative, or zero",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "n = int(input())\n\nif n > 0:\n    print(\"positive\")\nelif n < 0:\n    print(\"negative\")\nelse:\n    print(\"zero\")",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "pattern": "print(",
+          "message": "Use print(...) to show the required result.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "input(",
+          "message": "Read the needed value with input() instead of hard-coding the answer.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "if ",
+          "message": "Use an if statement to choose the correct output.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "elif ",
+          "message": "Use elif for the middle case in this exercise.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "else:",
+          "message": "Include an else branch for the remaining case.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "int(",
+          "message": "Convert the input to an integer before doing the number work.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\bn\\b",
+          "message": "Use the variable name `n` in your solution."
+        }
+      ]
+    },
+    {
+      "id": "code_pass_fail",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.code_pass_fail",
+      "language": "python",
+      "starterCode": "score = int(input())\n\n# TODO: print pass or fail",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "60\n",
+            "stdout": "pass\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "59\n",
+            "stdout": "fail\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "score = int(input())\n\nif score >= 60:\n    print(\"pass\")\nelse:\n    print(\"fail\")",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "score = int(input())\n\nif score >= 60:\n    print(\"pass\")\nelse:\n    print(\"fail\")",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": "print(",
+            "message": "Use print(...) to show the required result.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "input(",
+            "message": "Read the needed value with input() instead of hard-coding the answer.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "if ",
+            "message": "Use an if statement to choose the correct output.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "else:",
+            "message": "Include an else branch for the remaining case.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "int(",
+            "message": "Convert the input to an integer before doing the number work.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\bscore\\b",
+            "message": "Use the variable name `score` in your solution."
+          }
+        ]
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "score = int(input())\n\n# TODO: print pass or fail",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "score = int(input())\n\nif score >= 60:\n    print(\"pass\")\nelse:\n    print(\"fail\")",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "score = int(input())\n\n# TODO: print pass or fail",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "score = int(input())\n\n# TODO: print pass or fail",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "score = int(input())\n\nif score >= 60:\n    print(\"pass\")\nelse:\n    print(\"fail\")",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "pattern": "print(",
+          "message": "Use print(...) to show the required result.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "input(",
+          "message": "Read the needed value with input() instead of hard-coding the answer.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "if ",
+          "message": "Use an if statement to choose the correct output.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "else:",
+          "message": "Include an else branch for the remaining case.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "int(",
+          "message": "Convert the input to an integer before doing the number work.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\bscore\\b",
+          "message": "Use the variable name `score` in your solution."
+        }
+      ]
+    },
+    {
+      "id": "code_grade_checker",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.code_grade_checker",
+      "language": "python",
+      "starterCode": "score = int(input())\n\n# TODO: print A, B, C, or F",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "95\n",
+            "stdout": "A\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "84\n",
+            "stdout": "B\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "72\n",
+            "stdout": "C\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "40\n",
+            "stdout": "F\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "score = int(input())\n\nif score >= 90:\n    print(\"A\")\nelif score >= 80:\n    print(\"B\")\nelif score >= 70:\n    print(\"C\")\nelse:\n    print(\"F\")",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "score = int(input())\n\nif score >= 90:\n    print(\"A\")\nelif score >= 80:\n    print(\"B\")\nelif score >= 70:\n    print(\"C\")\nelse:\n    print(\"F\")",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": "print(",
+            "message": "Use print(...) to show the required result.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "input(",
+            "message": "Read the needed value with input() instead of hard-coding the answer.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "if ",
+            "message": "Use an if statement to choose the correct output.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "elif ",
+            "message": "Use elif for the middle case in this exercise.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "else:",
+            "message": "Include an else branch for the remaining case.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "int(",
+            "message": "Convert the input to an integer before doing the number work.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\bscore\\b",
+            "message": "Use the variable name `score` in your solution."
+          }
+        ]
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "score = int(input())\n\n# TODO: print A, B, C, or F",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "score = int(input())\n\nif score >= 90:\n    print(\"A\")\nelif score >= 80:\n    print(\"B\")\nelif score >= 70:\n    print(\"C\")\nelse:\n    print(\"F\")",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "score = int(input())\n\n# TODO: print A, B, C, or F",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "score = int(input())\n\n# TODO: print A, B, C, or F",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "score = int(input())\n\nif score >= 90:\n    print(\"A\")\nelif score >= 80:\n    print(\"B\")\nelif score >= 70:\n    print(\"C\")\nelse:\n    print(\"F\")",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "pattern": "print(",
+          "message": "Use print(...) to show the required result.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "input(",
+          "message": "Read the needed value with input() instead of hard-coding the answer.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "if ",
+          "message": "Use an if statement to choose the correct output.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "elif ",
+          "message": "Use elif for the middle case in this exercise.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "else:",
+          "message": "Include an else branch for the remaining case.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "int(",
+          "message": "Convert the input to an integer before doing the number work.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\bscore\\b",
+          "message": "Use the variable name `score` in your solution."
+        }
+      ]
+    },
+    {
+      "id": "code_empty_or_text",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.code_empty_or_text",
+      "language": "python",
+      "starterCode": "text = input()\n\n# TODO: print empty or text",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "hello\n",
+            "stdout": "text\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "\n",
+            "stdout": "empty\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "text = input()\n\nif text:\n    print(\"text\")\nelse:\n    print(\"empty\")",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "text = input()\n\nif text:\n    print(\"text\")\nelse:\n    print(\"empty\")",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": "print(",
+            "message": "Use print(...) to show the required result.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "input(",
+            "message": "Read the needed value with input() instead of hard-coding the answer.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "if ",
+            "message": "Use an if statement to choose the correct output.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "else:",
+            "message": "Include an else branch for the remaining case.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\btext\\b",
+            "message": "Use the variable name `text` in your solution."
+          }
+        ]
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "text = input()\n\n# TODO: print empty or text",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "text = input()\n\nif text:\n    print(\"text\")\nelse:\n    print(\"empty\")",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "text = input()\n\n# TODO: print empty or text",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "text = input()\n\n# TODO: print empty or text",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "text = input()\n\nif text:\n    print(\"text\")\nelse:\n    print(\"empty\")",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "pattern": "print(",
+          "message": "Use print(...) to show the required result.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "input(",
+          "message": "Read the needed value with input() instead of hard-coding the answer.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "if ",
+          "message": "Use an if statement to choose the correct output.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "else:",
+          "message": "Include an else branch for the remaining case.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\btext\\b",
+          "message": "Use the variable name `text` in your solution."
+        }
+      ]
+    },
+    {
+      "id": "code_even_odd",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.code_even_odd",
+      "language": "python",
+      "starterCode": "n = int(input())\n\n# TODO: print even or odd",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "8\n",
+            "stdout": "even\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "5\n",
+            "stdout": "odd\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "n = int(input())\n\nif n % 2 == 0:\n    print(\"even\")\nelse:\n    print(\"odd\")",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "n = int(input())\n\nif n % 2 == 0:\n    print(\"even\")\nelse:\n    print(\"odd\")",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": "print(",
+            "message": "Use print(...) to show the required result.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "input(",
+            "message": "Read the needed value with input() instead of hard-coding the answer.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "if ",
+            "message": "Use an if statement to choose the correct output.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "else:",
+            "message": "Include an else branch for the remaining case.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "int(",
+            "message": "Convert the input to an integer before doing the number work.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\bn\\b",
+            "message": "Use the variable name `n` in your solution."
+          }
+        ]
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "n = int(input())\n\n# TODO: print even or odd",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "n = int(input())\n\nif n % 2 == 0:\n    print(\"even\")\nelse:\n    print(\"odd\")",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "n = int(input())\n\n# TODO: print even or odd",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "n = int(input())\n\n# TODO: print even or odd",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "n = int(input())\n\nif n % 2 == 0:\n    print(\"even\")\nelse:\n    print(\"odd\")",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "pattern": "print(",
+          "message": "Use print(...) to show the required result.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "input(",
+          "message": "Read the needed value with input() instead of hard-coding the answer.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "if ",
+          "message": "Use an if statement to choose the correct output.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "else:",
+          "message": "Include an else branch for the remaining case.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "int(",
+          "message": "Convert the input to an integer before doing the number work.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\bn\\b",
+          "message": "Use the variable name `n` in your solution."
+        }
+      ]
+    }
+  ]
+}

@@ -2,7 +2,7 @@
   "topicId": "f-strings-and-formatting",
   "subjectSlug": "python-v2",
   "moduleSlug": "python-v2-1",
-  "sectionSlug": "python-v2-1-string-foundations",
+  "sectionSlug": "python-v2-python-v2-1-string-foundations",
   "prefix": "pyv2_1",
   "minutes": 22,
   "topic": {
@@ -305,7 +305,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_print_profile_line",
       "language": "python",
-      "starterCode": "# TODO: store the values in variables\n# TODO: print the sentence with an f-string",
+      "starterCode": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_print_profile_line.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -354,7 +354,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# TODO: store the values in variables\n# TODO: print the sentence with an f-string",
+          "content": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_print_profile_line.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -372,11 +372,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# TODO: store the values in variables\n# TODO: print the sentence with an f-string",
+        "starterCode": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_print_profile_line.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# TODO: store the values in variables\n# TODO: print the sentence with an f-string",
+            "content": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_print_profile_line.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -418,7 +418,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_format_price_two_decimals",
       "language": "python",
-      "starterCode": "price = 4.5\n# TODO: print the formatted price",
+      "starterCode": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_format_price_two_decimals.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -467,7 +467,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "price = 4.5\n# TODO: print the formatted price",
+          "content": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_format_price_two_decimals.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -485,11 +485,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "price = 4.5\n# TODO: print the formatted price",
+        "starterCode": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_format_price_two_decimals.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "price = 4.5\n# TODO: print the formatted price",
+            "content": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_format_price_two_decimals.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -531,7 +531,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_input_greeting",
       "language": "python",
-      "starterCode": "# Read a name\nname = input()\n\n# TODO: print the greeting with an f-string",
+      "starterCode": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_input_greeting.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -586,7 +586,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# Read a name\nname = input()\n\n# TODO: print the greeting with an f-string",
+          "content": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_input_greeting.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -604,11 +604,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# Read a name\nname = input()\n\n# TODO: print the greeting with an f-string",
+        "starterCode": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_input_greeting.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# Read a name\nname = input()\n\n# TODO: print the greeting with an f-string",
+            "content": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_input_greeting.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -656,7 +656,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_input_name_city",
       "language": "python",
-      "starterCode": "# Read the name and city\nname = input()\ncity = input()\n\n# TODO: print the formatted sentence",
+      "starterCode": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_input_name_city.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -711,7 +711,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# Read the name and city\nname = input()\ncity = input()\n\n# TODO: print the formatted sentence",
+          "content": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_input_name_city.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -729,11 +729,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# Read the name and city\nname = input()\ncity = input()\n\n# TODO: print the formatted sentence",
+        "starterCode": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_input_name_city.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# Read the name and city\nname = input()\ncity = input()\n\n# TODO: print the formatted sentence",
+            "content": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_input_name_city.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -781,7 +781,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_average_one_decimal",
       "language": "python",
-      "starterCode": "# Read two whole numbers\nfirst = int(input())\nsecond = int(input())\n\n# TODO: calculate the average\n# TODO: print it as Average: X.X",
+      "starterCode": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_average_one_decimal.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -842,7 +842,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# Read two whole numbers\nfirst = int(input())\nsecond = int(input())\n\n# TODO: calculate the average\n# TODO: print it as Average: X.X",
+          "content": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_average_one_decimal.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -860,11 +860,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# Read two whole numbers\nfirst = int(input())\nsecond = int(input())\n\n# TODO: calculate the average\n# TODO: print it as Average: X.X",
+        "starterCode": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_average_one_decimal.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# Read two whole numbers\nfirst = int(input())\nsecond = int(input())\n\n# TODO: calculate the average\n# TODO: print it as Average: X.X",
+            "content": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_average_one_decimal.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true

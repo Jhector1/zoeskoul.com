@@ -2,7 +2,7 @@
   "topicId": "for-loops-over-text",
   "subjectSlug": "python-v2",
   "moduleSlug": "python-v2-3",
-  "sectionSlug": "python-v2-3-for-loops",
+  "sectionSlug": "python-v2-python-v2-3-for-loops",
   "prefix": "pyv2_3",
   "minutes": 25,
   "topic": {
@@ -312,7 +312,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-1",
       "language": "python",
-      "starterCode": "text = input()\n\n# TODO: loop through text and print each character on its own line",
+      "starterCode": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-1.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -363,7 +363,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "text = input()\n\n# TODO: loop through text and print each character on its own line",
+          "content": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-1.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -381,11 +381,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "text = input()\n\n# TODO: loop through text and print each character on its own line",
+        "starterCode": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-1.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "text = input()\n\n# TODO: loop through text and print each character on its own line",
+            "content": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-1.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -429,7 +429,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-2",
       "language": "python",
-      "starterCode": "text = input()\ncount = 0\n\n# TODO: count how many times 'a' appears\n\nprint(count)",
+      "starterCode": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-2.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -491,7 +491,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "text = input()\ncount = 0\n\n# TODO: count how many times 'a' appears\n\nprint(count)",
+          "content": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-2.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -509,11 +509,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "text = input()\ncount = 0\n\n# TODO: count how many times 'a' appears\n\nprint(count)",
+        "starterCode": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-2.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "text = input()\ncount = 0\n\n# TODO: count how many times 'a' appears\n\nprint(count)",
+            "content": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-2.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -568,7 +568,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-3",
       "language": "python",
-      "starterCode": "text = input()\n\n# TODO: print only vowels, one per line",
+      "starterCode": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-3.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -630,7 +630,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "text = input()\n\n# TODO: print only vowels, one per line",
+          "content": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-3.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -648,11 +648,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "text = input()\n\n# TODO: print only vowels, one per line",
+        "starterCode": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-3.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "text = input()\n\n# TODO: print only vowels, one per line",
+            "content": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-3.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -707,7 +707,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-4",
       "language": "python",
-      "starterCode": "text = input()\ncount = 0\n\n# TODO: count uppercase letters\n\nprint(count)",
+      "starterCode": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-4.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -781,7 +781,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "text = input()\ncount = 0\n\n# TODO: count uppercase letters\n\nprint(count)",
+          "content": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-4.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -799,11 +799,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "text = input()\ncount = 0\n\n# TODO: count uppercase letters\n\nprint(count)",
+        "starterCode": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-4.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "text = input()\ncount = 0\n\n# TODO: count uppercase letters\n\nprint(count)",
+            "content": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-4.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -870,7 +870,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-5",
       "language": "python",
-      "starterCode": "text = input()\nresult = \"\"\n\n# TODO: add non-space characters to result\n\nprint(result)",
+      "starterCode": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-5.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -932,7 +932,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "text = input()\nresult = \"\"\n\n# TODO: add non-space characters to result\n\nprint(result)",
+          "content": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-5.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -950,11 +950,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "text = input()\nresult = \"\"\n\n# TODO: add non-space characters to result\n\nprint(result)",
+        "starterCode": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-5.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "text = input()\nresult = \"\"\n\n# TODO: add non-space characters to result\n\nprint(result)",
+            "content": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-5.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true

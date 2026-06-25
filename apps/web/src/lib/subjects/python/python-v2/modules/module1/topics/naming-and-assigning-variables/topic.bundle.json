@@ -2,7 +2,7 @@
   "topicId": "naming-and-assigning-variables",
   "subjectSlug": "python-v2",
   "moduleSlug": "python-v2-1",
-  "sectionSlug": "python-v2-1-variables-and-assignment",
+  "sectionSlug": "python-v2-python-v2-1-variables-and-assignment",
   "prefix": "pyv2_1",
   "minutes": 22,
   "topic": {
@@ -305,7 +305,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-1.naming-and-assigning-variables.quiz.q9",
       "language": "python",
-      "starterCode": "# Store 12 in a variable named age\n# Then print the variable",
+      "starterCode": "@:topics.python-v2.python-v2-1.naming-and-assigning-variables.quiz.q9.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -344,7 +344,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# Store 12 in a variable named age\n# Then print the variable",
+          "content": "@:topics.python-v2.python-v2-1.naming-and-assigning-variables.quiz.q9.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -362,11 +362,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# Store 12 in a variable named age\n# Then print the variable",
+        "starterCode": "@:topics.python-v2.python-v2-1.naming-and-assigning-variables.quiz.q9.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# Store 12 in a variable named age\n# Then print the variable",
+            "content": "@:topics.python-v2.python-v2-1.naming-and-assigning-variables.quiz.q9.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -398,7 +398,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-1.naming-and-assigning-variables.quiz.q10",
       "language": "python",
-      "starterCode": "# Store the name in student_name\n# Print the variable",
+      "starterCode": "@:topics.python-v2.python-v2-1.naming-and-assigning-variables.quiz.q10.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -442,7 +442,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# Store the name in student_name\n# Print the variable",
+          "content": "@:topics.python-v2.python-v2-1.naming-and-assigning-variables.quiz.q10.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -460,11 +460,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# Store the name in student_name\n# Print the variable",
+        "starterCode": "@:topics.python-v2.python-v2-1.naming-and-assigning-variables.quiz.q10.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# Store the name in student_name\n# Print the variable",
+            "content": "@:topics.python-v2.python-v2-1.naming-and-assigning-variables.quiz.q10.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -501,7 +501,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-1.naming-and-assigning-variables.quiz.q11",
       "language": "python",
-      "starterCode": "# Create level\n# Update level\n# Print level",
+      "starterCode": "@:topics.python-v2.python-v2-1.naming-and-assigning-variables.quiz.q11.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -540,7 +540,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# Create level\n# Update level\n# Print level",
+          "content": "@:topics.python-v2.python-v2-1.naming-and-assigning-variables.quiz.q11.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -558,11 +558,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# Create level\n# Update level\n# Print level",
+        "starterCode": "@:topics.python-v2.python-v2-1.naming-and-assigning-variables.quiz.q11.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# Create level\n# Update level\n# Print level",
+            "content": "@:topics.python-v2.python-v2-1.naming-and-assigning-variables.quiz.q11.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -594,7 +594,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-1.naming-and-assigning-variables.quiz.q12",
       "language": "python",
-      "starterCode": "# Read one line into city\n# Print city",
+      "starterCode": "@:topics.python-v2.python-v2-1.naming-and-assigning-variables.quiz.q12.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -639,7 +639,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# Read one line into city\n# Print city",
+          "content": "@:topics.python-v2.python-v2-1.naming-and-assigning-variables.quiz.q12.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -657,11 +657,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# Read one line into city\n# Print city",
+        "starterCode": "@:topics.python-v2.python-v2-1.naming-and-assigning-variables.quiz.q12.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# Read one line into city\n# Print city",
+            "content": "@:topics.python-v2.python-v2-1.naming-and-assigning-variables.quiz.q12.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -699,7 +699,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-1.naming-and-assigning-variables.quiz.q13",
       "language": "python",
-      "starterCode": "# Store the first color\n# Print it\n# Change the color\n# Print it again",
+      "starterCode": "@:topics.python-v2.python-v2-1.naming-and-assigning-variables.quiz.q13.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -743,7 +743,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# Store the first color\n# Print it\n# Change the color\n# Print it again",
+          "content": "@:topics.python-v2.python-v2-1.naming-and-assigning-variables.quiz.q13.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -761,11 +761,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# Store the first color\n# Print it\n# Change the color\n# Print it again",
+        "starterCode": "@:topics.python-v2.python-v2-1.naming-and-assigning-variables.quiz.q13.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# Store the first color\n# Print it\n# Change the color\n# Print it again",
+            "content": "@:topics.python-v2.python-v2-1.naming-and-assigning-variables.quiz.q13.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true

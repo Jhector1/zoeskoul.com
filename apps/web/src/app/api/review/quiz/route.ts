@@ -170,6 +170,11 @@ const DEV_REVIEW_CLONE_TOPICS = {
       "e2e-sql-section": ["e2e-sql-topic"],
     },
   },
+  linux: {
+    "e2e-terminal-review-clone": {
+      "e2e-terminal-section": ["e2e-terminal-topic"],
+    },
+  },
 } as const;
 
 function getDevCloneTopicSlugs(args: {

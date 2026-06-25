@@ -2,7 +2,7 @@
   "topicId": "loop-debugging",
   "subjectSlug": "python-v2",
   "moduleSlug": "python-v2-3",
-  "sectionSlug": "python-v2-3-while-loops",
+  "sectionSlug": "python-v2-python-v2-3-while-loops",
   "prefix": "pyv2_3",
   "minutes": 20,
   "topic": {
@@ -312,7 +312,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-code-1",
       "language": "python",
-      "starterCode": "# TODO: print 1, 2, 3 using a while loop\ncount = 1",
+      "starterCode": "@:topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-code-1.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -357,7 +357,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# TODO: print 1, 2, 3 using a while loop\ncount = 1",
+          "content": "@:topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-code-1.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -375,11 +375,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# TODO: print 1, 2, 3 using a while loop\ncount = 1",
+        "starterCode": "@:topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-code-1.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# TODO: print 1, 2, 3 using a while loop\ncount = 1",
+            "content": "@:topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-code-1.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -417,7 +417,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-code-2",
       "language": "python",
-      "starterCode": "# TODO: print 0, 1, 2 with a while loop\nn = 0",
+      "starterCode": "@:topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-code-2.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -462,7 +462,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# TODO: print 0, 1, 2 with a while loop\nn = 0",
+          "content": "@:topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-code-2.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -480,11 +480,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# TODO: print 0, 1, 2 with a while loop\nn = 0",
+        "starterCode": "@:topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-code-2.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# TODO: print 0, 1, 2 with a while loop\nn = 0",
+            "content": "@:topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-code-2.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -522,7 +522,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-code-3",
       "language": "python",
-      "starterCode": "# TODO: print 3, 2, 1 using a while loop\nn = 3",
+      "starterCode": "@:topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-code-3.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -567,7 +567,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# TODO: print 3, 2, 1 using a while loop\nn = 3",
+          "content": "@:topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-code-3.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -585,11 +585,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# TODO: print 3, 2, 1 using a while loop\nn = 3",
+        "starterCode": "@:topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-code-3.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# TODO: print 3, 2, 1 using a while loop\nn = 3",
+            "content": "@:topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-code-3.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -627,7 +627,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-code-4",
       "language": "python",
-      "starterCode": "word = input()\n# TODO: print word exactly 3 times using a while loop",
+      "starterCode": "@:topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-code-4.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -678,7 +678,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "word = input()\n# TODO: print word exactly 3 times using a while loop",
+          "content": "@:topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-code-4.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -696,11 +696,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "word = input()\n# TODO: print word exactly 3 times using a while loop",
+        "starterCode": "@:topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-code-4.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "word = input()\n# TODO: print word exactly 3 times using a while loop",
+            "content": "@:topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-code-4.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -744,7 +744,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-code-5",
       "language": "python",
-      "starterCode": "n = int(input())\n# TODO: use a while loop to compute the sum from 1 to n",
+      "starterCode": "@:topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-code-5.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -801,7 +801,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "n = int(input())\n# TODO: use a while loop to compute the sum from 1 to n",
+          "content": "@:topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-code-5.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -819,11 +819,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "n = int(input())\n# TODO: use a while loop to compute the sum from 1 to n",
+        "starterCode": "@:topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-code-5.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "n = int(input())\n# TODO: use a while loop to compute the sum from 1 to n",
+            "content": "@:topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-code-5.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true

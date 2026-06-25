@@ -686,6 +686,13 @@ export default function QuizPracticeCard(props: {
 
   const ui = useTaggedT("reviewQuizUi");
   const { raw } = useTaggedT();
+  const resolvedProjectStepManifest = useMemo(
+      () =>
+          projectStepManifest
+              ? resolveDeepTagged(projectStepManifest, (key) => raw(key, ""))
+              : null,
+      [projectStepManifest, raw],
+  );
 
   const [loadTimedOut, setLoadTimedOut] = useState(false);
   const [submitAfterToolsFlushToken, setSubmitAfterToolsFlushToken] = useState(0);
@@ -729,21 +736,21 @@ export default function QuizPracticeCard(props: {
 
   const ex: Exercise | null = useMemo(() => {
     if (!ps?.exercise) {
-      return mergeProjectStepFallbackExercise(null, projectStepManifest);
+      return mergeProjectStepFallbackExercise(null, resolvedProjectStepManifest);
     }
 
     const resolved = resolveDeepTagged(ps.exercise, (key) => raw(key, "")) as Exercise;
-    return mergeProjectStepFallbackExercise(resolved, projectStepManifest);
-  }, [ps?.exercise, raw, projectStepManifest]);
+    return mergeProjectStepFallbackExercise(resolved, resolvedProjectStepManifest);
+  }, [ps?.exercise, raw, resolvedProjectStepManifest]);
 
   const projectStepFallbackItem = useMemo(
       () =>
           buildProjectStepFallbackPracticeItem({
             q,
             exercise: ex,
-            projectStepManifest,
+            projectStepManifest: resolvedProjectStepManifest,
           }),
-      [q, ex, projectStepManifest],
+      [q, ex, resolvedProjectStepManifest],
   );
 
   const rawPracticeItem = ps?.item ?? projectStepFallbackItem;
@@ -764,7 +771,7 @@ export default function QuizPracticeCard(props: {
     const mergedExercise =
         mergeProjectStepFallbackExercise(
             (normalized as any).exercise as Exercise | undefined,
-            projectStepManifest,
+            resolvedProjectStepManifest,
         ) ?? (normalized as any).exercise;
 
     const mergedWorkspace =
@@ -797,22 +804,22 @@ export default function QuizPracticeCard(props: {
       workspaceOrigin: (normalized as any).workspaceOrigin ?? "starter",
       userEdited: (normalized as any).userEdited ?? false,
     };
-  }, [ex, rawPracticeItem, projectStepManifest, projectStepFallbackItem]);
+  }, [ex, rawPracticeItem, resolvedProjectStepManifest, projectStepFallbackItem]);
 
   const livePracticeManifest = useMemo(
       () =>
           mergeProjectStepFallbackExercise(
               (livePracticeItem?.exercise as Exercise | undefined) ?? ex,
-              projectStepManifest,
+              resolvedProjectStepManifest,
           ),
-      [ex, livePracticeItem, projectStepManifest],
+      [ex, livePracticeItem, resolvedProjectStepManifest],
   );
 
   const toolsEnabled = Boolean(toolsAny?.enabled);
   const isCodeInput = ex?.kind === "code_input";
   const resolvedCodeSurface = resolveCodeSurface({
     exercise: livePracticeManifest ?? ex,
-    projectStepManifest,
+    projectStepManifest: resolvedProjectStepManifest,
   });
   const useToolsCodeSurface = toolsEnabled && isCodeInput && resolvedCodeSurface === "tools";
   const codeRunnerMode: "embedded" | "tools" = useToolsCodeSurface ? "tools" : "embedded";
@@ -835,8 +842,8 @@ export default function QuizPracticeCard(props: {
      * showed a card asking for trail/checkpoint while Tools still had only the
      * library/desk starter files.
      */
-    return manifestSlotId || getStableExerciseSlotId(q, projectStepManifest);
-  }, [q, projectStepManifest, livePracticeManifest]);
+    return manifestSlotId || getStableExerciseSlotId(q, resolvedProjectStepManifest);
+  }, [q, resolvedProjectStepManifest, livePracticeManifest]);
   const exerciseKeyForTools = useMemo(() => {
     const fetch = (q as any).fetch ?? {};
 
@@ -911,7 +918,7 @@ export default function QuizPracticeCard(props: {
   useLayoutEffect(() => {
     if (!livePracticeManifest) return;
     if (livePracticeManifest.kind !== "code_input") return;
-    if (!livePracticeItem && !projectStepManifest) return;
+    if (!livePracticeItem && !resolvedProjectStepManifest) return;
 
     const manifestLanguage = getManifestExerciseLanguage(livePracticeManifest);
     const ensureKey = [
@@ -1017,7 +1024,7 @@ export default function QuizPracticeCard(props: {
     practiceStarterFilesKey,
     practiceWorkspaceKey,
     practiceIdeConfigKey,
-    projectStepManifest,
+    resolvedProjectStepManifest,
   ]);
 
   useLayoutEffect(() => {
@@ -1031,12 +1038,15 @@ export default function QuizPracticeCard(props: {
     if (!itemWorkspace) return;
 
     const existingWorkspace = getWorkspaceFromAnyState(runtimeExercise);
+    const existingEntryCode = getWorkspaceEntryCodeForPracticeCard(existingWorkspace);
+    const starterEntryCode = getWorkspaceEntryCodeForPracticeCard(itemWorkspace);
     const existingIsProtected =
         runtimeExercise?.userEdited === true ||
         runtimeExercise?.workspaceOrigin === "user" ||
         runtimeExercise?.workspaceOrigin === "saved";
+    const protectedButBlank = existingIsProtected && !existingEntryCode.trim() && starterEntryCode.trim().length > 0;
 
-    if (existingIsProtected) return;
+    if (existingIsProtected && !protectedButBlank) return;
 
     const existingWorkspaceKey = JSON.stringify(existingWorkspace ?? null);
     const liveWorkspaceKey = JSON.stringify(itemWorkspace);
@@ -1275,7 +1285,9 @@ export default function QuizPracticeCard(props: {
   const maxForRenderer = ps?.maxAttempts ?? Number.POSITIVE_INFINITY;
 
   const hasExercise = Boolean(ex && livePracticeItem);
-  const hasProjectStepFallback = Boolean(projectStepManifest && projectStepFallbackItem);
+  const hasProjectStepFallback = Boolean(
+      resolvedProjectStepManifest && projectStepFallbackItem,
+  );
   const isInitialLoading = Boolean(
       ps?.loading && !hasExercise && !hasProjectStepFallback && !ps?.error,
   );

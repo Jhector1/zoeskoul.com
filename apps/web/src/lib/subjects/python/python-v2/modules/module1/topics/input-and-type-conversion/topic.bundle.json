@@ -2,7 +2,7 @@
   "topicId": "input-and-type-conversion",
   "subjectSlug": "python-v2",
   "moduleSlug": "python-v2-1",
-  "sectionSlug": "python-v2-1-variables-and-assignment",
+  "sectionSlug": "python-v2-python-v2-1-variables-and-assignment",
   "prefix": "pyv2_1",
   "minutes": 25,
   "topic": {
@@ -312,7 +312,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-1.input-and-type-conversion.quiz.code_echo_name",
       "language": "python",
-      "starterCode": "# Read a name and print a greeting\n# TODO: use input() and print()",
+      "starterCode": "@:topics.python-v2.python-v2-1.input-and-type-conversion.quiz.code_echo_name.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -362,7 +362,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# Read a name and print a greeting\n# TODO: use input() and print()",
+          "content": "@:topics.python-v2.python-v2-1.input-and-type-conversion.quiz.code_echo_name.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -380,11 +380,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# Read a name and print a greeting\n# TODO: use input() and print()",
+        "starterCode": "@:topics.python-v2.python-v2-1.input-and-type-conversion.quiz.code_echo_name.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# Read a name and print a greeting\n# TODO: use input() and print()",
+            "content": "@:topics.python-v2.python-v2-1.input-and-type-conversion.quiz.code_echo_name.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -427,7 +427,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-1.input-and-type-conversion.quiz.code_add_two_ages",
       "language": "python",
-      "starterCode": "# Read two whole numbers and print their sum\nfirst = input()\nsecond = input()\n# TODO: convert and print",
+      "starterCode": "@:topics.python-v2.python-v2-1.input-and-type-conversion.quiz.code_add_two_ages.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -478,7 +478,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# Read two whole numbers and print their sum\nfirst = input()\nsecond = input()\n# TODO: convert and print",
+          "content": "@:topics.python-v2.python-v2-1.input-and-type-conversion.quiz.code_add_two_ages.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -496,11 +496,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# Read two whole numbers and print their sum\nfirst = input()\nsecond = input()\n# TODO: convert and print",
+        "starterCode": "@:topics.python-v2.python-v2-1.input-and-type-conversion.quiz.code_add_two_ages.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# Read two whole numbers and print their sum\nfirst = input()\nsecond = input()\n# TODO: convert and print",
+            "content": "@:topics.python-v2.python-v2-1.input-and-type-conversion.quiz.code_add_two_ages.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -544,7 +544,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-1.input-and-type-conversion.quiz.code_double_price",
       "language": "python",
-      "starterCode": "# Read a decimal number and print double its value\nvalue = input()\n# TODO: convert and print",
+      "starterCode": "@:topics.python-v2.python-v2-1.input-and-type-conversion.quiz.code_double_price.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -595,7 +595,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# Read a decimal number and print double its value\nvalue = input()\n# TODO: convert and print",
+          "content": "@:topics.python-v2.python-v2-1.input-and-type-conversion.quiz.code_double_price.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -613,11 +613,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# Read a decimal number and print double its value\nvalue = input()\n# TODO: convert and print",
+        "starterCode": "@:topics.python-v2.python-v2-1.input-and-type-conversion.quiz.code_double_price.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# Read a decimal number and print double its value\nvalue = input()\n# TODO: convert and print",
+            "content": "@:topics.python-v2.python-v2-1.input-and-type-conversion.quiz.code_double_price.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -661,7 +661,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-1.input-and-type-conversion.quiz.code_age_next_year",
       "language": "python",
-      "starterCode": "# Read an age and print next year's age\n# TODO: complete the program",
+      "starterCode": "@:topics.python-v2.python-v2-1.input-and-type-conversion.quiz.code_age_next_year.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -717,7 +717,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# Read an age and print next year's age\n# TODO: complete the program",
+          "content": "@:topics.python-v2.python-v2-1.input-and-type-conversion.quiz.code_age_next_year.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -735,11 +735,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# Read an age and print next year's age\n# TODO: complete the program",
+        "starterCode": "@:topics.python-v2.python-v2-1.input-and-type-conversion.quiz.code_age_next_year.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# Read an age and print next year's age\n# TODO: complete the program",
+            "content": "@:topics.python-v2.python-v2-1.input-and-type-conversion.quiz.code_age_next_year.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -788,7 +788,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-1.input-and-type-conversion.quiz.code_profile_line",
       "language": "python",
-      "starterCode": "# Read a name and an age, then print a profile line\nname = input()\nage = input()\n# TODO: convert age and print the sentence",
+      "starterCode": "@:topics.python-v2.python-v2-1.input-and-type-conversion.quiz.code_profile_line.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -844,7 +844,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# Read a name and an age, then print a profile line\nname = input()\nage = input()\n# TODO: convert age and print the sentence",
+          "content": "@:topics.python-v2.python-v2-1.input-and-type-conversion.quiz.code_profile_line.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -862,11 +862,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# Read a name and an age, then print a profile line\nname = input()\nage = input()\n# TODO: convert age and print the sentence",
+        "starterCode": "@:topics.python-v2.python-v2-1.input-and-type-conversion.quiz.code_profile_line.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# Read a name and an age, then print a profile line\nname = input()\nage = input()\n# TODO: convert age and print the sentence",
+            "content": "@:topics.python-v2.python-v2-1.input-and-type-conversion.quiz.code_profile_line.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true

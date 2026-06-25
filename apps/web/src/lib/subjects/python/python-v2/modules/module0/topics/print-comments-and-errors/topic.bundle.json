@@ -2,7 +2,7 @@
   "topicId": "print-comments-and-errors",
   "subjectSlug": "python-v2",
   "moduleSlug": "python-v2-0",
-  "sectionSlug": "python-v2-0-setup-and-first-programs",
+  "sectionSlug": "python-v2-python-v2-0-setup-and-first-programs",
   "prefix": "pyv2_0",
   "minutes": 20,
   "topic": {
@@ -306,7 +306,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-print-one-line",
       "language": "python",
-      "starterCode": "# Write Python code below",
+      "starterCode": "@:topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-print-one-line.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -345,7 +345,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# Write Python code below",
+          "content": "@:topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-print-one-line.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -363,11 +363,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# Write Python code below",
+        "starterCode": "@:topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-print-one-line.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# Write Python code below",
+            "content": "@:topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-print-one-line.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -399,7 +399,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-two-lines",
       "language": "python",
-      "starterCode": "# Print the two required lines",
+      "starterCode": "@:topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-two-lines.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -438,7 +438,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# Print the two required lines",
+          "content": "@:topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-two-lines.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -456,11 +456,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# Print the two required lines",
+        "starterCode": "@:topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-two-lines.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# Print the two required lines",
+            "content": "@:topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-two-lines.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -492,7 +492,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-comment-and-output",
       "language": "python",
-      "starterCode": "# Add your comment here\n# Then write the print line below",
+      "starterCode": "@:topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-comment-and-output.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -531,7 +531,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# Add your comment here\n# Then write the print line below",
+          "content": "@:topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-comment-and-output.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -549,11 +549,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# Add your comment here\n# Then write the print line below",
+        "starterCode": "@:topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-comment-and-output.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# Add your comment here\n# Then write the print line below",
+            "content": "@:topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-comment-and-output.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -585,7 +585,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-fix-missing-paren",
       "language": "python",
-      "starterCode": "print(\"Hello\"",
+      "starterCode": "@:topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-fix-missing-paren.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -624,7 +624,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "print(\"Hello\"",
+          "content": "@:topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-fix-missing-paren.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -642,11 +642,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "print(\"Hello\"",
+        "starterCode": "@:topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-fix-missing-paren.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "print(\"Hello\"",
+            "content": "@:topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-fix-missing-paren.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -678,7 +678,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-personal-intro",
       "language": "python",
-      "starterCode": "# Write your introduction program below",
+      "starterCode": "@:topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-personal-intro.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -717,7 +717,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# Write your introduction program below",
+          "content": "@:topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-personal-intro.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -735,11 +735,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# Write your introduction program below",
+        "starterCode": "@:topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-personal-intro.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# Write your introduction program below",
+            "content": "@:topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-personal-intro.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true

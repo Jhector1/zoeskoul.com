@@ -7,6 +7,10 @@ import {
     sendTerminal,
 } from "../utils/mockTerminalWorkspace";
 
+// Zoeskoul E2E suite pruning: this file is opt-in.
+test.skip(process.env.RUNNER_E2E !== "1", "Runner/PTY E2E is opt-in. Start the local runner and run with RUNNER_E2E=1 or pnpm test:e2e:runner.");
+
+
 function practiceKeyFromRequest(route: Route): string | null {
     const request = route.request();
     const url = new URL(request.url());

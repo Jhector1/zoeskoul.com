@@ -221,6 +221,38 @@ function firstUsableStarterFilesLike(...values: unknown[]) {
     return undefined;
 }
 
+function isTaggedMessageRefLike(value: unknown) {
+    return typeof value === "string" && value.trim().startsWith("@:");
+}
+
+function hasResolvedStarterCodeLike(value: unknown) {
+    return hasNonBlankStarterCodeLike(value) && !isTaggedMessageRefLike(value);
+}
+
+function hasResolvedStarterFilesLike(value: unknown) {
+    if (!Array.isArray(value)) return false;
+
+    return value.some((entry) => {
+        if (typeof entry === "string") {
+            return entry.trim().length > 0 && !isTaggedMessageRefLike(entry);
+        }
+
+        if (isRecordLike(entry) && typeof entry.content === "string") {
+            return entry.content.trim().length > 0 && !isTaggedMessageRefLike(entry.content);
+        }
+
+        return false;
+    });
+}
+
+function firstResolvedStarterFilesLike(...values: unknown[]) {
+    for (const value of values) {
+        if (hasResolvedStarterFilesLike(value)) return value;
+    }
+
+    return firstUsableStarterFilesLike(...values);
+}
+
 function mergeRenderedExerciseWithRouteManifest(
     renderedExercise: unknown,
     routeManifest: unknown,
@@ -233,20 +265,37 @@ function mergeRenderedExerciseWithRouteManifest(
     const renderedWorkspace = isRecordLike(rendered.workspace) ? rendered.workspace : {};
     const routedWorkspace = isRecordLike(routed.workspace) ? routed.workspace : {};
 
+    /**
+     * Route registry entries are manifest-shaped and can still contain raw
+     * i18n tags such as "@:topics...starterCode". The rendered exercise has
+     * already passed through useTaggedT/resolveDeepTagged, so prefer the
+     * rendered resolved starter over an unresolved routed manifest starter.
+     *
+     * Without this, direct real catalog exercise routes can bind Tools with a
+     * blank/raw starter even though the same embedded Try It resolves correctly.
+     */
     const starterCode =
-        hasNonBlankStarterCodeLike(routed.starterCode)
-            ? routed.starterCode
-            : hasNonBlankStarterCodeLike(routedWorkspace.starterCode)
-                ? routedWorkspace.starterCode
-                : hasNonBlankStarterCodeLike(rendered.starterCode)
-                    ? rendered.starterCode
-                    : renderedWorkspace.starterCode;
+        hasResolvedStarterCodeLike(rendered.starterCode)
+            ? rendered.starterCode
+            : hasResolvedStarterCodeLike(renderedWorkspace.starterCode)
+                ? renderedWorkspace.starterCode
+                : hasResolvedStarterCodeLike(routed.starterCode)
+                    ? routed.starterCode
+                    : hasResolvedStarterCodeLike(routedWorkspace.starterCode)
+                        ? routedWorkspace.starterCode
+                        : hasNonBlankStarterCodeLike(rendered.starterCode)
+                            ? rendered.starterCode
+                            : hasNonBlankStarterCodeLike(renderedWorkspace.starterCode)
+                                ? renderedWorkspace.starterCode
+                                : hasNonBlankStarterCodeLike(routed.starterCode)
+                                    ? routed.starterCode
+                                    : routedWorkspace.starterCode;
 
-    const starterFiles = firstUsableStarterFilesLike(
-        routed.starterFiles,
-        routedWorkspace.starterFiles,
+    const starterFiles = firstResolvedStarterFilesLike(
         rendered.starterFiles,
         renderedWorkspace.starterFiles,
+        routed.starterFiles,
+        routedWorkspace.starterFiles,
     );
 
     return {
@@ -736,14 +785,20 @@ export function shouldSkipEmbeddedEnsureExercise(args: {
         workspaceHasAnyFile(manifestStarterWorkspace) ||
         Boolean(String(manifestStarterCode ?? "").trim());
 
-    if (isUserOwnedWorkspaceState(existing)) {
-        return true;
-    }
-
     const existingHasContent =
         workspaceHasNonBlankFile(existingWorkspace) ||
         Boolean(String(existing?.code ?? "").trim()) ||
         Boolean(String(existing?.source ?? "").trim());
+
+    /**
+     * A previous broken i18n/starter pass could save an empty editor snapshot
+     * as "saved". That is not real learner work. If the manifest now has a
+     * real starter workspace/code, allow ensureExercise to replace the blank
+     * saved shell with the authored starter.
+     */
+    if (isUserOwnedWorkspaceState(existing)) {
+        return existingHasContent || !manifestHasStarter;
+    }
 
     const manifestPaths = workspaceFilePaths(manifestStarterWorkspace);
     const existingPaths = workspaceFilePaths(existingWorkspace);
@@ -1370,8 +1425,35 @@ function CodeInputWithTools(props: {
     const savedSketch = storeExercise?.sketch || null;
 
     return (
-        <CodeInputExerciseUI
-            exercise={exercise}
+        <>
+            {process.env.NODE_ENV !== "production" ? (
+                <textarea
+                    data-testid="exercise-renderer-state-e2e-input"
+                    aria-label="E2E resolved exercise state"
+                    readOnly
+                    value={JSON.stringify({
+                        exerciseId: String((exercise as any)?.id ?? ""),
+                        exerciseKey,
+                        code: normalizedActive.code ?? "",
+                        language: activeLanguage,
+                        ideConfig: resolveCodeInputIdeConfig(exercise),
+                        starterCode: (exercise as any)?.starterCode ?? "",
+                        starterFiles: (exercise as any)?.starterFiles ?? null,
+                        workspace: (exercise as any)?.workspace ?? null,
+                        recipe: (exercise as any)?.recipe ?? null,
+                    })}
+                    style={{
+                        position: "absolute",
+                        width: 1,
+                        height: 1,
+                        opacity: 0,
+                        pointerEvents: "none",
+                    }}
+                />
+            ) : null}
+
+            <CodeInputExerciseUI
+                exercise={exercise}
             code={normalizedActive.code}
             stdin={activeStdin}
             exerciseKey={exerciseKey}
@@ -1445,7 +1527,8 @@ function CodeInputWithTools(props: {
                 requestBind(codeInputId);
             }}
             onSketchStateChange={(state) => sketch?.saveSketchDebounced?.(exerciseKey, state, true)}
-        />
+            />
+        </>
     );
 }
 
@@ -2136,8 +2219,35 @@ export default function ExerciseRenderer({
         });
 
         return (
-            <CodeInputExerciseUI
-                exercise={exCode}
+            <>
+                {process.env.NODE_ENV !== "production" ? (
+                    <textarea
+                        data-testid="exercise-renderer-state-e2e-input"
+                        aria-label="E2E resolved embedded exercise state"
+                        readOnly
+                        value={JSON.stringify({
+                            exerciseId: String((exCode as any)?.id ?? ""),
+                            exerciseKey,
+                            code: activeCode ?? "",
+                            language: activeLanguage,
+                            ideConfig: resolveCodeInputIdeConfig(exCode),
+                            starterCode: (exCode as any)?.starterCode ?? "",
+                            starterFiles: (exCode as any)?.starterFiles ?? null,
+                            workspace: (exCode as any)?.workspace ?? null,
+                            recipe: (exCode as any)?.recipe ?? null,
+                        })}
+                        style={{ position: "absolute", width: 1, height: 1, opacity: 0, pointerEvents: "none" }}
+                    />
+                ) : null}
+                <textarea
+                    data-testid="exercise-renderer-embedded-state-e2e-input"
+                    aria-label="E2E resolved embedded exercise state marker"
+                    readOnly
+                    value="1"
+                    style={{ position: "absolute", width: 1, height: 1, opacity: 0, pointerEvents: "none" }}
+                />
+                <CodeInputExerciseUI
+                    exercise={exCode}
                 code={activeCode}
                 stdin={activeStdin}
                 workspace={activeWorkspace}
@@ -2211,6 +2321,7 @@ export default function ExerciseRenderer({
                 sectionRuntimeDefaults={runtimeLayers.sectionRuntimeDefaults}
                 moduleRuntimeDefaults={runtimeLayers.moduleRuntimeDefaults}
             />
+            </>
         );
     }
 

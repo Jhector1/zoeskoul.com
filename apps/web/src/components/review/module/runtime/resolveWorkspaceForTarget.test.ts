@@ -674,6 +674,173 @@ describe("resolveWorkspaceForExerciseTarget", () => {
     expect(filePaths(resolved.workspace)).toEqual(["main.py"]);
     expect(fileContent(resolved.workspace, "main.py")).toBe("");
   });
+
+  it("rejects blank saved user workspace when manifest has starter code", () => {
+    const resolved = resolveWorkspaceForTarget({
+      targetKey: "exercise:embedded-tryit",
+      targetKind: "exercise",
+      language: "python",
+      manifest: {
+        starterCode: "# TODO: print the required sentence\n",
+        workspace: {
+          entryFilePath: "main.py",
+          starterFiles: [
+            {
+              path: "main.py",
+              content: "# TODO: print the required sentence\n",
+              isEntry: true,
+            },
+          ],
+        },
+      },
+      workspaceRequested: true,
+      savedCandidates: [
+        {
+          targetKey: "exercise:embedded-tryit",
+          workspace: {
+            version: 2,
+            language: "python",
+            nodes: [
+              {
+                id: "file:main.py",
+                kind: "file",
+                name: "main.py",
+                parentId: null,
+                content: "",
+                createdAt: 0,
+                updatedAt: 0,
+              },
+            ],
+            openTabs: ["file:main.py"],
+            activeFileId: "file:main.py",
+            entryFileId: "file:main.py",
+            stdin: "",
+            expanded: [],
+            leftPct: 26,
+          },
+          code: "",
+          source: "",
+          userEdited: true,
+          workspaceOrigin: "saved",
+        },
+      ],
+    });
+
+    expect(resolved.source).toBe("manifest");
+    expect(fileContent(resolved.workspace, "main.py")).toBe(
+      "# TODO: print the required sentence\n",
+    );
+  });
+
+  it("rejects fresh blank local draft when manifest has starter code", () => {
+    const resolved = resolveWorkspaceForTarget({
+      targetKey: "exercise:embedded-tryit-local-draft",
+      targetKind: "exercise",
+      language: "python",
+      manifest: {
+        starterCode: "# TODO: print the required sentence\n",
+        workspace: {
+          entryFilePath: "main.py",
+          starterFiles: [
+            {
+              path: "main.py",
+              content: "# TODO: print the required sentence\n",
+              isEntry: true,
+            },
+          ],
+        },
+      },
+      workspaceRequested: true,
+      localDraft: {
+        targetKey: "exercise:embedded-tryit-local-draft",
+        workspace: {
+          version: 2,
+          language: "python",
+          nodes: [
+            {
+              id: "file:main.py",
+              kind: "file",
+              name: "main.py",
+              parentId: null,
+              content: "",
+              createdAt: 0,
+              updatedAt: 0,
+            },
+          ],
+          openTabs: ["file:main.py"],
+          activeFileId: "file:main.py",
+          entryFileId: "file:main.py",
+          stdin: "",
+          expanded: [],
+          leftPct: 26,
+        },
+        savedAt: Date.now(),
+      },
+    });
+
+    expect(resolved.source).toBe("manifest");
+    expect(fileContent(resolved.workspace, "main.py")).toBe(
+      "# TODO: print the required sentence\n",
+    );
+  });
+
+  it("rejects saved unresolved i18n alias workspace when manifest has resolved starter code", () => {
+    const resolved = resolveWorkspaceForTarget({
+      targetKey: "exercise:embedded-tryit-i18n",
+      targetKind: "exercise",
+      language: "python",
+      manifest: {
+        starterCode: "# TODO: print the required sentence\n",
+        workspace: {
+          entryFilePath: "main.py",
+          starterFiles: [
+            {
+              path: "main.py",
+              content: "# TODO: print the required sentence\n",
+              isEntry: true,
+            },
+          ],
+        },
+      },
+      workspaceRequested: true,
+      savedCandidates: [
+        {
+          targetKey: "exercise:embedded-tryit-i18n",
+          workspace: {
+            version: 2,
+            language: "python",
+            nodes: [
+              {
+                id: "file:main.py",
+                kind: "file",
+                name: "main.py",
+                parentId: null,
+                content: "@:topics.python-v2.example.quiz.demo.starterCode",
+                createdAt: 0,
+                updatedAt: 0,
+              },
+            ],
+            openTabs: ["file:main.py"],
+            activeFileId: "file:main.py",
+            entryFileId: "file:main.py",
+            stdin: "",
+            expanded: [],
+            leftPct: 26,
+          },
+          code: "@:topics.python-v2.example.quiz.demo.starterCode",
+          source: "@:topics.python-v2.example.quiz.demo.starterCode",
+          userEdited: true,
+          workspaceOrigin: "saved",
+        },
+      ],
+    });
+
+    expect(resolved.source).toBe("manifest");
+    expect(fileContent(resolved.workspace, "main.py")).toBe(
+      "# TODO: print the required sentence\n",
+    );
+  });
+
 });
 
 describe("createManifestWorkspaceDefinition", () => {

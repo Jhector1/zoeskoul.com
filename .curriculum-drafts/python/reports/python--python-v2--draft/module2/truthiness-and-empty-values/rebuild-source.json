@@ -1,0 +1,20 @@
+{
+  "mode": "rebuild-from-drafts",
+  "source": "current-draft-output",
+  "sourceBundlePath": "/Users/admin/Documents/NextJSProject/zoeskoul.com/.curriculum-drafts/python/subjects/python--python-v2--draft/modules/module2/topics/truthiness-and-empty-values/topic.bundle.json",
+  "sourceMessagesPaths": {
+    "en": "/Users/admin/Documents/NextJSProject/zoeskoul.com/.curriculum-drafts/python/messages/en/subjects/python--python-v2--draft/module2/truthiness-and-empty-values.json"
+  },
+  "identityNormalized": true,
+  "identityReplacements": [
+    [
+      "python-v2-2-combining-conditions",
+      "python--python-v2--draft-python-v2-2-combining-conditions"
+    ],
+    [
+      "python-v2",
+      "python--python-v2--draft"
+    ]
+  ],
+  "syncedReports": true
+}

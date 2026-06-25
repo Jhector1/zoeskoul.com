@@ -2,7 +2,7 @@
   "topicId": "range-and-counting",
   "subjectSlug": "python-v2",
   "moduleSlug": "python-v2-3",
-  "sectionSlug": "python-v2-3-for-loops",
+  "sectionSlug": "python-v2-python-v2-3-for-loops",
   "prefix": "pyv2_3",
   "minutes": 22,
   "topic": {
@@ -316,7 +316,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-3.range-and-counting.quiz.ci-print-zero-to-four",
       "language": "python",
-      "starterCode": "# Write your code below",
+      "starterCode": "@:topics.python-v2.python-v2-3.range-and-counting.quiz.ci-print-zero-to-four.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -367,7 +367,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# Write your code below",
+          "content": "@:topics.python-v2.python-v2-3.range-and-counting.quiz.ci-print-zero-to-four.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -385,11 +385,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# Write your code below",
+        "starterCode": "@:topics.python-v2.python-v2-3.range-and-counting.quiz.ci-print-zero-to-four.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# Write your code below",
+            "content": "@:topics.python-v2.python-v2-3.range-and-counting.quiz.ci-print-zero-to-four.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -433,7 +433,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-3.range-and-counting.quiz.ci-print-one-to-five",
       "language": "python",
-      "starterCode": "# Write your code below",
+      "starterCode": "@:topics.python-v2.python-v2-3.range-and-counting.quiz.ci-print-one-to-five.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -484,7 +484,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# Write your code below",
+          "content": "@:topics.python-v2.python-v2-3.range-and-counting.quiz.ci-print-one-to-five.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -502,11 +502,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# Write your code below",
+        "starterCode": "@:topics.python-v2.python-v2-3.range-and-counting.quiz.ci-print-one-to-five.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# Write your code below",
+            "content": "@:topics.python-v2.python-v2-3.range-and-counting.quiz.ci-print-one-to-five.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -550,7 +550,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-3.range-and-counting.quiz.ci-even-under-ten",
       "language": "python",
-      "starterCode": "# Write your code below",
+      "starterCode": "@:topics.python-v2.python-v2-3.range-and-counting.quiz.ci-even-under-ten.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -601,7 +601,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# Write your code below",
+          "content": "@:topics.python-v2.python-v2-3.range-and-counting.quiz.ci-even-under-ten.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -619,11 +619,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# Write your code below",
+        "starterCode": "@:topics.python-v2.python-v2-3.range-and-counting.quiz.ci-even-under-ten.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# Write your code below",
+            "content": "@:topics.python-v2.python-v2-3.range-and-counting.quiz.ci-even-under-ten.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -667,7 +667,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-3.range-and-counting.quiz.ci-countdown-three-to-one",
       "language": "python",
-      "starterCode": "# Write your code below",
+      "starterCode": "@:topics.python-v2.python-v2-3.range-and-counting.quiz.ci-countdown-three-to-one.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -718,7 +718,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# Write your code below",
+          "content": "@:topics.python-v2.python-v2-3.range-and-counting.quiz.ci-countdown-three-to-one.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -736,11 +736,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# Write your code below",
+        "starterCode": "@:topics.python-v2.python-v2-3.range-and-counting.quiz.ci-countdown-three-to-one.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# Write your code below",
+            "content": "@:topics.python-v2.python-v2-3.range-and-counting.quiz.ci-countdown-three-to-one.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -784,7 +784,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-3.range-and-counting.quiz.ci-print-squares-one-to-four",
       "language": "python",
-      "starterCode": "# Write your code below",
+      "starterCode": "@:topics.python-v2.python-v2-3.range-and-counting.quiz.ci-print-squares-one-to-four.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -835,7 +835,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# Write your code below",
+          "content": "@:topics.python-v2.python-v2-3.range-and-counting.quiz.ci-print-squares-one-to-four.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -853,11 +853,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# Write your code below",
+        "starterCode": "@:topics.python-v2.python-v2-3.range-and-counting.quiz.ci-print-squares-one-to-four.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# Write your code below",
+            "content": "@:topics.python-v2.python-v2-3.range-and-counting.quiz.ci-print-squares-one-to-four.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true

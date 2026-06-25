@@ -2,9 +2,9 @@
   "topicId": "module-1-profile-card-project",
   "subjectSlug": "python-v2",
   "moduleSlug": "python-v2-1",
-  "sectionSlug": "python-v2-1-module-project",
+  "sectionSlug": "python-v2-python-v2-1-module-project",
   "prefix": "pyv2_1",
-  "minutes": 45,
+  "minutes": 22,
   "runtimeDefaults": {
     "kind": "code",
     "language": "python",
@@ -105,11 +105,11 @@
       "messageBase": "topics.python-v2.python-v2-1.module-1-profile-card-project.quiz.try-module-1-profile-card-project-sketch0",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "# Store Ava in name.\n# Then print name.\n",
+      "starterCode": "@:topics.python-v2.python-v2-1.module-1-profile-card-project.quiz.try-module-1-profile-card-project-sketch0.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# Store Ava in name.\n# Then print name.\n",
+          "content": "@:topics.python-v2.python-v2-1.module-1-profile-card-project.quiz.try-module-1-profile-card-project-sketch0.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -118,11 +118,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# Store Ava in name.\n# Then print name.\n",
+        "starterCode": "@:topics.python-v2.python-v2-1.module-1-profile-card-project.quiz.try-module-1-profile-card-project-sketch0.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# Store Ava in name.\n# Then print name.\n",
+            "content": "@:topics.python-v2.python-v2-1.module-1-profile-card-project.quiz.try-module-1-profile-card-project-sketch0.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -193,11 +193,11 @@
       "messageBase": "topics.python-v2.python-v2-1.module-1-profile-card-project.quiz.mp-1-store-profile-values",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "name = \"Ava\"\nprint(name)\n\n# Replace the preview with a first profile card.\n# Store Maya in student_name and 7 in level.\n# Then print the two profile lines.\n",
+      "starterCode": "@:topics.python-v2.python-v2-1.module-1-profile-card-project.quiz.mp-1-store-profile-values.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "name = \"Ava\"\nprint(name)\n\n# Replace the preview with a first profile card.\n# Store Maya in student_name and 7 in level.\n# Then print the two profile lines.\n",
+          "content": "@:topics.python-v2.python-v2-1.module-1-profile-card-project.quiz.mp-1-store-profile-values.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -206,11 +206,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "name = \"Ava\"\nprint(name)\n\n# Replace the preview with a first profile card.\n# Store Maya in student_name and 7 in level.\n# Then print the two profile lines.\n",
+        "starterCode": "@:topics.python-v2.python-v2-1.module-1-profile-card-project.quiz.mp-1-store-profile-values.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "name = \"Ava\"\nprint(name)\n\n# Replace the preview with a first profile card.\n# Store Maya in student_name and 7 in level.\n# Then print the two profile lines.\n",
+            "content": "@:topics.python-v2.python-v2-1.module-1-profile-card-project.quiz.mp-1-store-profile-values.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -305,11 +305,11 @@
       "messageBase": "topics.python-v2.python-v2-1.module-1-profile-card-project.quiz.mp-2-read-and-label-input",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "student_name = \"Maya\"\nlevel = 7\nprint(f\"Profile for {student_name}\")\nprint(f\"Level: {level}\")\n\n# Keep the profile card idea.\n# Replace the stored name with input().\n# Read the city with input() too, then add the city line.\n",
+      "starterCode": "@:topics.python-v2.python-v2-1.module-1-profile-card-project.quiz.mp-2-read-and-label-input.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "student_name = \"Maya\"\nlevel = 7\nprint(f\"Profile for {student_name}\")\nprint(f\"Level: {level}\")\n\n# Keep the profile card idea.\n# Replace the stored name with input().\n# Read the city with input() too, then add the city line.\n",
+          "content": "@:topics.python-v2.python-v2-1.module-1-profile-card-project.quiz.mp-2-read-and-label-input.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -318,11 +318,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "student_name = \"Maya\"\nlevel = 7\nprint(f\"Profile for {student_name}\")\nprint(f\"Level: {level}\")\n\n# Keep the profile card idea.\n# Replace the stored name with input().\n# Read the city with input() too, then add the city line.\n",
+        "starterCode": "@:topics.python-v2.python-v2-1.module-1-profile-card-project.quiz.mp-2-read-and-label-input.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "student_name = \"Maya\"\nlevel = 7\nprint(f\"Profile for {student_name}\")\nprint(f\"Level: {level}\")\n\n# Keep the profile card idea.\n# Replace the stored name with input().\n# Read the city with input() too, then add the city line.\n",
+            "content": "@:topics.python-v2.python-v2-1.module-1-profile-card-project.quiz.mp-2-read-and-label-input.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -410,11 +410,11 @@
       "messageBase": "topics.python-v2.python-v2-1.module-1-profile-card-project.quiz.mp-3-clean-typed-name",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "name = input()\nlevel = 7\ncity = input()\nprint(f\"Profile for {name}\")\nprint(f\"Level: {level}\")\nprint(f\"City: {city}\")\n\n# Keep the card layout.\n# Clean the typed name with .strip() and .title() before printing it.\n",
+      "starterCode": "@:topics.python-v2.python-v2-1.module-1-profile-card-project.quiz.mp-3-clean-typed-name.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "name = input()\nlevel = 7\ncity = input()\nprint(f\"Profile for {name}\")\nprint(f\"Level: {level}\")\nprint(f\"City: {city}\")\n\n# Keep the card layout.\n# Clean the typed name with .strip() and .title() before printing it.\n",
+          "content": "@:topics.python-v2.python-v2-1.module-1-profile-card-project.quiz.mp-3-clean-typed-name.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -423,11 +423,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "name = input()\nlevel = 7\ncity = input()\nprint(f\"Profile for {name}\")\nprint(f\"Level: {level}\")\nprint(f\"City: {city}\")\n\n# Keep the card layout.\n# Clean the typed name with .strip() and .title() before printing it.\n",
+        "starterCode": "@:topics.python-v2.python-v2-1.module-1-profile-card-project.quiz.mp-3-clean-typed-name.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "name = input()\nlevel = 7\ncity = input()\nprint(f\"Profile for {name}\")\nprint(f\"Level: {level}\")\nprint(f\"City: {city}\")\n\n# Keep the card layout.\n# Clean the typed name with .strip() and .title() before printing it.\n",
+            "content": "@:topics.python-v2.python-v2-1.module-1-profile-card-project.quiz.mp-3-clean-typed-name.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -527,11 +527,11 @@
       "messageBase": "topics.python-v2.python-v2-1.module-1-profile-card-project.quiz.mp-4-build-full-profile-card",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "raw_name = input()\nlevel = 7\ncity = input()\nname = raw_name.strip().title()\nprint(f\"Profile for {name}\")\nprint(f\"Level: {level}\")\nprint(f\"City: {city}\")\n\n# Keep the cleaned name.\n# Replace level with a typed age.\n# Print Age next year instead of Level.\n",
+      "starterCode": "@:topics.python-v2.python-v2-1.module-1-profile-card-project.quiz.mp-4-build-full-profile-card.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "raw_name = input()\nlevel = 7\ncity = input()\nname = raw_name.strip().title()\nprint(f\"Profile for {name}\")\nprint(f\"Level: {level}\")\nprint(f\"City: {city}\")\n\n# Keep the cleaned name.\n# Replace level with a typed age.\n# Print Age next year instead of Level.\n",
+          "content": "@:topics.python-v2.python-v2-1.module-1-profile-card-project.quiz.mp-4-build-full-profile-card.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -540,11 +540,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "raw_name = input()\nlevel = 7\ncity = input()\nname = raw_name.strip().title()\nprint(f\"Profile for {name}\")\nprint(f\"Level: {level}\")\nprint(f\"City: {city}\")\n\n# Keep the cleaned name.\n# Replace level with a typed age.\n# Print Age next year instead of Level.\n",
+        "starterCode": "@:topics.python-v2.python-v2-1.module-1-profile-card-project.quiz.mp-4-build-full-profile-card.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "raw_name = input()\nlevel = 7\ncity = input()\nname = raw_name.strip().title()\nprint(f\"Profile for {name}\")\nprint(f\"Level: {level}\")\nprint(f\"City: {city}\")\n\n# Keep the cleaned name.\n# Replace level with a typed age.\n# Print Age next year instead of Level.\n",
+            "content": "@:topics.python-v2.python-v2-1.module-1-profile-card-project.quiz.mp-4-build-full-profile-card.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true

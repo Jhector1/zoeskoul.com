@@ -2,7 +2,7 @@
   "topicId": "what-python-is",
   "subjectSlug": "python-v2",
   "moduleSlug": "python-v2-0",
-  "sectionSlug": "python-v2-0-setup-and-first-programs",
+  "sectionSlug": "python-v2-python-v2-0-setup-and-first-programs",
   "prefix": "pyv2_0",
   "minutes": 12,
   "topic": {
@@ -312,7 +312,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-0.what-python-is.quiz.ci-print-usecase-automation",
       "language": "python",
-      "starterCode": "# TODO: print the required sentence",
+      "starterCode": "@:topics.python-v2.python-v2-0.what-python-is.quiz.ci-print-usecase-automation.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -351,7 +351,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# TODO: print the required sentence",
+          "content": "@:topics.python-v2.python-v2-0.what-python-is.quiz.ci-print-usecase-automation.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -369,11 +369,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# TODO: print the required sentence",
+        "starterCode": "@:topics.python-v2.python-v2-0.what-python-is.quiz.ci-print-usecase-automation.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# TODO: print the required sentence",
+            "content": "@:topics.python-v2.python-v2-0.what-python-is.quiz.ci-print-usecase-automation.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -405,7 +405,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-0.what-python-is.quiz.ci-two-usecases",
       "language": "python",
-      "starterCode": "# TODO: print the two required lines",
+      "starterCode": "@:topics.python-v2.python-v2-0.what-python-is.quiz.ci-two-usecases.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -444,7 +444,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# TODO: print the two required lines",
+          "content": "@:topics.python-v2.python-v2-0.what-python-is.quiz.ci-two-usecases.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -462,11 +462,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# TODO: print the two required lines",
+        "starterCode": "@:topics.python-v2.python-v2-0.what-python-is.quiz.ci-two-usecases.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# TODO: print the two required lines",
+            "content": "@:topics.python-v2.python-v2-0.what-python-is.quiz.ci-two-usecases.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -498,7 +498,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-0.what-python-is.quiz.ci-web-data-ai",
       "language": "python",
-      "starterCode": "# TODO: print the three lines exactly",
+      "starterCode": "@:topics.python-v2.python-v2-0.what-python-is.quiz.ci-web-data-ai.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -537,7 +537,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# TODO: print the three lines exactly",
+          "content": "@:topics.python-v2.python-v2-0.what-python-is.quiz.ci-web-data-ai.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -555,11 +555,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# TODO: print the three lines exactly",
+        "starterCode": "@:topics.python-v2.python-v2-0.what-python-is.quiz.ci-web-data-ai.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# TODO: print the three lines exactly",
+            "content": "@:topics.python-v2.python-v2-0.what-python-is.quiz.ci-web-data-ai.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -591,7 +591,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-0.what-python-is.quiz.ci-personal-usecase-label",
       "language": "python",
-      "starterCode": "# TODO: print the required labeled sentence",
+      "starterCode": "@:topics.python-v2.python-v2-0.what-python-is.quiz.ci-personal-usecase-label.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -630,7 +630,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# TODO: print the required labeled sentence",
+          "content": "@:topics.python-v2.python-v2-0.what-python-is.quiz.ci-personal-usecase-label.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -648,11 +648,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# TODO: print the required labeled sentence",
+        "starterCode": "@:topics.python-v2.python-v2-0.what-python-is.quiz.ci-personal-usecase-label.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# TODO: print the required labeled sentence",
+            "content": "@:topics.python-v2.python-v2-0.what-python-is.quiz.ci-personal-usecase-label.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -684,7 +684,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-0.what-python-is.quiz.ci-beginner-message",
       "language": "python",
-      "starterCode": "# TODO: print both required lines",
+      "starterCode": "@:topics.python-v2.python-v2-0.what-python-is.quiz.ci-beginner-message.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -723,7 +723,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# TODO: print both required lines",
+          "content": "@:topics.python-v2.python-v2-0.what-python-is.quiz.ci-beginner-message.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -741,11 +741,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# TODO: print both required lines",
+        "starterCode": "@:topics.python-v2.python-v2-0.what-python-is.quiz.ci-beginner-message.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# TODO: print both required lines",
+            "content": "@:topics.python-v2.python-v2-0.what-python-is.quiz.ci-beginner-message.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true

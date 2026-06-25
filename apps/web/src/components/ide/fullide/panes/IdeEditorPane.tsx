@@ -195,6 +195,22 @@ export default function IdeEditorPane({
             ) : null}
 
             <div ref={panelRef} className="min-h-0 min-w-0 flex-1 overflow-hidden">
+                {process.env.NODE_ENV !== "production" && activeFile ? (
+                    <textarea
+                        data-testid="fullide-editor-e2e-input"
+                        aria-label="E2E full IDE editor input"
+                        value={activeFile.content ?? ""}
+                        onChange={(e) => handleBoundCodeChange(e.target.value)}
+                        style={{
+                            position: "absolute",
+                            width: 1,
+                            height: 1,
+                            opacity: 0,
+                            pointerEvents: "auto",
+                        }}
+                    />
+                ) : null}
+
                 {activeFile || terminalWorkspaceOnly ? (
                     <div className={cn("h-full overflow-hidden  pt-2", PANEL_CARD_CLASS)}>
                         <CodeRunner

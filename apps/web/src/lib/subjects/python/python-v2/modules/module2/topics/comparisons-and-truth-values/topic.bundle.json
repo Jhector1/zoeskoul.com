@@ -2,7 +2,7 @@
   "topicId": "comparisons-and-truth-values",
   "subjectSlug": "python-v2",
   "moduleSlug": "python-v2-2",
-  "sectionSlug": "python-v2-2-conditional-basics",
+  "sectionSlug": "python-v2-python-v2-2-conditional-basics",
   "prefix": "pyv2_2",
   "minutes": 22,
   "topic": {
@@ -305,7 +305,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.ci-print-comparisons",
       "language": "python",
-      "starterCode": "# TODO: print the result of 8 > 3\n# TODO: print the result of 8 == 10",
+      "starterCode": "@:topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.ci-print-comparisons.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -344,7 +344,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# TODO: print the result of 8 > 3\n# TODO: print the result of 8 == 10",
+          "content": "@:topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.ci-print-comparisons.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -362,11 +362,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# TODO: print the result of 8 > 3\n# TODO: print the result of 8 == 10",
+        "starterCode": "@:topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.ci-print-comparisons.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# TODO: print the result of 8 > 3\n# TODO: print the result of 8 == 10",
+            "content": "@:topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.ci-print-comparisons.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -398,7 +398,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.ci-age-check",
       "language": "python",
-      "starterCode": "age = int(input())\n\n# TODO: print adult or minor",
+      "starterCode": "@:topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.ci-age-check.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -466,7 +466,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "age = int(input())\n\n# TODO: print adult or minor",
+          "content": "@:topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.ci-age-check.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -484,11 +484,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "age = int(input())\n\n# TODO: print adult or minor",
+        "starterCode": "@:topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.ci-age-check.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "age = int(input())\n\n# TODO: print adult or minor",
+            "content": "@:topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.ci-age-check.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -549,7 +549,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.ci-number-sign",
       "language": "python",
-      "starterCode": "n = int(input())\n\n# TODO: print positive, zero, or negative",
+      "starterCode": "@:topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.ci-number-sign.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -628,7 +628,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "n = int(input())\n\n# TODO: print positive, zero, or negative",
+          "content": "@:topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.ci-number-sign.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -646,11 +646,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "n = int(input())\n\n# TODO: print positive, zero, or negative",
+        "starterCode": "@:topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.ci-number-sign.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "n = int(input())\n\n# TODO: print positive, zero, or negative",
+            "content": "@:topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.ci-number-sign.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -717,7 +717,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.ci-name-truthy",
       "language": "python",
-      "starterCode": "name = input()\n\n# TODO: print Hello or No name",
+      "starterCode": "@:topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.ci-name-truthy.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -779,7 +779,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "name = input()\n\n# TODO: print Hello or No name",
+          "content": "@:topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.ci-name-truthy.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -797,11 +797,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "name = input()\n\n# TODO: print Hello or No name",
+        "starterCode": "@:topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.ci-name-truthy.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "name = input()\n\n# TODO: print Hello or No name",
+            "content": "@:topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.ci-name-truthy.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -856,7 +856,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.ci-max-of-two",
       "language": "python",
-      "starterCode": "a = int(input())\nb = int(input())\n\n# TODO: print the larger number",
+      "starterCode": "@:topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.ci-max-of-two.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -924,7 +924,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "a = int(input())\nb = int(input())\n\n# TODO: print the larger number",
+          "content": "@:topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.ci-max-of-two.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -942,11 +942,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "a = int(input())\nb = int(input())\n\n# TODO: print the larger number",
+        "starterCode": "@:topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.ci-max-of-two.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "a = int(input())\nb = int(input())\n\n# TODO: print the larger number",
+            "content": "@:topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.ci-max-of-two.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true

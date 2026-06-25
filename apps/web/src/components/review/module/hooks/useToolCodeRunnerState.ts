@@ -20,6 +20,7 @@ import {
     normalizeCodeWorkspacePair,
     stateLanguageMatches,
 } from "@/components/review/module/runtime/workspaceCodeSource";
+import { isI18nAliasString } from "../runtime/starterContent";
 
 type BoundTarget = { id: string; exerciseKey?: string; onPatch: (patch: any) => void };
 
@@ -201,7 +202,7 @@ function isExercisePlaceholderSeed(args: {
     defaultCode: string;
 }) {
     const value = args.saved;
-    if (!value || isSavedUserWork(value)) return false;
+    if (!value) return false;
 
     const origin = String(value?.workspaceOrigin ?? "").trim().toLowerCase();
 
@@ -223,6 +224,15 @@ function isExercisePlaceholderSeed(args: {
 
     const normalizedCode = String(code).trim();
     const normalizedDefaultCode = String(args.defaultCode ?? "").trim();
+    const codeIsAlias = isI18nAliasString(normalizedCode);
+    const savedUserWork = isSavedUserWork(value);
+    const noEditorContent =
+        (!normalizedCode || codeIsAlias) &&
+        !workspaceHasNonBlankEntryCode(workspace);
+
+    if (savedUserWork && !codeIsAlias) {
+        return false;
+    }
 
     /**
      * Tool seed snapshots that came from starter/default are not learner work.
@@ -237,6 +247,19 @@ function isExercisePlaceholderSeed(args: {
      * real saved/user work by isSavedUserWork().
      */
     if (value.userEdited === false) {
+        return true;
+    }
+
+    if (codeIsAlias) {
+        return true;
+    }
+
+    /**
+     * Exercise-scoped tools intentionally hydrate with defaultCode="".
+     * A blank passive snapshot must still be treated as placeholder state or it
+     * can overwrite a newly resolved authored starter on refresh.
+     */
+    if (noEditorContent && !savedUserWork) {
         return true;
     }
 
@@ -352,7 +375,8 @@ function workspaceWithEntryCode(
 }
 
 function workspaceHasNonBlankEntryCode(workspace: WorkspaceStateV2 | null | undefined) {
-    return Boolean(String(deriveEntryCode(workspace) ?? "").trim());
+    const code = String(deriveEntryCode(workspace) ?? "").trim();
+    return Boolean(code) && !isI18nAliasString(code);
 }
 
 function hydrateWorkspaceShellWithCode(

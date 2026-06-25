@@ -2,7 +2,7 @@
   "topicId": "operators-and-expressions",
   "subjectSlug": "python-v2",
   "moduleSlug": "python-v2-0",
-  "sectionSlug": "python-v2-0-values-and-expressions",
+  "sectionSlug": "python-v2-python-v2-0-values-and-expressions",
   "prefix": "pyv2_0",
   "minutes": 22,
   "topic": {
@@ -312,7 +312,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-arithmetic-output",
       "language": "python",
-      "starterCode": "# Write Python code below",
+      "starterCode": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-arithmetic-output.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -351,7 +351,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# Write Python code below",
+          "content": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-arithmetic-output.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -369,11 +369,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# Write Python code below",
+        "starterCode": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-arithmetic-output.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# Write Python code below",
+            "content": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-arithmetic-output.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -405,7 +405,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-parentheses-output",
       "language": "python",
-      "starterCode": "# Write Python code below",
+      "starterCode": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-parentheses-output.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -444,7 +444,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# Write Python code below",
+          "content": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-parentheses-output.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -462,11 +462,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# Write Python code below",
+        "starterCode": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-parentheses-output.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# Write Python code below",
+            "content": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-parentheses-output.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -498,7 +498,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-comparison-output",
       "language": "python",
-      "starterCode": "# Write Python code below",
+      "starterCode": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-comparison-output.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -537,7 +537,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# Write Python code below",
+          "content": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-comparison-output.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -555,11 +555,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# Write Python code below",
+        "starterCode": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-comparison-output.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# Write Python code below",
+            "content": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-comparison-output.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -591,7 +591,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-boolean-and-output",
       "language": "python",
-      "starterCode": "# Write Python code below",
+      "starterCode": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-boolean-and-output.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -630,7 +630,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# Write Python code below",
+          "content": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-boolean-and-output.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -648,11 +648,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# Write Python code below",
+        "starterCode": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-boolean-and-output.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# Write Python code below",
+            "content": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-boolean-and-output.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -684,7 +684,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-two-line-expression-check",
       "language": "python",
-      "starterCode": "# Write Python code below\n# Print the first result\n# Print the second result",
+      "starterCode": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-two-line-expression-check.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -723,7 +723,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# Write Python code below\n# Print the first result\n# Print the second result",
+          "content": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-two-line-expression-check.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -741,11 +741,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# Write Python code below\n# Print the first result\n# Print the second result",
+        "starterCode": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-two-line-expression-check.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# Write Python code below\n# Print the first result\n# Print the second result",
+            "content": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-two-line-expression-check.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true

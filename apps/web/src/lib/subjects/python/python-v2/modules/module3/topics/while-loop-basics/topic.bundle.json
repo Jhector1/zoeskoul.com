@@ -2,7 +2,7 @@
   "topicId": "while-loop-basics",
   "subjectSlug": "python-v2",
   "moduleSlug": "python-v2-3",
-  "sectionSlug": "python-v2-3-while-loops",
+  "sectionSlug": "python-v2-python-v2-3-while-loops",
   "prefix": "pyv2_3",
   "minutes": 24,
   "topic": {
@@ -312,7 +312,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-3.while-loop-basics.quiz.code_print_1_to_5",
       "language": "python",
-      "starterCode": "n = 1\n# TODO: use a while loop to print 1 to 5",
+      "starterCode": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_print_1_to_5.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -357,7 +357,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "n = 1\n# TODO: use a while loop to print 1 to 5",
+          "content": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_print_1_to_5.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -375,11 +375,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "n = 1\n# TODO: use a while loop to print 1 to 5",
+        "starterCode": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_print_1_to_5.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "n = 1\n# TODO: use a while loop to print 1 to 5",
+            "content": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_print_1_to_5.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -417,7 +417,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-3.while-loop-basics.quiz.code_print_0_to_2",
       "language": "python",
-      "starterCode": "# TODO: print 0, 1, and 2 using a while loop",
+      "starterCode": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_print_0_to_2.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -462,7 +462,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# TODO: print 0, 1, and 2 using a while loop",
+          "content": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_print_0_to_2.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -480,11 +480,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# TODO: print 0, 1, and 2 using a while loop",
+        "starterCode": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_print_0_to_2.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# TODO: print 0, 1, and 2 using a while loop",
+            "content": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_print_0_to_2.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -522,7 +522,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-3.while-loop-basics.quiz.code_countdown_3_to_1",
       "language": "python",
-      "starterCode": "n = 3\n# TODO: print 3, 2, 1 with a while loop",
+      "starterCode": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_countdown_3_to_1.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -567,7 +567,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "n = 3\n# TODO: print 3, 2, 1 with a while loop",
+          "content": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_countdown_3_to_1.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -585,11 +585,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "n = 3\n# TODO: print 3, 2, 1 with a while loop",
+        "starterCode": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_countdown_3_to_1.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "n = 3\n# TODO: print 3, 2, 1 with a while loop",
+            "content": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_countdown_3_to_1.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -627,7 +627,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-3.while-loop-basics.quiz.code_repeat_word_3_times",
       "language": "python",
-      "starterCode": "# TODO: print Go three times using a while loop",
+      "starterCode": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_repeat_word_3_times.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -677,7 +677,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# TODO: print Go three times using a while loop",
+          "content": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_repeat_word_3_times.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -695,11 +695,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# TODO: print Go three times using a while loop",
+        "starterCode": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_repeat_word_3_times.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# TODO: print Go three times using a while loop",
+            "content": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_repeat_word_3_times.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -742,7 +742,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-3.while-loop-basics.quiz.code_sum_1_to_4",
       "language": "python",
-      "starterCode": "total = 0\nn = 1\n# TODO: use a while loop to add 1 through 4 and print total",
+      "starterCode": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_sum_1_to_4.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -787,7 +787,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "total = 0\nn = 1\n# TODO: use a while loop to add 1 through 4 and print total",
+          "content": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_sum_1_to_4.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -805,11 +805,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "total = 0\nn = 1\n# TODO: use a while loop to add 1 through 4 and print total",
+        "starterCode": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_sum_1_to_4.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "total = 0\nn = 1\n# TODO: use a while loop to add 1 through 4 and print total",
+            "content": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_sum_1_to_4.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true

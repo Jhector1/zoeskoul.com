@@ -2,7 +2,7 @@
   "topicId": "values-types-and-literals",
   "subjectSlug": "python-v2",
   "moduleSlug": "python-v2-0",
-  "sectionSlug": "python-v2-0-values-and-expressions",
+  "sectionSlug": "python-v2-python-v2-0-values-and-expressions",
   "prefix": "pyv2_0",
   "minutes": 20,
   "topic": {
@@ -310,7 +310,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-print-literals",
       "language": "python",
-      "starterCode": "# TODO: print the five values in order",
+      "starterCode": "@:topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-print-literals.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -349,7 +349,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# TODO: print the five values in order",
+          "content": "@:topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-print-literals.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -367,11 +367,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# TODO: print the five values in order",
+        "starterCode": "@:topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-print-literals.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# TODO: print the five values in order",
+            "content": "@:topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-print-literals.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -403,7 +403,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-print-expression",
       "language": "python",
-      "starterCode": "# TODO: print the two expression results",
+      "starterCode": "@:topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-print-expression.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -442,7 +442,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# TODO: print the two expression results",
+          "content": "@:topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-print-expression.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -460,11 +460,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# TODO: print the two expression results",
+        "starterCode": "@:topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-print-expression.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# TODO: print the two expression results",
+            "content": "@:topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-print-expression.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -496,7 +496,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-read-and-print",
       "language": "python",
-      "starterCode": "# TODO: read one line and print it",
+      "starterCode": "@:topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-read-and-print.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -541,7 +541,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# TODO: read one line and print it",
+          "content": "@:topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-read-and-print.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -559,11 +559,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# TODO: read one line and print it",
+        "starterCode": "@:topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-read-and-print.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# TODO: read one line and print it",
+            "content": "@:topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-read-and-print.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -601,7 +601,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-read-number-text",
       "language": "python",
-      "starterCode": "# TODO: read input and print it after the label",
+      "starterCode": "@:topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-read-number-text.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -651,7 +651,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# TODO: read input and print it after the label",
+          "content": "@:topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-read-number-text.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -669,11 +669,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# TODO: read input and print it after the label",
+        "starterCode": "@:topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-read-number-text.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# TODO: read input and print it after the label",
+            "content": "@:topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-read-number-text.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -716,7 +716,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-three-lines",
       "language": "python",
-      "starterCode": "# TODO: print the required three lines",
+      "starterCode": "@:topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-three-lines.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -755,7 +755,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# TODO: print the required three lines",
+          "content": "@:topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-three-lines.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -773,11 +773,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# TODO: print the required three lines",
+        "starterCode": "@:topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-three-lines.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# TODO: print the required three lines",
+            "content": "@:topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-three-lines.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true

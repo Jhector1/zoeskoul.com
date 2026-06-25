@@ -2,7 +2,7 @@
   "topicId": "checking-special-cases-first",
   "subjectSlug": "python-v2",
   "moduleSlug": "python-v2-2",
-  "sectionSlug": "python-v2-2-combining-conditions",
+  "sectionSlug": "python-v2-python-v2-2-combining-conditions",
   "prefix": "pyv2_2",
   "minutes": 22,
   "topic": {
@@ -306,7 +306,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-invalid-before-range",
       "language": "python",
-      "starterCode": "age = int(input())\n\n# TODO: print Invalid, Child, or Older",
+      "starterCode": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-invalid-before-range.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -385,7 +385,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "age = int(input())\n\n# TODO: print Invalid, Child, or Older",
+          "content": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-invalid-before-range.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -403,11 +403,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "age = int(input())\n\n# TODO: print Invalid, Child, or Older",
+        "starterCode": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-invalid-before-range.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "age = int(input())\n\n# TODO: print Invalid, Child, or Older",
+            "content": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-invalid-before-range.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -474,7 +474,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-perfect-before-pass",
       "language": "python",
-      "starterCode": "score = int(input())\n\n# TODO: print Perfect, Pass, or Fail",
+      "starterCode": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-perfect-before-pass.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -553,7 +553,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "score = int(input())\n\n# TODO: print Perfect, Pass, or Fail",
+          "content": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-perfect-before-pass.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -571,11 +571,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "score = int(input())\n\n# TODO: print Perfect, Pass, or Fail",
+        "starterCode": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-perfect-before-pass.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "score = int(input())\n\n# TODO: print Perfect, Pass, or Fail",
+            "content": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-perfect-before-pass.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -642,7 +642,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-empty-yes-other",
       "language": "python",
-      "starterCode": "text = input()\n\n# TODO: print Empty, Confirmed, or Other",
+      "starterCode": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-empty-yes-other.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -715,7 +715,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "text = input()\n\n# TODO: print Empty, Confirmed, or Other",
+          "content": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-empty-yes-other.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -733,11 +733,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "text = input()\n\n# TODO: print Empty, Confirmed, or Other",
+        "starterCode": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-empty-yes-other.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "text = input()\n\n# TODO: print Empty, Confirmed, or Other",
+            "content": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-empty-yes-other.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -798,7 +798,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-zero-before-small",
       "language": "python",
-      "starterCode": "n = int(input())\n\n# TODO: print Zero, Small, or Large",
+      "starterCode": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-zero-before-small.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -877,7 +877,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "n = int(input())\n\n# TODO: print Zero, Small, or Large",
+          "content": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-zero-before-small.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -895,11 +895,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "n = int(input())\n\n# TODO: print Zero, Small, or Large",
+        "starterCode": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-zero-before-small.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "n = int(input())\n\n# TODO: print Zero, Small, or Large",
+            "content": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-zero-before-small.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -966,7 +966,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-invalid-code-first",
       "language": "python",
-      "starterCode": "code = int(input())\n\n# TODO: print Invalid, Start, or Continue",
+      "starterCode": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-invalid-code-first.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -1045,7 +1045,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "code = int(input())\n\n# TODO: print Invalid, Start, or Continue",
+          "content": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-invalid-code-first.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -1063,11 +1063,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "code = int(input())\n\n# TODO: print Invalid, Start, or Continue",
+        "starterCode": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-invalid-code-first.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "code = int(input())\n\n# TODO: print Invalid, Start, or Continue",
+            "content": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-invalid-code-first.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true

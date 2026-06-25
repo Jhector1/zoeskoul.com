@@ -745,6 +745,7 @@ export function useWorkspaceTerminalController(
     const currentCwdRef = React.useRef<string | undefined>(initialEvidenceCwd);
     const pendingStartupInputRef = React.useRef<string | null>(null);
     const pendingStartupCwdRef = React.useRef<string | undefined>(undefined);
+    const lastAuthoredCwdAppliedRef = React.useRef<string | undefined>(initialEvidenceCwd);
     const mountedRef = React.useRef(false);
     const leaseMountGenerationRef = React.useRef(0);
 
@@ -897,6 +898,7 @@ export function useWorkspaceTerminalController(
         terminalProcessExitedRef.current = false;
         terminalExitCodeRef.current = null;
         currentCwdRef.current = initialEvidenceCwd;
+        lastAuthoredCwdAppliedRef.current = initialEvidenceCwd;
         setTerminalEvidenceNow(createTerminalEvidence(initialEvidenceCwd));
         void ensureHistoryLoaded();
     }, [ensureHistoryLoaded, initialEvidenceCwd, setTerminalEvidenceNow]);
@@ -1248,6 +1250,30 @@ export function useWorkspaceTerminalController(
         [clearStartupCwdFlushTimer, flushPendingStartupInput],
     );
 
+    const queueAuthoredCwd = React.useCallback(
+        (cwd: string) => {
+            pendingStartupInputRef.current = `cd -- ${shellQuotePosix(cwd)}\n`;
+            pendingStartupCwdRef.current = cwd;
+            lastAuthoredCwdAppliedRef.current = cwd;
+
+            if (
+                sessionIdRef.current &&
+                workspaceReadyRef.current &&
+                !terminalProcessExitedRef.current &&
+                !stoppingRef.current &&
+                !restartingRef.current &&
+                interactiveReadyRef.current
+            ) {
+                setInputEnabled(false);
+                void flushPendingStartupInput();
+                return;
+            }
+
+            scheduleStartupCwdFlush();
+        },
+        [flushPendingStartupInput, scheduleStartupCwdFlush],
+    );
+
     const open = React.useCallback(
         async (options: OpenWorkspaceTerminalOptions = {}): Promise<void> => {
             const userInitiated = options.userInitiated === true;
@@ -1445,8 +1471,7 @@ export function useWorkspaceTerminalController(
                          * state. Queue the authored startup cd and flush it only
                          * after the terminal is ready.
                          */
-                        pendingStartupInputRef.current = `cd -- ${shellQuotePosix(normalizedStartCwd)}\n`;
-                        pendingStartupCwdRef.current = normalizedStartCwd;
+                        queueAuthoredCwd(normalizedStartCwd);
                     }
 
                     workspaceReadyRef.current = true;
@@ -1526,6 +1551,7 @@ export function useWorkspaceTerminalController(
             clearTerminalRecovery,
             flushPendingStartupInput,
             scheduleStartupCwdFlush,
+            queueAuthoredCwd,
             setTerminalRecovery,
             setTerminalEvidenceNow,
         ],
@@ -1652,6 +1678,37 @@ export function useWorkspaceTerminalController(
 
         closeSocket();
     }, [terminalLeaseKey, cancel, clearQuietTimer, clearRecycleRestartTimer, clearStartupCwdFlushTimer, clearStaleStartingTimer, clearTerminalRecovery, closeSocket]);
+
+    React.useEffect(() => {
+        const desiredCwd = normalizePath(args.cwd ?? "");
+        if (!desiredCwd || desiredCwd === "/workspace") {
+            return;
+        }
+
+        if (lastAuthoredCwdAppliedRef.current === desiredCwd) {
+            return;
+        }
+
+        if (
+            !sessionIdRef.current ||
+            !openedLeaseKeyRef.current ||
+            openedLeaseKeyRef.current !== terminalLeaseKey ||
+            startingRef.current ||
+            stoppingRef.current ||
+            restartingRef.current ||
+            terminalProcessExitedRef.current ||
+            isFinalSessionState(stateRef.current)
+        ) {
+            return;
+        }
+
+        if (currentCwdRef.current === desiredCwd) {
+            lastAuthoredCwdAppliedRef.current = desiredCwd;
+            return;
+        }
+
+        queueAuthoredCwd(desiredCwd);
+    }, [args.cwd, queueAuthoredCwd, terminalLeaseKey]);
 
     React.useEffect(() => {
         return () => {

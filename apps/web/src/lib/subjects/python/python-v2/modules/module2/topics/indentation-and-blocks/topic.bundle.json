@@ -2,7 +2,7 @@
   "topicId": "indentation-and-blocks",
   "subjectSlug": "python-v2",
   "moduleSlug": "python-v2-2",
-  "sectionSlug": "python-v2-2-conditional-basics",
+  "sectionSlug": "python-v2-python-v2-2-conditional-basics",
   "prefix": "pyv2_2",
   "minutes": 18,
   "topic": {
@@ -309,7 +309,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-basic-if-output",
       "language": "python",
-      "starterCode": "n = int(input())\n\n# TODO: print \"big\" if n > 10, otherwise print \"small\"",
+      "starterCode": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-basic-if-output.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -377,7 +377,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "n = int(input())\n\n# TODO: print \"big\" if n > 10, otherwise print \"small\"",
+          "content": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-basic-if-output.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -395,11 +395,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "n = int(input())\n\n# TODO: print \"big\" if n > 10, otherwise print \"small\"",
+        "starterCode": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-basic-if-output.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "n = int(input())\n\n# TODO: print \"big\" if n > 10, otherwise print \"small\"",
+            "content": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-basic-if-output.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -460,7 +460,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-two-lines-in-block",
       "language": "python",
-      "starterCode": "n = int(input())\n\n# TODO: write the conditional output",
+      "starterCode": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-two-lines-in-block.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -528,7 +528,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "n = int(input())\n\n# TODO: write the conditional output",
+          "content": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-two-lines-in-block.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -546,11 +546,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "n = int(input())\n\n# TODO: write the conditional output",
+        "starterCode": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-two-lines-in-block.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "n = int(input())\n\n# TODO: write the conditional output",
+            "content": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-two-lines-in-block.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -611,7 +611,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-elif-branches",
       "language": "python",
-      "starterCode": "n = int(input())\n\n# TODO: print positive, negative, or zero",
+      "starterCode": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-elif-branches.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -690,7 +690,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "n = int(input())\n\n# TODO: print positive, negative, or zero",
+          "content": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-elif-branches.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -708,11 +708,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "n = int(input())\n\n# TODO: print positive, negative, or zero",
+        "starterCode": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-elif-branches.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "n = int(input())\n\n# TODO: print positive, negative, or zero",
+            "content": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-elif-branches.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -779,7 +779,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-special-case-first",
       "language": "python",
-      "starterCode": "score = int(input())\n\n# TODO: print perfect, pass, or retry",
+      "starterCode": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-special-case-first.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -858,7 +858,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "score = int(input())\n\n# TODO: print perfect, pass, or retry",
+          "content": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-special-case-first.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -876,11 +876,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "score = int(input())\n\n# TODO: print perfect, pass, or retry",
+        "starterCode": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-special-case-first.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "score = int(input())\n\n# TODO: print perfect, pass, or retry",
+            "content": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-special-case-first.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -947,7 +947,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-nested-if-basic",
       "language": "python",
-      "starterCode": "age = int(input())\n\n# TODO: use a nested if to print child, teen, or adult",
+      "starterCode": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-nested-if-basic.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -1020,7 +1020,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "age = int(input())\n\n# TODO: use a nested if to print child, teen, or adult",
+          "content": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-nested-if-basic.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -1038,11 +1038,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "age = int(input())\n\n# TODO: use a nested if to print child, teen, or adult",
+        "starterCode": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-nested-if-basic.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "age = int(input())\n\n# TODO: use a nested if to print child, teen, or adult",
+            "content": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-nested-if-basic.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true

@@ -2,9 +2,9 @@
   "topicId": "module-0-welcome-board-project",
   "subjectSlug": "python-v2",
   "moduleSlug": "python-v2-0",
-  "sectionSlug": "python-v2-0-module-project",
+  "sectionSlug": "python-v2-python-v2-0-module-project",
   "prefix": "pyv2_0",
-  "minutes": 40,
+  "minutes": 20,
   "runtimeDefaults": {
     "kind": "code",
     "language": "python",
@@ -105,11 +105,11 @@
       "messageBase": "topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.try-module-0-welcome-board-project-sketch0",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "# Print the first welcome line\n",
+      "starterCode": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.try-module-0-welcome-board-project-sketch0.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# Print the first welcome line\n",
+          "content": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.try-module-0-welcome-board-project-sketch0.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -118,11 +118,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# Print the first welcome line\n",
+        "starterCode": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.try-module-0-welcome-board-project-sketch0.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# Print the first welcome line\n",
+            "content": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.try-module-0-welcome-board-project-sketch0.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -193,11 +193,11 @@
       "messageBase": "topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-1-print-event-title",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "print(\"Welcome to Python Club\")\n\n# Replace the preview line with the real event title.\n",
+      "starterCode": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-1-print-event-title.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "print(\"Welcome to Python Club\")\n\n# Replace the preview line with the real event title.\n",
+          "content": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-1-print-event-title.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -206,11 +206,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "print(\"Welcome to Python Club\")\n\n# Replace the preview line with the real event title.\n",
+        "starterCode": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-1-print-event-title.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "print(\"Welcome to Python Club\")\n\n# Replace the preview line with the real event title.\n",
+            "content": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-1-print-event-title.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -281,11 +281,11 @@
       "messageBase": "topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-2-print-agenda-lines",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "print(\"Code Club Open House\")\n\n# Keep the title line.\n# Add the time line under it.\n",
+      "starterCode": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-2-print-agenda-lines.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "print(\"Code Club Open House\")\n\n# Keep the title line.\n# Add the time line under it.\n",
+          "content": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-2-print-agenda-lines.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -294,11 +294,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "print(\"Code Club Open House\")\n\n# Keep the title line.\n# Add the time line under it.\n",
+        "starterCode": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-2-print-agenda-lines.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "print(\"Code Club Open House\")\n\n# Keep the title line.\n# Add the time line under it.\n",
+            "content": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-2-print-agenda-lines.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -369,11 +369,11 @@
       "messageBase": "topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-3-show-seat-count",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "print(\"Code Club Open House\")\nprint(\"Doors open at 4 PM\")\n\n# Keep the lines above.\n# Add the helper count with the expression 2 * 3.\n",
+      "starterCode": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-3-show-seat-count.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "print(\"Code Club Open House\")\nprint(\"Doors open at 4 PM\")\n\n# Keep the lines above.\n# Add the helper count with the expression 2 * 3.\n",
+          "content": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-3-show-seat-count.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -382,11 +382,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "print(\"Code Club Open House\")\nprint(\"Doors open at 4 PM\")\n\n# Keep the lines above.\n# Add the helper count with the expression 2 * 3.\n",
+        "starterCode": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-3-show-seat-count.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "print(\"Code Club Open House\")\nprint(\"Doors open at 4 PM\")\n\n# Keep the lines above.\n# Add the helper count with the expression 2 * 3.\n",
+            "content": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-3-show-seat-count.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -469,11 +469,11 @@
       "messageBase": "topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-4-build-full-welcome-board",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "print(\"Code Club Open House\")\nprint(\"Doors open at 4 PM\")\nprint(\"Helpers ready:\", 2 * 3)\n\n# Keep the board above.\n# Add one last line that says Bring your questions!\n",
+      "starterCode": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-4-build-full-welcome-board.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "print(\"Code Club Open House\")\nprint(\"Doors open at 4 PM\")\nprint(\"Helpers ready:\", 2 * 3)\n\n# Keep the board above.\n# Add one last line that says Bring your questions!\n",
+          "content": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-4-build-full-welcome-board.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -482,11 +482,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "print(\"Code Club Open House\")\nprint(\"Doors open at 4 PM\")\nprint(\"Helpers ready:\", 2 * 3)\n\n# Keep the board above.\n# Add one last line that says Bring your questions!\n",
+        "starterCode": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-4-build-full-welcome-board.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "print(\"Code Club Open House\")\nprint(\"Doors open at 4 PM\")\nprint(\"Helpers ready:\", 2 * 3)\n\n# Keep the board above.\n# Add one last line that says Bring your questions!\n",
+            "content": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-4-build-full-welcome-board.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true

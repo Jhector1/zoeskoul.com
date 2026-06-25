@@ -2,7 +2,7 @@
   "topicId": "running-python-code",
   "subjectSlug": "python-v2",
   "moduleSlug": "python-v2-0",
-  "sectionSlug": "python-v2-0-setup-and-first-programs",
+  "sectionSlug": "python-v2-python-v2-0-setup-and-first-programs",
   "prefix": "pyv2_0",
   "minutes": 18,
   "topic": {
@@ -304,7 +304,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-0.running-python-code.quiz.ci_print_greeting",
       "language": "python",
-      "starterCode": "# Write your code below",
+      "starterCode": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_print_greeting.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -343,7 +343,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# Write your code below",
+          "content": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_print_greeting.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -361,11 +361,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# Write your code below",
+        "starterCode": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_print_greeting.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# Write your code below",
+            "content": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_print_greeting.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -397,7 +397,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-0.running-python-code.quiz.ci_two_lines",
       "language": "python",
-      "starterCode": "# Print two lines below",
+      "starterCode": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_two_lines.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -436,7 +436,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# Print two lines below",
+          "content": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_two_lines.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -454,11 +454,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# Print two lines below",
+        "starterCode": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_two_lines.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# Print two lines below",
+            "content": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_two_lines.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -490,7 +490,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-0.running-python-code.quiz.ci_comment_and_output",
       "language": "python",
-      "starterCode": "# Add a comment here\n# Then write a print statement below",
+      "starterCode": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_comment_and_output.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -529,7 +529,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# Add a comment here\n# Then write a print statement below",
+          "content": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_comment_and_output.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -547,11 +547,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# Add a comment here\n# Then write a print statement below",
+        "starterCode": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_comment_and_output.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# Add a comment here\n# Then write a print statement below",
+            "content": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_comment_and_output.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -583,7 +583,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-0.running-python-code.quiz.ci_fix_quotes",
       "language": "python",
-      "starterCode": "print(",
+      "starterCode": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_fix_quotes.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -622,7 +622,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "print(",
+          "content": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_fix_quotes.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -640,11 +640,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "print(",
+        "starterCode": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_fix_quotes.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "print(",
+            "content": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_fix_quotes.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -676,7 +676,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-0.running-python-code.quiz.ci_print_expression",
       "language": "python",
-      "starterCode": "# Print the result of an addition",
+      "starterCode": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_print_expression.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -715,7 +715,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# Print the result of an addition",
+          "content": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_print_expression.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -733,11 +733,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# Print the result of an addition",
+        "starterCode": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_print_expression.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# Print the result of an addition",
+            "content": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_print_expression.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true

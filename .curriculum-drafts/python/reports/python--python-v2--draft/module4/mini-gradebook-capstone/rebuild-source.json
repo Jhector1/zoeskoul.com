@@ -1,0 +1,20 @@
+{
+  "mode": "rebuild-from-drafts",
+  "source": "current-draft-output",
+  "sourceBundlePath": "/Users/admin/Documents/NextJSProject/zoeskoul.com/.curriculum-drafts/python/subjects/python--python-v2--draft/modules/module4/topics/mini-gradebook-capstone/topic.bundle.json",
+  "sourceMessagesPaths": {
+    "en": "/Users/admin/Documents/NextJSProject/zoeskoul.com/.curriculum-drafts/python/messages/en/subjects/python--python-v2--draft/module4/mini-gradebook-capstone.json"
+  },
+  "identityNormalized": true,
+  "identityReplacements": [
+    [
+      "python-v2-4-gradebook-capstone",
+      "python--python-v2--draft-python-v2-4-capstone-project"
+    ],
+    [
+      "python-v2",
+      "python--python-v2--draft"
+    ]
+  ],
+  "syncedReports": true
+}

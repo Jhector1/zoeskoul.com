@@ -2,7 +2,7 @@
   "topicId": "accumulators-and-counters",
   "subjectSlug": "python-v2",
   "moduleSlug": "python-v2-3",
-  "sectionSlug": "python-v2-3-for-loops",
+  "sectionSlug": "python-v2-python-v2-3-for-loops",
   "prefix": "pyv2_3",
   "minutes": 25,
   "topic": {
@@ -312,7 +312,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-3.accumulators-and-counters.quiz.ex9",
       "language": "python",
-      "starterCode": "parts = input().split()\ntotal = 0\n\n# TODO: loop through parts, add each number to total\n\nprint(total)",
+      "starterCode": "@:topics.python-v2.python-v2-3.accumulators-and-counters.quiz.ex9.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -369,7 +369,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "parts = input().split()\ntotal = 0\n\n# TODO: loop through parts, add each number to total\n\nprint(total)",
+          "content": "@:topics.python-v2.python-v2-3.accumulators-and-counters.quiz.ex9.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -387,11 +387,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "parts = input().split()\ntotal = 0\n\n# TODO: loop through parts, add each number to total\n\nprint(total)",
+        "starterCode": "@:topics.python-v2.python-v2-3.accumulators-and-counters.quiz.ex9.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "parts = input().split()\ntotal = 0\n\n# TODO: loop through parts, add each number to total\n\nprint(total)",
+            "content": "@:topics.python-v2.python-v2-3.accumulators-and-counters.quiz.ex9.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -441,7 +441,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-3.accumulators-and-counters.quiz.ex10",
       "language": "python",
-      "starterCode": "word = input()\nvowel_count = 0\n\n# TODO: loop through the characters in word\n# TODO: if the character is a vowel, increase vowel_count\n\nprint(vowel_count)",
+      "starterCode": "@:topics.python-v2.python-v2-3.accumulators-and-counters.quiz.ex10.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -503,7 +503,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "word = input()\nvowel_count = 0\n\n# TODO: loop through the characters in word\n# TODO: if the character is a vowel, increase vowel_count\n\nprint(vowel_count)",
+          "content": "@:topics.python-v2.python-v2-3.accumulators-and-counters.quiz.ex10.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -521,11 +521,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "word = input()\nvowel_count = 0\n\n# TODO: loop through the characters in word\n# TODO: if the character is a vowel, increase vowel_count\n\nprint(vowel_count)",
+        "starterCode": "@:topics.python-v2.python-v2-3.accumulators-and-counters.quiz.ex10.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "word = input()\nvowel_count = 0\n\n# TODO: loop through the characters in word\n# TODO: if the character is a vowel, increase vowel_count\n\nprint(vowel_count)",
+            "content": "@:topics.python-v2.python-v2-3.accumulators-and-counters.quiz.ex10.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -580,7 +580,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-3.accumulators-and-counters.quiz.ex11",
       "language": "python",
-      "starterCode": "parts = input().split()\neven_total = 0\n\n# TODO: loop through the parts\n# TODO: convert each part to an integer\n# TODO: if the number is even, add it to even_total\n\nprint(even_total)",
+      "starterCode": "@:topics.python-v2.python-v2-3.accumulators-and-counters.quiz.ex11.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -643,7 +643,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "parts = input().split()\neven_total = 0\n\n# TODO: loop through the parts\n# TODO: convert each part to an integer\n# TODO: if the number is even, add it to even_total\n\nprint(even_total)",
+          "content": "@:topics.python-v2.python-v2-3.accumulators-and-counters.quiz.ex11.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -661,11 +661,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "parts = input().split()\neven_total = 0\n\n# TODO: loop through the parts\n# TODO: convert each part to an integer\n# TODO: if the number is even, add it to even_total\n\nprint(even_total)",
+        "starterCode": "@:topics.python-v2.python-v2-3.accumulators-and-counters.quiz.ex11.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "parts = input().split()\neven_total = 0\n\n# TODO: loop through the parts\n# TODO: convert each part to an integer\n# TODO: if the number is even, add it to even_total\n\nprint(even_total)",
+            "content": "@:topics.python-v2.python-v2-3.accumulators-and-counters.quiz.ex11.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -721,7 +721,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-3.accumulators-and-counters.quiz.ex12",
       "language": "python",
-      "starterCode": "parts = input().split()\ncount = 0\n\n# TODO: loop through the parts\n# TODO: count numbers greater than 0\n\nprint(count)",
+      "starterCode": "@:topics.python-v2.python-v2-3.accumulators-and-counters.quiz.ex12.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -784,7 +784,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "parts = input().split()\ncount = 0\n\n# TODO: loop through the parts\n# TODO: count numbers greater than 0\n\nprint(count)",
+          "content": "@:topics.python-v2.python-v2-3.accumulators-and-counters.quiz.ex12.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -802,11 +802,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "parts = input().split()\ncount = 0\n\n# TODO: loop through the parts\n# TODO: count numbers greater than 0\n\nprint(count)",
+        "starterCode": "@:topics.python-v2.python-v2-3.accumulators-and-counters.quiz.ex12.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "parts = input().split()\ncount = 0\n\n# TODO: loop through the parts\n# TODO: count numbers greater than 0\n\nprint(count)",
+            "content": "@:topics.python-v2.python-v2-3.accumulators-and-counters.quiz.ex12.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -862,7 +862,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-3.accumulators-and-counters.quiz.ex13",
       "language": "python",
-      "starterCode": "word = input()\nresult = \"\"\n\n# TODO: loop through each character in word\n# TODO: add the character and a dash to result\n\nprint(result)",
+      "starterCode": "@:topics.python-v2.python-v2-3.accumulators-and-counters.quiz.ex13.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -918,7 +918,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "word = input()\nresult = \"\"\n\n# TODO: loop through each character in word\n# TODO: add the character and a dash to result\n\nprint(result)",
+          "content": "@:topics.python-v2.python-v2-3.accumulators-and-counters.quiz.ex13.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -936,11 +936,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "word = input()\nresult = \"\"\n\n# TODO: loop through each character in word\n# TODO: add the character and a dash to result\n\nprint(result)",
+        "starterCode": "@:topics.python-v2.python-v2-3.accumulators-and-counters.quiz.ex13.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "word = input()\nresult = \"\"\n\n# TODO: loop through each character in word\n# TODO: add the character and a dash to result\n\nprint(result)",
+            "content": "@:topics.python-v2.python-v2-3.accumulators-and-counters.quiz.ex13.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true

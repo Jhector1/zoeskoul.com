@@ -1,0 +1,20 @@
+{
+  "mode": "rebuild-from-drafts",
+  "source": "current-draft-output",
+  "sourceBundlePath": "/Users/admin/Documents/NextJSProject/zoeskoul.com/.curriculum-drafts/python/subjects/python--python-v2--draft/modules/module2/topics/indentation-and-blocks/topic.bundle.json",
+  "sourceMessagesPaths": {
+    "en": "/Users/admin/Documents/NextJSProject/zoeskoul.com/.curriculum-drafts/python/messages/en/subjects/python--python-v2--draft/module2/indentation-and-blocks.json"
+  },
+  "identityNormalized": true,
+  "identityReplacements": [
+    [
+      "python-v2-2-conditional-basics",
+      "python--python-v2--draft-python-v2-2-conditional-basics"
+    ],
+    [
+      "python-v2",
+      "python--python-v2--draft"
+    ]
+  ],
+  "syncedReports": true
+}

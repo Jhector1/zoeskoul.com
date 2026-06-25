@@ -61,6 +61,12 @@ import {
 import {resolveRightRailSqlProps} from "../runtime/resolveRightRailSqlProps";
 import { resolveTopicStageRuntimeDefaults } from "../runtime/topicStageRuntimeDefaults";
 import { shouldUseWorkspaceCodeSurface } from "@/components/practice/workspaceExercise";
+import { resolveRightRailIdeConfig } from "./rightRailIdeConfig";
+import {
+    cardHasAuthoredExerciseSurface,
+    shouldRightRailUseBoundExercise,
+} from "./rightRailExerciseBinding";
+import { resolveActiveToolScopeKey } from "./activeToolScopeKey";
 function lastExerciseIdSegment(value: unknown) {
     const raw = typeof value === "string" ? value.trim() : "";
     if (!raw) return "";
@@ -105,18 +111,6 @@ function pickRouteExerciseId(args: {
     );
 }
 
-function cardHasAuthoredExerciseSurface(card: any) {
-    if (!card) return false;
-
-    if (card.type === "project") {
-        const steps = (card.spec as { steps?: unknown[] } | null | undefined)?.steps;
-        return Array.isArray(steps) && steps.length > 0;
-    }
-
-    const tryIt = (card as { tryIt?: { spec?: { steps?: unknown[] } | null } | null }).tryIt;
-    return Array.isArray(tryIt?.spec?.steps) && tryIt.spec.steps.length > 0;
-}
-
 function registryEntryToRouteTarget(entry: any): ReviewResolvedRouteTarget | null {
     if (!entry) return null;
 
@@ -150,8 +144,6 @@ function registryEntryToRouteTarget(entry: any): ReviewResolvedRouteTarget | nul
 type NavigateToResolvedTargetOptions = {
     bypassProgressiveLock?: boolean;
 };
-
-
 
 export function useReviewModuleController({
                                               mod,
@@ -956,9 +948,10 @@ export function useReviewModuleController({
             ) ?? null;
     }, [runtimeExercises, viewTid, activeCard?.id]);
 
-    const activeToolScopeKey =
-        activeExerciseTarget?.exerciseStateKey ??
-        (activeCard?.id
+    const activeToolScopeKey = resolveActiveToolScopeKey({
+        activeExerciseStateKey: activeExerciseTarget?.exerciseStateKey ?? null,
+        activeCardWorkspaceExerciseKey: activeCardWorkspaceExercise?.exerciseKey ?? null,
+        fallbackCardScopeKey: activeCard?.id
             ? `${getCardStateKey({
                 subjectSlug,
                 moduleSlug,
@@ -966,7 +959,8 @@ export function useReviewModuleController({
                 topicId: viewTid,
                 cardId: activeCard.id,
             })}:general`
-            : "general");
+            : "general",
+    });
 
     const tool = useToolCodeRunnerState({
         progress,
@@ -1506,8 +1500,10 @@ export function useReviewModuleController({
     );
 
     const routeOwnsExercise = routeTarget?.kind === "exercise";
-    const routeCanUseBoundExercise =
-        routeOwnsExercise || activeCard?.type === "quiz" || activeCard?.type === "project";
+    const routeCanUseBoundExercise = shouldRightRailUseBoundExercise({
+        routeOwnsExercise,
+        activeCard,
+    });
     const routeWorkspaceExercise =
         routeEditorEntry?.ownerKind === "exercise" &&
         shouldUseWorkspaceCodeSurface({
@@ -1576,11 +1572,12 @@ export function useReviewModuleController({
         tool,
         topicSqlFallback: runtime.topicSqlFallback,
     });
-    const rightRailIdeConfig =
-        tool.toolIdeConfig ??
-        rightRailExerciseRuntime?.ideConfig ??
-        boundExerciseRuntime?.ideConfig ??
-        runtime.effectiveIdeConfig;
+    const rightRailIdeConfig = resolveRightRailIdeConfig({
+        rightRailExerciseIdeConfig: rightRailExerciseRuntime?.ideConfig ?? null,
+        boundExerciseIdeConfig: boundExerciseRuntime?.ideConfig ?? null,
+        toolIdeConfig: tool.toolIdeConfig ?? null,
+        runtimeEffectiveIdeConfig: runtime.effectiveIdeConfig ?? null,
+    });
     return {
         toolsProvider,
 

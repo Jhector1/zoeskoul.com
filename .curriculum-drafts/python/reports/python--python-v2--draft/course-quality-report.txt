@@ -1,0 +1,36 @@
+subject: python--python-v2--draft
+profile: python
+course: python-v2
+modules: 5
+topics: 28
+exercise counts: {"single_choice":48,"multi_choice":48,"drag_reorder":48,"fill_blank_choice":48,"code_input":142}
+code_input count: 142
+severity counts: {"blocker":0,"error":0,"warning":28,"info":0}
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "what-python-is" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "running-python-code" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "print-comments-and-errors" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "values-types-and-literals" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "operators-and-expressions" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "reading-error-messages" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "module-0-welcome-board-project" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "naming-and-assigning-variables" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "input-and-type-conversion" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "common-variable-mistakes" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "string-indexing-and-slicing" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "string-methods" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "f-strings-and-formatting" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "module-1-profile-card-project" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "if-elif-else" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "comparisons-and-truth-values" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "indentation-and-blocks" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "and-or-not" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "truthiness-and-empty-values" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "checking-special-cases-first" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "module-2-study-checker-project" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "for-loops-over-text" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "range-and-counting" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "accumulators-and-counters" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "while-loop-basics" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "break-and-continue" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "loop-debugging" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "mini-gradebook-capstone" has no learning goals on its seed metadata.

@@ -2,7 +2,7 @@
   "topicId": "and-or-not",
   "subjectSlug": "python-v2",
   "moduleSlug": "python-v2-2",
-  "sectionSlug": "python-v2-2-combining-conditions",
+  "sectionSlug": "python-v2-python-v2-2-combining-conditions",
   "prefix": "pyv2_2",
   "minutes": 25,
   "topic": {
@@ -317,7 +317,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-2.and-or-not.quiz.code_ticket_check",
       "language": "python",
-      "starterCode": "age = int(input())\nhas_id = input().strip()\n\n# TODO: print allowed or denied",
+      "starterCode": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_ticket_check.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -401,7 +401,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "age = int(input())\nhas_id = input().strip()\n\n# TODO: print allowed or denied",
+          "content": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_ticket_check.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -419,11 +419,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "age = int(input())\nhas_id = input().strip()\n\n# TODO: print allowed or denied",
+        "starterCode": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_ticket_check.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "age = int(input())\nhas_id = input().strip()\n\n# TODO: print allowed or denied",
+            "content": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_ticket_check.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -495,7 +495,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-2.and-or-not.quiz.code_free_day",
       "language": "python",
-      "starterCode": "is_weekend = input().strip() == \"True\"\nis_holiday = input().strip() == \"True\"\n\n# TODO: print rest or work",
+      "starterCode": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_free_day.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -573,7 +573,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "is_weekend = input().strip() == \"True\"\nis_holiday = input().strip() == \"True\"\n\n# TODO: print rest or work",
+          "content": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_free_day.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -591,11 +591,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "is_weekend = input().strip() == \"True\"\nis_holiday = input().strip() == \"True\"\n\n# TODO: print rest or work",
+        "starterCode": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_free_day.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "is_weekend = input().strip() == \"True\"\nis_holiday = input().strip() == \"True\"\n\n# TODO: print rest or work",
+            "content": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_free_day.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -661,7 +661,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-2.and-or-not.quiz.code_not_logged_in",
       "language": "python",
-      "starterCode": "logged_in = input().strip() == \"True\"\n\n# TODO: print the correct message",
+      "starterCode": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_not_logged_in.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -734,7 +734,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "logged_in = input().strip() == \"True\"\n\n# TODO: print the correct message",
+          "content": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_not_logged_in.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -752,11 +752,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "logged_in = input().strip() == \"True\"\n\n# TODO: print the correct message",
+        "starterCode": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_not_logged_in.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "logged_in = input().strip() == \"True\"\n\n# TODO: print the correct message",
+            "content": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_not_logged_in.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -822,7 +822,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-2.and-or-not.quiz.code_score_certificate",
       "language": "python",
-      "starterCode": "score = int(input())\nlate = input().strip() == \"True\"\n\n# TODO: print certificate, passed, or practice",
+      "starterCode": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_score_certificate.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -917,7 +917,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "score = int(input())\nlate = input().strip() == \"True\"\n\n# TODO: print certificate, passed, or practice",
+          "content": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_score_certificate.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -935,11 +935,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "score = int(input())\nlate = input().strip() == \"True\"\n\n# TODO: print certificate, passed, or practice",
+        "starterCode": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_score_certificate.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "score = int(input())\nlate = input().strip() == \"True\"\n\n# TODO: print certificate, passed, or practice",
+            "content": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_score_certificate.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -1022,7 +1022,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-2.and-or-not.quiz.code_range_check",
       "language": "python",
-      "starterCode": "n = int(input())\n\n# TODO: print in range or out of range",
+      "starterCode": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_range_check.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -1100,7 +1100,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "n = int(input())\n\n# TODO: print in range or out of range",
+          "content": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_range_check.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -1118,11 +1118,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "n = int(input())\n\n# TODO: print in range or out of range",
+        "starterCode": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_range_check.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "n = int(input())\n\n# TODO: print in range or out of range",
+            "content": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_range_check.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true

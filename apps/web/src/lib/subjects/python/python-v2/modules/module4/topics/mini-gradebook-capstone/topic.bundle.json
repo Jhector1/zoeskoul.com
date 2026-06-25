@@ -2,9 +2,9 @@
   "topicId": "mini-gradebook-capstone",
   "subjectSlug": "python-v2",
   "moduleSlug": "python-v2-4",
-  "sectionSlug": "python-v2-4-gradebook-capstone",
+  "sectionSlug": "python-v2-python-v2-4-capstone-project",
   "prefix": "pyv2_4",
-  "minutes": 65,
+  "minutes": 35,
   "topic": {
     "labelKey": "topics.python-v2.python-v2-4.mini-gradebook-capstone.label",
     "summaryKey": "topics.python-v2.python-v2-4.mini-gradebook-capstone.summary"
@@ -116,11 +116,11 @@
       "messageBase": "topics.python-v2.python-v2-4.mini-gradebook-capstone.quiz.try-mini-gradebook-capstone-sketch0",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "student = input()\n\n# Print the first report line as Student: <name>\n",
+      "starterCode": "@:topics.python-v2.python-v2-4.mini-gradebook-capstone.quiz.try-mini-gradebook-capstone-sketch0.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "student = input()\n\n# Print the first report line as Student: <name>\n",
+          "content": "@:topics.python-v2.python-v2-4.mini-gradebook-capstone.quiz.try-mini-gradebook-capstone-sketch0.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -138,11 +138,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "student = input()\n\n# Print the first report line as Student: <name>\n",
+        "starterCode": "@:topics.python-v2.python-v2-4.mini-gradebook-capstone.quiz.try-mini-gradebook-capstone-sketch0.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "student = input()\n\n# Print the first report line as Student: <name>\n",
+            "content": "@:topics.python-v2.python-v2-4.mini-gradebook-capstone.quiz.try-mini-gradebook-capstone-sketch0.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -226,11 +226,11 @@
       "messageBase": "topics.python-v2.python-v2-4.mini-gradebook-capstone.quiz.cp-1-read-gradebook-header",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "student = input()\ncount = int(input())\n\n# Start the gradebook report.\n# Print the student line and the scores-entered line.\n",
+      "starterCode": "@:topics.python-v2.python-v2-4.mini-gradebook-capstone.quiz.cp-1-read-gradebook-header.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "student = input()\ncount = int(input())\n\n# Start the gradebook report.\n# Print the student line and the scores-entered line.\n",
+          "content": "@:topics.python-v2.python-v2-4.mini-gradebook-capstone.quiz.cp-1-read-gradebook-header.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -248,11 +248,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "student = input()\ncount = int(input())\n\n# Start the gradebook report.\n# Print the student line and the scores-entered line.\n",
+        "starterCode": "@:topics.python-v2.python-v2-4.mini-gradebook-capstone.quiz.cp-1-read-gradebook-header.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "student = input()\ncount = int(input())\n\n# Start the gradebook report.\n# Print the student line and the scores-entered line.\n",
+            "content": "@:topics.python-v2.python-v2-4.mini-gradebook-capstone.quiz.cp-1-read-gradebook-header.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -348,11 +348,11 @@
       "messageBase": "topics.python-v2.python-v2-4.mini-gradebook-capstone.quiz.cp-2-add-score-total",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "student = input()\ncount = int(input())\n\nprint(f\"Student: {student}\")\nprint(f\"Scores entered: {count}\")\n\ntotal = 0\nfor i in range(count):\n    score = int(input())\n    # Add each score to total.\n\n# Print a preview line: Total: <total>\n",
+      "starterCode": "@:topics.python-v2.python-v2-4.mini-gradebook-capstone.quiz.cp-2-add-score-total.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "student = input()\ncount = int(input())\n\nprint(f\"Student: {student}\")\nprint(f\"Scores entered: {count}\")\n\ntotal = 0\nfor i in range(count):\n    score = int(input())\n    # Add each score to total.\n\n# Print a preview line: Total: <total>\n",
+          "content": "@:topics.python-v2.python-v2-4.mini-gradebook-capstone.quiz.cp-2-add-score-total.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -370,11 +370,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "student = input()\ncount = int(input())\n\nprint(f\"Student: {student}\")\nprint(f\"Scores entered: {count}\")\n\ntotal = 0\nfor i in range(count):\n    score = int(input())\n    # Add each score to total.\n\n# Print a preview line: Total: <total>\n",
+        "starterCode": "@:topics.python-v2.python-v2-4.mini-gradebook-capstone.quiz.cp-2-add-score-total.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "student = input()\ncount = int(input())\n\nprint(f\"Student: {student}\")\nprint(f\"Scores entered: {count}\")\n\ntotal = 0\nfor i in range(count):\n    score = int(input())\n    # Add each score to total.\n\n# Print a preview line: Total: <total>\n",
+            "content": "@:topics.python-v2.python-v2-4.mini-gradebook-capstone.quiz.cp-2-add-score-total.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -494,11 +494,11 @@
       "messageBase": "topics.python-v2.python-v2-4.mini-gradebook-capstone.quiz.cp-3-track-highest-score",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "student = input()\ncount = int(input())\n\nprint(f\"Student: {student}\")\nprint(f\"Scores entered: {count}\")\n\ntotal = 0\nhighest = 0\nfor i in range(count):\n    score = int(input())\n    total = total + score\n    # Keep total working, then update highest when this score is bigger.\n\nprint(f\"Total: {total}\")\n# Print Highest score: <highest>\n",
+      "starterCode": "@:topics.python-v2.python-v2-4.mini-gradebook-capstone.quiz.cp-3-track-highest-score.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "student = input()\ncount = int(input())\n\nprint(f\"Student: {student}\")\nprint(f\"Scores entered: {count}\")\n\ntotal = 0\nhighest = 0\nfor i in range(count):\n    score = int(input())\n    total = total + score\n    # Keep total working, then update highest when this score is bigger.\n\nprint(f\"Total: {total}\")\n# Print Highest score: <highest>\n",
+          "content": "@:topics.python-v2.python-v2-4.mini-gradebook-capstone.quiz.cp-3-track-highest-score.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -516,11 +516,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "student = input()\ncount = int(input())\n\nprint(f\"Student: {student}\")\nprint(f\"Scores entered: {count}\")\n\ntotal = 0\nhighest = 0\nfor i in range(count):\n    score = int(input())\n    total = total + score\n    # Keep total working, then update highest when this score is bigger.\n\nprint(f\"Total: {total}\")\n# Print Highest score: <highest>\n",
+        "starterCode": "@:topics.python-v2.python-v2-4.mini-gradebook-capstone.quiz.cp-3-track-highest-score.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "student = input()\ncount = int(input())\n\nprint(f\"Student: {student}\")\nprint(f\"Scores entered: {count}\")\n\ntotal = 0\nhighest = 0\nfor i in range(count):\n    score = int(input())\n    total = total + score\n    # Keep total working, then update highest when this score is bigger.\n\nprint(f\"Total: {total}\")\n# Print Highest score: <highest>\n",
+            "content": "@:topics.python-v2.python-v2-4.mini-gradebook-capstone.quiz.cp-3-track-highest-score.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -652,11 +652,11 @@
       "messageBase": "topics.python-v2.python-v2-4.mini-gradebook-capstone.quiz.cp-4-calculate-average",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "student = input()\ncount = int(input())\n\nprint(f\"Student: {student}\")\nprint(f\"Scores entered: {count}\")\n\ntotal = 0\nhighest = 0\nfor i in range(count):\n    score = int(input())\n    total = total + score\n    if score > highest:\n        highest = score\n\nprint(f\"Total: {total}\")\nprint(f\"Highest score: {highest}\")\n\n# Calculate average after the loop.\n# Print Average: <average> with one digit after the decimal point.\n",
+      "starterCode": "@:topics.python-v2.python-v2-4.mini-gradebook-capstone.quiz.cp-4-calculate-average.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "student = input()\ncount = int(input())\n\nprint(f\"Student: {student}\")\nprint(f\"Scores entered: {count}\")\n\ntotal = 0\nhighest = 0\nfor i in range(count):\n    score = int(input())\n    total = total + score\n    if score > highest:\n        highest = score\n\nprint(f\"Total: {total}\")\nprint(f\"Highest score: {highest}\")\n\n# Calculate average after the loop.\n# Print Average: <average> with one digit after the decimal point.\n",
+          "content": "@:topics.python-v2.python-v2-4.mini-gradebook-capstone.quiz.cp-4-calculate-average.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -674,11 +674,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "student = input()\ncount = int(input())\n\nprint(f\"Student: {student}\")\nprint(f\"Scores entered: {count}\")\n\ntotal = 0\nhighest = 0\nfor i in range(count):\n    score = int(input())\n    total = total + score\n    if score > highest:\n        highest = score\n\nprint(f\"Total: {total}\")\nprint(f\"Highest score: {highest}\")\n\n# Calculate average after the loop.\n# Print Average: <average> with one digit after the decimal point.\n",
+        "starterCode": "@:topics.python-v2.python-v2-4.mini-gradebook-capstone.quiz.cp-4-calculate-average.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "student = input()\ncount = int(input())\n\nprint(f\"Student: {student}\")\nprint(f\"Scores entered: {count}\")\n\ntotal = 0\nhighest = 0\nfor i in range(count):\n    score = int(input())\n    total = total + score\n    if score > highest:\n        highest = score\n\nprint(f\"Total: {total}\")\nprint(f\"Highest score: {highest}\")\n\n# Calculate average after the loop.\n# Print Average: <average> with one digit after the decimal point.\n",
+            "content": "@:topics.python-v2.python-v2-4.mini-gradebook-capstone.quiz.cp-4-calculate-average.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -798,11 +798,11 @@
       "messageBase": "topics.python-v2.python-v2-4.mini-gradebook-capstone.quiz.cp-5-choose-status",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "student = input()\ncount = int(input())\n\nprint(f\"Student: {student}\")\nprint(f\"Scores entered: {count}\")\n\ntotal = 0\nhighest = 0\nfor i in range(count):\n    score = int(input())\n    total = total + score\n    if score > highest:\n        highest = score\n\naverage = total / count\n\nprint(f\"Total: {total}\")\nprint(f\"Highest score: {highest}\")\nprint(f\"Average: {average:.1f}\")\n\n# Add the status line.\n# Print excellent for averages 90+, passing for 70+, and needs practice otherwise.\n",
+      "starterCode": "@:topics.python-v2.python-v2-4.mini-gradebook-capstone.quiz.cp-5-choose-status.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "student = input()\ncount = int(input())\n\nprint(f\"Student: {student}\")\nprint(f\"Scores entered: {count}\")\n\ntotal = 0\nhighest = 0\nfor i in range(count):\n    score = int(input())\n    total = total + score\n    if score > highest:\n        highest = score\n\naverage = total / count\n\nprint(f\"Total: {total}\")\nprint(f\"Highest score: {highest}\")\nprint(f\"Average: {average:.1f}\")\n\n# Add the status line.\n# Print excellent for averages 90+, passing for 70+, and needs practice otherwise.\n",
+          "content": "@:topics.python-v2.python-v2-4.mini-gradebook-capstone.quiz.cp-5-choose-status.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -820,11 +820,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "student = input()\ncount = int(input())\n\nprint(f\"Student: {student}\")\nprint(f\"Scores entered: {count}\")\n\ntotal = 0\nhighest = 0\nfor i in range(count):\n    score = int(input())\n    total = total + score\n    if score > highest:\n        highest = score\n\naverage = total / count\n\nprint(f\"Total: {total}\")\nprint(f\"Highest score: {highest}\")\nprint(f\"Average: {average:.1f}\")\n\n# Add the status line.\n# Print excellent for averages 90+, passing for 70+, and needs practice otherwise.\n",
+        "starterCode": "@:topics.python-v2.python-v2-4.mini-gradebook-capstone.quiz.cp-5-choose-status.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "student = input()\ncount = int(input())\n\nprint(f\"Student: {student}\")\nprint(f\"Scores entered: {count}\")\n\ntotal = 0\nhighest = 0\nfor i in range(count):\n    score = int(input())\n    total = total + score\n    if score > highest:\n        highest = score\n\naverage = total / count\n\nprint(f\"Total: {total}\")\nprint(f\"Highest score: {highest}\")\nprint(f\"Average: {average:.1f}\")\n\n# Add the status line.\n# Print excellent for averages 90+, passing for 70+, and needs practice otherwise.\n",
+            "content": "@:topics.python-v2.python-v2-4.mini-gradebook-capstone.quiz.cp-5-choose-status.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -975,11 +975,11 @@
       "messageBase": "topics.python-v2.python-v2-4.mini-gradebook-capstone.quiz.capstone-mini-gradebook",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "student = input()\ncount = int(input())\n\nprint(f\"Student: {student}\")\nprint(f\"Scores entered: {count}\")\n\ntotal = 0\nhighest = 0\nfor i in range(count):\n    score = int(input())\n    total = total + score\n    if score > highest:\n        highest = score\n\naverage = total / count\n\nprint(f\"Total: {total}\")\nprint(f\"Highest score: {highest}\")\nprint(f\"Average: {average:.1f}\")\n\nif average >= 90:\n    print(\"Status: excellent\")\nelif average >= 70:\n    print(\"Status: passing\")\nelse:\n    print(\"Status: needs practice\")\n\n# Replace the preview-style version with the final report.\n# Remove the Total line and keep only the required final output order.\n",
+      "starterCode": "@:topics.python-v2.python-v2-4.mini-gradebook-capstone.quiz.capstone-mini-gradebook.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "student = input()\ncount = int(input())\n\nprint(f\"Student: {student}\")\nprint(f\"Scores entered: {count}\")\n\ntotal = 0\nhighest = 0\nfor i in range(count):\n    score = int(input())\n    total = total + score\n    if score > highest:\n        highest = score\n\naverage = total / count\n\nprint(f\"Total: {total}\")\nprint(f\"Highest score: {highest}\")\nprint(f\"Average: {average:.1f}\")\n\nif average >= 90:\n    print(\"Status: excellent\")\nelif average >= 70:\n    print(\"Status: passing\")\nelse:\n    print(\"Status: needs practice\")\n\n# Replace the preview-style version with the final report.\n# Remove the Total line and keep only the required final output order.\n",
+          "content": "@:topics.python-v2.python-v2-4.mini-gradebook-capstone.quiz.capstone-mini-gradebook.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -997,11 +997,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "student = input()\ncount = int(input())\n\nprint(f\"Student: {student}\")\nprint(f\"Scores entered: {count}\")\n\ntotal = 0\nhighest = 0\nfor i in range(count):\n    score = int(input())\n    total = total + score\n    if score > highest:\n        highest = score\n\naverage = total / count\n\nprint(f\"Total: {total}\")\nprint(f\"Highest score: {highest}\")\nprint(f\"Average: {average:.1f}\")\n\nif average >= 90:\n    print(\"Status: excellent\")\nelif average >= 70:\n    print(\"Status: passing\")\nelse:\n    print(\"Status: needs practice\")\n\n# Replace the preview-style version with the final report.\n# Remove the Total line and keep only the required final output order.\n",
+        "starterCode": "@:topics.python-v2.python-v2-4.mini-gradebook-capstone.quiz.capstone-mini-gradebook.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "student = input()\ncount = int(input())\n\nprint(f\"Student: {student}\")\nprint(f\"Scores entered: {count}\")\n\ntotal = 0\nhighest = 0\nfor i in range(count):\n    score = int(input())\n    total = total + score\n    if score > highest:\n        highest = score\n\naverage = total / count\n\nprint(f\"Total: {total}\")\nprint(f\"Highest score: {highest}\")\nprint(f\"Average: {average:.1f}\")\n\nif average >= 90:\n    print(\"Status: excellent\")\nelif average >= 70:\n    print(\"Status: passing\")\nelse:\n    print(\"Status: needs practice\")\n\n# Replace the preview-style version with the final report.\n# Remove the Total line and keep only the required final output order.\n",
+            "content": "@:topics.python-v2.python-v2-4.mini-gradebook-capstone.quiz.capstone-mini-gradebook.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true

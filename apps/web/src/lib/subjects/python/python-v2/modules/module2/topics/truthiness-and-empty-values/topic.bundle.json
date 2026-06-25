@@ -2,7 +2,7 @@
   "topicId": "truthiness-and-empty-values",
   "subjectSlug": "python-v2",
   "moduleSlug": "python-v2-2",
-  "sectionSlug": "python-v2-2-combining-conditions",
+  "sectionSlug": "python-v2-python-v2-2-combining-conditions",
   "prefix": "pyv2_2",
   "minutes": 20,
   "topic": {
@@ -316,7 +316,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-classify-string",
       "language": "python",
-      "starterCode": "text = input()\n# TODO: print \"empty\" if text is empty, otherwise print \"not empty\"",
+      "starterCode": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-classify-string.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -383,7 +383,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "text = input()\n# TODO: print \"empty\" if text is empty, otherwise print \"not empty\"",
+          "content": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-classify-string.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -401,11 +401,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "text = input()\n# TODO: print \"empty\" if text is empty, otherwise print \"not empty\"",
+        "starterCode": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-classify-string.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "text = input()\n# TODO: print \"empty\" if text is empty, otherwise print \"not empty\"",
+            "content": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-classify-string.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -465,7 +465,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-classify-number",
       "language": "python",
-      "starterCode": "number = int(input())\n# TODO: print the correct message based on the number's truthiness",
+      "starterCode": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-classify-number.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -538,7 +538,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "number = int(input())\n# TODO: print the correct message based on the number's truthiness",
+          "content": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-classify-number.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -556,11 +556,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "number = int(input())\n# TODO: print the correct message based on the number's truthiness",
+        "starterCode": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-classify-number.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "number = int(input())\n# TODO: print the correct message based on the number's truthiness",
+            "content": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-classify-number.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -621,7 +621,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-check-missing-word",
       "language": "python",
-      "starterCode": "value = input()\n# TODO: if the input text is exactly \"None\", print \"missing\"; otherwise print \"present\"",
+      "starterCode": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-check-missing-word.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -683,7 +683,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "value = input()\n# TODO: if the input text is exactly \"None\", print \"missing\"; otherwise print \"present\"",
+          "content": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-check-missing-word.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -701,11 +701,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "value = input()\n# TODO: if the input text is exactly \"None\", print \"missing\"; otherwise print \"present\"",
+        "starterCode": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-check-missing-word.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "value = input()\n# TODO: if the input text is exactly \"None\", print \"missing\"; otherwise print \"present\"",
+            "content": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-check-missing-word.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -760,7 +760,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-points-message",
       "language": "python",
-      "starterCode": "points = int(input())\n# TODO: print the correct message",
+      "starterCode": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-points-message.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -828,7 +828,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "points = int(input())\n# TODO: print the correct message",
+          "content": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-points-message.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -846,11 +846,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "points = int(input())\n# TODO: print the correct message",
+        "starterCode": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-points-message.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "points = int(input())\n# TODO: print the correct message",
+            "content": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-points-message.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -911,7 +911,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-two-inputs-both-present",
       "language": "python",
-      "starterCode": "first = input()\nsecond = input()\n# TODO: print \"both present\" only when both strings are non-empty",
+      "starterCode": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-two-inputs-both-present.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -983,7 +983,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "first = input()\nsecond = input()\n# TODO: print \"both present\" only when both strings are non-empty",
+          "content": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-two-inputs-both-present.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -1001,11 +1001,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "first = input()\nsecond = input()\n# TODO: print \"both present\" only when both strings are non-empty",
+        "starterCode": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-two-inputs-both-present.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "first = input()\nsecond = input()\n# TODO: print \"both present\" only when both strings are non-empty",
+            "content": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-two-inputs-both-present.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true

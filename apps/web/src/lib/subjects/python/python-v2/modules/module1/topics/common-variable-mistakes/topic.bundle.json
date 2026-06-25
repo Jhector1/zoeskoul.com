@@ -2,7 +2,7 @@
   "topicId": "common-variable-mistakes",
   "subjectSlug": "python-v2",
   "moduleSlug": "python-v2-1",
-  "sectionSlug": "python-v2-1-variables-and-assignment",
+  "sectionSlug": "python-v2-python-v2-1-variables-and-assignment",
   "prefix": "pyv2_1",
   "minutes": 18,
   "topic": {
@@ -306,7 +306,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-1.common-variable-mistakes.quiz.ci-fix-undefined-name",
       "language": "python",
-      "starterCode": "# Store 7 in count\n# Then print count",
+      "starterCode": "@:topics.python-v2.python-v2-1.common-variable-mistakes.quiz.ci-fix-undefined-name.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -345,7 +345,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# Store 7 in count\n# Then print count",
+          "content": "@:topics.python-v2.python-v2-1.common-variable-mistakes.quiz.ci-fix-undefined-name.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -363,11 +363,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# Store 7 in count\n# Then print count",
+        "starterCode": "@:topics.python-v2.python-v2-1.common-variable-mistakes.quiz.ci-fix-undefined-name.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# Store 7 in count\n# Then print count",
+            "content": "@:topics.python-v2.python-v2-1.common-variable-mistakes.quiz.ci-fix-undefined-name.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -399,7 +399,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-1.common-variable-mistakes.quiz.ci-print-variable-not-text",
       "language": "python",
-      "starterCode": "# Create a variable called name\n# Store the text Mila in it\n# Print the variable value",
+      "starterCode": "@:topics.python-v2.python-v2-1.common-variable-mistakes.quiz.ci-print-variable-not-text.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -443,7 +443,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# Create a variable called name\n# Store the text Mila in it\n# Print the variable value",
+          "content": "@:topics.python-v2.python-v2-1.common-variable-mistakes.quiz.ci-print-variable-not-text.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -461,11 +461,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# Create a variable called name\n# Store the text Mila in it\n# Print the variable value",
+        "starterCode": "@:topics.python-v2.python-v2-1.common-variable-mistakes.quiz.ci-print-variable-not-text.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# Create a variable called name\n# Store the text Mila in it\n# Print the variable value",
+            "content": "@:topics.python-v2.python-v2-1.common-variable-mistakes.quiz.ci-print-variable-not-text.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -502,7 +502,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-1.common-variable-mistakes.quiz.ci-match-variable-spelling",
       "language": "python",
-      "starterCode": "# Store the text green in favorite_color\n# Print the same variable",
+      "starterCode": "@:topics.python-v2.python-v2-1.common-variable-mistakes.quiz.ci-match-variable-spelling.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -546,7 +546,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# Store the text green in favorite_color\n# Print the same variable",
+          "content": "@:topics.python-v2.python-v2-1.common-variable-mistakes.quiz.ci-match-variable-spelling.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -564,11 +564,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# Store the text green in favorite_color\n# Print the same variable",
+        "starterCode": "@:topics.python-v2.python-v2-1.common-variable-mistakes.quiz.ci-match-variable-spelling.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# Store the text green in favorite_color\n# Print the same variable",
+            "content": "@:topics.python-v2.python-v2-1.common-variable-mistakes.quiz.ci-match-variable-spelling.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -605,7 +605,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-1.common-variable-mistakes.quiz.ci-read-and-store-input",
       "language": "python",
-      "starterCode": "# Read one line into city\n# Then print city",
+      "starterCode": "@:topics.python-v2.python-v2-1.common-variable-mistakes.quiz.ci-read-and-store-input.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -650,7 +650,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# Read one line into city\n# Then print city",
+          "content": "@:topics.python-v2.python-v2-1.common-variable-mistakes.quiz.ci-read-and-store-input.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -668,11 +668,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# Read one line into city\n# Then print city",
+        "starterCode": "@:topics.python-v2.python-v2-1.common-variable-mistakes.quiz.ci-read-and-store-input.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# Read one line into city\n# Then print city",
+            "content": "@:topics.python-v2.python-v2-1.common-variable-mistakes.quiz.ci-read-and-store-input.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -710,7 +710,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-1.common-variable-mistakes.quiz.ci-fix-accidental-string-number",
       "language": "python",
-      "starterCode": "# Store the number 12 in age\n# Print age",
+      "starterCode": "@:topics.python-v2.python-v2-1.common-variable-mistakes.quiz.ci-fix-accidental-string-number.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -749,7 +749,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# Store the number 12 in age\n# Print age",
+          "content": "@:topics.python-v2.python-v2-1.common-variable-mistakes.quiz.ci-fix-accidental-string-number.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -767,11 +767,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# Store the number 12 in age\n# Print age",
+        "starterCode": "@:topics.python-v2.python-v2-1.common-variable-mistakes.quiz.ci-fix-accidental-string-number.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# Store the number 12 in age\n# Print age",
+            "content": "@:topics.python-v2.python-v2-1.common-variable-mistakes.quiz.ci-fix-accidental-string-number.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true

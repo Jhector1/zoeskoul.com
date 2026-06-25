@@ -1,5 +1,9 @@
 import { expect, test, type Locator, type Page } from "@playwright/test";
 
+// Zoeskoul E2E suite pruning: this file is opt-in.
+test.skip(process.env.RUN_IDE_E2E !== "1", "Long FullIDE terminal/workspace E2E is opt-in. Run with RUN_IDE_E2E=1 or pnpm test:e2e:ide.");
+
+
 const PYTHON_SANDBOX_URL = "/en/sandbox/programming/python?e2eFullIdeAccess=1";
 const CPP_SANDBOX_URL = "/en/sandbox/programming/cpp?e2eFullIdeAccess=1";
 

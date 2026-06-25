@@ -2,7 +2,7 @@
   "topicId": "break-and-continue",
   "subjectSlug": "python-v2",
   "moduleSlug": "python-v2-3",
-  "sectionSlug": "python-v2-3-while-loops",
+  "sectionSlug": "python-v2-python-v2-3-while-loops",
   "prefix": "pyv2_3",
   "minutes": 20,
   "topic": {
@@ -312,7 +312,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-3.break-and-continue.quiz.code-break-stop-at-number",
       "language": "python",
-      "starterCode": "while True:\n    # TODO: read a number\n    # TODO: stop when the number is 0\n    # TODO: print the number if it is not 0\n    pass",
+      "starterCode": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-break-stop-at-number.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -381,7 +381,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "while True:\n    # TODO: read a number\n    # TODO: stop when the number is 0\n    # TODO: print the number if it is not 0\n    pass",
+          "content": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-break-stop-at-number.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -399,11 +399,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "while True:\n    # TODO: read a number\n    # TODO: stop when the number is 0\n    # TODO: print the number if it is not 0\n    pass",
+        "starterCode": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-break-stop-at-number.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "while True:\n    # TODO: read a number\n    # TODO: stop when the number is 0\n    # TODO: print the number if it is not 0\n    pass",
+            "content": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-break-stop-at-number.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -465,7 +465,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-3.break-and-continue.quiz.code-continue-skip-multiples",
       "language": "python",
-      "starterCode": "for number in range(1, 11):\n    # TODO: if number is a multiple of 3, skip it\n    # TODO: otherwise print it\n    pass",
+      "starterCode": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-continue-skip-multiples.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -528,7 +528,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "for number in range(1, 11):\n    # TODO: if number is a multiple of 3, skip it\n    # TODO: otherwise print it\n    pass",
+          "content": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-continue-skip-multiples.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -546,11 +546,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "for number in range(1, 11):\n    # TODO: if number is a multiple of 3, skip it\n    # TODO: otherwise print it\n    pass",
+        "starterCode": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-continue-skip-multiples.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "for number in range(1, 11):\n    # TODO: if number is a multiple of 3, skip it\n    # TODO: otherwise print it\n    pass",
+            "content": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-continue-skip-multiples.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -606,7 +606,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-3.break-and-continue.quiz.code-break-first-negative",
       "language": "python",
-      "starterCode": "total = 0\n\nwhile True:\n    # TODO: read a number\n    # TODO: stop if it is negative\n    # TODO: otherwise add it to total\n    pass\n\nprint(total)",
+      "starterCode": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-break-first-negative.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -675,7 +675,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "total = 0\n\nwhile True:\n    # TODO: read a number\n    # TODO: stop if it is negative\n    # TODO: otherwise add it to total\n    pass\n\nprint(total)",
+          "content": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-break-first-negative.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -693,11 +693,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "total = 0\n\nwhile True:\n    # TODO: read a number\n    # TODO: stop if it is negative\n    # TODO: otherwise add it to total\n    pass\n\nprint(total)",
+        "starterCode": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-break-first-negative.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "total = 0\n\nwhile True:\n    # TODO: read a number\n    # TODO: stop if it is negative\n    # TODO: otherwise add it to total\n    pass\n\nprint(total)",
+            "content": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-break-first-negative.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -759,7 +759,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-3.break-and-continue.quiz.code-continue-skip-letter",
       "language": "python",
-      "starterCode": "word = \"banana\"\n\nfor ch in word:\n    # TODO: skip the letter a\n    # TODO: print the other characters\n    pass",
+      "starterCode": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-continue-skip-letter.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -821,7 +821,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "word = \"banana\"\n\nfor ch in word:\n    # TODO: skip the letter a\n    # TODO: print the other characters\n    pass",
+          "content": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-continue-skip-letter.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -839,11 +839,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "word = \"banana\"\n\nfor ch in word:\n    # TODO: skip the letter a\n    # TODO: print the other characters\n    pass",
+        "starterCode": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-continue-skip-letter.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "word = \"banana\"\n\nfor ch in word:\n    # TODO: skip the letter a\n    # TODO: print the other characters\n    pass",
+            "content": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-continue-skip-letter.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -898,7 +898,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-3.break-and-continue.quiz.code-break-guess-game",
       "language": "python",
-      "starterCode": "while True:\n    guess = int(input())\n    # TODO: if the guess is 7, print the success message and stop\n    # TODO: otherwise print the retry message",
+      "starterCode": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-break-guess-game.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -967,7 +967,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "while True:\n    guess = int(input())\n    # TODO: if the guess is 7, print the success message and stop\n    # TODO: otherwise print the retry message",
+          "content": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-break-guess-game.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -985,11 +985,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "while True:\n    guess = int(input())\n    # TODO: if the guess is 7, print the success message and stop\n    # TODO: otherwise print the retry message",
+        "starterCode": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-break-guess-game.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "while True:\n    guess = int(input())\n    # TODO: if the guess is 7, print the success message and stop\n    # TODO: otherwise print the retry message",
+            "content": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-break-guess-game.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true

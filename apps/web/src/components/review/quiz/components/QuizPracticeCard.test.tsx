@@ -13,15 +13,21 @@ const mocked = vi.hoisted(() => ({
     requestBind: vi.fn(),
     ensureVisible: vi.fn(),
     setCodeInputMeta: vi.fn(),
+    rawMessages: {
+        "topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-1-print-event-title.starterCode":
+            "print(\"Welcome to Python Club\")\n\n# Replace the preview line with the real event title.\n",
+        "topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-1-print-event-title.prompt":
+            "Start the real welcome board.",
+    } as Record<string, string>,
 }));
 
 vi.mock("@/i18n/tagged", () => ({
     useTaggedT: () => ({
         t: (_key: string, _params?: unknown, fallback?: string) => fallback ?? "",
-        raw: (_key: string, fallback?: string) => fallback ?? "",
+        raw: (key: string, fallback?: string) => mocked.rawMessages[key] ?? fallback ?? "",
     }),
-    isTaggedKey: () => false,
-    stripTag: (value: string) => value,
+    isTaggedKey: (value: string) => typeof value === "string" && value.startsWith("@:"),
+    stripTag: (value: string) => value.replace(/^@:/, ""),
 }));
 
 vi.mock("@/components/practice/ExerciseRenderer", () => ({
@@ -219,6 +225,72 @@ describe("QuizPracticeCard project-step fallback", () => {
         expect(html).toContain('data-testid="exercise-renderer"');
         expect(html).toContain("e2e-reveal-fill-multifile");
         expect(html).toContain("from tools.names import clean_name");
+    });
+
+    it("resolves tagged starter content from the project step manifest fallback", () => {
+        const html = renderToStaticMarkup(
+            <QuizPracticeCard
+                q={{
+                    id: "proj:mp-1-print-event-title:abc",
+                    kind: "practice",
+                    fetch: {
+                        subject: "python-v2",
+                        module: "python-v2-0",
+                        section: "python-v2-python-v2-0-module-project",
+                        topic: "module-0-welcome-board-project",
+                        exerciseKey: "mp-1-print-event-title",
+                    },
+                } as any}
+                ownerCardId="module-0-welcome-board-project"
+                projectStepManifest={{
+                    id: "mp_1",
+                    exerciseKey: "mp-1-print-event-title",
+                    title: "Set the event title",
+                    prompt:
+                        "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-1-print-event-title.prompt",
+                    starterCode:
+                        "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-1-print-event-title.starterCode",
+                    starterFiles: {
+                        "main.py":
+                            "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-1-print-event-title.starterCode",
+                    },
+                    workspace: {
+                        language: "python",
+                        entryFile: "main.py",
+                        starterFiles: {
+                            "main.py":
+                                "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-1-print-event-title.starterCode",
+                        },
+                    },
+                }}
+                ps={{
+                    loading: true,
+                    error: null,
+                    busy: false,
+                    item: null,
+                    exercise: null,
+                    attempts: 0,
+                    maxAttempts: 3,
+                } as any}
+                toolsActive
+                unlocked
+                isCompleted={false}
+                locked={false}
+                unlimitedAttempts
+                strictSequential={false}
+                seqOrder={1}
+                padRef={{ current: null } as any}
+                onUpdateItem={vi.fn()}
+                onSubmit={vi.fn()}
+                onHelp={vi.fn()}
+                onRetryExercise={vi.fn()}
+                onExcused={vi.fn()}
+            />,
+        );
+
+        expect(html).toContain('data-testid="exercise-renderer"');
+        expect(html).toContain("print(&quot;Welcome to Python Club&quot;)");
+        expect(html).not.toContain("@:topics.python-v2");
     });
 
     it("preserves project step ideConfig on fallback exercises", () => {

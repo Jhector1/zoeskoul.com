@@ -37,6 +37,8 @@ vi.mock("@/i18n/tagged", () => ({
         resolve: (value: string | null | undefined, _vars: Record<string, unknown>, fallback: string) =>
             value ?? fallback,
     }),
+    isTaggedKey: (value: string) => typeof value === "string" && value.startsWith("@:"),
+    stripTag: (value: string) => value.replace(/^@:/, ""),
 }));
 
 vi.mock("@/components/review/module/runtime/reviewRuntimeStore", () => ({

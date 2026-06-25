@@ -2,7 +2,7 @@
   "topicId": "if-elif-else",
   "subjectSlug": "python-v2",
   "moduleSlug": "python-v2-2",
-  "sectionSlug": "python-v2-2-conditional-basics",
+  "sectionSlug": "python-v2-python-v2-2-conditional-basics",
   "prefix": "pyv2_2",
   "minutes": 25,
   "topic": {
@@ -335,7 +335,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.code_positive_negative_zero",
       "language": "python",
-      "starterCode": "n = int(input())\n\n# TODO: print positive, negative, or zero",
+      "starterCode": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_positive_negative_zero.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -414,7 +414,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "n = int(input())\n\n# TODO: print positive, negative, or zero",
+          "content": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_positive_negative_zero.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -432,11 +432,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "n = int(input())\n\n# TODO: print positive, negative, or zero",
+        "starterCode": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_positive_negative_zero.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "n = int(input())\n\n# TODO: print positive, negative, or zero",
+            "content": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_positive_negative_zero.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -503,7 +503,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.code_pass_fail",
       "language": "python",
-      "starterCode": "score = int(input())\n\n# TODO: print pass or fail",
+      "starterCode": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_pass_fail.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -571,7 +571,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "score = int(input())\n\n# TODO: print pass or fail",
+          "content": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_pass_fail.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -589,11 +589,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "score = int(input())\n\n# TODO: print pass or fail",
+        "starterCode": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_pass_fail.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "score = int(input())\n\n# TODO: print pass or fail",
+            "content": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_pass_fail.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -654,7 +654,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.code_grade_checker",
       "language": "python",
-      "starterCode": "score = int(input())\n\n# TODO: print A, B, C, or F",
+      "starterCode": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_grade_checker.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -738,7 +738,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "score = int(input())\n\n# TODO: print A, B, C, or F",
+          "content": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_grade_checker.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -756,11 +756,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "score = int(input())\n\n# TODO: print A, B, C, or F",
+        "starterCode": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_grade_checker.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "score = int(input())\n\n# TODO: print A, B, C, or F",
+            "content": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_grade_checker.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -827,7 +827,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.code_empty_or_text",
       "language": "python",
-      "starterCode": "text = input()\n\n# TODO: print empty or text",
+      "starterCode": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_empty_or_text.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -889,7 +889,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "text = input()\n\n# TODO: print empty or text",
+          "content": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_empty_or_text.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -907,11 +907,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "text = input()\n\n# TODO: print empty or text",
+        "starterCode": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_empty_or_text.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "text = input()\n\n# TODO: print empty or text",
+            "content": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_empty_or_text.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -966,7 +966,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.code_even_odd",
       "language": "python",
-      "starterCode": "n = int(input())\n\n# TODO: print even or odd",
+      "starterCode": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_even_odd.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -1034,7 +1034,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "n = int(input())\n\n# TODO: print even or odd",
+          "content": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_even_odd.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -1052,11 +1052,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "n = int(input())\n\n# TODO: print even or odd",
+        "starterCode": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_even_odd.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "n = int(input())\n\n# TODO: print even or odd",
+            "content": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_even_odd.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true

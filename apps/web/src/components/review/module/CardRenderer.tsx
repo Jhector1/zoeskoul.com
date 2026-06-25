@@ -14,6 +14,7 @@ import { buildReviewQuizKey } from "@/lib/subjects/quizClient";
 import SketchBlock from "@/components/sketches/subjects/SketchBlock";
 import type { SavedSketchState } from "@/components/sketches/subjects/types";
 import { useTaggedT } from "@/i18n/tagged";
+import { resolveDeepTagged } from "@/i18n/resolveDeepTagged";
 import { FlowNavMode } from "@/components/review/navigation/FlowNavigator";
 import { useReviewRuntimeStore } from "@/components/review/module/runtime/reviewRuntimeStore";
 import { buildQuizBlockRuntimeDefaultsProps } from "@/components/review/module/runtime/cardRuntimeDefaults";
@@ -192,7 +193,12 @@ export default function CardRenderer(props: {
             tryIt.title ?? "Try it yourself",
         );
 
-        const key = buildReviewQuizKey(tryIt.spec, tryItId, versionStr);
+        const resolvedTryItSpec = resolveDeepTagged(
+            tryIt.spec,
+            (key) => tt.resolve(`@:${key}`),
+        ) as typeof tryIt.spec;
+
+        const key = buildReviewQuizKey(resolvedTryItSpec, tryItId, versionStr);
 
         const runtimeDefaultsProps = buildQuizBlockRuntimeDefaultsProps({
             subjectRuntimeDefaults,
@@ -206,6 +212,27 @@ export default function CardRenderer(props: {
             <div className="mt-4 rounded-xl border border-emerald-200 bg-emerald-50/40 p-3 dark:border-emerald-400/20 dark:bg-emerald-950/20">
                 <div className="ui-title-sm">{title || "Try it yourself"}</div>
 
+                {process.env.NODE_ENV !== "production" ? (
+                    <textarea
+                        data-testid="cardrenderer-tryit-spec-e2e-input"
+                        aria-label="E2E resolved embedded Try It spec"
+                        readOnly
+                        value={JSON.stringify({
+                            tryItId,
+                            quizKey: key,
+                            spec: resolvedTryItSpec,
+                            firstStep: (resolvedTryItSpec as any)?.steps?.[0] ?? null,
+                        })}
+                        style={{
+                            position: "absolute",
+                            width: 1,
+                            height: 1,
+                            opacity: 0,
+                            pointerEvents: "none",
+                        }}
+                    />
+                ) : null}
+
                 {!progressHydrated ? (
                     <div className="mt-2 ui-meta">
                         Loading saved try it yourself state…
@@ -216,7 +243,7 @@ export default function CardRenderer(props: {
                         quizId={tryItId}
                         quizCardId={card.id}
                         toolsActive={active}
-                        spec={tryIt.spec}
+                        spec={resolvedTryItSpec}
                         quizKey={key}
                         passScore={1.0}
                         prereqsMet={prereqsMet}

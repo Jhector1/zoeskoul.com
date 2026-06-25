@@ -16,6 +16,7 @@ import { reviewSaveDebug, summarizeWorkspaceForSave } from "../runtime/reviewSav
 import { getExerciseStateKey } from "../runtime/exerciseKeys";
 import { deriveEntryCode } from "../runtime/exerciseWorkspaceResolver";
 import { stateLanguageMatches } from "../runtime/workspaceCodeSource";
+import { isUsableStarterCode } from "../runtime/starterContent";
 
 function isPersistedCardToolKey(toolKey: string) {
     if (typeof toolKey !== "string" || !toolKey.trim()) return false;
@@ -516,7 +517,11 @@ function workspaceHasNonBlankCode(workspace: any) {
     }
 
     const code = deriveEntryCode(workspace);
-    return typeof code === "string" && code.trim().length > 0;
+    return isUsableStarterCode(code);
+}
+
+function hasUsableSavedCode(value: unknown) {
+    return isUsableStarterCode(value);
 }
 
 function hasSavedExerciseContent(value: any) {
@@ -524,8 +529,8 @@ function hasSavedExerciseContent(value: any) {
 
     const hasNonBlankCode =
         workspaceHasNonBlankCode(workspace) ||
-        (typeof value?.code === "string" && value.code.trim().length > 0) ||
-        (typeof value?.source === "string" && value.source.trim().length > 0);
+        hasUsableSavedCode(value?.code) ||
+        hasUsableSavedCode(value?.source);
 
     const hasSketch = Boolean(value?.sketch);
 
@@ -555,17 +560,17 @@ function hasSavedExerciseEditorContent(value: any) {
 
     return Boolean(
         workspaceHasNonBlankCode(workspace) ||
-        (typeof value?.code === "string" && value.code.trim().length > 0) ||
-        (typeof value?.source === "string" && value.source.trim().length > 0),
+        hasUsableSavedCode(value?.code) ||
+        hasUsableSavedCode(value?.source),
     );
 }
 
 
 function getSavedExerciseCode(value: any, workspace: any) {
     const workspaceCode = deriveEntryCode(workspace) ?? "";
-    if (workspaceCode) return workspaceCode;
-    if (typeof value?.code === "string") return value.code;
-    if (typeof value?.source === "string") return value.source;
+    if (isUsableStarterCode(workspaceCode)) return workspaceCode;
+    if (isUsableStarterCode(value?.code)) return value.code;
+    if (isUsableStarterCode(value?.source)) return value.source;
     return "";
 }
 

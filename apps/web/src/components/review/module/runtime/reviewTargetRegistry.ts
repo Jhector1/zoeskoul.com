@@ -653,16 +653,20 @@ export function buildReviewTargetRegistry(args: {
             (card.type === "text" || card.type === "sketch")
                 ? (card.tryIt ?? null)
                 : null;
+        const localizedEmbeddedTryItSpec = rawEmbeddedTryIt?.spec
+            ? resolveReviewTargetI18nAliases(rawEmbeddedTryIt.spec, resolveMessage)
+            : rawEmbeddedTryIt?.spec;
+
         const embeddedTryIt = rawEmbeddedTryIt
             ? {
                 ...rawEmbeddedTryIt,
                 allowReveal: true,
-                spec: rawEmbeddedTryIt.spec
+                spec: localizedEmbeddedTryItSpec
                     ? {
-                        ...rawEmbeddedTryIt.spec,
+                        ...localizedEmbeddedTryItSpec,
                         allowReveal: true,
                     }
-                    : rawEmbeddedTryIt.spec,
+                    : localizedEmbeddedTryItSpec,
               }
             : null;
 

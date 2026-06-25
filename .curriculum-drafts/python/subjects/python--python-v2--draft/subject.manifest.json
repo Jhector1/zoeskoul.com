@@ -1,21 +1,22 @@
 {
   "subject": {
-    "slug": "python-v2",
+    "slug": "python--python-v2--draft",
     "profileId": "python",
     "catalogSlug": "python",
     "genKey": "python_part1",
-    "order": 30,
+    "order": 0,
     "accessPolicy": "paid",
     "status": "active",
-    "imagePublicId":"python_for_beginners_uct3dz.png",
+    "imagePublicId": null,
     "imageAlt": null,
-    "titleKey": "subjects.python-v2.title",
-    "descriptionKey": "subjects.python-v2.description",
+    "titleKey": "subjects.python--python-v2--draft.title",
+    "descriptionKey": "subjects.python--python-v2--draft.description",
+    "serviceDefaults": null,
     "meta": {
       "curriculum": {
         "plannedModuleCount": 5,
         "isTerminalRelease": false,
-        "moreComingMessageKey": "subjects.python-v2.moreComingSoon"
+        "moreComingMessageKey": "subjects.python--python-v2--draft.moreComingSoon"
       },
       "completionPolicy": {
         "requireAllPublishedModules": true,
@@ -37,8 +38,8 @@
       "slug": "python-v2-0",
       "prefix": "pyv2_0",
       "order": 0,
-      "titleKey": "modules.python-v2.python-v2-0.title",
-      "descriptionKey": "modules.python-v2.python-v2-0.description",
+      "titleKey": "modules.python--python-v2--draft.python-v2-0.title",
+      "descriptionKey": "modules.python--python-v2--draft.python-v2-0.description",
       "weekStart": null,
       "weekEnd": null,
       "accessOverride": null,
@@ -51,35 +52,37 @@
         "supportsStdInStdOut": true,
         "supportsPackageInstall": false
       },
+      "serviceDefaults": null,
       "meta": {
-        "estimatedMinutes": 110,
+        "estimatedMinutes": 130,
         "prereqKeys": [],
         "outcomeKeys": [
-          "modules.python-v2.python-v2-0.outcomes.0",
-          "modules.python-v2.python-v2-0.outcomes.1",
-          "modules.python-v2.python-v2-0.outcomes.2"
+          "modules.python--python-v2--draft.python-v2-0.outcomes.0",
+          "modules.python--python-v2--draft.python-v2-0.outcomes.1",
+          "modules.python--python-v2--draft.python-v2-0.outcomes.2"
         ],
         "whyKeys": [
-          "modules.python-v2.python-v2-0.why.0",
-          "modules.python-v2.python-v2-0.why.1"
+          "modules.python--python-v2--draft.python-v2-0.why.0",
+          "modules.python--python-v2--draft.python-v2-0.why.1"
         ]
       },
       "sections": [
         {
-          "slug": "python-v2-0-setup-and-first-programs",
+          "slug": "python--python-v2--draft-python-v2-0-setup-and-first-programs",
           "order": 1,
-          "titleKey": "sections.python-v2.python-v2-0.python-v2-0-setup-and-first-programs.title",
-          "descriptionKey": "sections.python-v2.python-v2-0.python-v2-0-setup-and-first-programs.description",
+          "titleKey": "sections.python--python-v2--draft.python-v2-0.python--python-v2--draft-python-v2-0-setup-and-first-programs.title",
+          "descriptionKey": "sections.python--python-v2--draft.python-v2-0.python--python-v2--draft-python-v2-0-setup-and-first-programs.description",
           "meta": {
             "module": 0,
-            "weeksKey": "sections.python-v2.python-v2-0.python-v2-0-setup-and-first-programs.weeks",
+            "weeksKey": "sections.python--python-v2--draft.python-v2-0.python--python-v2--draft-python-v2-0-setup-and-first-programs.weeks",
             "bulletKeys": [
-              "sections.python-v2.python-v2-0.python-v2-0-setup-and-first-programs.bullets.0",
-              "sections.python-v2.python-v2-0.python-v2-0-setup-and-first-programs.bullets.1",
-              "sections.python-v2.python-v2-0.python-v2-0-setup-and-first-programs.bullets.2",
-              "sections.python-v2.python-v2-0.python-v2-0-setup-and-first-programs.bullets.3"
+              "sections.python--python-v2--draft.python-v2-0.python--python-v2--draft-python-v2-0-setup-and-first-programs.bullets.0",
+              "sections.python--python-v2--draft.python-v2-0.python--python-v2--draft-python-v2-0-setup-and-first-programs.bullets.1",
+              "sections.python--python-v2--draft.python-v2-0.python--python-v2--draft-python-v2-0-setup-and-first-programs.bullets.2",
+              "sections.python--python-v2--draft.python-v2-0.python--python-v2--draft-python-v2-0-setup-and-first-programs.bullets.3"
             ]
           },
+          "serviceDefaults": null,
           "topics": [
             "what-python-is",
             "running-python-code",
@@ -87,20 +90,21 @@
           ]
         },
         {
-          "slug": "python-v2-0-values-and-expressions",
+          "slug": "python--python-v2--draft-python-v2-0-values-and-expressions",
           "order": 2,
-          "titleKey": "sections.python-v2.python-v2-0.python-v2-0-values-and-expressions.title",
-          "descriptionKey": "sections.python-v2.python-v2-0.python-v2-0-values-and-expressions.description",
+          "titleKey": "sections.python--python-v2--draft.python-v2-0.python--python-v2--draft-python-v2-0-values-and-expressions.title",
+          "descriptionKey": "sections.python--python-v2--draft.python-v2-0.python--python-v2--draft-python-v2-0-values-and-expressions.description",
           "meta": {
             "module": 0,
-            "weeksKey": "sections.python-v2.python-v2-0.python-v2-0-values-and-expressions.weeks",
+            "weeksKey": "sections.python--python-v2--draft.python-v2-0.python--python-v2--draft-python-v2-0-values-and-expressions.weeks",
             "bulletKeys": [
-              "sections.python-v2.python-v2-0.python-v2-0-values-and-expressions.bullets.0",
-              "sections.python-v2.python-v2-0.python-v2-0-values-and-expressions.bullets.1",
-              "sections.python-v2.python-v2-0.python-v2-0-values-and-expressions.bullets.2",
-              "sections.python-v2.python-v2-0.python-v2-0-values-and-expressions.bullets.3"
+              "sections.python--python-v2--draft.python-v2-0.python--python-v2--draft-python-v2-0-values-and-expressions.bullets.0",
+              "sections.python--python-v2--draft.python-v2-0.python--python-v2--draft-python-v2-0-values-and-expressions.bullets.1",
+              "sections.python--python-v2--draft.python-v2-0.python--python-v2--draft-python-v2-0-values-and-expressions.bullets.2",
+              "sections.python--python-v2--draft.python-v2-0.python--python-v2--draft-python-v2-0-values-and-expressions.bullets.3"
             ]
           },
+          "serviceDefaults": null,
           "topics": [
             "values-types-and-literals",
             "operators-and-expressions",
@@ -108,19 +112,22 @@
           ]
         },
         {
-          "slug": "python-v2-0-module-project",
-          "order": 99,
-          "titleKey": "sections.python-v2.python-v2-0.python-v2-0-module-project.title",
-          "descriptionKey": "sections.python-v2.python-v2-0.python-v2-0-module-project.description",
+          "slug": "python--python-v2--draft-python-v2-0-module-project",
+          "order": 3,
+          "role": "module_project",
+          "titleKey": "sections.python--python-v2--draft.python-v2-0.python--python-v2--draft-python-v2-0-module-project.title",
+          "descriptionKey": "sections.python--python-v2--draft.python-v2-0.python--python-v2--draft-python-v2-0-module-project.description",
           "meta": {
             "module": 0,
-            "weeksKey": "sections.python-v2.python-v2-0.python-v2-0-module-project.weeks",
+            "weeksKey": "sections.python--python-v2--draft.python-v2-0.python--python-v2--draft-python-v2-0-module-project.weeks",
             "bulletKeys": [
-              "sections.python-v2.python-v2-0.python-v2-0-module-project.bullets.0",
-              "sections.python-v2.python-v2-0.python-v2-0-module-project.bullets.1",
-              "sections.python-v2.python-v2-0.python-v2-0-module-project.bullets.2"
+              "sections.python--python-v2--draft.python-v2-0.python--python-v2--draft-python-v2-0-module-project.bullets.0",
+              "sections.python--python-v2--draft.python-v2-0.python--python-v2--draft-python-v2-0-module-project.bullets.1",
+              "sections.python--python-v2--draft.python-v2-0.python--python-v2--draft-python-v2-0-module-project.bullets.2",
+              "sections.python--python-v2--draft.python-v2-0.python--python-v2--draft-python-v2-0-module-project.bullets.3"
             ]
           },
+          "serviceDefaults": null,
           "topics": [
             "module-0-welcome-board-project"
           ]
@@ -131,8 +138,8 @@
       "slug": "python-v2-1",
       "prefix": "pyv2_1",
       "order": 1,
-      "titleKey": "modules.python-v2.python-v2-1.title",
-      "descriptionKey": "modules.python-v2.python-v2-1.description",
+      "titleKey": "modules.python--python-v2--draft.python-v2-1.title",
+      "descriptionKey": "modules.python--python-v2--draft.python-v2-1.description",
       "weekStart": null,
       "weekEnd": null,
       "accessOverride": null,
@@ -145,37 +152,39 @@
         "supportsStdInStdOut": true,
         "supportsPackageInstall": false
       },
+      "serviceDefaults": null,
       "meta": {
-        "estimatedMinutes": 137,
+        "estimatedMinutes": 159,
         "prereqKeys": [
-          "modules.python-v2.python-v2-0.title"
+          "modules.python--python-v2--draft.python-v2-0.title"
         ],
         "outcomeKeys": [
-          "modules.python-v2.python-v2-1.outcomes.0",
-          "modules.python-v2.python-v2-1.outcomes.1",
-          "modules.python-v2.python-v2-1.outcomes.2"
+          "modules.python--python-v2--draft.python-v2-1.outcomes.0",
+          "modules.python--python-v2--draft.python-v2-1.outcomes.1",
+          "modules.python--python-v2--draft.python-v2-1.outcomes.2"
         ],
         "whyKeys": [
-          "modules.python-v2.python-v2-1.why.0",
-          "modules.python-v2.python-v2-1.why.1"
+          "modules.python--python-v2--draft.python-v2-1.why.0",
+          "modules.python--python-v2--draft.python-v2-1.why.1"
         ]
       },
       "sections": [
         {
-          "slug": "python-v2-1-variables-and-assignment",
+          "slug": "python--python-v2--draft-python-v2-1-variables-and-assignment",
           "order": 1,
-          "titleKey": "sections.python-v2.python-v2-1.python-v2-1-variables-and-assignment.title",
-          "descriptionKey": "sections.python-v2.python-v2-1.python-v2-1-variables-and-assignment.description",
+          "titleKey": "sections.python--python-v2--draft.python-v2-1.python--python-v2--draft-python-v2-1-variables-and-assignment.title",
+          "descriptionKey": "sections.python--python-v2--draft.python-v2-1.python--python-v2--draft-python-v2-1-variables-and-assignment.description",
           "meta": {
             "module": 1,
-            "weeksKey": "sections.python-v2.python-v2-1.python-v2-1-variables-and-assignment.weeks",
+            "weeksKey": "sections.python--python-v2--draft.python-v2-1.python--python-v2--draft-python-v2-1-variables-and-assignment.weeks",
             "bulletKeys": [
-              "sections.python-v2.python-v2-1.python-v2-1-variables-and-assignment.bullets.0",
-              "sections.python-v2.python-v2-1.python-v2-1-variables-and-assignment.bullets.1",
-              "sections.python-v2.python-v2-1.python-v2-1-variables-and-assignment.bullets.2",
-              "sections.python-v2.python-v2-1.python-v2-1-variables-and-assignment.bullets.3"
+              "sections.python--python-v2--draft.python-v2-1.python--python-v2--draft-python-v2-1-variables-and-assignment.bullets.0",
+              "sections.python--python-v2--draft.python-v2-1.python--python-v2--draft-python-v2-1-variables-and-assignment.bullets.1",
+              "sections.python--python-v2--draft.python-v2-1.python--python-v2--draft-python-v2-1-variables-and-assignment.bullets.2",
+              "sections.python--python-v2--draft.python-v2-1.python--python-v2--draft-python-v2-1-variables-and-assignment.bullets.3"
             ]
           },
+          "serviceDefaults": null,
           "topics": [
             "naming-and-assigning-variables",
             "input-and-type-conversion",
@@ -183,20 +192,21 @@
           ]
         },
         {
-          "slug": "python-v2-1-string-foundations",
+          "slug": "python--python-v2--draft-python-v2-1-string-foundations",
           "order": 2,
-          "titleKey": "sections.python-v2.python-v2-1.python-v2-1-string-foundations.title",
-          "descriptionKey": "sections.python-v2.python-v2-1.python-v2-1-string-foundations.description",
+          "titleKey": "sections.python--python-v2--draft.python-v2-1.python--python-v2--draft-python-v2-1-string-foundations.title",
+          "descriptionKey": "sections.python--python-v2--draft.python-v2-1.python--python-v2--draft-python-v2-1-string-foundations.description",
           "meta": {
             "module": 1,
-            "weeksKey": "sections.python-v2.python-v2-1.python-v2-1-string-foundations.weeks",
+            "weeksKey": "sections.python--python-v2--draft.python-v2-1.python--python-v2--draft-python-v2-1-string-foundations.weeks",
             "bulletKeys": [
-              "sections.python-v2.python-v2-1.python-v2-1-string-foundations.bullets.0",
-              "sections.python-v2.python-v2-1.python-v2-1-string-foundations.bullets.1",
-              "sections.python-v2.python-v2-1.python-v2-1-string-foundations.bullets.2",
-              "sections.python-v2.python-v2-1.python-v2-1-string-foundations.bullets.3"
+              "sections.python--python-v2--draft.python-v2-1.python--python-v2--draft-python-v2-1-string-foundations.bullets.0",
+              "sections.python--python-v2--draft.python-v2-1.python--python-v2--draft-python-v2-1-string-foundations.bullets.1",
+              "sections.python--python-v2--draft.python-v2-1.python--python-v2--draft-python-v2-1-string-foundations.bullets.2",
+              "sections.python--python-v2--draft.python-v2-1.python--python-v2--draft-python-v2-1-string-foundations.bullets.3"
             ]
           },
+          "serviceDefaults": null,
           "topics": [
             "string-indexing-and-slicing",
             "string-methods",
@@ -204,19 +214,22 @@
           ]
         },
         {
-          "slug": "python-v2-1-module-project",
-          "order": 99,
-          "titleKey": "sections.python-v2.python-v2-1.python-v2-1-module-project.title",
-          "descriptionKey": "sections.python-v2.python-v2-1.python-v2-1-module-project.description",
+          "slug": "python--python-v2--draft-python-v2-1-module-project",
+          "order": 3,
+          "role": "module_project",
+          "titleKey": "sections.python--python-v2--draft.python-v2-1.python--python-v2--draft-python-v2-1-module-project.title",
+          "descriptionKey": "sections.python--python-v2--draft.python-v2-1.python--python-v2--draft-python-v2-1-module-project.description",
           "meta": {
             "module": 1,
-            "weeksKey": "sections.python-v2.python-v2-1.python-v2-1-module-project.weeks",
+            "weeksKey": "sections.python--python-v2--draft.python-v2-1.python--python-v2--draft-python-v2-1-module-project.weeks",
             "bulletKeys": [
-              "sections.python-v2.python-v2-1.python-v2-1-module-project.bullets.0",
-              "sections.python-v2.python-v2-1.python-v2-1-module-project.bullets.1",
-              "sections.python-v2.python-v2-1.python-v2-1-module-project.bullets.2"
+              "sections.python--python-v2--draft.python-v2-1.python--python-v2--draft-python-v2-1-module-project.bullets.0",
+              "sections.python--python-v2--draft.python-v2-1.python--python-v2--draft-python-v2-1-module-project.bullets.1",
+              "sections.python--python-v2--draft.python-v2-1.python--python-v2--draft-python-v2-1-module-project.bullets.2",
+              "sections.python--python-v2--draft.python-v2-1.python--python-v2--draft-python-v2-1-module-project.bullets.3"
             ]
           },
+          "serviceDefaults": null,
           "topics": [
             "module-1-profile-card-project"
           ]
@@ -227,8 +240,8 @@
       "slug": "python-v2-2",
       "prefix": "pyv2_2",
       "order": 2,
-      "titleKey": "modules.python-v2.python-v2-2.title",
-      "descriptionKey": "modules.python-v2.python-v2-2.description",
+      "titleKey": "modules.python--python-v2--draft.python-v2-2.title",
+      "descriptionKey": "modules.python--python-v2--draft.python-v2-2.description",
       "weekStart": null,
       "weekEnd": null,
       "accessOverride": null,
@@ -241,37 +254,39 @@
         "supportsStdInStdOut": true,
         "supportsPackageInstall": false
       },
+      "serviceDefaults": null,
       "meta": {
-        "estimatedMinutes": 132,
+        "estimatedMinutes": 154,
         "prereqKeys": [
-          "modules.python-v2.python-v2-1.title"
+          "modules.python--python-v2--draft.python-v2-1.title"
         ],
         "outcomeKeys": [
-          "modules.python-v2.python-v2-2.outcomes.0",
-          "modules.python-v2.python-v2-2.outcomes.1",
-          "modules.python-v2.python-v2-2.outcomes.2"
+          "modules.python--python-v2--draft.python-v2-2.outcomes.0",
+          "modules.python--python-v2--draft.python-v2-2.outcomes.1",
+          "modules.python--python-v2--draft.python-v2-2.outcomes.2"
         ],
         "whyKeys": [
-          "modules.python-v2.python-v2-2.why.0",
-          "modules.python-v2.python-v2-2.why.1"
+          "modules.python--python-v2--draft.python-v2-2.why.0",
+          "modules.python--python-v2--draft.python-v2-2.why.1"
         ]
       },
       "sections": [
         {
-          "slug": "python-v2-2-conditional-basics",
+          "slug": "python--python-v2--draft-python-v2-2-conditional-basics",
           "order": 1,
-          "titleKey": "sections.python-v2.python-v2-2.python-v2-2-conditional-basics.title",
-          "descriptionKey": "sections.python-v2.python-v2-2.python-v2-2-conditional-basics.description",
+          "titleKey": "sections.python--python-v2--draft.python-v2-2.python--python-v2--draft-python-v2-2-conditional-basics.title",
+          "descriptionKey": "sections.python--python-v2--draft.python-v2-2.python--python-v2--draft-python-v2-2-conditional-basics.description",
           "meta": {
             "module": 2,
-            "weeksKey": "sections.python-v2.python-v2-2.python-v2-2-conditional-basics.weeks",
+            "weeksKey": "sections.python--python-v2--draft.python-v2-2.python--python-v2--draft-python-v2-2-conditional-basics.weeks",
             "bulletKeys": [
-              "sections.python-v2.python-v2-2.python-v2-2-conditional-basics.bullets.0",
-              "sections.python-v2.python-v2-2.python-v2-2-conditional-basics.bullets.1",
-              "sections.python-v2.python-v2-2.python-v2-2-conditional-basics.bullets.2",
-              "sections.python-v2.python-v2-2.python-v2-2-conditional-basics.bullets.3"
+              "sections.python--python-v2--draft.python-v2-2.python--python-v2--draft-python-v2-2-conditional-basics.bullets.0",
+              "sections.python--python-v2--draft.python-v2-2.python--python-v2--draft-python-v2-2-conditional-basics.bullets.1",
+              "sections.python--python-v2--draft.python-v2-2.python--python-v2--draft-python-v2-2-conditional-basics.bullets.2",
+              "sections.python--python-v2--draft.python-v2-2.python--python-v2--draft-python-v2-2-conditional-basics.bullets.3"
             ]
           },
+          "serviceDefaults": null,
           "topics": [
             "if-elif-else",
             "comparisons-and-truth-values",
@@ -279,20 +294,21 @@
           ]
         },
         {
-          "slug": "python-v2-2-combining-conditions",
+          "slug": "python--python-v2--draft-python-v2-2-combining-conditions",
           "order": 2,
-          "titleKey": "sections.python-v2.python-v2-2.python-v2-2-combining-conditions.title",
-          "descriptionKey": "sections.python-v2.python-v2-2.python-v2-2-combining-conditions.description",
+          "titleKey": "sections.python--python-v2--draft.python-v2-2.python--python-v2--draft-python-v2-2-combining-conditions.title",
+          "descriptionKey": "sections.python--python-v2--draft.python-v2-2.python--python-v2--draft-python-v2-2-combining-conditions.description",
           "meta": {
             "module": 2,
-            "weeksKey": "sections.python-v2.python-v2-2.python-v2-2-combining-conditions.weeks",
+            "weeksKey": "sections.python--python-v2--draft.python-v2-2.python--python-v2--draft-python-v2-2-combining-conditions.weeks",
             "bulletKeys": [
-              "sections.python-v2.python-v2-2.python-v2-2-combining-conditions.bullets.0",
-              "sections.python-v2.python-v2-2.python-v2-2-combining-conditions.bullets.1",
-              "sections.python-v2.python-v2-2.python-v2-2-combining-conditions.bullets.2",
-              "sections.python-v2.python-v2-2.python-v2-2-combining-conditions.bullets.3"
+              "sections.python--python-v2--draft.python-v2-2.python--python-v2--draft-python-v2-2-combining-conditions.bullets.0",
+              "sections.python--python-v2--draft.python-v2-2.python--python-v2--draft-python-v2-2-combining-conditions.bullets.1",
+              "sections.python--python-v2--draft.python-v2-2.python--python-v2--draft-python-v2-2-combining-conditions.bullets.2",
+              "sections.python--python-v2--draft.python-v2-2.python--python-v2--draft-python-v2-2-combining-conditions.bullets.3"
             ]
           },
+          "serviceDefaults": null,
           "topics": [
             "and-or-not",
             "truthiness-and-empty-values",
@@ -300,19 +316,22 @@
           ]
         },
         {
-          "slug": "python-v2-2-module-project",
-          "order": 99,
-          "titleKey": "sections.python-v2.python-v2-2.python-v2-2-module-project.title",
-          "descriptionKey": "sections.python-v2.python-v2-2.python-v2-2-module-project.description",
+          "slug": "python--python-v2--draft-python-v2-2-module-project",
+          "order": 3,
+          "role": "module_project",
+          "titleKey": "sections.python--python-v2--draft.python-v2-2.python--python-v2--draft-python-v2-2-module-project.title",
+          "descriptionKey": "sections.python--python-v2--draft.python-v2-2.python--python-v2--draft-python-v2-2-module-project.description",
           "meta": {
             "module": 2,
-            "weeksKey": "sections.python-v2.python-v2-2.python-v2-2-module-project.weeks",
+            "weeksKey": "sections.python--python-v2--draft.python-v2-2.python--python-v2--draft-python-v2-2-module-project.weeks",
             "bulletKeys": [
-              "sections.python-v2.python-v2-2.python-v2-2-module-project.bullets.0",
-              "sections.python-v2.python-v2-2.python-v2-2-module-project.bullets.1",
-              "sections.python-v2.python-v2-2.python-v2-2-module-project.bullets.2"
+              "sections.python--python-v2--draft.python-v2-2.python--python-v2--draft-python-v2-2-module-project.bullets.0",
+              "sections.python--python-v2--draft.python-v2-2.python--python-v2--draft-python-v2-2-module-project.bullets.1",
+              "sections.python--python-v2--draft.python-v2-2.python--python-v2--draft-python-v2-2-module-project.bullets.2",
+              "sections.python--python-v2--draft.python-v2-2.python--python-v2--draft-python-v2-2-module-project.bullets.3"
             ]
           },
+          "serviceDefaults": null,
           "topics": [
             "module-2-study-checker-project"
           ]
@@ -323,8 +342,8 @@
       "slug": "python-v2-3",
       "prefix": "pyv2_3",
       "order": 3,
-      "titleKey": "modules.python-v2.python-v2-3.title",
-      "descriptionKey": "modules.python-v2.python-v2-3.description",
+      "titleKey": "modules.python--python-v2--draft.python-v2-3.title",
+      "descriptionKey": "modules.python--python-v2--draft.python-v2-3.description",
       "weekStart": null,
       "weekEnd": null,
       "accessOverride": null,
@@ -337,37 +356,39 @@
         "supportsStdInStdOut": true,
         "supportsPackageInstall": false
       },
+      "serviceDefaults": null,
       "meta": {
-        "estimatedMinutes": 108,
+        "estimatedMinutes": 136,
         "prereqKeys": [
-          "modules.python-v2.python-v2-2.title"
+          "modules.python--python-v2--draft.python-v2-2.title"
         ],
         "outcomeKeys": [
-          "modules.python-v2.python-v2-3.outcomes.0",
-          "modules.python-v2.python-v2-3.outcomes.1",
-          "modules.python-v2.python-v2-3.outcomes.2"
+          "modules.python--python-v2--draft.python-v2-3.outcomes.0",
+          "modules.python--python-v2--draft.python-v2-3.outcomes.1",
+          "modules.python--python-v2--draft.python-v2-3.outcomes.2"
         ],
         "whyKeys": [
-          "modules.python-v2.python-v2-3.why.0",
-          "modules.python-v2.python-v2-3.why.1"
+          "modules.python--python-v2--draft.python-v2-3.why.0",
+          "modules.python--python-v2--draft.python-v2-3.why.1"
         ]
       },
       "sections": [
         {
-          "slug": "python-v2-3-for-loops",
+          "slug": "python--python-v2--draft-python-v2-3-for-loops",
           "order": 1,
-          "titleKey": "sections.python-v2.python-v2-3.python-v2-3-for-loops.title",
-          "descriptionKey": "sections.python-v2.python-v2-3.python-v2-3-for-loops.description",
+          "titleKey": "sections.python--python-v2--draft.python-v2-3.python--python-v2--draft-python-v2-3-for-loops.title",
+          "descriptionKey": "sections.python--python-v2--draft.python-v2-3.python--python-v2--draft-python-v2-3-for-loops.description",
           "meta": {
             "module": 3,
-            "weeksKey": "sections.python-v2.python-v2-3.python-v2-3-for-loops.weeks",
+            "weeksKey": "sections.python--python-v2--draft.python-v2-3.python--python-v2--draft-python-v2-3-for-loops.weeks",
             "bulletKeys": [
-              "sections.python-v2.python-v2-3.python-v2-3-for-loops.bullets.0",
-              "sections.python-v2.python-v2-3.python-v2-3-for-loops.bullets.1",
-              "sections.python-v2.python-v2-3.python-v2-3-for-loops.bullets.2",
-              "sections.python-v2.python-v2-3.python-v2-3-for-loops.bullets.3"
+              "sections.python--python-v2--draft.python-v2-3.python--python-v2--draft-python-v2-3-for-loops.bullets.0",
+              "sections.python--python-v2--draft.python-v2-3.python--python-v2--draft-python-v2-3-for-loops.bullets.1",
+              "sections.python--python-v2--draft.python-v2-3.python--python-v2--draft-python-v2-3-for-loops.bullets.2",
+              "sections.python--python-v2--draft.python-v2-3.python--python-v2--draft-python-v2-3-for-loops.bullets.3"
             ]
           },
+          "serviceDefaults": null,
           "topics": [
             "for-loops-over-text",
             "range-and-counting",
@@ -375,20 +396,21 @@
           ]
         },
         {
-          "slug": "python-v2-3-while-loops",
+          "slug": "python--python-v2--draft-python-v2-3-while-loops",
           "order": 2,
-          "titleKey": "sections.python-v2.python-v2-3.python-v2-3-while-loops.title",
-          "descriptionKey": "sections.python-v2.python-v2-3.python-v2-3-while-loops.description",
+          "titleKey": "sections.python--python-v2--draft.python-v2-3.python--python-v2--draft-python-v2-3-while-loops.title",
+          "descriptionKey": "sections.python--python-v2--draft.python-v2-3.python--python-v2--draft-python-v2-3-while-loops.description",
           "meta": {
             "module": 3,
-            "weeksKey": "sections.python-v2.python-v2-3.python-v2-3-while-loops.weeks",
+            "weeksKey": "sections.python--python-v2--draft.python-v2-3.python--python-v2--draft-python-v2-3-while-loops.weeks",
             "bulletKeys": [
-              "sections.python-v2.python-v2-3.python-v2-3-while-loops.bullets.0",
-              "sections.python-v2.python-v2-3.python-v2-3-while-loops.bullets.1",
-              "sections.python-v2.python-v2-3.python-v2-3-while-loops.bullets.2",
-              "sections.python-v2.python-v2-3.python-v2-3-while-loops.bullets.3"
+              "sections.python--python-v2--draft.python-v2-3.python--python-v2--draft-python-v2-3-while-loops.bullets.0",
+              "sections.python--python-v2--draft.python-v2-3.python--python-v2--draft-python-v2-3-while-loops.bullets.1",
+              "sections.python--python-v2--draft.python-v2-3.python--python-v2--draft-python-v2-3-while-loops.bullets.2",
+              "sections.python--python-v2--draft.python-v2-3.python--python-v2--draft-python-v2-3-while-loops.bullets.3"
             ]
           },
+          "serviceDefaults": null,
           "topics": [
             "while-loop-basics",
             "break-and-continue",
@@ -401,8 +423,9 @@
       "slug": "python-v2-4",
       "prefix": "pyv2_4",
       "order": 4,
-      "titleKey": "modules.python-v2.python-v2-4.title",
-      "descriptionKey": "modules.python-v2.python-v2-4.description",
+      "role": "capstone",
+      "titleKey": "modules.python--python-v2--draft.python-v2-4.title",
+      "descriptionKey": "modules.python--python-v2--draft.python-v2-4.description",
       "weekStart": null,
       "weekEnd": null,
       "accessOverride": null,
@@ -415,36 +438,40 @@
         "supportsStdInStdOut": true,
         "supportsPackageInstall": false
       },
+      "serviceDefaults": null,
       "meta": {
-        "estimatedMinutes": 55,
+        "estimatedMinutes": 35,
         "prereqKeys": [
-          "modules.python-v2.python-v2-3.title"
+          "modules.python--python-v2--draft.python-v2-3.title"
         ],
         "outcomeKeys": [
-          "modules.python-v2.python-v2-4.outcomes.0",
-          "modules.python-v2.python-v2-4.outcomes.1",
-          "modules.python-v2.python-v2-4.outcomes.2"
+          "modules.python--python-v2--draft.python-v2-4.outcomes.0",
+          "modules.python--python-v2--draft.python-v2-4.outcomes.1",
+          "modules.python--python-v2--draft.python-v2-4.outcomes.2"
         ],
         "whyKeys": [
-          "modules.python-v2.python-v2-4.why.0",
-          "modules.python-v2.python-v2-4.why.1"
+          "modules.python--python-v2--draft.python-v2-4.why.0",
+          "modules.python--python-v2--draft.python-v2-4.why.1"
         ]
       },
       "sections": [
         {
-          "slug": "python-v2-4-gradebook-capstone",
+          "slug": "python--python-v2--draft-python-v2-4-capstone-project",
           "order": 1,
-          "titleKey": "sections.python-v2.python-v2-4.python-v2-4-gradebook-capstone.title",
-          "descriptionKey": "sections.python-v2.python-v2-4.python-v2-4-gradebook-capstone.description",
+          "role": "capstone",
+          "titleKey": "sections.python--python-v2--draft.python-v2-4.python--python-v2--draft-python-v2-4-capstone-project.title",
+          "descriptionKey": "sections.python--python-v2--draft.python-v2-4.python--python-v2--draft-python-v2-4-capstone-project.description",
           "meta": {
             "module": 4,
-            "weeksKey": "sections.python-v2.python-v2-4.python-v2-4-gradebook-capstone.weeks",
+            "weeksKey": "sections.python--python-v2--draft.python-v2-4.python--python-v2--draft-python-v2-4-capstone-project.weeks",
             "bulletKeys": [
-              "sections.python-v2.python-v2-4.python-v2-4-gradebook-capstone.bullets.0",
-              "sections.python-v2.python-v2-4.python-v2-4-gradebook-capstone.bullets.1",
-              "sections.python-v2.python-v2-4.python-v2-4-gradebook-capstone.bullets.2"
+              "sections.python--python-v2--draft.python-v2-4.python--python-v2--draft-python-v2-4-capstone-project.bullets.0",
+              "sections.python--python-v2--draft.python-v2-4.python--python-v2--draft-python-v2-4-capstone-project.bullets.1",
+              "sections.python--python-v2--draft.python-v2-4.python--python-v2--draft-python-v2-4-capstone-project.bullets.2",
+              "sections.python--python-v2--draft.python-v2-4.python--python-v2--draft-python-v2-4-capstone-project.bullets.3"
             ]
           },
+          "serviceDefaults": null,
           "topics": [
             "mini-gradebook-capstone"
           ]

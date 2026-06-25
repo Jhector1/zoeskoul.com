@@ -1,0 +1,20 @@
+{
+  "mode": "rebuild-from-drafts",
+  "source": "current-draft-output",
+  "sourceBundlePath": "/Users/admin/Documents/NextJSProject/zoeskoul.com/.curriculum-drafts/python/subjects/python--python-v2--draft/modules/module0/topics/print-comments-and-errors/topic.bundle.json",
+  "sourceMessagesPaths": {
+    "en": "/Users/admin/Documents/NextJSProject/zoeskoul.com/.curriculum-drafts/python/messages/en/subjects/python--python-v2--draft/module0/print-comments-and-errors.json"
+  },
+  "identityNormalized": true,
+  "identityReplacements": [
+    [
+      "python-v2-0-setup-and-first-programs",
+      "python--python-v2--draft-python-v2-0-setup-and-first-programs"
+    ],
+    [
+      "python-v2",
+      "python--python-v2--draft"
+    ]
+  ],
+  "syncedReports": true
+}

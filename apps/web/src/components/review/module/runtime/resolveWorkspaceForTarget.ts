@@ -790,6 +790,32 @@ function workspaceHasNonBlankFile(workspace: WorkspaceStateV2 | null | undefined
   });
 }
 
+function workspaceHasMeaningfulSavedContent(workspace: WorkspaceStateV2 | null | undefined) {
+  if (!workspace || workspace.version !== 2 || !Array.isArray(workspace.nodes)) {
+    return false;
+  }
+
+  return workspace.nodes.some((node: any) => {
+    if (node?.kind !== "file") return false;
+
+    const content = String(node.content ?? "").trim();
+    if (!content) return false;
+
+    // A raw i18n alias can be left behind by an older broken starter-code
+    // resolver. It is authored metadata, not learner code.
+    if (content.startsWith("@:")) return false;
+
+    return true;
+  });
+}
+
+function hasMeaningfulSavedCodeValue(value: unknown) {
+  if (typeof value !== "string") return false;
+
+  const content = value.trim();
+  return Boolean(content) && !content.startsWith("@:");
+}
+
 function workspaceLanguage(workspace: WorkspaceStateV2 | null | undefined) {
   return String((workspace as any)?.language ?? "").trim().toLowerCase();
 }
@@ -950,20 +976,34 @@ function shouldUseSavedWorkspace(args: {
     return false;
   }
 
+  const savedHasCode = workspaceHasNonBlankFile(args.savedWorkspace);
+  const savedHasMeaningfulCode = workspaceHasMeaningfulSavedContent(args.savedWorkspace);
+  const savedHasLegacyCode = Boolean(
+      hasMeaningfulSavedCodeValue(args.savedState.code) ||
+      hasMeaningfulSavedCodeValue((args.savedState as any).source),
+  );
+  const manifestHasStarter =
+      workspaceHasNonBlankFile(args.manifest.manifestWorkspace) ||
+      Boolean(String(args.manifest.starterCode ?? "").trim());
+
   const userOwned = isUserWorkspaceState(args.savedState);
 
   /**
    * Real learner work must win even when the course was regenerated and the
    * starter hash changed. This is the core saved > starter > default contract.
+   *
+   * But an old broken i18n pass could persist an empty editor shell, or even
+   * the raw @: starterCode alias, as workspaceOrigin="saved". That is not
+   * learner work. When the current manifest has a resolved starter, reject that
+   * stale saved shell so embedded Try It cards seed the authored starter again.
    */
   if (userOwned) {
+    if (!savedHasMeaningfulCode && !savedHasLegacyCode && manifestHasStarter) {
+      return false;
+    }
+
     return true;
   }
-
-  const savedHasCode = workspaceHasNonBlankFile(args.savedWorkspace);
-  const savedHasLegacyCode = Boolean(
-      typeof args.savedState.code === "string" && args.savedState.code.trim(),
-  );
 
   if (!savedHasCode && !savedHasLegacyCode) {
     return false;
@@ -1255,10 +1295,19 @@ export function resolveWorkspaceForTarget(args: {
   );
 
   const draftMaxAgeMs = args.draftMaxAgeMs ?? 10 * 60 * 1000;
+  const manifestHasStarter =
+    workspaceHasNonBlankFile(manifest.manifestWorkspace) ||
+    Boolean(String(manifest.starterCode ?? "").trim());
+  const localDraftHasMeaningfulContent = workspaceHasMeaningfulSavedContent(
+    args.localDraft?.workspace,
+  );
+  const localDraftCanOverrideStarter =
+    !manifestHasStarter || localDraftHasMeaningfulContent;
   const draftIsFresh =
     args.localDraft &&
     args.localDraft.targetKey === args.targetKey &&
     isWorkspace(args.localDraft.workspace) &&
+    localDraftCanOverrideStarter &&
     Date.now() - args.localDraft.savedAt <= draftMaxAgeMs &&
     args.localDraft.savedAt >= freshestSavedUpdatedAt;
 
