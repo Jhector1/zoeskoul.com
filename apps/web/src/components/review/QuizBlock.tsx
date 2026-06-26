@@ -37,6 +37,7 @@ import {
 
 import { scrollIntoViewSmart } from "@/lib/ui/flowScroll";
 import { useTaggedT } from "@/i18n/tagged";
+import { learnerUiFlags } from "@/lib/config/learnerUiFlags";
 import FlowNavigator, {
   type FlowNavMode,
 } from "@/components/review/navigation/FlowNavigator";
@@ -225,6 +226,7 @@ function serializePracticeItemForSave(
 
   const itemAny = item as UnknownRecord;
   const ui = itemAny.ui as UnknownRecord | undefined;
+  const result = itemAny.result as UnknownRecord | undefined;
 
   const rest: UnknownRecord = {
     single: itemAny.single,
@@ -282,6 +284,17 @@ function serializePracticeItemForSave(
   if (exercise?.kind === "drag_reorder" && !ui?.reorderTouched) {
     delete rest.reorder;
     delete rest.reorderIds;
+  }
+
+  /**
+   * Wrong-answer feedback dismissal is transient UI state.
+   *
+   * Persisting feedbackDismissed=true on an incorrect checked result can hide
+   * the learner's most recent wrong-answer feedback after refresh/rehydration,
+   * especially if that dismissed state came from an older sync bug.
+   */
+  if (result?.ok === false && itemAny.feedbackDismissed === true) {
+    delete rest.feedbackDismissed;
   }
 
   for (const key of Object.keys(rest)) {
@@ -1683,32 +1696,34 @@ export default function QuizBlock({
             renderItem={renderQuestionItem}
         />
 
-        <div ref={footerElRef}>
-          <div className="ui-quiz-toggle-row">
-            <label className="ui-quiz-toggle-label">
-              <input
-                  type="checkbox"
-                  checked={autoAdvance}
-                  onChange={(e) => {
-                    setAwaitNextQid(null);
-                    setAutoAdvance(e.target.checked);
-                  }}
-              />
-              {ui.t("autoAdvance", {}, "Auto-advance")}
-            </label>
-          </div>
+        {!learnerUiFlags.compactLearnerUi || learnerUiFlags.showDebugLearningUi ? (
+          <div ref={footerElRef}>
+            <div className="ui-quiz-toggle-row">
+              <label className="ui-quiz-toggle-label">
+                <input
+                    type="checkbox"
+                    checked={autoAdvance}
+                    onChange={(e) => {
+                      setAwaitNextQid(null);
+                      setAutoAdvance(e.target.checked);
+                    }}
+                />
+                {ui.t("autoAdvance", {}, "Auto-advance")}
+              </label>
+            </div>
 
-          <QuizFooter
-              checkedCount={summary.checkedCount}
-              correctCount={summary.correctCount}
-              total={summary.total}
-              scorePct={Math.round(summary.score * 100)}
-              isCompleted={isCompleted}
-              passed={summary.passed}
-              sequential={sequential}
-              onResetClick={() => setConfirmResetQuiz(true)}
-          />
-        </div>
+            <QuizFooter
+                checkedCount={summary.checkedCount}
+                correctCount={summary.correctCount}
+                total={summary.total}
+                scorePct={Math.round(summary.score * 100)}
+                isCompleted={isCompleted}
+                passed={summary.passed}
+                sequential={sequential}
+                onResetClick={() => setConfirmResetQuiz(true)}
+            />
+          </div>
+        ) : null}
 
         <ConfirmDialog
             open={confirmResetQuiz}

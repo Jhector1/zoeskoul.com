@@ -38,9 +38,33 @@ import { cx } from "@/components/tools/utils/cx";
 import HeaderBar from "@/components/code/runner/components/HeaderBar";
 import type { SqlPaneOptions } from "@/components/code/runner/components/sql/results-pane";
 import { resolveEditableWorkspaceFileId } from "@/components/code/runner/workspaceEditing";
+import { learnerUiFlags } from "@/lib/config/learnerUiFlags";
+import type {
+    CodeRunnerController,
+    WorkspaceTerminalController,
+} from "@/components/code/runner/runtime";
 
 type MobilePane = "editor" | "output";
 type OutputTab = "output" | "terminal";
+
+type IdleOutputCollapseArgs = {
+    compactLearnerUi: boolean;
+    showEditor: boolean;
+    showTerminal: boolean;
+    terminalOnlyMode: boolean;
+    isWeb: boolean;
+    language: WorkspaceLanguage;
+    outputTab: OutputTab;
+    runner: Pick<
+        CodeRunnerController,
+        "busy" | "runState" | "lastResult" | "transcript" | "stream"
+    >;
+    workspaceTerminalEnabled: boolean;
+    workspaceTerminal: Pick<
+        WorkspaceTerminalController,
+        "busy" | "starting" | "started" | "sessionId" | "inputEnabled" | "terminalFeed"
+    >;
+};
 
 type CodeRunnerWithStdinProps = CodeRunnerProps & {
     stdin?: string;
@@ -129,6 +153,64 @@ function shouldClaimTerminalAutoOpen(key: string) {
 
 function releaseTerminalAutoOpenClaim(key: string) {
     terminalAutoOpenClaims.delete(key);
+}
+
+function hasMeaningfulRunnerOutput(
+    controller: Pick<
+        CodeRunnerController,
+        "busy" | "runState" | "lastResult" | "transcript" | "stream"
+    >,
+) {
+    if (controller.busy || controller.runState !== "idle" || controller.lastResult) {
+        return true;
+    }
+
+    if (controller.transcript) {
+        if (controller.transcript.awaitingInput || controller.transcript.terminal.length > 0) {
+            return true;
+        }
+    }
+
+    if (controller.stream) {
+        if (controller.stream.inputEnabled || controller.stream.terminalFeed.length > 0) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+function hasMeaningfulWorkspaceTerminalOutput(
+    controller: Pick<
+        WorkspaceTerminalController,
+        "busy" | "starting" | "started" | "sessionId" | "inputEnabled" | "terminalFeed"
+    >,
+) {
+    return (
+        controller.busy ||
+        controller.starting ||
+        controller.started ||
+        Boolean(controller.sessionId) ||
+        controller.inputEnabled ||
+        controller.terminalFeed.length > 0
+    );
+}
+
+export function shouldCollapseIdleOutputPanel(args: IdleOutputCollapseArgs) {
+    if (!args.compactLearnerUi) return false;
+    if (!args.showEditor || !args.showTerminal || args.terminalOnlyMode) return false;
+    if (args.isWeb || args.language === "sql") return false;
+    if (args.outputTab !== "output") return false;
+    if (hasMeaningfulRunnerOutput(args.runner)) return false;
+
+    if (
+        args.workspaceTerminalEnabled &&
+        hasMeaningfulWorkspaceTerminalOutput(args.workspaceTerminal)
+    ) {
+        return false;
+    }
+
+    return true;
 }
 
 export async function restartWorkspaceTerminalSession(args: {
@@ -874,6 +956,18 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         showStdinEditor && showEditor && !terminalOnlyMode && lang !== "sql" && !isWeb;
     const showWorkspaceTerminalTab = workspaceTerminalEnabled;
     const effectiveEditorLanguage = editorLanguage ?? (isWeb ? "html" : lang);
+    const shouldCollapseIdleOutput = shouldCollapseIdleOutputPanel({
+        compactLearnerUi: learnerUiFlags.compactLearnerUi,
+        showEditor,
+        showTerminal,
+        terminalOnlyMode,
+        isWeb,
+        language: lang,
+        outputTab,
+        runner: term,
+        workspaceTerminalEnabled,
+        workspaceTerminal: workspaceTerm,
+    });
 
     const outputModel: OutputSurfaceModel = useMemo(() => {
         if (isWeb) {
@@ -1052,6 +1146,12 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         </div>
     );
 
+    const renderCollapsedIdleOutputFooter = () => (
+        <div className="border-t border-neutral-200 px-3 py-2 text-[11px] text-neutral-500 dark:border-white/10 dark:text-white/45">
+            Output will appear after you run.
+        </div>
+    );
+
     return (
         <div className={outerCls} data-testid={testId} style={rootStyle}>
             {showHeaderBar ? (
@@ -1209,8 +1309,17 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                                 <div className="min-h-0 flex-1 overflow-hidden">
                                     {mobilePane === "editor"
                                         ? renderEditorPane(mobileBodyHeight)
-                                        : renderOutputPane(mobileBodyHeight)}
+                                        : shouldCollapseIdleOutput
+                                            ? renderCollapsedIdleOutputFooter()
+                                            : renderOutputPane(mobileBodyHeight)}
                                 </div>
+                            </div>
+                        ) : shouldCollapseIdleOutput ? (
+                            <div className="flex h-full min-h-0 flex-col">
+                                <div className={cx("min-h-0 flex-1", PANEL_EDITOR)}>
+                                    {renderEditorPane(surfaceBodyHeight)}
+                                </div>
+                                {renderCollapsedIdleOutputFooter()}
                             </div>
                         ) : effectiveDock === "bottom" ? (
                             <div className="flex h-full min-h-0 flex-col">

@@ -1,0 +1,400 @@
+{
+  "topics": {
+    "linux--linux-terminal-fundamentals--draft": {
+      "linux-module-1-terminal-navigation": {
+        "what-the-terminal-is": {
+          "label": "Kisa tèminal la ye",
+          "summary": "Understand the tèminal as a place pou type kòmands ak see the computer respond.",
+          "cards": {
+            "sketch0": {
+              "title": "Tèminal la se yon konvèsasyon ak òdinatè ou"
+            },
+            "sketch1": {
+              "title": "Kòmand yo se enstriksyon, epi rezilta a se repons lan"
+            },
+            "sketch2": {
+              "title": "Poukisa moun sèvi ak tèminal la"
+            },
+            "quiz": {
+              "title": "Pratik"
+            }
+          },
+          "practice": {
+            "sc-terminal-purpose": {
+              "title": "Sa tèminal la fè",
+              "prompt": "Ou se helping organize a club espas travay avèk katabs ak fichyes. Ki best describes the tèminal?",
+              "hint": "Panse ak whether the tèminal se a place pou type instructions oswa a place that stores fichyes by itself.",
+              "help": {
+                "concept": "The tèminal se an interface for entering kòmands ak seeing the computer's responses. It se not the same thing as a katab, fichye, oswa operating system.",
+                "hint_1": "Decide which choice describes interaction: ou type something, ak the computer responds.",
+                "hint_2": "Chèche the option that describes a text-based tool for running kòmands."
+              },
+              "options": {
+                "a": "A text-based place pou type kòmands ak see the computer respond",
+                "b": "A katab that automatically stores every fichye ou kreye",
+                "c": "A special fichye that liss all kòmands on the computer",
+                "d": "A background process that runs san user input"
+              }
+            },
+            "sc-pwd-vs-ls": {
+              "title": "Chwazi bon objektif kòmand lan",
+              "prompt": "Yon elèv types a kòmand because they want pou know which katab they se currently nan anvan lising fichyes. Ki kòmand matches that objektif?",
+              "hint": "Sèvi ak eksplikasyon leson an ak fason kesyon an ekri pou diminye chwa yo.",
+              "help": {
+                "concept": "Tèks èd sa a te korije paske premye vèsyon an te montre repons lan twò dirèkteman.",
+                "hint_1": "Compare the question pou the lesson example ak redeplase details that fè not match the requested concept.",
+                "hint_2": "Sèvi ak wòl oswa prèv ki nan enstriksyon an olye ou konte sèlman sou mo ki nan repons yo."
+              },
+              "options": {
+                "a": "pwd",
+                "b": "ls",
+                "c": "cat",
+                "d": "touch"
+              }
+            },
+            "mc-terminal-workflow": {
+              "title": "Sa ki dwe antre nan yon fason travay debaz nan tèminal",
+              "prompt": "Choose all actions that fit the idea of using the tèminal pou enspekte a espas travay an sekiritely at the start of a task.",
+              "hint": "Panse ak kòmands that help ou tcheke ou kote ak see what se nan the katab aktyèl la.",
+              "help": {
+                "concept": "Early tèminal workflow often starts avèk enspekteion kòmands such as `pwd` ak `ls` so ou understand ou current kote ak kontni anvan making changes.",
+                "hint_1": "Chèche actions that help ou orient yourself anvan kreye, moving, oswa deleting anything.",
+                "hint_2": "Two of these choices se direct tchekes: one montres ou katab aktyèl la ak one liss items nan it."
+              },
+              "options": {
+                "a": "Kouri `pwd` pou konfime the katab aktyèl la",
+                "b": "Kouri `ls` pou see fichyes ak katabs nan the current kote",
+                "c": "Sèvi ak `sudo` pou get full control anvan tchekeing anything",
+                "d": "Install a package so the tèminal can montre katab names"
+              }
+            },
+            "dr-terminal-check-sequence": {
+              "title": "Mete yon tchek tèminal senp nan lòd",
+              "prompt": "Mete sa yo etaps nan pi bon order for a débutan who opens the tèminal ak wants pou understand the espas travay anvan doing anything else.",
+              "hint": "Li chak moso epi mete yo nan lòd pou deklarasyon an ka byen konprann.",
+              "help": {
+                "concept": "Moso yo dwe fòme yon deklarasyon ki valab nan yon lòd ki lojik.",
+                "hint_1": "Kòmanse ak moso ki prezante lide a oswa aksyon an.",
+                "hint_2": "Mete moso ki depann yo apre pati yo dekri oswa konplete a."
+              },
+              "tokens": {
+                "t1": "Open the tèminal",
+                "t2": "Kouri `pwd`",
+                "t3": "Kouri `ls`"
+              }
+            },
+            "fb-pwd-meaning": {
+              "title": "Konplete sans kòmand lan",
+              "prompt": "Ranpli kòmand ki manke a for this situation: ou want the tèminal pou montre ou katab aktyèl la kote.",
+              "hint": "Choose the kòmand that enprime the repètwa travay la.",
+              "help": {
+                "concept": "`the missing term` se the kòmand used pou display the current repètwa travay la nan the tèminal.",
+                "hint_1": "This kòmand se short for print repètwa travay la.",
+                "hint_2": "It se the kòmand ou use when ou want the tèminal pou answer “Where am I?”"
+              },
+              "template": "To montre ou katab aktyèl la kote, type `[blank1]`.",
+              "choices": [
+                "pwd",
+                "ls",
+                "cat",
+                "mkdir"
+              ]
+            },
+            "fb-ls-purpose": {
+              "title": "Konplete objektif kòmand lan",
+              "prompt": "Ranpli kòmand ki manke a for this situation: ou se inside a project katab ak want pou see the names of fichyes ak katabs there.",
+              "hint": "Chwazi kòmand that liss items nan the repètwa aktyèl la.",
+              "help": {
+                "concept": "`the missing term` liss the kontni of the repètwa aktyèl la, such as fichyes ak katabs.",
+                "hint_1": "This kòmand helps ou answer “Kisa here?”",
+                "hint_2": "It se not the kòmand for montreing ou kote; li se the one for lising names."
+              },
+              "template": "To lis the names of fichyes ak katabs nan the repètwa aktyèl la, type `[blank1]`.",
+              "choices": [
+                "pwd",
+                "touch",
+                "ls",
+                "mv"
+              ]
+            }
+          },
+          "tryIt": {
+            "exercises": {
+              "what-the-terminal-is-try-it-1": {
+                "prompt": "Ou fèk louvri a shared espas travay. Kouri `pwd` pou see where ou se starting.",
+                "title": "Travay tèminal: kouri pwd"
+              },
+              "what-the-terminal-is-try-it-2": {
+                "title": "Travay tèminal: kouri ls",
+                "prompt": "Take a quick look around. Kouri `ls` pou see what se nan the katab aktyèl la."
+              },
+              "what-the-terminal-is-try-it-3": {
+                "title": "Travay tèminal: mande kote ak kisa",
+                "prompt": "Before ou change anything, get oriented. Kouri `pwd`, then `ls`."
+              }
+            },
+            "try_what_the_terminal_is_sketch0": {
+              "title": "Eseye li ou menm: kouri pwd",
+              "prompt": "Kouri `pwd` pou see ou katab aktyèl la."
+            },
+            "try_what_the_terminal_is_sketch1": {
+              "title": "Eseye li ou menm: kouri ls",
+              "prompt": "Kouri `ls` pou lis what se nan the katab aktyèl la."
+            },
+            "try_what_the_terminal_is_sketch2": {
+              "title": "Eseye li ou menm: kouri pwd apre sa ls",
+              "prompt": "Kouri `pwd`, then `ls`, pou see where ou se anvan ou start working."
+            }
+          }
+        }
+      }
+    },
+    "linux-terminal-fundamentals": {
+      "linux-module-1-terminal-navigation": {
+        "what-the-terminal-is": {
+          "label": "Kisa tèminal la ye",
+          "summary": "Understand the tèminal as a place pou type kòmands ak see the computer respond.",
+          "cards": {
+            "sketch0": {
+              "title": "Tèminal la se yon konvèsasyon ak òdinatè ou"
+            },
+            "sketch1": {
+              "title": "Kòmand yo se enstriksyon, epi rezilta a se repons lan"
+            },
+            "sketch2": {
+              "title": "Poukisa moun sèvi ak tèminal la"
+            },
+            "quiz": {
+              "title": "Pratik"
+            }
+          },
+          "practice": {
+            "sc-terminal-purpose": {
+              "title": "Sa tèminal la fè",
+              "prompt": "Ou se helping organize a club espas travay avèk katabs ak fichyes. Ki best describes the tèminal?",
+              "hint": "Panse ak whether the tèminal se a place pou type instructions oswa a place that stores fichyes by itself.",
+              "help": {
+                "concept": "The tèminal se an interface for entering kòmands ak seeing the computer's responses. It se not the same thing as a katab, fichye, oswa operating system.",
+                "hint_1": "Decide which choice describes interaction: ou type something, ak the computer responds.",
+                "hint_2": "Chèche the option that describes a text-based tool for running kòmands."
+              },
+              "options": {
+                "a": "A text-based place pou type kòmands ak see the computer respond",
+                "b": "A katab that automatically stores every fichye ou kreye",
+                "c": "A special fichye that liss all kòmands on the computer",
+                "d": "A background process that runs san user input"
+              }
+            },
+            "sc-pwd-vs-ls": {
+              "title": "Chwazi bon objektif kòmand lan",
+              "prompt": "Yon elèv types a kòmand because they want pou know which katab they se currently nan anvan lising fichyes. Ki kòmand matches that objektif?",
+              "hint": "Sèvi ak eksplikasyon leson an ak fason kesyon an ekri pou diminye chwa yo.",
+              "help": {
+                "concept": "Tèks èd sa a te korije paske premye vèsyon an te montre repons lan twò dirèkteman.",
+                "hint_1": "Compare the question pou the lesson example ak redeplase details that fè not match the requested concept.",
+                "hint_2": "Sèvi ak wòl oswa prèv ki nan enstriksyon an olye ou konte sèlman sou mo ki nan repons yo."
+              },
+              "options": {
+                "a": "pwd",
+                "b": "ls",
+                "c": "cat",
+                "d": "touch"
+              }
+            },
+            "mc-terminal-workflow": {
+              "title": "Sa ki dwe antre nan yon fason travay debaz nan tèminal",
+              "prompt": "Choose all actions that fit the idea of using the tèminal pou enspekte a espas travay an sekiritely at the start of a task.",
+              "hint": "Panse ak kòmands that help ou tcheke ou kote ak see what se nan the katab aktyèl la.",
+              "help": {
+                "concept": "Early tèminal workflow often starts avèk enspekteion kòmands such as `pwd` ak `ls` so ou understand ou current kote ak kontni anvan making changes.",
+                "hint_1": "Chèche actions that help ou orient yourself anvan kreye, moving, oswa deleting anything.",
+                "hint_2": "Two of these choices se direct tchekes: one montres ou katab aktyèl la ak one liss items nan it."
+              },
+              "options": {
+                "a": "Kouri `pwd` pou konfime the katab aktyèl la",
+                "b": "Kouri `ls` pou see fichyes ak katabs nan the current kote",
+                "c": "Sèvi ak `sudo` pou get full control anvan tchekeing anything",
+                "d": "Install a package so the tèminal can montre katab names"
+              }
+            },
+            "dr-terminal-check-sequence": {
+              "title": "Mete yon tchek tèminal senp nan lòd",
+              "prompt": "Mete sa yo etaps nan pi bon order for a débutan who opens the tèminal ak wants pou understand the espas travay anvan doing anything else.",
+              "hint": "Li chak moso epi mete yo nan lòd pou deklarasyon an ka byen konprann.",
+              "help": {
+                "concept": "Moso yo dwe fòme yon deklarasyon ki valab nan yon lòd ki lojik.",
+                "hint_1": "Kòmanse ak moso ki prezante lide a oswa aksyon an.",
+                "hint_2": "Mete moso ki depann yo apre pati yo dekri oswa konplete a."
+              },
+              "tokens": {
+                "t1": "Open the tèminal",
+                "t2": "Kouri `pwd`",
+                "t3": "Kouri `ls`"
+              }
+            },
+            "fb-pwd-meaning": {
+              "title": "Konplete sans kòmand lan",
+              "prompt": "Ranpli kòmand ki manke a for this situation: ou want the tèminal pou montre ou katab aktyèl la kote.",
+              "hint": "Choose the kòmand that enprime the repètwa travay la.",
+              "help": {
+                "concept": "`the missing term` se the kòmand used pou display the current repètwa travay la nan the tèminal.",
+                "hint_1": "This kòmand se short for print repètwa travay la.",
+                "hint_2": "It se the kòmand ou use when ou want the tèminal pou answer “Where am I?”"
+              },
+              "template": "To montre ou katab aktyèl la kote, type `[blank1]`.",
+              "choices": [
+                "pwd",
+                "ls",
+                "cat",
+                "mkdir"
+              ]
+            },
+            "fb-ls-purpose": {
+              "title": "Konplete objektif kòmand lan",
+              "prompt": "Ranpli kòmand ki manke a for this situation: ou se inside a project katab ak want pou see the names of fichyes ak katabs there.",
+              "hint": "Chwazi kòmand that liss items nan the repètwa aktyèl la.",
+              "help": {
+                "concept": "`the missing term` liss the kontni of the repètwa aktyèl la, such as fichyes ak katabs.",
+                "hint_1": "This kòmand helps ou answer “Kisa here?”",
+                "hint_2": "It se not the kòmand for montreing ou kote; li se the one for lising names."
+              },
+              "template": "To lis the names of fichyes ak katabs nan the repètwa aktyèl la, type `[blank1]`.",
+              "choices": [
+                "pwd",
+                "touch",
+                "ls",
+                "mv"
+              ]
+            }
+          },
+          "tryIt": {
+            "exercises": {
+              "what-the-terminal-is-try-it-1": {
+                "prompt": "Ou fèk louvri a shared espas travay. Kouri `pwd` pou see where ou se starting.",
+                "title": "Travay tèminal: kouri pwd",
+                "terminalExpectations": {
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Kouri `pwd` pou print the current repètwa travay la."
+                    }
+                  },
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "Pa sèvi ak sudo pou travay débutan nan espas travay la."
+                    }
+                  }
+                },
+                "starterFiles": {
+                  "terminal_tour_location_readme_txt": {
+                    "content": "Kouri pwd pou ask the tèminal where ou are.\n"
+                  }
+                }
+              },
+              "what-the-terminal-is-try-it-2": {
+                "title": "Travay tèminal: kouri ls",
+                "prompt": "Take a quick look around. Kouri `ls` pou see what se nan the katab aktyèl la.",
+                "terminalExpectations": {
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Kouri `ls` pou lis what se nan the katab aktyèl la."
+                    }
+                  },
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "Pa sèvi ak sudo pou travay débutan nan espas travay la."
+                    }
+                  }
+                },
+                "starterFiles": {
+                  "terminal_tour_notes_txt": {
+                    "content": "notes\n"
+                  },
+                  "terminal_tour_photos_readme_txt": {
+                    "content": "photo katab\n"
+                  }
+                }
+              },
+              "what-the-terminal-is-try-it-3": {
+                "title": "Travay tèminal: mande kote ak kisa",
+                "prompt": "Before ou change anything, get oriented. Kouri `pwd`, then `ls`.",
+                "terminalExpectations": {
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Kouri `pwd` first."
+                    },
+                    "1": {
+                      "message": "Kouri `ls` apre pwd."
+                    }
+                  },
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "Pa sèvi ak sudo pou travay débutan nan espas travay la."
+                    }
+                  }
+                },
+                "starterFiles": {
+                  "event_plan_schedule_txt": {
+                    "content": "10:00 setup\n"
+                  },
+                  "event_plan_guests_txt": {
+                    "content": "Guests\n"
+                  }
+                }
+              }
+            },
+            "try_what_the_terminal_is_sketch0": {
+              "title": "Eseye li ou menm: kouri pwd",
+              "prompt": "Kouri `pwd` pou see ou katab aktyèl la."
+            },
+            "try_what_the_terminal_is_sketch1": {
+              "title": "Eseye li ou menm: kouri ls",
+              "prompt": "Kouri `ls` pou lis what se nan the katab aktyèl la."
+            },
+            "try_what_the_terminal_is_sketch2": {
+              "title": "Eseye li ou menm: kouri pwd apre sa ls",
+              "prompt": "Kouri `pwd`, then `ls`, pou see where ou se anvan ou start working."
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "linux--linux-terminal-fundamentals--draft": {
+      "linux-module-1-terminal-navigation": {
+        "what-the-terminal-is": {
+          "terminal-basics": {
+            "title": "Tèminal la se yon konvèsasyon ak òdinatè ou",
+            "bodyMarkdown": "The tèminal se a text-based place where ou **type kòmands** ak the computer **responds avèk rezilta**. Instead of clicking katabs ak buttons, ou tell the computer what pou fè avèk short instructions.\n\nA kòmand usually has two parts:\n\n1. the kòmand name\n2. the rezilta the computer montres back pou you\n\nFor example:\n\n```bash\npwd\n```\n\nIf ou run `pwd`, the computer enprime ou current kote nan the espas travay. Line by line, here se what se happening:\n\n- `pwd` se the kòmand ou type\n- li stands for **print repètwa travay la**\n- the tèminal responds by montreing the katab ou se currently in\n\nAnother example:\n\n```bash\nls\n```\n\n- `ls` se the kòmand ou type\n- li liss what se nan the katab aktyèl la\n- the tèminal responds avèk fichye ak katab names\n\nImagine ou se helping organize a small project katab for a school club. In a fichye explorer, ou might click around pou see where ou are. In the tèminal, ou can ask directly avèk `pwd` ak `ls`. The tèminal se not magic—it se just a faster, text-based way pou enspekte ak control ou espas travay."
+          },
+          "commands-and-output": {
+            "title": "Kòmand yo se enstriksyon, epi rezilta a se repons lan",
+            "bodyMarkdown": "When ou use the tèminal, ou se giving the computer a specific instruction. The computer then montres a rezilta, often as text.\n\nHere se a simple worked example:\n\n```bash\nls\n```\n\nSuppose the katab aktyèl la contains two items named `notes.txt` ak `photos`. The tèminal rezilta might look like this:\n\n```bash\nnotes.txt\nphotos\n```\n\nThat means:\n\n- ou typed `ls`\n- the computer tchekeed the katab aktyèl la\n- li printed the names of the items inside it\n\nNow compare that with:\n\n```bash\npwd\n```\n\nPossible rezilta:\n\n```bash\n/home/learner/project\n```\n\nThis tells ou **where ou are**, not **what se inside**. That difference matters:\n\n- `pwd` answers: “Ki katab am I in?”\n- `ls` answers: “Kisa nan this katab?”\n\nIf ou se organizing a newsletter espas travay, `pwd` helps ou konfime ou se nan the `drafts` katab, while `ls` helps ou see whether fichyes like `intro.txt` oswa `outline.txt` se there."
+          },
+          "why-terminal-matters": {
+            "title": "Poukisa moun sèvi ak tèminal la",
+            "bodyMarkdown": "People use the tèminal because li gives clear, direct control over fichyes ak katabs. It se especially useful when ou want pou enspekte a espas travay quickly oswa repeat the same kinds of actions.\n\nFor a débutan, the most important idea se this: the tèminal helps ou **navigate** ak **enspekte** ou espas travay avèk kòmands.\n\nHere se a short sequence:\n\n```bash\npwd\nls\n```\n\nStep by etap:\n\n- `pwd` montres ou katab aktyèl la\n- `ls` montres what se inside that katab\n\nTogether, these kòmands help ou stay oriented.\n\nImagine ou se a junior assistant preparing katabs for an event team. You might need pou konfime that ou se inside `event-plan` anvan tchekeing whether `schedule.txt` ak `guests.txt` exist. In the tèminal, that workflow se quick ak precise.\n\nThe tèminal fè not replace thinking. You still decide what ou want pou enspekte oswa change. The tèminal se simply the tool that carries out ou kòmands ak reports back."
+          }
+        }
+      }
+    },
+    "linux-terminal-fundamentals": {
+      "linux-module-1-terminal-navigation": {
+        "what-the-terminal-is": {
+          "terminal-basics": {
+            "title": "Tèminal la se yon konvèsasyon ak òdinatè ou",
+            "bodyMarkdown": "The tèminal se a text-based place where ou **type kòmands** ak the computer **responds avèk rezilta**. Instead of clicking katabs ak buttons, ou tell the computer what pou fè avèk short instructions.\n\nA kòmand usually has two parts:\n\n1. the kòmand name\n2. the rezilta the computer montres back pou you\n\nFor example:\n\n```bash\npwd\n```\n\nIf ou run `pwd`, the computer enprime ou current kote nan the espas travay. Line by line, here se what se happening:\n\n- `pwd` se the kòmand ou type\n- li stands for **print repètwa travay la**\n- the tèminal responds by montreing the katab ou se currently in\n\nAnother example:\n\n```bash\nls\n```\n\n- `ls` se the kòmand ou type\n- li liss what se nan the katab aktyèl la\n- the tèminal responds avèk fichye ak katab names\n\nImagine ou se helping organize a small project katab for a school club. In a fichye explorer, ou might click around pou see where ou are. In the tèminal, ou can ask directly avèk `pwd` ak `ls`. The tèminal se not magic—it se just a faster, text-based way pou enspekte ak control ou espas travay."
+          },
+          "commands-and-output": {
+            "title": "Kòmand yo se enstriksyon, epi rezilta a se repons lan",
+            "bodyMarkdown": "When ou use the tèminal, ou se giving the computer a specific instruction. The computer then montres a rezilta, often as text.\n\nHere se a simple worked example:\n\n```bash\nls\n```\n\nSuppose the katab aktyèl la contains two items named `notes.txt` ak `photos`. The tèminal rezilta might look like this:\n\n```bash\nnotes.txt\nphotos\n```\n\nThat means:\n\n- ou typed `ls`\n- the computer tchekeed the katab aktyèl la\n- li printed the names of the items inside it\n\nNow compare that with:\n\n```bash\npwd\n```\n\nPossible rezilta:\n\n```bash\n/home/learner/project\n```\n\nThis tells ou **where ou are**, not **what se inside**. That difference matters:\n\n- `pwd` answers: “Ki katab am I in?”\n- `ls` answers: “Kisa nan this katab?”\n\nIf ou se organizing a newsletter espas travay, `pwd` helps ou konfime ou se nan the `drafts` katab, while `ls` helps ou see whether fichyes like `intro.txt` oswa `outline.txt` se there."
+          },
+          "why-terminal-matters": {
+            "title": "Poukisa moun sèvi ak tèminal la",
+            "bodyMarkdown": "People use the tèminal because li gives clear, direct control over fichyes ak katabs. It se especially useful when ou want pou enspekte a espas travay quickly oswa repeat the same kinds of actions.\n\nFor a débutan, the most important idea se this: the tèminal helps ou **navigate** ak **enspekte** ou espas travay avèk kòmands.\n\nHere se a short sequence:\n\n```bash\npwd\nls\n```\n\nStep by etap:\n\n- `pwd` montres ou katab aktyèl la\n- `ls` montres what se inside that katab\n\nTogether, these kòmands help ou stay oriented.\n\nImagine ou se a junior assistant preparing katabs for an event team. You might need pou konfime that ou se inside `event-plan` anvan tchekeing whether `schedule.txt` ak `guests.txt` exist. In the tèminal, that workflow se quick ak precise.\n\nThe tèminal fè not replace thinking. You still decide what ou want pou enspekte oswa change. The tèminal se simply the tool that carries out ou kòmands ak reports back."
+          }
+        }
+      }
+    }
+  }
+}

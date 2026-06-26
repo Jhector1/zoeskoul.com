@@ -32,6 +32,7 @@ import {
     writeReviewWorkspaceDraft
 } from "@/components/tools/panes/reviewWorkspaceDrafts";
 import { extractRuntimeSnapshotFromWorkspace } from "@/components/tools/panes/workspaceSnapshot";
+import { learnerUiFlags } from "@/lib/config/learnerUiFlags";
 
 const FullIDE = dynamic(() => import("@/components/ide/fullide/FullIDE"), {
     ssr: false,
@@ -1079,6 +1080,7 @@ export default function CodeToolPane(props: {
     const previewExerciseKey = tools?.previewExerciseKey ?? null;
     const clearRunFeedback = tools?.clearRunFeedback;
     const setRunFeedbackForCard = tools?.setRunFeedback;
+    const getRunFeedbackEntryForCard = tools?.getRunFeedbackEntry;
     const syncCodeInputSnapshot = tools?.syncCodeInputSnapshot;
     const runtimeBoundExerciseKey = useReviewRuntimeStore(
         (s) => s.tool.boundExerciseKey,
@@ -1407,6 +1409,13 @@ export default function CodeToolPane(props: {
     const runnerH = Math.max(usesWorkspaceShell ? 480 : 320, size.h);
 
     const [runFeedback, setRunFeedback] = useState<CodeFeedback | null>(null);
+    const contextRunFeedback = boundId
+        ? getRunFeedbackEntryForCard?.(boundId)?.feedback ?? null
+        : null;
+    const visibleRunFeedback =
+        contextRunFeedback?.source === "check"
+            ? contextRunFeedback
+            : runFeedback ?? contextRunFeedback;
     const [ideReady, setIdeReady] = useState(false);
     const lastEmittedRef = useRef<{ code: string; stdin: string } | null>(null);
     const lastIncomingRef = useRef<{ code: string; stdin: string } | null>(null);
@@ -2428,7 +2437,7 @@ export default function CodeToolPane(props: {
                             ...ideShell.services,
                             runner: {
                                 ...(ideShell.services.runner ?? {}),
-                                showThemeToggle: true,
+                                showThemeToggle: !learnerUiFlags.compactLearnerUi,
                                 showSqlDialectPicker: false,
                                 ...(effectiveTerminalCwd ? { terminalCwd: effectiveTerminalCwd } : {}),
                             },
@@ -2515,11 +2524,11 @@ export default function CodeToolPane(props: {
                 ) : null}
             </div>
 
-            {!isSql && runFeedback ? (
-                <div className="mt-3">
-                    <CodeFeedbackCallout feedback={runFeedback} />
-                </div>
-            ) : null}
+            {/*{!isSql && visibleRunFeedback ? (*/}
+            {/*    <div className="mt-3">*/}
+            {/*        <CodeFeedbackCallout feedback={visibleRunFeedback} />*/}
+            {/*    </div>*/}
+            {/*) : null}*/}
         </div>
     );
 }

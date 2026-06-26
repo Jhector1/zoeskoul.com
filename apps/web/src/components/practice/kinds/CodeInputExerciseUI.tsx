@@ -24,6 +24,7 @@ import {
     type SqlTableSnapshots,
 } from "@/lib/subjects/sql/sql/runtime/resolveSqlRunnerConfig";
 import {isRunnerLanguage, RunnerLanguage} from "@zoeskoul/code-contracts";
+import { learnerUiFlags } from "@/lib/config/learnerUiFlags";
 
 type CodeInputExercise = Extract<Exercise, { kind: "code_input" }>;
 
@@ -605,6 +606,11 @@ export default function CodeInputExerciseUI({
         onUseTools();
     }, [variant, onUseTools, toolsBound, toolsUnbound, autoBindMode, exerciseKey, exercise.id]);
 
+    const hideBoundToolsCard =
+        learnerUiFlags.compactLearnerUi &&
+        variant === "tools" &&
+        toolsBound;
+
     useEffect(() => {
         if (variant !== "tools") return;
         if (!toolsBound) return;
@@ -626,50 +632,52 @@ export default function CodeInputExerciseUI({
                     <ExpectedExampleCard example={exercise.expectedExample} />
                 ) : null}
 
-                <div className="ui-page-surface p-3">
-                    <div className="flex items-center justify-between gap-3">
-                        <div className="min-w-0">
-                            <div className="ui-title-sm">
-                                {ui.t("tools.title", {}, "Use the Code tab")}
+                {!hideBoundToolsCard ? (
+                    <div className="ui-page-surface p-3">
+                        <div className="flex items-center justify-between gap-3">
+                            <div className="min-w-0">
+                                <div className="ui-title-sm">
+                                    {ui.t("tools.title", {}, "Use the Code tab")}
+                                </div>
+
+                                <div className="mt-1 ui-meta">
+                                    {ui.t("tools.language", {}, "Language")}: {" "}
+                                    <span className="font-medium ui-text">{String(language ?? "python")}</span>
+                                    {" • "}
+                                    {toolsBound
+                                        ? ui.t("tools.bound", {}, "Workspace ready")
+                                        : ui.t("tools.notBound", {}, "Workspace opening")}
+                                </div>
+                                <div className="mt-2 ui-meta">
+                                    {ui.t(
+                                        "tools.desc",
+                                        {},
+                                        "Open the Code tab to edit and run your answer in the full workspace."
+                                    )}
+                                </div>
                             </div>
 
-                            <div className="mt-1 ui-meta">
-                                {ui.t("tools.language", {}, "Language")}:{" "}
-                                <span className="font-medium ui-text">{String(language ?? "python")}</span>
-                                {" • "}
+                            <button
+                                type="button"
+                                onClick={onUseTools}
+                                disabled={!onUseTools}
+                                className={
+                                    !onUseTools ? "ui-btn-disabled" : "ui-btn-secondary"
+                                }
+                                title={ui.t("tools.bindTitle", {}, "Open the full code workspace")}
+                                aria-label={
+                                    toolsBound
+                                        ? ui.t("tools.boundAria", {}, "Bound ✓ Jump to Code Open in Tools")
+                                        : ui.t("tools.openAria", {}, "Open in Tools Open Code")
+                                }
+                            >
                                 {toolsBound
-                                    ? ui.t("tools.bound", {}, "Workspace ready")
-                                    : ui.t("tools.notBound", {}, "Workspace opening")}
-                            </div>
-                            <div className="mt-2 ui-meta">
-                                {ui.t(
-                                    "tools.desc",
-                                    {},
-                                    "Open the Code tab to edit and run your answer in the full workspace."
-                                )}
-                            </div>
+                                    ? ui.t("tools.boundShort", {}, "Jump to Code")
+                                    : ui.t("tools.open", {}, "Open Code")}
+                            </button>
                         </div>
-
-                        <button
-                            type="button"
-                            onClick={onUseTools}
-                            disabled={!onUseTools}
-                            className={
-                                !onUseTools ? "ui-btn-disabled" : "ui-btn-secondary"
-                            }
-                            title={ui.t("tools.bindTitle", {}, "Open the full code workspace")}
-                            aria-label={
-                                toolsBound
-                                    ? ui.t("tools.boundAria", {}, "Bound ✓ Jump to Code Open in Tools")
-                                    : ui.t("tools.openAria", {}, "Open in Tools Open Code")
-                            }
-                        >
-                            {toolsBound
-                                ? ui.t("tools.boundShort", {}, "Jump to Code")
-                                : ui.t("tools.open", {}, "Open Code")}
-                        </button>
                     </div>
-                </div>
+                ) : null}
 
                 {showFeedback ? (
                     <CodeFeedbackCallout

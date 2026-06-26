@@ -391,6 +391,7 @@ function ModuleSidebar({
                            navError = false,
                            assignmentLabel,
                            assignmentSublabel,
+                           showAssignmentCta = true,
                            onAssignmentClick,
                            hasNextModule,
                            canGoNextModule,
@@ -407,6 +408,7 @@ function ModuleSidebar({
     assignmentMissedPct?: number;
     assignmentLabel: string;
     assignmentSublabel?: string;
+    showAssignmentCta?: boolean;
     onAssignmentClick: () => void;
     navLoading?: boolean;
     navError?: boolean;
@@ -566,17 +568,19 @@ function ModuleSidebar({
 
             <div
                 className="shrink-0 border-t border-[rgb(var(--ui-border)/0.9)] bg-[rgb(var(--ui-surface-2)/0.72)] p-2.5 sm:p-3">
-                <RingButton
-                    pct={assignmentPct}
-                    missedPct={assignmentMissedPct}
-                    label={assignmentLabel}
-                    sublabel={assignmentSublabel || undefined}
-                    onClick={onAssignmentClick}
-                    disabled={false}
-                />
+                {showAssignmentCta ? (
+                    <RingButton
+                        pct={assignmentPct}
+                        missedPct={assignmentMissedPct}
+                        label={assignmentLabel}
+                        sublabel={assignmentSublabel || undefined}
+                        onClick={onAssignmentClick}
+                        disabled={false}
+                    />
+                ) : null}
 
                 {navLoading ? (
-                    <div className="ui-review-note mt-2.5">
+                    <div className={cn("ui-review-note", showAssignmentCta ? "mt-2.5" : "")}>
                         <div className="ui-title-sm">
                             {ui.t("nextModule.title", {}, "Next module")}
                         </div>
@@ -585,7 +589,7 @@ function ModuleSidebar({
                         </div>
                     </div>
                 ) : navError ? (
-                    <div className="ui-review-note-danger mt-2.5">
+                    <div className={cn("ui-review-note-danger", showAssignmentCta ? "mt-2.5" : "")}>
                         <div className="ui-title-sm">
                             {ui.t("nextModule.title", {}, "Next module")}
                         </div>
@@ -598,7 +602,7 @@ function ModuleSidebar({
                         </div>
                     </div>
                 ) : hasNextModule ? (
-                    <div className="ui-review-note mt-2.5">
+                    <div className={cn("ui-review-note", showAssignmentCta ? "mt-2.5" : "")}>
                         <div className="ui-title-sm">
                             {ui.t("nextModule.title", {}, "Next module")}
                         </div>
@@ -640,6 +644,7 @@ export default React.memo(
         prev.assignmentMissedPct === next.assignmentMissedPct &&
         prev.assignmentLabel === next.assignmentLabel &&
         prev.assignmentSublabel === next.assignmentSublabel &&
+        prev.showAssignmentCta === next.showAssignmentCta &&
         prev.onAssignmentClick === next.onAssignmentClick &&
         prev.navLoading === next.navLoading &&
         prev.navError === next.navError &&

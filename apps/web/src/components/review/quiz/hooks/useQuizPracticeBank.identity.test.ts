@@ -4,6 +4,7 @@ import {
     getPracticeQuestionIdentity,
     getPracticeStateIdentity,
     sanitizeSavedPracticePatch,
+    shouldTreatPatchAsExplicitFeedbackDismiss,
 } from "@/components/review/quiz/hooks/useQuizPracticeBank";
 import { collectTerminalWorkspaceCommands } from "@/lib/practice/terminalWorkspaceHints";
 import { normalizeVisibleTerminalTranscriptText } from "@/lib/practice/visibleTerminalTranscript";
@@ -197,6 +198,120 @@ describe("useQuizPracticeBank practice identity guards", () => {
         expect((sanitized as any).workspace?.language).toBe("python");
         expect((sanitized as any).code).toBe("print('learner work')\n");
         expect((sanitized as any).userEdited).toBe(true);
+    });
+
+    it("drops persisted wrong-feedback dismissal during restore sanitization", () => {
+        const sanitized = sanitizeSavedPracticePatch({
+            result: {
+                ok: false,
+                finalized: false,
+            },
+            submitted: true,
+            feedbackDismissed: true,
+            code: "print('wrong')\n",
+        });
+
+        expect(sanitized).not.toHaveProperty("feedbackDismissed");
+        expect((sanitized as any).result?.ok).toBe(false);
+        expect((sanitized as any).submitted).toBe(true);
+    });
+
+    it("does not dismiss wrong-answer feedback for no-op sync patches", () => {
+        const currentItem = {
+            code: "pwd",
+            source: "pwd",
+            stdin: "",
+            codeStdin: "",
+            language: "bash",
+            codeLang: "bash",
+            workspace: {
+                version: 2,
+                language: "bash",
+                entryFileId: "main.sh",
+                activeFileId: "main.sh",
+                nodes: [
+                    {
+                        id: "main.sh",
+                        kind: "file",
+                        name: "main.sh",
+                        parentId: null,
+                        content: "pwd",
+                        createdAt: 0,
+                        updatedAt: 0,
+                    },
+                ],
+                openTabs: ["main.sh"],
+                expanded: [],
+                stdin: "",
+            },
+        } as any;
+
+        expect(
+            shouldTreatPatchAsExplicitFeedbackDismiss(currentItem, {
+                code: "pwd",
+                source: "pwd",
+                dismissFeedbackOnEdit: true,
+                feedbackDismissed: true,
+                userEdited: true,
+                workspaceOrigin: "user",
+            }),
+        ).toBe(false);
+    });
+
+
+    it("does not dismiss wrong-answer feedback for saved or passive sync patches", () => {
+        const currentItem = {
+            code: "print('wrong')\n",
+            source: "print('wrong')\n",
+            stdin: "",
+            codeStdin: "",
+            language: "python",
+            codeLang: "python",
+        } as any;
+
+        expect(
+            shouldTreatPatchAsExplicitFeedbackDismiss(currentItem, {
+                code: "print('still from saved progress')\n",
+                source: "print('still from saved progress')\n",
+                dismissFeedbackOnEdit: true,
+                feedbackDismissed: true,
+                userEdited: true,
+                workspaceOrigin: "saved",
+            }),
+        ).toBe(false);
+
+        expect(
+            shouldTreatPatchAsExplicitFeedbackDismiss(currentItem, {
+                code: "print('starter hydration')\n",
+                source: "print('starter hydration')\n",
+                dismissFeedbackOnEdit: true,
+                feedbackDismissed: true,
+                updateOrigin: "sync",
+                workspaceOrigin: "starter",
+            }),
+        ).toBe(false);
+    });
+
+    it("dismisses wrong-answer feedback after a real learner edit", () => {
+        const currentItem = {
+            code: "pwd",
+            source: "pwd",
+            stdin: "",
+            codeStdin: "",
+            language: "bash",
+            codeLang: "bash",
+        } as any;
+
+        expect(
+            shouldTreatPatchAsExplicitFeedbackDismiss(currentItem, {
+                code: "ls",
+                source: "ls",
+                dismissFeedbackOnEdit: true,
+                feedbackDismissed: true,
+                userEdited: true,
+                workspaceOrigin: "user",
+            }),
+        ).toBe(true);
     });
 
     it("preserves prompt boundaries in visible terminal transcript fallback", () => {

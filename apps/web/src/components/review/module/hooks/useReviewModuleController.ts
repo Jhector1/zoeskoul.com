@@ -58,6 +58,7 @@ import {
     computeProgressiveUnlock, firstRouteTargetForUnlockedTopic,
     getTargetKeyForRouteTarget, maxUnlockedCardIndexForTopic
 } from "@/components/review/module/runtime/progressiveUnlock";
+import { learnerUiFlags } from "@/lib/config/learnerUiFlags";
 import {resolveRightRailSqlProps} from "../runtime/resolveRightRailSqlProps";
 import { resolveTopicStageRuntimeDefaults } from "../runtime/topicStageRuntimeDefaults";
 import { shouldUseWorkspaceCodeSurface } from "@/components/practice/workspaceExercise";
@@ -67,6 +68,8 @@ import {
     shouldRightRailUseBoundExercise,
 } from "./rightRailExerciseBinding";
 import { resolveActiveToolScopeKey } from "./activeToolScopeKey";
+import { resolveCompactAssignmentCtaVisibility } from "../assignmentCtaVisibility";
+import { shouldDefaultCollapseToolsRailForCompactQuiz } from "../toolsRailVisibility";
 function lastExerciseIdSegment(value: unknown) {
     const raw = typeof value === "string" ? value.trim() : "";
     if (!raw) return "";
@@ -578,8 +581,6 @@ export function useReviewModuleController({
         targetRegistry,
     ]);
 
-    const panels = useReviewPanels({footerInsetPx});
-
     const sketch = useDebouncedSketchState({});
 
     useEffect(() => {
@@ -947,6 +948,59 @@ export function useReviewModuleController({
                 }),
             ) ?? null;
     }, [runtimeExercises, viewTid, activeCard?.id]);
+
+    const shouldDefaultCollapseRightRail = shouldDefaultCollapseToolsRailForCompactQuiz({
+        compactLearnerUi: learnerUiFlags.compactLearnerUi,
+        showDebugLearningUi: learnerUiFlags.showDebugLearningUi,
+        activeCard,
+        routeTargetKind: routeTarget?.kind ?? null,
+        cardHasEmbeddedTryIt: Boolean(
+            (activeCard?.type === "text" || activeCard?.type === "sketch") &&
+            activeCard.tryIt,
+        ),
+        hasWorkspaceExercise: Boolean(activeCardWorkspaceExercise),
+    });
+    const routeExerciseStateKey =
+        routeTarget?.kind === "exercise" ? routeTarget.exerciseStateKey : "";
+    const activeCardTryItKey =
+        activeCard?.type === "text" || activeCard?.type === "sketch"
+            ? activeCard.tryIt?.exerciseKey ?? activeCard.tryIt?.id ?? ""
+            : "";
+
+    const rightRailDefaultScopeKey = useMemo(
+        () =>
+            [
+                routeTarget?.kind ?? "card",
+                routeTarget?.sectionSlug ?? sectionSlug ?? "",
+                routeTarget?.topicId ?? viewTid ?? "",
+                routeTarget?.cardId ?? activeCard?.id ?? "",
+                routeExerciseStateKey,
+                activeCard?.type ?? "",
+                activeCardWorkspaceExercise?.exerciseKey ?? "",
+                activeCardTryItKey,
+                shouldDefaultCollapseRightRail ? "collapsed" : "open",
+            ].join("::"),
+        [
+            activeCard?.id,
+            activeCard?.type,
+            activeCardTryItKey,
+            activeCardWorkspaceExercise?.exerciseKey,
+            routeTarget?.cardId,
+            routeTarget?.kind,
+            routeTarget?.sectionSlug,
+            routeTarget?.topicId,
+            routeExerciseStateKey,
+            sectionSlug,
+            shouldDefaultCollapseRightRail,
+            viewTid,
+        ],
+    );
+
+    const panels = useReviewPanels({
+        footerInsetPx,
+        shouldDefaultCollapseRightRail,
+        rightRailDefaultScopeKey,
+    });
 
     const activeToolScopeKey = resolveActiveToolScopeKey({
         activeExerciseStateKey: activeExerciseTarget?.exerciseStateKey ?? null,
@@ -1498,6 +1552,24 @@ export function useReviewModuleController({
         (progress as any)?.topics?.[viewTid],
         viewTid,
     );
+    const showAssignmentCta = resolveCompactAssignmentCtaVisibility({
+        compactLearnerUi: learnerUiFlags.compactLearnerUi,
+        showDebugLearningUi: learnerUiFlags.showDebugLearningUi,
+        topics,
+        progress,
+        assignmentPhase: assignmentStatus.phase,
+        activeCard,
+        moduleComplete,
+    });
+    const hasActiveTopic = Boolean(viewTid);
+    const isAtModuleEnd = !topicFlow.nextTopic?.id;
+    const shouldHideModuleNavInCompactMode =
+        learnerUiFlags.compactLearnerUi &&
+        !learnerUiFlags.showDebugLearningUi &&
+        hasActiveTopic &&
+        !viewIsComplete &&
+        !moduleComplete &&
+        !isAtModuleEnd;
 
     const routeOwnsExercise = routeTarget?.kind === "exercise";
     const routeCanUseBoundExercise = shouldRightRailUseBoundExercise({
@@ -1598,6 +1670,7 @@ export function useReviewModuleController({
             locale,
             toolsUiEnabled: panels.toolsUiEnabled,
             showDesktopLeft: panels.showDesktopLeft,
+            showDesktopRight: panels.showDesktopRight,
             leftCollapsed: panels.leftCollapsed,
             rightCollapsed: panels.rightCollapsed,
             modulesHref: `/${locale}/subjects/${encodeURIComponent(subjectSlug)}/modules`,
@@ -1692,6 +1765,7 @@ export function useReviewModuleController({
                 assignmentMissedPct: assignmentMissedPct,
                 assignmentLabel,
                 assignmentSublabel,
+                showAssignmentCta,
                 onAssignmentClick: handleAssignmentClick,
                 hasNextModule: !!nav && !!nav.nextModuleId,
                 navLoading,
@@ -1809,6 +1883,7 @@ export function useReviewModuleController({
                 assignmentMissedPct: assignmentMissedPct,
                 assignmentLabel,
                 assignmentSublabel,
+                showAssignmentCta,
                 onAssignmentClick: handleAssignmentClick,
                 hasNextModule: !!nav && !!nav.nextModuleId,
                 navLoading,
@@ -1867,6 +1942,7 @@ export function useReviewModuleController({
             topicRuntimeDefaults: topicStageRuntimeDefaults.topicRuntimeDefaults,
         },
         moduleNav: {
+            show: !shouldHideModuleNavInCompactMode,
             locale,
             subjectSlug,
             prevModuleId: nav?.prevModuleId ?? null,

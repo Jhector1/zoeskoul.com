@@ -2,6 +2,7 @@
 
 import React from "react";
 import CodeRunner from "@/components/code/CodeRunner";
+import { learnerUiFlags } from "@/lib/config/learnerUiFlags";
 import {
     resolveTerminalWorkspaceKey,
     type CodeRunnerRuntime,
@@ -233,7 +234,7 @@ export default function IdeEditorPane({
                             sqlInitialTableSnapshots={sqlInitialTableSnapshots}
                             showLanguagePicker={false}
                             showSqlDialectPicker={services.runner.showSqlDialectPicker}
-                            allowReset={isDesktop}
+                            allowReset={isDesktop && !learnerUiFlags.compactLearnerUi}
                             allowRun={services.runner.allowRun && !isWeb}
                             runtime={runtime}
                             showTerminal={services.runner.showTerminal}

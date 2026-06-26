@@ -12,6 +12,7 @@ import type {
 } from "@/lib/subjects/progressTypes";
 import type { SubjectFinishState } from "../../types/subjectFinish.types";
 import { useDebouncedSketchState } from "../../hooks/useDebouncedSketchState";
+import { learnerUiFlags } from "@/lib/config/learnerUiFlags";
 
 type Props = {
     leftCollapsedEff: boolean;
@@ -118,13 +119,23 @@ export default function ReviewTopicStage({
 }: Props) {
     const useWorkspaceTabs = Boolean(showMobileWorkspaceTabs && mobileToolsPanel);
     const activeTab = useWorkspaceTabs ? activeMobileWorkspaceTab : "lesson";
+    const activeCard = viewCards[activeCardIndex] ?? null;
+    const constrainQuizWidth =
+        learnerUiFlags.compactLearnerUi &&
+        !learnerUiFlags.showDebugLearningUi &&
+        activeCard?.type === "quiz";
     const setActiveTab = (tab: "lesson" | "code") => {
         onMobileWorkspaceTabChange?.(tab);
     };
 
     const lessonContent = (
         <TopicShell title={viewTopic?.label ?? ""} subtitle={viewTopic?.summary ?? null}>
-            <div className="flex min-h-full flex-col pb-28">
+            <div
+                className={cn(
+                    "flex min-h-full flex-col pb-28",
+                    constrainQuizWidth && "mx-auto w-full max-w-4xl",
+                )}
+            >
                 <ReviewTopicCards
                     motionKey={`${viewTid}:${versionStr}`}
                     viewCards={viewCards}

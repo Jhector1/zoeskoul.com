@@ -1,13 +1,13 @@
 {
   "subjects": {
-    "linux-terminal-fundamentals": {
+    "linux--linux-terminal-fundamentals--draft": {
       "title": "Linux Terminal Fundamentals",
       "description": "A beginner-friendly Linux course focused on terminal navigation, files, folders, safe command habits, and workspace-based practice.",
       "moreComingSoon": "More Linux Terminal Fundamentals lessons are coming soon."
     }
   },
   "modules": {
-    "linux-terminal-fundamentals": {
+    "linux--linux-terminal-fundamentals--draft": {
       "linux-module-1-terminal-navigation": {
         "title": "Terminal Navigation Basics",
         "description": "Learn what the terminal is, how to know where you are, how to list files, and how to move between folders.",
@@ -53,9 +53,9 @@
     }
   },
   "sections": {
-    "linux-terminal-fundamentals": {
+    "linux--linux-terminal-fundamentals--draft": {
       "linux-module-1-terminal-navigation": {
-        "linux-terminal-fundamentals-linux-module-1-orientation": {
+        "linux--linux-terminal-fundamentals--draft-linux-module-1-orientation": {
           "title": "Terminal Orientation",
           "description": "Learn what the terminal is, where am i? pwd and ls, moving around with cd through focused examples and practice.",
           "weeks": null,
@@ -65,7 +65,7 @@
             "Moving Around with cd"
           ]
         },
-        "linux-terminal-fundamentals-linux-module-1-project": {
+        "linux--linux-terminal-fundamentals--draft-linux-module-1-project": {
           "title": "Module Project",
           "description": "Learn project: terminal map through focused examples and practice.",
           "weeks": null,
@@ -75,7 +75,7 @@
         }
       },
       "linux-module-2-files-and-folders": {
-        "linux-terminal-fundamentals-linux-module-2-file-workflow": {
+        "linux--linux-terminal-fundamentals--draft-linux-module-2-file-workflow": {
           "title": "File Workflow",
           "description": "Learn creating folders and files, copy, move, and rename, viewing file contents through focused examples and practice.",
           "weeks": null,
@@ -85,7 +85,7 @@
             "Viewing File Contents"
           ]
         },
-        "linux-terminal-fundamentals-linux-module-2-project": {
+        "linux--linux-terminal-fundamentals--draft-linux-module-2-project": {
           "title": "Module Project",
           "description": "Learn project: notes organizer through focused examples and practice.",
           "weeks": null,
@@ -95,7 +95,7 @@
         }
       },
       "linux-module-3-final-capstone": {
-        "linux-terminal-fundamentals-linux-module-3-capstone": {
+        "linux--linux-terminal-fundamentals--draft-linux-module-3-capstone": {
           "title": "Final Capstone",
           "description": "Learn capstone: file room handoff through focused examples and practice.",
           "weeks": null,

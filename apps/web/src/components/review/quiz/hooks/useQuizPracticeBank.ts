@@ -336,6 +336,34 @@ function patchChangesLearnerAnswer(currentItem: any, patch: any) {
   return false;
 }
 
+export function shouldTreatPatchAsExplicitFeedbackDismiss(
+    currentItem: any,
+    patch: any,
+) {
+  if (!currentItem || !patch) return false;
+
+  const requestedDismiss =
+      Boolean((patch as any).dismissFeedbackOnEdit) &&
+      Boolean((patch as any).feedbackDismissed);
+
+  if (!requestedDismiss) return false;
+
+  /**
+   * `feedbackDismissed` is transient UI state. Saved progress, starter
+   * hydration, tool rebinds, and passive runtime sync can all carry answer
+   * fields that differ from the current item, but they are not learner edits.
+   * Only patches produced by an active input/change handler may dismiss the
+   * visible wrong-answer feedback.
+   */
+  const learnerEditOrigin =
+      (patch as any).updateOrigin === "user" ||
+      (patch as any).workspaceOrigin === "user";
+
+  if (!learnerEditOrigin) return false;
+
+  return patchChangesLearnerAnswer(currentItem, patch);
+}
+
 function removeResultResetFromPatch<T extends Record<string, any>>(patch: T): T {
   const next = { ...patch };
   delete next.submitted;
@@ -896,6 +924,15 @@ export function sanitizeSavedPracticePatch(savedPatch: any, exerciseKind?: strin
     delete next.reorderIds;
   }
 
+  /**
+   * feedbackDismissed=true for a wrong checked result is transient UI state.
+   * Do not let an old persisted dismissal keep the latest incorrect feedback
+   * hidden after restore.
+   */
+  if (next.result?.ok === false && next.feedbackDismissed === true) {
+    delete next.feedbackDismissed;
+  }
+
   return next;
 }
 function mayRestoreQuestionIdPatch(
@@ -1054,16 +1091,23 @@ function mergeSavedPatchIntoPracticeItem(item: any, savedPatch: any) {
       item,
   );
 
+  const sanitizedSavedPatch = sanitizeSavedPracticePatch(
+      savedPatch,
+      currentItem?.exercise?.kind,
+  );
+
+  if (!sanitizedSavedPatch) return item;
+
   const isCodeInput = currentItem?.exercise?.kind === "code_input";
   const starterCode = String(currentItem?.exercise?.starterCode ?? "").trim();
   const expectedLanguage = getPracticeExerciseLanguage(currentItem?.exercise);
 
   const userEdited =
-      savedPatch.userEdited === true ||
-      savedPatch.workspaceOrigin === "user" ||
-      savedPatch.workspaceOrigin === "saved";
+      sanitizedSavedPatch.userEdited === true ||
+      sanitizedSavedPatch.workspaceOrigin === "user" ||
+      sanitizedSavedPatch.workspaceOrigin === "saved";
 
-  const patch = { ...savedPatch };
+  const patch = { ...sanitizedSavedPatch };
   /**
    * Do not merge ephemeral signed transport tokens from saved progress.
    * The live item.key from /api/practice is always the source of truth.
@@ -1394,7 +1438,7 @@ export function useQuizPracticeBank(args: {
                 },
                 savedPatch: sanitizeSavedPracticePatch(
                     getSavedPracticePatch(initialState, q),
-                    "drag_reorder",
+                    resolvedPreferKind,
                 ),
                 transformItem: (baseItem, resolvedEx) => {
                   /**
@@ -1566,9 +1610,10 @@ export function useQuizPracticeBank(args: {
            *   feedbackDismissed: true
            *   dismissFeedbackOnEdit: true
            */
-          const explicitUserDismiss =
-              Boolean((patch as any).dismissFeedbackOnEdit) &&
-              Boolean((patch as any).feedbackDismissed);
+          const explicitUserDismiss = shouldTreatPatchAsExplicitFeedbackDismiss(
+              ps.item,
+              patch,
+          );
 
           const patchForItem = { ...(patch as any) };
           delete patchForItem.dismissFeedbackOnEdit;

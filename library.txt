@@ -146,7 +146,7 @@ ssh -p 2222 \
 
 
   redis
-  ssh -p 2222 -N -L 6380:127.0.0.1:6379 jean@127.0.0.
+  ssh -p 2222 -N -L 6380:127.0.0.1:6379 jean@127.0.0.1
 
 cd ~/Documents/judge0-masyg/infra/judge0
 sudo docker compose down
@@ -156,7 +156,7 @@ sudo docker compose up -d judge0 worker
 
 
 
- RUN_DRAFT_CODE_INPUT_GOLDENS=1 pnpm curr:course -- draft-goldens linux linux-terminal-fundamentals
+RUN_DRAFT_CODE_INPUT_GOLDENS=1 pnpm curr:course -- draft-goldens linux linux-terminal-fundamentals
 
 sudo scp -r deploy@5.78.159.224:/opt/edge-proxy ~/Downloads/
 

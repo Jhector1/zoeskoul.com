@@ -1,8 +1,8 @@
 {
   "topicId": "viewing-file-contents",
-  "subjectSlug": "linux-terminal-fundamentals",
+  "subjectSlug": "linux--linux-terminal-fundamentals--draft",
   "moduleSlug": "linux-module-2-files-and-folders",
-  "sectionSlug": "linux-terminal-fundamentals-linux-module-2-file-workflow",
+  "sectionSlug": "linux--linux-terminal-fundamentals--draft-linux-module-2-file-workflow",
   "prefix": "linux_module_2",
   "minutes": 18,
   "runtimeDefaults": {
@@ -15,20 +15,20 @@
     "supportsPackageInstall": false
   },
   "topic": {
-    "labelKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.label",
-    "summaryKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.summary"
+    "labelKey": "topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.label",
+    "summaryKey": "topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.summary"
   },
   "cards": [
     {
       "id": "sketch0",
       "kind": "sketch",
-      "titleKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.cards.sketch0.title",
+      "titleKey": "topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.cards.sketch0.title",
       "sketchId": "sketch-1",
       "height": 420,
       "tryIt": {
         "id": "try-viewing-file-contents-sketch0",
-        "titleKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.try_viewing_file_contents_sketch0.title",
-        "promptKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.try_viewing_file_contents_sketch0.prompt",
+        "titleKey": "topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.tryIt.try_viewing_file_contents_sketch0.title",
+        "promptKey": "topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.tryIt.try_viewing_file_contents_sketch0.prompt",
         "exerciseKey": "viewing-file-contents-try-it-1",
         "difficulty": "easy",
         "preferKind": "code_input",
@@ -41,13 +41,13 @@
     {
       "id": "sketch1",
       "kind": "sketch",
-      "titleKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.cards.sketch1.title",
+      "titleKey": "topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.cards.sketch1.title",
       "sketchId": "sketch-2",
       "height": 420,
       "tryIt": {
         "id": "try-viewing-file-contents-sketch1",
-        "titleKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.try_viewing_file_contents_sketch1.title",
-        "promptKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.try_viewing_file_contents_sketch1.prompt",
+        "titleKey": "topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.tryIt.try_viewing_file_contents_sketch1.title",
+        "promptKey": "topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.tryIt.try_viewing_file_contents_sketch1.prompt",
         "exerciseKey": "viewing-file-contents-try-it-2",
         "difficulty": "easy",
         "preferKind": "code_input",
@@ -60,13 +60,13 @@
     {
       "id": "sketch2",
       "kind": "sketch",
-      "titleKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.cards.sketch2.title",
+      "titleKey": "topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.cards.sketch2.title",
       "sketchId": "sketch-3",
       "height": 420,
       "tryIt": {
         "id": "try-viewing-file-contents-sketch2",
-        "titleKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.try_viewing_file_contents_sketch2.title",
-        "promptKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.try_viewing_file_contents_sketch2.prompt",
+        "titleKey": "topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.tryIt.try_viewing_file_contents_sketch2.title",
+        "promptKey": "topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.tryIt.try_viewing_file_contents_sketch2.prompt",
         "exerciseKey": "viewing-file-contents-try-it-3",
         "difficulty": "easy",
         "preferKind": "code_input",
@@ -79,7 +79,7 @@
     {
       "id": "quiz",
       "kind": "quiz",
-      "titleKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.cards.quiz.title",
+      "titleKey": "topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.cards.quiz.title",
       "quiz": {
         "difficulty": "easy",
         "n": 4,
@@ -96,20 +96,20 @@
     {
       "id": "sketch-1",
       "archetype": "paragraph",
-      "titleKey": "sketches.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.sketch-1.title",
-      "bodyKey": "sketches.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.sketch-1.bodyMarkdown"
+      "titleKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.sketch-1.title",
+      "bodyKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.sketch-1.bodyMarkdown"
     },
     {
       "id": "sketch-2",
       "archetype": "paragraph",
-      "titleKey": "sketches.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.sketch-2.title",
-      "bodyKey": "sketches.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.sketch-2.bodyMarkdown"
+      "titleKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.sketch-2.title",
+      "bodyKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.sketch-2.bodyMarkdown"
     },
     {
       "id": "sketch-3",
       "archetype": "paragraph",
-      "titleKey": "sketches.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.sketch-3.title",
-      "bodyKey": "sketches.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.sketch-3.bodyMarkdown"
+      "titleKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.sketch-3.title",
+      "bodyKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.sketch-3.bodyMarkdown"
     }
   ],
   "exercises": [
@@ -118,7 +118,7 @@
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.practice.sc-tail-purpose",
+      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.practice.sc-tail-purpose",
       "optionIds": [
         "a",
         "b",
@@ -135,7 +135,7 @@
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.practice.mc-cat-uses",
+      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.practice.mc-cat-uses",
       "optionIds": [
         "a",
         "b",
@@ -155,7 +155,7 @@
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.practice.mc-wc-meaning",
+      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.practice.mc-wc-meaning",
       "optionIds": [
         "a",
         "b",
@@ -176,7 +176,7 @@
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.practice.dr-inspect-order",
+      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.practice.dr-inspect-order",
       "tokenIds": [
         "t1",
         "t2",
@@ -196,7 +196,7 @@
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.practice.fb-head-purpose",
+      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.practice.fb-head-purpose",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
@@ -208,7 +208,7 @@
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.practice.code-cat-menu",
+      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.practice.code-cat-menu",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
@@ -220,20 +220,20 @@
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-1",
+      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-1",
       "language": "bash",
-      "starterCode": "# Use the terminal for this Linux task.",
+      "starterCode": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-1.starterCode",
       "starterFiles": [
         {
           "path": "main.sh",
-          "content": "# Use the terminal for this Linux task.\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-1.starterCode",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "cafe/menu.txt",
-          "content": "Soup\nSalad\nTea\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-1.starterFiles.cafe_menu_txt.content",
           "language": "bash"
         }
       ],
@@ -255,7 +255,7 @@
         "requiredCommands": [
           {
             "pattern": "^cat\\s+cafe/menu\\.txt$",
-            "message": "Run `cat cafe/menu.txt`."
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-1.terminalExpectations.requiredCommands.0.message"
           }
         ],
         "outputContains": [
@@ -265,25 +265,32 @@
         "forbiddenCommands": [
           {
             "pattern": "(^|\\s)sudo(\\s|$)",
-            "message": "Do not use sudo for beginner workspace tasks."
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-1.terminalExpectations.forbiddenCommands.0.message"
           }
         ]
       },
       "workspace": {
         "language": "bash",
         "entryFilePath": "main.sh",
-        "starterCode": "# Use the terminal for this Linux task.",
+        "starterCode": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-1.starterCode",
         "starterFiles": [
           {
             "path": "main.sh",
-            "content": "# Use the terminal for this Linux task.\n",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-1.starterCode",
             "language": "bash",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "cafe/menu.txt",
-            "content": "Soup\nSalad\nTea\n",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-1.starterFiles.cafe_menu_txt.content",
+            "language": "bash"
+          }
+        ],
+        "fixtureFiles": [
+          {
+            "path": "cafe/menu.txt",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-1.starterFiles.cafe_menu_txt.content",
             "language": "bash"
           }
         ]
@@ -292,7 +299,7 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "Read the whole file by running `cat cafe/menu.txt`."
+        "instructions": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-1.prompt"
       },
       "ideConfig": {
         "runnerBackend": "pty",
@@ -303,27 +310,34 @@
           "terminal": true
         },
         "terminalSessionScope": "exercise"
-      }
+      },
+      "fixtureFiles": [
+        {
+          "path": "cafe/menu.txt",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-1.starterFiles.cafe_menu_txt.content",
+          "language": "bash"
+        }
+      ]
     },
     {
       "id": "viewing-file-contents-try-it-2",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-2",
+      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-2",
       "language": "bash",
-      "starterCode": "# Use the terminal for this Linux task.",
+      "starterCode": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-2.starterCode",
       "starterFiles": [
         {
           "path": "main.sh",
-          "content": "# Use the terminal for this Linux task.\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-2.starterCode",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "logs/event.log",
-          "content": "setup started\nchairs placed\nsnacks delivered\ndoors opened\nguests arrived\ncleanup planned\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-2.starterFiles.logs_event_log.content",
           "language": "bash"
         }
       ],
@@ -345,11 +359,11 @@
         "requiredCommands": [
           {
             "pattern": "^head\\s+logs/event\\.log$",
-            "message": "Run `head logs/event.log`."
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-2.terminalExpectations.requiredCommands.0.message"
           },
           {
             "pattern": "^tail\\s+logs/event\\.log$",
-            "message": "Run `tail logs/event.log`."
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-2.terminalExpectations.requiredCommands.1.message"
           }
         ],
         "outputContains": [
@@ -359,25 +373,32 @@
         "forbiddenCommands": [
           {
             "pattern": "(^|\\s)sudo(\\s|$)",
-            "message": "Do not use sudo for beginner workspace tasks."
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-2.terminalExpectations.forbiddenCommands.0.message"
           }
         ]
       },
       "workspace": {
         "language": "bash",
         "entryFilePath": "main.sh",
-        "starterCode": "# Use the terminal for this Linux task.",
+        "starterCode": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-2.starterCode",
         "starterFiles": [
           {
             "path": "main.sh",
-            "content": "# Use the terminal for this Linux task.\n",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-2.starterCode",
             "language": "bash",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "logs/event.log",
-            "content": "setup started\nchairs placed\nsnacks delivered\ndoors opened\nguests arrived\ncleanup planned\n",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-2.starterFiles.logs_event_log.content",
+            "language": "bash"
+          }
+        ],
+        "fixtureFiles": [
+          {
+            "path": "logs/event.log",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-2.starterFiles.logs_event_log.content",
             "language": "bash"
           }
         ]
@@ -386,7 +407,7 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "Preview the log by running `head logs/event.log`, then `tail logs/event.log`."
+        "instructions": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-2.prompt"
       },
       "ideConfig": {
         "runnerBackend": "pty",
@@ -397,27 +418,34 @@
           "terminal": true
         },
         "terminalSessionScope": "exercise"
-      }
+      },
+      "fixtureFiles": [
+        {
+          "path": "logs/event.log",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-2.starterFiles.logs_event_log.content",
+          "language": "bash"
+        }
+      ]
     },
     {
       "id": "viewing-file-contents-try-it-3",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-3",
+      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-3",
       "language": "bash",
-      "starterCode": "# Use the terminal for this Linux task.",
+      "starterCode": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-3.starterCode",
       "starterFiles": [
         {
           "path": "main.sh",
-          "content": "# Use the terminal for this Linux task.\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-3.starterCode",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "logs/checklist.txt",
-          "content": "open room\nset chairs\ncheck projector\nwelcome guests\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-3.starterFiles.logs_checklist_txt.content",
           "language": "bash"
         }
       ],
@@ -439,7 +467,7 @@
         "requiredCommands": [
           {
             "pattern": "^wc\\s+-l\\s+logs/checklist\\.txt$",
-            "message": "Run `wc -l logs/checklist.txt`."
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-3.terminalExpectations.requiredCommands.0.message"
           }
         ],
         "outputContains": [
@@ -448,25 +476,32 @@
         "forbiddenCommands": [
           {
             "pattern": "(^|\\s)sudo(\\s|$)",
-            "message": "Do not use sudo for beginner workspace tasks."
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-3.terminalExpectations.forbiddenCommands.0.message"
           }
         ]
       },
       "workspace": {
         "language": "bash",
         "entryFilePath": "main.sh",
-        "starterCode": "# Use the terminal for this Linux task.",
+        "starterCode": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-3.starterCode",
         "starterFiles": [
           {
             "path": "main.sh",
-            "content": "# Use the terminal for this Linux task.\n",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-3.starterCode",
             "language": "bash",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "logs/checklist.txt",
-            "content": "open room\nset chairs\ncheck projector\nwelcome guests\n",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-3.starterFiles.logs_checklist_txt.content",
+            "language": "bash"
+          }
+        ],
+        "fixtureFiles": [
+          {
+            "path": "logs/checklist.txt",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-3.starterFiles.logs_checklist_txt.content",
             "language": "bash"
           }
         ]
@@ -475,7 +510,7 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "Count the lines in `logs/checklist.txt` with `wc -l`."
+        "instructions": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-3.prompt"
       },
       "ideConfig": {
         "runnerBackend": "pty",
@@ -486,7 +521,14 @@
           "terminal": true
         },
         "terminalSessionScope": "exercise"
-      }
+      },
+      "fixtureFiles": [
+        {
+          "path": "logs/checklist.txt",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-3.starterFiles.logs_checklist_txt.content",
+          "language": "bash"
+        }
+      ]
     }
   ],
   "topicMeta": {

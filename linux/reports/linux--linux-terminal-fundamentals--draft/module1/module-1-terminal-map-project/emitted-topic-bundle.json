@@ -85,205 +85,35 @@
       "weight": 1,
       "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-1",
       "language": "bash",
-      "starterCode": "# Use the terminal for this Linux project step.",
+      "starterCode": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-1.starterCode",
       "starterFiles": [
         {
           "path": "main.sh",
-          "content": "# Use the terminal for this Linux project step.\n",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "main.sh",
-          "content": "mkdir -p park-terminal-map/requests\nprintf 'North trail request log\\n' > park-terminal-map/requests/north-trail.txt\nfind park-terminal-map -maxdepth 2 -type f | sort\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-1.starterCode",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "park-terminal-map/requests/north-trail.txt",
-          "content": "North trail request log\n",
-          "language": "bash"
-        }
-      ],
-      "workspaceExpectations": {
-        "requiredFiles": [
-          "park-terminal-map/requests/north-trail.txt"
-        ],
-        "requiredFolders": [
-          "park-terminal-map",
-          "park-terminal-map/requests"
-        ]
-      },
-      "terminalExpectations": {
-        "forbiddenCommands": [
-          {
-            "pattern": "(^|\\s)sudo(\\s|$)",
-            "message": "Do not use sudo for beginner workspace tasks."
-          }
-        ]
-      },
-      "workspace": {
-        "language": "bash",
-        "entryFilePath": "main.sh",
-        "starterCode": "# Use the terminal for this Linux project step.",
-        "starterFiles": [
-          {
-            "path": "main.sh",
-            "content": "# Use the terminal for this Linux project step.\n",
-            "language": "bash",
-            "isEntry": true,
-            "entry": true
-          }
-        ],
-        "workspaceExpectations": {
-          "requiredFiles": [
-            "park-terminal-map/requests/north-trail.txt"
-          ],
-          "requiredFolders": [
-            "park-terminal-map",
-            "park-terminal-map/requests"
-          ]
-        }
-      },
-      "showExpectedExample": false,
-      "recipe": {
-        "type": "shell_task",
-        "mode": "terminal_workspace",
-        "instructions": "You are helping a park survey team build a terminal map. Create park-terminal-map/requests/north-trail.txt so the team has a request log to start from."
-      }
-    },
-    {
-      "id": "module-1-terminal-map-project-terminal-task-2",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-2",
-      "language": "bash",
-      "starterCode": "# Use the terminal for this Linux project step.",
-      "starterFiles": [
-        {
-          "path": "main.sh",
-          "content": "# Use the terminal for this Linux project step.\n",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "park-terminal-map/requests/north-trail.txt",
-          "content": "North trail request log\n",
-          "language": "bash"
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "main.sh",
-          "content": "mkdir -p park-terminal-map/maps\nprintf 'Current location checked with pwd and ls\\n' > park-terminal-map/maps/current-location.txt\nfind park-terminal-map -maxdepth 2 -type f | sort\n",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "park-terminal-map/requests/north-trail.txt",
-          "content": "North trail request log\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-1.starterFiles.park_terminal_map_requests_north_trail_txt.content",
           "language": "bash"
         },
         {
           "path": "park-terminal-map/maps/current-location.txt",
-          "content": "Current location checked with pwd and ls\n",
-          "language": "bash"
-        }
-      ],
-      "workspaceExpectations": {
-        "requiredFiles": [
-          "park-terminal-map/maps/current-location.txt",
-          "park-terminal-map/requests/north-trail.txt"
-        ],
-        "requiredFolders": [
-          "park-terminal-map",
-          "park-terminal-map/maps",
-          "park-terminal-map/requests"
-        ]
-      },
-      "terminalExpectations": {
-        "forbiddenCommands": [
-          {
-            "pattern": "(^|\\s)sudo(\\s|$)",
-            "message": "Do not use sudo for beginner workspace tasks."
-          }
-        ]
-      },
-      "workspace": {
-        "language": "bash",
-        "entryFilePath": "main.sh",
-        "starterCode": "# Use the terminal for this Linux project step.",
-        "starterFiles": [
-          {
-            "path": "main.sh",
-            "content": "# Use the terminal for this Linux project step.\n",
-            "language": "bash",
-            "isEntry": true,
-            "entry": true
-          },
-          {
-            "path": "park-terminal-map/requests/north-trail.txt",
-            "content": "North trail request log\n",
-            "language": "bash"
-          }
-        ],
-        "workspaceExpectations": {
-          "requiredFiles": [
-            "park-terminal-map/maps/current-location.txt",
-            "park-terminal-map/requests/north-trail.txt"
-          ],
-          "requiredFolders": [
-            "park-terminal-map",
-            "park-terminal-map/maps",
-            "park-terminal-map/requests"
-          ]
-        }
-      },
-      "showExpectedExample": false,
-      "recipe": {
-        "type": "shell_task",
-        "mode": "terminal_workspace",
-        "instructions": "Continue from the request folder. Keep park-terminal-map/requests/north-trail.txt, then add park-terminal-map/maps/current-location.txt for the navigation note."
-      }
-    },
-    {
-      "id": "module-1-terminal-map-project-terminal-task-3",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-3",
-      "language": "bash",
-      "starterCode": "# Use the terminal for this Linux project step.",
-      "starterFiles": [
-        {
-          "path": "main.sh",
-          "content": "# Use the terminal for this Linux project step.\n",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "park-terminal-map/requests/north-trail.txt",
-          "content": "North trail request log\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-1.starterFiles.park_terminal_map_maps_current_location_txt.content",
           "language": "bash"
         },
         {
-          "path": "park-terminal-map/maps/current-location.txt",
-          "content": "Current location checked with pwd and ls\n",
+          "path": "park-terminal-map/handoff/terminal-map-ready.txt",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-1.starterFiles.park_terminal_map_handoff_terminal_map_ready_txt.content",
           "language": "bash"
         }
       ],
       "solutionFiles": [
         {
           "path": "main.sh",
-          "content": "mkdir -p park-terminal-map/handoff\nprintf 'Terminal map ready for the park survey team\\n' > park-terminal-map/handoff/terminal-map-ready.txt\nfind park-terminal-map -maxdepth 2 -type f | sort\n",
+          "content": "ls\ncd park-terminal-map\npwd\n",
           "language": "bash",
           "isEntry": true,
           "entry": true
@@ -318,33 +148,53 @@
         ]
       },
       "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^ls$",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-1.terminalExpectations.requiredCommands.0.message"
+          },
+          {
+            "pattern": "^cd\\s+park-terminal-map$",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-1.terminalExpectations.requiredCommands.1.message"
+          },
+          {
+            "pattern": "^pwd$",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-1.terminalExpectations.requiredCommands.2.message"
+          }
+        ],
+        "cwdEndsWith": "park-terminal-map",
         "forbiddenCommands": [
           {
             "pattern": "(^|\\s)sudo(\\s|$)",
-            "message": "Do not use sudo for beginner workspace tasks."
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-1.terminalExpectations.forbiddenCommands.0.message"
           }
         ]
       },
       "workspace": {
         "language": "bash",
         "entryFilePath": "main.sh",
-        "starterCode": "# Use the terminal for this Linux project step.",
+        "starterCode": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-1.starterCode",
         "starterFiles": [
           {
             "path": "main.sh",
-            "content": "# Use the terminal for this Linux project step.\n",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-1.starterCode",
             "language": "bash",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "park-terminal-map/requests/north-trail.txt",
-            "content": "North trail request log\n",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-1.starterFiles.park_terminal_map_requests_north_trail_txt.content",
             "language": "bash"
           },
           {
             "path": "park-terminal-map/maps/current-location.txt",
-            "content": "Current location checked with pwd and ls\n",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-1.starterFiles.park_terminal_map_maps_current_location_txt.content",
+            "language": "bash"
+          },
+          {
+            "path": "park-terminal-map/handoff/terminal-map-ready.txt",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-1.starterFiles.park_terminal_map_handoff_terminal_map_ready_txt.content",
             "language": "bash"
           }
         ],
@@ -360,21 +210,447 @@
             "park-terminal-map/maps",
             "park-terminal-map/requests"
           ]
-        }
+        },
+        "fixtureFiles": [
+          {
+            "path": "park-terminal-map/requests/north-trail.txt",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-1.starterFiles.park_terminal_map_requests_north_trail_txt.content",
+            "language": "bash"
+          },
+          {
+            "path": "park-terminal-map/maps/current-location.txt",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-1.starterFiles.park_terminal_map_maps_current_location_txt.content",
+            "language": "bash"
+          },
+          {
+            "path": "park-terminal-map/handoff/terminal-map-ready.txt",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-1.starterFiles.park_terminal_map_handoff_terminal_map_ready_txt.content",
+            "language": "bash"
+          }
+        ]
       },
       "showExpectedExample": false,
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "Finish the terminal map handoff. Keep the request and map notes, then create park-terminal-map/handoff/terminal-map-ready.txt as the final deliverable."
-      }
+        "instructions": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-1.prompt"
+      },
+      "ideConfig": {
+        "runnerBackend": "pty",
+        "layoutMode": "terminal_workspace",
+        "terminalCwd": "/workspace",
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalSessionScope": "exercise"
+      },
+      "fixtureFiles": [
+        {
+          "path": "park-terminal-map/requests/north-trail.txt",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-1.starterFiles.park_terminal_map_requests_north_trail_txt.content",
+          "language": "bash"
+        },
+        {
+          "path": "park-terminal-map/maps/current-location.txt",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-1.starterFiles.park_terminal_map_maps_current_location_txt.content",
+          "language": "bash"
+        },
+        {
+          "path": "park-terminal-map/handoff/terminal-map-ready.txt",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-1.starterFiles.park_terminal_map_handoff_terminal_map_ready_txt.content",
+          "language": "bash"
+        }
+      ]
+    },
+    {
+      "id": "module-1-terminal-map-project-terminal-task-2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-2",
+      "language": "bash",
+      "starterCode": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-2.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-2.starterCode",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "park-terminal-map/requests/north-trail.txt",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-2.starterFiles.park_terminal_map_requests_north_trail_txt.content",
+          "language": "bash"
+        },
+        {
+          "path": "park-terminal-map/maps/current-location.txt",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-2.starterFiles.park_terminal_map_maps_current_location_txt.content",
+          "language": "bash"
+        },
+        {
+          "path": "park-terminal-map/handoff/terminal-map-ready.txt",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-2.starterFiles.park_terminal_map_handoff_terminal_map_ready_txt.content",
+          "language": "bash"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "ls\ncd requests\npwd\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "park-terminal-map/requests/north-trail.txt",
+          "content": "North trail request log\n",
+          "language": "bash"
+        },
+        {
+          "path": "park-terminal-map/maps/current-location.txt",
+          "content": "Current location checked with pwd and ls\n",
+          "language": "bash"
+        },
+        {
+          "path": "park-terminal-map/handoff/terminal-map-ready.txt",
+          "content": "Terminal map ready for the park survey team\n",
+          "language": "bash"
+        }
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "park-terminal-map/handoff/terminal-map-ready.txt",
+          "park-terminal-map/maps/current-location.txt",
+          "park-terminal-map/requests/north-trail.txt"
+        ],
+        "requiredFolders": [
+          "park-terminal-map",
+          "park-terminal-map/handoff",
+          "park-terminal-map/maps",
+          "park-terminal-map/requests"
+        ]
+      },
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^ls$",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-2.terminalExpectations.requiredCommands.0.message"
+          },
+          {
+            "pattern": "^cd\\s+requests$",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-2.terminalExpectations.requiredCommands.1.message"
+          },
+          {
+            "pattern": "^pwd$",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-2.terminalExpectations.requiredCommands.2.message"
+          }
+        ],
+        "cwdEndsWith": "requests",
+        "forbiddenCommands": [
+          {
+            "pattern": "(^|\\s)sudo(\\s|$)",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-2.terminalExpectations.forbiddenCommands.0.message"
+          }
+        ]
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "starterCode": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-2.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-2.starterCode",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "park-terminal-map/requests/north-trail.txt",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-2.starterFiles.park_terminal_map_requests_north_trail_txt.content",
+            "language": "bash"
+          },
+          {
+            "path": "park-terminal-map/maps/current-location.txt",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-2.starterFiles.park_terminal_map_maps_current_location_txt.content",
+            "language": "bash"
+          },
+          {
+            "path": "park-terminal-map/handoff/terminal-map-ready.txt",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-2.starterFiles.park_terminal_map_handoff_terminal_map_ready_txt.content",
+            "language": "bash"
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "park-terminal-map/handoff/terminal-map-ready.txt",
+            "park-terminal-map/maps/current-location.txt",
+            "park-terminal-map/requests/north-trail.txt"
+          ],
+          "requiredFolders": [
+            "park-terminal-map",
+            "park-terminal-map/handoff",
+            "park-terminal-map/maps",
+            "park-terminal-map/requests"
+          ]
+        },
+        "fixtureFiles": [
+          {
+            "path": "park-terminal-map/requests/north-trail.txt",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-2.starterFiles.park_terminal_map_requests_north_trail_txt.content",
+            "language": "bash"
+          },
+          {
+            "path": "park-terminal-map/maps/current-location.txt",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-2.starterFiles.park_terminal_map_maps_current_location_txt.content",
+            "language": "bash"
+          },
+          {
+            "path": "park-terminal-map/handoff/terminal-map-ready.txt",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-2.starterFiles.park_terminal_map_handoff_terminal_map_ready_txt.content",
+            "language": "bash"
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-2.prompt"
+      },
+      "ideConfig": {
+        "runnerBackend": "pty",
+        "layoutMode": "terminal_workspace",
+        "terminalCwd": "/workspace/park-terminal-map",
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalSessionScope": "exercise"
+      },
+      "fixtureFiles": [
+        {
+          "path": "park-terminal-map/requests/north-trail.txt",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-2.starterFiles.park_terminal_map_requests_north_trail_txt.content",
+          "language": "bash"
+        },
+        {
+          "path": "park-terminal-map/maps/current-location.txt",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-2.starterFiles.park_terminal_map_maps_current_location_txt.content",
+          "language": "bash"
+        },
+        {
+          "path": "park-terminal-map/handoff/terminal-map-ready.txt",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-2.starterFiles.park_terminal_map_handoff_terminal_map_ready_txt.content",
+          "language": "bash"
+        }
+      ]
+    },
+    {
+      "id": "module-1-terminal-map-project-terminal-task-3",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-3",
+      "language": "bash",
+      "starterCode": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-3.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-3.starterCode",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "park-terminal-map/requests/north-trail.txt",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-3.starterFiles.park_terminal_map_requests_north_trail_txt.content",
+          "language": "bash"
+        },
+        {
+          "path": "park-terminal-map/maps/current-location.txt",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-3.starterFiles.park_terminal_map_maps_current_location_txt.content",
+          "language": "bash"
+        },
+        {
+          "path": "park-terminal-map/handoff/terminal-map-ready.txt",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-3.starterFiles.park_terminal_map_handoff_terminal_map_ready_txt.content",
+          "language": "bash"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "cd ..\ncd maps\npwd\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "park-terminal-map/requests/north-trail.txt",
+          "content": "North trail request log\n",
+          "language": "bash"
+        },
+        {
+          "path": "park-terminal-map/maps/current-location.txt",
+          "content": "Current location checked with pwd and ls\n",
+          "language": "bash"
+        },
+        {
+          "path": "park-terminal-map/handoff/terminal-map-ready.txt",
+          "content": "Terminal map ready for the park survey team\n",
+          "language": "bash"
+        }
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "park-terminal-map/handoff/terminal-map-ready.txt",
+          "park-terminal-map/maps/current-location.txt",
+          "park-terminal-map/requests/north-trail.txt"
+        ],
+        "requiredFolders": [
+          "park-terminal-map",
+          "park-terminal-map/handoff",
+          "park-terminal-map/maps",
+          "park-terminal-map/requests"
+        ]
+      },
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^cd\\s+\\.\\.$",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-3.terminalExpectations.requiredCommands.0.message"
+          },
+          {
+            "pattern": "^cd\\s+maps$",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-3.terminalExpectations.requiredCommands.1.message"
+          },
+          {
+            "pattern": "^pwd$",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-3.terminalExpectations.requiredCommands.2.message"
+          }
+        ],
+        "cwdEndsWith": "maps",
+        "forbiddenCommands": [
+          {
+            "pattern": "(^|\\s)sudo(\\s|$)",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-3.terminalExpectations.forbiddenCommands.0.message"
+          }
+        ]
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "starterCode": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-3.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-3.starterCode",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "park-terminal-map/requests/north-trail.txt",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-3.starterFiles.park_terminal_map_requests_north_trail_txt.content",
+            "language": "bash"
+          },
+          {
+            "path": "park-terminal-map/maps/current-location.txt",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-3.starterFiles.park_terminal_map_maps_current_location_txt.content",
+            "language": "bash"
+          },
+          {
+            "path": "park-terminal-map/handoff/terminal-map-ready.txt",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-3.starterFiles.park_terminal_map_handoff_terminal_map_ready_txt.content",
+            "language": "bash"
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "park-terminal-map/handoff/terminal-map-ready.txt",
+            "park-terminal-map/maps/current-location.txt",
+            "park-terminal-map/requests/north-trail.txt"
+          ],
+          "requiredFolders": [
+            "park-terminal-map",
+            "park-terminal-map/handoff",
+            "park-terminal-map/maps",
+            "park-terminal-map/requests"
+          ]
+        },
+        "fixtureFiles": [
+          {
+            "path": "park-terminal-map/requests/north-trail.txt",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-3.starterFiles.park_terminal_map_requests_north_trail_txt.content",
+            "language": "bash"
+          },
+          {
+            "path": "park-terminal-map/maps/current-location.txt",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-3.starterFiles.park_terminal_map_maps_current_location_txt.content",
+            "language": "bash"
+          },
+          {
+            "path": "park-terminal-map/handoff/terminal-map-ready.txt",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-3.starterFiles.park_terminal_map_handoff_terminal_map_ready_txt.content",
+            "language": "bash"
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-3.prompt"
+      },
+      "ideConfig": {
+        "runnerBackend": "pty",
+        "layoutMode": "terminal_workspace",
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/park-terminal-map/requests"
+      },
+      "fixtureFiles": [
+        {
+          "path": "park-terminal-map/requests/north-trail.txt",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-3.starterFiles.park_terminal_map_requests_north_trail_txt.content",
+          "language": "bash"
+        },
+        {
+          "path": "park-terminal-map/maps/current-location.txt",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-3.starterFiles.park_terminal_map_maps_current_location_txt.content",
+          "language": "bash"
+        },
+        {
+          "path": "park-terminal-map/handoff/terminal-map-ready.txt",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-3.starterFiles.park_terminal_map_handoff_terminal_map_ready_txt.content",
+          "language": "bash"
+        }
+      ]
     }
   ],
   "topicMeta": {
     "learningGoals": [
-      "Create a real folder map for a park survey team.",
-      "Chain project steps so each step starts from the previous workspace.",
-      "Leave a useful handoff marker for review."
+      "Trace a real folder map for a park survey team.",
+      "Use ls, cd, and pwd across connected project steps.",
+      "Confirm your location as you move between folders."
     ]
+  },
+  "serviceDefaults": {
+    "runnerBackend": "pty",
+    "layoutMode": "terminal_workspace",
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": true
+    }
   }
 }

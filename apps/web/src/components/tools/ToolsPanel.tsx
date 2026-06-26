@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { ListIcon } from "lucide-react";
+import { ListIcon, MoreHorizontal } from "lucide-react";
 
 import ToolTabs from "./ToolTabs";
 import { TOOL_SPECS } from "./registry";
@@ -12,6 +12,7 @@ import type { WorkspaceLanguage, SqlDialect } from "@/lib/practice/types";
 import type { LearningIdeConfig } from "@/lib/ide/learningIdeConfig";
 import type { WorkspaceStateV2 } from "@/components/ide/types";
 import type { SqlPaneOptions } from "@/components/code/runner/components/sql/results-pane";
+import { learnerUiFlags } from "@/lib/config/learnerUiFlags";
 
 const PANE_ANIM = {
     show: { opacity: 1, scale: 1, y: 0, filter: "blur(0px)" },
@@ -107,7 +108,7 @@ function ToolsPanelInner(props: ToolsPanelProps) {
     );
 
     return (
-        <div className="flex h-full flex-col overflow-hidden ui-surface-muted rounded-none">
+        <div className="flex h-full min-h-0 flex-col overflow-visible ui-surface-muted rounded-none">
             <MemoToolsHeader
                 ctx={ctx}
                 active={active}
@@ -178,15 +179,56 @@ function ToolsHeader({
     onUnbind?: () => void;
     onCollapse: () => void;
 }) {
+    const showDebugLearningUi = learnerUiFlags.showDebugLearningUi;
+    const compactToolsHeader =
+        learnerUiFlags.compactLearnerUi && !learnerUiFlags.showDebugLearningUi;
+    const [menuOpen, setMenuOpen] = useState(false);
+    const menuRef = useRef<HTMLDivElement | null>(null);
+    const { primarySpec, secondarySpecs } = resolveCompactToolsHeaderModel({
+        compactToolsHeader,
+        ctx,
+    });
+
+    useEffect(() => {
+        if (!menuOpen) return;
+
+        const handlePointerDown = (event: MouseEvent) => {
+            if (!menuRef.current?.contains(event.target as Node)) {
+                setMenuOpen(false);
+            }
+        };
+
+        const handleKeyDown = (event: KeyboardEvent) => {
+            if (event.key === "Escape") {
+                setMenuOpen(false);
+            }
+        };
+
+        document.addEventListener("mousedown", handlePointerDown);
+        document.addEventListener("keydown", handleKeyDown);
+
+        return () => {
+            document.removeEventListener("mousedown", handlePointerDown);
+            document.removeEventListener("keydown", handleKeyDown);
+        };
+    }, [menuOpen]);
+
+    const activateTool = (v: ToolId) => {
+        const spec = TOOL_SPECS.find((t) => t.id === v);
+        if (!spec || !spec.enabled(ctx)) return;
+        setActive(v);
+        setMenuOpen(false);
+    };
+
     return (
-        <div className="shrink-0 border-b border-neutral-200 bg-white/80 p-3 backdrop-blur dark:border-white/10 dark:bg-black/30">
+        <div className="relative z-20 shrink-0 border-b border-neutral-200 bg-white/80 p-3 backdrop-blur dark:border-white/10 dark:bg-black/30">
             <div className="flex items-center justify-between gap-2">
                 <div className="min-w-0">
                     <div className="text-sm font-black text-neutral-800 dark:text-white/80">
                         Tools
                     </div>
 
-                    {boundId ? (
+                    {showDebugLearningUi && boundId ? (
                         <div className="mt-1 text-[6px] font-extrabold text-neutral-600 dark:text-white/60">
                             Bound to: <span className="font-black text-e">{boundId}</span>
                             {onUnbind ? (
@@ -203,37 +245,135 @@ function ToolsHeader({
                         <div className="mt-1 text-[11px] font-extrabold text-neutral-600 dark:text-white/60">
                             Loading exercise…
                         </div>
-                    ) : (
+                    ) : showDebugLearningUi ? (
                         <div className="mt-1 text-[11px] font-extrabold text-neutral-600 dark:text-white/60">
                             Not bound
                         </div>
-                    )}
+                    ) : null}
                 </div>
 
                 <div className="flex items-center gap-2">
-                    <ToolTabs
-                        ctx={ctx}
-                        value={active}
-                        onChange={(v: ToolId) => {
-                            const spec = TOOL_SPECS.find((t) => t.id === v);
-                            if (!spec) return;
-                            if (!spec.enabled(ctx)) return;
-                            setActive(v);
-                        }}
-                    />
+                    {compactToolsHeader ? (
+                        <>
+                            {primarySpec ? (
+                                <button
+                                    type="button"
+                                    onClick={() => activateTool(primarySpec.id)}
+                                    className="ui-btn ui-btn-secondary px-3 py-2 text-[11px] font-extrabold"
+                                    aria-pressed={active === primarySpec.id}
+                                    title={primarySpec.label}
+                                >
+                                    <span className="inline-flex items-center gap-1.5">
+                                        <primarySpec.Icon className="h-4 w-4" />
+                                        {primarySpec.label}
+                                    </span>
+                                </button>
+                            ) : null}
 
-                    <button
-                        type="button"
-                        className="ui-btn ui-btn-secondary px-3 py-2 text-[11px] font-extrabold"
-                        title="Collapse tools"
-                        onClick={onCollapse}
-                    >
-                        <ListIcon />
-                    </button>
+                            <div ref={menuRef} className="relative">
+                                <button
+                                    type="button"
+                                    className="ui-btn ui-btn-secondary px-3 py-2 text-[11px] font-extrabold"
+                                    aria-label="More tools options"
+                                    aria-haspopup="menu"
+                                    aria-expanded={menuOpen}
+                                    onClick={() => setMenuOpen((open) => !open)}
+                                >
+                                    <span className="inline-flex items-center gap-1.5">
+                                        <MoreHorizontal className="h-4 w-4" />
+                                        More
+                                    </span>
+                                </button>
+
+                                {menuOpen ? (
+                                    <div
+                                        role="menu"
+                                        aria-label="More tools options"
+                                        className="absolute right-0 top-full z-20 mt-2 min-w-[12rem] overflow-hidden rounded-xl border border-neutral-200 bg-white shadow-lg dark:border-white/10 dark:bg-neutral-950"
+                                    >
+                                        {secondarySpecs.map((spec) => (
+                                            <button
+                                                key={spec.id}
+                                                type="button"
+                                                role="menuitem"
+                                                onClick={() => activateTool(spec.id)}
+                                                className="flex w-full items-center justify-between gap-3 px-3 py-2 text-left text-[11px] font-extrabold text-neutral-800 hover:bg-neutral-100 dark:text-white/80 dark:hover:bg-white/10"
+                                            >
+                                                <span className="inline-flex items-center gap-2">
+                                                    <spec.Icon className="h-4 w-4" />
+                                                    {spec.label}
+                                                </span>
+                                                {active === spec.id ? (
+                                                    <span className="text-neutral-500 dark:text-white/45">
+                                                        Open
+                                                    </span>
+                                                ) : null}
+                                            </button>
+                                        ))}
+
+                                        <button
+                                            type="button"
+                                            role="menuitem"
+                                            onClick={() => {
+                                                setMenuOpen(false);
+                                                onCollapse();
+                                            }}
+                                            className="flex w-full items-center gap-2 border-t border-neutral-200 px-3 py-2 text-left text-[11px] font-extrabold text-neutral-800 hover:bg-neutral-100 dark:border-white/10 dark:text-white/80 dark:hover:bg-white/10"
+                                        >
+                                            <ListIcon className="h-4 w-4" />
+                                            Collapse tools
+                                        </button>
+                                    </div>
+                                ) : null}
+                            </div>
+                        </>
+                    ) : (
+                        <>
+                            <ToolTabs
+                                ctx={ctx}
+                                value={active}
+                                onChange={(v: ToolId) => {
+                                    const spec = TOOL_SPECS.find((t) => t.id === v);
+                                    if (!spec) return;
+                                    if (!spec.enabled(ctx)) return;
+                                    setActive(v);
+                                }}
+                            />
+
+                            <button
+                                type="button"
+                                className="ui-btn ui-btn-secondary px-3 py-2 text-[11px] font-extrabold"
+                                title="Collapse tools"
+                                onClick={onCollapse}
+                            >
+                                <ListIcon />
+                            </button>
+                        </>
+                    )}
                 </div>
             </div>
         </div>
     );
+}
+
+export function resolveCompactToolsHeaderModel(args: {
+    compactToolsHeader: boolean;
+    ctx: ToolsCtx;
+}) {
+    const enabledSpecs = TOOL_SPECS.filter((t) => t.enabled(args.ctx));
+    const primarySpec =
+        (args.ctx.codeEnabled ? TOOL_SPECS.find((t) => t.id === "code") : null) ??
+        enabledSpecs[0] ??
+        null;
+    const secondarySpecs = args.compactToolsHeader
+        ? enabledSpecs.filter((t) => t.id !== primarySpec?.id)
+        : [];
+
+    return {
+        enabledSpecs,
+        primarySpec,
+        secondarySpecs,
+    };
 }
 
 const MemoToolsHeader = React.memo(

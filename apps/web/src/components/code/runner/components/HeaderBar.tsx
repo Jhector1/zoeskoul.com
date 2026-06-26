@@ -17,6 +17,7 @@ import { SiPython, SiJavascript, SiC, SiCplusplus, SiHtml5 } from "react-icons/s
 import { FaJava } from "react-icons/fa";
 import { TbSql } from "react-icons/tb";
 import type { WorkspaceLanguage, SqlDialect } from "@/lib/practice/types";
+import { learnerUiFlags } from "@/lib/config/learnerUiFlags";
 
 const LANG_META: Record<
     WorkspaceLanguage,
@@ -203,7 +204,7 @@ export default function HeaderBar(props: {
                             );
                         })}
                     </div>
-                ) : (
+                ) : learnerUiFlags.compactLearnerUi ? null : (
                     <Tooltip tip={`Language: ${langMeta.label}`}>
                         <div className="text-[11px] font-medium text-neutral-500 dark:text-white/50">
                             <IconText icon={<LangIcon className="text-[13px]" />} text={langMeta.label} />

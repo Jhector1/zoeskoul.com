@@ -419,10 +419,8 @@ export function ReviewToolsProvider({
   }, []);
     function isRealUserWorkspaceEdit(patch: CodeInputPatch) {
         return (
-            patch?.userEdited === true ||
             patch?.workspaceOrigin === "user" ||
-            patch?.updateOrigin === "user" ||
-            patch?.dismissFeedbackOnEdit === true
+            patch?.updateOrigin === "user"
         );
     }
   const getRunFeedbackEntry = useCallback(
@@ -694,6 +692,7 @@ export function ReviewToolsProvider({
             cur.onPatch?.(patch);
 
             const feedbackDismissPatch =
+                userEdited &&
                 patch?.dismissFeedbackOnEdit === true &&
                 patch?.feedbackDismissed === true
                     ? {

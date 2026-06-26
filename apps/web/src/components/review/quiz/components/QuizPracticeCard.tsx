@@ -35,6 +35,8 @@ import {
 import { normalizeCurrentPracticeItem } from "@/lib/practice/runtime";
 import { deriveEntryCode } from "@/components/review/module/runtime/exerciseWorkspaceResolver";
 import { mergeLearningIdeConfigs } from "@/lib/ide/learningIdeConfig";
+import type { CodeFeedback } from "@/lib/code/feedback/types";
+import { learnerUiFlags } from "@/lib/config/learnerUiFlags";
 
 function uniqueTruthyStrings(values: Array<unknown>) {
   return Array.from(
@@ -44,6 +46,35 @@ function uniqueTruthyStrings(values: Array<unknown>) {
               .filter(Boolean),
       ),
   );
+}
+
+
+function buildCheckFeedbackFromResult(result: any): CodeFeedback | null {
+  if (!result || typeof result !== "object") return null;
+
+  const authored = result.feedback;
+  if (authored && typeof authored === "object") {
+    return {
+      ...(authored as CodeFeedback),
+      source: "check",
+    };
+  }
+
+  const explanation =
+      typeof result.explanation === "string" && result.explanation.trim().length > 0
+          ? result.explanation.trim()
+          : typeof result.message === "string" && result.message.trim().length > 0
+              ? result.message.trim()
+              : "Check the answer and try again.";
+
+  return {
+    area: "code",
+    source: "check",
+    kind: "logic",
+    tone: "warning",
+    title: "Not correct yet",
+    message: explanation,
+  };
 }
 
 function patchTerminalEvidenceForSubmit(args: {
@@ -1114,21 +1145,56 @@ export default function QuizPracticeCard(props: {
   }, [ex, ps?.item, padRef, runtimeExerciseCode]);
 
   const isCodeExerciseWithInput = ex?.kind === "code_input" && hasInput;
+  const compactLearnerUi = learnerUiFlags.compactLearnerUi;
 
   const feedbackDismissed = Boolean((ps?.item as any)?.feedbackDismissed);
+  const checkedResult = (ps?.item as any)?.result ?? null;
 
   const resultOk =
-      typeof (ps?.item as any)?.result?.ok === "boolean"
-          ? Boolean((ps?.item as any).result.ok)
+      typeof checkedResult?.ok === "boolean"
+          ? Boolean(checkedResult.ok)
           : null;
 
   const isCorrect =
-      (Boolean((ps?.item as any)?.result?.finalized) && resultOk === true) ||
+      (Boolean(checkedResult?.finalized) && resultOk === true) ||
       ps?.ok === true ||
       resultOk === true;
 
+  useEffect(() => {
+    if (!toolsEnabled) return;
+    if (!isCodeInput) return;
+    if (!codeInputId) return;
+
+    if (resultOk === true) {
+      toolsAny?.clearRunFeedback?.(codeInputId);
+      return;
+    }
+
+    if (resultOk !== false) return;
+    if (feedbackDismissed) return;
+
+    const feedback = buildCheckFeedbackFromResult(checkedResult);
+    if (!feedback) return;
+
+    /**
+     * Check Answer and Run must surface the same feedback channel for the
+     * currently bound full-workspace editor. The card still owns grading, but
+     * the Tools pane should not stay blank when the check result contains the
+     * runtime/classified feedback.
+     */
+    toolsAny?.setRunFeedback?.(codeInputId, feedback);
+  }, [
+    toolsEnabled,
+    isCodeInput,
+    codeInputId,
+    resultOk,
+    feedbackDismissed,
+    checkedResult,
+    toolsAny,
+  ]);
+
   const isFinalized =
-      Boolean((ps?.item as any)?.result?.finalized) ||
+      Boolean(checkedResult?.finalized) ||
       isCorrect ||
       attemptsCapped ||
       isCompleted ||
@@ -1550,34 +1616,38 @@ export default function QuizPracticeCard(props: {
                   ) : null}
                 </div>
 
-                <div className="ui-quiz-checkrow-status">
-              <span className="whitespace-normal">
-                {ui.t(
-                    "practice.attempts",
-                    {
-                      n: ps?.attempts ?? 0,
-                      max: ps?.maxAttempts == null ? "∞" : ps.maxAttempts,
-                    },
-                    `Attempts: ${ps?.attempts ?? 0}/${ps?.maxAttempts == null ? "∞" : ps.maxAttempts}`,
-                )}
-              </span>
+                {!compactLearnerUi || isCorrect || (!feedbackDismissed && resultOk === false && ps?.item?.result) ? (
+                  <div className="ui-quiz-checkrow-status">
+                    {!compactLearnerUi ? (
+                      <span className="whitespace-normal">
+                        {ui.t(
+                            "practice.attempts",
+                            {
+                              n: ps?.attempts ?? 0,
+                              max: ps?.maxAttempts == null ? "∞" : ps.maxAttempts,
+                            },
+                            `Attempts: ${ps?.attempts ?? 0}/${ps?.maxAttempts == null ? "∞" : ps.maxAttempts}`,
+                        )}
+                      </span>
+                    ) : null}
 
-                  {isCorrect ? (
-                      <span
-                          className="ml-2 whitespace-nowrap ui-quiz-status-good"
-                          data-testid="review-practice-result-correct"
-                      >
-      ✓ Correct
-    </span>
-                  ) : !feedbackDismissed && resultOk === false && ps?.item?.result ? (
-                      <span
-                          className="ml-2 whitespace-nowrap ui-quiz-status-danger"
-                          data-testid="review-practice-result-incorrect"
-                      >
-      ✕ Not correct
-    </span>
-                  ) : null}
-                </div>
+                    {isCorrect ? (
+                        <span
+                            className={!compactLearnerUi ? "ml-2 whitespace-nowrap ui-quiz-status-good" : "whitespace-nowrap ui-quiz-status-good"}
+                            data-testid="review-practice-result-correct"
+                        >
+        ✓ Correct
+      </span>
+                    ) : !feedbackDismissed && resultOk === false && ps?.item?.result ? (
+                        <span
+                            className={!compactLearnerUi ? "ml-2 whitespace-nowrap ui-quiz-status-danger" : "whitespace-nowrap ui-quiz-status-danger"}
+                            data-testid="review-practice-result-incorrect"
+                        >
+        ✕ Not correct
+      </span>
+                    ) : null}
+                  </div>
+                ) : null}
               </div>
 
               <PracticeHelpPanel

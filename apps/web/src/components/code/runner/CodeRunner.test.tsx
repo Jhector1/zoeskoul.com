@@ -3,6 +3,7 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import CodeRunner, {
     restartWorkspaceTerminalSession,
+    shouldCollapseIdleOutputPanel,
 } from "@/components/code/runner/CodeRunner";
 
 const mockedWorkspaceTerminalControllerCalls: any[] = [];
@@ -309,5 +310,76 @@ describe("CodeRunner terminal-only mode", () => {
         expect(html).toContain('data-testid="editor-pane"');
         expect(html).toContain('data-testid="mock-editor-pane"');
         expect(html).not.toContain('data-testid="mock-xterm-terminal"');
+    });
+});
+
+describe("shouldCollapseIdleOutputPanel", () => {
+    const baseArgs = {
+        compactLearnerUi: true,
+        showEditor: true,
+        showTerminal: true,
+        terminalOnlyMode: false,
+        isWeb: false,
+        language: "python" as const,
+        outputTab: "output" as const,
+        runner: {
+            busy: false,
+            runState: "idle" as const,
+            lastResult: null,
+            transcript: null,
+            stream: null,
+        },
+        workspaceTerminalEnabled: false,
+        workspaceTerminal: {
+            busy: false,
+            starting: false,
+            started: false,
+            sessionId: null,
+            inputEnabled: false,
+            terminalFeed: [],
+        },
+    };
+
+    it("collapses the output panel for compact idle runner state", () => {
+        expect(shouldCollapseIdleOutputPanel(baseArgs)).toBe(true);
+    });
+
+    it("keeps the output panel open after a run result exists", () => {
+        expect(
+            shouldCollapseIdleOutputPanel({
+                ...baseArgs,
+                runner: {
+                    ...baseArgs.runner,
+                    lastResult: {
+                        ok: true,
+                        status: "Accepted",
+                        stdout: "",
+                    },
+                },
+            }),
+        ).toBe(false);
+    });
+
+    it("keeps the output panel open when workspace terminal output exists", () => {
+        expect(
+            shouldCollapseIdleOutputPanel({
+                ...baseArgs,
+                workspaceTerminalEnabled: true,
+                workspaceTerminal: {
+                    ...baseArgs.workspaceTerminal,
+                    started: true,
+                    terminalFeed: [{ id: 1, kind: "pty", data: "ls\n" }],
+                },
+            }),
+        ).toBe(false);
+    });
+
+    it("preserves legacy idle behavior outside compact learner mode", () => {
+        expect(
+            shouldCollapseIdleOutputPanel({
+                ...baseArgs,
+                compactLearnerUi: false,
+            }),
+        ).toBe(false);
     });
 });

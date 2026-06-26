@@ -4,11 +4,13 @@ import React from "react";
 import HeaderSlick from "@/components/HeaderSlick";
 import type { HeaderGamificationVm } from "../../types";
 import NavButton from "@/components/ui/NavButton";
+import { learnerUiFlags } from "@/lib/config/learnerUiFlags";
 
 type Props = {
     locale: string;
     toolsUiEnabled: boolean;
     showDesktopLeft: boolean;
+    showDesktopRight: boolean;
     leftCollapsed: boolean;
     rightCollapsed: boolean;
     modulesHref: string;
@@ -29,6 +31,7 @@ type Props = {
 export default function ReviewModuleHeader({
                                                toolsUiEnabled,
                                                showDesktopLeft,
+                                               showDesktopRight,
                                                leftCollapsed,
                                                rightCollapsed,
                                                modulesHref,                                               onToggleLeftPanel,
@@ -44,6 +47,14 @@ export default function ReviewModuleHeader({
                                                saveStatus = "idle",
                                                lastSaveError,
                                            }: Props) {
+    const compactModeActive =
+        learnerUiFlags.compactLearnerUi && !learnerUiFlags.showDebugLearningUi;
+    const showTopicsButton =
+        !compactModeActive || !showDesktopLeft || leftCollapsed;
+    const showToolsButton =
+        toolsUiEnabled &&
+        (!compactModeActive || !showDesktopRight || rightCollapsed);
+
     return (
         <HeaderSlick
             slot={
@@ -58,20 +69,22 @@ export default function ReviewModuleHeader({
                             ← Modules
                         </NavButton>
 
-                        <button
-                            type="button"
-                            onClick={onToggleLeftPanel}
-                            className="ui-btn ui-btn-secondary text-xs font-extrabold whitespace-nowrap"
-                            title="Topics"
-                        >
-                            {showDesktopLeft
-                                ? leftCollapsed
-                                    ? "Topics ▶"
-                                    : "Topics"
-                                : "Topics"}
-                        </button>
+                        {showTopicsButton ? (
+                            <button
+                                type="button"
+                                onClick={onToggleLeftPanel}
+                                className="ui-btn ui-btn-secondary text-xs font-extrabold whitespace-nowrap"
+                                title="Topics"
+                            >
+                                {showDesktopLeft
+                                    ? leftCollapsed
+                                        ? "Topics ▶"
+                                        : "Topics"
+                                    : "Topics"}
+                            </button>
+                        ) : null}
 
-                        {toolsUiEnabled ? (
+                        {showToolsButton ? (
                             <button
                                 type="button"
                                 onClick={onToggleRightPanel}

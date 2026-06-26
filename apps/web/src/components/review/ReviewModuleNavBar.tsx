@@ -7,6 +7,7 @@ import { ROUTES } from "@/utils";
 import NavButton from "@/components/ui/NavButton";
 
 type Props = {
+    show?: boolean;
     locale: string;
     subjectSlug: string;
     prevModuleId: string | null;
@@ -24,6 +25,7 @@ type Props = {
 const ReviewModuleNavBar = React.forwardRef<HTMLDivElement, Props>(
     function ReviewModuleNavBar(
         {
+            show = true,
             locale,
             subjectSlug,
             prevModuleId,
@@ -38,6 +40,10 @@ const ReviewModuleNavBar = React.forwardRef<HTMLDivElement, Props>(
         },
         ref,
     ) {
+        if (!show) {
+            return null;
+        }
+
         const t = useTranslations("reviewNav");
         const [dragOffset, setDragOffset] = React.useState({ x: 0, y: 0 });
         const [isDragging, setIsDragging] = React.useState(false);

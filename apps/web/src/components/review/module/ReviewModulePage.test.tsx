@@ -22,6 +22,7 @@ const mocked = vi.hoisted(() => ({
             locale: "en",
             toolsUiEnabled: true,
             showDesktopLeft: false,
+            showDesktopRight: false,
             leftCollapsed: true,
             rightCollapsed: false,
             modulesHref: "/modules",
@@ -125,6 +126,7 @@ const mocked = vi.hoisted(() => ({
             onOpenCertificate: vi.fn(),
         },
         moduleNav: {
+            show: true,
             locale: "en",
             subjectSlug: "python",
             prevModuleId: null,
@@ -206,7 +208,7 @@ vi.mock("./components/overlays/ReviewResetDialog", () => ({
 }));
 
 vi.mock("@/components/review/ReviewModuleNavBar", () => ({
-    default: () => <div data-testid="review-module-nav" />,
+    default: (props: any) => (props.show === false ? null : <div data-testid="review-module-nav" />),
 }));
 
 vi.mock("./context/ReviewToolsContext", () => ({
@@ -235,5 +237,15 @@ describe("ReviewModulePage responsive tools mount", () => {
 
         mocked.controller.rightRail.showDesktopRight = false;
         mocked.controller.rightRail.shouldRenderStackedTools = true;
+    });
+
+    it("omits the bottom module nav when the controller hides it", () => {
+        mocked.controller.moduleNav.show = false;
+
+        const html = renderToStaticMarkup(<ReviewModulePage {...({} as any)} />);
+
+        expect(html).not.toContain('data-testid="review-module-nav"');
+
+        mocked.controller.moduleNav.show = true;
     });
 });
