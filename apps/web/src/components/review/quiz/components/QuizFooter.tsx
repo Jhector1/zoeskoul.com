@@ -14,8 +14,6 @@ export default function QuizFooter(props: {
   passed: boolean;
   sequential: boolean;
   locked?: boolean;
-
-  onResetClick: () => void;
 }) {
   const pct = props.total > 0 ? Math.round((props.checkedCount / props.total) * 100) : 0;
   const ui = useTaggedT("reviewQuizUi");
@@ -50,16 +48,6 @@ export default function QuizFooter(props: {
         </div>
 
         <div className="flex items-center gap-2">
-          {!props.isCompleted ? (
-              <button
-                  type="button"
-                  onClick={props.onResetClick}
-                  className="ui-quiz-action ui-quiz-action--primary"
-              >
-                {ui.t("buttons.resetQuiz", {}, "Reset quiz")}
-              </button>
-          ) : null}
-
           {props.locked ? (
               <span className="ui-pill-warn">{ui.t("status.locked", {}, "Locked")}</span>
           ) : props.isCompleted ? (

@@ -120,10 +120,18 @@ export default function ReviewTopicStage({
     const useWorkspaceTabs = Boolean(showMobileWorkspaceTabs && mobileToolsPanel);
     const activeTab = useWorkspaceTabs ? activeMobileWorkspaceTab : "lesson";
     const activeCard = viewCards[activeCardIndex] ?? null;
-    const constrainQuizWidth =
+    const cardExplicitlyHidesTools = activeCard?.tools?.defaultVisible === false;
+    const shouldConstrainQuizWidth =
         learnerUiFlags.compactLearnerUi &&
         !learnerUiFlags.showDebugLearningUi &&
         activeCard?.type === "quiz";
+    const shouldConstrainReadingWidth =
+        cardExplicitlyHidesTools &&
+        (activeCard?.type === "sketch" ||
+            activeCard?.type === "text" ||
+            activeCard?.type === "video");
+    const constrainContentWidth =
+        shouldConstrainQuizWidth || shouldConstrainReadingWidth;
     const setActiveTab = (tab: "lesson" | "code") => {
         onMobileWorkspaceTabChange?.(tab);
     };
@@ -133,7 +141,7 @@ export default function ReviewTopicStage({
             <div
                 className={cn(
                     "flex min-h-full flex-col pb-28",
-                    constrainQuizWidth && "mx-auto w-full max-w-4xl",
+                    constrainContentWidth && "mx-auto w-full max-w-4xl",
                 )}
             >
                 <ReviewTopicCards

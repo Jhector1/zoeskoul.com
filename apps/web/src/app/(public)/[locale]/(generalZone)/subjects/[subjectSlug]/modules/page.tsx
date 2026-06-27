@@ -1,6 +1,7 @@
 import "server-only";
 
 import { prisma } from "@/lib/prisma";
+import { SUBJECT_ARTIFACTS } from "@/lib/subjects";
 import SubjectModulesClient from "./SubjectModulesClient";
 import { auth } from "@/lib/auth";
 import type { Actor } from "@/lib/practice/actor";
@@ -12,6 +13,7 @@ import {
   getResolvedSubjectModulesFromManifest,
 } from "@/lib/subjects/server/resolveSubjectPresentation";
 import { notFound } from "next/navigation";
+import { normalizeTopicProgressKey } from "@/lib/review/progressTopicKeys";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -86,28 +88,49 @@ export default async function SubjectModulesPage({
 
   const resolvedSectionsBySlug = await getResolvedSectionPresentationMap(subjectSlug);
 
-  const manifestModulesBySlug = new Map(
-      manifestView.modules.map((m) => [m.slug, m]),
-  );
+  const manifestModuleSlugs = new Set(manifestView.modules.map((m) => m.slug));
+  const dbModulesBySlug = new Map(subject.modules.map((m) => [m.slug, m]));
 
-  const modules = subject.modules.map((m) => {
-    const mv = manifestModulesBySlug.get(m.slug);
+  // The generated manifest is the source of truth for what learners can see.
+  // DB rows are only used for stable ids/access/progress. This prevents old
+  // published sections/topics from inflating counts after a course is republished
+  // with fewer manifest sections.
+  const modules = manifestView.modules.flatMap((mv) => {
+    const db = dbModulesBySlug.get(mv.slug);
+    if (!db) return [];
 
-    return {
-      ...m,
-      title: mv?.title ?? m.slug,
-      description: mv?.description ?? null,
-    };
+    return [
+      {
+        ...db,
+        title: mv.title,
+        description: mv.description || null,
+        order: db.order ?? mv.order,
+        weekStart: db.weekStart ?? mv.weekStart ?? null,
+        weekEnd: db.weekEnd ?? mv.weekEnd ?? null,
+      },
+    ];
   });
 
-  const sections = subject.sections.map((s) => {
-    const sv = resolvedSectionsBySlug[s.slug];
+  const manifestSections = SUBJECT_ARTIFACTS.sections
+    .filter((s) => s.subjectSlug === subjectSlug && manifestModuleSlugs.has(s.moduleSlug))
+    .sort((a, b) => a.order - b.order || a.slug.localeCompare(b.slug));
 
-    return {
-      ...s,
-      title: sv?.title ?? s.title,
-      description: sv?.description ?? s.description ?? null,
-    };
+  const sections = manifestSections.flatMap((s) => {
+    const dbModule = dbModulesBySlug.get(s.moduleSlug);
+    if (!dbModule) return [];
+
+    const resolved = resolvedSectionsBySlug[s.slug];
+
+    return [
+      {
+        id: s.slug,
+        slug: s.slug,
+        title: resolved?.title ?? s.title,
+        description: resolved?.description ?? s.description ?? null,
+        order: resolved?.order ?? s.order,
+        moduleId: dbModule.id,
+      },
+    ];
   });
 
   const requireAll = process.env.BILLING_REQUIRE_ALL_MODULES === "1";
@@ -149,36 +172,19 @@ export default async function SubjectModulesPage({
     };
   }
 
-  const moduleDbIds = modules.map((m) => m.id);
-  const sectionIds = sections.map((s) => s.id);
-
-  const moduleTopics = await prisma.practiceTopic.findMany({
-    where: { moduleId: { in: moduleDbIds } },
-    select: { moduleId: true, genKey: true, slug: true },
-  });
-
   const topicIdsByModuleDbId: Record<string, string[]> = {};
-  for (const t of moduleTopics) {
-    const mid = t.moduleId ? String(t.moduleId) : "";
-    if (!mid) continue;
-    const key = String(t.genKey ?? t.slug);
-    (topicIdsByModuleDbId[mid] ??= []).push(key);
+  for (const m of modules) {
+    const keys = SUBJECT_ARTIFACTS.topics
+      .filter((t) => t.subjectSlug === subjectSlug && t.moduleSlug === m.slug)
+      .sort((a, b) => a.order - b.order || a.slug.localeCompare(b.slug))
+      .map((t) => normalizeTopicProgressKey(t.slug));
+
+    topicIdsByModuleDbId[String(m.id)] = [...new Set(keys)];
   }
 
-  const sectionLinks = await prisma.practiceSectionTopic.findMany({
-    where: { sectionId: { in: sectionIds } },
-    select: {
-      sectionId: true,
-      topic: { select: { genKey: true, slug: true } },
-    },
-    orderBy: { order: "asc" },
-  });
-
   const topicIdsBySectionId: Record<string, string[]> = {};
-  for (const link of sectionLinks) {
-    const sid = String(link.sectionId);
-    const key = String(link.topic.genKey ?? link.topic.slug);
-    (topicIdsBySectionId[sid] ??= []).push(key);
+  for (const s of manifestSections) {
+    topicIdsBySectionId[s.slug] = [...new Set(s.topicSlugs.map((slug) => normalizeTopicProgressKey(slug)))];
   }
 
   return (

@@ -2,14 +2,14 @@
   "topicId": "order_by",
   "subjectSlug": "sql-v2",
   "moduleSlug": "sql-v2-3",
-  "sectionSlug": "sql-v2-3-1",
+  "sectionSlug": "sql-v2-sql-v2-3-1",
   "prefix": "sqlv2_3",
-  "minutes": 15,
+  "minutes": 16,
   "runtimeDefaults": {
     "kind": "sql",
     "showSchema": true,
-    "showErd": true,
-    "showChen": true,
+    "showErd": false,
+    "showChen": false,
     "supportsTerminal": false,
     "supportsMultiFile": false,
     "supportsFileSystem": false,
@@ -303,7 +303,7 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-3.order_by.quiz.ci_sort_by_price_low_high",
       "language": "sql",
-      "starterCode": "SELECT name, price\nFROM products\n-- TODO: sort by price from lowest to highest\n;",
+      "starterCode": "@:topics.sql-v2.sql-v2-3.order_by.quiz.ci_sort_by_price_low_high.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -311,8 +311,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -321,8 +321,60 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT name, price\nFROM products\nORDER BY price ASC;"
-      }
+        "solutionCode": "SELECT name, price\nFROM products\nORDER BY price ASC;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, price\nFROM products\nORDER BY price ASC;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-3.order_by.quiz.ci_sort_by_price_low_high.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT name, price\nFROM products\nORDER BY price ASC;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-3.order_by.quiz.ci_sort_by_price_low_high.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-3.order_by.quiz.ci_sort_by_price_low_high.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, price\nFROM products\nORDER BY price ASC;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     },
     {
       "id": "ci_newest_products",
@@ -331,7 +383,7 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-3.order_by.quiz.ci_newest_products",
       "language": "sql",
-      "starterCode": "SELECT name, created_at\nFROM products\n-- TODO: sort so the newest rows come first\n;",
+      "starterCode": "@:topics.sql-v2.sql-v2-3.order_by.quiz.ci_newest_products.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -339,8 +391,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -349,8 +401,60 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT name, created_at\nFROM products\nORDER BY created_at DESC;"
-      }
+        "solutionCode": "SELECT name, created_at\nFROM products\nORDER BY created_at DESC;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, created_at\nFROM products\nORDER BY created_at DESC;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-3.order_by.quiz.ci_newest_products.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT name, created_at\nFROM products\nORDER BY created_at DESC;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-3.order_by.quiz.ci_newest_products.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-3.order_by.quiz.ci_newest_products.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, created_at\nFROM products\nORDER BY created_at DESC;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     },
     {
       "id": "ci_top_3_expensive",
@@ -359,7 +463,7 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-3.order_by.quiz.ci_top_3_expensive",
       "language": "sql",
-      "starterCode": "SELECT name, price\nFROM products\n-- TODO: sort by highest price first\n-- TODO: return only 3 rows\n;",
+      "starterCode": "@:topics.sql-v2.sql-v2-3.order_by.quiz.ci_top_3_expensive.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -367,8 +471,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -377,8 +481,60 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT name, price\nFROM products\nORDER BY price DESC\nLIMIT 3;"
-      }
+        "solutionCode": "SELECT name, price\nFROM products\nORDER BY price DESC\nLIMIT 3;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, price\nFROM products\nORDER BY price DESC\nLIMIT 3;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-3.order_by.quiz.ci_top_3_expensive.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT name, price\nFROM products\nORDER BY price DESC\nLIMIT 3;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-3.order_by.quiz.ci_top_3_expensive.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-3.order_by.quiz.ci_top_3_expensive.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, price\nFROM products\nORDER BY price DESC\nLIMIT 3;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     },
     {
       "id": "try-order_by-sketch0",
@@ -387,7 +543,7 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-3.order_by.quiz.try-order_by-sketch0",
       "language": "sql",
-      "starterCode": "SELECT name, price\nFROM products\n-- TODO: sort by price from lowest to highest\n;",
+      "starterCode": "@:topics.sql-v2.sql-v2-3.order_by.quiz.try-order_by-sketch0.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -395,8 +551,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -405,8 +561,60 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT name, price\nFROM products\nORDER BY price ASC;"
-      }
+        "solutionCode": "SELECT name, price\nFROM products\nORDER BY price ASC;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, price\nFROM products\nORDER BY price ASC;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-3.order_by.quiz.try-order_by-sketch0.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT name, price\nFROM products\nORDER BY price ASC;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-3.order_by.quiz.try-order_by-sketch0.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-3.order_by.quiz.try-order_by-sketch0.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, price\nFROM products\nORDER BY price ASC;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     },
     {
       "id": "try-order_by-sketch1",
@@ -415,7 +623,7 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-3.order_by.quiz.try-order_by-sketch1",
       "language": "sql",
-      "starterCode": "SELECT name, created_at\nFROM products\n-- TODO: sort so the newest rows come first\n;",
+      "starterCode": "@:topics.sql-v2.sql-v2-3.order_by.quiz.try-order_by-sketch1.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -423,8 +631,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -433,8 +641,60 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT name, created_at\nFROM products\nORDER BY created_at DESC;"
-      }
+        "solutionCode": "SELECT name, created_at\nFROM products\nORDER BY created_at DESC;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, created_at\nFROM products\nORDER BY created_at DESC;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-3.order_by.quiz.try-order_by-sketch1.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT name, created_at\nFROM products\nORDER BY created_at DESC;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-3.order_by.quiz.try-order_by-sketch1.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-3.order_by.quiz.try-order_by-sketch1.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, created_at\nFROM products\nORDER BY created_at DESC;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     },
     {
       "id": "try-order_by-sketch2",
@@ -443,7 +703,7 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-3.order_by.quiz.try-order_by-sketch2",
       "language": "sql",
-      "starterCode": "SELECT name, price\nFROM products\n-- TODO: sort by highest price first\n-- TODO: return only 3 rows\n;",
+      "starterCode": "@:topics.sql-v2.sql-v2-3.order_by.quiz.try-order_by-sketch2.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -451,8 +711,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -461,8 +721,60 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT name, price\nFROM products\nORDER BY price DESC\nLIMIT 3;"
-      }
+        "solutionCode": "SELECT name, price\nFROM products\nORDER BY price DESC\nLIMIT 3;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, price\nFROM products\nORDER BY price DESC\nLIMIT 3;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-3.order_by.quiz.try-order_by-sketch2.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT name, price\nFROM products\nORDER BY price DESC\nLIMIT 3;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-3.order_by.quiz.try-order_by-sketch2.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-3.order_by.quiz.try-order_by-sketch2.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, price\nFROM products\nORDER BY price DESC\nLIMIT 3;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     }
   ]
 }

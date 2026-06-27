@@ -1,0 +1,204 @@
+{
+  "topicId": "intro_to_keys",
+  "subjectSlug": "sql-v2",
+  "moduleSlug": "sql-v2-0",
+  "sectionSlug": "sql-v2-sql-v2-0-3",
+  "prefix": "sqlv2_0",
+  "minutes": 12,
+  "runtimeDefaults": {
+    "kind": "sql",
+    "showSchema": true,
+    "showErd": true,
+    "showChen": true,
+    "supportsTerminal": false,
+    "supportsMultiFile": false,
+    "supportsFileSystem": false,
+    "datasetId": "students_intro",
+    "fixedSqlDialect": "sqlite",
+    "resultShape": "table"
+  },
+  "topic": {
+    "labelKey": "topics.sql-v2.sql-v2-0.intro_to_keys.label",
+    "summaryKey": "topics.sql-v2.sql-v2-0.intro_to_keys.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql-v2.sql-v2-0.intro_to_keys.cards.sketch0.title",
+      "sketchId": "keys-idea",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql-v2.sql-v2-0.intro_to_keys.cards.sketch1.title",
+      "sketchId": "keys-vs-regular-columns",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.sql-v2.sql-v2-0.intro_to_keys.cards.sketch2.title",
+      "sketchId": "reading-primary-key-idea",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql-v2.sql-v2-0.intro_to_keys.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "keys-idea",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql-v2.sql-v2-0.intro_to_keys.keys-idea.title",
+      "bodyKey": "sketches.sql-v2.sql-v2-0.intro_to_keys.keys-idea.bodyMarkdown"
+    },
+    {
+      "id": "keys-vs-regular-columns",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql-v2.sql-v2-0.intro_to_keys.keys-vs-regular-columns.title",
+      "bodyKey": "sketches.sql-v2.sql-v2-0.intro_to_keys.keys-vs-regular-columns.bodyMarkdown"
+    },
+    {
+      "id": "reading-primary-key-idea",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql-v2.sql-v2-0.intro_to_keys.reading-primary-key-idea.title",
+      "bodyKey": "sketches.sql-v2.sql-v2-0.intro_to_keys.reading-primary-key-idea.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "sc-key-purpose",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-0.intro_to_keys.quiz.sc-key-purpose",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "sc-best-key-column",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-0.intro_to_keys.quiz.sc-best-key-column",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "c"
+      }
+    },
+    {
+      "id": "mc-columns-can-repeat",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-0.intro_to_keys.quiz.mc-columns-can-repeat",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "mc-key-characteristics",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-0.intro_to_keys.quiz.mc-key-characteristics",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "dr-read-query-order",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-0.intro_to_keys.quiz.dr-read-query-order",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "dr-key-thinking-order",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-0.intro_to_keys.quiz.dr-key-thinking-order",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    }
+  ]
+}

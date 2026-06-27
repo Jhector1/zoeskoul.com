@@ -1,0 +1,633 @@
+{
+  "generatedAt": "2026-06-26T19:25:00.127936Z",
+  "sourceZip": "sql.zip",
+  "subject": "sql--sql-v2--draft",
+  "topicsScanned": 88,
+  "tryItCardsAdded": 100,
+  "tryItCardsAddedByModule": {
+    "module0": 47,
+    "module1": 49,
+    "module2": 1,
+    "module3": 1,
+    "module4": 1,
+    "module5": 1
+  },
+  "codeInputExercisesNormalized": 469,
+  "codeInputExercisesNormalizedByModule": {
+    "module0": 55,
+    "module1": 100,
+    "module2": 112,
+    "module3": 98,
+    "module4": 99,
+    "module5": 5
+  },
+  "normalization": {
+    "starterCode": "resolved from @: message aliases into literal SQL",
+    "entryFilePath": "query.sql",
+    "starterFiles": "added for every code_input exercise",
+    "workspace": "added for every code_input exercise with starterFiles and solutionFiles",
+    "solutionFiles": "added from recipe.solutionCode for every code_input exercise"
+  },
+  "details": [
+    {
+      "topic": "how_data_is_organized",
+      "module": "module0",
+      "card": "sketch0",
+      "addedTryIt": "try-how_data_is_organized-sketch0"
+    },
+    {
+      "topic": "how_data_is_organized",
+      "module": "module0",
+      "card": "sketch1",
+      "addedTryIt": "try-how_data_is_organized-sketch1"
+    },
+    {
+      "topic": "how_data_is_organized",
+      "module": "module0",
+      "card": "sketch2",
+      "addedTryIt": "try-how_data_is_organized-sketch2"
+    },
+    {
+      "topic": "intro_to_keys",
+      "module": "module0",
+      "card": "sketch0",
+      "addedTryIt": "try-intro_to_keys-sketch0"
+    },
+    {
+      "topic": "intro_to_keys",
+      "module": "module0",
+      "card": "sketch1",
+      "addedTryIt": "try-intro_to_keys-sketch1"
+    },
+    {
+      "topic": "intro_to_keys",
+      "module": "module0",
+      "card": "sketch2",
+      "addedTryIt": "try-intro_to_keys-sketch2"
+    },
+    {
+      "topic": "module-0-student-roster-project",
+      "module": "module0",
+      "card": "sketch0",
+      "addedTryIt": "try-module-0-student-roster-project-sketch0"
+    },
+    {
+      "topic": "one_table_vs_multiple_tables",
+      "module": "module0",
+      "card": "sketch0",
+      "addedTryIt": "try-one_table_vs_multiple_tables-sketch0"
+    },
+    {
+      "topic": "one_table_vs_multiple_tables",
+      "module": "module0",
+      "card": "sketch1",
+      "addedTryIt": "try-one_table_vs_multiple_tables-sketch1"
+    },
+    {
+      "topic": "one_table_vs_multiple_tables",
+      "module": "module0",
+      "card": "sketch2",
+      "addedTryIt": "try-one_table_vs_multiple_tables-sketch2"
+    },
+    {
+      "topic": "reading_data_like_a_spreadsheet",
+      "module": "module0",
+      "card": "sketch0",
+      "addedTryIt": "try-reading_data_like_a_spreadsheet-sketch0"
+    },
+    {
+      "topic": "reading_data_like_a_spreadsheet",
+      "module": "module0",
+      "card": "sketch1",
+      "addedTryIt": "try-reading_data_like_a_spreadsheet-sketch1"
+    },
+    {
+      "topic": "reading_data_like_a_spreadsheet",
+      "module": "module0",
+      "card": "sketch2",
+      "addedTryIt": "try-reading_data_like_a_spreadsheet-sketch2"
+    },
+    {
+      "topic": "reading_query_results",
+      "module": "module0",
+      "card": "sketch0",
+      "addedTryIt": "try-reading_query_results-sketch0"
+    },
+    {
+      "topic": "reading_query_results",
+      "module": "module0",
+      "card": "sketch1",
+      "addedTryIt": "try-reading_query_results-sketch1"
+    },
+    {
+      "topic": "reading_query_results",
+      "module": "module0",
+      "card": "sketch2",
+      "addedTryIt": "try-reading_query_results-sketch2"
+    },
+    {
+      "topic": "real_world_examples_of_databases",
+      "module": "module0",
+      "card": "sketch0",
+      "addedTryIt": "try-real_world_examples_of_databases-sketch0"
+    },
+    {
+      "topic": "real_world_examples_of_databases",
+      "module": "module0",
+      "card": "sketch1",
+      "addedTryIt": "try-real_world_examples_of_databases-sketch1"
+    },
+    {
+      "topic": "real_world_examples_of_databases",
+      "module": "module0",
+      "card": "sketch2",
+      "addedTryIt": "try-real_world_examples_of_databases-sketch2"
+    },
+    {
+      "topic": "records_and_fields",
+      "module": "module0",
+      "card": "sketch0",
+      "addedTryIt": "try-records_and_fields-sketch0"
+    },
+    {
+      "topic": "records_and_fields",
+      "module": "module0",
+      "card": "sketch1",
+      "addedTryIt": "try-records_and_fields-sketch1"
+    },
+    {
+      "topic": "records_and_fields",
+      "module": "module0",
+      "card": "sketch2",
+      "addedTryIt": "try-records_and_fields-sketch2"
+    },
+    {
+      "topic": "rows_and_columns",
+      "module": "module0",
+      "card": "sketch0",
+      "addedTryIt": "try-rows_and_columns-sketch0"
+    },
+    {
+      "topic": "rows_and_columns",
+      "module": "module0",
+      "card": "sketch1",
+      "addedTryIt": "try-rows_and_columns-sketch1"
+    },
+    {
+      "topic": "running_your_first_query",
+      "module": "module0",
+      "card": "sketch0",
+      "addedTryIt": "try-running_your_first_query-sketch0"
+    },
+    {
+      "topic": "running_your_first_query",
+      "module": "module0",
+      "card": "sketch1",
+      "addedTryIt": "try-running_your_first_query-sketch1"
+    },
+    {
+      "topic": "running_your_first_query",
+      "module": "module0",
+      "card": "sketch2",
+      "addedTryIt": "try-running_your_first_query-sketch2"
+    },
+    {
+      "topic": "sql_editor_basics",
+      "module": "module0",
+      "card": "sketch0",
+      "addedTryIt": "try-sql_editor_basics-sketch0"
+    },
+    {
+      "topic": "sql_editor_basics",
+      "module": "module0",
+      "card": "sketch1",
+      "addedTryIt": "try-sql_editor_basics-sketch1"
+    },
+    {
+      "topic": "sql_editor_basics",
+      "module": "module0",
+      "card": "sketch2",
+      "addedTryIt": "try-sql_editor_basics-sketch2"
+    },
+    {
+      "topic": "table_names_and_column_names",
+      "module": "module0",
+      "card": "sketch0",
+      "addedTryIt": "try-table_names_and_column_names-sketch0"
+    },
+    {
+      "topic": "table_names_and_column_names",
+      "module": "module0",
+      "card": "sketch1",
+      "addedTryIt": "try-table_names_and_column_names-sketch1"
+    },
+    {
+      "topic": "thinking_in_questions_and_answers",
+      "module": "module0",
+      "card": "sketch0",
+      "addedTryIt": "try-thinking_in_questions_and_answers-sketch0"
+    },
+    {
+      "topic": "thinking_in_questions_and_answers",
+      "module": "module0",
+      "card": "sketch1",
+      "addedTryIt": "try-thinking_in_questions_and_answers-sketch1"
+    },
+    {
+      "topic": "thinking_in_questions_and_answers",
+      "module": "module0",
+      "card": "sketch2",
+      "addedTryIt": "try-thinking_in_questions_and_answers-sketch2"
+    },
+    {
+      "topic": "what_a_database_is",
+      "module": "module0",
+      "card": "sketch0",
+      "addedTryIt": "try-what_a_database_is-sketch0"
+    },
+    {
+      "topic": "what_a_database_is",
+      "module": "module0",
+      "card": "sketch1",
+      "addedTryIt": "try-what_a_database_is-sketch1"
+    },
+    {
+      "topic": "what_a_database_is",
+      "module": "module0",
+      "card": "sketch2",
+      "addedTryIt": "try-what_a_database_is-sketch2"
+    },
+    {
+      "topic": "what_sql_means",
+      "module": "module0",
+      "card": "sketch0",
+      "addedTryIt": "try-what_sql_means-sketch0"
+    },
+    {
+      "topic": "what_sql_means",
+      "module": "module0",
+      "card": "sketch1",
+      "addedTryIt": "try-what_sql_means-sketch1"
+    },
+    {
+      "topic": "what_sql_means",
+      "module": "module0",
+      "card": "sketch2",
+      "addedTryIt": "try-what_sql_means-sketch2"
+    },
+    {
+      "topic": "where_sql_runs",
+      "module": "module0",
+      "card": "sketch0",
+      "addedTryIt": "try-where_sql_runs-sketch0"
+    },
+    {
+      "topic": "where_sql_runs",
+      "module": "module0",
+      "card": "sketch1",
+      "addedTryIt": "try-where_sql_runs-sketch1"
+    },
+    {
+      "topic": "where_sql_runs",
+      "module": "module0",
+      "card": "sketch2",
+      "addedTryIt": "try-where_sql_runs-sketch2"
+    },
+    {
+      "topic": "why_sql_is_useful",
+      "module": "module0",
+      "card": "sketch0",
+      "addedTryIt": "try-why_sql_is_useful-sketch0"
+    },
+    {
+      "topic": "why_sql_is_useful",
+      "module": "module0",
+      "card": "sketch1",
+      "addedTryIt": "try-why_sql_is_useful-sketch1"
+    },
+    {
+      "topic": "why_sql_is_useful",
+      "module": "module0",
+      "card": "sketch2",
+      "addedTryIt": "try-why_sql_is_useful-sketch2"
+    },
+    {
+      "topic": "choosing_the_right_columns",
+      "module": "module1",
+      "card": "sketch0",
+      "addedTryIt": "try-choosing_the_right_columns-sketch0"
+    },
+    {
+      "topic": "choosing_the_right_columns",
+      "module": "module1",
+      "card": "sketch1",
+      "addedTryIt": "try-choosing_the_right_columns-sketch1"
+    },
+    {
+      "topic": "choosing_the_right_columns",
+      "module": "module1",
+      "card": "sketch2",
+      "addedTryIt": "try-choosing_the_right_columns-sketch2"
+    },
+    {
+      "topic": "common_beginner_syntax_mistakes",
+      "module": "module1",
+      "card": "sketch0",
+      "addedTryIt": "try-common_beginner_syntax_mistakes-sketch0"
+    },
+    {
+      "topic": "common_beginner_syntax_mistakes",
+      "module": "module1",
+      "card": "sketch1",
+      "addedTryIt": "try-common_beginner_syntax_mistakes-sketch1"
+    },
+    {
+      "topic": "common_beginner_syntax_mistakes",
+      "module": "module1",
+      "card": "sketch2",
+      "addedTryIt": "try-common_beginner_syntax_mistakes-sketch2"
+    },
+    {
+      "topic": "from_and_table_names",
+      "module": "module1",
+      "card": "sketch0",
+      "addedTryIt": "try-from_and_table_names-sketch0"
+    },
+    {
+      "topic": "from_and_table_names",
+      "module": "module1",
+      "card": "sketch1",
+      "addedTryIt": "try-from_and_table_names-sketch1"
+    },
+    {
+      "topic": "from_and_table_names",
+      "module": "module1",
+      "card": "sketch2",
+      "addedTryIt": "try-from_and_table_names-sketch2"
+    },
+    {
+      "topic": "keywords",
+      "module": "module1",
+      "card": "sketch0",
+      "addedTryIt": "try-keywords-sketch0"
+    },
+    {
+      "topic": "keywords",
+      "module": "module1",
+      "card": "sketch1",
+      "addedTryIt": "try-keywords-sketch1"
+    },
+    {
+      "topic": "keywords",
+      "module": "module1",
+      "card": "sketch2",
+      "addedTryIt": "try-keywords-sketch2"
+    },
+    {
+      "topic": "module-1-product-starter-sheet-project",
+      "module": "module1",
+      "card": "sketch0",
+      "addedTryIt": "try-module-1-product-starter-sheet-project-sketch0"
+    },
+    {
+      "topic": "predicting_result_output",
+      "module": "module1",
+      "card": "sketch0",
+      "addedTryIt": "try-predicting_result_output-sketch0"
+    },
+    {
+      "topic": "predicting_result_output",
+      "module": "module1",
+      "card": "sketch1",
+      "addedTryIt": "try-predicting_result_output-sketch1"
+    },
+    {
+      "topic": "predicting_result_output",
+      "module": "module1",
+      "card": "sketch2",
+      "addedTryIt": "try-predicting_result_output-sketch2"
+    },
+    {
+      "topic": "query_full_tables",
+      "module": "module1",
+      "card": "sketch0",
+      "addedTryIt": "try-query_full_tables-sketch0"
+    },
+    {
+      "topic": "query_full_tables",
+      "module": "module1",
+      "card": "sketch1",
+      "addedTryIt": "try-query_full_tables-sketch1"
+    },
+    {
+      "topic": "query_full_tables",
+      "module": "module1",
+      "card": "sketch2",
+      "addedTryIt": "try-query_full_tables-sketch2"
+    },
+    {
+      "topic": "query_multiple_columns",
+      "module": "module1",
+      "card": "sketch0",
+      "addedTryIt": "try-query_multiple_columns-sketch0"
+    },
+    {
+      "topic": "query_multiple_columns",
+      "module": "module1",
+      "card": "sketch1",
+      "addedTryIt": "try-query_multiple_columns-sketch1"
+    },
+    {
+      "topic": "query_multiple_columns",
+      "module": "module1",
+      "card": "sketch2",
+      "addedTryIt": "try-query_multiple_columns-sketch2"
+    },
+    {
+      "topic": "query_one_column",
+      "module": "module1",
+      "card": "sketch0",
+      "addedTryIt": "try-query_one_column-sketch0"
+    },
+    {
+      "topic": "query_one_column",
+      "module": "module1",
+      "card": "sketch1",
+      "addedTryIt": "try-query_one_column-sketch1"
+    },
+    {
+      "topic": "query_one_column",
+      "module": "module1",
+      "card": "sketch2",
+      "addedTryIt": "try-query_one_column-sketch2"
+    },
+    {
+      "topic": "query_structure_basics",
+      "module": "module1",
+      "card": "sketch0",
+      "addedTryIt": "try-query_structure_basics-sketch0"
+    },
+    {
+      "topic": "query_structure_basics",
+      "module": "module1",
+      "card": "sketch1",
+      "addedTryIt": "try-query_structure_basics-sketch1"
+    },
+    {
+      "topic": "query_structure_basics",
+      "module": "module1",
+      "card": "sketch2",
+      "addedTryIt": "try-query_structure_basics-sketch2"
+    },
+    {
+      "topic": "selecting_all_columns_with_star",
+      "module": "module1",
+      "card": "sketch0",
+      "addedTryIt": "try-selecting_all_columns_with_star-sketch0"
+    },
+    {
+      "topic": "selecting_all_columns_with_star",
+      "module": "module1",
+      "card": "sketch1",
+      "addedTryIt": "try-selecting_all_columns_with_star-sketch1"
+    },
+    {
+      "topic": "selecting_all_columns_with_star",
+      "module": "module1",
+      "card": "sketch2",
+      "addedTryIt": "try-selecting_all_columns_with_star-sketch2"
+    },
+    {
+      "topic": "selecting_specific_columns",
+      "module": "module1",
+      "card": "sketch0",
+      "addedTryIt": "try-selecting_specific_columns-sketch0"
+    },
+    {
+      "topic": "selecting_specific_columns",
+      "module": "module1",
+      "card": "sketch1",
+      "addedTryIt": "try-selecting_specific_columns-sketch1"
+    },
+    {
+      "topic": "selecting_specific_columns",
+      "module": "module1",
+      "card": "sketch2",
+      "addedTryIt": "try-selecting_specific_columns-sketch2"
+    },
+    {
+      "topic": "semicolons",
+      "module": "module1",
+      "card": "sketch0",
+      "addedTryIt": "try-semicolons-sketch0"
+    },
+    {
+      "topic": "semicolons",
+      "module": "module1",
+      "card": "sketch1",
+      "addedTryIt": "try-semicolons-sketch1"
+    },
+    {
+      "topic": "semicolons",
+      "module": "module1",
+      "card": "sketch2",
+      "addedTryIt": "try-semicolons-sketch2"
+    },
+    {
+      "topic": "uppercase_vs_lowercase",
+      "module": "module1",
+      "card": "sketch0",
+      "addedTryIt": "try-uppercase_vs_lowercase-sketch0"
+    },
+    {
+      "topic": "uppercase_vs_lowercase",
+      "module": "module1",
+      "card": "sketch1",
+      "addedTryIt": "try-uppercase_vs_lowercase-sketch1"
+    },
+    {
+      "topic": "uppercase_vs_lowercase",
+      "module": "module1",
+      "card": "sketch2",
+      "addedTryIt": "try-uppercase_vs_lowercase-sketch2"
+    },
+    {
+      "topic": "viewing_clean_results",
+      "module": "module1",
+      "card": "sketch0",
+      "addedTryIt": "try-viewing_clean_results-sketch0"
+    },
+    {
+      "topic": "viewing_clean_results",
+      "module": "module1",
+      "card": "sketch1",
+      "addedTryIt": "try-viewing_clean_results-sketch1"
+    },
+    {
+      "topic": "viewing_clean_results",
+      "module": "module1",
+      "card": "sketch2",
+      "addedTryIt": "try-viewing_clean_results-sketch2"
+    },
+    {
+      "topic": "what_select_does",
+      "module": "module1",
+      "card": "sketch0",
+      "addedTryIt": "try-what_select_does-sketch0"
+    },
+    {
+      "topic": "what_select_does",
+      "module": "module1",
+      "card": "sketch1",
+      "addedTryIt": "try-what_select_does-sketch1"
+    },
+    {
+      "topic": "what_select_does",
+      "module": "module1",
+      "card": "sketch2",
+      "addedTryIt": "try-what_select_does-sketch2"
+    },
+    {
+      "topic": "writing_simple_readable_queries",
+      "module": "module1",
+      "card": "sketch0",
+      "addedTryIt": "try-writing_simple_readable_queries-sketch0"
+    },
+    {
+      "topic": "writing_simple_readable_queries",
+      "module": "module1",
+      "card": "sketch1",
+      "addedTryIt": "try-writing_simple_readable_queries-sketch1"
+    },
+    {
+      "topic": "writing_simple_readable_queries",
+      "module": "module1",
+      "card": "sketch2",
+      "addedTryIt": "try-writing_simple_readable_queries-sketch2"
+    },
+    {
+      "topic": "module-2-inventory-watchlist-project",
+      "module": "module2",
+      "card": "sketch0",
+      "addedTryIt": "try-module-2-inventory-watchlist-project-sketch0"
+    },
+    {
+      "topic": "module-3-sales-leaderboard-project",
+      "module": "module3",
+      "card": "sketch0",
+      "addedTryIt": "try-module-3-sales-leaderboard-project-sketch0"
+    },
+    {
+      "topic": "module-4-customer-cleanup-project",
+      "module": "module4",
+      "card": "sketch0",
+      "addedTryIt": "try-module-4-customer-cleanup-project-sketch0"
+    },
+    {
+      "topic": "module-5-customer-follow-up-capstone",
+      "module": "module5",
+      "card": "sketch0",
+      "addedTryIt": "try-module-5-customer-follow-up-capstone-sketch0"
+    }
+  ]
+}

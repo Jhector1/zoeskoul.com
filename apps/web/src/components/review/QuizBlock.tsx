@@ -38,6 +38,7 @@ import {
 import { scrollIntoViewSmart } from "@/lib/ui/flowScroll";
 import { useTaggedT } from "@/i18n/tagged";
 import { learnerUiFlags } from "@/lib/config/learnerUiFlags";
+import { clearReviewWorkspaceDrafts } from "@/components/tools/panes/reviewWorkspaceDrafts";
 import FlowNavigator, {
   type FlowNavMode,
 } from "@/components/review/navigation/FlowNavigator";
@@ -1477,6 +1478,7 @@ export default function QuizBlock({
     });
 
     onReset?.();
+    clearReviewWorkspaceDrafts();
     local.reset();
     practiceBank.setPractice({});
     setExcusedById({});
@@ -1720,7 +1722,6 @@ export default function QuizBlock({
                 isCompleted={isCompleted}
                 passed={summary.passed}
                 sequential={sequential}
-                onResetClick={() => setConfirmResetQuiz(true)}
             />
           </div>
         ) : null}

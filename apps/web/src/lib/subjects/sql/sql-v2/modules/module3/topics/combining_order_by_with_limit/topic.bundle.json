@@ -2,14 +2,14 @@
   "topicId": "combining_order_by_with_limit",
   "subjectSlug": "sql-v2",
   "moduleSlug": "sql-v2-3",
-  "sectionSlug": "sql-v2-3-3",
+  "sectionSlug": "sql-v2-sql-v2-3-3",
   "prefix": "sqlv2_3",
-  "minutes": 15,
+  "minutes": 16,
   "runtimeDefaults": {
     "kind": "sql",
     "showSchema": true,
-    "showErd": true,
-    "showChen": true,
+    "showErd": false,
+    "showChen": false,
     "supportsTerminal": false,
     "supportsMultiFile": false,
     "supportsFileSystem": false,
@@ -282,7 +282,7 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-3.combining_order_by_with_limit.quiz.ci_top_three_expensive",
       "language": "sql",
-      "starterCode": "SELECT \nFROM products\nORDER BY \nLIMIT ;",
+      "starterCode": "@:topics.sql-v2.sql-v2-3.combining_order_by_with_limit.quiz.ci_top_three_expensive.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -290,8 +290,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -300,8 +300,60 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT name, price\nFROM products\nORDER BY price DESC\nLIMIT 3;"
-      }
+        "solutionCode": "SELECT name, price\nFROM products\nORDER BY price DESC\nLIMIT 3;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, price\nFROM products\nORDER BY price DESC\nLIMIT 3;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-3.combining_order_by_with_limit.quiz.ci_top_three_expensive.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT name, price\nFROM products\nORDER BY price DESC\nLIMIT 3;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-3.combining_order_by_with_limit.quiz.ci_top_three_expensive.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-3.combining_order_by_with_limit.quiz.ci_top_three_expensive.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, price\nFROM products\nORDER BY price DESC\nLIMIT 3;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     },
     {
       "id": "ci_two_cheapest_stationery",
@@ -310,7 +362,7 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-3.combining_order_by_with_limit.quiz.ci_two_cheapest_stationery",
       "language": "sql",
-      "starterCode": "SELECT name, category, price\nFROM products\nWHERE \nORDER BY \nLIMIT ;",
+      "starterCode": "@:topics.sql-v2.sql-v2-3.combining_order_by_with_limit.quiz.ci_two_cheapest_stationery.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -318,8 +370,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -328,8 +380,60 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT name, category, price\nFROM products\nWHERE category = 'Stationery'\nORDER BY price ASC\nLIMIT 2;"
-      }
+        "solutionCode": "SELECT name, category, price\nFROM products\nWHERE category = 'Stationery'\nORDER BY price ASC\nLIMIT 2;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, category, price\nFROM products\nWHERE category = 'Stationery'\nORDER BY price ASC\nLIMIT 2;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-3.combining_order_by_with_limit.quiz.ci_two_cheapest_stationery.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT name, category, price\nFROM products\nWHERE category = 'Stationery'\nORDER BY price ASC\nLIMIT 2;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-3.combining_order_by_with_limit.quiz.ci_two_cheapest_stationery.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-3.combining_order_by_with_limit.quiz.ci_two_cheapest_stationery.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, category, price\nFROM products\nWHERE category = 'Stationery'\nORDER BY price ASC\nLIMIT 2;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     },
     {
       "id": "ci_newest_home_item",
@@ -338,7 +442,7 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-3.combining_order_by_with_limit.quiz.ci_newest_home_item",
       "language": "sql",
-      "starterCode": "SELECT name, created_at\nFROM products\nWHERE \nORDER BY \nLIMIT ;",
+      "starterCode": "@:topics.sql-v2.sql-v2-3.combining_order_by_with_limit.quiz.ci_newest_home_item.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -346,8 +450,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -356,8 +460,60 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT name, created_at\nFROM products\nWHERE category = 'Home'\nORDER BY created_at DESC\nLIMIT 1;"
-      }
+        "solutionCode": "SELECT name, created_at\nFROM products\nWHERE category = 'Home'\nORDER BY created_at DESC\nLIMIT 1;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, created_at\nFROM products\nWHERE category = 'Home'\nORDER BY created_at DESC\nLIMIT 1;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-3.combining_order_by_with_limit.quiz.ci_newest_home_item.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT name, created_at\nFROM products\nWHERE category = 'Home'\nORDER BY created_at DESC\nLIMIT 1;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-3.combining_order_by_with_limit.quiz.ci_newest_home_item.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-3.combining_order_by_with_limit.quiz.ci_newest_home_item.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, created_at\nFROM products\nWHERE category = 'Home'\nORDER BY created_at DESC\nLIMIT 1;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     },
     {
       "id": "try-combining_order_by_with_limit-sketch0",
@@ -366,7 +522,7 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-3.combining_order_by_with_limit.quiz.try-combining_order_by_with_limit-sketch0",
       "language": "sql",
-      "starterCode": "SELECT \nFROM products\nORDER BY \nLIMIT ;",
+      "starterCode": "@:topics.sql-v2.sql-v2-3.combining_order_by_with_limit.quiz.try-combining_order_by_with_limit-sketch0.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -374,8 +530,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -384,8 +540,60 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT name, price\nFROM products\nORDER BY price DESC\nLIMIT 3;"
-      }
+        "solutionCode": "SELECT name, price\nFROM products\nORDER BY price DESC\nLIMIT 3;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, price\nFROM products\nORDER BY price DESC\nLIMIT 3;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-3.combining_order_by_with_limit.quiz.try-combining_order_by_with_limit-sketch0.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT name, price\nFROM products\nORDER BY price DESC\nLIMIT 3;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-3.combining_order_by_with_limit.quiz.try-combining_order_by_with_limit-sketch0.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-3.combining_order_by_with_limit.quiz.try-combining_order_by_with_limit-sketch0.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, price\nFROM products\nORDER BY price DESC\nLIMIT 3;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     },
     {
       "id": "try-combining_order_by_with_limit-sketch1",
@@ -394,7 +602,7 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-3.combining_order_by_with_limit.quiz.try-combining_order_by_with_limit-sketch1",
       "language": "sql",
-      "starterCode": "SELECT name, category, price\nFROM products\nWHERE \nORDER BY \nLIMIT ;",
+      "starterCode": "@:topics.sql-v2.sql-v2-3.combining_order_by_with_limit.quiz.try-combining_order_by_with_limit-sketch1.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -402,8 +610,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -412,8 +620,60 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT name, category, price\nFROM products\nWHERE category = 'Stationery'\nORDER BY price ASC\nLIMIT 2;"
-      }
+        "solutionCode": "SELECT name, category, price\nFROM products\nWHERE category = 'Stationery'\nORDER BY price ASC\nLIMIT 2;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, category, price\nFROM products\nWHERE category = 'Stationery'\nORDER BY price ASC\nLIMIT 2;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-3.combining_order_by_with_limit.quiz.try-combining_order_by_with_limit-sketch1.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT name, category, price\nFROM products\nWHERE category = 'Stationery'\nORDER BY price ASC\nLIMIT 2;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-3.combining_order_by_with_limit.quiz.try-combining_order_by_with_limit-sketch1.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-3.combining_order_by_with_limit.quiz.try-combining_order_by_with_limit-sketch1.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, category, price\nFROM products\nWHERE category = 'Stationery'\nORDER BY price ASC\nLIMIT 2;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     }
   ]
 }

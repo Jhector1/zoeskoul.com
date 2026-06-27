@@ -1,0 +1,779 @@
+{
+  "topicId": "uppercase_vs_lowercase",
+  "subjectSlug": "sql--sql-v2--draft",
+  "moduleSlug": "sql-v2-1",
+  "sectionSlug": "sql--sql-v2--draft-sql-v2-1-3",
+  "prefix": "sqlv2_1",
+  "minutes": 16,
+  "runtimeDefaults": {
+    "kind": "sql",
+    "showSchema": true,
+    "showErd": true,
+    "showChen": true,
+    "supportsTerminal": false,
+    "supportsMultiFile": false,
+    "supportsFileSystem": false,
+    "datasetId": "products_catalog",
+    "fixedSqlDialect": "sqlite",
+    "resultShape": "table"
+  },
+  "topic": {
+    "labelKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.uppercase_vs_lowercase.label",
+    "summaryKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.uppercase_vs_lowercase.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.uppercase_vs_lowercase.cards.sketch0.title",
+      "sketchId": "case_keywords_same_meaning",
+      "height": 420,
+      "tryIt": {
+        "id": "try-uppercase_vs_lowercase-sketch0",
+        "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.uppercase_vs_lowercase.tryIt.try_uppercase_vs_lowercase_sketch0.title",
+        "promptKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.uppercase_vs_lowercase.tryIt.try_uppercase_vs_lowercase_sketch0.prompt",
+        "exerciseKey": "try-uppercase_vs_lowercase-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.uppercase_vs_lowercase.cards.sketch1.title",
+      "sketchId": "style_readability",
+      "height": 420,
+      "tryIt": {
+        "id": "try-uppercase_vs_lowercase-sketch1",
+        "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.uppercase_vs_lowercase.tryIt.try_uppercase_vs_lowercase_sketch1.title",
+        "promptKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.uppercase_vs_lowercase.tryIt.try_uppercase_vs_lowercase_sketch1.prompt",
+        "exerciseKey": "try-uppercase_vs_lowercase-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.uppercase_vs_lowercase.cards.sketch2.title",
+      "sketchId": "identifiers_and_strings",
+      "height": 420,
+      "tryIt": {
+        "id": "try-uppercase_vs_lowercase-sketch2",
+        "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.uppercase_vs_lowercase.tryIt.try_uppercase_vs_lowercase_sketch2.title",
+        "promptKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.uppercase_vs_lowercase.tryIt.try_uppercase_vs_lowercase_sketch2.prompt",
+        "exerciseKey": "try-uppercase_vs_lowercase-sketch2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.uppercase_vs_lowercase.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.uppercase_vs_lowercase.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "ci_select_name_uppercase",
+            "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.uppercase_vs_lowercase.projectSteps.ci_select_name_uppercase.title",
+            "exerciseKey": "ci_select_name_uppercase",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "ci_select_name_lowercase",
+            "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.uppercase_vs_lowercase.projectSteps.ci_select_name_lowercase.title",
+            "exerciseKey": "ci_select_name_lowercase",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "ci_select_two_columns_readable",
+            "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.uppercase_vs_lowercase.projectSteps.ci_select_two_columns_readable.title",
+            "exerciseKey": "ci_select_two_columns_readable",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "case_keywords_same_meaning",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql--sql-v2--draft.sql--sql-v2--draft-1.uppercase_vs_lowercase.case_keywords_same_meaning.title",
+      "bodyKey": "sketches.sql--sql-v2--draft.sql--sql-v2--draft-1.uppercase_vs_lowercase.case_keywords_same_meaning.bodyMarkdown"
+    },
+    {
+      "id": "style_readability",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql--sql-v2--draft.sql--sql-v2--draft-1.uppercase_vs_lowercase.style_readability.title",
+      "bodyKey": "sketches.sql--sql-v2--draft.sql--sql-v2--draft-1.uppercase_vs_lowercase.style_readability.bodyMarkdown"
+    },
+    {
+      "id": "identifiers_and_strings",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql--sql-v2--draft.sql--sql-v2--draft-1.uppercase_vs_lowercase.identifiers_and_strings.title",
+      "bodyKey": "sketches.sql--sql-v2--draft.sql--sql-v2--draft-1.uppercase_vs_lowercase.identifiers_and_strings.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "sc_case_same_result",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.uppercase_vs_lowercase.quiz.sc_case_same_result",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "c"
+      }
+    },
+    {
+      "id": "sc_best_style_readability",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.uppercase_vs_lowercase.quiz.sc_best_style_readability",
+      "optionIds": [
+        "a",
+        "b"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "mc_keywords_in_query",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.uppercase_vs_lowercase.quiz.mc_keywords_in_query",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "mc_same_meaning_queries",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.uppercase_vs_lowercase.quiz.mc_same_meaning_queries",
+      "optionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "dr_readable_query_order",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.uppercase_vs_lowercase.quiz.dr_readable_query_order",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "dr_lowercase_query_order",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.uppercase_vs_lowercase.quiz.dr_lowercase_query_order",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t4",
+          "t3",
+          "t1",
+          "t2"
+        ]
+      }
+    },
+    {
+      "id": "fb_keyword_case",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.uppercase_vs_lowercase.quiz.fb_keyword_case",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "FROM"
+      }
+    },
+    {
+      "id": "fb_lowercase_style",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.uppercase_vs_lowercase.quiz.fb_lowercase_style",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "select"
+      }
+    },
+    {
+      "id": "ci_select_name_uppercase",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.uppercase_vs_lowercase.quiz.ci_select_name_uppercase",
+      "language": "sql",
+      "starterCode": "SELECT\n  -- choose one column here\nFROM\n  products;",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "SELECT name\nFROM products;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name\nFROM products;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT\n  -- choose one column here\nFROM\n  products;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT name\nFROM products;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "SELECT\n  -- choose one column here\nFROM\n  products;",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT\n  -- choose one column here\nFROM\n  products;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name\nFROM products;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
+    },
+    {
+      "id": "ci_select_name_lowercase",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.uppercase_vs_lowercase.quiz.ci_select_name_lowercase",
+      "language": "sql",
+      "starterCode": "select\n  -- choose one column here\nfrom\n  products;",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "select name\nfrom products;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "select name\nfrom products;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "select\n  -- choose one column here\nfrom\n  products;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "select name\nfrom products;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "select\n  -- choose one column here\nfrom\n  products;",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "select\n  -- choose one column here\nfrom\n  products;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "select name\nfrom products;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
+    },
+    {
+      "id": "ci_select_two_columns_readable",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.uppercase_vs_lowercase.quiz.ci_select_two_columns_readable",
+      "language": "sql",
+      "starterCode": "SELECT\n  -- add two columns here\nFROM products;",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "SELECT name, category\nFROM products;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, category\nFROM products;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT\n  -- add two columns here\nFROM products;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT name, category\nFROM products;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "SELECT\n  -- add two columns here\nFROM products;",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT\n  -- add two columns here\nFROM products;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, category\nFROM products;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
+    },
+    {
+      "id": "try-uppercase_vs_lowercase-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.uppercase_vs_lowercase.quiz.try-uppercase_vs_lowercase-sketch0",
+      "language": "sql",
+      "starterCode": "SELECT\n  -- choose one column here\nFROM\n  products;",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "SELECT name\nFROM products;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name\nFROM products;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT\n  -- choose one column here\nFROM\n  products;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT name\nFROM products;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "SELECT\n  -- choose one column here\nFROM\n  products;",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT\n  -- choose one column here\nFROM\n  products;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name\nFROM products;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
+    },
+    {
+      "id": "try-uppercase_vs_lowercase-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.uppercase_vs_lowercase.quiz.try-uppercase_vs_lowercase-sketch1",
+      "language": "sql",
+      "starterCode": "select\n  -- choose one column here\nfrom\n  products;",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "select name\nfrom products;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "select name\nfrom products;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "select\n  -- choose one column here\nfrom\n  products;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "select name\nfrom products;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "select\n  -- choose one column here\nfrom\n  products;",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "select\n  -- choose one column here\nfrom\n  products;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "select name\nfrom products;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
+    },
+    {
+      "id": "try-uppercase_vs_lowercase-sketch2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.uppercase_vs_lowercase.quiz.try-uppercase_vs_lowercase-sketch2",
+      "language": "sql",
+      "starterCode": "SELECT\n  -- add two columns here\nFROM products;",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "SELECT name, category\nFROM products;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, category\nFROM products;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT\n  -- add two columns here\nFROM products;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT name, category\nFROM products;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "SELECT\n  -- add two columns here\nFROM products;",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT\n  -- add two columns here\nFROM products;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, category\nFROM products;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
+    }
+  ]
+}

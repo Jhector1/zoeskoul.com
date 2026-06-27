@@ -1,0 +1,20 @@
+{
+  "mode": "rebuild-from-drafts",
+  "source": "current-draft-output",
+  "sourceBundlePath": "/Users/admin/Documents/NextJSProject/zoeskoul.com/.curriculum-drafts/sql/subjects/sql--sql-v2--draft/modules/module0/topics/module-0-student-roster-project/topic.bundle.json",
+  "sourceMessagesPaths": {
+    "en": "/Users/admin/Documents/NextJSProject/zoeskoul.com/.curriculum-drafts/sql/messages/en/subjects/sql--sql-v2--draft/module0/module-0-student-roster-project.json"
+  },
+  "identityNormalized": true,
+  "identityReplacements": [
+    [
+      "sql-v2-0-module-project",
+      "sql--sql-v2--draft-sql-v2-0-module-project"
+    ],
+    [
+      "sql-v2",
+      "sql--sql-v2--draft"
+    ]
+  ],
+  "syncedReports": true
+}

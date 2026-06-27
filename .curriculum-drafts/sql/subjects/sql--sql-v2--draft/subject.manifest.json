@@ -1,34 +1,38 @@
 {
   "subject": {
-    "slug": "sql-v2",
+    "slug": "sql--sql-v2--draft",
     "profileId": "sql",
     "catalogSlug": "sql",
     "genKey": "sql_for_beginners",
-    "order": 30,
-    "accessPolicy": "free",
+    "order": 1,
+    "accessPolicy": "paid",
     "status": "active",
-    "imagePublicId": "sql_for_beginers_yhge3d.png",
+    "imagePublicId": null,
     "imageAlt": null,
-    "titleKey": "subjects.sql-v2.title",
-    "descriptionKey": "subjects.sql-v2.description",
+    "titleKey": "subjects.sql--sql-v2--draft.title",
+    "descriptionKey": "subjects.sql--sql-v2--draft.description",
+    "serviceDefaults": null,
     "meta": {
       "curriculum": {
         "plannedModuleCount": 6,
         "isTerminalRelease": false,
-        "moreComingMessageKey": "subjects.sql-v2.moreComingSoon"
+        "moreComingMessageKey": "subjects.sql--sql-v2--draft.moreComingSoon",
+        "qualityPass": {
+          "name": "sql-v2-module0-legacy-preserved-images",
+          "appliedAt": "2026-06-26T22:04:58.881199+00:00",
+          "normalizations": [
+            "module 0 replaced with legacy four-topic introduction",
+            "all legacy image tags preserved in sketch bodyMarkdown",
+            "each legacy sketch card has a Try it yourself code_input",
+            "SQL code_input exercises use literal starterCode, starterFiles, workspace, and solutionFiles",
+            "module project kept as the single official module project"
+          ]
+        }
       },
       "completionPolicy": {
         "requireAllPublishedModules": true,
         "rewardEnabledByDefault": true,
         "certificateEnabledByDefault": true
-      },
-      "versioning": {
-        "family": "sql",
-        "version": 2,
-        "status": "active",
-        "defaultForNewEnrollments": true,
-        "supersedes": "sql",
-        "supersededBy": null
       }
     }
   },
@@ -37,16 +41,16 @@
       "slug": "sql-v2-0",
       "prefix": "sqlv2_0",
       "order": 0,
-      "titleKey": "modules.sql-v2.sql-v2-0.title",
-      "descriptionKey": "modules.sql-v2.sql-v2-0.description",
+      "titleKey": "modules.sql--sql-v2--draft.sql-v2-0.title",
+      "descriptionKey": "modules.sql--sql-v2--draft.sql-v2-0.description",
       "weekStart": null,
       "weekEnd": null,
-      "accessOverride": "free",
+      "accessOverride": null,
       "runtimeDefaults": {
         "kind": "sql",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false,
@@ -54,124 +58,117 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table"
       },
+      "serviceDefaults": null,
       "meta": {
-        "estimatedMinutes": 240,
+        "estimatedMinutes": 110,
         "prereqKeys": [],
         "outcomeKeys": [
-          "modules.sql-v2.sql-v2-0.outcomes.0",
-          "modules.sql-v2.sql-v2-0.outcomes.1",
-          "modules.sql-v2.sql-v2-0.outcomes.2",
-          "modules.sql-v2.sql-v2-0.outcomes.3"
+          "modules.sql--sql-v2--draft.sql-v2-0.outcomes.0",
+          "modules.sql--sql-v2--draft.sql-v2-0.outcomes.1",
+          "modules.sql--sql-v2--draft.sql-v2-0.outcomes.2",
+          "modules.sql--sql-v2--draft.sql-v2-0.outcomes.3"
         ],
         "whyKeys": [
-          "modules.sql-v2.sql-v2-0.why.0",
-          "modules.sql-v2.sql-v2-0.why.1"
+          "modules.sql--sql-v2--draft.sql-v2-0.why.0",
+          "modules.sql--sql-v2--draft.sql-v2-0.why.1"
         ]
       },
       "sections": [
         {
-          "slug": "sql-v2-0-1",
+          "slug": "sql--sql-v2--draft-sql-v2-0-1",
           "order": 1,
-          "titleKey": "sections.sql-v2.sql-v2-0.sql-v2-0-1.title",
-          "descriptionKey": "sections.sql-v2.sql-v2-0.sql-v2-0-1.description",
+          "titleKey": "sections.sql--sql-v2--draft.sql-v2-0.sql--sql-v2--draft-sql-v2-0-1.title",
+          "descriptionKey": "sections.sql--sql-v2--draft.sql-v2-0.sql--sql-v2--draft-sql-v2-0-1.description",
           "meta": {
             "module": 0,
-            "weeksKey": "sections.sql-v2.sql-v2-0.sql-v2-0-1.weeks",
+            "weeksKey": "sections.sql--sql-v2--draft.sql-v2-0.sql--sql-v2--draft-sql-v2-0-1.weeks",
             "bulletKeys": [
-              "sections.sql-v2.sql-v2-0.sql-v2-0-1.bullets.0",
-              "sections.sql-v2.sql-v2-0.sql-v2-0-1.bullets.1",
-              "sections.sql-v2.sql-v2-0.sql-v2-0-1.bullets.2",
-              "sections.sql-v2.sql-v2-0.sql-v2-0-1.bullets.3"
+              "sections.sql--sql-v2--draft.sql-v2-0.sql--sql-v2--draft-sql-v2-0-1.bullets.0",
+              "sections.sql--sql-v2--draft.sql-v2-0.sql--sql-v2--draft-sql-v2-0-1.bullets.1",
+              "sections.sql--sql-v2--draft.sql-v2-0.sql--sql-v2--draft-sql-v2-0-1.bullets.2",
+              "sections.sql--sql-v2--draft.sql-v2-0.sql--sql-v2--draft-sql-v2-0-1.bullets.3"
             ]
           },
+          "serviceDefaults": null,
           "topics": [
-            "what_sql_means",
-            "what_a_database_is",
-            "why_sql_is_useful",
-            "real_world_examples_of_databases"
+            "what_sql_is"
           ]
         },
         {
-          "slug": "sql-v2-0-2",
+          "slug": "sql--sql-v2--draft-sql-v2-0-2",
           "order": 2,
-          "titleKey": "sections.sql-v2.sql-v2-0.sql-v2-0-2.title",
-          "descriptionKey": "sections.sql-v2.sql-v2-0.sql-v2-0-2.description",
+          "titleKey": "sections.sql--sql-v2--draft.sql-v2-0.sql--sql-v2--draft-sql-v2-0-2.title",
+          "descriptionKey": "sections.sql--sql-v2--draft.sql-v2-0.sql--sql-v2--draft-sql-v2-0-2.description",
           "meta": {
             "module": 0,
-            "weeksKey": "sections.sql-v2.sql-v2-0.sql-v2-0-2.weeks",
+            "weeksKey": "sections.sql--sql-v2--draft.sql-v2-0.sql--sql-v2--draft-sql-v2-0-2.weeks",
             "bulletKeys": [
-              "sections.sql-v2.sql-v2-0.sql-v2-0-2.bullets.0",
-              "sections.sql-v2.sql-v2-0.sql-v2-0-2.bullets.1",
-              "sections.sql-v2.sql-v2-0.sql-v2-0-2.bullets.2",
-              "sections.sql-v2.sql-v2-0.sql-v2-0-2.bullets.3"
+              "sections.sql--sql-v2--draft.sql-v2-0.sql--sql-v2--draft-sql-v2-0-2.bullets.0",
+              "sections.sql--sql-v2--draft.sql-v2-0.sql--sql-v2--draft-sql-v2-0-2.bullets.1",
+              "sections.sql--sql-v2--draft.sql-v2-0.sql--sql-v2--draft-sql-v2-0-2.bullets.2",
+              "sections.sql--sql-v2--draft.sql-v2-0.sql--sql-v2--draft-sql-v2-0-2.bullets.3"
             ]
           },
+          "serviceDefaults": null,
           "topics": [
-            "rows_and_columns",
-            "records_and_fields",
-            "table_names_and_column_names",
-            "reading_data_like_a_spreadsheet"
+            "understanding_tables"
           ]
         },
         {
-          "slug": "sql-v2-0-3",
+          "slug": "sql--sql-v2--draft-sql-v2-0-3",
           "order": 3,
-          "titleKey": "sections.sql-v2.sql-v2-0.sql-v2-0-3.title",
-          "descriptionKey": "sections.sql-v2.sql-v2-0.sql-v2-0-3.description",
+          "titleKey": "sections.sql--sql-v2--draft.sql-v2-0.sql--sql-v2--draft-sql-v2-0-3.title",
+          "descriptionKey": "sections.sql--sql-v2--draft.sql-v2-0.sql--sql-v2--draft-sql-v2-0-3.description",
           "meta": {
             "module": 0,
-            "weeksKey": "sections.sql-v2.sql-v2-0.sql-v2-0-3.weeks",
+            "weeksKey": "sections.sql--sql-v2--draft.sql-v2-0.sql--sql-v2--draft-sql-v2-0-3.weeks",
             "bulletKeys": [
-              "sections.sql-v2.sql-v2-0.sql-v2-0-3.bullets.0",
-              "sections.sql-v2.sql-v2-0.sql-v2-0-3.bullets.1",
-              "sections.sql-v2.sql-v2-0.sql-v2-0-3.bullets.2",
-              "sections.sql-v2.sql-v2-0.sql-v2-0-3.bullets.3"
+              "sections.sql--sql-v2--draft.sql-v2-0.sql--sql-v2--draft-sql-v2-0-3.bullets.0",
+              "sections.sql--sql-v2--draft.sql-v2-0.sql--sql-v2--draft-sql-v2-0-3.bullets.1",
+              "sections.sql--sql-v2--draft.sql-v2-0.sql--sql-v2--draft-sql-v2-0-3.bullets.2",
+              "sections.sql--sql-v2--draft.sql-v2-0.sql--sql-v2--draft-sql-v2-0-3.bullets.3"
             ]
           },
+          "serviceDefaults": null,
           "topics": [
-            "how_data_is_organized",
-            "one_table_vs_multiple_tables",
-            "intro_to_keys",
-            "thinking_in_questions_and_answers"
+            "database_thinking"
           ]
         },
         {
-          "slug": "sql-v2-0-4",
+          "slug": "sql--sql-v2--draft-sql-v2-0-4",
           "order": 4,
-          "titleKey": "sections.sql-v2.sql-v2-0.sql-v2-0-4.title",
-          "descriptionKey": "sections.sql-v2.sql-v2-0.sql-v2-0-4.description",
+          "titleKey": "sections.sql--sql-v2--draft.sql-v2-0.sql--sql-v2--draft-sql-v2-0-4.title",
+          "descriptionKey": "sections.sql--sql-v2--draft.sql-v2-0.sql--sql-v2--draft-sql-v2-0-4.description",
           "meta": {
             "module": 0,
-            "weeksKey": "sections.sql-v2.sql-v2-0.sql-v2-0-4.weeks",
+            "weeksKey": "sections.sql--sql-v2--draft.sql-v2-0.sql--sql-v2--draft-sql-v2-0-4.weeks",
             "bulletKeys": [
-              "sections.sql-v2.sql-v2-0.sql-v2-0-4.bullets.0",
-              "sections.sql-v2.sql-v2-0.sql-v2-0-4.bullets.1",
-              "sections.sql-v2.sql-v2-0.sql-v2-0-4.bullets.2",
-              "sections.sql-v2.sql-v2-0.sql-v2-0-4.bullets.3"
+              "sections.sql--sql-v2--draft.sql-v2-0.sql--sql-v2--draft-sql-v2-0-4.bullets.0",
+              "sections.sql--sql-v2--draft.sql-v2-0.sql--sql-v2--draft-sql-v2-0-4.bullets.1",
+              "sections.sql--sql-v2--draft.sql-v2-0.sql--sql-v2--draft-sql-v2-0-4.bullets.2",
+              "sections.sql--sql-v2--draft.sql-v2-0.sql--sql-v2--draft-sql-v2-0-4.bullets.3"
             ]
           },
+          "serviceDefaults": null,
           "topics": [
-            "where_sql_runs",
-            "sql_editor_basics",
-            "running_your_first_query",
-            "reading_query_results"
+            "first_sql_environment"
           ]
         },
         {
-          "slug": "sql-v2-0-module-project",
+          "slug": "sql--sql-v2--draft-sql-v2-0-module-project",
           "order": 5,
-          "titleKey": "sections.sql-v2.sql-v2-0.sql-v2-0-module-project.title",
-          "descriptionKey": "sections.sql-v2.sql-v2-0.sql-v2-0-module-project.description",
-          "role": "module_project",
+          "titleKey": "sections.sql--sql-v2--draft.sql-v2-0.sql--sql-v2--draft-sql-v2-0-module-project.title",
+          "descriptionKey": "sections.sql--sql-v2--draft.sql-v2-0.sql--sql-v2--draft-sql-v2-0-module-project.description",
           "meta": {
             "module": 0,
-            "weeksKey": "sections.sql-v2.sql-v2-0.sql-v2-0-module-project.weeks",
+            "weeksKey": "sections.sql--sql-v2--draft.sql-v2-0.sql--sql-v2--draft-sql-v2-0-module-project.weeks",
             "bulletKeys": [
-              "sections.sql-v2.sql-v2-0.sql-v2-0-module-project.bullets.0",
-              "sections.sql-v2.sql-v2-0.sql-v2-0-module-project.bullets.1",
-              "sections.sql-v2.sql-v2-0.sql-v2-0-module-project.bullets.2"
+              "sections.sql--sql-v2--draft.sql-v2-0.sql--sql-v2--draft-sql-v2-0-module-project.bullets.0",
+              "sections.sql--sql-v2--draft.sql-v2-0.sql--sql-v2--draft-sql-v2-0-module-project.bullets.1",
+              "sections.sql--sql-v2--draft.sql-v2-0.sql--sql-v2--draft-sql-v2-0-module-project.bullets.2"
             ]
           },
+          "serviceDefaults": null,
           "topics": [
             "module-0-student-roster-project"
           ]
@@ -182,16 +179,16 @@
       "slug": "sql-v2-1",
       "prefix": "sqlv2_1",
       "order": 1,
-      "titleKey": "modules.sql-v2.sql-v2-1.title",
-      "descriptionKey": "modules.sql-v2.sql-v2-1.description",
+      "titleKey": "modules.sql--sql-v2--draft.sql-v2-1.title",
+      "descriptionKey": "modules.sql--sql-v2--draft.sql-v2-1.description",
       "weekStart": null,
       "weekEnd": null,
-      "accessOverride": "free",
+      "accessOverride": null,
       "runtimeDefaults": {
         "kind": "sql",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false,
@@ -199,38 +196,40 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table"
       },
+      "serviceDefaults": null,
       "meta": {
-        "estimatedMinutes": 240,
+        "estimatedMinutes": 200,
         "prereqKeys": [
-          "modules.sql-v2.sql-v2-0.title"
+          "modules.sql--sql-v2--draft.sql-v2-0.title"
         ],
         "outcomeKeys": [
-          "modules.sql-v2.sql-v2-1.outcomes.0",
-          "modules.sql-v2.sql-v2-1.outcomes.1",
-          "modules.sql-v2.sql-v2-1.outcomes.2",
-          "modules.sql-v2.sql-v2-1.outcomes.3"
+          "modules.sql--sql-v2--draft.sql-v2-1.outcomes.0",
+          "modules.sql--sql-v2--draft.sql-v2-1.outcomes.1",
+          "modules.sql--sql-v2--draft.sql-v2-1.outcomes.2",
+          "modules.sql--sql-v2--draft.sql-v2-1.outcomes.3"
         ],
         "whyKeys": [
-          "modules.sql-v2.sql-v2-1.why.0",
-          "modules.sql-v2.sql-v2-1.why.1"
+          "modules.sql--sql-v2--draft.sql-v2-1.why.0",
+          "modules.sql--sql-v2--draft.sql-v2-1.why.1"
         ]
       },
       "sections": [
         {
-          "slug": "sql-v2-1-1",
+          "slug": "sql--sql-v2--draft-sql-v2-1-1",
           "order": 1,
-          "titleKey": "sections.sql-v2.sql-v2-1.sql-v2-1-1.title",
-          "descriptionKey": "sections.sql-v2.sql-v2-1.sql-v2-1-1.description",
+          "titleKey": "sections.sql--sql-v2--draft.sql-v2-1.sql--sql-v2--draft-sql-v2-1-1.title",
+          "descriptionKey": "sections.sql--sql-v2--draft.sql-v2-1.sql--sql-v2--draft-sql-v2-1-1.description",
           "meta": {
             "module": 1,
-            "weeksKey": "sections.sql-v2.sql-v2-1.sql-v2-1-1.weeks",
+            "weeksKey": "sections.sql--sql-v2--draft.sql-v2-1.sql--sql-v2--draft-sql-v2-1-1.weeks",
             "bulletKeys": [
-              "sections.sql-v2.sql-v2-1.sql-v2-1-1.bullets.0",
-              "sections.sql-v2.sql-v2-1.sql-v2-1-1.bullets.1",
-              "sections.sql-v2.sql-v2-1.sql-v2-1-1.bullets.2",
-              "sections.sql-v2.sql-v2-1.sql-v2-1-1.bullets.3"
+              "sections.sql--sql-v2--draft.sql-v2-1.sql--sql-v2--draft-sql-v2-1-1.bullets.0",
+              "sections.sql--sql-v2--draft.sql-v2-1.sql--sql-v2--draft-sql-v2-1-1.bullets.1",
+              "sections.sql--sql-v2--draft.sql-v2-1.sql--sql-v2--draft-sql-v2-1-1.bullets.2",
+              "sections.sql--sql-v2--draft.sql-v2-1.sql--sql-v2--draft-sql-v2-1-1.bullets.3"
             ]
           },
+          "serviceDefaults": null,
           "topics": [
             "what_select_does",
             "selecting_all_columns_with_star",
@@ -239,86 +238,86 @@
           ]
         },
         {
-          "slug": "sql-v2-1-2",
+          "slug": "sql--sql-v2--draft-sql-v2-1-2",
           "order": 2,
-          "titleKey": "sections.sql-v2.sql-v2-1.sql-v2-1-2.title",
-          "descriptionKey": "sections.sql-v2.sql-v2-1.sql-v2-1-2.description",
+          "titleKey": "sections.sql--sql-v2--draft.sql-v2-1.sql--sql-v2--draft-sql-v2-1-2.title",
+          "descriptionKey": "sections.sql--sql-v2--draft.sql-v2-1.sql--sql-v2--draft-sql-v2-1-2.description",
           "meta": {
             "module": 1,
-            "weeksKey": "sections.sql-v2.sql-v2-1.sql-v2-1-2.weeks",
+            "weeksKey": "sections.sql--sql-v2--draft.sql-v2-1.sql--sql-v2--draft-sql-v2-1-2.weeks",
             "bulletKeys": [
-              "sections.sql-v2.sql-v2-1.sql-v2-1-2.bullets.0",
-              "sections.sql-v2.sql-v2-1.sql-v2-1-2.bullets.1",
-              "sections.sql-v2.sql-v2-1.sql-v2-1-2.bullets.2",
-              "sections.sql-v2.sql-v2-1.sql-v2-1-2.bullets.3"
+              "sections.sql--sql-v2--draft.sql-v2-1.sql--sql-v2--draft-sql-v2-1-2.bullets.0",
+              "sections.sql--sql-v2--draft.sql-v2-1.sql--sql-v2--draft-sql-v2-1-2.bullets.1",
+              "sections.sql--sql-v2--draft.sql-v2-1.sql--sql-v2--draft-sql-v2-1-2.bullets.2",
+              "sections.sql--sql-v2--draft.sql-v2-1.sql--sql-v2--draft-sql-v2-1-2.bullets.3"
             ]
           },
+          "serviceDefaults": null,
           "topics": [
             "from_and_table_names",
             "choosing_the_right_columns",
-            "viewing_clean_results",
             "writing_simple_readable_queries"
           ]
         },
         {
-          "slug": "sql-v2-1-3",
+          "slug": "sql--sql-v2--draft-sql-v2-1-3",
           "order": 3,
-          "titleKey": "sections.sql-v2.sql-v2-1.sql-v2-1-3.title",
-          "descriptionKey": "sections.sql-v2.sql-v2-1.sql-v2-1-3.description",
+          "titleKey": "sections.sql--sql-v2--draft.sql-v2-1.sql--sql-v2--draft-sql-v2-1-3.title",
+          "descriptionKey": "sections.sql--sql-v2--draft.sql-v2-1.sql--sql-v2--draft-sql-v2-1-3.description",
           "meta": {
             "module": 1,
-            "weeksKey": "sections.sql-v2.sql-v2-1.sql-v2-1-3.weeks",
+            "weeksKey": "sections.sql--sql-v2--draft.sql-v2-1.sql--sql-v2--draft-sql-v2-1-3.weeks",
             "bulletKeys": [
-              "sections.sql-v2.sql-v2-1.sql-v2-1-3.bullets.0",
-              "sections.sql-v2.sql-v2-1.sql-v2-1-3.bullets.1",
-              "sections.sql-v2.sql-v2-1.sql-v2-1-3.bullets.2",
-              "sections.sql-v2.sql-v2-1.sql-v2-1-3.bullets.3"
+              "sections.sql--sql-v2--draft.sql-v2-1.sql--sql-v2--draft-sql-v2-1-3.bullets.0",
+              "sections.sql--sql-v2--draft.sql-v2-1.sql--sql-v2--draft-sql-v2-1-3.bullets.1",
+              "sections.sql--sql-v2--draft.sql-v2-1.sql--sql-v2--draft-sql-v2-1-3.bullets.2",
+              "sections.sql--sql-v2--draft.sql-v2-1.sql--sql-v2--draft-sql-v2-1-3.bullets.3"
             ]
           },
+          "serviceDefaults": null,
           "topics": [
-            "keywords",
-            "semicolons",
-            "uppercase_vs_lowercase",
             "common_beginner_syntax_mistakes"
           ]
         },
         {
-          "slug": "sql-v2-1-4",
+          "slug": "sql--sql-v2--draft-sql-v2-1-4",
           "order": 4,
-          "titleKey": "sections.sql-v2.sql-v2-1.sql-v2-1-4.title",
-          "descriptionKey": "sections.sql-v2.sql-v2-1.sql-v2-1-4.description",
+          "titleKey": "sections.sql--sql-v2--draft.sql-v2-1.sql--sql-v2--draft-sql-v2-1-4.title",
+          "descriptionKey": "sections.sql--sql-v2--draft.sql-v2-1.sql--sql-v2--draft-sql-v2-1-4.description",
           "meta": {
             "module": 1,
-            "weeksKey": "sections.sql-v2.sql-v2-1.sql-v2-1-4.weeks",
+            "weeksKey": "sections.sql--sql-v2--draft.sql-v2-1.sql--sql-v2--draft-sql-v2-1-4.weeks",
             "bulletKeys": [
-              "sections.sql-v2.sql-v2-1.sql-v2-1-4.bullets.0",
-              "sections.sql-v2.sql-v2-1.sql-v2-1-4.bullets.1",
-              "sections.sql-v2.sql-v2-1.sql-v2-1-4.bullets.2",
-              "sections.sql-v2.sql-v2-1.sql-v2-1-4.bullets.3"
+              "sections.sql--sql-v2--draft.sql-v2-1.sql--sql-v2--draft-sql-v2-1-4.bullets.0",
+              "sections.sql--sql-v2--draft.sql-v2-1.sql--sql-v2--draft-sql-v2-1-4.bullets.1",
+              "sections.sql--sql-v2--draft.sql-v2-1.sql--sql-v2--draft-sql-v2-1-4.bullets.2",
+              "sections.sql--sql-v2--draft.sql-v2-1.sql--sql-v2--draft-sql-v2-1-4.bullets.3"
             ]
           },
+          "serviceDefaults": null,
           "topics": [
             "query_one_column",
             "query_multiple_columns",
-            "query_full_tables",
             "predicting_result_output"
           ]
         },
         {
-          "slug": "sql-v2-1-module-project",
+          "slug": "sql--sql-v2--draft-sql-v2-1-module-project",
           "order": 5,
-          "titleKey": "sections.sql-v2.sql-v2-1.sql-v2-1-module-project.title",
-          "descriptionKey": "sections.sql-v2.sql-v2-1.sql-v2-1-module-project.description",
           "role": "module_project",
+          "titleKey": "sections.sql--sql-v2--draft.sql-v2-1.sql--sql-v2--draft-sql-v2-1-module-project.title",
+          "descriptionKey": "sections.sql--sql-v2--draft.sql-v2-1.sql--sql-v2--draft-sql-v2-1-module-project.description",
           "meta": {
             "module": 1,
-            "weeksKey": "sections.sql-v2.sql-v2-1.sql-v2-1-module-project.weeks",
+            "weeksKey": "sections.sql--sql-v2--draft.sql-v2-1.sql--sql-v2--draft-sql-v2-1-module-project.weeks",
             "bulletKeys": [
-              "sections.sql-v2.sql-v2-1.sql-v2-1-module-project.bullets.0",
-              "sections.sql-v2.sql-v2-1.sql-v2-1-module-project.bullets.1",
-              "sections.sql-v2.sql-v2-1.sql-v2-1-module-project.bullets.2"
+              "sections.sql--sql-v2--draft.sql-v2-1.sql--sql-v2--draft-sql-v2-1-module-project.bullets.0",
+              "sections.sql--sql-v2--draft.sql-v2-1.sql--sql-v2--draft-sql-v2-1-module-project.bullets.1",
+              "sections.sql--sql-v2--draft.sql-v2-1.sql--sql-v2--draft-sql-v2-1-module-project.bullets.2",
+              "sections.sql--sql-v2--draft.sql-v2-1.sql--sql-v2--draft-sql-v2-1-module-project.bullets.3"
             ]
           },
+          "serviceDefaults": null,
           "topics": [
             "module-1-product-starter-sheet-project"
           ]
@@ -329,16 +328,16 @@
       "slug": "sql-v2-2",
       "prefix": "sqlv2_2",
       "order": 2,
-      "titleKey": "modules.sql-v2.sql-v2-2.title",
-      "descriptionKey": "modules.sql-v2.sql-v2-2.description",
+      "titleKey": "modules.sql--sql-v2--draft.sql-v2-2.title",
+      "descriptionKey": "modules.sql--sql-v2--draft.sql-v2-2.description",
       "weekStart": null,
       "weekEnd": null,
       "accessOverride": null,
       "runtimeDefaults": {
         "kind": "sql",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false,
@@ -346,60 +345,62 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table"
       },
+      "serviceDefaults": null,
       "meta": {
-        "estimatedMinutes": 270,
+        "estimatedMinutes": 268,
         "prereqKeys": [
-          "modules.sql-v2.sql-v2-1.title"
+          "modules.sql--sql-v2--draft.sql-v2-1.title"
         ],
         "outcomeKeys": [
-          "modules.sql-v2.sql-v2-2.outcomes.0",
-          "modules.sql-v2.sql-v2-2.outcomes.1",
-          "modules.sql-v2.sql-v2-2.outcomes.2",
-          "modules.sql-v2.sql-v2-2.outcomes.3"
+          "modules.sql--sql-v2--draft.sql-v2-2.outcomes.0",
+          "modules.sql--sql-v2--draft.sql-v2-2.outcomes.1",
+          "modules.sql--sql-v2--draft.sql-v2-2.outcomes.2",
+          "modules.sql--sql-v2--draft.sql-v2-2.outcomes.3"
         ],
         "whyKeys": [
-          "modules.sql-v2.sql-v2-2.why.0",
-          "modules.sql-v2.sql-v2-2.why.1"
+          "modules.sql--sql-v2--draft.sql-v2-2.why.0",
+          "modules.sql--sql-v2--draft.sql-v2-2.why.1"
         ]
       },
       "sections": [
         {
-          "slug": "sql-v2-2-1",
+          "slug": "sql--sql-v2--draft-sql-v2-2-1",
           "order": 1,
-          "titleKey": "sections.sql-v2.sql-v2-2.sql-v2-2-1.title",
-          "descriptionKey": "sections.sql-v2.sql-v2-2.sql-v2-2-1.description",
+          "titleKey": "sections.sql--sql-v2--draft.sql-v2-2.sql--sql-v2--draft-sql-v2-2-1.title",
+          "descriptionKey": "sections.sql--sql-v2--draft.sql-v2-2.sql--sql-v2--draft-sql-v2-2-1.description",
           "meta": {
             "module": 2,
-            "weeksKey": "sections.sql-v2.sql-v2-2.sql-v2-2-1.weeks",
+            "weeksKey": "sections.sql--sql-v2--draft.sql-v2-2.sql--sql-v2--draft-sql-v2-2-1.weeks",
             "bulletKeys": [
-              "sections.sql-v2.sql-v2-2.sql-v2-2-1.bullets.0",
-              "sections.sql-v2.sql-v2-2.sql-v2-2-1.bullets.1",
-              "sections.sql-v2.sql-v2-2.sql-v2-2-1.bullets.2",
-              "sections.sql-v2.sql-v2-2.sql-v2-2-1.bullets.3"
+              "sections.sql--sql-v2--draft.sql-v2-2.sql--sql-v2--draft-sql-v2-2-1.bullets.0",
+              "sections.sql--sql-v2--draft.sql-v2-2.sql--sql-v2--draft-sql-v2-2-1.bullets.1",
+              "sections.sql--sql-v2--draft.sql-v2-2.sql--sql-v2--draft-sql-v2-2-1.bullets.2",
+              "sections.sql--sql-v2--draft.sql-v2-2.sql--sql-v2--draft-sql-v2-2-1.bullets.3"
             ]
           },
+          "serviceDefaults": null,
           "topics": [
             "why_filtering_matters",
             "the_where_clause",
-            "matching_exact_values",
             "filtering_numbers_and_text"
           ]
         },
         {
-          "slug": "sql-v2-2-2",
+          "slug": "sql--sql-v2--draft-sql-v2-2-2",
           "order": 2,
-          "titleKey": "sections.sql-v2.sql-v2-2.sql-v2-2-2.title",
-          "descriptionKey": "sections.sql-v2.sql-v2-2.sql-v2-2-2.description",
+          "titleKey": "sections.sql--sql-v2--draft.sql-v2-2.sql--sql-v2--draft-sql-v2-2-2.title",
+          "descriptionKey": "sections.sql--sql-v2--draft.sql-v2-2.sql--sql-v2--draft-sql-v2-2-2.description",
           "meta": {
             "module": 2,
-            "weeksKey": "sections.sql-v2.sql-v2-2.sql-v2-2-2.weeks",
+            "weeksKey": "sections.sql--sql-v2--draft.sql-v2-2.sql--sql-v2--draft-sql-v2-2-2.weeks",
             "bulletKeys": [
-              "sections.sql-v2.sql-v2-2.sql-v2-2-2.bullets.0",
-              "sections.sql-v2.sql-v2-2.sql-v2-2-2.bullets.1",
-              "sections.sql-v2.sql-v2-2.sql-v2-2-2.bullets.2",
-              "sections.sql-v2.sql-v2-2.sql-v2-2-2.bullets.3"
+              "sections.sql--sql-v2--draft.sql-v2-2.sql--sql-v2--draft-sql-v2-2-2.bullets.0",
+              "sections.sql--sql-v2--draft.sql-v2-2.sql--sql-v2--draft-sql-v2-2-2.bullets.1",
+              "sections.sql--sql-v2--draft.sql-v2-2.sql--sql-v2--draft-sql-v2-2-2.bullets.2",
+              "sections.sql--sql-v2--draft.sql-v2-2.sql--sql-v2--draft-sql-v2-2-2.bullets.3"
             ]
           },
+          "serviceDefaults": null,
           "topics": [
             "equals_comparison",
             "not_equal_comparison",
@@ -410,20 +411,21 @@
           ]
         },
         {
-          "slug": "sql-v2-2-3",
+          "slug": "sql--sql-v2--draft-sql-v2-2-3",
           "order": 3,
-          "titleKey": "sections.sql-v2.sql-v2-2.sql-v2-2-3.title",
-          "descriptionKey": "sections.sql-v2.sql-v2-2.sql-v2-2-3.description",
+          "titleKey": "sections.sql--sql-v2--draft.sql-v2-2.sql--sql-v2--draft-sql-v2-2-3.title",
+          "descriptionKey": "sections.sql--sql-v2--draft.sql-v2-2.sql--sql-v2--draft-sql-v2-2-3.description",
           "meta": {
             "module": 2,
-            "weeksKey": "sections.sql-v2.sql-v2-2.sql-v2-2-3.weeks",
+            "weeksKey": "sections.sql--sql-v2--draft.sql-v2-2.sql--sql-v2--draft-sql-v2-2-3.weeks",
             "bulletKeys": [
-              "sections.sql-v2.sql-v2-2.sql-v2-2-3.bullets.0",
-              "sections.sql-v2.sql-v2-2.sql-v2-2-3.bullets.1",
-              "sections.sql-v2.sql-v2-2.sql-v2-2-3.bullets.2",
-              "sections.sql-v2.sql-v2-2.sql-v2-2-3.bullets.3"
+              "sections.sql--sql-v2--draft.sql-v2-2.sql--sql-v2--draft-sql-v2-2-3.bullets.0",
+              "sections.sql--sql-v2--draft.sql-v2-2.sql--sql-v2--draft-sql-v2-2-3.bullets.1",
+              "sections.sql--sql-v2--draft.sql-v2-2.sql--sql-v2--draft-sql-v2-2-3.bullets.2",
+              "sections.sql--sql-v2--draft.sql-v2-2.sql--sql-v2--draft-sql-v2-2-3.bullets.3"
             ]
           },
+          "serviceDefaults": null,
           "topics": [
             "and_conditions",
             "or_conditions",
@@ -432,42 +434,42 @@
           ]
         },
         {
-          "slug": "sql-v2-2-4",
+          "slug": "sql--sql-v2--draft-sql-v2-2-4",
           "order": 4,
-          "titleKey": "sections.sql-v2.sql-v2-2.sql-v2-2-4.title",
-          "descriptionKey": "sections.sql-v2.sql-v2-2.sql-v2-2-4.description",
+          "titleKey": "sections.sql--sql-v2--draft.sql-v2-2.sql--sql-v2--draft-sql-v2-2-4.title",
+          "descriptionKey": "sections.sql--sql-v2--draft.sql-v2-2.sql--sql-v2--draft-sql-v2-2-4.description",
           "meta": {
             "module": 2,
-            "weeksKey": "sections.sql-v2.sql-v2-2.sql-v2-2-4.weeks",
+            "weeksKey": "sections.sql--sql-v2--draft.sql-v2-2.sql--sql-v2--draft-sql-v2-2-4.weeks",
             "bulletKeys": [
-              "sections.sql-v2.sql-v2-2.sql-v2-2-4.bullets.0",
-              "sections.sql-v2.sql-v2-2.sql-v2-2-4.bullets.1",
-              "sections.sql-v2.sql-v2-2.sql-v2-2-4.bullets.2",
-              "sections.sql-v2.sql-v2-2.sql-v2-2-4.bullets.3"
+              "sections.sql--sql-v2--draft.sql-v2-2.sql--sql-v2--draft-sql-v2-2-4.bullets.0",
+              "sections.sql--sql-v2--draft.sql-v2-2.sql--sql-v2--draft-sql-v2-2-4.bullets.1",
+              "sections.sql--sql-v2--draft.sql-v2-2.sql--sql-v2--draft-sql-v2-2-4.bullets.2",
+              "sections.sql--sql-v2--draft.sql-v2-2.sql--sql-v2--draft-sql-v2-2-4.bullets.3"
             ]
           },
+          "serviceDefaults": null,
           "topics": [
-            "filter_by_number",
-            "filter_by_text",
-            "filter_by_more_than_one_rule",
             "avoiding_filtering_mistakes"
           ]
         },
         {
-          "slug": "sql-v2-2-module-project",
+          "slug": "sql--sql-v2--draft-sql-v2-2-module-project",
           "order": 5,
-          "titleKey": "sections.sql-v2.sql-v2-2.sql-v2-2-module-project.title",
-          "descriptionKey": "sections.sql-v2.sql-v2-2.sql-v2-2-module-project.description",
           "role": "module_project",
+          "titleKey": "sections.sql--sql-v2--draft.sql-v2-2.sql--sql-v2--draft-sql-v2-2-module-project.title",
+          "descriptionKey": "sections.sql--sql-v2--draft.sql-v2-2.sql--sql-v2--draft-sql-v2-2-module-project.description",
           "meta": {
             "module": 2,
-            "weeksKey": "sections.sql-v2.sql-v2-2.sql-v2-2-module-project.weeks",
+            "weeksKey": "sections.sql--sql-v2--draft.sql-v2-2.sql--sql-v2--draft-sql-v2-2-module-project.weeks",
             "bulletKeys": [
-              "sections.sql-v2.sql-v2-2.sql-v2-2-module-project.bullets.0",
-              "sections.sql-v2.sql-v2-2.sql-v2-2-module-project.bullets.1",
-              "sections.sql-v2.sql-v2-2.sql-v2-2-module-project.bullets.2"
+              "sections.sql--sql-v2--draft.sql-v2-2.sql--sql-v2--draft-sql-v2-2-module-project.bullets.0",
+              "sections.sql--sql-v2--draft.sql-v2-2.sql--sql-v2--draft-sql-v2-2-module-project.bullets.1",
+              "sections.sql--sql-v2--draft.sql-v2-2.sql--sql-v2--draft-sql-v2-2-module-project.bullets.2",
+              "sections.sql--sql-v2--draft.sql-v2-2.sql--sql-v2--draft-sql-v2-2-module-project.bullets.3"
             ]
           },
+          "serviceDefaults": null,
           "topics": [
             "module-2-inventory-watchlist-project"
           ]
@@ -478,16 +480,16 @@
       "slug": "sql-v2-3",
       "prefix": "sqlv2_3",
       "order": 3,
-      "titleKey": "modules.sql-v2.sql-v2-3.title",
-      "descriptionKey": "modules.sql-v2.sql-v2-3.description",
+      "titleKey": "modules.sql--sql-v2--draft.sql-v2-3.title",
+      "descriptionKey": "modules.sql--sql-v2--draft.sql-v2-3.description",
       "weekStart": null,
       "weekEnd": null,
       "accessOverride": null,
       "runtimeDefaults": {
         "kind": "sql",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false,
@@ -495,38 +497,40 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table"
       },
+      "serviceDefaults": null,
       "meta": {
-        "estimatedMinutes": 240,
+        "estimatedMinutes": 200,
         "prereqKeys": [
-          "modules.sql-v2.sql-v2-2.title"
+          "modules.sql--sql-v2--draft.sql-v2-2.title"
         ],
         "outcomeKeys": [
-          "modules.sql-v2.sql-v2-3.outcomes.0",
-          "modules.sql-v2.sql-v2-3.outcomes.1",
-          "modules.sql-v2.sql-v2-3.outcomes.2",
-          "modules.sql-v2.sql-v2-3.outcomes.3"
+          "modules.sql--sql-v2--draft.sql-v2-3.outcomes.0",
+          "modules.sql--sql-v2--draft.sql-v2-3.outcomes.1",
+          "modules.sql--sql-v2--draft.sql-v2-3.outcomes.2",
+          "modules.sql--sql-v2--draft.sql-v2-3.outcomes.3"
         ],
         "whyKeys": [
-          "modules.sql-v2.sql-v2-3.why.0",
-          "modules.sql-v2.sql-v2-3.why.1"
+          "modules.sql--sql-v2--draft.sql-v2-3.why.0",
+          "modules.sql--sql-v2--draft.sql-v2-3.why.1"
         ]
       },
       "sections": [
         {
-          "slug": "sql-v2-3-1",
+          "slug": "sql--sql-v2--draft-sql-v2-3-1",
           "order": 1,
-          "titleKey": "sections.sql-v2.sql-v2-3.sql-v2-3-1.title",
-          "descriptionKey": "sections.sql-v2.sql-v2-3.sql-v2-3-1.description",
+          "titleKey": "sections.sql--sql-v2--draft.sql-v2-3.sql--sql-v2--draft-sql-v2-3-1.title",
+          "descriptionKey": "sections.sql--sql-v2--draft.sql-v2-3.sql--sql-v2--draft-sql-v2-3-1.description",
           "meta": {
             "module": 3,
-            "weeksKey": "sections.sql-v2.sql-v2-3.sql-v2-3-1.weeks",
+            "weeksKey": "sections.sql--sql-v2--draft.sql-v2-3.sql--sql-v2--draft-sql-v2-3-1.weeks",
             "bulletKeys": [
-              "sections.sql-v2.sql-v2-3.sql-v2-3-1.bullets.0",
-              "sections.sql-v2.sql-v2-3.sql-v2-3-1.bullets.1",
-              "sections.sql-v2.sql-v2-3.sql-v2-3-1.bullets.2",
-              "sections.sql-v2.sql-v2-3.sql-v2-3-1.bullets.3"
+              "sections.sql--sql-v2--draft.sql-v2-3.sql--sql-v2--draft-sql-v2-3-1.bullets.0",
+              "sections.sql--sql-v2--draft.sql-v2-3.sql--sql-v2--draft-sql-v2-3-1.bullets.1",
+              "sections.sql--sql-v2--draft.sql-v2-3.sql--sql-v2--draft-sql-v2-3-1.bullets.2",
+              "sections.sql--sql-v2--draft.sql-v2-3.sql--sql-v2--draft-sql-v2-3-1.bullets.3"
             ]
           },
+          "serviceDefaults": null,
           "topics": [
             "why_sorting_matters",
             "order_by",
@@ -535,20 +539,21 @@
           ]
         },
         {
-          "slug": "sql-v2-3-2",
+          "slug": "sql--sql-v2--draft-sql-v2-3-2",
           "order": 2,
-          "titleKey": "sections.sql-v2.sql-v2-3.sql-v2-3-2.title",
-          "descriptionKey": "sections.sql-v2.sql-v2-3.sql-v2-3-2.description",
+          "titleKey": "sections.sql--sql-v2--draft.sql-v2-3.sql--sql-v2--draft-sql-v2-3-2.title",
+          "descriptionKey": "sections.sql--sql-v2--draft.sql-v2-3.sql--sql-v2--draft-sql-v2-3-2.description",
           "meta": {
             "module": 3,
-            "weeksKey": "sections.sql-v2.sql-v2-3.sql-v2-3-2.weeks",
+            "weeksKey": "sections.sql--sql-v2--draft.sql-v2-3.sql--sql-v2--draft-sql-v2-3-2.weeks",
             "bulletKeys": [
-              "sections.sql-v2.sql-v2-3.sql-v2-3-2.bullets.0",
-              "sections.sql-v2.sql-v2-3.sql-v2-3-2.bullets.1",
-              "sections.sql-v2.sql-v2-3.sql-v2-3-2.bullets.2",
-              "sections.sql-v2.sql-v2-3.sql-v2-3-2.bullets.3"
+              "sections.sql--sql-v2--draft.sql-v2-3.sql--sql-v2--draft-sql-v2-3-2.bullets.0",
+              "sections.sql--sql-v2--draft.sql-v2-3.sql--sql-v2--draft-sql-v2-3-2.bullets.1",
+              "sections.sql--sql-v2--draft.sql-v2-3.sql--sql-v2--draft-sql-v2-3-2.bullets.2",
+              "sections.sql--sql-v2--draft.sql-v2-3.sql--sql-v2--draft-sql-v2-3-2.bullets.3"
             ]
           },
+          "serviceDefaults": null,
           "topics": [
             "primary_sort",
             "secondary_sort",
@@ -557,64 +562,63 @@
           ]
         },
         {
-          "slug": "sql-v2-3-3",
+          "slug": "sql--sql-v2--draft-sql-v2-3-3",
           "order": 3,
-          "titleKey": "sections.sql-v2.sql-v2-3.sql-v2-3-3.title",
-          "descriptionKey": "sections.sql-v2.sql-v2-3.sql-v2-3-3.description",
+          "titleKey": "sections.sql--sql-v2--draft.sql-v2-3.sql--sql-v2--draft-sql-v2-3-3.title",
+          "descriptionKey": "sections.sql--sql-v2--draft.sql-v2-3.sql--sql-v2--draft-sql-v2-3-3.description",
           "meta": {
             "module": 3,
-            "weeksKey": "sections.sql-v2.sql-v2-3.sql-v2-3-3.weeks",
+            "weeksKey": "sections.sql--sql-v2--draft.sql-v2-3.sql--sql-v2--draft-sql-v2-3-3.weeks",
             "bulletKeys": [
-              "sections.sql-v2.sql-v2-3.sql-v2-3-3.bullets.0",
-              "sections.sql-v2.sql-v2-3.sql-v2-3-3.bullets.1",
-              "sections.sql-v2.sql-v2-3.sql-v2-3-3.bullets.2",
-              "sections.sql-v2.sql-v2-3.sql-v2-3-3.bullets.3"
+              "sections.sql--sql-v2--draft.sql-v2-3.sql--sql-v2--draft-sql-v2-3-3.bullets.0",
+              "sections.sql--sql-v2--draft.sql-v2-3.sql--sql-v2--draft-sql-v2-3-3.bullets.1",
+              "sections.sql--sql-v2--draft.sql-v2-3.sql--sql-v2--draft-sql-v2-3-3.bullets.2",
+              "sections.sql--sql-v2--draft.sql-v2-3.sql--sql-v2--draft-sql-v2-3-3.bullets.3"
             ]
           },
+          "serviceDefaults": null,
           "topics": [
-            "why_limit_results",
             "limit_clause",
-            "top_rows_only",
             "combining_order_by_with_limit"
           ]
         },
         {
-          "slug": "sql-v2-3-4",
+          "slug": "sql--sql-v2--draft-sql-v2-3-4",
           "order": 4,
-          "titleKey": "sections.sql-v2.sql-v2-3.sql-v2-3-4.title",
-          "descriptionKey": "sections.sql-v2.sql-v2-3.sql-v2-3-4.description",
+          "titleKey": "sections.sql--sql-v2--draft.sql-v2-3.sql--sql-v2--draft-sql-v2-3-4.title",
+          "descriptionKey": "sections.sql--sql-v2--draft.sql-v2-3.sql--sql-v2--draft-sql-v2-3-4.description",
           "meta": {
             "module": 3,
-            "weeksKey": "sections.sql-v2.sql-v2-3.sql-v2-3-4.weeks",
+            "weeksKey": "sections.sql--sql-v2--draft.sql-v2-3.sql--sql-v2--draft-sql-v2-3-4.weeks",
             "bulletKeys": [
-              "sections.sql-v2.sql-v2-3.sql-v2-3-4.bullets.0",
-              "sections.sql-v2.sql-v2-3.sql-v2-3-4.bullets.1",
-              "sections.sql-v2.sql-v2-3.sql-v2-3-4.bullets.2",
-              "sections.sql-v2.sql-v2-3.sql-v2-3-4.bullets.3"
+              "sections.sql--sql-v2--draft.sql-v2-3.sql--sql-v2--draft-sql-v2-3-4.bullets.0",
+              "sections.sql--sql-v2--draft.sql-v2-3.sql--sql-v2--draft-sql-v2-3-4.bullets.1",
+              "sections.sql--sql-v2--draft.sql-v2-3.sql--sql-v2--draft-sql-v2-3-4.bullets.2",
+              "sections.sql--sql-v2--draft.sql-v2-3.sql--sql-v2--draft-sql-v2-3-4.bullets.3"
             ]
           },
+          "serviceDefaults": null,
           "topics": [
-            "find_highest_values",
-            "find_lowest_values",
-            "show_top_5_records",
             "build_clear_result_sets"
           ]
         },
         {
-          "slug": "sql-v2-3-module-project",
+          "slug": "sql--sql-v2--draft-sql-v2-3-module-project",
           "order": 5,
-          "titleKey": "sections.sql-v2.sql-v2-3.sql-v2-3-module-project.title",
-          "descriptionKey": "sections.sql-v2.sql-v2-3.sql-v2-3-module-project.description",
           "role": "module_project",
+          "titleKey": "sections.sql--sql-v2--draft.sql-v2-3.sql--sql-v2--draft-sql-v2-3-module-project.title",
+          "descriptionKey": "sections.sql--sql-v2--draft.sql-v2-3.sql--sql-v2--draft-sql-v2-3-module-project.description",
           "meta": {
             "module": 3,
-            "weeksKey": "sections.sql-v2.sql-v2-3.sql-v2-3-module-project.weeks",
+            "weeksKey": "sections.sql--sql-v2--draft.sql-v2-3.sql--sql-v2--draft-sql-v2-3-module-project.weeks",
             "bulletKeys": [
-              "sections.sql-v2.sql-v2-3.sql-v2-3-module-project.bullets.0",
-              "sections.sql-v2.sql-v2-3.sql-v2-3-module-project.bullets.1",
-              "sections.sql-v2.sql-v2-3.sql-v2-3-module-project.bullets.2"
+              "sections.sql--sql-v2--draft.sql-v2-3.sql--sql-v2--draft-sql-v2-3-module-project.bullets.0",
+              "sections.sql--sql-v2--draft.sql-v2-3.sql--sql-v2--draft-sql-v2-3-module-project.bullets.1",
+              "sections.sql--sql-v2--draft.sql-v2-3.sql--sql-v2--draft-sql-v2-3-module-project.bullets.2",
+              "sections.sql--sql-v2--draft.sql-v2-3.sql--sql-v2--draft-sql-v2-3-module-project.bullets.3"
             ]
           },
+          "serviceDefaults": null,
           "topics": [
             "module-3-sales-leaderboard-project"
           ]
@@ -625,16 +629,16 @@
       "slug": "sql-v2-4",
       "prefix": "sqlv2_4",
       "order": 4,
-      "titleKey": "modules.sql-v2.sql-v2-4.title",
-      "descriptionKey": "modules.sql-v2.sql-v2-4.description",
+      "titleKey": "modules.sql--sql-v2--draft.sql-v2-4.title",
+      "descriptionKey": "modules.sql--sql-v2--draft.sql-v2-4.description",
       "weekStart": null,
       "weekEnd": null,
       "accessOverride": null,
       "runtimeDefaults": {
         "kind": "sql",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false,
@@ -642,38 +646,40 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table"
       },
+      "serviceDefaults": null,
       "meta": {
-        "estimatedMinutes": 240,
+        "estimatedMinutes": 238,
         "prereqKeys": [
-          "modules.sql-v2.sql-v2-3.title"
+          "modules.sql--sql-v2--draft.sql-v2-3.title"
         ],
         "outcomeKeys": [
-          "modules.sql-v2.sql-v2-4.outcomes.0",
-          "modules.sql-v2.sql-v2-4.outcomes.1",
-          "modules.sql-v2.sql-v2-4.outcomes.2",
-          "modules.sql-v2.sql-v2-4.outcomes.3"
+          "modules.sql--sql-v2--draft.sql-v2-4.outcomes.0",
+          "modules.sql--sql-v2--draft.sql-v2-4.outcomes.1",
+          "modules.sql--sql-v2--draft.sql-v2-4.outcomes.2",
+          "modules.sql--sql-v2--draft.sql-v2-4.outcomes.3"
         ],
         "whyKeys": [
-          "modules.sql-v2.sql-v2-4.why.0",
-          "modules.sql-v2.sql-v2-4.why.1"
+          "modules.sql--sql-v2--draft.sql-v2-4.why.0",
+          "modules.sql--sql-v2--draft.sql-v2-4.why.1"
         ]
       },
       "sections": [
         {
-          "slug": "sql-v2-4-1",
+          "slug": "sql--sql-v2--draft-sql-v2-4-1",
           "order": 1,
-          "titleKey": "sections.sql-v2.sql-v2-4.sql-v2-4-1.title",
-          "descriptionKey": "sections.sql-v2.sql-v2-4.sql-v2-4-1.description",
+          "titleKey": "sections.sql--sql-v2--draft.sql-v2-4.sql--sql-v2--draft-sql-v2-4-1.title",
+          "descriptionKey": "sections.sql--sql-v2--draft.sql-v2-4.sql--sql-v2--draft-sql-v2-4-1.description",
           "meta": {
             "module": 4,
-            "weeksKey": "sections.sql-v2.sql-v2-4.sql-v2-4-1.weeks",
+            "weeksKey": "sections.sql--sql-v2--draft.sql-v2-4.sql--sql-v2--draft-sql-v2-4-1.weeks",
             "bulletKeys": [
-              "sections.sql-v2.sql-v2-4.sql-v2-4-1.bullets.0",
-              "sections.sql-v2.sql-v2-4.sql-v2-4-1.bullets.1",
-              "sections.sql-v2.sql-v2-4.sql-v2-4-1.bullets.2",
-              "sections.sql-v2.sql-v2-4.sql-v2-4-1.bullets.3"
+              "sections.sql--sql-v2--draft.sql-v2-4.sql--sql-v2--draft-sql-v2-4-1.bullets.0",
+              "sections.sql--sql-v2--draft.sql-v2-4.sql--sql-v2--draft-sql-v2-4-1.bullets.1",
+              "sections.sql--sql-v2--draft.sql-v2-4.sql--sql-v2--draft-sql-v2-4-1.bullets.2",
+              "sections.sql--sql-v2--draft.sql-v2-4.sql--sql-v2--draft-sql-v2-4-1.bullets.3"
             ]
           },
+          "serviceDefaults": null,
           "topics": [
             "intro_to_like",
             "percent_wildcard",
@@ -682,42 +688,43 @@
           ]
         },
         {
-          "slug": "sql-v2-4-2",
+          "slug": "sql--sql-v2--draft-sql-v2-4-2",
           "order": 2,
-          "titleKey": "sections.sql-v2.sql-v2-4.sql-v2-4-2.title",
-          "descriptionKey": "sections.sql-v2.sql-v2-4.sql-v2-4-2.description",
+          "titleKey": "sections.sql--sql-v2--draft.sql-v2-4.sql--sql-v2--draft-sql-v2-4-2.title",
+          "descriptionKey": "sections.sql--sql-v2--draft.sql-v2-4.sql--sql-v2--draft-sql-v2-4-2.description",
           "meta": {
             "module": 4,
-            "weeksKey": "sections.sql-v2.sql-v2-4.sql-v2-4-2.weeks",
+            "weeksKey": "sections.sql--sql-v2--draft.sql-v2-4.sql--sql-v2--draft-sql-v2-4-2.weeks",
             "bulletKeys": [
-              "sections.sql-v2.sql-v2-4.sql-v2-4-2.bullets.0",
-              "sections.sql-v2.sql-v2-4.sql-v2-4-2.bullets.1",
-              "sections.sql-v2.sql-v2-4.sql-v2-4-2.bullets.2",
-              "sections.sql-v2.sql-v2-4.sql-v2-4-2.bullets.3"
+              "sections.sql--sql-v2--draft.sql-v2-4.sql--sql-v2--draft-sql-v2-4-2.bullets.0",
+              "sections.sql--sql-v2--draft.sql-v2-4.sql--sql-v2--draft-sql-v2-4-2.bullets.1",
+              "sections.sql--sql-v2--draft.sql-v2-4.sql--sql-v2--draft-sql-v2-4-2.bullets.2",
+              "sections.sql--sql-v2--draft.sql-v2-4.sql--sql-v2--draft-sql-v2-4-2.bullets.3"
             ]
           },
+          "serviceDefaults": null,
           "topics": [
             "in_list_filter",
             "not_in_list_filter",
-            "between_range_filter",
-            "range_filtering_practice"
+            "between_range_filter"
           ]
         },
         {
-          "slug": "sql-v2-4-3",
+          "slug": "sql--sql-v2--draft-sql-v2-4-3",
           "order": 3,
-          "titleKey": "sections.sql-v2.sql-v2-4.sql-v2-4-3.title",
-          "descriptionKey": "sections.sql-v2.sql-v2-4.sql-v2-4-3.description",
+          "titleKey": "sections.sql--sql-v2--draft.sql-v2-4.sql--sql-v2--draft-sql-v2-4-3.title",
+          "descriptionKey": "sections.sql--sql-v2--draft.sql-v2-4.sql--sql-v2--draft-sql-v2-4-3.description",
           "meta": {
             "module": 4,
-            "weeksKey": "sections.sql-v2.sql-v2-4.sql-v2-4-3.weeks",
+            "weeksKey": "sections.sql--sql-v2--draft.sql-v2-4.sql--sql-v2--draft-sql-v2-4-3.weeks",
             "bulletKeys": [
-              "sections.sql-v2.sql-v2-4.sql-v2-4-3.bullets.0",
-              "sections.sql-v2.sql-v2-4.sql-v2-4-3.bullets.1",
-              "sections.sql-v2.sql-v2-4.sql-v2-4-3.bullets.2",
-              "sections.sql-v2.sql-v2-4.sql-v2-4-3.bullets.3"
+              "sections.sql--sql-v2--draft.sql-v2-4.sql--sql-v2--draft-sql-v2-4-3.bullets.0",
+              "sections.sql--sql-v2--draft.sql-v2-4.sql--sql-v2--draft-sql-v2-4-3.bullets.1",
+              "sections.sql--sql-v2--draft.sql-v2-4.sql--sql-v2--draft-sql-v2-4-3.bullets.2",
+              "sections.sql--sql-v2--draft.sql-v2-4.sql--sql-v2--draft-sql-v2-4-3.bullets.3"
             ]
           },
+          "serviceDefaults": null,
           "topics": [
             "what_null_means",
             "is_null",
@@ -726,42 +733,43 @@
           ]
         },
         {
-          "slug": "sql-v2-4-4",
+          "slug": "sql--sql-v2--draft-sql-v2-4-4",
           "order": 4,
-          "titleKey": "sections.sql-v2.sql-v2-4.sql-v2-4-4.title",
-          "descriptionKey": "sections.sql-v2.sql-v2-4.sql-v2-4-4.description",
+          "titleKey": "sections.sql--sql-v2--draft.sql-v2-4.sql--sql-v2--draft-sql-v2-4-4.title",
+          "descriptionKey": "sections.sql--sql-v2--draft.sql-v2-4.sql--sql-v2--draft-sql-v2-4-4.description",
           "meta": {
             "module": 4,
-            "weeksKey": "sections.sql-v2.sql-v2-4.sql-v2-4-4.weeks",
+            "weeksKey": "sections.sql--sql-v2--draft.sql-v2-4.sql--sql-v2--draft-sql-v2-4-4.weeks",
             "bulletKeys": [
-              "sections.sql-v2.sql-v2-4.sql-v2-4-4.bullets.0",
-              "sections.sql-v2.sql-v2-4.sql-v2-4-4.bullets.1",
-              "sections.sql-v2.sql-v2-4.sql-v2-4-4.bullets.2",
-              "sections.sql-v2.sql-v2-4.sql-v2-4-4.bullets.3"
+              "sections.sql--sql-v2--draft.sql-v2-4.sql--sql-v2--draft-sql-v2-4-4.bullets.0",
+              "sections.sql--sql-v2--draft.sql-v2-4.sql--sql-v2--draft-sql-v2-4-4.bullets.1",
+              "sections.sql--sql-v2--draft.sql-v2-4.sql--sql-v2--draft-sql-v2-4-4.bullets.2",
+              "sections.sql--sql-v2--draft.sql-v2-4.sql--sql-v2--draft-sql-v2-4-4.bullets.3"
             ]
           },
+          "serviceDefaults": null,
           "topics": [
             "search_names",
-            "filter_statuses",
-            "find_missing_data",
             "combine_text_and_null_filters"
           ]
         },
         {
-          "slug": "sql-v2-4-module-project",
+          "slug": "sql--sql-v2--draft-sql-v2-4-module-project",
           "order": 5,
-          "titleKey": "sections.sql-v2.sql-v2-4.sql-v2-4-module-project.title",
-          "descriptionKey": "sections.sql-v2.sql-v2-4.sql-v2-4-module-project.description",
           "role": "module_project",
+          "titleKey": "sections.sql--sql-v2--draft.sql-v2-4.sql--sql-v2--draft-sql-v2-4-module-project.title",
+          "descriptionKey": "sections.sql--sql-v2--draft.sql-v2-4.sql--sql-v2--draft-sql-v2-4-module-project.description",
           "meta": {
             "module": 4,
-            "weeksKey": "sections.sql-v2.sql-v2-4.sql-v2-4-module-project.weeks",
+            "weeksKey": "sections.sql--sql-v2--draft.sql-v2-4.sql--sql-v2--draft-sql-v2-4-module-project.weeks",
             "bulletKeys": [
-              "sections.sql-v2.sql-v2-4.sql-v2-4-module-project.bullets.0",
-              "sections.sql-v2.sql-v2-4.sql-v2-4-module-project.bullets.1",
-              "sections.sql-v2.sql-v2-4.sql-v2-4-module-project.bullets.2"
+              "sections.sql--sql-v2--draft.sql-v2-4.sql--sql-v2--draft-sql-v2-4-module-project.bullets.0",
+              "sections.sql--sql-v2--draft.sql-v2-4.sql--sql-v2--draft-sql-v2-4-module-project.bullets.1",
+              "sections.sql--sql-v2--draft.sql-v2-4.sql--sql-v2--draft-sql-v2-4-module-project.bullets.2",
+              "sections.sql--sql-v2--draft.sql-v2-4.sql--sql-v2--draft-sql-v2-4-module-project.bullets.3"
             ]
           },
+          "serviceDefaults": null,
           "topics": [
             "module-4-customer-cleanup-project"
           ]
@@ -772,55 +780,58 @@
       "slug": "sql-v2-5",
       "prefix": "sqlv2_5",
       "order": 5,
-      "titleKey": "modules.sql-v2.sql-v2-5.title",
-      "descriptionKey": "modules.sql-v2.sql-v2-5.description",
+      "role": "capstone",
+      "titleKey": "modules.sql--sql-v2--draft.sql-v2-5.title",
+      "descriptionKey": "modules.sql--sql-v2--draft.sql-v2-5.description",
       "weekStart": null,
       "weekEnd": null,
-      "accessOverride": "free",
-      "role": "capstone",
+      "accessOverride": null,
       "runtimeDefaults": {
         "kind": "sql",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false,
-        "datasetId": "customers_cleanup",
+        "datasetId": "sales_kpi",
         "fixedSqlDialect": "sqlite",
         "resultShape": "table"
       },
+      "serviceDefaults": null,
       "meta": {
-        "estimatedMinutes": 150,
+        "estimatedMinutes": 36,
         "prereqKeys": [
-          "modules.sql-v2.sql-v2-4.title"
+          "modules.sql--sql-v2--draft.sql-v2-4.title"
         ],
         "outcomeKeys": [
-          "modules.sql-v2.sql-v2-5.outcomes.0",
-          "modules.sql-v2.sql-v2-5.outcomes.1",
-          "modules.sql-v2.sql-v2-5.outcomes.2"
+          "modules.sql--sql-v2--draft.sql-v2-5.outcomes.0",
+          "modules.sql--sql-v2--draft.sql-v2-5.outcomes.1",
+          "modules.sql--sql-v2--draft.sql-v2-5.outcomes.2"
         ],
         "whyKeys": [
-          "modules.sql-v2.sql-v2-5.why.0",
-          "modules.sql-v2.sql-v2-5.why.1"
+          "modules.sql--sql-v2--draft.sql-v2-5.why.0",
+          "modules.sql--sql-v2--draft.sql-v2-5.why.1"
         ]
       },
       "sections": [
         {
-          "slug": "sql-v2-5-capstone-project",
+          "slug": "sql--sql-v2--draft-sql-v2-5-capstone-project",
           "order": 1,
-          "titleKey": "sections.sql-v2.sql-v2-5.sql-v2-5-capstone-project.title",
-          "descriptionKey": "sections.sql-v2.sql-v2-5.sql-v2-5-capstone-project.description",
           "role": "capstone",
+          "titleKey": "sections.sql--sql-v2--draft.sql-v2-5.sql--sql-v2--draft-sql-v2-5-capstone-project.title",
+          "descriptionKey": "sections.sql--sql-v2--draft.sql-v2-5.sql--sql-v2--draft-sql-v2-5-capstone-project.description",
           "meta": {
             "module": 5,
-            "weeksKey": "sections.sql-v2.sql-v2-5.sql-v2-5-capstone-project.weeks",
+            "weeksKey": "sections.sql--sql-v2--draft.sql-v2-5.sql--sql-v2--draft-sql-v2-5-capstone-project.weeks",
             "bulletKeys": [
-              "sections.sql-v2.sql-v2-5.sql-v2-5-capstone-project.bullets.0",
-              "sections.sql-v2.sql-v2-5.sql-v2-5-capstone-project.bullets.1",
-              "sections.sql-v2.sql-v2-5.sql-v2-5-capstone-project.bullets.2"
+              "sections.sql--sql-v2--draft.sql-v2-5.sql--sql-v2--draft-sql-v2-5-capstone-project.bullets.0",
+              "sections.sql--sql-v2--draft.sql-v2-5.sql--sql-v2--draft-sql-v2-5-capstone-project.bullets.1",
+              "sections.sql--sql-v2--draft.sql-v2-5.sql--sql-v2--draft-sql-v2-5-capstone-project.bullets.2",
+              "sections.sql--sql-v2--draft.sql-v2-5.sql--sql-v2--draft-sql-v2-5-capstone-project.bullets.3"
             ]
           },
+          "serviceDefaults": null,
           "topics": [
             "module-5-customer-follow-up-capstone"
           ]

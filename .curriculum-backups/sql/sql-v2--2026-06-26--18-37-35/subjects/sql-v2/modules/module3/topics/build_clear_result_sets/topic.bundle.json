@@ -1,0 +1,469 @@
+{
+  "topicId": "build_clear_result_sets",
+  "subjectSlug": "sql-v2",
+  "moduleSlug": "sql-v2-3",
+  "sectionSlug": "sql-v2-3-4",
+  "prefix": "sqlv2_3",
+  "minutes": 15,
+  "runtimeDefaults": {
+    "kind": "sql",
+    "showSchema": true,
+    "showErd": true,
+    "showChen": true,
+    "supportsTerminal": false,
+    "supportsMultiFile": false,
+    "supportsFileSystem": false,
+    "datasetId": "products_catalog",
+    "fixedSqlDialect": "sqlite",
+    "resultShape": "table"
+  },
+  "topic": {
+    "labelKey": "topics.sql-v2.sql-v2-3.build_clear_result_sets.label",
+    "summaryKey": "topics.sql-v2.sql-v2-3.build_clear_result_sets.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql-v2.sql-v2-3.build_clear_result_sets.cards.sketch0.title",
+      "sketchId": "sketch_sorting_makes_results_clear",
+      "height": 420,
+      "tryIt": {
+        "id": "try-build_clear_result_sets-sketch0",
+        "titleKey": "topics.sql-v2.sql-v2-3.build_clear_result_sets.tryIt.try_build_clear_result_sets_sketch0.title",
+        "promptKey": "topics.sql-v2.sql-v2-3.build_clear_result_sets.tryIt.try_build_clear_result_sets_sketch0.prompt",
+        "exerciseKey": "try-build_clear_result_sets-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql-v2.sql-v2-3.build_clear_result_sets.cards.sketch1.title",
+      "sketchId": "sketch_limit_focuses_answer",
+      "height": 420,
+      "tryIt": {
+        "id": "try-build_clear_result_sets-sketch1",
+        "titleKey": "topics.sql-v2.sql-v2-3.build_clear_result_sets.tryIt.try_build_clear_result_sets_sketch1.title",
+        "promptKey": "topics.sql-v2.sql-v2-3.build_clear_result_sets.tryIt.try_build_clear_result_sets_sketch1.prompt",
+        "exerciseKey": "try-build_clear_result_sets-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.sql-v2.sql-v2-3.build_clear_result_sets.cards.sketch2.title",
+      "sketchId": "sketch_choose_columns_and_order",
+      "height": 420,
+      "tryIt": {
+        "id": "try-build_clear_result_sets-sketch2",
+        "titleKey": "topics.sql-v2.sql-v2-3.build_clear_result_sets.tryIt.try_build_clear_result_sets_sketch2.title",
+        "promptKey": "topics.sql-v2.sql-v2-3.build_clear_result_sets.tryIt.try_build_clear_result_sets_sketch2.prompt",
+        "exerciseKey": "try-build_clear_result_sets-sketch2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql-v2.sql-v2-3.build_clear_result_sets.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.sql-v2.sql-v2-3.build_clear_result_sets.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "ci_top_three_expensive_products",
+            "titleKey": "topics.sql-v2.sql-v2-3.build_clear_result_sets.projectSteps.ci_top_three_expensive_products.title",
+            "exerciseKey": "ci_top_three_expensive_products",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "ci_newest_two_products",
+            "titleKey": "topics.sql-v2.sql-v2-3.build_clear_result_sets.projectSteps.ci_newest_two_products.title",
+            "exerciseKey": "ci_newest_two_products",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "ci_low_stock_report",
+            "titleKey": "topics.sql-v2.sql-v2-3.build_clear_result_sets.projectSteps.ci_low_stock_report.title",
+            "exerciseKey": "ci_low_stock_report",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch_sorting_makes_results_clear",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql-v2.sql-v2-3.build_clear_result_sets.sketch_sorting_makes_results_clear.title",
+      "bodyKey": "sketches.sql-v2.sql-v2-3.build_clear_result_sets.sketch_sorting_makes_results_clear.bodyMarkdown"
+    },
+    {
+      "id": "sketch_limit_focuses_answer",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql-v2.sql-v2-3.build_clear_result_sets.sketch_limit_focuses_answer.title",
+      "bodyKey": "sketches.sql-v2.sql-v2-3.build_clear_result_sets.sketch_limit_focuses_answer.bodyMarkdown"
+    },
+    {
+      "id": "sketch_choose_columns_and_order",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql-v2.sql-v2-3.build_clear_result_sets.sketch_choose_columns_and_order.title",
+      "bodyKey": "sketches.sql-v2.sql-v2-3.build_clear_result_sets.sketch_choose_columns_and_order.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "sc_order_by_desc_price",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-3.build_clear_result_sets.quiz.sc_order_by_desc_price",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "sc_limit_after_sorting",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-3.build_clear_result_sets.quiz.sc_limit_after_sorting",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "mc_clear_result_set_choices",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-3.build_clear_result_sets.quiz.mc_clear_result_set_choices",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "mc_desc_examples",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-3.build_clear_result_sets.quiz.mc_desc_examples",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "dr_build_top_two_expensive",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-3.build_clear_result_sets.quiz.dr_build_top_two_expensive",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "dr_build_low_stock_list",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-3.build_clear_result_sets.quiz.dr_build_low_stock_list",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
+    },
+    {
+      "id": "fb_limit_keyword",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-3.build_clear_result_sets.quiz.fb_limit_keyword",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "LIMIT"
+      }
+    },
+    {
+      "id": "fb_desc_for_highest_first",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-3.build_clear_result_sets.quiz.fb_desc_for_highest_first",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "DESC"
+      }
+    },
+    {
+      "id": "ci_top_three_expensive_products",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-3.build_clear_result_sets.quiz.ci_top_three_expensive_products",
+      "language": "sql",
+      "starterCode": "SELECT name, price\nFROM products\n-- add sorting and limiting",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "SELECT name, price\nFROM products\nORDER BY price DESC\nLIMIT 3;"
+      }
+    },
+    {
+      "id": "ci_newest_two_products",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-3.build_clear_result_sets.quiz.ci_newest_two_products",
+      "language": "sql",
+      "starterCode": "SELECT name, created_at\nFROM products\n-- sort by date and keep 2 rows",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "SELECT name, created_at\nFROM products\nORDER BY created_at DESC\nLIMIT 2;"
+      }
+    },
+    {
+      "id": "ci_low_stock_report",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-3.build_clear_result_sets.quiz.ci_low_stock_report",
+      "language": "sql",
+      "starterCode": "SELECT name, stock\nFROM products\n-- sort by stock and limit the result",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "SELECT name, stock\nFROM products\nORDER BY stock ASC\nLIMIT 4;"
+      }
+    },
+    {
+      "id": "try-build_clear_result_sets-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-3.build_clear_result_sets.quiz.try-build_clear_result_sets-sketch0",
+      "language": "sql",
+      "starterCode": "SELECT name, price\nFROM products\n-- add sorting and limiting",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "SELECT name, price\nFROM products\nORDER BY price DESC\nLIMIT 3;"
+      }
+    },
+    {
+      "id": "try-build_clear_result_sets-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-3.build_clear_result_sets.quiz.try-build_clear_result_sets-sketch1",
+      "language": "sql",
+      "starterCode": "SELECT name, created_at\nFROM products\n-- sort by date and keep 2 rows",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "SELECT name, created_at\nFROM products\nORDER BY created_at DESC\nLIMIT 2;"
+      }
+    },
+    {
+      "id": "try-build_clear_result_sets-sketch2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-3.build_clear_result_sets.quiz.try-build_clear_result_sets-sketch2",
+      "language": "sql",
+      "starterCode": "SELECT name, stock\nFROM products\n-- sort by stock and limit the result",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "SELECT name, stock\nFROM products\nORDER BY stock ASC\nLIMIT 4;"
+      }
+    }
+  ]
+}

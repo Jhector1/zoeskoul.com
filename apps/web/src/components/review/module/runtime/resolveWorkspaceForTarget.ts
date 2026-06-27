@@ -11,6 +11,8 @@ import {
   cleanStarterCode,
   hasUsableStarterFilesValue,
   isUsableStarterCode,
+  mergeStarterFileSources,
+  pickEntryFileFromStarterFilesValue,
 } from "@/components/review/module/runtime/starterContent";
 import { languagesCompatible } from "@/components/review/module/utils";
 
@@ -82,24 +84,6 @@ export type ResolvedWorkspaceForExerciseTarget = {
   entryFilePath: string;
 };
 
-type StarterFile =
-  | string
-  | {
-      path?: string;
-      filePath?: string;
-      filename?: string;
-      name?: string;
-      content?: string;
-      contents?: string;
-      text?: string;
-      code?: string;
-      source?: string;
-      body?: string;
-      value?: string;
-      entry?: boolean;
-      isEntry?: boolean;
-      main?: boolean;
-    };
 
 function isRecord(value: unknown): value is UnknownRecord {
   return !!value && typeof value === "object" && !Array.isArray(value);
@@ -113,6 +97,7 @@ function isWorkspace(value: unknown): value is WorkspaceStateV2 {
     Array.isArray((value as WorkspaceStateV2).nodes)
   );
 }
+
 function firstWorkspace(...values: unknown[]): WorkspaceStateV2 | null {
   for (const value of values) {
     if (isWorkspace(value)) {
@@ -122,6 +107,7 @@ function firstWorkspace(...values: unknown[]): WorkspaceStateV2 | null {
 
   return null;
 }
+
 function normalizeManifestShape(input: unknown): UnknownRecord {
   const manifest = isRecord(input) ? input : {};
   const spec = isRecord(manifest.spec) ? manifest.spec : {};
@@ -168,125 +154,11 @@ function normalizePath(input: unknown, fallback: string) {
   return parts.join("/") || fallback;
 }
 
-function starterFilePath(file: StarterFile, fallback: string) {
-  if (typeof file === "string") return normalizePath(file, fallback);
-  if (!isRecord(file)) return fallback;
-
-  return normalizePath(
-    file.path ?? file.filePath ?? file.filename ?? file.name,
-    fallback,
-  );
-}
-
-function starterFileContent(file: StarterFile): string {
-  if (typeof file === "string") return "";
-  if (!isRecord(file)) return "";
-
-  for (const key of [
-    "content",
-    "contents",
-    "text",
-    "code",
-    "source",
-    "body",
-    "value",
-  ] as const) {
-    if (typeof file[key] === "string") {
-      return isUsableStarterCode(file[key]) ? file[key] : "";
-    }
-  }
-
-  return "";
-}
-
-function unwrapStarterFiles(raw: unknown): unknown {
-  if (!isRecord(raw)) return raw;
-
-  return (
-    raw.starterFiles ??
-    raw.files ??
-    raw.initialFiles ??
-    raw.workspaceFiles ??
-    raw.entries ??
-    raw.items ??
-    raw
-  );
-}
-
-function normalizeStarterFiles(
-  raw: unknown,
-  fallbackEntryFile: string,
-): Array<{ path: string; content: string }> {
-  const files: Array<{ path: string; content: string }> = [];
-  const source = unwrapStarterFiles(raw);
-
-  if (Array.isArray(source)) {
-    source.forEach((file, index) => {
-      const fallback =
-        index === 0 ? fallbackEntryFile : `file-${String(index + 1)}.txt`;
-
-      files.push({
-        path: normalizePath(starterFilePath(file as StarterFile, fallback), fallback),
-        content: starterFileContent(file as StarterFile),
-      });
-    });
-
-    return files.filter((file) => file.path);
-  }
-
-  if (isRecord(source)) {
-    for (const [path, value] of Object.entries(source)) {
-      if (
-        [
-          "entryFile",
-          "entryFilePath",
-          "mainFile",
-          "mainFilePath",
-          "language",
-          "lang",
-        ].includes(path)
-      ) {
-        continue;
-      }
-
-      files.push({
-        path: normalizePath(path, fallbackEntryFile),
-        content:
-          typeof value === "string"
-            ? isUsableStarterCode(value)
-              ? value
-              : ""
-            : isRecord(value)
-              ? starterFileContent(value as StarterFile)
-              : "",
-      });
-    }
-  }
-
-  return files.filter((file) => file.path);
-}
-
 function mergeNormalizedStarterFiles(
   sources: Array<unknown>,
   fallbackEntryFile: string,
 ): Array<{ path: string; content: string }> {
-  const byPath = new Map<string, { path: string; content: string }>();
-
-  for (const source of sources) {
-    const normalized = normalizeStarterFiles(source, fallbackEntryFile);
-
-    for (const file of normalized) {
-      const path = normalizePath(file.path, fallbackEntryFile);
-      if (!path || byPath.has(path)) continue;
-
-      byPath.set(path, {
-        path,
-        content: file.content ?? "",
-      });
-    }
-  }
-
-  return Array.from(byPath.values());
+  return mergeStarterFileSources(sources, fallbackEntryFile);
 }
 
 function explicitStarterCodeFromManifest(manifest: UnknownRecord) {
@@ -369,51 +241,8 @@ function collectEntryFileSources(manifest: UnknownRecord) {
 }
 
 function getEntryFileFromStarterFiles(raw: unknown): string {
-  const source = unwrapStarterFiles(raw);
-
-  if (Array.isArray(source)) {
-    const entry = source.find((file) => {
-      if (!isRecord(file)) return false;
-      return file.entry === true || file.isEntry === true || file.main === true;
-    });
-
-    if (entry) return starterFilePath(entry as StarterFile, "");
-
-    const first = source.find((file) => {
-      if (typeof file === "string") return file.trim().length > 0;
-      return isRecord(file) && starterFilePath(file as StarterFile, "").trim().length > 0;
-    });
-
-    return first ? starterFilePath(first as StarterFile, "") : "";
-  }
-
-  if (isRecord(source)) {
-    const explicit = normalizePath(
-      source.entryFile ?? source.entryFilePath ?? source.mainFile ?? source.mainFilePath,
-      "",
-    );
-    if (explicit) return explicit;
-
-    for (const [path] of Object.entries(source)) {
-      if (
-        [
-          "entryFile",
-          "entryFilePath",
-          "mainFile",
-          "mainFilePath",
-          "language",
-          "lang",
-        ].includes(path)
-      ) {
-        continue;
-      }
-
-      const normalized = normalizePath(path, "");
-      if (normalized) return normalized;
-    }
-  }
-
-  return "";
+  const entry = pickEntryFileFromStarterFilesValue(raw, "");
+  return entry.trim() ? entry : "";
 }
 
 function getEntryFile(args: {
@@ -1176,6 +1005,22 @@ export function createManifestWorkspaceDefinition(args: {
       ],
       entryFile,
   );
+
+  const normalizedEntryFile = normalizePath(entryFile, defaultMainFile(language));
+  if (isUsableStarterCode(starterCode)) {
+    const entryIndex = starterFiles.findIndex(
+        (file) => normalizePath(file.path, normalizedEntryFile) === normalizedEntryFile,
+    );
+
+    if (entryIndex >= 0) {
+      const existing = starterFiles[entryIndex];
+      if (!isUsableStarterCode(existing.content)) {
+        starterFiles = starterFiles.map((file, index) =>
+            index === entryIndex ? { ...file, content: starterCode } : file,
+        );
+      }
+    }
+  }
 
   const hasFullManifestWorkspace = Boolean(
       isWorkspace(manifest.workspace) ||

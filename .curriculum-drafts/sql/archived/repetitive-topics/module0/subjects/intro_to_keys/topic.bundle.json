@@ -1,0 +1,480 @@
+{
+  "topicId": "intro_to_keys",
+  "subjectSlug": "sql--sql-v2--draft",
+  "moduleSlug": "sql-v2-0",
+  "sectionSlug": "sql--sql-v2--draft-sql-v2-0-3",
+  "prefix": "sqlv2_0",
+  "minutes": 12,
+  "runtimeDefaults": {
+    "kind": "sql",
+    "showSchema": true,
+    "showErd": true,
+    "showChen": true,
+    "supportsTerminal": false,
+    "supportsMultiFile": false,
+    "supportsFileSystem": false,
+    "datasetId": "students_intro",
+    "fixedSqlDialect": "sqlite",
+    "resultShape": "table"
+  },
+  "topic": {
+    "labelKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-0.intro_to_keys.label",
+    "summaryKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-0.intro_to_keys.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-0.intro_to_keys.cards.sketch0.title",
+      "sketchId": "keys-idea",
+      "height": 420,
+      "tryIt": {
+        "id": "try-intro_to_keys-sketch0",
+        "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-0.intro_to_keys.tryIt.try_intro_to_keys_sketch0.title",
+        "promptKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-0.intro_to_keys.tryIt.try_intro_to_keys_sketch0.prompt",
+        "exerciseKey": "try-intro_to_keys-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-0.intro_to_keys.cards.sketch1.title",
+      "sketchId": "keys-vs-regular-columns",
+      "height": 420,
+      "tryIt": {
+        "id": "try-intro_to_keys-sketch1",
+        "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-0.intro_to_keys.tryIt.try_intro_to_keys_sketch1.title",
+        "promptKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-0.intro_to_keys.tryIt.try_intro_to_keys_sketch1.prompt",
+        "exerciseKey": "try-intro_to_keys-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-0.intro_to_keys.cards.sketch2.title",
+      "sketchId": "reading-primary-key-idea",
+      "height": 420,
+      "tryIt": {
+        "id": "try-intro_to_keys-sketch2",
+        "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-0.intro_to_keys.tryIt.try_intro_to_keys_sketch2.title",
+        "promptKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-0.intro_to_keys.tryIt.try_intro_to_keys_sketch2.prompt",
+        "exerciseKey": "try-intro_to_keys-sketch2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-0.intro_to_keys.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "keys-idea",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql--sql-v2--draft.sql--sql-v2--draft-0.intro_to_keys.keys-idea.title",
+      "bodyKey": "sketches.sql--sql-v2--draft.sql--sql-v2--draft-0.intro_to_keys.keys-idea.bodyMarkdown"
+    },
+    {
+      "id": "keys-vs-regular-columns",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql--sql-v2--draft.sql--sql-v2--draft-0.intro_to_keys.keys-vs-regular-columns.title",
+      "bodyKey": "sketches.sql--sql-v2--draft.sql--sql-v2--draft-0.intro_to_keys.keys-vs-regular-columns.bodyMarkdown"
+    },
+    {
+      "id": "reading-primary-key-idea",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql--sql-v2--draft.sql--sql-v2--draft-0.intro_to_keys.reading-primary-key-idea.title",
+      "bodyKey": "sketches.sql--sql-v2--draft.sql--sql-v2--draft-0.intro_to_keys.reading-primary-key-idea.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "sc-key-purpose",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-0.intro_to_keys.quiz.sc-key-purpose",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "sc-best-key-column",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-0.intro_to_keys.quiz.sc-best-key-column",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "c"
+      }
+    },
+    {
+      "id": "mc-columns-can-repeat",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-0.intro_to_keys.quiz.mc-columns-can-repeat",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "mc-key-characteristics",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-0.intro_to_keys.quiz.mc-key-characteristics",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "dr-read-query-order",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-0.intro_to_keys.quiz.dr-read-query-order",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "dr-key-thinking-order",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-0.intro_to_keys.quiz.dr-key-thinking-order",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "try-intro_to_keys-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-0.intro_to_keys.quiz.try-intro_to_keys-sketch0",
+      "language": "sql",
+      "starterCode": "-- Show every column from the students table\nSELECT *\nFROM students;",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "students_intro",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "students_intro",
+        "resultShape": "table",
+        "solutionCode": "SELECT *\nFROM students;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT *\nFROM students;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "-- Show every column from the students table\nSELECT *\nFROM students;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT *\nFROM students;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "-- Show every column from the students table\nSELECT *\nFROM students;",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "-- Show every column from the students table\nSELECT *\nFROM students;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT *\nFROM students;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
+    },
+    {
+      "id": "try-intro_to_keys-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-0.intro_to_keys.quiz.try-intro_to_keys-sketch1",
+      "language": "sql",
+      "starterCode": "-- Show names and grades from the students table\nSELECT \nFROM students;",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "students_intro",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "students_intro",
+        "resultShape": "table",
+        "solutionCode": "SELECT name, grade\nFROM students;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, grade\nFROM students;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "-- Show names and grades from the students table\nSELECT \nFROM students;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT name, grade\nFROM students;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "-- Show names and grades from the students table\nSELECT \nFROM students;",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "-- Show names and grades from the students table\nSELECT \nFROM students;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, grade\nFROM students;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
+    },
+    {
+      "id": "try-intro_to_keys-sketch2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-0.intro_to_keys.quiz.try-intro_to_keys-sketch2",
+      "language": "sql",
+      "starterCode": "-- Show student ids, names, and cities\nSELECT \nFROM students;",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "students_intro",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "students_intro",
+        "resultShape": "table",
+        "solutionCode": "SELECT id, name, city\nFROM students;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT id, name, city\nFROM students;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "-- Show student ids, names, and cities\nSELECT \nFROM students;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT id, name, city\nFROM students;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "-- Show student ids, names, and cities\nSELECT \nFROM students;",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "-- Show student ids, names, and cities\nSELECT \nFROM students;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT id, name, city\nFROM students;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
+    }
+  ]
+}

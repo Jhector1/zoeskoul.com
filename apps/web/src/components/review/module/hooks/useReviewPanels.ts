@@ -7,6 +7,7 @@ type Args = {
     footerInsetPx?: number;
     shouldDefaultCollapseRightRail?: boolean;
     rightRailDefaultScopeKey?: string;
+    allowDesktopRightRail?: boolean;
 };
 
 export function shouldDefaultCollapseReviewSidebar(args: {
@@ -34,6 +35,7 @@ export function useReviewPanels({
     footerInsetPx = 0,
     shouldDefaultCollapseRightRail = false,
     rightRailDefaultScopeKey,
+    allowDesktopRightRail = true,
 }: Args) {
     const panels = useResizablePanels();
 
@@ -44,7 +46,7 @@ export function useReviewPanels({
 
     const showDesktopLeft = xlUp;
     const toolsUiEnabled = true;
-    const showDesktopRight = xlUp;
+    const showDesktopRight = xlUp && allowDesktopRightRail;
     const shouldDefaultCollapseSidebar = shouldDefaultCollapseReviewSidebar({
         compactLearnerUi: learnerUiFlags.compactLearnerUi,
         showDebugLearningUi: learnerUiFlags.showDebugLearningUi,

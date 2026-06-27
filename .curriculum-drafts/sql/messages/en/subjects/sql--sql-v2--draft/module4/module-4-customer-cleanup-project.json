@@ -1,6 +1,84 @@
 {
   "topics": {
-    "sql-v2": {
+    "sql--sql-v2--draft": {
+      "sql--sql-v2--draft-4": {
+        "module-4-customer-cleanup-project": {
+          "label": "Module 4 Customer Cleanup Project",
+          "summary": "Build a customer cleanup worksheet with text, list, and NULL checks.",
+          "cards": {
+            "sketch0": {
+              "title": "Project brief"
+            },
+            "project": {
+              "title": "Customer cleanup worksheet"
+            }
+          },
+          "projectSteps": {
+            "mp_1": {
+              "title": "Find the missing email records"
+            },
+            "mp_2": {
+              "title": "Keep the real follow-up statuses"
+            },
+            "mp_3": {
+              "title": "Finish the cleanup report"
+            }
+          },
+          "quiz": {
+            "mp-1-find-missing-emails": {
+              "title": "Find the missing email records",
+              "prompt": "Start the cleanup report by returning `id`, `full_name`, and `email` from `customers` where `email` is NULL.",
+              "hint": "Switch the NULL check so it keeps the missing values.",
+              "help": {
+                "concept": "Cleanup queries often start by isolating the rows that are missing required information.",
+                "hint_1": "Use `WHERE email IS NULL`.",
+                "hint_2": "Run the query and confirm the results table shows only customers without email values."
+              },
+              "starterCode": "-- Returning id, full_name, and email from customers where email is NULL.\nSELECT\n  id,\n  full_name,\n  email\nFROM customers\nWHERE email IS NOT NULL;"
+            },
+            "mp-2-keep-real-follow-ups": {
+              "title": "Keep the real follow-up statuses",
+              "prompt": "Add `status` to the result, and keep only customers whose status is `active` or `draft`.",
+              "hint": "Use IN to keep the two allowed statuses.",
+              "help": {
+                "concept": "Each new rule should make the cleanup list more useful.",
+                "hint_1": "Keep the `email IS NULL` condition.",
+                "hint_2": "Add `status` to the SELECT list and `status IN ('active', 'draft')` to the WHERE clause."
+              },
+              "starterCode": "-- Keep the missing-email rule above.\n-- Only keep active or draft customers.\nSELECT\n  id,\n  full_name,\n  email\nFROM customers\nWHERE email IS NULL;"
+            },
+            "mp-3-finish-cleanup-report": {
+              "title": "Finish the cleanup report",
+              "prompt": "Add `city` to the result, exclude test rows, and keep only customers whose city starts with `Chi`.",
+              "hint": "You need one more selected column and two more conditions.",
+              "help": {
+                "concept": "The last step combines several real-world cleanup checks in one query.",
+                "hint_1": "Add `city` to the SELECT list.",
+                "hint_2": "Use `city LIKE 'Chi%'` and `is_test = 0` while keeping the earlier conditions."
+              },
+              "starterCode": "-- Keep the filters above.\n-- Add city, exclude test rows, and keep only cities that start with Chi.\nSELECT\n  id,\n  full_name,\n  email,\n  status\nFROM customers\nWHERE email IS NULL\n  AND status IN ('active', 'draft');"
+            },
+            "try-module-4-customer-cleanup-project-sketch0": {
+              "title": "Query id and full_name from customers",
+              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that returns `id`, `full_name`, `email` from the `customers` table. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the selected columns and table name in the SQL editor.",
+                "hint_2": "Run the query and compare the result table with the expected result."
+              },
+              "starterCode": "-- Return id, full_name, email from the customers table.\nSELECT\n  id,\n  full_name,\n  email\nFROM customers\nWHERE email IS NOT NULL;"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_module_4_customer_cleanup_project_sketch0": {
+              "title": "Query id and full_name from customers",
+              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that returns `id`, `full_name`, `email` from the `customers` table. Write the query in the SQL editor, click Run query, and check the results table."
+            }
+          }
+        }
+      },
       "sql-v2-4": {
         "module-4-customer-cleanup-project": {
           "label": "Module 4 Customer Cleanup Project",
@@ -34,7 +112,7 @@
                 "hint_1": "Use `WHERE email IS NULL`.",
                 "hint_2": "Run the query and confirm the results table shows only customers without email values."
               },
-              "starterCode": "-- Start the cleanup report by finding missing emails.\nSELECT\n  id,\n  full_name,\n  email\nFROM customers\nWHERE email IS NOT NULL;"
+              "starterCode": "-- Returning id, full_name, and email from customers where email is NULL.\nSELECT\n  id,\n  full_name,\n  email\nFROM customers\nWHERE email IS NOT NULL;"
             },
             "mp-2-keep-real-follow-ups": {
               "title": "Keep the real follow-up statuses",
@@ -45,7 +123,7 @@
                 "hint_1": "Keep the `email IS NULL` condition.",
                 "hint_2": "Add `status` to the SELECT list and `status IN ('active', 'draft')` to the WHERE clause."
               },
-              "starterCode": "SELECT\n  id,\n  full_name,\n  email\nFROM customers\nWHERE email IS NULL;\n\n-- Keep the missing-email rule above.\n-- Only keep active or draft customers.\n"
+              "starterCode": "-- Keep the missing-email rule above.\n-- Only keep active or draft customers.\nSELECT\n  id,\n  full_name,\n  email\nFROM customers\nWHERE email IS NULL;"
             },
             "mp-3-finish-cleanup-report": {
               "title": "Finish the cleanup report",
@@ -56,7 +134,25 @@
                 "hint_1": "Add `city` to the SELECT list.",
                 "hint_2": "Use `city LIKE 'Chi%'` and `is_test = 0` while keeping the earlier conditions."
               },
-              "starterCode": "SELECT\n  id,\n  full_name,\n  email,\n  status\nFROM customers\nWHERE email IS NULL\n  AND status IN ('active', 'draft');\n\n-- Keep the filters above.\n-- Add city, exclude test rows, and keep only cities that start with Chi.\n"
+              "starterCode": "-- Keep the filters above.\n-- Add city, exclude test rows, and keep only cities that start with Chi.\nSELECT\n  id,\n  full_name,\n  email,\n  status\nFROM customers\nWHERE email IS NULL\n  AND status IN ('active', 'draft');"
+            },
+            "try-module-4-customer-cleanup-project-sketch0": {
+              "title": "Query id and full_name from customers",
+              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that returns `id`, `full_name`, `email` from the `customers` table. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the selected columns and table name in the SQL editor.",
+                "hint_2": "Run the query and compare the result table with the expected result."
+              },
+              "starterCode": "-- Return id, full_name, email from the customers table.\nSELECT\n  id,\n  full_name,\n  email\nFROM customers\nWHERE email IS NOT NULL;"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_module_4_customer_cleanup_project_sketch0": {
+              "title": "Query id and full_name from customers",
+              "prompt": "Scenario: The support team is cleaning customer records and needs precise filters. Write a query that returns `id`, `full_name`, `email` from the `customers` table. Write the query in the SQL editor, click Run query, and check the results table."
             }
           }
         }
@@ -64,7 +160,15 @@
     }
   },
   "sketches": {
-    "sql-v2": {
+    "sql--sql-v2--draft": {
+      "sql--sql-v2--draft-4": {
+        "module-4-customer-cleanup-project": {
+          "sketch_project_brief": {
+            "title": "Project brief",
+            "bodyMarkdown": "A teammate is preparing a cleanup pass on customer records and needs a short follow-up worksheet.\n\nStart by finding the obvious gaps, then narrow the list until it highlights the records that still need attention.\n\nThe finished report should focus on real customer rows, not test data."
+          }
+        }
+      },
       "sql-v2-4": {
         "module-4-customer-cleanup-project": {
           "sketch_project_brief": {

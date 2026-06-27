@@ -220,4 +220,56 @@ describe("buildReviewFromManifest try-it project cards", () => {
             seedPolicy: "global",
         });
     });
+
+
+    it("preserves authored tools visibility on sketch cards without try-it", () => {
+        const built = buildReviewFromManifest({
+            manifest: {
+                prefix: "sqlv2_0",
+                topicId: "what_sql_is",
+                subjectSlug: "sql-v2",
+                moduleSlug: "sql-v2-0",
+                sectionSlug: "sql-v2-sql-v2-0-1",
+                minutes: 5,
+                runtimeDefaults: {
+                    kind: "sql",
+                    datasetId: "students_intro",
+                },
+                topic: {
+                    labelKey: "topic.label",
+                    summaryKey: "topic.summary",
+                },
+                cards: [
+                    {
+                        id: "sketch0",
+                        kind: "sketch",
+                        titleKey: "cards.sketch0.title",
+                        sketchId: "what_sql_means",
+                        tools: {
+                            defaultVisible: false,
+                            allowOpen: false,
+                        },
+                    },
+                ],
+                sketches: [
+                    {
+                        id: "what_sql_means",
+                        archetype: "paragraph",
+                        titleKey: "sketch.title",
+                        bodyKey: "sketch.body",
+                    },
+                ],
+                exercises: [],
+            } as any,
+            pool: [],
+        });
+
+        const card = built.topic.cards[0] as any;
+        expect(card.type).toBe("sketch");
+        expect(card.tools).toEqual({
+            defaultVisible: false,
+            allowOpen: false,
+        });
+    });
+
 });

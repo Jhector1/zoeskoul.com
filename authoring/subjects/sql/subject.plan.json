@@ -4,11 +4,11 @@
   "profileId": "sql",
   "accessPolicy": "paid",
   "courseOrder": [
-    "sql-foundations"
+    "sql-v2"
   ],
   "publishTarget": {
     "liveSubjectSlug": "sql-v2",
-    "courseSlug": "sql-foundations",
+    "courseSlug": "sql-v2",
     "channel": "current"
   },
   "versioning": {
@@ -21,10 +21,10 @@
   },
   "courses": [
     {
-      "courseSlug": "sql-foundations",
+      "courseSlug": "sql-v2",
       "title": "SQL Foundations",
       "order": 1,
-      "path": "courses/sql-foundations/course.spec.json"
+      "path": "courses/sql-v2/course.spec.json"
     }
   ]
 }

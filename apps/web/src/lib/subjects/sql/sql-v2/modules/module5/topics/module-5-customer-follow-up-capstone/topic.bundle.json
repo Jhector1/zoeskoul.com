@@ -2,14 +2,14 @@
   "topicId": "module-5-customer-follow-up-capstone",
   "subjectSlug": "sql-v2",
   "moduleSlug": "sql-v2-5",
-  "sectionSlug": "sql-v2-5-capstone-project",
+  "sectionSlug": "sql-v2-sql-v2-5-capstone-project",
   "prefix": "sqlv2_5",
-  "minutes": 40,
+  "minutes": 36,
   "runtimeDefaults": {
     "kind": "sql",
     "showSchema": true,
-    "showErd": true,
-    "showChen": true,
+    "showErd": false,
+    "showChen": false,
     "supportsTerminal": false,
     "supportsMultiFile": false,
     "supportsFileSystem": false,
@@ -27,7 +27,19 @@
       "kind": "sketch",
       "titleKey": "topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.cards.sketch0.title",
       "sketchId": "sketch_project_brief",
-      "height": 420
+      "height": 420,
+      "tryIt": {
+        "id": "try-module-5-customer-follow-up-capstone-sketch0",
+        "titleKey": "topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.tryIt.try_module_5_customer_follow_up_capstone_sketch0.title",
+        "promptKey": "topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.tryIt.try_module_5_customer_follow_up_capstone_sketch0.prompt",
+        "exerciseKey": "try-module-5-customer-follow-up-capstone-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
     },
     {
       "id": "project",
@@ -95,7 +107,7 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.cp-1-start-follow-up-slice",
       "language": "sql",
-      "starterCode": "-- Start the follow-up report with active and draft customers.\nSELECT\n  full_name,\n  city,\n  status\nFROM customers\nWHERE status = 'active';",
+      "starterCode": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.cp-1-start-follow-up-slice.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -103,8 +115,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -113,8 +125,60 @@
         "type": "sql_query",
         "datasetId": "customers_cleanup",
         "resultShape": "table",
-        "solutionCode": "SELECT\n  full_name,\n  city,\n  status\nFROM customers\nWHERE status IN ('active', 'draft');"
-      }
+        "solutionCode": "SELECT\n  full_name,\n  city,\n  status\nFROM customers\nWHERE status IN ('active', 'draft');",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT\n  full_name,\n  city,\n  status\nFROM customers\nWHERE status IN ('active', 'draft');",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.cp-1-start-follow-up-slice.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT\n  full_name,\n  city,\n  status\nFROM customers\nWHERE status IN ('active', 'draft');",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.cp-1-start-follow-up-slice.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.cp-1-start-follow-up-slice.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT\n  full_name,\n  city,\n  status\nFROM customers\nWHERE status IN ('active', 'draft');",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     },
     {
       "id": "cp-2-keep-real-contactable-customers",
@@ -123,7 +187,7 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.cp-2-keep-real-contactable-customers",
       "language": "sql",
-      "starterCode": "SELECT\n  full_name,\n  city,\n  status\nFROM customers\nWHERE status IN ('active', 'draft');\n\n-- Keep the status filter above.\n-- Add email to the result, keep only real rows, and require a real email.\n",
+      "starterCode": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.cp-2-keep-real-contactable-customers.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -131,8 +195,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -141,8 +205,60 @@
         "type": "sql_query",
         "datasetId": "customers_cleanup",
         "resultShape": "table",
-        "solutionCode": "SELECT\n  full_name,\n  email,\n  city,\n  status\nFROM customers\nWHERE status IN ('active', 'draft')\n  AND email IS NOT NULL\n  AND is_test = 0;"
-      }
+        "solutionCode": "SELECT\n  full_name,\n  email,\n  city,\n  status\nFROM customers\nWHERE status IN ('active', 'draft')\n  AND email IS NOT NULL\n  AND is_test = 0;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT\n  full_name,\n  email,\n  city,\n  status\nFROM customers\nWHERE status IN ('active', 'draft')\n  AND email IS NOT NULL\n  AND is_test = 0;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.cp-2-keep-real-contactable-customers.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT\n  full_name,\n  email,\n  city,\n  status\nFROM customers\nWHERE status IN ('active', 'draft')\n  AND email IS NOT NULL\n  AND is_test = 0;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.cp-2-keep-real-contactable-customers.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.cp-2-keep-real-contactable-customers.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT\n  full_name,\n  email,\n  city,\n  status\nFROM customers\nWHERE status IN ('active', 'draft')\n  AND email IS NOT NULL\n  AND is_test = 0;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     },
     {
       "id": "cp-3-add-city-and-date-focus",
@@ -151,7 +267,7 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.cp-3-add-city-and-date-focus",
       "language": "sql",
-      "starterCode": "SELECT\n  full_name,\n  email,\n  city,\n  status\nFROM customers\nWHERE status IN ('active', 'draft')\n  AND email IS NOT NULL\n  AND is_test = 0;\n\n-- Keep the follow-up slice above.\n-- Add signup_date and focus on Chicago or Seattle customers in the January 10 to February 05 range.\n",
+      "starterCode": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.cp-3-add-city-and-date-focus.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -159,8 +275,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -169,8 +285,60 @@
         "type": "sql_query",
         "datasetId": "customers_cleanup",
         "resultShape": "table",
-        "solutionCode": "SELECT\n  full_name,\n  email,\n  city,\n  status,\n  signup_date\nFROM customers\nWHERE status IN ('active', 'draft')\n  AND email IS NOT NULL\n  AND is_test = 0\n  AND city IN ('Chicago', 'Seattle')\n  AND signup_date BETWEEN '2026-01-10' AND '2026-02-05';"
-      }
+        "solutionCode": "SELECT\n  full_name,\n  email,\n  city,\n  status,\n  signup_date\nFROM customers\nWHERE status IN ('active', 'draft')\n  AND email IS NOT NULL\n  AND is_test = 0\n  AND city IN ('Chicago', 'Seattle')\n  AND signup_date BETWEEN '2026-01-10' AND '2026-02-05';",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT\n  full_name,\n  email,\n  city,\n  status,\n  signup_date\nFROM customers\nWHERE status IN ('active', 'draft')\n  AND email IS NOT NULL\n  AND is_test = 0\n  AND city IN ('Chicago', 'Seattle')\n  AND signup_date BETWEEN '2026-01-10' AND '2026-02-05';",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.cp-3-add-city-and-date-focus.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT\n  full_name,\n  email,\n  city,\n  status,\n  signup_date\nFROM customers\nWHERE status IN ('active', 'draft')\n  AND email IS NOT NULL\n  AND is_test = 0\n  AND city IN ('Chicago', 'Seattle')\n  AND signup_date BETWEEN '2026-01-10' AND '2026-02-05';",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.cp-3-add-city-and-date-focus.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.cp-3-add-city-and-date-focus.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT\n  full_name,\n  email,\n  city,\n  status,\n  signup_date\nFROM customers\nWHERE status IN ('active', 'draft')\n  AND email IS NOT NULL\n  AND is_test = 0\n  AND city IN ('Chicago', 'Seattle')\n  AND signup_date BETWEEN '2026-01-10' AND '2026-02-05';",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     },
     {
       "id": "cp-4-finish-capstone-report",
@@ -179,7 +347,7 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.cp-4-finish-capstone-report",
       "language": "sql",
-      "starterCode": "SELECT\n  full_name,\n  email,\n  city,\n  status,\n  signup_date\nFROM customers\nWHERE status IN ('active', 'draft')\n  AND email IS NOT NULL\n  AND is_test = 0\n  AND city IN ('Chicago', 'Seattle')\n  AND signup_date BETWEEN '2026-01-10' AND '2026-02-05';\n\n-- Keep the follow-up slice above.\n-- Keep only names that contain the letter a, then order by signup_date and limit to 5 rows.\n",
+      "starterCode": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.cp-4-finish-capstone-report.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -187,8 +355,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -197,8 +365,140 @@
         "type": "sql_query",
         "datasetId": "customers_cleanup",
         "resultShape": "table",
-        "solutionCode": "SELECT\n  full_name,\n  email,\n  city,\n  status,\n  signup_date\nFROM customers\nWHERE status IN ('active', 'draft')\n  AND email IS NOT NULL\n  AND is_test = 0\n  AND city IN ('Chicago', 'Seattle')\n  AND signup_date BETWEEN '2026-01-10' AND '2026-02-05'\n  AND full_name LIKE '%a%'\nORDER BY signup_date ASC\nLIMIT 5;"
-      }
+        "solutionCode": "SELECT\n  full_name,\n  email,\n  city,\n  status,\n  signup_date\nFROM customers\nWHERE status IN ('active', 'draft')\n  AND email IS NOT NULL\n  AND is_test = 0\n  AND city IN ('Chicago', 'Seattle')\n  AND signup_date BETWEEN '2026-01-10' AND '2026-02-05'\n  AND full_name LIKE '%a%'\nORDER BY signup_date ASC\nLIMIT 5;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT\n  full_name,\n  email,\n  city,\n  status,\n  signup_date\nFROM customers\nWHERE status IN ('active', 'draft')\n  AND email IS NOT NULL\n  AND is_test = 0\n  AND city IN ('Chicago', 'Seattle')\n  AND signup_date BETWEEN '2026-01-10' AND '2026-02-05'\n  AND full_name LIKE '%a%'\nORDER BY signup_date ASC\nLIMIT 5;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.cp-4-finish-capstone-report.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT\n  full_name,\n  email,\n  city,\n  status,\n  signup_date\nFROM customers\nWHERE status IN ('active', 'draft')\n  AND email IS NOT NULL\n  AND is_test = 0\n  AND city IN ('Chicago', 'Seattle')\n  AND signup_date BETWEEN '2026-01-10' AND '2026-02-05'\n  AND full_name LIKE '%a%'\nORDER BY signup_date ASC\nLIMIT 5;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.cp-4-finish-capstone-report.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.cp-4-finish-capstone-report.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT\n  full_name,\n  email,\n  city,\n  status,\n  signup_date\nFROM customers\nWHERE status IN ('active', 'draft')\n  AND email IS NOT NULL\n  AND is_test = 0\n  AND city IN ('Chicago', 'Seattle')\n  AND signup_date BETWEEN '2026-01-10' AND '2026-02-05'\n  AND full_name LIKE '%a%'\nORDER BY signup_date ASC\nLIMIT 5;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
+    },
+    {
+      "id": "try-module-5-customer-follow-up-capstone-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.try-module-5-customer-follow-up-capstone-sketch0",
+      "language": "sql",
+      "starterCode": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.try-module-5-customer-follow-up-capstone-sketch0.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "customers_cleanup",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": false,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "customers_cleanup",
+        "resultShape": "table",
+        "solutionCode": "SELECT\n  full_name,\n  city,\n  status\nFROM customers\nWHERE status IN ('active', 'draft');",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT\n  full_name,\n  city,\n  status\nFROM customers\nWHERE status IN ('active', 'draft');",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.try-module-5-customer-follow-up-capstone-sketch0.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT\n  full_name,\n  city,\n  status\nFROM customers\nWHERE status IN ('active', 'draft');",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.try-module-5-customer-follow-up-capstone-sketch0.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.try-module-5-customer-follow-up-capstone-sketch0.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT\n  full_name,\n  city,\n  status\nFROM customers\nWHERE status IN ('active', 'draft');",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     }
   ]
 }

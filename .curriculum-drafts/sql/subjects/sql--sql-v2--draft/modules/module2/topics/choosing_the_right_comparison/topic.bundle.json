@@ -1,15 +1,15 @@
 {
   "topicId": "choosing_the_right_comparison",
-  "subjectSlug": "sql-v2",
+  "subjectSlug": "sql--sql-v2--draft",
   "moduleSlug": "sql-v2-2",
-  "sectionSlug": "sql-v2-2-2",
+  "sectionSlug": "sql--sql-v2--draft-sql-v2-2-2",
   "prefix": "sqlv2_2",
-  "minutes": 15,
+  "minutes": 20,
   "runtimeDefaults": {
     "kind": "sql",
     "showSchema": true,
-    "showErd": true,
-    "showChen": true,
+    "showErd": false,
+    "showChen": false,
     "supportsTerminal": false,
     "supportsMultiFile": false,
     "supportsFileSystem": false,
@@ -18,20 +18,20 @@
     "resultShape": "table"
   },
   "topic": {
-    "labelKey": "topics.sql-v2.sql-v2-2.choosing_the_right_comparison.label",
-    "summaryKey": "topics.sql-v2.sql-v2-2.choosing_the_right_comparison.summary"
+    "labelKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.choosing_the_right_comparison.label",
+    "summaryKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.choosing_the_right_comparison.summary"
   },
   "cards": [
     {
       "id": "sketch0",
       "kind": "sketch",
-      "titleKey": "topics.sql-v2.sql-v2-2.choosing_the_right_comparison.cards.sketch0.title",
+      "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.choosing_the_right_comparison.cards.sketch0.title",
       "sketchId": "sketch_compare_numbers",
       "height": 420,
       "tryIt": {
         "id": "try-choosing_the_right_comparison-sketch0",
-        "titleKey": "topics.sql-v2.sql-v2-2.choosing_the_right_comparison.tryIt.try_choosing_the_right_comparison_sketch0.title",
-        "promptKey": "topics.sql-v2.sql-v2-2.choosing_the_right_comparison.tryIt.try_choosing_the_right_comparison_sketch0.prompt",
+        "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.choosing_the_right_comparison.tryIt.try_choosing_the_right_comparison_sketch0.title",
+        "promptKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.choosing_the_right_comparison.tryIt.try_choosing_the_right_comparison_sketch0.prompt",
         "exerciseKey": "try-choosing_the_right_comparison-sketch0",
         "difficulty": "easy",
         "preferKind": "code_input",
@@ -44,13 +44,13 @@
     {
       "id": "sketch1",
       "kind": "sketch",
-      "titleKey": "topics.sql-v2.sql-v2-2.choosing_the_right_comparison.cards.sketch1.title",
+      "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.choosing_the_right_comparison.cards.sketch1.title",
       "sketchId": "sketch_text_and_exact_match",
       "height": 420,
       "tryIt": {
         "id": "try-choosing_the_right_comparison-sketch1",
-        "titleKey": "topics.sql-v2.sql-v2-2.choosing_the_right_comparison.tryIt.try_choosing_the_right_comparison_sketch1.title",
-        "promptKey": "topics.sql-v2.sql-v2-2.choosing_the_right_comparison.tryIt.try_choosing_the_right_comparison_sketch1.prompt",
+        "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.choosing_the_right_comparison.tryIt.try_choosing_the_right_comparison_sketch1.title",
+        "promptKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.choosing_the_right_comparison.tryIt.try_choosing_the_right_comparison_sketch1.prompt",
         "exerciseKey": "try-choosing_the_right_comparison-sketch1",
         "difficulty": "easy",
         "preferKind": "code_input",
@@ -63,13 +63,13 @@
     {
       "id": "sketch2",
       "kind": "sketch",
-      "titleKey": "topics.sql-v2.sql-v2-2.choosing_the_right_comparison.cards.sketch2.title",
+      "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.choosing_the_right_comparison.cards.sketch2.title",
       "sketchId": "sketch_boundary_thinking",
       "height": 420,
       "tryIt": {
         "id": "try-choosing_the_right_comparison-sketch2",
-        "titleKey": "topics.sql-v2.sql-v2-2.choosing_the_right_comparison.tryIt.try_choosing_the_right_comparison_sketch2.title",
-        "promptKey": "topics.sql-v2.sql-v2-2.choosing_the_right_comparison.tryIt.try_choosing_the_right_comparison_sketch2.prompt",
+        "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.choosing_the_right_comparison.tryIt.try_choosing_the_right_comparison_sketch2.title",
+        "promptKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.choosing_the_right_comparison.tryIt.try_choosing_the_right_comparison_sketch2.prompt",
         "exerciseKey": "try-choosing_the_right_comparison-sketch2",
         "difficulty": "easy",
         "preferKind": "code_input",
@@ -82,7 +82,7 @@
     {
       "id": "quiz",
       "kind": "quiz",
-      "titleKey": "topics.sql-v2.sql-v2-2.choosing_the_right_comparison.cards.quiz.title",
+      "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.choosing_the_right_comparison.cards.quiz.title",
       "quiz": {
         "difficulty": "easy",
         "n": 4,
@@ -97,7 +97,7 @@
     {
       "id": "project",
       "kind": "project",
-      "titleKey": "topics.sql-v2.sql-v2-2.choosing_the_right_comparison.cards.project.title",
+      "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.choosing_the_right_comparison.cards.project.title",
       "project": {
         "difficulty": "easy",
         "allowReveal": true,
@@ -106,7 +106,7 @@
         "steps": [
           {
             "id": "ci_price_greater_than",
-            "titleKey": "topics.sql-v2.sql-v2-2.choosing_the_right_comparison.projectSteps.ci_price_greater_than.title",
+            "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.choosing_the_right_comparison.projectSteps.ci_price_greater_than.title",
             "exerciseKey": "ci_price_greater_than",
             "difficulty": "easy",
             "preferKind": "code_input",
@@ -115,7 +115,7 @@
           },
           {
             "id": "ci_stock_at_most_10",
-            "titleKey": "topics.sql-v2.sql-v2-2.choosing_the_right_comparison.projectSteps.ci_stock_at_most_10.title",
+            "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.choosing_the_right_comparison.projectSteps.ci_stock_at_most_10.title",
             "exerciseKey": "ci_stock_at_most_10",
             "difficulty": "easy",
             "preferKind": "code_input",
@@ -124,7 +124,7 @@
           },
           {
             "id": "ci_not_home_category",
-            "titleKey": "topics.sql-v2.sql-v2-2.choosing_the_right_comparison.projectSteps.ci_not_home_category.title",
+            "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.choosing_the_right_comparison.projectSteps.ci_not_home_category.title",
             "exerciseKey": "ci_not_home_category",
             "difficulty": "easy",
             "preferKind": "code_input",
@@ -139,20 +139,20 @@
     {
       "id": "sketch_compare_numbers",
       "archetype": "paragraph",
-      "titleKey": "sketches.sql-v2.sql-v2-2.choosing_the_right_comparison.sketch_compare_numbers.title",
-      "bodyKey": "sketches.sql-v2.sql-v2-2.choosing_the_right_comparison.sketch_compare_numbers.bodyMarkdown"
+      "titleKey": "sketches.sql--sql-v2--draft.sql--sql-v2--draft-2.choosing_the_right_comparison.sketch_compare_numbers.title",
+      "bodyKey": "sketches.sql--sql-v2--draft.sql--sql-v2--draft-2.choosing_the_right_comparison.sketch_compare_numbers.bodyMarkdown"
     },
     {
       "id": "sketch_text_and_exact_match",
       "archetype": "paragraph",
-      "titleKey": "sketches.sql-v2.sql-v2-2.choosing_the_right_comparison.sketch_text_and_exact_match.title",
-      "bodyKey": "sketches.sql-v2.sql-v2-2.choosing_the_right_comparison.sketch_text_and_exact_match.bodyMarkdown"
+      "titleKey": "sketches.sql--sql-v2--draft.sql--sql-v2--draft-2.choosing_the_right_comparison.sketch_text_and_exact_match.title",
+      "bodyKey": "sketches.sql--sql-v2--draft.sql--sql-v2--draft-2.choosing_the_right_comparison.sketch_text_and_exact_match.bodyMarkdown"
     },
     {
       "id": "sketch_boundary_thinking",
       "archetype": "paragraph",
-      "titleKey": "sketches.sql-v2.sql-v2-2.choosing_the_right_comparison.sketch_boundary_thinking.title",
-      "bodyKey": "sketches.sql-v2.sql-v2-2.choosing_the_right_comparison.sketch_boundary_thinking.bodyMarkdown"
+      "titleKey": "sketches.sql--sql-v2--draft.sql--sql-v2--draft-2.choosing_the_right_comparison.sketch_boundary_thinking.title",
+      "bodyKey": "sketches.sql--sql-v2--draft.sql--sql-v2--draft-2.choosing_the_right_comparison.sketch_boundary_thinking.bodyMarkdown"
     }
   ],
   "exercises": [
@@ -161,7 +161,7 @@
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-2.choosing_the_right_comparison.quiz.sc_equal_text_category",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.choosing_the_right_comparison.quiz.sc_equal_text_category",
       "optionIds": [
         "a",
         "b",
@@ -177,7 +177,7 @@
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-2.choosing_the_right_comparison.quiz.sc_boundary_inclusive_stock",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.choosing_the_right_comparison.quiz.sc_boundary_inclusive_stock",
       "optionIds": [
         "a",
         "b",
@@ -194,7 +194,7 @@
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-2.choosing_the_right_comparison.quiz.mc_conditions_price_over_20",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.choosing_the_right_comparison.quiz.mc_conditions_price_over_20",
       "optionIds": [
         "a",
         "b",
@@ -214,7 +214,7 @@
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-2.choosing_the_right_comparison.quiz.mc_not_art_category",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.choosing_the_right_comparison.quiz.mc_not_art_category",
       "optionIds": [
         "a",
         "b",
@@ -233,7 +233,7 @@
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-2.choosing_the_right_comparison.quiz.dr_build_price_filter_query",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.choosing_the_right_comparison.quiz.dr_build_price_filter_query",
       "tokenIds": [
         "t1",
         "t2",
@@ -253,7 +253,7 @@
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-2.choosing_the_right_comparison.quiz.dr_build_exact_category_query",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.choosing_the_right_comparison.quiz.dr_build_exact_category_query",
       "tokenIds": [
         "t1",
         "t2",
@@ -273,7 +273,7 @@
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-2.choosing_the_right_comparison.quiz.fb_less_than_operator",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.choosing_the_right_comparison.quiz.fb_less_than_operator",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
@@ -285,7 +285,7 @@
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-2.choosing_the_right_comparison.quiz.fb_not_equal_operator",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.choosing_the_right_comparison.quiz.fb_not_equal_operator",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
@@ -297,9 +297,9 @@
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-2.choosing_the_right_comparison.quiz.ci_price_greater_than",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.choosing_the_right_comparison.quiz.ci_price_greater_than",
       "language": "sql",
-      "starterCode": "SELECT \n  name,\n  price\nFROM products\nWHERE ;",
+      "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.choosing_the_right_comparison.quiz.ci_price_greater_than.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -307,8 +307,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -317,17 +317,69 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT name, price\nFROM products\nWHERE price > 20;"
-      }
+        "solutionCode": "SELECT name, price\nFROM products\nWHERE price > 20;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, price\nFROM products\nWHERE price > 20;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.choosing_the_right_comparison.quiz.ci_price_greater_than.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT name, price\nFROM products\nWHERE price > 20;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.choosing_the_right_comparison.quiz.ci_price_greater_than.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.choosing_the_right_comparison.quiz.ci_price_greater_than.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, price\nFROM products\nWHERE price > 20;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     },
     {
       "id": "ci_stock_at_most_10",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-2.choosing_the_right_comparison.quiz.ci_stock_at_most_10",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.choosing_the_right_comparison.quiz.ci_stock_at_most_10",
       "language": "sql",
-      "starterCode": "SELECT \n  name,\n  stock\nFROM products\nWHERE ;",
+      "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.choosing_the_right_comparison.quiz.ci_stock_at_most_10.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -335,8 +387,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -345,17 +397,69 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT name, stock\nFROM products\nWHERE stock <= 10;"
-      }
+        "solutionCode": "SELECT name, stock\nFROM products\nWHERE stock <= 10;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, stock\nFROM products\nWHERE stock <= 10;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.choosing_the_right_comparison.quiz.ci_stock_at_most_10.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT name, stock\nFROM products\nWHERE stock <= 10;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.choosing_the_right_comparison.quiz.ci_stock_at_most_10.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.choosing_the_right_comparison.quiz.ci_stock_at_most_10.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, stock\nFROM products\nWHERE stock <= 10;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     },
     {
       "id": "ci_not_home_category",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-2.choosing_the_right_comparison.quiz.ci_not_home_category",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.choosing_the_right_comparison.quiz.ci_not_home_category",
       "language": "sql",
-      "starterCode": "SELECT \n  name,\n  category\nFROM products\nWHERE ;",
+      "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.choosing_the_right_comparison.quiz.ci_not_home_category.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -363,8 +467,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -373,17 +477,69 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT name, category\nFROM products\nWHERE category != 'Home';"
-      }
+        "solutionCode": "SELECT name, category\nFROM products\nWHERE category != 'Home';",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, category\nFROM products\nWHERE category != 'Home';",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.choosing_the_right_comparison.quiz.ci_not_home_category.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT name, category\nFROM products\nWHERE category != 'Home';",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.choosing_the_right_comparison.quiz.ci_not_home_category.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.choosing_the_right_comparison.quiz.ci_not_home_category.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, category\nFROM products\nWHERE category != 'Home';",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     },
     {
       "id": "try-choosing_the_right_comparison-sketch0",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-2.choosing_the_right_comparison.quiz.try-choosing_the_right_comparison-sketch0",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.choosing_the_right_comparison.quiz.try-choosing_the_right_comparison-sketch0",
       "language": "sql",
-      "starterCode": "SELECT \n  name,\n  price\nFROM products\nWHERE ;",
+      "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.choosing_the_right_comparison.quiz.try-choosing_the_right_comparison-sketch0.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -391,8 +547,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -401,17 +557,69 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT name, price\nFROM products\nWHERE price > 20;"
-      }
+        "solutionCode": "SELECT name, price\nFROM products\nWHERE price > 20;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, price\nFROM products\nWHERE price > 20;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.choosing_the_right_comparison.quiz.try-choosing_the_right_comparison-sketch0.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT name, price\nFROM products\nWHERE price > 20;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.choosing_the_right_comparison.quiz.try-choosing_the_right_comparison-sketch0.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.choosing_the_right_comparison.quiz.try-choosing_the_right_comparison-sketch0.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, price\nFROM products\nWHERE price > 20;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     },
     {
       "id": "try-choosing_the_right_comparison-sketch1",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-2.choosing_the_right_comparison.quiz.try-choosing_the_right_comparison-sketch1",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.choosing_the_right_comparison.quiz.try-choosing_the_right_comparison-sketch1",
       "language": "sql",
-      "starterCode": "SELECT \n  name,\n  stock\nFROM products\nWHERE ;",
+      "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.choosing_the_right_comparison.quiz.try-choosing_the_right_comparison-sketch1.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -419,8 +627,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -429,17 +637,69 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT name, stock\nFROM products\nWHERE stock <= 10;"
-      }
+        "solutionCode": "SELECT name, stock\nFROM products\nWHERE stock <= 10;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, stock\nFROM products\nWHERE stock <= 10;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.choosing_the_right_comparison.quiz.try-choosing_the_right_comparison-sketch1.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT name, stock\nFROM products\nWHERE stock <= 10;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.choosing_the_right_comparison.quiz.try-choosing_the_right_comparison-sketch1.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.choosing_the_right_comparison.quiz.try-choosing_the_right_comparison-sketch1.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, stock\nFROM products\nWHERE stock <= 10;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     },
     {
       "id": "try-choosing_the_right_comparison-sketch2",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-2.choosing_the_right_comparison.quiz.try-choosing_the_right_comparison-sketch2",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.choosing_the_right_comparison.quiz.try-choosing_the_right_comparison-sketch2",
       "language": "sql",
-      "starterCode": "SELECT \n  name,\n  category\nFROM products\nWHERE ;",
+      "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.choosing_the_right_comparison.quiz.try-choosing_the_right_comparison-sketch2.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -447,8 +707,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -457,8 +717,60 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT name, category\nFROM products\nWHERE category != 'Home';"
-      }
+        "solutionCode": "SELECT name, category\nFROM products\nWHERE category != 'Home';",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, category\nFROM products\nWHERE category != 'Home';",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.choosing_the_right_comparison.quiz.try-choosing_the_right_comparison-sketch2.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT name, category\nFROM products\nWHERE category != 'Home';",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.choosing_the_right_comparison.quiz.try-choosing_the_right_comparison-sketch2.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.choosing_the_right_comparison.quiz.try-choosing_the_right_comparison-sketch2.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, category\nFROM products\nWHERE category != 'Home';",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     }
   ]
 }

@@ -1,0 +1,440 @@
+{
+  "topics": {
+    "sql--sql-v2--draft": {
+      "sql--sql-v2--draft-1": {
+        "semicolons": {
+          "label": "Semicolons",
+          "summary": "Learn what semicolons do in beginner SQL queries, when to include them, and how they help mark the end of a statement in the SQL editor.",
+          "cards": {
+            "sketch0": {
+              "title": "What a semicolon does"
+            },
+            "sketch1": {
+              "title": "Why semicolons matter more with multiple statements"
+            },
+            "sketch2": {
+              "title": "Good beginner style with semicolons"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Semicolon practice queries"
+            }
+          },
+          "projectSteps": {
+            "ci_add_semicolon_name": {
+              "title": "Write a query with a semicolon"
+            },
+            "ci_add_semicolon_two_columns": {
+              "title": "Select two columns and end correctly"
+            },
+            "ci_created_at_semicolon": {
+              "title": "Complete another statement"
+            }
+          },
+          "quiz": {
+            "sc-semicolon-purpose": {
+              "title": "What semicolon means",
+              "prompt": "In a beginner SQL query like `SELECT name FROM products;`, what does the semicolon do?",
+              "hint": "Think about where the query stops.",
+              "help": {
+                "concept": "A semicolon is a statement terminator in SQL. It marks the end of one complete query.",
+                "hint_1": "Look for the choice that describes ending the SQL statement, not choosing a table or column.",
+                "hint_2": "The semicolon comes after `FROM products` because the query is finished at that point."
+              },
+              "options": {
+                "a": "It ends the SQL statement.",
+                "b": "It selects all rows.",
+                "c": "It names the table.",
+                "d": "It sorts the results."
+              }
+            },
+            "sc-semicolon-location": {
+              "title": "Where the semicolon goes",
+              "prompt": "Where is the best place to put a semicolon in a simple query?",
+              "hint": "Place it after the query is complete.",
+              "help": {
+                "concept": "The semicolon belongs at the end of the full SQL statement, after all required clauses are written.",
+                "hint_1": "In `SELECT ... FROM ...`, both clauses come before the statement is finished.",
+                "hint_2": "The semicolon should appear after the table name in this kind of beginner query, not after `SELECT`."
+              },
+              "options": {
+                "a": "At the very start of the query",
+                "b": "Right after `SELECT`",
+                "c": "At the end of the complete statement",
+                "d": "Between every column name"
+              }
+            },
+            "mc-semicolon-benefits": {
+              "title": "Why semicolons are useful",
+              "prompt": "Choose all true statements about using semicolons in beginner SQL.",
+              "hint": "Think about statement endings and readability.",
+              "help": {
+                "concept": "Semicolons help mark the end of a statement and make it easier to separate one query from another.",
+                "hint_1": "Look for choices about ending a query and keeping multiple statements separate.",
+                "hint_2": "A semicolon does not choose columns or change the table data; it marks boundaries between statements."
+              },
+              "options": {
+                "a": "They mark the end of a statement.",
+                "b": "They help separate one SQL statement from the next.",
+                "c": "They rename columns automatically.",
+                "d": "They are a good habit for clear SQL formatting."
+              }
+            },
+            "mc-semicolon-not-do": {
+              "title": "What semicolons do not do",
+              "prompt": "Choose all actions that a semicolon does NOT perform in SQL.",
+              "hint": "A semicolon marks the end, but it does not change the data you ask for.",
+              "help": {
+                "concept": "A semicolon is punctuation for statement boundaries, not a command that selects columns, filters rows, or sorts results.",
+                "hint_1": "Check which choices describe actual query logic rather than punctuation.",
+                "hint_2": "Selecting columns and ordering results come from SQL clauses like `SELECT` and `ORDER BY`, not from `;`."
+              },
+              "options": {
+                "a": "Select columns from a table",
+                "b": "End a statement",
+                "c": "Sort rows alphabetically",
+                "d": "Choose which table to read"
+              }
+            },
+            "dr-query-order-basic": {
+              "title": "Build a complete query",
+              "prompt": "Arrange the tokens to form a valid beginner SQL query that selects the `name` column from `products` and ends correctly.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "SELECT",
+                "t2": "name",
+                "t3": "FROM",
+                "t4": "products",
+                "t5": ";"
+              }
+            },
+            "dr-two-statement-separator": {
+              "title": "Separate two statements",
+              "prompt": "Arrange the tokens to show two SQL statements separated correctly with semicolons.",
+              "hint": "Each statement needs its own ending before the next `SELECT` begins.",
+              "help": {
+                "concept": "When writing two SQL statements, each one must be completed before the next starts, and semicolons mark those boundaries.",
+                "hint_1": "Finish the first `SELECT ... FROM ...` before placing the second `SELECT`.",
+                "hint_2": "You need one semicolon after the first table name and another after the second table name."
+              },
+              "tokens": {
+                "t1": "SELECT name FROM products",
+                "t2": ";",
+                "t3": "SELECT category FROM products"
+              }
+            },
+            "fb-end-symbol": {
+              "title": "Finish the statement",
+              "prompt": "Complete the SQL statement with the correct ending symbol.",
+              "hint": "Use the symbol that marks the end of an SQL statement.",
+              "help": {
+                "concept": "SQL statements are commonly ended with a semicolon to show the query is complete.",
+                "hint_1": "This is punctuation, not a keyword like `FROM` or `SELECT`.",
+                "hint_2": "The missing symbol is the one you place at the very end of the query."
+              },
+              "template": "SELECT name FROM products[blank1]",
+              "choices": [
+                ";",
+                ",",
+                ":",
+                "."
+              ]
+            },
+            "fb-table-name-before-semicolon": {
+              "title": "Complete the query text",
+              "prompt": "Fill in the missing table name so the query is complete before the semicolon.",
+              "hint": "Use the table shown in this lesson's schema.",
+              "help": {
+                "concept": "A `FROM` clause needs a real table name, and in this topic the dataset table is `the missing term`.",
+                "hint_1": "Look at the schema browser for the single table used in these examples.",
+                "hint_2": "The missing word is the table that contains columns like `id`, `name`, and `price`."
+              },
+              "template": "SELECT name FROM [blank1];",
+              "choices": [
+                "products",
+                "price",
+                "name",
+                "category"
+              ]
+            },
+            "ci-add-semicolon-name": {
+              "title": "Write a query with a semicolon",
+              "prompt": "Write a query that selects the `name` column from the `products` table. End the statement with a semicolon. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "SELECT \nFROM products"
+            },
+            "ci-add-semicolon-two-columns": {
+              "title": "Select two columns and end correctly",
+              "prompt": "Write a query that returns the `id` and `category` columns from `products`. End the statement with a semicolon. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "SELECT id\nFROM products"
+            },
+            "ci-created-at-semicolon": {
+              "title": "Complete another statement",
+              "prompt": "Write a query that selects the `created_at` and `name` columns from `products`. End the query with a semicolon. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "SELECT created_at\nFROM"
+            }
+          }
+        }
+      },
+      "sql-v2-1": {
+        "semicolons": {
+          "label": "Semicolons",
+          "summary": "Learn what semicolons do in beginner SQL queries, when to include them, and how they help mark the end of a statement in the SQL editor.",
+          "cards": {
+            "sketch0": {
+              "title": "What a semicolon does"
+            },
+            "sketch1": {
+              "title": "Why semicolons matter more with multiple statements"
+            },
+            "sketch2": {
+              "title": "Good beginner style with semicolons"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Semicolon practice queries"
+            }
+          },
+          "projectSteps": {
+            "ci_add_semicolon_name": {
+              "title": "Write a query with a semicolon"
+            },
+            "ci_add_semicolon_two_columns": {
+              "title": "Select two columns and end correctly"
+            },
+            "ci_created_at_semicolon": {
+              "title": "Complete another statement"
+            }
+          },
+          "quiz": {
+            "sc-semicolon-purpose": {
+              "title": "What semicolon means",
+              "prompt": "In a beginner SQL query like `SELECT name FROM products;`, what does the semicolon do?",
+              "hint": "Think about where the query stops.",
+              "help": {
+                "concept": "A semicolon is a statement terminator in SQL. It marks the end of one complete query.",
+                "hint_1": "Look for the choice that describes ending the SQL statement, not choosing a table or column.",
+                "hint_2": "The semicolon comes after `FROM products` because the query is finished at that point."
+              },
+              "options": {
+                "a": "It ends the SQL statement.",
+                "b": "It selects all rows.",
+                "c": "It names the table.",
+                "d": "It sorts the results."
+              }
+            },
+            "sc-semicolon-location": {
+              "title": "Where the semicolon goes",
+              "prompt": "Where is the best place to put a semicolon in a simple query?",
+              "hint": "Place it after the query is complete.",
+              "help": {
+                "concept": "The semicolon belongs at the end of the full SQL statement, after all required clauses are written.",
+                "hint_1": "In `SELECT ... FROM ...`, both clauses come before the statement is finished.",
+                "hint_2": "The semicolon should appear after the table name in this kind of beginner query, not after `SELECT`."
+              },
+              "options": {
+                "a": "At the very start of the query",
+                "b": "Right after `SELECT`",
+                "c": "At the end of the complete statement",
+                "d": "Between every column name"
+              }
+            },
+            "mc-semicolon-benefits": {
+              "title": "Why semicolons are useful",
+              "prompt": "Choose all true statements about using semicolons in beginner SQL.",
+              "hint": "Think about statement endings and readability.",
+              "help": {
+                "concept": "Semicolons help mark the end of a statement and make it easier to separate one query from another.",
+                "hint_1": "Look for choices about ending a query and keeping multiple statements separate.",
+                "hint_2": "A semicolon does not choose columns or change the table data; it marks boundaries between statements."
+              },
+              "options": {
+                "a": "They mark the end of a statement.",
+                "b": "They help separate one SQL statement from the next.",
+                "c": "They rename columns automatically.",
+                "d": "They are a good habit for clear SQL formatting."
+              }
+            },
+            "mc-semicolon-not-do": {
+              "title": "What semicolons do not do",
+              "prompt": "Choose all actions that a semicolon does NOT perform in SQL.",
+              "hint": "A semicolon marks the end, but it does not change the data you ask for.",
+              "help": {
+                "concept": "A semicolon is punctuation for statement boundaries, not a command that selects columns, filters rows, or sorts results.",
+                "hint_1": "Check which choices describe actual query logic rather than punctuation.",
+                "hint_2": "Selecting columns and ordering results come from SQL clauses like `SELECT` and `ORDER BY`, not from `;`."
+              },
+              "options": {
+                "a": "Select columns from a table",
+                "b": "End a statement",
+                "c": "Sort rows alphabetically",
+                "d": "Choose which table to read"
+              }
+            },
+            "dr-query-order-basic": {
+              "title": "Build a complete query",
+              "prompt": "Arrange the tokens to form a valid beginner SQL query that selects the `name` column from `products` and ends correctly.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "SELECT",
+                "t2": "name",
+                "t3": "FROM",
+                "t4": "products",
+                "t5": ";"
+              }
+            },
+            "dr-two-statement-separator": {
+              "title": "Separate two statements",
+              "prompt": "Arrange the tokens to show two SQL statements separated correctly with semicolons.",
+              "hint": "Each statement needs its own ending before the next `SELECT` begins.",
+              "help": {
+                "concept": "When writing two SQL statements, each one must be completed before the next starts, and semicolons mark those boundaries.",
+                "hint_1": "Finish the first `SELECT ... FROM ...` before placing the second `SELECT`.",
+                "hint_2": "You need one semicolon after the first table name and another after the second table name."
+              },
+              "tokens": {
+                "t1": "SELECT name FROM products",
+                "t2": ";",
+                "t3": "SELECT category FROM products"
+              }
+            },
+            "fb-end-symbol": {
+              "title": "Finish the statement",
+              "prompt": "Complete the SQL statement with the correct ending symbol.",
+              "hint": "Use the symbol that marks the end of an SQL statement.",
+              "help": {
+                "concept": "SQL statements are commonly ended with a semicolon to show the query is complete.",
+                "hint_1": "This is punctuation, not a keyword like `FROM` or `SELECT`.",
+                "hint_2": "The missing symbol is the one you place at the very end of the query."
+              },
+              "template": "SELECT name FROM products[blank1]",
+              "choices": [
+                ";",
+                ",",
+                ":",
+                "."
+              ]
+            },
+            "fb-table-name-before-semicolon": {
+              "title": "Complete the query text",
+              "prompt": "Fill in the missing table name so the query is complete before the semicolon.",
+              "hint": "Use the table shown in this lesson's schema.",
+              "help": {
+                "concept": "A `FROM` clause needs a real table name, and in this topic the dataset table is `the missing term`.",
+                "hint_1": "Look at the schema browser for the single table used in these examples.",
+                "hint_2": "The missing word is the table that contains columns like `id`, `name`, and `price`."
+              },
+              "template": "SELECT name FROM [blank1];",
+              "choices": [
+                "products",
+                "price",
+                "name",
+                "category"
+              ]
+            },
+            "ci-add-semicolon-name": {
+              "title": "Write a query with a semicolon",
+              "prompt": "Write a query that selects the `name` column from the `products` table. End the statement with a semicolon. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "SELECT \nFROM products"
+            },
+            "ci-add-semicolon-two-columns": {
+              "title": "Select two columns and end correctly",
+              "prompt": "Write a query that returns the `id` and `category` columns from `products`. End the statement with a semicolon. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "SELECT id\nFROM products"
+            },
+            "ci-created-at-semicolon": {
+              "title": "Complete another statement",
+              "prompt": "Write a query that selects the `created_at` and `name` columns from `products`. End the query with a semicolon. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "SELECT created_at\nFROM"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql--sql-v2--draft": {
+      "sql--sql-v2--draft-1": {
+        "semicolons": {
+          "semicolon-basics": {
+            "title": "What a semicolon does",
+            "bodyMarkdown": "A semicolon (`;`) marks the end of an SQL statement. In beginner SQL, you will often write one query at a time, and the semicolon shows where that query finishes.\n\nHere is a simple example using the `products` table:\n\n```sql\nSELECT name\nFROM products;\n```\n\nStep by step:\n- `SELECT name` says you want the `name` column.\n- `FROM products` says the data comes from the `products` table.\n- `;` shows the statement is complete.\n\nWithout the semicolon, some SQL tools still run a single query. But many SQL environments and style guides expect it, especially when you later write more than one statement.\n\nWorked example:\n\n```sql\nSELECT id, name, price\nFROM products;\n```\n\nThis returns the `id`, `name`, and `price` columns for all rows in `products`."
+          },
+          "semicolon-multiple-statements": {
+            "title": "Why semicolons matter more with multiple statements",
+            "bodyMarkdown": "Semicolons become especially useful when there is more than one SQL statement. They separate one statement from the next.\n\nExample:\n\n```sql\nSELECT name\nFROM products;\n\nSELECT category\nFROM products;\n```\n\nLine by line:\n- The first `SELECT` gets product names.\n- The first semicolon ends that statement.\n- The second `SELECT` starts a new statement.\n- The final semicolon ends the second statement.\n\nIf you forget the first semicolon, SQL may treat the text as one broken statement instead of two separate ones.\n\nA common beginner habit is to always end each query with `;`. That makes your SQL easier to read and safer to extend later."
+          },
+          "semicolon-style": {
+            "title": "Good beginner style with semicolons",
+            "bodyMarkdown": "Even in a lesson focused on `SELECT` and `FROM`, good formatting helps. A clear beginner style is:\n\n```sql\nSELECT category, stock\nFROM products;\n```\n\nWhy this style helps:\n- `SELECT` and `FROM` are easy to spot on separate lines.\n- The table name `products` is easy to read.\n- The semicolon clearly ends the query.\n\nWorked example with real data columns:\n\n```sql\nSELECT created_at, name\nFROM products;\n```\n\nThis asks for the `created_at` and `name` columns from the `products` table, then ends the statement with `;`."
+          }
+        }
+      },
+      "sql-v2-1": {
+        "semicolons": {
+          "semicolon-basics": {
+            "title": "What a semicolon does",
+            "bodyMarkdown": "A semicolon (`;`) marks the end of an SQL statement. In beginner SQL, you will often write one query at a time, and the semicolon shows where that query finishes.\n\nHere is a simple example using the `products` table:\n\n```sql\nSELECT name\nFROM products;\n```\n\nStep by step:\n- `SELECT name` says you want the `name` column.\n- `FROM products` says the data comes from the `products` table.\n- `;` shows the statement is complete.\n\nWithout the semicolon, some SQL tools still run a single query. But many SQL environments and style guides expect it, especially when you later write more than one statement.\n\nWorked example:\n\n```sql\nSELECT id, name, price\nFROM products;\n```\n\nThis returns the `id`, `name`, and `price` columns for all rows in `products`."
+          },
+          "semicolon-multiple-statements": {
+            "title": "Why semicolons matter more with multiple statements",
+            "bodyMarkdown": "Semicolons become especially useful when there is more than one SQL statement. They separate one statement from the next.\n\nExample:\n\n```sql\nSELECT name\nFROM products;\n\nSELECT category\nFROM products;\n```\n\nLine by line:\n- The first `SELECT` gets product names.\n- The first semicolon ends that statement.\n- The second `SELECT` starts a new statement.\n- The final semicolon ends the second statement.\n\nIf you forget the first semicolon, SQL may treat the text as one broken statement instead of two separate ones.\n\nA common beginner habit is to always end each query with `;`. That makes your SQL easier to read and safer to extend later."
+          },
+          "semicolon-style": {
+            "title": "Good beginner style with semicolons",
+            "bodyMarkdown": "Even in a lesson focused on `SELECT` and `FROM`, good formatting helps. A clear beginner style is:\n\n```sql\nSELECT category, stock\nFROM products;\n```\n\nWhy this style helps:\n- `SELECT` and `FROM` are easy to spot on separate lines.\n- The table name `products` is easy to read.\n- The semicolon clearly ends the query.\n\nWorked example with real data columns:\n\n```sql\nSELECT created_at, name\nFROM products;\n```\n\nThis asks for the `created_at` and `name` columns from the `products` table, then ends the statement with `;`."
+          }
+        }
+      }
+    }
+  }
+}

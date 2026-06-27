@@ -1,0 +1,272 @@
+{
+  "topics": {
+    "sql-v2": {
+      "sql-v2-3": {
+        "descending_order": {
+          "label": "Descending Order",
+          "summary": "Learn how to sort SQL results from highest to lowest with DESC, and combine it with ORDER BY and LIMIT to rank products clearly.",
+          "cards": {
+            "sketch0": {
+              "title": "What DESC does"
+            },
+            "sketch1": {
+              "title": "Using DESC with dates"
+            },
+            "sketch2": {
+              "title": "Ranking with DESC and LIMIT"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Ranked Product Reports"
+            }
+          },
+          "projectSteps": {
+            "ci_price_desc": {
+              "title": "Sort products by highest price"
+            },
+            "ci_newest_products": {
+              "title": "Show newest products first"
+            },
+            "ci_top2_stock": {
+              "title": "Top 2 products by stock"
+            }
+          },
+          "quiz": {
+            "sc_desc_meaning": {
+              "title": "Meaning of DESC",
+              "prompt": "What does `DESC` do in `ORDER BY price DESC`?",
+              "hint": "Think about whether the largest or smallest price should appear first.",
+              "help": {
+                "concept": "`DESC` changes the sort direction so rows are ordered from larger values to smaller values in the chosen column.",
+                "hint_1": "Look at the word after `ORDER BY price`. It controls whether high prices or low prices come first.",
+                "hint_2": "If you were ranking products from most expensive to least expensive, you would use this direction."
+              },
+              "options": {
+                "a": "It sorts prices from highest to lowest.",
+                "b": "It sorts prices from lowest to highest.",
+                "c": "It removes duplicate prices.",
+                "d": "It filters out rows with small prices."
+              }
+            },
+            "sc_default_order": {
+              "title": "Default sort direction",
+              "prompt": "If you write `ORDER BY price` without `ASC` or `DESC`, what happens in beginner SQL lessons like this one?",
+              "hint": "Think about the default direction when no keyword is added.",
+              "help": {
+                "concept": "When no direction is written, SQL sorts in ascending order by default for the selected column.",
+                "hint_1": "Compare `ORDER BY price` with `ORDER BY price ASC`.",
+                "hint_2": "The default puts smaller numbers before larger numbers."
+              },
+              "options": {
+                "a": "The rows are sorted from highest to lowest.",
+                "b": "The rows are sorted from lowest to highest.",
+                "c": "The rows stay in random order.",
+                "d": "The query causes an error unless `ASC` is written."
+              }
+            },
+            "mc_desc_good_uses": {
+              "title": "Good uses for descending order",
+              "prompt": "Which tasks are good reasons to use `DESC`? Choose all that apply.",
+              "hint": "Think about cases where you want the biggest or newest values first.",
+              "help": {
+                "concept": "`DESC` is useful when you want results ranked from highest to lowest or from newest to oldest.",
+                "hint_1": "Look for tasks involving top prices, top stock counts, or latest dates.",
+                "hint_2": "Choose the options where the first row should represent the largest number or most recent date."
+              },
+              "options": {
+                "a": "Showing the most expensive products first",
+                "b": "Showing the newest products first by `created_at`",
+                "c": "Showing the smallest prices first",
+                "d": "Showing the highest stock counts first"
+              }
+            },
+            "mc_desc_queries": {
+              "title": "Queries that use descending order",
+              "prompt": "Which queries sort the results in descending order? Choose all that apply.",
+              "hint": "Look for the keyword that changes sort direction after `ORDER BY`.",
+              "help": {
+                "concept": "A query sorts in descending order only when `DESC` is attached to the column in the `ORDER BY` clause.",
+                "hint_1": "Check each option for `ORDER BY ... DESC`, not just `ORDER BY` by itself.",
+                "hint_2": "More than one option includes the descending keyword."
+              },
+              "options": {
+                "a": "SELECT name, price FROM products ORDER BY price DESC;",
+                "b": "SELECT name, stock FROM products ORDER BY stock ASC;",
+                "c": "SELECT name, created_at FROM products ORDER BY created_at DESC;",
+                "d": "SELECT name FROM products WHERE stock > 10;"
+              }
+            },
+            "dr_build_desc_query": {
+              "title": "Build a descending sort query",
+              "prompt": "Put these SQL parts in the correct order to show product names and prices, sorted by highest price first.",
+              "hint": "Start with `SELECT`, then name the table, then add the sort clause.",
+              "help": {
+                "concept": "A basic SQL query follows the clause order `SELECT`, `FROM`, then `ORDER BY` with the chosen direction.",
+                "hint_1": "The sorting instruction comes after the table name.",
+                "hint_2": "The last part should mention `price DESC`."
+              },
+              "tokens": {
+                "t1": "SELECT name, price",
+                "t2": "FROM products",
+                "t3": "ORDER BY price DESC"
+              }
+            },
+            "dr_desc_limit_order": {
+              "title": "Place LIMIT correctly",
+              "prompt": "Arrange these parts to create a query that shows the top 2 products by stock.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "SELECT name, stock",
+                "t2": "FROM products",
+                "t3": "ORDER BY stock DESC",
+                "t4": "LIMIT 2"
+              }
+            },
+            "fb_desc_keyword": {
+              "title": "Fill in the sort direction",
+              "prompt": "Complete the query so the highest stock values appear first.",
+              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+              "help": {
+                "concept": "The blank should be filled with the term that makes the statement accurate.",
+                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+                "hint_2": "Choose the option that completes the statement with the clearest meaning."
+              },
+              "template": "SELECT name, stock FROM products ORDER BY stock [blank1];",
+              "choices": [
+                "ASC",
+                "DESC",
+                "WHERE",
+                "LIMIT"
+              ]
+            },
+            "fb_desc_date_column": {
+              "title": "Choose the right column",
+              "prompt": "Complete the query so the newest products appear first.",
+              "hint": "Use the date column from the `products` table.",
+              "help": {
+                "concept": "To sort by newest items first, you must order by the date column and use descending order.",
+                "hint_1": "The table stores product dates in a column that ends with `_at`.",
+                "hint_2": "Choose the column that contains values like `2026-02-14`."
+              },
+              "template": "SELECT name, created_at FROM products ORDER BY [blank1] DESC;",
+              "choices": [
+                "name",
+                "category",
+                "created_at",
+                "stock"
+              ]
+            },
+            "ci_price_desc": {
+              "title": "Sort products by highest price",
+              "prompt": "Write a query that shows `name` and `price` from `products`, sorted by `price` in descending order. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "SELECT name, price\nFROM products\n-- TODO: sort by price from highest to lowest\n;"
+            },
+            "ci_newest_products": {
+              "title": "Show newest products first",
+              "prompt": "Write a query that shows `name` and `created_at` from `products`, sorted so the newest products appear first. Use the SQL editor, then click Run query and inspect the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "SELECT name, created_at\nFROM products\n-- TODO: sort so the newest date is first\n;"
+            },
+            "ci_top2_stock": {
+              "title": "Top 2 products by stock",
+              "prompt": "Write a query that shows `name` and `stock` from `products`, sorted by `stock` from highest to lowest, and returns only the first 2 rows. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "SELECT name, stock\nFROM products\n-- TODO: sort by highest stock first\n-- TODO: keep only 2 rows\n;"
+            },
+            "try-descending_order-sketch0": {
+              "title": "Sort products by highest price",
+              "prompt": "Write a query that shows `name` and `price` from `products`, sorted by `price` in descending order. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "SELECT name, price\nFROM products\n-- TODO: sort by price from highest to lowest\n;"
+            },
+            "try-descending_order-sketch1": {
+              "title": "Show newest products first",
+              "prompt": "Write a query that shows `name` and `created_at` from `products`, sorted so the newest products appear first. Use the SQL editor, then click Run query and inspect the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "SELECT name, created_at\nFROM products\n-- TODO: sort so the newest date is first\n;"
+            },
+            "try-descending_order-sketch2": {
+              "title": "Top 2 products by stock",
+              "prompt": "Write a query that shows `name` and `stock` from `products`, sorted by `stock` from highest to lowest, and returns only the first 2 rows. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "SELECT name, stock\nFROM products\n-- TODO: sort by highest stock first\n-- TODO: keep only 2 rows\n;"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_descending_order_sketch0": {
+              "title": "Sort products by highest price",
+              "prompt": "Write a query that shows `name` and `price` from `products`, sorted by `price` in descending order. Write the query in the SQL editor, click Run query, and check the results table."
+            },
+            "try_descending_order_sketch1": {
+              "title": "Show newest products first",
+              "prompt": "Write a query that shows `name` and `created_at` from `products`, sorted so the newest products appear first. Use the SQL editor, then click Run query and inspect the results table."
+            },
+            "try_descending_order_sketch2": {
+              "title": "Top 2 products by stock",
+              "prompt": "Write a query that shows `name` and `stock` from `products`, sorted by `stock` from highest to lowest, and returns only the first 2 rows. Write the query in the SQL editor, click Run query, and check the results table."
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql-v2": {
+      "sql-v2-3": {
+        "descending_order": {
+          "desc_basics": {
+            "title": "What DESC does",
+            "bodyMarkdown": "When you use `ORDER BY`, SQL sorts your rows by a column. By default, the sort is ascending, which means smaller values come first. If you want the biggest values first, add `DESC`, short for descending.\n\nHere is a simple example using the `products` table:\n\n```sql\nSELECT name, price\nFROM products\nORDER BY price DESC;\n```\n\nStep by step:\n- `SELECT name, price` chooses the columns to show.\n- `FROM products` reads from the `products` table.\n- `ORDER BY price DESC` sorts from the highest price down to the lowest price.\n\nWith this dataset, `Office Chair` would appear before `Desk Lamp`, because `129.00` is greater than `39.99`.\n\nA helpful way to remember it: `DESC` means \"start at the top\" when you are ranking by a number or date."
+          },
+          "desc_dates": {
+            "title": "Using DESC with dates",
+            "bodyMarkdown": "Descending order is also useful for dates. If you sort a date column with `DESC`, the newest rows come first.\n\nExample:\n\n```sql\nSELECT name, created_at\nFROM products\nORDER BY created_at DESC;\n```\n\nLine by line:\n- `SELECT name, created_at` shows each product and its date.\n- `FROM products` gets the rows.\n- `ORDER BY created_at DESC` puts the most recent date first.\n\nIn this dataset, `Notebook` has `2026-02-14`, so it appears before older rows like `Office Chair`, which has `2025-11-05`.\n\nThis is useful when you want to see the latest items first."
+          },
+          "desc_with_limit": {
+            "title": "Ranking with DESC and LIMIT",
+            "bodyMarkdown": "A common pattern is to sort in descending order and then keep only the first few rows with `LIMIT`.\n\nExample:\n\n```sql\nSELECT name, stock\nFROM products\nORDER BY stock DESC\nLIMIT 3;\n```\n\nStep by step:\n- `SELECT name, stock` shows product names and stock counts.\n- `FROM products` reads the table.\n- `ORDER BY stock DESC` puts the largest stock values first.\n- `LIMIT 3` keeps only the top 3 rows.\n\nIn this dataset, products with the highest stock, such as `Notebook` and `Sketchbook`, rise to the top.\n\nThis pattern is great for questions like:\n- Which items cost the most?\n- Which products have the most stock?\n- What are the newest 2 products?"
+          }
+        }
+      }
+    }
+  }
+}

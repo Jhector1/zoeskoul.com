@@ -1,0 +1,788 @@
+{
+  "topicId": "the_where_clause",
+  "subjectSlug": "sql-v2",
+  "moduleSlug": "sql-v2-2",
+  "sectionSlug": "sql-v2-sql-v2-2-1",
+  "prefix": "sqlv2_2",
+  "minutes": 16,
+  "runtimeDefaults": {
+    "kind": "sql",
+    "showSchema": true,
+    "showErd": true,
+    "showChen": true,
+    "supportsTerminal": false,
+    "supportsMultiFile": false,
+    "supportsFileSystem": false,
+    "datasetId": "products_catalog",
+    "fixedSqlDialect": "sqlite",
+    "resultShape": "table"
+  },
+  "topic": {
+    "labelKey": "topics.sql-v2.sql-v2-2.the_where_clause.label",
+    "summaryKey": "topics.sql-v2.sql-v2-2.the_where_clause.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql-v2.sql-v2-2.the_where_clause.cards.sketch0.title",
+      "sketchId": "where_filters_rows",
+      "height": 420,
+      "tryIt": {
+        "id": "try-the_where_clause-sketch0",
+        "titleKey": "topics.sql-v2.sql-v2-2.the_where_clause.tryIt.try_the_where_clause_sketch0.title",
+        "promptKey": "topics.sql-v2.sql-v2-2.the_where_clause.tryIt.try_the_where_clause_sketch0.prompt",
+        "exerciseKey": "try-the_where_clause-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql-v2.sql-v2-2.the_where_clause.cards.sketch1.title",
+      "sketchId": "where_text_and_numbers",
+      "height": 420,
+      "tryIt": {
+        "id": "try-the_where_clause-sketch1",
+        "titleKey": "topics.sql-v2.sql-v2-2.the_where_clause.tryIt.try_the_where_clause_sketch1.title",
+        "promptKey": "topics.sql-v2.sql-v2-2.the_where_clause.tryIt.try_the_where_clause_sketch1.prompt",
+        "exerciseKey": "try-the_where_clause-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.sql-v2.sql-v2-2.the_where_clause.cards.sketch2.title",
+      "sketchId": "where_reads_like_a_question",
+      "height": 420,
+      "tryIt": {
+        "id": "try-the_where_clause-sketch2",
+        "titleKey": "topics.sql-v2.sql-v2-2.the_where_clause.tryIt.try_the_where_clause_sketch2.title",
+        "promptKey": "topics.sql-v2.sql-v2-2.the_where_clause.tryIt.try_the_where_clause_sketch2.prompt",
+        "exerciseKey": "try-the_where_clause-sketch2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql-v2.sql-v2-2.the_where_clause.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.sql-v2.sql-v2-2.the_where_clause.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "ci_where_art_products",
+            "titleKey": "topics.sql-v2.sql-v2-2.the_where_clause.projectSteps.ci_where_art_products.title",
+            "exerciseKey": "ci_where_art_products",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "ci_where_low_stock",
+            "titleKey": "topics.sql-v2.sql-v2-2.the_where_clause.projectSteps.ci_where_low_stock.title",
+            "exerciseKey": "ci_where_low_stock",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "ci_where_stationery_prices",
+            "titleKey": "topics.sql-v2.sql-v2-2.the_where_clause.projectSteps.ci_where_stationery_prices.title",
+            "exerciseKey": "ci_where_stationery_prices",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "where_filters_rows",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql-v2.sql-v2-2.the_where_clause.where_filters_rows.title",
+      "bodyKey": "sketches.sql-v2.sql-v2-2.the_where_clause.where_filters_rows.bodyMarkdown"
+    },
+    {
+      "id": "where_text_and_numbers",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql-v2.sql-v2-2.the_where_clause.where_text_and_numbers.title",
+      "bodyKey": "sketches.sql-v2.sql-v2-2.the_where_clause.where_text_and_numbers.bodyMarkdown"
+    },
+    {
+      "id": "where_reads_like_a_question",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql-v2.sql-v2-2.the_where_clause.where_reads_like_a_question.title",
+      "bodyKey": "sketches.sql-v2.sql-v2-2.the_where_clause.where_reads_like_a_question.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "sc_where_purpose",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-2.the_where_clause.quiz.sc_where_purpose",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "sc_where_text_quotes",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-2.the_where_clause.quiz.sc_where_text_quotes",
+      "optionIds": [
+        "a",
+        "b"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "mc_where_numeric_matches",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-2.the_where_clause.quiz.mc_where_numeric_matches",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "mc_valid_where_conditions",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-2.the_where_clause.quiz.mc_valid_where_conditions",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "dr_where_query_order",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-2.the_where_clause.quiz.dr_where_query_order",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4",
+        "t5",
+        "t6"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4",
+          "t5",
+          "t6"
+        ]
+      }
+    },
+    {
+      "id": "dr_where_reading_order",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-2.the_where_clause.quiz.dr_where_reading_order",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4",
+        "t5",
+        "t6"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4",
+          "t5",
+          "t6"
+        ]
+      }
+    },
+    {
+      "id": "fb_where_keyword",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-2.the_where_clause.quiz.fb_where_keyword",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "WHERE"
+      }
+    },
+    {
+      "id": "fb_where_numeric_value",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-2.the_where_clause.quiz.fb_where_numeric_value",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "10"
+      }
+    },
+    {
+      "id": "ci_where_art_products",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-2.the_where_clause.quiz.ci_where_art_products",
+      "language": "sql",
+      "starterCode": "@:topics.sql-v2.sql-v2-2.the_where_clause.quiz.ci_where_art_products.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "SELECT name, price\nFROM products\nWHERE category = 'Art';",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, price\nFROM products\nWHERE category = 'Art';",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-2.the_where_clause.quiz.ci_where_art_products.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT name, price\nFROM products\nWHERE category = 'Art';",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-2.the_where_clause.quiz.ci_where_art_products.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-2.the_where_clause.quiz.ci_where_art_products.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, price\nFROM products\nWHERE category = 'Art';",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
+    },
+    {
+      "id": "ci_where_low_stock",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-2.the_where_clause.quiz.ci_where_low_stock",
+      "language": "sql",
+      "starterCode": "@:topics.sql-v2.sql-v2-2.the_where_clause.quiz.ci_where_low_stock.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "SELECT name, stock\nFROM products\nWHERE stock < 10;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, stock\nFROM products\nWHERE stock < 10;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-2.the_where_clause.quiz.ci_where_low_stock.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT name, stock\nFROM products\nWHERE stock < 10;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-2.the_where_clause.quiz.ci_where_low_stock.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-2.the_where_clause.quiz.ci_where_low_stock.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, stock\nFROM products\nWHERE stock < 10;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
+    },
+    {
+      "id": "ci_where_stationery_prices",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-2.the_where_clause.quiz.ci_where_stationery_prices",
+      "language": "sql",
+      "starterCode": "@:topics.sql-v2.sql-v2-2.the_where_clause.quiz.ci_where_stationery_prices.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "SELECT name, category, price\nFROM products\nWHERE category = 'Stationery';",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, category, price\nFROM products\nWHERE category = 'Stationery';",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-2.the_where_clause.quiz.ci_where_stationery_prices.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT name, category, price\nFROM products\nWHERE category = 'Stationery';",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-2.the_where_clause.quiz.ci_where_stationery_prices.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-2.the_where_clause.quiz.ci_where_stationery_prices.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, category, price\nFROM products\nWHERE category = 'Stationery';",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
+    },
+    {
+      "id": "try-the_where_clause-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-2.the_where_clause.quiz.try-the_where_clause-sketch0",
+      "language": "sql",
+      "starterCode": "@:topics.sql-v2.sql-v2-2.the_where_clause.quiz.try-the_where_clause-sketch0.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "SELECT name, price\nFROM products\nWHERE category = 'Art';",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, price\nFROM products\nWHERE category = 'Art';",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-2.the_where_clause.quiz.try-the_where_clause-sketch0.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT name, price\nFROM products\nWHERE category = 'Art';",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-2.the_where_clause.quiz.try-the_where_clause-sketch0.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-2.the_where_clause.quiz.try-the_where_clause-sketch0.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, price\nFROM products\nWHERE category = 'Art';",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
+    },
+    {
+      "id": "try-the_where_clause-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-2.the_where_clause.quiz.try-the_where_clause-sketch1",
+      "language": "sql",
+      "starterCode": "@:topics.sql-v2.sql-v2-2.the_where_clause.quiz.try-the_where_clause-sketch1.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "SELECT name, stock\nFROM products\nWHERE stock < 10;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, stock\nFROM products\nWHERE stock < 10;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-2.the_where_clause.quiz.try-the_where_clause-sketch1.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT name, stock\nFROM products\nWHERE stock < 10;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-2.the_where_clause.quiz.try-the_where_clause-sketch1.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-2.the_where_clause.quiz.try-the_where_clause-sketch1.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, stock\nFROM products\nWHERE stock < 10;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
+    },
+    {
+      "id": "try-the_where_clause-sketch2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-2.the_where_clause.quiz.try-the_where_clause-sketch2",
+      "language": "sql",
+      "starterCode": "@:topics.sql-v2.sql-v2-2.the_where_clause.quiz.try-the_where_clause-sketch2.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "SELECT name, category, price\nFROM products\nWHERE category = 'Stationery';",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, category, price\nFROM products\nWHERE category = 'Stationery';",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-2.the_where_clause.quiz.try-the_where_clause-sketch2.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT name, category, price\nFROM products\nWHERE category = 'Stationery';",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-2.the_where_clause.quiz.try-the_where_clause-sketch2.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-2.the_where_clause.quiz.try-the_where_clause-sketch2.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, category, price\nFROM products\nWHERE category = 'Stationery';",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
+    }
+  ]
+}

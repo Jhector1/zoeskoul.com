@@ -66,6 +66,19 @@ type IdleOutputCollapseArgs = {
     >;
 };
 
+type WorkspaceTerminalAutoOpenArgs = {
+    outputTab: OutputTab;
+    workspaceTerminalEnabled: boolean;
+    recoverState: string;
+    state: string;
+    restarting: boolean;
+    stopping: boolean;
+    sessionId: string | null;
+    started: boolean;
+    starting: boolean;
+    autoOpenAlreadyRequested: boolean;
+};
+
 type CodeRunnerWithStdinProps = CodeRunnerProps & {
     stdin?: string;
     initialStdin?: string;
@@ -207,6 +220,41 @@ export function shouldCollapseIdleOutputPanel(args: IdleOutputCollapseArgs) {
         args.workspaceTerminalEnabled &&
         hasMeaningfulWorkspaceTerminalOutput(args.workspaceTerminal)
     ) {
+        return false;
+    }
+
+    return true;
+}
+
+export function shouldAutoOpenWorkspaceTerminal(args: WorkspaceTerminalAutoOpenArgs) {
+    if (args.outputTab !== "terminal" || !args.workspaceTerminalEnabled) {
+        return false;
+    }
+
+    /**
+     * One automatic attempt per terminal scope.
+     *
+     * If that attempt fails, stop and wait for an explicit learner restart.
+     * This prevents a single visible terminal from repeatedly hammering the
+     * session-start endpoint and tripping the runner rate limits.
+     */
+    if (args.autoOpenAlreadyRequested) {
+        return false;
+    }
+
+    if (args.recoverState === "blocked_too_many_sessions") {
+        return false;
+    }
+
+    if (args.state === "failed") {
+        return false;
+    }
+
+    if (args.restarting || args.stopping) {
+        return false;
+    }
+
+    if (args.sessionId || args.started || args.starting) {
         return false;
     }
 
@@ -751,39 +799,22 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         workspaceTerminalEnabled,
     ]);
 
-    const [terminalAutoOpenRetryTick, setTerminalAutoOpenRetryTick] = useState(0);
-
     useEffect(() => {
-        if (outputTab !== "terminal" || !workspaceTerminalEnabled) {
-            return;
-        }
-
-        /**
-         * Only the runner rate limiter should block automatic recovery. Normal
-         * refresh/socket recovery should reconnect without forcing the learner to
-         * click Restart terminal.
-         */
-        if (workspaceTerm.recoverState === "blocked_too_many_sessions") {
-            return;
-        }
-
-        if (workspaceTerm.state === "failed") {
-            return;
-        }
-
-        if (workspaceTerm.restarting || workspaceTerm.stopping) {
-            return;
-        }
-
         if (
-            workspaceTerm.sessionId ||
-            workspaceTerm.started ||
-            workspaceTerm.starting
+            !shouldAutoOpenWorkspaceTerminal({
+                outputTab,
+                workspaceTerminalEnabled,
+                recoverState: workspaceTerm.recoverState,
+                state: workspaceTerm.state,
+                restarting: workspaceTerm.restarting,
+                stopping: workspaceTerm.stopping,
+                sessionId: workspaceTerm.sessionId,
+                started: workspaceTerm.started,
+                starting: workspaceTerm.starting,
+                autoOpenAlreadyRequested:
+                    terminalAutoOpenRequestedKeyRef.current === terminalAutoOpenKey,
+            })
         ) {
-            return;
-        }
-
-        if (terminalAutoOpenRequestedKeyRef.current === terminalAutoOpenKey) {
             return;
         }
 
@@ -807,10 +838,6 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
 
             void workspaceTerm.open({ userInitiated: false }).finally(() => {
                 releaseTerminalAutoOpenClaim(terminalAutoOpenKey);
-
-                if (terminalAutoOpenRequestedKeyRef.current === terminalAutoOpenKey) {
-                    terminalAutoOpenRequestedKeyRef.current = null;
-                }
             });
         }, TERMINAL_AUTO_OPEN_DELAY_MS);
 
@@ -830,32 +857,6 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         workspaceTerm.recoverState,
         workspaceTerm.open,
         terminalAutoOpenKey,
-        terminalAutoOpenRetryTick,
-    ]);
-
-
-    useEffect(() => {
-        if (outputTab !== "terminal" || !workspaceTerminalEnabled) return;
-        if (workspaceTerm.sessionId || workspaceTerm.started || workspaceTerm.starting) return;
-        if (workspaceTerm.recoverState === "blocked_too_many_sessions") return;
-        if (workspaceTerm.state === "failed") return;
-
-        const timer = window.setTimeout(() => {
-            setTerminalAutoOpenRetryTick((value) => value + 1);
-        }, TERMINAL_AUTO_OPEN_COOLDOWN_MS);
-
-        return () => {
-            window.clearTimeout(timer);
-        };
-    }, [
-        outputTab,
-        workspaceTerminalEnabled,
-        workspaceTerm.sessionId,
-        workspaceTerm.started,
-        workspaceTerm.starting,
-        workspaceTerm.recoverState,
-        workspaceTerm.state,
-        terminalAutoOpenRetryTick,
     ]);
 
 

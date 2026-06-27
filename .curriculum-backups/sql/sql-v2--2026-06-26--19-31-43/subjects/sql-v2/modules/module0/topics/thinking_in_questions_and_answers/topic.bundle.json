@@ -1,0 +1,208 @@
+{
+  "topicId": "thinking_in_questions_and_answers",
+  "subjectSlug": "sql-v2",
+  "moduleSlug": "sql-v2-0",
+  "sectionSlug": "sql-v2-sql-v2-0-3",
+  "prefix": "sqlv2_0",
+  "minutes": 12,
+  "runtimeDefaults": {
+    "kind": "sql",
+    "showSchema": true,
+    "showErd": true,
+    "showChen": true,
+    "supportsTerminal": false,
+    "supportsMultiFile": false,
+    "supportsFileSystem": false,
+    "datasetId": "students_intro",
+    "fixedSqlDialect": "sqlite",
+    "resultShape": "table"
+  },
+  "topic": {
+    "labelKey": "topics.sql-v2.sql-v2-0.thinking_in_questions_and_answers.label",
+    "summaryKey": "topics.sql-v2.sql-v2-0.thinking_in_questions_and_answers.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql-v2.sql-v2-0.thinking_in_questions_and_answers.cards.sketch0.title",
+      "sketchId": "sketch_question_to_query",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql-v2.sql-v2-0.thinking_in_questions_and_answers.cards.sketch1.title",
+      "sketchId": "sketch_whole_table_vs_part",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.sql-v2.sql-v2-0.thinking_in_questions_and_answers.cards.sketch2.title",
+      "sketchId": "sketch_reading_answers",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql-v2.sql-v2-0.thinking_in_questions_and_answers.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch_question_to_query",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql-v2.sql-v2-0.thinking_in_questions_and_answers.sketch_question_to_query.title",
+      "bodyKey": "sketches.sql-v2.sql-v2-0.thinking_in_questions_and_answers.sketch_question_to_query.bodyMarkdown"
+    },
+    {
+      "id": "sketch_whole_table_vs_part",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql-v2.sql-v2-0.thinking_in_questions_and_answers.sketch_whole_table_vs_part.title",
+      "bodyKey": "sketches.sql-v2.sql-v2-0.thinking_in_questions_and_answers.sketch_whole_table_vs_part.bodyMarkdown"
+    },
+    {
+      "id": "sketch_reading_answers",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql-v2.sql-v2-0.thinking_in_questions_and_answers.sketch_reading_answers.title",
+      "bodyKey": "sketches.sql-v2.sql-v2-0.thinking_in_questions_and_answers.sketch_reading_answers.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "sc_question_select_name",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-0.thinking_in_questions_and_answers.quiz.sc_question_select_name",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "sc_meaning_of_star",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-0.thinking_in_questions_and_answers.quiz.sc_meaning_of_star",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "mc_parts_of_simple_query",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-0.thinking_in_questions_and_answers.quiz.mc_parts_of_simple_query",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "mc_good_beginner_questions",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-0.thinking_in_questions_and_answers.quiz.mc_good_beginner_questions",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "dr_build_simple_query",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-0.thinking_in_questions_and_answers.quiz.dr_build_simple_query",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4",
+        "t5"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t3",
+          "t4",
+          "t5",
+          "t1",
+          "t2"
+        ]
+      }
+    },
+    {
+      "id": "dr_build_two_column_query",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-0.thinking_in_questions_and_answers.quiz.dr_build_two_column_query",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4",
+        "t5"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t2",
+          "t4",
+          "t5",
+          "t1",
+          "t3"
+        ]
+      }
+    }
+  ]
+}

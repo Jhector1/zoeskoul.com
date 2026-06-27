@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import {cn} from "@/lib/cn";
 import type {
     ReviewModule,
     ReviewModuleSection,
@@ -9,6 +8,7 @@ import type {
 } from "@/lib/subjects/types";
 import RingButton from "@/components/review/module/RingButton";
 import {useTaggedT} from "@/i18n/tagged";
+import { cn } from "@/lib/cn";
 
 export type SidebarTopicItemVm = {
     id: string;
@@ -383,7 +383,6 @@ function ModuleSidebar({
                            unlockAll,
                            moduleProgress,
                            onGoToTopic,
-                           onResetModule,
                            onCollapse,
                            assignmentPct,
                            assignmentMissedPct = 0,
@@ -402,7 +401,6 @@ function ModuleSidebar({
     unlockAll: boolean;
     moduleProgress: { done: number; total: number; pct: number };
     onGoToTopic: (tid: string) => void;
-    onResetModule: () => void;
     onCollapse: () => void;
     assignmentPct: number;
     assignmentMissedPct?: number;
@@ -529,23 +527,6 @@ function ModuleSidebar({
                         >
                             ◀
                         </button>
-
-                        <button
-                            type="button"
-                            onClick={onResetModule}
-                            data-testid="review-reset-module-button"
-                            className={cn(
-                                "ui-btn-secondary px-3",
-                                "text-rose-700 dark:text-rose-200",
-                            )}
-                            title={ui.t(
-                                "resetTitle",
-                                {},
-                                "Reset all progress in this module",
-                            )}
-                        >
-                            {ui.t("reset", {}, "Reset Module")}
-                        </button>
                     </div>
                 </div>
             </div>
@@ -638,7 +619,6 @@ export default React.memo(
         prev.unlockAll === next.unlockAll &&
         prev.moduleProgress === next.moduleProgress &&
         prev.onGoToTopic === next.onGoToTopic &&
-        prev.onResetModule === next.onResetModule &&
         prev.onCollapse === next.onCollapse &&
         prev.assignmentPct === next.assignmentPct &&
         prev.assignmentMissedPct === next.assignmentMissedPct &&

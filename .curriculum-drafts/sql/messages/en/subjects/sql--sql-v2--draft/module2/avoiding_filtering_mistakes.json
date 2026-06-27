@@ -1,6 +1,250 @@
 {
   "topics": {
-    "sql-v2": {
+    "sql--sql-v2--draft": {
+      "sql--sql-v2--draft-2": {
+        "avoiding_filtering_mistakes": {
+          "label": "Avoiding Filtering Mistakes",
+          "summary": "Learn how to avoid common WHERE mistakes by checking operators, combining conditions carefully, and reading your results closely.",
+          "cards": {
+            "sketch0": {
+              "title": "Small WHERE mistakes change your results"
+            },
+            "sketch1": {
+              "title": "Be careful when combining conditions"
+            },
+            "sketch2": {
+              "title": "Check the results table to catch mistakes"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Filtering Mistake Detective"
+            }
+          },
+          "projectSteps": {
+            "ci_filter_expensive_products": {
+              "title": "Query products above a price threshold"
+            },
+            "ci_filter_category_and_stock": {
+              "title": "Find well-stocked stationery items"
+            },
+            "ci_filter_recent_products": {
+              "title": "Show recently created products"
+            }
+          },
+          "quiz": {
+            "sc_where_wrong_operator": {
+              "title": "Spot the operator mistake",
+              "prompt": "You want products that cost more than 20. Which WHERE condition matches that goal?",
+              "hint": "Use the comparison that keeps values above 20, not below or equal only.",
+              "help": {
+                "concept": "Comparison operators in WHERE decide which numeric values stay in the result. 'More than 20' means strictly greater than 20.",
+                "hint_1": "Compare the meaning of `>`, `<`, and `=` with the phrase 'more than 20'.",
+                "hint_2": "The correct condition keeps prices like 24.50 and 39.99, but not 18.00 or 20.00."
+              },
+              "options": {
+                "a": "price > 20",
+                "b": "price < 20",
+                "c": "price = 20",
+                "d": "price <= 20"
+              }
+            },
+            "sc_text_quotes": {
+              "title": "Filter text values correctly",
+              "prompt": "Which condition correctly filters the products table to only rows in the Art category?",
+              "hint": "Text values in SQL conditions should be written as quoted strings.",
+              "help": {
+                "concept": "Text comparisons in SQL use string literals, and string literals need quotes. Column names are not quoted the same way as text values.",
+                "hint_1": "The column is `category`, and the value you are matching is the text Art.",
+                "hint_2": "Look for the option that compares the column to a quoted text value."
+              },
+              "options": {
+                "a": "category = Art",
+                "b": "Art = category ="
+              }
+            },
+            "mc_and_vs_or": {
+              "title": "Choose filters that require both conditions",
+              "prompt": "Which WHERE clauses return only products that are in the Home category and have stock less than 10? Choose all that apply.",
+              "hint": "You need both category and stock rules to be true for the same row.",
+              "help": {
+                "concept": "When a query must satisfy two conditions at once, use AND so both tests apply to each row.",
+                "hint_1": "One condition should check `category`, and the other should check `stock < 10`.",
+                "hint_2": "Reject any option that uses OR or that changes the stock comparison away from 'less than 10'."
+              },
+              "options": {
+                "a": "category = 'Home' AND stock < 10",
+                "b": "stock < 10 AND category = 'Home'",
+                "c": "category = 'Home' OR stock < 10",
+                "d": "category = 'Home' AND stock > 10"
+              }
+            },
+            "mc_check_result_clues": {
+              "title": "Notice clues that a filter is wrong",
+              "prompt": "You meant to show only Stationery products, but the results table also shows Art items. Which explanations could be true? Choose all that apply.",
+              "hint": "Think about mistakes that would allow extra rows through the filter.",
+              "help": {
+                "concept": "Wrong results often come from using the wrong comparison, the wrong logical operator, or the wrong text value in WHERE.",
+                "hint_1": "A filter can become too broad if it uses OR or if it checks the wrong category value.",
+                "hint_2": "Look for options that would let non-Stationery rows pass instead of restricting the result to one category."
+              },
+              "options": {
+                "a": "The query used `category = 'Stationery' OR category = 'Art'`.",
+                "b": "The query used the wrong category value in the condition.",
+                "c": "The query selected `name` and `category` columns.",
+                "d": "The query used `ORDER BY name`."
+              }
+            },
+            "dr_build_basic_filter": {
+              "title": "Build a simple filtered query",
+              "prompt": "Arrange the SQL parts to create a query that shows product names from the products table where stock is greater than 10.",
+              "hint": "Start with SELECT, then FROM, then WHERE.",
+              "help": {
+                "concept": "A basic filtered SELECT query follows the order SELECT columns, FROM table, then WHERE condition.",
+                "hint_1": "The column list comes right after SELECT, and the table name comes right after FROM.",
+                "hint_2": "The condition `stock > 10` belongs after the WHERE keyword."
+              },
+              "tokens": {
+                "t1": "SELECT name",
+                "t2": "FROM products",
+                "t3": "WHERE stock > 10"
+              }
+            },
+            "dr_build_sorted_filter": {
+              "title": "Order the clauses correctly",
+              "prompt": "Arrange the SQL parts to query product names and prices for products under 20, sorted by price from low to high.",
+              "hint": "Filtering happens before sorting in the query structure.",
+              "help": {
+                "concept": "In SQL, the written clause order is SELECT, FROM, WHERE, then ORDER BY. ASC sorts from low to high.",
+                "hint_1": "Put the table clause before the filter clause.",
+                "hint_2": "The sorting clause should come last, after the condition `price < 20`."
+              },
+              "tokens": {
+                "t1": "SELECT name, price",
+                "t2": "FROM products",
+                "t3": "WHERE price < 20",
+                "t4": "ORDER BY price ASC"
+              }
+            },
+            "fb_choose_and": {
+              "title": "Pick the right logical operator",
+              "prompt": "Complete the query so it keeps only Art products with stock of at least 10.",
+              "hint": "Both conditions must be true together.",
+              "help": {
+                "concept": "Use the missing term when a row must satisfy two conditions at the same time.",
+                "hint_1": "The query should keep rows only when the category matches the missing term the stock rule also matches.",
+                "hint_2": "Choose the operator that is stricter than OR because it requires both tests."
+              },
+              "template": "SELECT name FROM products WHERE category = 'Art' [blank1] stock >= 10;",
+              "choices": [
+                "AND",
+                "OR",
+                "NOT IN",
+                "LIKE"
+              ]
+            },
+            "fb_choose_quoted_text": {
+              "title": "Complete the text filter",
+              "prompt": "Fill in the missing value so the query returns only Home products.",
+              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+              "help": {
+                "concept": "The blank should be filled with the term that makes the statement accurate.",
+                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+                "hint_2": "Choose the option that completes the statement with the clearest meaning."
+              },
+              "template": "SELECT name FROM products WHERE category = [blank1];",
+              "choices": [
+                "'Home'",
+                "Home",
+                "price",
+                "'products'"
+              ]
+            },
+            "ci_filter_expensive_products": {
+              "title": "Query products above a price threshold",
+              "prompt": "Write a query that shows the `name` and `price` of products with a `price` greater than 20. Sort the results by `price` from highest to lowest. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "-- TODO: keep only rows with price greater than 20\n-- TODO: sort by price from highest to lowest\nSELECT \n  name,\n  price\nFROM products\n;"
+            },
+            "ci_filter_category_and_stock": {
+              "title": "Find well-stocked stationery items",
+              "prompt": "Write a query that shows `name`, `category`, and `stock` for products in the `Stationery` category with `stock` greater than or equal to 15. Sort the results by `stock` from highest to lowest. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "-- TODO: add a WHERE clause for Stationery items with enough stock\n-- TODO: sort by stock from highest to lowest\nSELECT \n  name,\n  category,\n  stock\nFROM products\n;"
+            },
+            "ci_filter_recent_products": {
+              "title": "Show recently created products",
+              "prompt": "Write a query that shows `name` and `created_at` for products created on or after `2026-01-25`. Sort the results by `created_at` from earliest to latest. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "-- TODO: keep products created on or after 2026-01-25\n-- TODO: sort from earliest date to latest date\nSELECT \n  name,\n  created_at\nFROM products\n;"
+            },
+            "try-avoiding_filtering_mistakes-sketch0": {
+              "title": "Query products above a price threshold",
+              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that shows the `name` and `price` of products with a `price` greater than 20. Sort the results by `price` from highest to lowest. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "-- TODO: keep only rows with price greater than 20\n-- TODO: sort by price from highest to lowest\nSELECT \n  name,\n  price\nFROM products\n;"
+            },
+            "try-avoiding_filtering_mistakes-sketch1": {
+              "title": "Find well-stocked stationery items",
+              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that shows `name`, `category`, and `stock` for products in the `Stationery` category with `stock` greater than or equal to 15. Sort the results by `stock` from highest to lowest. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "-- TODO: add a WHERE clause for Stationery items with enough stock\n-- TODO: sort by stock from highest to lowest\nSELECT \n  name,\n  category,\n  stock\nFROM products\n;"
+            },
+            "try-avoiding_filtering_mistakes-sketch2": {
+              "title": "Show recently created products",
+              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that shows `name` and `created_at` for products created on or after `2026-01-25`. Sort the results by `created_at` from earliest to latest. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "-- TODO: keep products created on or after 2026-01-25\n-- TODO: sort from earliest date to latest date\nSELECT \n  name,\n  created_at\nFROM products\n;"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_avoiding_filtering_mistakes_sketch0": {
+              "title": "Query products above a price threshold",
+              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that shows the `name` and `price` of products with a `price` greater than 20. Sort the results by `price` from highest to lowest. Write the query in the SQL editor, click Run query, and check the results table."
+            },
+            "try_avoiding_filtering_mistakes_sketch1": {
+              "title": "Find well-stocked stationery items",
+              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that shows `name`, `category`, and `stock` for products in the `Stationery` category with `stock` greater than or equal to 15. Sort the results by `stock` from highest to lowest. Write the query in the SQL editor, click Run query, and check the results table."
+            },
+            "try_avoiding_filtering_mistakes_sketch2": {
+              "title": "Show recently created products",
+              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that shows `name` and `created_at` for products created on or after `2026-01-25`. Sort the results by `created_at` from earliest to latest. Write the query in the SQL editor, click Run query, and check the results table."
+            }
+          }
+        }
+      },
       "sql-v2-2": {
         "avoiding_filtering_mistakes": {
           "label": "Avoiding Filtering Mistakes",
@@ -170,7 +414,7 @@
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
                 "hint_2": "Run the query and compare the results table."
               },
-              "starterCode": "SELECT \n  name,\n  price\nFROM products\n-- TODO: keep only rows with price greater than 20\n-- TODO: sort by price from highest to lowest\n;"
+              "starterCode": "-- TODO: keep only rows with price greater than 20\n-- TODO: sort by price from highest to lowest\nSELECT \n  name,\n  price\nFROM products\n;"
             },
             "ci_filter_category_and_stock": {
               "title": "Find well-stocked stationery items",
@@ -181,7 +425,7 @@
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
                 "hint_2": "Run the query and compare the results table."
               },
-              "starterCode": "SELECT \n  name,\n  category,\n  stock\nFROM products\n-- TODO: add a WHERE clause for Stationery items with enough stock\n-- TODO: sort by stock from highest to lowest\n;"
+              "starterCode": "-- TODO: add a WHERE clause for Stationery items with enough stock\n-- TODO: sort by stock from highest to lowest\nSELECT \n  name,\n  category,\n  stock\nFROM products\n;"
             },
             "ci_filter_recent_products": {
               "title": "Show recently created products",
@@ -192,55 +436,55 @@
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
                 "hint_2": "Run the query and compare the results table."
               },
-              "starterCode": "SELECT \n  name,\n  created_at\nFROM products\n-- TODO: keep products created on or after 2026-01-25\n-- TODO: sort from earliest date to latest date\n;"
+              "starterCode": "-- TODO: keep products created on or after 2026-01-25\n-- TODO: sort from earliest date to latest date\nSELECT \n  name,\n  created_at\nFROM products\n;"
             },
             "try-avoiding_filtering_mistakes-sketch0": {
               "title": "Query products above a price threshold",
-              "prompt": "Write a query that shows the `name` and `price` of products with a `price` greater than 20. Sort the results by `price` from highest to lowest. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
+              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that shows the `name` and `price` of products with a `price` greater than 20. Sort the results by `price` from highest to lowest. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
               "help": {
                 "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
                 "hint_2": "Run the query and compare the results table."
               },
-              "starterCode": "SELECT \n  name,\n  price\nFROM products\n-- TODO: keep only rows with price greater than 20\n-- TODO: sort by price from highest to lowest\n;"
+              "starterCode": "-- TODO: keep only rows with price greater than 20\n-- TODO: sort by price from highest to lowest\nSELECT \n  name,\n  price\nFROM products\n;"
             },
             "try-avoiding_filtering_mistakes-sketch1": {
               "title": "Find well-stocked stationery items",
-              "prompt": "Write a query that shows `name`, `category`, and `stock` for products in the `Stationery` category with `stock` greater than or equal to 15. Sort the results by `stock` from highest to lowest. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
+              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that shows `name`, `category`, and `stock` for products in the `Stationery` category with `stock` greater than or equal to 15. Sort the results by `stock` from highest to lowest. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
               "help": {
                 "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
                 "hint_2": "Run the query and compare the results table."
               },
-              "starterCode": "SELECT \n  name,\n  category,\n  stock\nFROM products\n-- TODO: add a WHERE clause for Stationery items with enough stock\n-- TODO: sort by stock from highest to lowest\n;"
+              "starterCode": "-- TODO: add a WHERE clause for Stationery items with enough stock\n-- TODO: sort by stock from highest to lowest\nSELECT \n  name,\n  category,\n  stock\nFROM products\n;"
             },
             "try-avoiding_filtering_mistakes-sketch2": {
               "title": "Show recently created products",
-              "prompt": "Write a query that shows `name` and `created_at` for products created on or after `2026-01-25`. Sort the results by `created_at` from earliest to latest. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
+              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that shows `name` and `created_at` for products created on or after `2026-01-25`. Sort the results by `created_at` from earliest to latest. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
               "help": {
                 "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
                 "hint_2": "Run the query and compare the results table."
               },
-              "starterCode": "SELECT \n  name,\n  created_at\nFROM products\n-- TODO: keep products created on or after 2026-01-25\n-- TODO: sort from earliest date to latest date\n;"
+              "starterCode": "-- TODO: keep products created on or after 2026-01-25\n-- TODO: sort from earliest date to latest date\nSELECT \n  name,\n  created_at\nFROM products\n;"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_avoiding_filtering_mistakes_sketch0": {
               "title": "Query products above a price threshold",
-              "prompt": "Write a query that shows the `name` and `price` of products with a `price` greater than 20. Sort the results by `price` from highest to lowest. Write the query in the SQL editor, click Run query, and check the results table."
+              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that shows the `name` and `price` of products with a `price` greater than 20. Sort the results by `price` from highest to lowest. Write the query in the SQL editor, click Run query, and check the results table."
             },
             "try_avoiding_filtering_mistakes_sketch1": {
               "title": "Find well-stocked stationery items",
-              "prompt": "Write a query that shows `name`, `category`, and `stock` for products in the `Stationery` category with `stock` greater than or equal to 15. Sort the results by `stock` from highest to lowest. Write the query in the SQL editor, click Run query, and check the results table."
+              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that shows `name`, `category`, and `stock` for products in the `Stationery` category with `stock` greater than or equal to 15. Sort the results by `stock` from highest to lowest. Write the query in the SQL editor, click Run query, and check the results table."
             },
             "try_avoiding_filtering_mistakes_sketch2": {
               "title": "Show recently created products",
-              "prompt": "Write a query that shows `name` and `created_at` for products created on or after `2026-01-25`. Sort the results by `created_at` from earliest to latest. Write the query in the SQL editor, click Run query, and check the results table."
+              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that shows `name` and `created_at` for products created on or after `2026-01-25`. Sort the results by `created_at` from earliest to latest. Write the query in the SQL editor, click Run query, and check the results table."
             }
           }
         }
@@ -248,7 +492,23 @@
     }
   },
   "sketches": {
-    "sql-v2": {
+    "sql--sql-v2--draft": {
+      "sql--sql-v2--draft-2": {
+        "avoiding_filtering_mistakes": {
+          "sketch_where_precision": {
+            "title": "Small WHERE mistakes change your results",
+            "bodyMarkdown": "The `WHERE` clause keeps only the rows that match a condition. A tiny mistake in that condition can return the wrong products.\n\nHere is a correct example that finds products with a price above 20:\n\n```sql\nSELECT name, price\nFROM products\nWHERE price > 20;\n```\n\nStep by step:\n- `SELECT name, price` chooses the columns to show.\n- `FROM products` says which table to read.\n- `WHERE price > 20` keeps only rows where the `price` value is greater than 20.\n\nIn this dataset, that includes products like `Acrylic Paint Set`, `Desk Lamp`, and `Office Chair`.\n\nA common mistake is using the wrong comparison. For example, `price < 20` would return cheaper items instead, which is the opposite of what you wanted."
+          },
+          "sketch_and_or_mistakes": {
+            "title": "Be careful when combining conditions",
+            "bodyMarkdown": "When you use `AND` or `OR`, each word changes how rows are filtered.\n\nExample:\n\n```sql\nSELECT name, category, stock\nFROM products\nWHERE category = 'Art' AND stock >= 10;\n```\n\nLine by line:\n- `category = 'Art'` keeps only Art products.\n- `stock >= 10` keeps only products with at least 10 in stock.\n- `AND` means both conditions must be true for the same row.\n\nWith this data, `Sketchbook` and `Acrylic Paint Set` match.\n\nIf you changed `AND` to `OR`, the query would return many more rows, because a product could match either condition instead of both.\n\nAnother common mistake is forgetting that text values need quotes in SQL. `category = 'Art'` is correct, but `category = Art` is not."
+          },
+          "sketch_reading_results": {
+            "title": "Check the results table to catch mistakes",
+            "bodyMarkdown": "A good habit is to read the results table after every filter. If the rows look surprising, your condition may be wrong.\n\nExample:\n\n```sql\nSELECT name, created_at\nFROM products\nWHERE created_at >= '2026-01-01'\nORDER BY created_at ASC;\n```\n\nWhat this does:\n- It shows product names and dates.\n- It keeps only rows from `2026-01-01` or later.\n- It sorts the remaining rows from earliest to latest.\n\nBecause the dates are stored in `YYYY-MM-DD` format, comparisons like `>= '2026-01-01'` work correctly in SQLite.\n\nIf you expected older products too, then the filter is too strict. If you expected a different order, check the `ORDER BY` direction."
+          }
+        }
+      },
       "sql-v2-2": {
         "avoiding_filtering_mistakes": {
           "sketch_where_precision": {

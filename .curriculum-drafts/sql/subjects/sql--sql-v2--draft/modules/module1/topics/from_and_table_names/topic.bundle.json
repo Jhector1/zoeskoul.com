@@ -1,15 +1,15 @@
 {
   "topicId": "from_and_table_names",
-  "subjectSlug": "sql-v2",
+  "subjectSlug": "sql--sql-v2--draft",
   "moduleSlug": "sql-v2-1",
-  "sectionSlug": "sql-v2-1-2",
+  "sectionSlug": "sql--sql-v2--draft-sql-v2-1-2",
   "prefix": "sqlv2_1",
-  "minutes": 15,
+  "minutes": 16,
   "runtimeDefaults": {
     "kind": "sql",
     "showSchema": true,
-    "showErd": true,
-    "showChen": true,
+    "showErd": false,
+    "showChen": false,
     "supportsTerminal": false,
     "supportsMultiFile": false,
     "supportsFileSystem": false,
@@ -18,35 +18,71 @@
     "resultShape": "table"
   },
   "topic": {
-    "labelKey": "topics.sql-v2.sql-v2-1.from_and_table_names.label",
-    "summaryKey": "topics.sql-v2.sql-v2-1.from_and_table_names.summary"
+    "labelKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.from_and_table_names.label",
+    "summaryKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.from_and_table_names.summary"
   },
   "cards": [
     {
       "id": "sketch0",
       "kind": "sketch",
-      "titleKey": "topics.sql-v2.sql-v2-1.from_and_table_names.cards.sketch0.title",
+      "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.from_and_table_names.cards.sketch0.title",
       "sketchId": "sketch_from_points_to_table",
-      "height": 420
+      "height": 420,
+      "tryIt": {
+        "id": "try-from_and_table_names-sketch0",
+        "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.from_and_table_names.tryIt.try_from_and_table_names_sketch0.title",
+        "promptKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.from_and_table_names.tryIt.try_from_and_table_names_sketch0.prompt",
+        "exerciseKey": "try-from_and_table_names-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
     },
     {
       "id": "sketch1",
       "kind": "sketch",
-      "titleKey": "topics.sql-v2.sql-v2-1.from_and_table_names.cards.sketch1.title",
+      "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.from_and_table_names.cards.sketch1.title",
       "sketchId": "sketch_table_names_must_match",
-      "height": 420
+      "height": 420,
+      "tryIt": {
+        "id": "try-from_and_table_names-sketch1",
+        "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.from_and_table_names.tryIt.try_from_and_table_names_sketch1.title",
+        "promptKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.from_and_table_names.tryIt.try_from_and_table_names_sketch1.prompt",
+        "exerciseKey": "try-from_and_table_names-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
     },
     {
       "id": "sketch2",
       "kind": "sketch",
-      "titleKey": "topics.sql-v2.sql-v2-1.from_and_table_names.cards.sketch2.title",
+      "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.from_and_table_names.cards.sketch2.title",
       "sketchId": "sketch_select_and_from_work_together",
-      "height": 420
+      "height": 420,
+      "tryIt": {
+        "id": "try-from_and_table_names-sketch2",
+        "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.from_and_table_names.tryIt.try_from_and_table_names_sketch2.title",
+        "promptKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.from_and_table_names.tryIt.try_from_and_table_names_sketch2.prompt",
+        "exerciseKey": "try-from_and_table_names-sketch2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
     },
     {
       "id": "quiz",
       "kind": "quiz",
-      "titleKey": "topics.sql-v2.sql-v2-1.from_and_table_names.cards.quiz.title",
+      "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.from_and_table_names.cards.quiz.title",
       "quiz": {
         "difficulty": "easy",
         "n": 4,
@@ -61,7 +97,7 @@
     {
       "id": "project",
       "kind": "project",
-      "titleKey": "topics.sql-v2.sql-v2-1.from_and_table_names.cards.project.title",
+      "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.from_and_table_names.cards.project.title",
       "project": {
         "difficulty": "easy",
         "allowReveal": true,
@@ -70,7 +106,7 @@
         "steps": [
           {
             "id": "ci_select_all_products",
-            "titleKey": "topics.sql-v2.sql-v2-1.from_and_table_names.projectSteps.ci_select_all_products.title",
+            "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.from_and_table_names.projectSteps.ci_select_all_products.title",
             "exerciseKey": "ci_select_all_products",
             "difficulty": "easy",
             "preferKind": "code_input",
@@ -79,7 +115,7 @@
           },
           {
             "id": "ci_select_names_from_products",
-            "titleKey": "topics.sql-v2.sql-v2-1.from_and_table_names.projectSteps.ci_select_names_from_products.title",
+            "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.from_and_table_names.projectSteps.ci_select_names_from_products.title",
             "exerciseKey": "ci_select_names_from_products",
             "difficulty": "easy",
             "preferKind": "code_input",
@@ -88,7 +124,7 @@
           },
           {
             "id": "ci_select_price_and_stock",
-            "titleKey": "topics.sql-v2.sql-v2-1.from_and_table_names.projectSteps.ci_select_price_and_stock.title",
+            "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.from_and_table_names.projectSteps.ci_select_price_and_stock.title",
             "exerciseKey": "ci_select_price_and_stock",
             "difficulty": "easy",
             "preferKind": "code_input",
@@ -103,20 +139,20 @@
     {
       "id": "sketch_from_points_to_table",
       "archetype": "paragraph",
-      "titleKey": "sketches.sql-v2.sql-v2-1.from_and_table_names.sketch_from_points_to_table.title",
-      "bodyKey": "sketches.sql-v2.sql-v2-1.from_and_table_names.sketch_from_points_to_table.bodyMarkdown"
+      "titleKey": "sketches.sql--sql-v2--draft.sql--sql-v2--draft-1.from_and_table_names.sketch_from_points_to_table.title",
+      "bodyKey": "sketches.sql--sql-v2--draft.sql--sql-v2--draft-1.from_and_table_names.sketch_from_points_to_table.bodyMarkdown"
     },
     {
       "id": "sketch_table_names_must_match",
       "archetype": "paragraph",
-      "titleKey": "sketches.sql-v2.sql-v2-1.from_and_table_names.sketch_table_names_must_match.title",
-      "bodyKey": "sketches.sql-v2.sql-v2-1.from_and_table_names.sketch_table_names_must_match.bodyMarkdown"
+      "titleKey": "sketches.sql--sql-v2--draft.sql--sql-v2--draft-1.from_and_table_names.sketch_table_names_must_match.title",
+      "bodyKey": "sketches.sql--sql-v2--draft.sql--sql-v2--draft-1.from_and_table_names.sketch_table_names_must_match.bodyMarkdown"
     },
     {
       "id": "sketch_select_and_from_work_together",
       "archetype": "paragraph",
-      "titleKey": "sketches.sql-v2.sql-v2-1.from_and_table_names.sketch_select_and_from_work_together.title",
-      "bodyKey": "sketches.sql-v2.sql-v2-1.from_and_table_names.sketch_select_and_from_work_together.bodyMarkdown"
+      "titleKey": "sketches.sql--sql-v2--draft.sql--sql-v2--draft-1.from_and_table_names.sketch_select_and_from_work_together.title",
+      "bodyKey": "sketches.sql--sql-v2--draft.sql--sql-v2--draft-1.from_and_table_names.sketch_select_and_from_work_together.bodyMarkdown"
     }
   ],
   "exercises": [
@@ -125,7 +161,7 @@
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-1.from_and_table_names.quiz.sc_from_purpose",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.from_and_table_names.quiz.sc_from_purpose",
       "optionIds": [
         "a",
         "b",
@@ -142,7 +178,7 @@
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-1.from_and_table_names.quiz.sc_exact_table_name",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.from_and_table_names.quiz.sc_exact_table_name",
       "optionIds": [
         "a",
         "b",
@@ -159,7 +195,7 @@
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-1.from_and_table_names.quiz.mc_queries_using_products",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.from_and_table_names.quiz.mc_queries_using_products",
       "optionIds": [
         "a",
         "b",
@@ -179,7 +215,7 @@
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-1.from_and_table_names.quiz.mc_columns_from_products",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.from_and_table_names.quiz.mc_columns_from_products",
       "optionIds": [
         "a",
         "b",
@@ -199,7 +235,7 @@
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-1.from_and_table_names.quiz.dr_basic_query_order",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.from_and_table_names.quiz.dr_basic_query_order",
       "tokenIds": [
         "t1",
         "t2",
@@ -221,7 +257,7 @@
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-1.from_and_table_names.quiz.dr_name_column_query_order",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.from_and_table_names.quiz.dr_name_column_query_order",
       "tokenIds": [
         "t1",
         "t2",
@@ -243,7 +279,7 @@
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-1.from_and_table_names.quiz.fb_table_name_products",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.from_and_table_names.quiz.fb_table_name_products",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
@@ -255,7 +291,7 @@
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-1.from_and_table_names.quiz.fb_from_keyword",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.from_and_table_names.quiz.fb_from_keyword",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
@@ -267,9 +303,9 @@
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-1.from_and_table_names.quiz.ci_select_all_products",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.from_and_table_names.quiz.ci_select_all_products",
       "language": "sql",
-      "starterCode": "-- Return all columns from the products table\nSELECT \nFROM ;",
+      "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.from_and_table_names.quiz.ci_select_all_products.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -277,8 +313,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -287,17 +323,69 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT *\nFROM products;"
-      }
+        "solutionCode": "SELECT *\nFROM products;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT *\nFROM products;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.from_and_table_names.quiz.ci_select_all_products.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT *\nFROM products;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.from_and_table_names.quiz.ci_select_all_products.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.from_and_table_names.quiz.ci_select_all_products.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT *\nFROM products;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     },
     {
       "id": "ci_select_names_from_products",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-1.from_and_table_names.quiz.ci_select_names_from_products",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.from_and_table_names.quiz.ci_select_names_from_products",
       "language": "sql",
-      "starterCode": "-- Return only the name column\nSELECT \nFROM products;",
+      "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.from_and_table_names.quiz.ci_select_names_from_products.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -305,8 +393,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -315,17 +403,69 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT name\nFROM products;"
-      }
+        "solutionCode": "SELECT name\nFROM products;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name\nFROM products;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.from_and_table_names.quiz.ci_select_names_from_products.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT name\nFROM products;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.from_and_table_names.quiz.ci_select_names_from_products.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.from_and_table_names.quiz.ci_select_names_from_products.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name\nFROM products;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     },
     {
       "id": "ci_select_price_and_stock",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-1.from_and_table_names.quiz.ci_select_price_and_stock",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.from_and_table_names.quiz.ci_select_price_and_stock",
       "language": "sql",
-      "starterCode": "-- Return the price and stock columns\nSELECT price\nFROM products;",
+      "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.from_and_table_names.quiz.ci_select_price_and_stock.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -333,8 +473,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -343,8 +483,300 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT price, stock\nFROM products;"
-      }
+        "solutionCode": "SELECT price, stock\nFROM products;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT price, stock\nFROM products;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.from_and_table_names.quiz.ci_select_price_and_stock.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT price, stock\nFROM products;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.from_and_table_names.quiz.ci_select_price_and_stock.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.from_and_table_names.quiz.ci_select_price_and_stock.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT price, stock\nFROM products;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
+    },
+    {
+      "id": "try-from_and_table_names-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.from_and_table_names.quiz.try-from_and_table_names-sketch0",
+      "language": "sql",
+      "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.from_and_table_names.quiz.try-from_and_table_names-sketch0.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": false,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "SELECT *\nFROM products;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT *\nFROM products;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.from_and_table_names.quiz.try-from_and_table_names-sketch0.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT *\nFROM products;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.from_and_table_names.quiz.try-from_and_table_names-sketch0.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.from_and_table_names.quiz.try-from_and_table_names-sketch0.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT *\nFROM products;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
+    },
+    {
+      "id": "try-from_and_table_names-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.from_and_table_names.quiz.try-from_and_table_names-sketch1",
+      "language": "sql",
+      "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.from_and_table_names.quiz.try-from_and_table_names-sketch1.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": false,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "SELECT name\nFROM products;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name\nFROM products;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.from_and_table_names.quiz.try-from_and_table_names-sketch1.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT name\nFROM products;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.from_and_table_names.quiz.try-from_and_table_names-sketch1.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.from_and_table_names.quiz.try-from_and_table_names-sketch1.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name\nFROM products;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
+    },
+    {
+      "id": "try-from_and_table_names-sketch2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.from_and_table_names.quiz.try-from_and_table_names-sketch2",
+      "language": "sql",
+      "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.from_and_table_names.quiz.try-from_and_table_names-sketch2.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": false,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "SELECT price, stock\nFROM products;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT price, stock\nFROM products;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.from_and_table_names.quiz.try-from_and_table_names-sketch2.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT price, stock\nFROM products;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.from_and_table_names.quiz.try-from_and_table_names-sketch2.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.from_and_table_names.quiz.try-from_and_table_names-sketch2.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT price, stock\nFROM products;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     }
   ]
 }

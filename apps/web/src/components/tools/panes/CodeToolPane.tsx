@@ -606,17 +606,21 @@ function reviewRuntimeWorkspaceIsUsable(runtime: any, workspace: WorkspaceStateV
         return true;
     }
 
-    if (
-        runtime?.workspaceOrigin === "starter" ||
-        runtime?.workspaceOrigin === "empty" ||
-        runtime?.userEdited === false
-    ) {
+    if (runtime?.workspaceOrigin === "starter" || runtime?.userEdited === false) {
         /**
-         * Route-owned starter workspaces are deterministic, even when the entry
-         * file is intentionally blank because the learner must write the first
-         * line. Requiring a non-empty file made the Tools IDE wait forever and
-         * also hid blank fixture files such as message.txt.
+         * A starter-owned runtime shell with only blank files is usually a
+         * pre-hydration placeholder. SQL-v2 reaches the Tools/FullIDE path early
+         * because it has dataset metadata, so that blank query.sql shell can
+         * otherwise win over the later localized starter. Python avoids this
+         * more often through embedded starter fallbacks.
+         *
+         * Keep multi-file starter shells available for fixture-driven labs, but
+         * do not let a one-file blank starter suppress resolved starter code.
          */
+        return reviewWorkspaceHasNonEmptyFile(workspace) || workspaceNeedsMultiFile(workspace);
+    }
+
+    if (runtime?.workspaceOrigin === "empty") {
         return workspaceHasAnyFile(workspace);
     }
 

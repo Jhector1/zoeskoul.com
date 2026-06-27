@@ -3,7 +3,7 @@ import type { UnknownRecord } from "./reviewRuntimeTypes";
 import { getCardStateKey, getExerciseStateKey } from "./exerciseKeys";
 import { resolveCourseLanguage, resolveCourseFileSeed, resolveRuntimeDefaultDataset } from "./courseProfiles";
 import {tag} from "@/lib/practice/generator/shared/i18n";
-import {isUsableStarterCode} from "@/components/review/module/runtime/starterContent";
+import {hasStarterIntentValue, isUsableStarterCode} from "@/components/review/module/runtime/starterContent";
 import { resolveManifestExercise } from "@/lib/curriculum/resolveManifestExercise";
 
 export type ReviewTargetKind = "sketch" | "exercise" | "quiz" | "card" | "project" | "text" | "video";
@@ -31,7 +31,7 @@ export type LooseManifestRecord = UnknownRecord & {
   status?: string;
   updatedAt?: number;
   code?: string;
-  starterCode?: string;
+  starterCode?: unknown;
   starterFiles?: unknown;
 };
 
@@ -104,6 +104,33 @@ function asRecord(value: unknown): LooseManifestRecord | null {
   return typeof value === "object" && value !== null
     ? (value as LooseManifestRecord)
     : null;
+}
+
+function asString(value: unknown) {
+  return typeof value === "string" ? value.trim() : "";
+}
+
+function findManifestExerciseByKey(
+  topicBundle: UnknownRecord | null | undefined,
+  exerciseKey: string,
+) {
+  const exercises = Array.isArray(topicBundle?.exercises)
+    ? topicBundle.exercises
+    : [];
+
+  for (const exercise of exercises) {
+    const record = asRecord(exercise);
+    if (!record) continue;
+
+    const id = asString(record.id);
+    const key = asString(record.exerciseId) || asString(record.exerciseKey);
+    const stableId = asString(record.stableExerciseId);
+    if (id === exerciseKey || key === exerciseKey || stableId === exerciseKey) {
+      return record;
+    }
+  }
+
+  return null;
 }
 
 function resolveReviewTargetI18nAliases<T>(
@@ -227,6 +254,27 @@ function normalizeWorkspaceFixtureAliases(
   };
 }
 
+function pickStarterCodeCandidate(
+    primary: LooseManifestRecord | null,
+    secondary: LooseManifestRecord | null,
+): unknown {
+  /**
+   * Keep unresolved @: starterCode aliases through manifest merging.
+   * They are localized immediately after this merge by
+   * resolveReviewTargetI18nAliases(). Dropping them here makes SQL-v2 look
+   * starter-less even though it is authored with the same shape as Python-v2.
+   */
+  if (hasStarterIntentValue(primary?.starterCode)) return primary?.starterCode;
+  if (hasStarterIntentValue(secondary?.starterCode)) return secondary?.starterCode;
+  if (primary && Object.prototype.hasOwnProperty.call(primary, "starterCode")) {
+    return primary.starterCode;
+  }
+  if (secondary && Object.prototype.hasOwnProperty.call(secondary, "starterCode")) {
+    return secondary.starterCode;
+  }
+  return undefined;
+}
+
 function mergeManifestParts(
     primary: UnknownRecord | null | undefined,
     secondary: UnknownRecord | null | undefined,
@@ -307,11 +355,7 @@ function mergeManifestParts(
     },
     starterFiles: primaryRecord.starterFiles ?? secondaryRecord.starterFiles,
     solutionFiles: primaryRecord.solutionFiles ?? secondaryRecord.solutionFiles,
-    starterCode: isUsableStarterCode(primaryRecord.starterCode)
-        ? primaryRecord.starterCode
-        : isUsableStarterCode(secondaryRecord.starterCode)
-            ? secondaryRecord.starterCode
-            : undefined,
+    starterCode: pickStarterCodeCandidate(primaryRecord, secondaryRecord),
     solutionCode:
         typeof primaryRecord.solutionCode === "string"
             ? primaryRecord.solutionCode
@@ -638,21 +682,39 @@ export function buildReviewTargetRegistry(args: {
           mergedCardManifest,
           resolveMessage,
         );
+
+        const rawEmbeddedTryIt =
+            (card.type === "text" || card.type === "sketch")
+                ? (card.tryIt ?? null)
+                : null;
+        const rawEmbeddedTryItSpec = asRecord(rawEmbeddedTryIt?.spec);
+        const rawEmbeddedTryItSteps = Array.isArray(rawEmbeddedTryItSpec?.steps)
+            ? rawEmbeddedTryItSpec.steps
+            : [];
+        const rawEmbeddedTryItStep = asRecord(rawEmbeddedTryItSteps[0]);
+        const rawEmbeddedTryItExerciseKey =
+            asString(rawEmbeddedTryItStep?.exerciseKey) ||
+            asString(rawEmbeddedTryIt?.exerciseKey);
+        const rawEmbeddedTryItExercise = rawEmbeddedTryItExerciseKey
+            ? findManifestExerciseByKey(rawManifest, rawEmbeddedTryItExerciseKey)
+            : null;
+        const localizedEmbeddedTryItToolManifest = rawEmbeddedTryItStep
+            ? resolveReviewTargetI18nAliases(
+                mergeManifestParts(rawEmbeddedTryItExercise, rawEmbeddedTryItStep),
+                resolveMessage,
+              )
+            : null;
+        const cardToolManifest = localizedEmbeddedTryItToolManifest ?? localizedCardManifest;
+
         const cardRuntimeContext = buildRuntimeEntryContext({
           subjectSlug,
-          item: localizedCardManifest,
+          item: cardToolManifest,
           topicRuntimeDefaults,
           moduleRuntimeDefaults,
           fallbackLanguage: topicFallbackLanguage,
           profileId,
           versionFamily,
         });
-
-
-        const rawEmbeddedTryIt =
-            (card.type === "text" || card.type === "sketch")
-                ? (card.tryIt ?? null)
-                : null;
         const localizedEmbeddedTryItSpec = rawEmbeddedTryIt?.spec
             ? resolveReviewTargetI18nAliases(rawEmbeddedTryIt.spec, resolveMessage)
             : rawEmbeddedTryIt?.spec;
@@ -687,26 +749,26 @@ export function buildReviewTargetRegistry(args: {
           tryIt: embeddedTryIt,
           toolScopeKey: `${cardKey}:general`,
           language: cardRuntimeContext.language,
-          starterFiles: pickStarterFiles(localizedCardManifest, subjectSlug, cardRuntimeContext.language, profileId, versionFamily),
-          solutionFiles: pickSolutionFiles(localizedCardManifest, subjectSlug, cardRuntimeContext.language, profileId, versionFamily),
+          starterFiles: pickStarterFiles(cardToolManifest, subjectSlug, cardRuntimeContext.language, profileId, versionFamily),
+          solutionFiles: pickSolutionFiles(cardToolManifest, subjectSlug, cardRuntimeContext.language, profileId, versionFamily),
           starterCode: pickStarterCode(
-              localizedCardManifest,
+              cardToolManifest,
               subjectSlug,
               cardRuntimeContext.language,
               profileId,
               versionFamily,
               resolveMessage,
           ),
-          solutionCode: pickSolutionCode(localizedCardManifest, subjectSlug, cardRuntimeContext.language, profileId, versionFamily),
+          solutionCode: pickSolutionCode(cardToolManifest, subjectSlug, cardRuntimeContext.language, profileId, versionFamily),
           runtimeDefaults: topicRuntimeDefaults,
           topicRuntimeDefaults,
           moduleRuntimeDefaults,
           sqlDatasetId: cardRuntimeContext.datasetResolution.datasetId,
           sqlDatasetResolutionSource: cardRuntimeContext.datasetResolution.source,
           sqlDatasetResolutionError: cardRuntimeContext.datasetResolution.error,
-          starterWorkspace: asRecord(localizedCardManifest?.workspace) ?? asRecord(cardRecord.spec)?.workspace ?? null,
-          toolManifest: localizedCardManifest ?? buildToolManifest(card),
-          item: localizedCardManifest,
+          starterWorkspace: asRecord(cardToolManifest?.workspace) ?? asRecord(cardRecord.spec)?.workspace ?? null,
+          toolManifest: cardToolManifest ?? buildToolManifest(card),
+          item: cardToolManifest,
           profileId,
           versionFamily,
         };

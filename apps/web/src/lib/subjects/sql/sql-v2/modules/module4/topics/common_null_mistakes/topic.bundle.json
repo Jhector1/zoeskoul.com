@@ -2,14 +2,14 @@
   "topicId": "common_null_mistakes",
   "subjectSlug": "sql-v2",
   "moduleSlug": "sql-v2-4",
-  "sectionSlug": "sql-v2-4-3",
+  "sectionSlug": "sql-v2-sql-v2-4-3",
   "prefix": "sqlv2_4",
-  "minutes": 15,
+  "minutes": 16,
   "runtimeDefaults": {
     "kind": "sql",
     "showSchema": true,
-    "showErd": true,
-    "showChen": true,
+    "showErd": false,
+    "showChen": false,
     "supportsTerminal": false,
     "supportsMultiFile": false,
     "supportsFileSystem": false,
@@ -301,7 +301,7 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-4.common_null_mistakes.quiz.ci_find_missing_emails",
       "language": "sql",
-      "starterCode": "SELECT id, full_name, email\nFROM customers\nWHERE ;",
+      "starterCode": "@:topics.sql-v2.sql-v2-4.common_null_mistakes.quiz.ci_find_missing_emails.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -309,8 +309,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -319,8 +319,60 @@
         "type": "sql_query",
         "datasetId": "customers_cleanup",
         "resultShape": "table",
-        "solutionCode": "SELECT id, full_name, email\nFROM customers\nWHERE email IS NULL;"
-      }
+        "solutionCode": "SELECT id, full_name, email\nFROM customers\nWHERE email IS NULL;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT id, full_name, email\nFROM customers\nWHERE email IS NULL;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-4.common_null_mistakes.quiz.ci_find_missing_emails.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT id, full_name, email\nFROM customers\nWHERE email IS NULL;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-4.common_null_mistakes.quiz.ci_find_missing_emails.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-4.common_null_mistakes.quiz.ci_find_missing_emails.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT id, full_name, email\nFROM customers\nWHERE email IS NULL;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     },
     {
       "id": "ci_find_missing_city_real_customers",
@@ -329,7 +381,7 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-4.common_null_mistakes.quiz.ci_find_missing_city_real_customers",
       "language": "sql",
-      "starterCode": "SELECT id, full_name, city, is_test\nFROM customers\nWHERE city IS NULL\n  AND ;",
+      "starterCode": "@:topics.sql-v2.sql-v2-4.common_null_mistakes.quiz.ci_find_missing_city_real_customers.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -337,8 +389,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -347,8 +399,60 @@
         "type": "sql_query",
         "datasetId": "customers_cleanup",
         "resultShape": "table",
-        "solutionCode": "SELECT id, full_name, city, is_test\nFROM customers\nWHERE city IS NULL\n  AND is_test = 0;"
-      }
+        "solutionCode": "SELECT id, full_name, city, is_test\nFROM customers\nWHERE city IS NULL\n  AND is_test = 0;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT id, full_name, city, is_test\nFROM customers\nWHERE city IS NULL\n  AND is_test = 0;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-4.common_null_mistakes.quiz.ci_find_missing_city_real_customers.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT id, full_name, city, is_test\nFROM customers\nWHERE city IS NULL\n  AND is_test = 0;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-4.common_null_mistakes.quiz.ci_find_missing_city_real_customers.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-4.common_null_mistakes.quiz.ci_find_missing_city_real_customers.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT id, full_name, city, is_test\nFROM customers\nWHERE city IS NULL\n  AND is_test = 0;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     },
     {
       "id": "ci_find_present_email_and_city",
@@ -357,7 +461,7 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-4.common_null_mistakes.quiz.ci_find_present_email_and_city",
       "language": "sql",
-      "starterCode": "SELECT id, full_name, email, city\nFROM customers\nWHERE email IS NOT NULL\nORDER BY ;",
+      "starterCode": "@:topics.sql-v2.sql-v2-4.common_null_mistakes.quiz.ci_find_present_email_and_city.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -365,8 +469,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -375,8 +479,60 @@
         "type": "sql_query",
         "datasetId": "customers_cleanup",
         "resultShape": "table",
-        "solutionCode": "SELECT id, full_name, email, city\nFROM customers\nWHERE email IS NOT NULL\n  AND city IS NOT NULL\nORDER BY id ASC;"
-      }
+        "solutionCode": "SELECT id, full_name, email, city\nFROM customers\nWHERE email IS NOT NULL\n  AND city IS NOT NULL\nORDER BY id ASC;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT id, full_name, email, city\nFROM customers\nWHERE email IS NOT NULL\n  AND city IS NOT NULL\nORDER BY id ASC;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-4.common_null_mistakes.quiz.ci_find_present_email_and_city.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT id, full_name, email, city\nFROM customers\nWHERE email IS NOT NULL\n  AND city IS NOT NULL\nORDER BY id ASC;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-4.common_null_mistakes.quiz.ci_find_present_email_and_city.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-4.common_null_mistakes.quiz.ci_find_present_email_and_city.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT id, full_name, email, city\nFROM customers\nWHERE email IS NOT NULL\n  AND city IS NOT NULL\nORDER BY id ASC;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     },
     {
       "id": "try-common_null_mistakes-sketch0",
@@ -385,7 +541,7 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-4.common_null_mistakes.quiz.try-common_null_mistakes-sketch0",
       "language": "sql",
-      "starterCode": "SELECT id, full_name, email\nFROM customers\nWHERE ;",
+      "starterCode": "@:topics.sql-v2.sql-v2-4.common_null_mistakes.quiz.try-common_null_mistakes-sketch0.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -393,8 +549,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -403,8 +559,60 @@
         "type": "sql_query",
         "datasetId": "customers_cleanup",
         "resultShape": "table",
-        "solutionCode": "SELECT id, full_name, email\nFROM customers\nWHERE email IS NULL;"
-      }
+        "solutionCode": "SELECT id, full_name, email\nFROM customers\nWHERE email IS NULL;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT id, full_name, email\nFROM customers\nWHERE email IS NULL;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-4.common_null_mistakes.quiz.try-common_null_mistakes-sketch0.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT id, full_name, email\nFROM customers\nWHERE email IS NULL;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-4.common_null_mistakes.quiz.try-common_null_mistakes-sketch0.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-4.common_null_mistakes.quiz.try-common_null_mistakes-sketch0.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT id, full_name, email\nFROM customers\nWHERE email IS NULL;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     },
     {
       "id": "try-common_null_mistakes-sketch1",
@@ -413,7 +621,7 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-4.common_null_mistakes.quiz.try-common_null_mistakes-sketch1",
       "language": "sql",
-      "starterCode": "SELECT id, full_name, city, is_test\nFROM customers\nWHERE city IS NULL\n  AND ;",
+      "starterCode": "@:topics.sql-v2.sql-v2-4.common_null_mistakes.quiz.try-common_null_mistakes-sketch1.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -421,8 +629,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -431,8 +639,60 @@
         "type": "sql_query",
         "datasetId": "customers_cleanup",
         "resultShape": "table",
-        "solutionCode": "SELECT id, full_name, city, is_test\nFROM customers\nWHERE city IS NULL\n  AND is_test = 0;"
-      }
+        "solutionCode": "SELECT id, full_name, city, is_test\nFROM customers\nWHERE city IS NULL\n  AND is_test = 0;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT id, full_name, city, is_test\nFROM customers\nWHERE city IS NULL\n  AND is_test = 0;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-4.common_null_mistakes.quiz.try-common_null_mistakes-sketch1.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT id, full_name, city, is_test\nFROM customers\nWHERE city IS NULL\n  AND is_test = 0;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-4.common_null_mistakes.quiz.try-common_null_mistakes-sketch1.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-4.common_null_mistakes.quiz.try-common_null_mistakes-sketch1.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT id, full_name, city, is_test\nFROM customers\nWHERE city IS NULL\n  AND is_test = 0;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     },
     {
       "id": "try-common_null_mistakes-sketch2",
@@ -441,7 +701,7 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-4.common_null_mistakes.quiz.try-common_null_mistakes-sketch2",
       "language": "sql",
-      "starterCode": "SELECT id, full_name, email, city\nFROM customers\nWHERE email IS NOT NULL\nORDER BY ;",
+      "starterCode": "@:topics.sql-v2.sql-v2-4.common_null_mistakes.quiz.try-common_null_mistakes-sketch2.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -449,8 +709,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -459,8 +719,60 @@
         "type": "sql_query",
         "datasetId": "customers_cleanup",
         "resultShape": "table",
-        "solutionCode": "SELECT id, full_name, email, city\nFROM customers\nWHERE email IS NOT NULL\n  AND city IS NOT NULL\nORDER BY id ASC;"
-      }
+        "solutionCode": "SELECT id, full_name, email, city\nFROM customers\nWHERE email IS NOT NULL\n  AND city IS NOT NULL\nORDER BY id ASC;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT id, full_name, email, city\nFROM customers\nWHERE email IS NOT NULL\n  AND city IS NOT NULL\nORDER BY id ASC;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-4.common_null_mistakes.quiz.try-common_null_mistakes-sketch2.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT id, full_name, email, city\nFROM customers\nWHERE email IS NOT NULL\n  AND city IS NOT NULL\nORDER BY id ASC;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-4.common_null_mistakes.quiz.try-common_null_mistakes-sketch2.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-4.common_null_mistakes.quiz.try-common_null_mistakes-sketch2.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT id, full_name, email, city\nFROM customers\nWHERE email IS NOT NULL\n  AND city IS NOT NULL\nORDER BY id ASC;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     }
   ]
 }

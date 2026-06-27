@@ -270,6 +270,31 @@ describe("review workspace ownership guards", () => {
         expect(selectedWorkspace).toBe(solvedWorkspace);
     });
 
+    it("does not let a blank starter runtime shell hide a resolved SQL starter workspace", () => {
+        const blankSqlShell = makeWorkspace("", "sql");
+        const resolvedSqlStarter = makeWorkspace(
+            "-- Return only the name column\nSELECT name\nFROM products;\n",
+            "sql",
+        );
+
+        const selectedWorkspace = pickDirectReviewRuntimeWorkspace({
+            editorRuntime: {
+                workspaceStatus: "ready",
+                workspaceOrigin: "starter",
+                workspaceSeedMode: "starter",
+                userEdited: false,
+                workspace: blankSqlShell,
+                updatedAt: 20,
+            },
+            exerciseRuntime: null,
+            normalizedToolWorkspace: resolvedSqlStarter,
+            effectiveLanguage: "sql",
+        });
+
+        expect(selectedWorkspace).toBe(resolvedSqlStarter);
+        expect(getFileContent(selectedWorkspace, "query.sql")).toContain("SELECT name");
+    });
+
     it("keeps an intentional user blank workspace over starter fallback", () => {
         const userBlankWorkspace = makeWorkspace("");
         const starterWorkspace = makeWorkspace("print('starter')\n");

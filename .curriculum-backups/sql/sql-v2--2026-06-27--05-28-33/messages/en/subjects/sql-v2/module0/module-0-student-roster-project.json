@@ -1,0 +1,96 @@
+{
+  "topics": {
+    "sql-v2": {
+      "sql-v2-0": {
+        "module-0-student-roster-project": {
+          "label": "Module 0 Student Roster Project",
+          "summary": "Build a simple student roster that becomes more useful with each step.",
+          "cards": {
+            "sketch0": {
+              "title": "Project brief"
+            },
+            "project": {
+              "title": "Student roster build"
+            }
+          },
+          "projectSteps": {
+            "mp_1": {
+              "title": "Preview the roster columns"
+            },
+            "mp_2": {
+              "title": "Add each student's city"
+            },
+            "mp_3": {
+              "title": "Finish the full roster view"
+            }
+          },
+          "quiz": {
+            "mp-1-preview-student-roster": {
+              "title": "Preview the roster columns",
+              "prompt": "Start the student roster by returning `id`, `name`, and `grade` from the `students` table.",
+              "hint": "Add the missing field in the SELECT list.",
+              "help": {
+                "concept": "This step adds one more detail to the roster so it is easier to use.",
+                "hint_1": "Keep `id` and `name`, then add `grade` before `FROM students`.",
+                "hint_2": "Run the query and check that the result shows three columns in that order."
+              },
+              "starterCode": "-- Start the roster with id, name, and grade.\nSELECT\n  id,\n  name\nFROM students;"
+            },
+            "mp-2-add-city-to-roster": {
+              "title": "Add each student's city",
+              "prompt": "Add the `city` column so the roster shows where each student is from.",
+              "hint": "Extend the SELECT list instead of starting over.",
+              "help": {
+                "concept": "Add the new detail without changing the parts of the roster that already work.",
+                "hint_1": "Keep `id`, `name`, and `grade` exactly as they are.",
+                "hint_2": "Add `city` before `FROM students`, then rerun the query."
+              },
+              "starterCode": "SELECT\n  id,\n  name,\n  grade\nFROM students;\n\n-- Keep the roster fields above.\n-- Add city before FROM.\n"
+            },
+            "mp-3-finish-student-roster": {
+              "title": "Finish the full roster view",
+              "prompt": "Add `age` so the final roster returns `id`, `name`, `grade`, `age`, and `city` from `students`.",
+              "hint": "Insert one more field into the SELECT list.",
+              "help": {
+                "concept": "This last step completes the roster with the final missing field.",
+                "hint_1": "Leave `id`, `name`, `grade`, and `city` in place.",
+                "hint_2": "Add `age` between `grade` and `city`, then rerun the query."
+              },
+              "starterCode": "SELECT\n  id,\n  name,\n  grade,\n  city\nFROM students;\n\n-- Keep the roster fields above.\n-- Add age between grade and city.\n"
+            },
+            "try-module-0-student-roster-project-sketch0": {
+              "title": "Preview id and name from students",
+              "prompt": "Scenario: The school office is learning how to read its student roster database. Write a query that returns `id` and `name` from the `students` table. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the selected columns and table name in the SQL editor.",
+                "hint_2": "Run the query and compare the result table with the expected result."
+              },
+              "starterCode": "-- Preview the id and name columns before building the full roster.\nSELECT\n  id\nFROM students;"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_module_0_student_roster_project_sketch0": {
+              "title": "Preview id and name from students",
+              "prompt": "Scenario: The school office is learning how to read its student roster database. Write a query that returns `id` and `name` from the `students` table. Write the query in the SQL editor, click Run query, and check the results table."
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql-v2": {
+      "sql-v2-0": {
+        "module-0-student-roster-project": {
+          "sketch_project_brief": {
+            "title": "Project brief",
+            "bodyMarkdown": "A teammate wants a quick classroom snapshot they can read at a glance.\n\nStart with a small roster and add the missing details one step at a time.\n\nBy the end, the results table should show the key student information in one clean view."
+          }
+        }
+      }
+    }
+  }
+}

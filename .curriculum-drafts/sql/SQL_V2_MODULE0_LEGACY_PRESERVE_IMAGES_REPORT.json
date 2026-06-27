@@ -1,0 +1,47 @@
+{
+  "generatedAt": "2026-06-26T22:04:58.885560+00:00",
+  "baseZip": "sql_v2_regenerated_complete.zip",
+  "legacyModuleZip": "module0.zip",
+  "recommendation": "Use the legacy module 0 as the visible intro, after normalization.",
+  "module0BeforeVisibleTopics": [
+    "how_data_is_organized",
+    "one_table_vs_multiple_tables",
+    "reading_query_results",
+    "rows_and_columns",
+    "running_your_first_query",
+    "sql_editor_basics",
+    "table_names_and_column_names",
+    "thinking_in_questions_and_answers",
+    "what_a_database_is",
+    "what_sql_means",
+    "why_sql_is_useful",
+    "module-0-student-roster-project"
+  ],
+  "module0AfterVisibleTopics": [
+    "what_sql_is",
+    "understanding_tables",
+    "database_thinking",
+    "first_sql_environment",
+    "module-0-student-roster-project"
+  ],
+  "module0VisibleTopicCountBefore": 12,
+  "module0VisibleTopicCountAfter": 5,
+  "legacyImageTagsTotal": 31,
+  "legacyImageTagsUnique": 30,
+  "generatedImageTagsTotal": 31,
+  "generatedImageTagsUnique": 30,
+  "missingImageTags": [],
+  "conventionChecks": {
+    "module0SketchCardsWithoutTryIt": [],
+    "module0SqlCodeInputsWithoutWorkspaceOrFiles": [],
+    "module0StarterCodeAliases": []
+  },
+  "legacyCodeInputQuizItemsSkippedBecauseOfficialModuleProjectRemains": [
+    "m0_s04_filter_rows",
+    "m0_s04_run_first_select",
+    "m0_s04_run_hello_query",
+    "m0_s04_show_one_column",
+    "m0_s04_sort_results",
+    "m0_s04_students_explorer_project"
+  ]
+}

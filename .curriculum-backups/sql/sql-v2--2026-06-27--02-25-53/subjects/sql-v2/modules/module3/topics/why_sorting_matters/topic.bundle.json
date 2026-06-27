@@ -1,0 +1,782 @@
+{
+  "topicId": "why_sorting_matters",
+  "subjectSlug": "sql-v2",
+  "moduleSlug": "sql-v2-3",
+  "sectionSlug": "sql-v2-sql-v2-3-1",
+  "prefix": "sqlv2_3",
+  "minutes": 12,
+  "runtimeDefaults": {
+    "kind": "sql",
+    "showSchema": true,
+    "showErd": true,
+    "showChen": true,
+    "supportsTerminal": false,
+    "supportsMultiFile": false,
+    "supportsFileSystem": false,
+    "datasetId": "products_catalog",
+    "fixedSqlDialect": "sqlite",
+    "resultShape": "table"
+  },
+  "topic": {
+    "labelKey": "topics.sql-v2.sql-v2-3.why_sorting_matters.label",
+    "summaryKey": "topics.sql-v2.sql-v2-3.why_sorting_matters.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql-v2.sql-v2-3.why_sorting_matters.cards.sketch0.title",
+      "sketchId": "sorting_makes_results_useful",
+      "height": 420,
+      "tryIt": {
+        "id": "try-why_sorting_matters-sketch0",
+        "titleKey": "topics.sql-v2.sql-v2-3.why_sorting_matters.tryIt.try_why_sorting_matters_sketch0.title",
+        "promptKey": "topics.sql-v2.sql-v2-3.why_sorting_matters.tryIt.try_why_sorting_matters_sketch0.prompt",
+        "exerciseKey": "try-why_sorting_matters-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql-v2.sql-v2-3.why_sorting_matters.cards.sketch1.title",
+      "sketchId": "sorting_supports_real_questions",
+      "height": 420,
+      "tryIt": {
+        "id": "try-why_sorting_matters-sketch1",
+        "titleKey": "topics.sql-v2.sql-v2-3.why_sorting_matters.tryIt.try_why_sorting_matters_sketch1.title",
+        "promptKey": "topics.sql-v2.sql-v2-3.why_sorting_matters.tryIt.try_why_sorting_matters_sketch1.prompt",
+        "exerciseKey": "try-why_sorting_matters-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.sql-v2.sql-v2-3.why_sorting_matters.cards.sketch2.title",
+      "sketchId": "sorting_prepares_for_limiting",
+      "height": 420,
+      "tryIt": {
+        "id": "try-why_sorting_matters-sketch2",
+        "titleKey": "topics.sql-v2.sql-v2-3.why_sorting_matters.tryIt.try_why_sorting_matters_sketch2.title",
+        "promptKey": "topics.sql-v2.sql-v2-3.why_sorting_matters.tryIt.try_why_sorting_matters_sketch2.prompt",
+        "exerciseKey": "try-why_sorting_matters-sketch2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql-v2.sql-v2-3.why_sorting_matters.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.sql-v2.sql-v2-3.why_sorting_matters.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "ci_sort_prices_low_to_high",
+            "titleKey": "topics.sql-v2.sql-v2-3.why_sorting_matters.projectSteps.ci_sort_prices_low_to_high.title",
+            "exerciseKey": "ci_sort_prices_low_to_high",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "ci_newest_products_first",
+            "titleKey": "topics.sql-v2.sql-v2-3.why_sorting_matters.projectSteps.ci_newest_products_first.title",
+            "exerciseKey": "ci_newest_products_first",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "ci_top_three_expensive",
+            "titleKey": "topics.sql-v2.sql-v2-3.why_sorting_matters.projectSteps.ci_top_three_expensive.title",
+            "exerciseKey": "ci_top_three_expensive",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sorting_makes_results_useful",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql-v2.sql-v2-3.why_sorting_matters.sorting_makes_results_useful.title",
+      "bodyKey": "sketches.sql-v2.sql-v2-3.why_sorting_matters.sorting_makes_results_useful.bodyMarkdown"
+    },
+    {
+      "id": "sorting_supports_real_questions",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql-v2.sql-v2-3.why_sorting_matters.sorting_supports_real_questions.title",
+      "bodyKey": "sketches.sql-v2.sql-v2-3.why_sorting_matters.sorting_supports_real_questions.bodyMarkdown"
+    },
+    {
+      "id": "sorting_prepares_for_limiting",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql-v2.sql-v2-3.why_sorting_matters.sorting_prepares_for_limiting.title",
+      "bodyKey": "sketches.sql-v2.sql-v2-3.why_sorting_matters.sorting_prepares_for_limiting.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "sc_sorting_goal_price",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-3.why_sorting_matters.quiz.sc_sorting_goal_price",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "sc_limit_without_sorting",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-3.why_sorting_matters.quiz.sc_limit_without_sorting",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "c"
+      }
+    },
+    {
+      "id": "mc_sorting_helps_tasks",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-3.why_sorting_matters.quiz.mc_sorting_helps_tasks",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "mc_order_by_true_statements",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-3.why_sorting_matters.quiz.mc_order_by_true_statements",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "dr_query_clause_order_basic",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-3.why_sorting_matters.quiz.dr_query_clause_order_basic",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
+    },
+    {
+      "id": "dr_ranked_query_with_limit",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-3.why_sorting_matters.quiz.dr_ranked_query_with_limit",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "fb_desc_for_highest_first",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-3.why_sorting_matters.quiz.fb_desc_for_highest_first",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "DESC"
+      }
+    },
+    {
+      "id": "fb_sort_column_stock",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-3.why_sorting_matters.quiz.fb_sort_column_stock",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "stock"
+      }
+    },
+    {
+      "id": "ci_sort_prices_low_to_high",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-3.why_sorting_matters.quiz.ci_sort_prices_low_to_high",
+      "language": "sql",
+      "starterCode": "SELECT name, price\nFROM products\n-- TODO: sort by price from lowest to highest\n;",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "SELECT name, price\nFROM products\nORDER BY price ASC;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, price\nFROM products\nORDER BY price ASC;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT name, price\nFROM products\n-- TODO: sort by price from lowest to highest\n;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT name, price\nFROM products\nORDER BY price ASC;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "SELECT name, price\nFROM products\n-- TODO: sort by price from lowest to highest\n;",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, price\nFROM products\n-- TODO: sort by price from lowest to highest\n;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, price\nFROM products\nORDER BY price ASC;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
+    },
+    {
+      "id": "ci_newest_products_first",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-3.why_sorting_matters.quiz.ci_newest_products_first",
+      "language": "sql",
+      "starterCode": "SELECT name, created_at\nFROM products\n-- TODO: sort so the newest dates come first\n;",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "SELECT name, created_at\nFROM products\nORDER BY created_at DESC;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, created_at\nFROM products\nORDER BY created_at DESC;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT name, created_at\nFROM products\n-- TODO: sort so the newest dates come first\n;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT name, created_at\nFROM products\nORDER BY created_at DESC;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "SELECT name, created_at\nFROM products\n-- TODO: sort so the newest dates come first\n;",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, created_at\nFROM products\n-- TODO: sort so the newest dates come first\n;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, created_at\nFROM products\nORDER BY created_at DESC;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
+    },
+    {
+      "id": "ci_top_three_expensive",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-3.why_sorting_matters.quiz.ci_top_three_expensive",
+      "language": "sql",
+      "starterCode": "SELECT name, price\nFROM products\n-- TODO: sort from highest price to lowest\n-- TODO: return only 3 rows\n;",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "SELECT name, price\nFROM products\nORDER BY price DESC\nLIMIT 3;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, price\nFROM products\nORDER BY price DESC\nLIMIT 3;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT name, price\nFROM products\n-- TODO: sort from highest price to lowest\n-- TODO: return only 3 rows\n;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT name, price\nFROM products\nORDER BY price DESC\nLIMIT 3;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "SELECT name, price\nFROM products\n-- TODO: sort from highest price to lowest\n-- TODO: return only 3 rows\n;",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, price\nFROM products\n-- TODO: sort from highest price to lowest\n-- TODO: return only 3 rows\n;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, price\nFROM products\nORDER BY price DESC\nLIMIT 3;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
+    },
+    {
+      "id": "try-why_sorting_matters-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-3.why_sorting_matters.quiz.try-why_sorting_matters-sketch0",
+      "language": "sql",
+      "starterCode": "SELECT name, price\nFROM products\n-- TODO: sort by price from lowest to highest\n;",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "SELECT name, price\nFROM products\nORDER BY price ASC;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, price\nFROM products\nORDER BY price ASC;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT name, price\nFROM products\n-- TODO: sort by price from lowest to highest\n;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT name, price\nFROM products\nORDER BY price ASC;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "SELECT name, price\nFROM products\n-- TODO: sort by price from lowest to highest\n;",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, price\nFROM products\n-- TODO: sort by price from lowest to highest\n;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, price\nFROM products\nORDER BY price ASC;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
+    },
+    {
+      "id": "try-why_sorting_matters-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-3.why_sorting_matters.quiz.try-why_sorting_matters-sketch1",
+      "language": "sql",
+      "starterCode": "SELECT name, created_at\nFROM products\n-- TODO: sort so the newest dates come first\n;",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "SELECT name, created_at\nFROM products\nORDER BY created_at DESC;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, created_at\nFROM products\nORDER BY created_at DESC;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT name, created_at\nFROM products\n-- TODO: sort so the newest dates come first\n;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT name, created_at\nFROM products\nORDER BY created_at DESC;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "SELECT name, created_at\nFROM products\n-- TODO: sort so the newest dates come first\n;",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, created_at\nFROM products\n-- TODO: sort so the newest dates come first\n;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, created_at\nFROM products\nORDER BY created_at DESC;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
+    },
+    {
+      "id": "try-why_sorting_matters-sketch2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-3.why_sorting_matters.quiz.try-why_sorting_matters-sketch2",
+      "language": "sql",
+      "starterCode": "SELECT name, price\nFROM products\n-- TODO: sort from highest price to lowest\n-- TODO: return only 3 rows\n;",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "SELECT name, price\nFROM products\nORDER BY price DESC\nLIMIT 3;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, price\nFROM products\nORDER BY price DESC\nLIMIT 3;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT name, price\nFROM products\n-- TODO: sort from highest price to lowest\n-- TODO: return only 3 rows\n;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT name, price\nFROM products\nORDER BY price DESC\nLIMIT 3;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "SELECT name, price\nFROM products\n-- TODO: sort from highest price to lowest\n-- TODO: return only 3 rows\n;",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, price\nFROM products\n-- TODO: sort from highest price to lowest\n-- TODO: return only 3 rows\n;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, price\nFROM products\nORDER BY price DESC\nLIMIT 3;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
+    }
+  ]
+}

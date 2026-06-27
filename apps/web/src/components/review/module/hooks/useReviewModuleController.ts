@@ -24,6 +24,7 @@ import {useReviewScrollSync} from "./useReviewScrollSync";
 import {useReviewPanels} from "./useReviewPanels";
 
 import {prereqsMetForAnyQuizOrProject, isTopicComplete} from "../utils";
+import { getEmbeddedTryIt, isQuizLikeCard } from "../progressKeys";
 import {
     getModuleProgress,
     getSidebarTopicItems,
@@ -32,6 +33,7 @@ import {
     moduleCompleteFromProgress,
 } from "../selectors";
 import {
+    buildQuizResetProgress,
     buildModuleCompletedProgress,
     buildNormalizedTopicsProgress,
     buildTopicCompletedProgress,
@@ -63,13 +65,17 @@ import {resolveRightRailSqlProps} from "../runtime/resolveRightRailSqlProps";
 import { resolveTopicStageRuntimeDefaults } from "../runtime/topicStageRuntimeDefaults";
 import { shouldUseWorkspaceCodeSurface } from "@/components/practice/workspaceExercise";
 import { resolveRightRailIdeConfig } from "./rightRailIdeConfig";
+import { clearReviewWorkspaceDrafts } from "@/components/tools/panes/reviewWorkspaceDrafts";
 import {
     cardHasAuthoredExerciseSurface,
     shouldRightRailUseBoundExercise,
 } from "./rightRailExerciseBinding";
 import { resolveActiveToolScopeKey } from "./activeToolScopeKey";
 import { resolveCompactAssignmentCtaVisibility } from "../assignmentCtaVisibility";
-import { shouldDefaultCollapseToolsRailForCompactQuiz } from "../toolsRailVisibility";
+import {
+    resolveToolsRailVisibility,
+    shouldDefaultCollapseToolsRailForCompactQuiz,
+} from "../toolsRailVisibility";
 function lastExerciseIdSegment(value: unknown) {
     const raw = typeof value === "string" ? value.trim() : "";
     if (!raw) return "";
@@ -954,6 +960,17 @@ export function useReviewModuleController({
         showDebugLearningUi: learnerUiFlags.showDebugLearningUi,
         activeCard,
         routeTargetKind: routeTarget?.kind ?? null,
+        routeTargetTargetKind: routeTarget?.targetKind ?? null,
+        cardHasEmbeddedTryIt: Boolean(
+            (activeCard?.type === "text" || activeCard?.type === "sketch") &&
+            activeCard.tryIt,
+        ),
+        hasWorkspaceExercise: Boolean(activeCardWorkspaceExercise),
+    });
+    const toolsRailVisibility = resolveToolsRailVisibility({
+        activeCard,
+        routeTargetKind: routeTarget?.kind ?? null,
+        routeTargetTargetKind: routeTarget?.targetKind ?? null,
         cardHasEmbeddedTryIt: Boolean(
             (activeCard?.type === "text" || activeCard?.type === "sketch") &&
             activeCard.tryIt,
@@ -1000,6 +1017,7 @@ export function useReviewModuleController({
         footerInsetPx,
         shouldDefaultCollapseRightRail,
         rightRailDefaultScopeKey,
+        allowDesktopRightRail: toolsRailVisibility.isAvailable,
     });
 
     const activeToolScopeKey = resolveActiveToolScopeKey({
@@ -1297,6 +1315,94 @@ export function useReviewModuleController({
     const handleResetCurrentTopic = useCallback(() => {
         resetFlow.requestResetTopic(viewTid);
     }, [resetFlow, viewTid]);
+    const activeCardResetTarget = useMemo(() => {
+        if (!activeCard) return null;
+
+        const embeddedTryIt = getEmbeddedTryIt(activeCard);
+        if (embeddedTryIt && embeddedTryIt.required !== false) {
+            return {
+                quizCardId: embeddedTryIt.id,
+                menuLabel: "This exercise",
+                menuDescription: "Clear the current Try it yourself answer and editor state.",
+                dialogTitle: "Reset this exercise?",
+                dialogDescription:
+                    "This will clear the current Try it yourself exercise and cannot be undone.",
+            };
+        }
+
+        if (!isQuizLikeCard(activeCard)) return null;
+
+        return {
+            quizCardId: activeCard.id,
+            menuLabel: activeCard.type === "project" ? "This project" : "This quiz",
+            menuDescription:
+                activeCard.type === "project"
+                    ? "Clear the current project practice progress and editor state."
+                    : "Clear the current quiz progress and answers.",
+            dialogTitle:
+                activeCard.type === "project" ? "Reset this project?" : "Reset this quiz?",
+            dialogDescription:
+                activeCard.type === "project"
+                    ? "This will clear the current project practice progress and cannot be undone."
+                    : "This will clear the current quiz progress and cannot be undone.",
+        };
+    }, [activeCard]);
+    const [confirmResetCurrentCard, setConfirmResetCurrentCard] = useState(false);
+    const requestResetCurrentCard = useCallback(() => {
+        if (!activeCardResetTarget) return;
+        setConfirmResetCurrentCard(true);
+    }, [activeCardResetTarget]);
+    const cancelResetCurrentCard = useCallback(() => {
+        setConfirmResetCurrentCard(false);
+    }, []);
+    const applyResetCurrentCard = useCallback(() => {
+        if (!activeCardResetTarget) return;
+
+        useReviewRuntimeStore.getState().clearRuntimeForCard(viewTid, activeCardResetTarget.quizCardId);
+        clearReviewWorkspaceDrafts();
+
+        setProgress((prev: ReviewProgressState) => {
+            const next = buildQuizResetProgress(prev, viewTid, activeCardResetTarget.quizCardId);
+            queueMicrotask(() => flushNow(next));
+            return next;
+        });
+
+        setConfirmResetCurrentCard(false);
+    }, [activeCardResetTarget, flushNow, setProgress, viewTid]);
+    const headerResetOptions = useMemo(() => {
+        const options: Array<{
+            id: string;
+            label: string;
+            description: string;
+            onSelect: () => void;
+        }> = [];
+
+        if (activeCardResetTarget) {
+            options.push({
+                id: "card",
+                label: activeCardResetTarget.menuLabel,
+                description: activeCardResetTarget.menuDescription,
+                onSelect: requestResetCurrentCard,
+            });
+        }
+
+        options.push(
+            {
+                id: "topic",
+                label: "This topic",
+                description: "Clear the current topic and start it over.",
+                onSelect: handleResetCurrentTopic,
+            },
+            {
+                id: "module",
+                label: "This module",
+                description: "Clear every topic and quiz in this module.",
+                onSelect: resetFlow.requestResetModule,
+            },
+        );
+
+        return options;
+    }, [activeCardResetTarget, handleResetCurrentTopic, requestResetCurrentCard, resetFlow.requestResetModule]);
 
     const sidebarTopicItems = useMemo(
         () =>
@@ -1342,6 +1448,10 @@ export function useReviewModuleController({
     const stackedToolsRef = useRef<HTMLElement | null>(null);
 
     const handleEnsureToolsVisible = useCallback(() => {
+        if (!toolsRailVisibility.isAvailable || !toolsRailVisibility.allowOpen) {
+            return;
+        }
+
         if (panels.rightCollapsed) {
             panels.setRightCollapsed(false);
         }
@@ -1365,7 +1475,13 @@ export function useReviewModuleController({
         }
 
         scrollToTools();
-    }, [panels.rightCollapsed, panels.setRightCollapsed, panels.showDesktopRight]);
+    }, [
+        panels.rightCollapsed,
+        panels.setRightCollapsed,
+        panels.showDesktopRight,
+        toolsRailVisibility.allowOpen,
+        toolsRailVisibility.isAvailable,
+    ]);
 
     const handleRun = useCallback(() => {
         void flushAll();
@@ -1521,7 +1637,7 @@ export function useReviewModuleController({
 
     const toolsProvider = useMemo(
         () => ({
-            enabled: panels.toolsUiEnabled,
+            enabled: panels.toolsUiEnabled && toolsRailVisibility.isAvailable,
             /**
              * Keep the registry stable across progress/version churn.
              *
@@ -1539,6 +1655,7 @@ export function useReviewModuleController({
         }),
         [
             panels.toolsUiEnabled,
+            toolsRailVisibility.isAvailable,
             toolsResetKey,
             activeExerciseTarget?.exerciseStateKey,
             activeExerciseTarget?.exerciseId,
@@ -1584,7 +1701,8 @@ export function useReviewModuleController({
             ? routeEditorEntry
             : null;
     const shouldRenderStackedTools = Boolean(
-        routeWorkspaceExercise || activeCardWorkspaceExercise,
+        toolsRailVisibility.isAvailable &&
+        (routeWorkspaceExercise || activeCardWorkspaceExercise),
     );
 
     useEffect(() => {
@@ -1668,7 +1786,8 @@ export function useReviewModuleController({
 
         header: {
             locale,
-            toolsUiEnabled: panels.toolsUiEnabled,
+            toolsUiEnabled: panels.toolsUiEnabled && toolsRailVisibility.isAvailable,
+            toolsToggleAllowed: toolsRailVisibility.allowOpen,
             showDesktopLeft: panels.showDesktopLeft,
             showDesktopRight: panels.showDesktopRight,
             leftCollapsed: panels.leftCollapsed,
@@ -1676,7 +1795,7 @@ export function useReviewModuleController({
             modulesHref: `/${locale}/subjects/${encodeURIComponent(subjectSlug)}/modules`,
             onToggleLeftPanel: panels.handleToggleLeftPanel,
             onToggleRightPanel: panels.handleToggleRightPanel,
-            onResetCurrentTopic: handleResetCurrentTopic,
+            resetOptions: headerResetOptions,
             onPrevTopic: topicFlow.prevTopic?.id
                 ? () => {
                     const topic = topics.find((item) => item.id === topicFlow.prevTopic?.id) ?? null;
@@ -1759,7 +1878,6 @@ export function useReviewModuleController({
                         );
                     }
                 },
-                onResetModule: resetFlow.requestResetModule,
                 onCollapse: panels.handleCollapseLeft,
                 assignmentPct: assignmentRightPct,
                 assignmentMissedPct: assignmentMissedPct,
@@ -1877,7 +1995,6 @@ export function useReviewModuleController({
                         );
                     }
                 },
-                onResetModule: resetFlow.requestResetModule,
                 onCollapse: () => panels.setMobileTopicsOpen(false),
                 assignmentPct: assignmentRightPct,
                 assignmentMissedPct: assignmentMissedPct,
@@ -1986,11 +2103,20 @@ export function useReviewModuleController({
         },
 
         resetDialog: {
-            open: resetFlow.confirmOpen,
-            title: resetFlow.pendingStats.title,
-            description: resetFlow.pendingStats.description,
-            onConfirm: resetFlow.applyPendingChange,
-            onClose: resetFlow.cancelPendingChange,
+            open: confirmResetCurrentCard || resetFlow.confirmOpen,
+            title: confirmResetCurrentCard
+                ? (activeCardResetTarget?.dialogTitle ?? "Reset this exercise?")
+                : resetFlow.pendingStats.title,
+            description: confirmResetCurrentCard
+                ? (activeCardResetTarget?.dialogDescription ??
+                    "This will clear the current exercise and cannot be undone.")
+                : resetFlow.pendingStats.description,
+            onConfirm: confirmResetCurrentCard
+                ? applyResetCurrentCard
+                : resetFlow.applyPendingChange,
+            onClose: confirmResetCurrentCard
+                ? cancelResetCurrentCard
+                : resetFlow.cancelPendingChange,
         },
     };
 }

@@ -1,0 +1,534 @@
+{
+  "topics": {
+    "sql--sql-v2--draft": {
+      "sql--sql-v2--draft-4": {
+        "combine_text_and_null_filters": {
+          "label": "Combine Text and NULL Filters",
+          "summary": "Learn how to combine LIKE, IS NULL, and other WHERE conditions to find missing or suspicious customer records.",
+          "cards": {
+            "sketch0": {
+              "title": "Using text filters and NULL filters in one query"
+            },
+            "sketch1": {
+              "title": "Grouping conditions carefully"
+            },
+            "sketch2": {
+              "title": "Common cleanup patterns"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Search and cleanup query practice"
+            }
+          },
+          "projectSteps": {
+            "ci_missing_or_test_accounts": {
+              "title": "Find missing emails or test-like names"
+            },
+            "ci_active_example_emails": {
+              "title": "Find active example.com customers"
+            },
+            "ci_grouped_test_email_filter": {
+              "title": "Use grouped conditions for test records"
+            }
+          },
+          "quiz": {
+            "sc_null_operator": {
+              "title": "Check for missing email",
+              "prompt": "Which condition correctly finds rows where `email` has no value?",
+              "hint": "Use the SQL operator made for missing values, not `=`.",
+              "help": {
+                "concept": "In SQL, `NULL` means missing or unknown data, and it must be checked with `IS NULL` rather than equality operators.",
+                "hint_1": "A condition like `email = NULL` does not work the way beginners often expect.",
+                "hint_2": "Look for the option that uses `IS` with `NULL`."
+              },
+              "options": {
+                "a": "email = NULL",
+                "b": "email IS NULL",
+                "c": "email LIKE NULL",
+                "d": "email NOT NULL"
+              }
+            },
+            "sc_or_vs_and": {
+              "title": "Choose the right connector",
+              "prompt": "You want rows where the email is missing or the full name contains `Test`. Which connector should join those two conditions?",
+              "hint": "Read the question and connect it to the specific lesson example.",
+              "help": {
+                "concept": "This question checks a specific idea from the lesson, not general test-taking strategy.",
+                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+                "hint_2": "Remove options from unrelated SQL clauses, then choose the one that fits the question."
+              },
+              "options": {
+                "a": "AND",
+                "b": "OR",
+                "c": "FROM",
+                "d": "ORDER BY"
+              }
+            },
+            "mc_find_suspicious_rows": {
+              "title": "Rows that match a combined filter",
+              "prompt": "Choose all rows that would match this condition: `email IS NULL OR full_name LIKE '%Test%'`",
+              "hint": "A row matches if it has a missing email, a name containing `Test`, or both.",
+              "help": {
+                "concept": "An `OR` condition includes every row that satisfies at least one side of the condition.",
+                "hint_1": "Check the sample rows for `NULL` emails and for names containing the word `Test`.",
+                "hint_2": "Two rows match because of missing email, and one different row matches because of the name text."
+              },
+              "options": {
+                "a": "Leo Grant",
+                "b": "Emma Reed",
+                "c": "Liam Scott",
+                "d": "Test Account"
+              }
+            },
+            "mc_valid_combined_filters": {
+              "title": "Useful cleanup filters",
+              "prompt": "Which WHERE conditions are valid ways to combine text and NULL filtering on this dataset? Choose all that apply.",
+              "hint": "Look for conditions that correctly use `LIKE` and `IS NULL`.",
+              "help": {
+                "concept": "Text pattern matching uses `LIKE`, while missing values use `IS NULL` or `IS NOT NULL`; these can be combined with `AND` or `OR`.",
+                "hint_1": "Reject any option that compares `NULL` with `=`.",
+                "hint_2": "More than one option is correct here: one uses `OR` with `IS NULL`, and another uses `AND` with `LIKE` and `IS NOT NULL`."
+              },
+              "options": {
+                "a": "email IS NULL OR city = 'Chicago'",
+                "b": "full_name LIKE '%Test%' AND email IS NOT NULL",
+                "c": "email = NULL AND status = 'active'",
+                "d": "city LIKE NULL OR is_test = 1"
+              }
+            },
+            "dr_query_order_basic": {
+              "title": "Build a combined filter query",
+              "prompt": "Put these SQL parts in the correct order to query customer names and emails for rows with missing email values.",
+              "hint": "Start with `SELECT`, then name the table, then add the filter.",
+              "help": {
+                "concept": "A basic SQL query follows the structure `SELECT ... FROM ... WHERE ...`.",
+                "hint_1": "The column list comes right after `SELECT`.",
+                "hint_2": "The filtering condition belongs after the `WHERE` keyword."
+              },
+              "tokens": {
+                "t1": "SELECT full_name, email",
+                "t2": "FROM customers",
+                "t3": "WHERE email IS NULL"
+              }
+            },
+            "dr_query_order_grouped": {
+              "title": "Order a grouped WHERE clause",
+              "prompt": "Arrange these parts to form a query that finds test rows with missing emails or emails containing `test`.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "SELECT id, email, is_test",
+                "t2": "FROM customers",
+                "t3": "WHERE (email IS NULL OR email LIKE '%test%')",
+                "t4": "AND is_test = 1"
+              }
+            },
+            "fb_like_wildcard": {
+              "title": "Complete a text pattern",
+              "prompt": "Fill in the missing pattern piece to find names containing the word `Test` anywhere in the text.",
+              "hint": "Use `%` on both sides of the word when it can appear anywhere.",
+              "help": {
+                "concept": "In a `LIKE` pattern, `%` matches any number of characters before or after the text you care about.",
+                "hint_1": "A contains search needs a wildcard before and after `Test`.",
+                "hint_2": "Choose the pattern that would match a value like `Test Account`, not only an exact match."
+              },
+              "template": "full_name LIKE '[blank1]'",
+              "choices": [
+                "Test",
+                "%Test%",
+                "Test%",
+                "%Test"
+              ]
+            },
+            "fb_null_keyword": {
+              "title": "Complete the NULL check",
+              "prompt": "Fill in the missing keyword to complete this condition for missing cities.",
+              "hint": "Missing values use a special keyword after `IS`.",
+              "help": {
+                "concept": "SQL uses `IS the missing term` to test whether a column has no stored value.",
+                "hint_1": "The condition is not checking text like `'the missing term'`; it is checking the missing-value marker.",
+                "hint_2": "Choose the keyword that completes `city IS ...` for a missing city."
+              },
+              "template": "city IS [blank1]",
+              "choices": [
+                "EMPTY",
+                "NONE",
+                "NULL",
+                "MISSING"
+              ]
+            },
+            "ci_missing_or_test_accounts": {
+              "title": "Find missing emails or test-like names",
+              "prompt": "Write a query that returns `id`, `full_name`, and `email` from `customers` for rows where the email is missing or the full name contains `Test`. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "SELECT \nFROM customers\nWHERE ;"
+            },
+            "ci_active_example_emails": {
+              "title": "Find active example.com customers",
+              "prompt": "Write a query that returns `id`, `full_name`, `email`, and `status` for customers whose email ends with `@example.com` and whose status is `active`. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "SELECT id, full_name, email, status\nFROM customers\nWHERE ;"
+            },
+            "ci_grouped_test_email_filter": {
+              "title": "Use grouped conditions for test records",
+              "prompt": "Write a query that returns `id`, `full_name`, `email`, and `is_test` for rows where the email is missing or contains `test`, but only when `is_test = 1`. Use parentheses so the email conditions are grouped together. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "SELECT id, full_name, email, is_test\nFROM customers\nWHERE ( )\n  AND ;"
+            },
+            "try-combine_text_and_null_filters-sketch0": {
+              "title": "Find missing emails or test-like names",
+              "prompt": "Write a query that returns `id`, `full_name`, and `email` from `customers` for rows where the email is missing or the full name contains `Test`. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "SELECT \nFROM customers\nWHERE ;"
+            },
+            "try-combine_text_and_null_filters-sketch1": {
+              "title": "Find active example.com customers",
+              "prompt": "Write a query that returns `id`, `full_name`, `email`, and `status` for customers whose email ends with `@example.com` and whose status is `active`. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "SELECT id, full_name, email, status\nFROM customers\nWHERE ;"
+            },
+            "try-combine_text_and_null_filters-sketch2": {
+              "title": "Use grouped conditions for test records",
+              "prompt": "Write a query that returns `id`, `full_name`, `email`, and `is_test` for rows where the email is missing or contains `test`, but only when `is_test = 1`. Use parentheses so the email conditions are grouped together. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "SELECT id, full_name, email, is_test\nFROM customers\nWHERE ( )\n  AND ;"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_combine_text_and_null_filters_sketch0": {
+              "title": "Find missing emails or test-like names",
+              "prompt": "Write a query that returns `id`, `full_name`, and `email` from `customers` for rows where the email is missing or the full name contains `Test`. Write the query in the SQL editor, click Run query, and check the results table."
+            },
+            "try_combine_text_and_null_filters_sketch1": {
+              "title": "Find active example.com customers",
+              "prompt": "Write a query that returns `id`, `full_name`, `email`, and `status` for customers whose email ends with `@example.com` and whose status is `active`. Write the query in the SQL editor, click Run query, and check the results table."
+            },
+            "try_combine_text_and_null_filters_sketch2": {
+              "title": "Use grouped conditions for test records",
+              "prompt": "Write a query that returns `id`, `full_name`, `email`, and `is_test` for rows where the email is missing or contains `test`, but only when `is_test = 1`. Use parentheses so the email conditions are grouped together. Write the query in the SQL editor, click Run query, and check the results table."
+            }
+          }
+        }
+      },
+      "sql-v2-4": {
+        "combine_text_and_null_filters": {
+          "label": "Combine Text and NULL Filters",
+          "summary": "Learn how to combine LIKE, IS NULL, and other WHERE conditions to find missing or suspicious customer records.",
+          "cards": {
+            "sketch0": {
+              "title": "Using text filters and NULL filters in one query"
+            },
+            "sketch1": {
+              "title": "Grouping conditions carefully"
+            },
+            "sketch2": {
+              "title": "Common cleanup patterns"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Search and cleanup query practice"
+            }
+          },
+          "projectSteps": {
+            "ci_missing_or_test_accounts": {
+              "title": "Find missing emails or test-like names"
+            },
+            "ci_active_example_emails": {
+              "title": "Find active example.com customers"
+            },
+            "ci_grouped_test_email_filter": {
+              "title": "Use grouped conditions for test records"
+            }
+          },
+          "quiz": {
+            "sc_null_operator": {
+              "title": "Check for missing email",
+              "prompt": "Which condition correctly finds rows where `email` has no value?",
+              "hint": "Use the SQL operator made for missing values, not `=`.",
+              "help": {
+                "concept": "In SQL, `NULL` means missing or unknown data, and it must be checked with `IS NULL` rather than equality operators.",
+                "hint_1": "A condition like `email = NULL` does not work the way beginners often expect.",
+                "hint_2": "Look for the option that uses `IS` with `NULL`."
+              },
+              "options": {
+                "a": "email = NULL",
+                "b": "email IS NULL",
+                "c": "email LIKE NULL",
+                "d": "email NOT NULL"
+              }
+            },
+            "sc_or_vs_and": {
+              "title": "Choose the right connector",
+              "prompt": "You want rows where the email is missing or the full name contains `Test`. Which connector should join those two conditions?",
+              "hint": "Read the question and connect it to the specific lesson example.",
+              "help": {
+                "concept": "This question checks a specific idea from the lesson, not general test-taking strategy.",
+                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+                "hint_2": "Remove options from unrelated SQL clauses, then choose the one that fits the question."
+              },
+              "options": {
+                "a": "AND",
+                "b": "OR",
+                "c": "FROM",
+                "d": "ORDER BY"
+              }
+            },
+            "mc_find_suspicious_rows": {
+              "title": "Rows that match a combined filter",
+              "prompt": "Choose all rows that would match this condition: `email IS NULL OR full_name LIKE '%Test%'`",
+              "hint": "A row matches if it has a missing email, a name containing `Test`, or both.",
+              "help": {
+                "concept": "An `OR` condition includes every row that satisfies at least one side of the condition.",
+                "hint_1": "Check the sample rows for `NULL` emails and for names containing the word `Test`.",
+                "hint_2": "Two rows match because of missing email, and one different row matches because of the name text."
+              },
+              "options": {
+                "a": "Leo Grant",
+                "b": "Emma Reed",
+                "c": "Liam Scott",
+                "d": "Test Account"
+              }
+            },
+            "mc_valid_combined_filters": {
+              "title": "Useful cleanup filters",
+              "prompt": "Which WHERE conditions are valid ways to combine text and NULL filtering on this dataset? Choose all that apply.",
+              "hint": "Look for conditions that correctly use `LIKE` and `IS NULL`.",
+              "help": {
+                "concept": "Text pattern matching uses `LIKE`, while missing values use `IS NULL` or `IS NOT NULL`; these can be combined with `AND` or `OR`.",
+                "hint_1": "Reject any option that compares `NULL` with `=`.",
+                "hint_2": "More than one option is correct here: one uses `OR` with `IS NULL`, and another uses `AND` with `LIKE` and `IS NOT NULL`."
+              },
+              "options": {
+                "a": "email IS NULL OR city = 'Chicago'",
+                "b": "full_name LIKE '%Test%' AND email IS NOT NULL",
+                "c": "email = NULL AND status = 'active'",
+                "d": "city LIKE NULL OR is_test = 1"
+              }
+            },
+            "dr_query_order_basic": {
+              "title": "Build a combined filter query",
+              "prompt": "Put these SQL parts in the correct order to query customer names and emails for rows with missing email values.",
+              "hint": "Start with `SELECT`, then name the table, then add the filter.",
+              "help": {
+                "concept": "A basic SQL query follows the structure `SELECT ... FROM ... WHERE ...`.",
+                "hint_1": "The column list comes right after `SELECT`.",
+                "hint_2": "The filtering condition belongs after the `WHERE` keyword."
+              },
+              "tokens": {
+                "t1": "SELECT full_name, email",
+                "t2": "FROM customers",
+                "t3": "WHERE email IS NULL"
+              }
+            },
+            "dr_query_order_grouped": {
+              "title": "Order a grouped WHERE clause",
+              "prompt": "Arrange these parts to form a query that finds test rows with missing emails or emails containing `test`.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "SELECT id, email, is_test",
+                "t2": "FROM customers",
+                "t3": "WHERE (email IS NULL OR email LIKE '%test%')",
+                "t4": "AND is_test = 1"
+              }
+            },
+            "fb_like_wildcard": {
+              "title": "Complete a text pattern",
+              "prompt": "Fill in the missing pattern piece to find names containing the word `Test` anywhere in the text.",
+              "hint": "Use `%` on both sides of the word when it can appear anywhere.",
+              "help": {
+                "concept": "In a `LIKE` pattern, `%` matches any number of characters before or after the text you care about.",
+                "hint_1": "A contains search needs a wildcard before and after `Test`.",
+                "hint_2": "Choose the pattern that would match a value like `Test Account`, not only an exact match."
+              },
+              "template": "full_name LIKE '[blank1]'",
+              "choices": [
+                "Test",
+                "%Test%",
+                "Test%",
+                "%Test"
+              ]
+            },
+            "fb_null_keyword": {
+              "title": "Complete the NULL check",
+              "prompt": "Fill in the missing keyword to complete this condition for missing cities.",
+              "hint": "Missing values use a special keyword after `IS`.",
+              "help": {
+                "concept": "SQL uses `IS the missing term` to test whether a column has no stored value.",
+                "hint_1": "The condition is not checking text like `'the missing term'`; it is checking the missing-value marker.",
+                "hint_2": "Choose the keyword that completes `city IS ...` for a missing city."
+              },
+              "template": "city IS [blank1]",
+              "choices": [
+                "EMPTY",
+                "NONE",
+                "NULL",
+                "MISSING"
+              ]
+            },
+            "ci_missing_or_test_accounts": {
+              "title": "Find missing emails or test-like names",
+              "prompt": "Write a query that returns `id`, `full_name`, and `email` from `customers` for rows where the email is missing or the full name contains `Test`. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "SELECT \nFROM customers\nWHERE ;"
+            },
+            "ci_active_example_emails": {
+              "title": "Find active example.com customers",
+              "prompt": "Write a query that returns `id`, `full_name`, `email`, and `status` for customers whose email ends with `@example.com` and whose status is `active`. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "SELECT id, full_name, email, status\nFROM customers\nWHERE ;"
+            },
+            "ci_grouped_test_email_filter": {
+              "title": "Use grouped conditions for test records",
+              "prompt": "Write a query that returns `id`, `full_name`, `email`, and `is_test` for rows where the email is missing or contains `test`, but only when `is_test = 1`. Use parentheses so the email conditions are grouped together. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "SELECT id, full_name, email, is_test\nFROM customers\nWHERE ( )\n  AND ;"
+            },
+            "try-combine_text_and_null_filters-sketch0": {
+              "title": "Find missing emails or test-like names",
+              "prompt": "Write a query that returns `id`, `full_name`, and `email` from `customers` for rows where the email is missing or the full name contains `Test`. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "SELECT \nFROM customers\nWHERE ;"
+            },
+            "try-combine_text_and_null_filters-sketch1": {
+              "title": "Find active example.com customers",
+              "prompt": "Write a query that returns `id`, `full_name`, `email`, and `status` for customers whose email ends with `@example.com` and whose status is `active`. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "SELECT id, full_name, email, status\nFROM customers\nWHERE ;"
+            },
+            "try-combine_text_and_null_filters-sketch2": {
+              "title": "Use grouped conditions for test records",
+              "prompt": "Write a query that returns `id`, `full_name`, `email`, and `is_test` for rows where the email is missing or contains `test`, but only when `is_test = 1`. Use parentheses so the email conditions are grouped together. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "SELECT id, full_name, email, is_test\nFROM customers\nWHERE ( )\n  AND ;"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_combine_text_and_null_filters_sketch0": {
+              "title": "Find missing emails or test-like names",
+              "prompt": "Write a query that returns `id`, `full_name`, and `email` from `customers` for rows where the email is missing or the full name contains `Test`. Write the query in the SQL editor, click Run query, and check the results table."
+            },
+            "try_combine_text_and_null_filters_sketch1": {
+              "title": "Find active example.com customers",
+              "prompt": "Write a query that returns `id`, `full_name`, `email`, and `status` for customers whose email ends with `@example.com` and whose status is `active`. Write the query in the SQL editor, click Run query, and check the results table."
+            },
+            "try_combine_text_and_null_filters_sketch2": {
+              "title": "Use grouped conditions for test records",
+              "prompt": "Write a query that returns `id`, `full_name`, `email`, and `is_test` for rows where the email is missing or contains `test`, but only when `is_test = 1`. Use parentheses so the email conditions are grouped together. Write the query in the SQL editor, click Run query, and check the results table."
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql--sql-v2--draft": {
+      "sql--sql-v2--draft-4": {
+        "combine_text_and_null_filters": {
+          "sketch_text_and_null_together": {
+            "title": "Using text filters and NULL filters in one query",
+            "bodyMarkdown": "You can combine text checks and missing-value checks in the same `WHERE` clause. This is useful when you want to find records that look incomplete or suspicious.\n\nFor example, in the `customers` table, some rows have missing emails and some rows look like test accounts.\n\n```sql\nSELECT id, full_name, email, status\nFROM customers\nWHERE email IS NULL\n   OR full_name LIKE '%Test%';\n```\n\nStep by step:\n- `SELECT id, full_name, email, status` chooses the columns to show.\n- `FROM customers` reads from the `customers` table.\n- `email IS NULL` finds customers with no email value.\n- `OR full_name LIKE '%Test%'` also includes rows whose name contains `Test`.\n\nWith the sample data, this would match rows like:\n- `Leo Grant` because `email` is `NULL`\n- `Liam Scott` because `email` is `NULL`\n- `Test Account` because the name contains `Test`"
+          },
+          "sketch_grouping_conditions": {
+            "title": "Grouping conditions carefully",
+            "bodyMarkdown": "When you mix `AND` and `OR`, grouping matters. Parentheses help SQL understand which conditions belong together.\n\nExample:\n\n```sql\nSELECT id, full_name, email, is_test\nFROM customers\nWHERE (email IS NULL OR email LIKE '%test%')\n  AND is_test = 1;\n```\n\nLine by line:\n- `email IS NULL OR email LIKE '%test%'` looks for either a missing email or an email containing `test`.\n- Parentheses group those two text/NULL checks together.\n- `AND is_test = 1` keeps only rows marked as test accounts.\n\nWithout parentheses, SQL may combine the conditions in a different way than you intended.\n\nA concrete example from this dataset:\n- `Noah Kim` has `noah@test.com` and `is_test = 1`, so this row matches.\n- `Test Account` has `test@internal.dev` and `is_test = 1`, so this row also matches.\n- `Leo Grant` has `email IS NULL`, but `is_test = 0`, so this row does not match."
+          },
+          "sketch_real_cleanup_patterns": {
+            "title": "Common cleanup patterns",
+            "bodyMarkdown": "Real cleanup work often means combining several filters to narrow down the exact rows you need.\n\nHere is a practical example that finds non-test customers in Chicago who are missing an email:\n\n```sql\nSELECT id, full_name, city, email\nFROM customers\nWHERE city = 'Chicago'\n  AND email IS NULL\n  AND is_test = 0;\n```\n\nHow to read it:\n- `city = 'Chicago'` keeps only Chicago customers.\n- `email IS NULL` keeps only rows with missing email values.\n- `is_test = 0` removes test accounts.\n\nIn the current sample data, this query returns no rows, and that is still useful. A query can confirm that no records match a cleanup rule.\n\nYou can also search for suspicious text values:\n\n```sql\nSELECT id, full_name, email\nFROM customers\nWHERE email LIKE '%@example.com'\n  AND status = 'active';\n```\n\nThis finds active customers whose email ends with `@example.com`."
+          }
+        }
+      },
+      "sql-v2-4": {
+        "combine_text_and_null_filters": {
+          "sketch_text_and_null_together": {
+            "title": "Using text filters and NULL filters in one query",
+            "bodyMarkdown": "You can combine text checks and missing-value checks in the same `WHERE` clause. This is useful when you want to find records that look incomplete or suspicious.\n\nFor example, in the `customers` table, some rows have missing emails and some rows look like test accounts.\n\n```sql\nSELECT id, full_name, email, status\nFROM customers\nWHERE email IS NULL\n   OR full_name LIKE '%Test%';\n```\n\nStep by step:\n- `SELECT id, full_name, email, status` chooses the columns to show.\n- `FROM customers` reads from the `customers` table.\n- `email IS NULL` finds customers with no email value.\n- `OR full_name LIKE '%Test%'` also includes rows whose name contains `Test`.\n\nWith the sample data, this would match rows like:\n- `Leo Grant` because `email` is `NULL`\n- `Liam Scott` because `email` is `NULL`\n- `Test Account` because the name contains `Test`"
+          },
+          "sketch_grouping_conditions": {
+            "title": "Grouping conditions carefully",
+            "bodyMarkdown": "When you mix `AND` and `OR`, grouping matters. Parentheses help SQL understand which conditions belong together.\n\nExample:\n\n```sql\nSELECT id, full_name, email, is_test\nFROM customers\nWHERE (email IS NULL OR email LIKE '%test%')\n  AND is_test = 1;\n```\n\nLine by line:\n- `email IS NULL OR email LIKE '%test%'` looks for either a missing email or an email containing `test`.\n- Parentheses group those two text/NULL checks together.\n- `AND is_test = 1` keeps only rows marked as test accounts.\n\nWithout parentheses, SQL may combine the conditions in a different way than you intended.\n\nA concrete example from this dataset:\n- `Noah Kim` has `noah@test.com` and `is_test = 1`, so this row matches.\n- `Test Account` has `test@internal.dev` and `is_test = 1`, so this row also matches.\n- `Leo Grant` has `email IS NULL`, but `is_test = 0`, so this row does not match."
+          },
+          "sketch_real_cleanup_patterns": {
+            "title": "Common cleanup patterns",
+            "bodyMarkdown": "Real cleanup work often means combining several filters to narrow down the exact rows you need.\n\nHere is a practical example that finds non-test customers in Chicago who are missing an email:\n\n```sql\nSELECT id, full_name, city, email\nFROM customers\nWHERE city = 'Chicago'\n  AND email IS NULL\n  AND is_test = 0;\n```\n\nHow to read it:\n- `city = 'Chicago'` keeps only Chicago customers.\n- `email IS NULL` keeps only rows with missing email values.\n- `is_test = 0` removes test accounts.\n\nIn the current sample data, this query returns no rows, and that is still useful. A query can confirm that no records match a cleanup rule.\n\nYou can also search for suspicious text values:\n\n```sql\nSELECT id, full_name, email\nFROM customers\nWHERE email LIKE '%@example.com'\n  AND status = 'active';\n```\n\nThis finds active customers whose email ends with `@example.com`."
+          }
+        }
+      }
+    }
+  }
+}

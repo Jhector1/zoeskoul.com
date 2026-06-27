@@ -1,0 +1,1542 @@
+{
+  "authoringFormatVersion": "2.0",
+  "courseSlug": "sql-v2",
+  "catalogSlug": "sql",
+  "subjectSlug": "sql",
+  "profileId": "sql",
+  "title": "SQL Foundations",
+  "subtitle": "Learn to read tables, write SELECT queries, filter rows, sort results, and handle real-world beginner data.",
+  "level": "beginner",
+  "courseNumber": 1,
+  "trackSlug": "sql",
+  "sourceLocale": "en",
+  "targetLocales": [],
+  "intendedFor": [
+    "absolute beginners",
+    "first-time SQL learners",
+    "students starting database classes",
+    "self-learners preparing for data analysis",
+    "web developers who need SQL basics"
+  ],
+  "prerequisites": [],
+  "learningGoals": [
+    "Explain what SQL does in plain language.",
+    "Identify tables, rows, columns, records, fields, and simple keys.",
+    "Write basic SELECT queries against one table.",
+    "Choose specific columns instead of always using SELECT *.",
+    "Filter rows with WHERE.",
+    "Compare text and numeric values.",
+    "Combine conditions with AND, OR, and NOT.",
+    "Sort results with ORDER BY.",
+    "Limit output with LIMIT.",
+    "Search text using LIKE and wildcards.",
+    "Filter lists and ranges using IN, NOT IN, and BETWEEN.",
+    "Find missing values using IS NULL and IS NOT NULL.",
+    "Read query results and explain them in plain English."
+  ],
+  "moduleCount": 6,
+  "modules": [
+    {
+      "moduleNumber": 0,
+      "moduleSlug": "sql-v2-0",
+      "title": "Getting Started with SQL and Databases",
+      "purpose": "Build the learner's mental model before syntax: what SQL is, how databases organize information, and how questions become queries.",
+      "datasetId": "students_intro",
+      "coreSkill": "Database mental model",
+      "learningObjectives": [
+        "Explain what SQL is used for in real applications.",
+        "Identify tables, rows, columns, records, and fields.",
+        "Read simple table data and describe what it means.",
+        "Use the browser SQL workspace to run a beginner query."
+      ],
+      "sections": [
+        {
+          "sectionSlug": "sql-v2-0-1",
+          "title": "What SQL Is",
+          "topics": [
+            {
+              "topicId": "what_sql_means",
+              "title": "What SQL Means",
+              "summary": "Understand what SQL means so you can explain the idea in beginner-friendly language.",
+              "minutes": 12,
+              "technical": false,
+              "learningGoals": [
+                "Describe what SQL means in plain language.",
+                "Identify a beginner SQL scenario that depends on understanding what SQL means."
+              ]
+            },
+            {
+              "topicId": "what_a_database_is",
+              "title": "What a Database Is",
+              "summary": "Understand what a database is so you can explain the idea in beginner-friendly language.",
+              "minutes": 12,
+              "technical": false,
+              "learningGoals": [
+                "Describe what a database is in plain language.",
+                "Identify a beginner SQL scenario that depends on understanding what a database is."
+              ]
+            },
+            {
+              "topicId": "why_sql_is_useful",
+              "title": "Why SQL Is Useful",
+              "summary": "Understand why SQL is useful so you can explain the idea in beginner-friendly language.",
+              "minutes": 12,
+              "technical": false,
+              "learningGoals": [
+                "Describe why SQL is useful in plain language.",
+                "Identify a beginner SQL scenario that depends on understanding why SQL is useful."
+              ]
+            },
+            {
+              "topicId": "real_world_examples_of_databases",
+              "title": "Real-World Examples of Databases",
+              "summary": "Understand real-world examples of databases so you can explain the idea in beginner-friendly language.",
+              "minutes": 12,
+              "technical": false,
+              "learningGoals": [
+                "Describe real-world examples of databases in plain language.",
+                "Identify a beginner SQL scenario that depends on understanding real-world examples of databases."
+              ]
+            }
+          ]
+        },
+        {
+          "sectionSlug": "sql-v2-0-2",
+          "title": "Understanding Tables",
+          "topics": [
+            {
+              "topicId": "rows_and_columns",
+              "title": "Rows and Columns",
+              "summary": "Understand rows and columns so you can explain the idea in beginner-friendly language.",
+              "minutes": 12,
+              "technical": false,
+              "learningGoals": [
+                "Describe rows and columns in plain language.",
+                "Identify a beginner SQL scenario that depends on understanding rows and columns."
+              ]
+            },
+            {
+              "topicId": "records_and_fields",
+              "title": "Records and Fields",
+              "summary": "Understand records and fields so you can explain the idea in beginner-friendly language.",
+              "minutes": 12,
+              "technical": false,
+              "learningGoals": [
+                "Describe records and fields in plain language.",
+                "Identify a beginner SQL scenario that depends on understanding records and fields."
+              ]
+            },
+            {
+              "topicId": "table_names_and_column_names",
+              "title": "Table Names and Column Names",
+              "summary": "Understand table names and column names so you can explain the idea in beginner-friendly language.",
+              "minutes": 12,
+              "technical": false,
+              "learningGoals": [
+                "Describe table names and column names in plain language.",
+                "Identify a beginner SQL scenario that depends on understanding table names and column names."
+              ]
+            },
+            {
+              "topicId": "reading_data_like_a_spreadsheet",
+              "title": "Reading Data Like a Spreadsheet",
+              "summary": "Understand reading data LIKE a spreadsheet so you can explain the idea in beginner-friendly language.",
+              "minutes": 12,
+              "technical": false,
+              "learningGoals": [
+                "Describe reading data LIKE a spreadsheet in plain language.",
+                "Identify a beginner SQL scenario that depends on understanding reading data LIKE a spreadsheet."
+              ]
+            }
+          ]
+        },
+        {
+          "sectionSlug": "sql-v2-0-3",
+          "title": "Database Thinking",
+          "topics": [
+            {
+              "topicId": "how_data_is_organized",
+              "title": "How Data Is Organized",
+              "summary": "Understand how data is organized so you can explain the idea in beginner-friendly language.",
+              "minutes": 12,
+              "technical": false,
+              "learningGoals": [
+                "Describe how data is organized in plain language.",
+                "Identify a beginner SQL scenario that depends on understanding how data is organized."
+              ]
+            },
+            {
+              "topicId": "one_table_vs_multiple_tables",
+              "title": "One Table vs. Multiple Tables",
+              "summary": "Understand one table vs. multiple tables so you can explain the idea in beginner-friendly language.",
+              "minutes": 12,
+              "technical": false,
+              "learningGoals": [
+                "Describe one table vs. multiple tables in plain language.",
+                "Identify a beginner SQL scenario that depends on understanding one table vs. multiple tables."
+              ]
+            },
+            {
+              "topicId": "intro_to_keys",
+              "title": "Intro to Keys",
+              "summary": "Understand intro to keys so you can explain the idea in beginner-friendly language.",
+              "minutes": 12,
+              "technical": false,
+              "learningGoals": [
+                "Describe intro to keys in plain language.",
+                "Identify a beginner SQL scenario that depends on understanding intro to keys."
+              ]
+            },
+            {
+              "topicId": "thinking_in_questions_and_answers",
+              "title": "Thinking in Questions and Answers",
+              "summary": "Understand thinking in questions and answers so you can explain the idea in beginner-friendly language.",
+              "minutes": 12,
+              "technical": false,
+              "learningGoals": [
+                "Describe thinking in questions and answers in plain language.",
+                "Identify a beginner SQL scenario that depends on understanding thinking in questions and answers."
+              ]
+            }
+          ]
+        },
+        {
+          "sectionSlug": "sql-v2-0-4",
+          "title": "First SQL Environment",
+          "topics": [
+            {
+              "topicId": "where_sql_runs",
+              "title": "Where SQL Runs",
+              "summary": "Understand where SQL runs so you can explain the idea in beginner-friendly language.",
+              "minutes": 12,
+              "technical": false,
+              "learningGoals": [
+                "Describe where SQL runs in plain language.",
+                "Identify a beginner SQL scenario that depends on understanding where SQL runs."
+              ]
+            },
+            {
+              "topicId": "sql_editor_basics",
+              "title": "SQL Editor Basics",
+              "summary": "Understand SQL editor basics so you can explain the idea in beginner-friendly language.",
+              "minutes": 12,
+              "technical": false,
+              "learningGoals": [
+                "Describe SQL editor basics in plain language.",
+                "Identify a beginner SQL scenario that depends on understanding SQL editor basics."
+              ]
+            },
+            {
+              "topicId": "running_your_first_query",
+              "title": "Running Your First Query",
+              "summary": "Practice running your first query so you can use it in a simple SQL query or workflow.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Use Running Your First Query in a simple SQL query or workflow.",
+                "Explain what result or output running your first query should produce."
+              ]
+            },
+            {
+              "topicId": "reading_query_results",
+              "title": "Reading Query Results",
+              "summary": "Understand reading query results so you can explain the idea in beginner-friendly language.",
+              "minutes": 12,
+              "technical": false,
+              "learningGoals": [
+                "Describe reading query results in plain language.",
+                "Identify a beginner SQL scenario that depends on understanding reading query results."
+              ]
+            }
+          ]
+        },
+        {
+          "sectionSlug": "sql-v2-0-module-project",
+          "title": "Module Project",
+          "role": "module_project",
+          "topics": [
+            {
+              "topicId": "module-0-student-roster-project",
+              "title": "Module 0 Student Roster Project",
+              "summary": "Build a simple student roster snapshot one safe SELECT step at a time until the final table is ready to share.",
+              "minutes": 24,
+              "technical": true,
+              "learningGoals": [
+                "Keep a small SQL project growing from one working query to the next.",
+                "Read a student table by selecting the columns needed for a clear roster view."
+              ],
+              "practice": {
+                "projectFlow": "progressive"
+              }
+            }
+          ]
+        }
+      ],
+      "moduleProject": "Create a simple data map for a tiny school or store database showing tables, columns, and example rows.",
+      "prefix": "sqlv2_0"
+    },
+    {
+      "moduleNumber": 1,
+      "moduleSlug": "sql-v2-1",
+      "title": "Your First Queries with SELECT",
+      "purpose": "Teach learners to retrieve data confidently with SELECT and FROM before filtering or joining tables.",
+      "datasetId": "products_catalog",
+      "coreSkill": "SELECT",
+      "learningObjectives": [
+        "Write SELECT queries that retrieve data from one table.",
+        "Choose specific columns instead of always selecting every column.",
+        "Use FROM to identify the table being queried.",
+        "Read a query result table and explain what was returned."
+      ],
+      "sections": [
+        {
+          "sectionSlug": "sql-v2-1-1",
+          "title": "Intro to SELECT",
+          "topics": [
+            {
+              "topicId": "what_select_does",
+              "title": "What SELECT Does",
+              "summary": "Understand what select does so you can explain the idea in beginner-friendly language.",
+              "minutes": 12,
+              "technical": false,
+              "learningGoals": [
+                "Describe what select does in plain language.",
+                "Identify a beginner SQL scenario that depends on understanding what select does."
+              ]
+            },
+            {
+              "topicId": "selecting_all_columns_with_star",
+              "title": "Selecting All Columns with *",
+              "summary": "Practice selecting all columns with * so you can use it in a simple SQL query or workflow.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Use Selecting All Columns with * in a simple SQL query or workflow.",
+                "Explain what result or output selecting all columns with * should produce."
+              ]
+            },
+            {
+              "topicId": "selecting_specific_columns",
+              "title": "Selecting Specific Columns",
+              "summary": "Practice selecting specific columns so you can use it in a simple SQL query or workflow.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Use Selecting Specific Columns in a simple SQL query or workflow.",
+                "Explain what result or output selecting specific columns should produce."
+              ]
+            },
+            {
+              "topicId": "query_structure_basics",
+              "title": "Query Structure Basics",
+              "summary": "Practice query structure basics so you can use it in a simple SQL query or workflow.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Use Query Structure Basics in a simple SQL query or workflow.",
+                "Explain what result or output query structure basics should produce."
+              ]
+            }
+          ]
+        },
+        {
+          "sectionSlug": "sql-v2-1-2",
+          "title": "Reading Data from a Table",
+          "topics": [
+            {
+              "topicId": "from_and_table_names",
+              "title": "FROM and Table Names",
+              "summary": "Practice from and table names so you can use it in a simple SQL query or workflow.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Use FROM and Table Names in a simple SQL query or workflow.",
+                "Explain what result or output from and table names should produce."
+              ]
+            },
+            {
+              "topicId": "choosing_the_right_columns",
+              "title": "Choosing the Right Columns",
+              "summary": "Practice choosing the right columns so you can use it in a simple SQL query or workflow.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Use Choosing the Right Columns in a simple SQL query or workflow.",
+                "Explain what result or output choosing the right columns should produce."
+              ]
+            },
+            {
+              "topicId": "viewing_clean_results",
+              "title": "Viewing Clean Results",
+              "summary": "Practice viewing clean results so you can use it in a simple SQL query or workflow.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Use Viewing Clean Results in a simple SQL query or workflow.",
+                "Explain what result or output viewing clean results should produce."
+              ]
+            },
+            {
+              "topicId": "writing_simple_readable_queries",
+              "title": "Writing Simple, Readable Queries",
+              "summary": "Practice writing simple, readable queries so you can use it in a simple SQL query or workflow.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Use Writing Simple, Readable Queries in a simple SQL query or workflow.",
+                "Explain what result or output writing simple, readable queries should produce."
+              ]
+            }
+          ]
+        },
+        {
+          "sectionSlug": "sql-v2-1-3",
+          "title": "SQL Syntax Basics",
+          "topics": [
+            {
+              "topicId": "keywords",
+              "title": "SQL Keywords",
+              "summary": "Practice SQL keywords so you can use it in a simple SQL query or workflow.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Use SQL Keywords in a simple SQL query or workflow.",
+                "Explain what result or output SQL keywords should produce."
+              ]
+            },
+            {
+              "topicId": "semicolons",
+              "title": "Semicolons",
+              "summary": "Practice semicolons so you can use it in a simple SQL query or workflow.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Use Semicolons in a simple SQL query or workflow.",
+                "Explain what result or output semicolons should produce."
+              ]
+            },
+            {
+              "topicId": "uppercase_vs_lowercase",
+              "title": "Uppercase vs. Lowercase",
+              "summary": "Practice uppercase vs. lowercase so you can use it in a simple SQL query or workflow.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Use Uppercase vs. Lowercase in a simple SQL query or workflow.",
+                "Explain what result or output uppercase vs. lowercase should produce."
+              ]
+            },
+            {
+              "topicId": "common_beginner_syntax_mistakes",
+              "title": "Common Beginner Syntax Mistakes",
+              "summary": "Practice common beginner syntax mistakes so you can use it in a simple SQL query or workflow.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Use Common Beginner Syntax Mistakes in a simple SQL query or workflow.",
+                "Explain what result or output common beginner syntax mistakes should produce."
+              ]
+            }
+          ]
+        },
+        {
+          "sectionSlug": "sql-v2-1-4",
+          "title": "Practice with Basic Queries",
+          "topics": [
+            {
+              "topicId": "query_one_column",
+              "title": "Query One Column",
+              "summary": "Practice query one column so you can use it in a simple SQL query or workflow.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Use Query One Column in a simple SQL query or workflow.",
+                "Explain what result or output query one column should produce."
+              ]
+            },
+            {
+              "topicId": "query_multiple_columns",
+              "title": "Query Multiple Columns",
+              "summary": "Practice query multiple columns so you can use it in a simple SQL query or workflow.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Use Query Multiple Columns in a simple SQL query or workflow.",
+                "Explain what result or output query multiple columns should produce."
+              ]
+            },
+            {
+              "topicId": "query_full_tables",
+              "title": "Query Full Tables",
+              "summary": "Practice query full tables so you can use it in a simple SQL query or workflow.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Use Query Full Tables in a simple SQL query or workflow.",
+                "Explain what result or output query full tables should produce."
+              ]
+            },
+            {
+              "topicId": "predicting_result_output",
+              "title": "Predicting Result Output",
+              "summary": "Practice predicting result output so you can use it in a simple SQL query or workflow.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Use Predicting Result Output in a simple SQL query or workflow.",
+                "Explain what result or output predicting result output should produce."
+              ]
+            }
+          ]
+        },
+        {
+          "sectionSlug": "sql-v2-1-module-project",
+          "title": "Module Project",
+          "role": "module_project",
+          "topics": [
+            {
+              "topicId": "module-1-product-starter-sheet-project",
+              "title": "Module 1 Product Starter Sheet Project",
+              "summary": "Build a clean product starter sheet by growing one SELECT query into a simple reference report.",
+              "minutes": 28,
+              "technical": true,
+              "learningGoals": [
+                "Carry a product query forward from one finished step to the next.",
+                "Select only the product columns that make a report easier to read."
+              ],
+              "practice": {
+                "projectFlow": "progressive"
+              }
+            }
+          ]
+        }
+      ],
+      "moduleProject": "Build a starter query sheet with beginner SELECT queries against a products table.",
+      "prefix": "sqlv2_1"
+    },
+    {
+      "moduleNumber": 2,
+      "moduleSlug": "sql-v2-2",
+      "title": "Filtering Data with WHERE",
+      "purpose": "Introduce decision-making in queries by teaching learners to keep only the rows they actually need.",
+      "datasetId": "products_catalog",
+      "coreSkill": "WHERE",
+      "learningObjectives": [
+        "Use WHERE to return only rows that match a condition.",
+        "Compare text and numbers with beginner SQL operators.",
+        "Combine conditions with AND, OR, and NOT.",
+        "Debug common filtering mistakes in simple SQL queries."
+      ],
+      "sections": [
+        {
+          "sectionSlug": "sql-v2-2-1",
+          "title": "Intro to Filtering",
+          "topics": [
+            {
+              "topicId": "why_filtering_matters",
+              "title": "Why Filtering Matters",
+              "summary": "Understand why filtering matters so you can explain the idea in beginner-friendly language.",
+              "minutes": 12,
+              "technical": false,
+              "learningGoals": [
+                "Describe why filtering matters in plain language.",
+                "Identify a beginner SQL scenario that depends on understanding why filtering matters."
+              ]
+            },
+            {
+              "topicId": "the_where_clause",
+              "title": "The WHERE Clause",
+              "summary": "Practice the where clause so you can use it in a simple SQL query or workflow.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Use The WHERE Clause in a simple SQL query or workflow.",
+                "Explain what result or output the where clause should produce."
+              ]
+            },
+            {
+              "topicId": "matching_exact_values",
+              "title": "Matching Exact Values",
+              "summary": "Practice matching exact values so you can use it in a simple SQL query or workflow.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Use Matching Exact Values in a simple SQL query or workflow.",
+                "Explain what result or output matching exact values should produce."
+              ]
+            },
+            {
+              "topicId": "filtering_numbers_and_text",
+              "title": "Filtering Numbers and Text",
+              "summary": "Practice filtering numbers and text so you can use it in a simple SQL query or workflow.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Use Filtering Numbers and Text in a simple SQL query or workflow.",
+                "Explain what result or output filtering numbers and text should produce."
+              ]
+            }
+          ]
+        },
+        {
+          "sectionSlug": "sql-v2-2-2",
+          "title": "Comparison Operators",
+          "topics": [
+            {
+              "topicId": "equals_comparison",
+              "title": "Equals Comparison",
+              "summary": "Practice equals comparison so you can use it in a simple SQL query or workflow.",
+              "minutes": 20,
+              "technical": true,
+              "learningGoals": [
+                "Use Equals Comparison in a simple SQL query or workflow.",
+                "Explain what result or output equals comparison should produce."
+              ]
+            },
+            {
+              "topicId": "not_equal_comparison",
+              "title": "Not-Equal Comparison",
+              "summary": "Practice not-equal comparison so you can use it in a simple SQL query or workflow.",
+              "minutes": 20,
+              "technical": true,
+              "learningGoals": [
+                "Use Not-Equal Comparison in a simple SQL query or workflow.",
+                "Explain what result or output not-equal comparison should produce."
+              ]
+            },
+            {
+              "topicId": "greater_than_comparison",
+              "title": "Greater-Than Comparison",
+              "summary": "Practice greater-than comparison so you can use it in a simple SQL query or workflow.",
+              "minutes": 20,
+              "technical": true,
+              "learningGoals": [
+                "Use Greater-Than Comparison in a simple SQL query or workflow.",
+                "Explain what result or output greater-than comparison should produce."
+              ]
+            },
+            {
+              "topicId": "less_than_comparison",
+              "title": "Less-Than Comparison",
+              "summary": "Practice less-than comparison so you can use it in a simple SQL query or workflow.",
+              "minutes": 20,
+              "technical": true,
+              "learningGoals": [
+                "Use Less-Than Comparison in a simple SQL query or workflow.",
+                "Explain what result or output less-than comparison should produce."
+              ]
+            },
+            {
+              "topicId": "greater_than_or_equal_and_less_than_or_equal",
+              "title": "Greater-Than-or-Equal and Less-Than-or-Equal",
+              "summary": "Practice greater-than-or-equal and less-than-or-equal so you can use it in a simple SQL query or workflow.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Use Greater-Than-or-Equal and Less-Than-or-Equal in a simple SQL query or workflow.",
+                "Explain what result or output greater-than-or-equal and less-than-or-equal should produce."
+              ]
+            },
+            {
+              "topicId": "choosing_the_right_comparison",
+              "title": "Choosing the Right Comparison",
+              "summary": "Practice choosing the right comparison so you can use it in a simple SQL query or workflow.",
+              "minutes": 20,
+              "technical": true,
+              "learningGoals": [
+                "Use Choosing the Right Comparison in a simple SQL query or workflow.",
+                "Explain what result or output choosing the right comparison should produce."
+              ]
+            }
+          ]
+        },
+        {
+          "sectionSlug": "sql-v2-2-3",
+          "title": "Filtering with Multiple Conditions",
+          "topics": [
+            {
+              "topicId": "and_conditions",
+              "title": "AND Conditions",
+              "summary": "Practice and conditions so you can use it in a simple SQL query or workflow.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Use AND Conditions in a simple SQL query or workflow.",
+                "Explain what result or output and conditions should produce."
+              ]
+            },
+            {
+              "topicId": "or_conditions",
+              "title": "OR Conditions",
+              "summary": "Practice or conditions so you can use it in a simple SQL query or workflow.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Use OR Conditions in a simple SQL query or workflow.",
+                "Explain what result or output or conditions should produce."
+              ]
+            },
+            {
+              "topicId": "not_conditions",
+              "title": "NOT Conditions",
+              "summary": "Practice not conditions so you can use it in a simple SQL query or workflow.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Use NOT Conditions in a simple SQL query or workflow.",
+                "Explain what result or output not conditions should produce."
+              ]
+            },
+            {
+              "topicId": "combining_conditions_safely",
+              "title": "Combining Conditions Safely",
+              "summary": "Practice combining conditions safely so you can use it in a simple SQL query or workflow.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Use Combining Conditions Safely in a simple SQL query or workflow.",
+                "Explain what result or output combining conditions safely should produce."
+              ]
+            }
+          ]
+        },
+        {
+          "sectionSlug": "sql-v2-2-4",
+          "title": "Beginner Filtering Practice",
+          "topics": [
+            {
+              "topicId": "filter_by_number",
+              "title": "Filter By Number",
+              "summary": "Practice filter by number so you can use it in a simple SQL query or workflow.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Use Filter By Number in a simple SQL query or workflow.",
+                "Explain what result or output filter by number should produce."
+              ]
+            },
+            {
+              "topicId": "filter_by_text",
+              "title": "Filter By Text",
+              "summary": "Practice filter by text so you can use it in a simple SQL query or workflow.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Use Filter By Text in a simple SQL query or workflow.",
+                "Explain what result or output filter by text should produce."
+              ]
+            },
+            {
+              "topicId": "filter_by_more_than_one_rule",
+              "title": "Filter By More Than One Rule",
+              "summary": "Practice filter by more than one rule so you can use it in a simple SQL query or workflow.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Use Filter By More Than One Rule in a simple SQL query or workflow.",
+                "Explain what result or output filter by more than one rule should produce."
+              ]
+            },
+            {
+              "topicId": "avoiding_filtering_mistakes",
+              "title": "Avoiding Filtering Mistakes",
+              "summary": "Practice avoiding filtering mistakes so you can use it in a simple SQL query or workflow.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Use Avoiding Filtering Mistakes in a simple SQL query or workflow.",
+                "Explain what result or output avoiding filtering mistakes should produce."
+              ]
+            }
+          ]
+        },
+        {
+          "sectionSlug": "sql-v2-2-module-project",
+          "title": "Module Project",
+          "role": "module_project",
+          "topics": [
+            {
+              "topicId": "module-2-inventory-watchlist-project",
+              "title": "Module 2 Inventory Watchlist Project",
+              "summary": "Build an inventory watchlist by adding one practical filter at a time to the same working query.",
+              "minutes": 28,
+              "technical": true,
+              "learningGoals": [
+                "Refine one inventory query through multiple filtering steps.",
+                "Use comparisons and logical conditions to isolate the products that need attention."
+              ],
+              "practice": {
+                "projectFlow": "progressive"
+              }
+            }
+          ]
+        }
+      ],
+      "moduleProject": "Create a data-detective worksheet with filtering prompts and SQL answers.",
+      "prefix": "sqlv2_2"
+    },
+    {
+      "moduleNumber": 3,
+      "moduleSlug": "sql-v2-3",
+      "title": "Sorting and Limiting Results",
+      "purpose": "Help beginners control output so answers are easier to read, rank, and compare.",
+      "datasetId": "products_catalog",
+      "coreSkill": "ORDER BY and LIMIT",
+      "learningObjectives": [
+        "Sort query results with ORDER BY.",
+        "Use ASC and DESC to control sort direction.",
+        "Use LIMIT to show a smaller result set.",
+        "Combine filtering, sorting, and limiting in one query."
+      ],
+      "sections": [
+        {
+          "sectionSlug": "sql-v2-3-1",
+          "title": "Sorting Data",
+          "topics": [
+            {
+              "topicId": "why_sorting_matters",
+              "title": "Why Sorting Matters",
+              "summary": "Understand why sorting matters so you can explain the idea in beginner-friendly language.",
+              "minutes": 12,
+              "technical": false,
+              "learningGoals": [
+                "Describe why sorting matters in plain language.",
+                "Identify a beginner SQL scenario that depends on understanding why sorting matters."
+              ]
+            },
+            {
+              "topicId": "order_by",
+              "title": "ORDER BY",
+              "summary": "Practice order by so you can use it in a simple SQL query or workflow.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Use ORDER BY in a simple SQL query or workflow.",
+                "Explain what result or output order by should produce."
+              ]
+            },
+            {
+              "topicId": "ascending_order",
+              "title": "Ascending Order",
+              "summary": "Practice ascending order so you can use it in a simple SQL query or workflow.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Use Ascending Order in a simple SQL query or workflow.",
+                "Explain what result or output ascending order should produce."
+              ]
+            },
+            {
+              "topicId": "descending_order",
+              "title": "Descending Order",
+              "summary": "Practice descending order so you can use it in a simple SQL query or workflow.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Use Descending Order in a simple SQL query or workflow.",
+                "Explain what result or output descending order should produce."
+              ]
+            }
+          ]
+        },
+        {
+          "sectionSlug": "sql-v2-3-2",
+          "title": "Sorting by Multiple Columns",
+          "topics": [
+            {
+              "topicId": "primary_sort",
+              "title": "Primary Sort",
+              "summary": "Practice primary sort so you can use it in a simple SQL query or workflow.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Use Primary Sort in a simple SQL query or workflow.",
+                "Explain what result or output primary sort should produce."
+              ]
+            },
+            {
+              "topicId": "secondary_sort",
+              "title": "Secondary Sort",
+              "summary": "Practice secondary sort so you can use it in a simple SQL query or workflow.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Use Secondary Sort in a simple SQL query or workflow.",
+                "Explain what result or output secondary sort should produce."
+              ]
+            },
+            {
+              "topicId": "sorting_text",
+              "title": "Sorting Text",
+              "summary": "Practice sorting text so you can use it in a simple SQL query or workflow.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Use Sorting Text in a simple SQL query or workflow.",
+                "Explain what result or output sorting text should produce."
+              ]
+            },
+            {
+              "topicId": "sorting_numbers_and_dates",
+              "title": "Sorting Numbers and Dates",
+              "summary": "Practice sorting numbers and dates so you can use it in a simple SQL query or workflow.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Use Sorting Numbers and Dates in a simple SQL query or workflow.",
+                "Explain what result or output sorting numbers and dates should produce."
+              ]
+            }
+          ]
+        },
+        {
+          "sectionSlug": "sql-v2-3-3",
+          "title": "Limiting Output",
+          "topics": [
+            {
+              "topicId": "why_limit_results",
+              "title": "Why Limit Results",
+              "summary": "Understand why limit results so you can explain the idea in beginner-friendly language.",
+              "minutes": 12,
+              "technical": false,
+              "learningGoals": [
+                "Describe why limit results in plain language.",
+                "Identify a beginner SQL scenario that depends on understanding why limit results."
+              ]
+            },
+            {
+              "topicId": "limit_clause",
+              "title": "The LIMIT Clause",
+              "summary": "Practice the limit clause so you can use it in a simple SQL query or workflow.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Use The LIMIT Clause in a simple SQL query or workflow.",
+                "Explain what result or output the limit clause should produce."
+              ]
+            },
+            {
+              "topicId": "top_rows_only",
+              "title": "Top Rows Only",
+              "summary": "Practice top rows only so you can use it in a simple SQL query or workflow.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Use Top Rows Only in a simple SQL query or workflow.",
+                "Explain what result or output top rows only should produce."
+              ]
+            },
+            {
+              "topicId": "combining_order_by_with_limit",
+              "title": "Combining ORDER BY with LIMIT",
+              "summary": "Practice combining order by with limit so you can use it in a simple SQL query or workflow.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Use Combining ORDER BY with LIMIT in a simple SQL query or workflow.",
+                "Explain what result or output combining order by with limit should produce."
+              ]
+            }
+          ]
+        },
+        {
+          "sectionSlug": "sql-v2-3-4",
+          "title": "Practice with Output Control",
+          "topics": [
+            {
+              "topicId": "find_highest_values",
+              "title": "Find Highest Values",
+              "summary": "Practice find highest values so you can use it in a simple SQL query or workflow.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Use Find Highest Values in a simple SQL query or workflow.",
+                "Explain what result or output find highest values should produce."
+              ]
+            },
+            {
+              "topicId": "find_lowest_values",
+              "title": "Find Lowest Values",
+              "summary": "Practice find lowest values so you can use it in a simple SQL query or workflow.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Use Find Lowest Values in a simple SQL query or workflow.",
+                "Explain what result or output find lowest values should produce."
+              ]
+            },
+            {
+              "topicId": "show_top_5_records",
+              "title": "Show Top 5 Records",
+              "summary": "Practice show top 5 records so you can use it in a simple SQL query or workflow.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Use Show Top 5 Records in a simple SQL query or workflow.",
+                "Explain what result or output show top 5 records should produce."
+              ]
+            },
+            {
+              "topicId": "build_clear_result_sets",
+              "title": "Build Clear Result Sets",
+              "summary": "Practice build clear result sets so you can use it in a simple SQL query or workflow.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Use Build Clear Result Sets in a simple SQL query or workflow.",
+                "Explain what result or output build clear result sets should produce."
+              ]
+            }
+          ]
+        },
+        {
+          "sectionSlug": "sql-v2-3-module-project",
+          "title": "Module Project",
+          "role": "module_project",
+          "topics": [
+            {
+              "topicId": "module-3-sales-leaderboard-project",
+              "title": "Module 3 Sales Leaderboard Project",
+              "summary": "Turn a rough product query into a ranked leaderboard by layering sorting and limiting steps one by one.",
+              "minutes": 28,
+              "technical": true,
+              "learningGoals": [
+                "Grow a ranking query from a plain result set into a focused leaderboard.",
+                "Use ORDER BY and LIMIT to make a product report easy to scan."
+              ],
+              "practice": {
+                "projectFlow": "progressive"
+              }
+            }
+          ]
+        }
+      ],
+      "moduleProject": "Build a ranked product report using sorting and limiting.",
+      "prefix": "sqlv2_3"
+    },
+    {
+      "moduleNumber": 4,
+      "moduleSlug": "sql-v2-4",
+      "title": "Working with Text, Lists, Ranges, and NULL",
+      "purpose": "Expand filtering to real-world cases like partial text, multiple choices, ranges, and missing values.",
+      "datasetId": "customers_cleanup",
+      "coreSkill": "LIKE, IN, BETWEEN, NULL",
+      "learningObjectives": [
+        "Search partial text with LIKE and wildcards.",
+        "Filter multiple values with IN and NOT IN.",
+        "Filter ranges with BETWEEN.",
+        "Find missing and present values with IS NULL and IS NOT NULL."
+      ],
+      "sections": [
+        {
+          "sectionSlug": "sql-v2-4-1",
+          "title": "Text Matching",
+          "topics": [
+            {
+              "topicId": "intro_to_like",
+              "title": "Intro to LIKE",
+              "summary": "Practice intro to LIKE so you can use it in a simple SQL query or workflow.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Use Intro to LIKE in a simple SQL query or workflow.",
+                "Explain what result or output intro to LIKE should produce."
+              ]
+            },
+            {
+              "topicId": "percent_wildcard",
+              "title": "Percent Wildcard (%)",
+              "summary": "Practice percent wildcard (%) so you can use it in a simple SQL query or workflow.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Use Percent Wildcard (%) in a simple SQL query or workflow.",
+                "Explain what result or output percent wildcard (%) should produce."
+              ]
+            },
+            {
+              "topicId": "underscore_wildcard",
+              "title": "Underscore Wildcard (_)",
+              "summary": "Practice underscore wildcard (_) so you can use it in a simple SQL query or workflow.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Use Underscore Wildcard (_) in a simple SQL query or workflow.",
+                "Explain what result or output underscore wildcard (_) should produce."
+              ]
+            },
+            {
+              "topicId": "searching_partial_text",
+              "title": "Searching Partial Text",
+              "summary": "Practice searching partial text so you can use it in a simple SQL query or workflow.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Use Searching Partial Text in a simple SQL query or workflow.",
+                "Explain what result or output searching partial text should produce."
+              ]
+            }
+          ]
+        },
+        {
+          "sectionSlug": "sql-v2-4-2",
+          "title": "Lists and Ranges",
+          "topics": [
+            {
+              "topicId": "in_list_filter",
+              "title": "IN List Filter",
+              "summary": "Practice in list filter so you can use it in a simple SQL query or workflow.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Use IN List Filter in a simple SQL query or workflow.",
+                "Explain what result or output in list filter should produce."
+              ]
+            },
+            {
+              "topicId": "not_in_list_filter",
+              "title": "NOT IN List Filter",
+              "summary": "Practice NOT IN list filter so you can use it in a simple SQL query or workflow.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Use NOT IN List Filter in a simple SQL query or workflow.",
+                "Explain what result or output NOT IN list filter should produce."
+              ]
+            },
+            {
+              "topicId": "between_range_filter",
+              "title": "BETWEEN Range Filter",
+              "summary": "Practice between range filter so you can use it in a simple SQL query or workflow.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Use BETWEEN Range Filter in a simple SQL query or workflow.",
+                "Explain what result or output between range filter should produce."
+              ]
+            },
+            {
+              "topicId": "range_filtering_practice",
+              "title": "Range Filtering Practice",
+              "summary": "Practice range filtering practice so you can use it in a simple SQL query or workflow.",
+              "minutes": 22,
+              "technical": true,
+              "learningGoals": [
+                "Use Range Filtering Practice in a simple SQL query or workflow.",
+                "Explain what result or output range filtering practice should produce."
+              ]
+            }
+          ]
+        },
+        {
+          "sectionSlug": "sql-v2-4-3",
+          "title": "Missing Data",
+          "topics": [
+            {
+              "topicId": "what_null_means",
+              "title": "What NULL Means",
+              "summary": "Practice what NULL means so you can use it in a simple SQL query or workflow.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Use What NULL Means in a simple SQL query or workflow.",
+                "Explain what result or output what NULL means should produce."
+              ]
+            },
+            {
+              "topicId": "is_null",
+              "title": "IS NULL",
+              "summary": "Practice is NULL so you can use it in a simple SQL query or workflow.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Use IS NULL in a simple SQL query or workflow.",
+                "Explain what result or output is NULL should produce."
+              ]
+            },
+            {
+              "topicId": "is_not_null",
+              "title": "IS NOT NULL",
+              "summary": "Practice is not NULL so you can use it in a simple SQL query or workflow.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Use IS NOT NULL in a simple SQL query or workflow.",
+                "Explain what result or output is not NULL should produce."
+              ]
+            },
+            {
+              "topicId": "common_null_mistakes",
+              "title": "Common NULL Mistakes",
+              "summary": "Practice common NULL mistakes so you can use it in a simple SQL query or workflow.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Use Common NULL Mistakes in a simple SQL query or workflow.",
+                "Explain what result or output common NULL mistakes should produce."
+              ]
+            }
+          ]
+        },
+        {
+          "sectionSlug": "sql-v2-4-4",
+          "title": "Search and Cleanup Practice",
+          "topics": [
+            {
+              "topicId": "search_names",
+              "title": "Search Names",
+              "summary": "Practice search names so you can use it in a simple SQL query or workflow.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Use Search Names in a simple SQL query or workflow.",
+                "Explain what result or output search names should produce."
+              ]
+            },
+            {
+              "topicId": "filter_statuses",
+              "title": "Filter Statuses",
+              "summary": "Practice filter statuses so you can use it in a simple SQL query or workflow.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Use Filter Statuses in a simple SQL query or workflow.",
+                "Explain what result or output filter statuses should produce."
+              ]
+            },
+            {
+              "topicId": "find_missing_data",
+              "title": "Find Missing Data",
+              "summary": "Practice find missing data so you can use it in a simple SQL query or workflow.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Use Find Missing Data in a simple SQL query or workflow.",
+                "Explain what result or output find missing data should produce."
+              ]
+            },
+            {
+              "topicId": "combine_text_and_null_filters",
+              "title": "Combine Text and NULL Filters",
+              "summary": "Practice combine text and NULL filters so you can use it in a simple SQL query or workflow.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Use Combine Text and NULL Filters in a simple SQL query or workflow.",
+                "Explain what result or output combine text and NULL filters should produce."
+              ]
+            }
+          ]
+        },
+        {
+          "sectionSlug": "sql-v2-4-module-project",
+          "title": "Module Project",
+          "role": "module_project",
+          "topics": [
+            {
+              "topicId": "module-4-customer-cleanup-project",
+              "title": "Module 4 Customer Cleanup Project",
+              "summary": "Build a customer cleanup worksheet by combining text, list, range, and NULL filters in one steady project flow.",
+              "minutes": 30,
+              "technical": true,
+              "learningGoals": [
+                "Carry a customer cleanup query through several realistic filtering revisions.",
+                "Combine LIKE, IN, BETWEEN, and NULL checks in one report."
+              ],
+              "practice": {
+                "projectFlow": "progressive"
+              }
+            }
+          ]
+        }
+      ],
+      "moduleProject": "Create a search-and-cleanup worksheet for a customer table with missing or inconsistent information.",
+      "prefix": "sqlv2_4"
+    },
+    {
+      "moduleNumber": 5,
+      "moduleSlug": "sql-v2-5",
+      "role": "capstone",
+      "title": "Capstone: Customer Follow-Up Report",
+      "purpose": "Pull the course skills together in one final reporting task that feels like a beginner analyst handoff.",
+      "datasetId": "customers_cleanup",
+      "coreSkill": "Integrated SQL reporting",
+      "learningObjectives": [
+        "Combine selection, filtering, ordering, and limiting in one practical query flow.",
+        "Revise a working query without losing earlier progress.",
+        "Build a clean report that highlights real customer follow-up needs."
+      ],
+      "sections": [
+        {
+          "sectionSlug": "sql-v2-5-capstone-project",
+          "title": "Capstone Project",
+          "role": "capstone",
+          "topics": [
+            {
+              "topicId": "module-5-customer-follow-up-capstone",
+              "title": "Module 5 Customer Follow-Up Capstone",
+              "summary": "Build a real-world customer follow-up report by improving one working query step by step until the final handoff is ready.",
+              "minutes": 36,
+              "technical": true,
+              "learningGoals": [
+                "Sustain one SQL project through several realistic revisions.",
+                "Ship a final customer report that combines the core SQL foundations skills from the course."
+              ],
+              "practice": {
+                "projectFlow": "progressive"
+              }
+            }
+          ]
+        }
+      ],
+      "moduleProject": "Create a final customer follow-up report that surfaces the most important real records for a teammate to review.",
+      "prefix": "sqlv2_5"
+    }
+  ],
+  "topicPolicies": {
+    "what_sql_means": {
+      "teachingMode": "conceptual-only",
+      "generationTargets": {
+        "quizBankMin": 4,
+        "quizBankTarget": 5,
+        "quizVisibleDefault": 4,
+        "quizVisibleMax": 5,
+        "projectCodeInputMin": 0,
+        "projectCodeInputTarget": 0,
+        "projectCodeInputMax": 1
+      }
+    },
+    "what_a_database_is": {
+      "teachingMode": "conceptual-only",
+      "generationTargets": {
+        "quizBankMin": 4,
+        "quizBankTarget": 5,
+        "quizVisibleDefault": 4,
+        "quizVisibleMax": 5,
+        "projectCodeInputMin": 0,
+        "projectCodeInputTarget": 0,
+        "projectCodeInputMax": 1
+      }
+    },
+    "why_sql_is_useful": {
+      "teachingMode": "conceptual-only",
+      "generationTargets": {
+        "quizBankMin": 4,
+        "quizBankTarget": 5,
+        "quizVisibleDefault": 4,
+        "quizVisibleMax": 5,
+        "projectCodeInputMin": 0,
+        "projectCodeInputTarget": 0,
+        "projectCodeInputMax": 1
+      }
+    },
+    "real_world_examples_of_databases": {
+      "teachingMode": "conceptual-only",
+      "generationTargets": {
+        "quizBankMin": 4,
+        "quizBankTarget": 5,
+        "quizVisibleDefault": 4,
+        "quizVisibleMax": 5,
+        "projectCodeInputMin": 0,
+        "projectCodeInputTarget": 0,
+        "projectCodeInputMax": 1
+      }
+    },
+    "rows_and_columns": {
+      "teachingMode": "conceptual-only",
+      "generationTargets": {
+        "quizBankMin": 5,
+        "quizBankTarget": 6,
+        "quizVisibleDefault": 4,
+        "quizVisibleMax": 6,
+        "projectCodeInputMin": 0,
+        "projectCodeInputTarget": 1,
+        "projectCodeInputMax": 1
+      }
+    },
+    "records_and_fields": {
+      "teachingMode": "conceptual-only",
+      "generationTargets": {
+        "quizBankMin": 5,
+        "quizBankTarget": 6,
+        "quizVisibleDefault": 4,
+        "quizVisibleMax": 6,
+        "projectCodeInputMin": 0,
+        "projectCodeInputTarget": 1,
+        "projectCodeInputMax": 1
+      }
+    },
+    "table_names_and_column_names": {
+      "teachingMode": "conceptual-only",
+      "generationTargets": {
+        "quizBankMin": 5,
+        "quizBankTarget": 6,
+        "quizVisibleDefault": 4,
+        "quizVisibleMax": 6,
+        "projectCodeInputMin": 0,
+        "projectCodeInputTarget": 1,
+        "projectCodeInputMax": 1
+      }
+    },
+    "reading_data_like_a_spreadsheet": {
+      "teachingMode": "conceptual-only",
+      "generationTargets": {
+        "quizBankMin": 5,
+        "quizBankTarget": 6,
+        "quizVisibleDefault": 4,
+        "quizVisibleMax": 6,
+        "projectCodeInputMin": 0,
+        "projectCodeInputTarget": 1,
+        "projectCodeInputMax": 1
+      }
+    },
+    "how_data_is_organized": {
+      "teachingMode": "conceptual-only",
+      "generationTargets": {
+        "quizBankMin": 5,
+        "quizBankTarget": 6,
+        "quizVisibleDefault": 4,
+        "quizVisibleMax": 6,
+        "projectCodeInputMin": 0,
+        "projectCodeInputTarget": 1,
+        "projectCodeInputMax": 1
+      }
+    },
+    "one_table_vs_multiple_tables": {
+      "teachingMode": "conceptual-only",
+      "generationTargets": {
+        "quizBankMin": 5,
+        "quizBankTarget": 6,
+        "quizVisibleDefault": 4,
+        "quizVisibleMax": 6,
+        "projectCodeInputMin": 0,
+        "projectCodeInputTarget": 1,
+        "projectCodeInputMax": 1
+      }
+    },
+    "intro_to_keys": {
+      "teachingMode": "conceptual-only",
+      "generationTargets": {
+        "quizBankMin": 5,
+        "quizBankTarget": 6,
+        "quizVisibleDefault": 4,
+        "quizVisibleMax": 6,
+        "projectCodeInputMin": 0,
+        "projectCodeInputTarget": 1,
+        "projectCodeInputMax": 1
+      }
+    },
+    "thinking_in_questions_and_answers": {
+      "teachingMode": "conceptual-only",
+      "generationTargets": {
+        "quizBankMin": 5,
+        "quizBankTarget": 6,
+        "quizVisibleDefault": 4,
+        "quizVisibleMax": 6,
+        "projectCodeInputMin": 0,
+        "projectCodeInputTarget": 1,
+        "projectCodeInputMax": 1
+      }
+    },
+    "where_sql_runs": {
+      "teachingMode": "ui-guided",
+      "generationTargets": {
+        "quizBankMin": 5,
+        "quizBankTarget": 6,
+        "quizVisibleDefault": 4,
+        "quizVisibleMax": 6,
+        "projectCodeInputMin": 1,
+        "projectCodeInputTarget": 1,
+        "projectCodeInputMax": 2
+      }
+    },
+    "sql_editor_basics": {
+      "teachingMode": "ui-guided",
+      "generationTargets": {
+        "quizBankMin": 5,
+        "quizBankTarget": 6,
+        "quizVisibleDefault": 4,
+        "quizVisibleMax": 6,
+        "projectCodeInputMin": 1,
+        "projectCodeInputTarget": 1,
+        "projectCodeInputMax": 2
+      }
+    },
+    "running_your_first_query": {
+      "teachingMode": "ui-guided",
+      "generationTargets": {
+        "quizBankMin": 6,
+        "quizBankTarget": 7,
+        "quizVisibleDefault": 4,
+        "quizVisibleMax": 6,
+        "projectCodeInputMin": 1,
+        "projectCodeInputTarget": 2,
+        "projectCodeInputMax": 2
+      }
+    },
+    "reading_query_results": {
+      "teachingMode": "ui-guided",
+      "generationTargets": {
+        "quizBankMin": 5,
+        "quizBankTarget": 6,
+        "quizVisibleDefault": 4,
+        "quizVisibleMax": 6,
+        "projectCodeInputMin": 1,
+        "projectCodeInputTarget": 1,
+        "projectCodeInputMax": 2
+      }
+    }
+  },
+  "assessmentPolicy": {
+    "topicExerciseMin": 4,
+    "technicalTopicCodeInputMin": 1,
+    "requireModuleProject": true,
+    "capstoneRequired": false,
+    "defaultExerciseMix": {
+      "single_choice": 0.12,
+      "multi_choice": 0.12,
+      "drag_reorder": 0.08,
+      "fill_blank_choice": 0.18,
+      "code_input": 0.5
+    }
+  },
+  "validationPolicy": {
+    "allowedSqlConcepts": [
+      "SELECT",
+      "FROM",
+      "WHERE",
+      "comparison_operators",
+      "AND",
+      "OR",
+      "NOT",
+      "ORDER BY",
+      "ASC",
+      "DESC",
+      "LIMIT",
+      "LIKE",
+      "IN",
+      "NOT IN",
+      "BETWEEN",
+      "IS NULL",
+      "IS NOT NULL"
+    ],
+    "disallowedSqlConcepts": [
+      "JOIN",
+      "GROUP BY",
+      "HAVING",
+      "INSERT",
+      "UPDATE",
+      "DELETE",
+      "CREATE TABLE",
+      "subquery"
+    ],
+    "datasets": [
+      "students_intro",
+      "products_catalog",
+      "customers_cleanup"
+    ],
+    "goldenTestsRequired": true,
+    "requireMappedImages": true,
+    "requireResolvedI18n": true
+  }
+}

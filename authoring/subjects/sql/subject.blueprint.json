@@ -5,7 +5,7 @@
   "title": "SQL for Beginners",
   "summary": "A complete beginner SQL path from database foundations through reporting, joins, data management, database design, and portfolio projects.",
   "courseOrder": [
-    "sql-foundations",
+    "sql-v2",
     "sql-analysis-reporting",
     "multi-table-sql",
     "sql-data-management",
@@ -13,7 +13,7 @@
   ],
   "milestones": [
     {
-      "courseSlug": "sql-foundations",
+      "courseSlug": "sql-v2",
       "outcome": "Read and filter data from single tables."
     },
     {

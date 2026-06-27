@@ -139,6 +139,20 @@ export type ReviewCardProgressMeta = {
     legacyProgressKeys?: string[];
 };
 
+export type ReviewCardToolsSpec = {
+    /**
+     * Controls whether the right Tools rail opens by default for this card.
+     * Missing values preserve legacy behavior; the runtime still keeps Tools
+     * visible for cards that require a workspace.
+     */
+    defaultVisible?: boolean;
+    /**
+     * Controls whether learners may manually open Tools for this card.
+     * Missing values allow opening so older bundles keep working.
+     */
+    allowOpen?: boolean;
+};
+
 export type ReviewVideoCard = ReviewCardProgressMeta & {
     type: "video";
     id: string;
@@ -149,6 +163,7 @@ export type ReviewVideoCard = ReviewCardProgressMeta & {
     posterUrl?: string;
     captionMarkdown?: string;
     spec?: any;
+    tools?: ReviewCardToolsSpec | null;
 };
 
 export type ReviewCard =
@@ -159,6 +174,7 @@ export type ReviewCard =
     markdown: string;
     tryIt?: ReviewEmbeddedTryIt | null;
     spec?: any;
+    tools?: ReviewCardToolsSpec | null;
 })
     | (ReviewCardProgressMeta & {
     type: "sketch";
@@ -169,6 +185,7 @@ export type ReviewCard =
     spec?: any;
     height?: number;
     props?: any;
+    tools?: ReviewCardToolsSpec | null;
 })
     | (ReviewCardProgressMeta & {
     type: "quiz";
@@ -176,6 +193,7 @@ export type ReviewCard =
     title?: string;
     passScore?: number;
     spec: ReviewQuizSpec;
+    tools?: ReviewCardToolsSpec | null;
 })
     | (ReviewCardProgressMeta & {
     type: "project";
@@ -184,6 +202,7 @@ export type ReviewCard =
     passScore?: number;
     tryIt?: boolean | string | null;
     spec: ReviewProjectSpec;
+    tools?: ReviewCardToolsSpec | null;
 })
     | ReviewVideoCard;
 

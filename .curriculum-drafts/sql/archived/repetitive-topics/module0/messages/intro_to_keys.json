@@ -1,0 +1,536 @@
+{
+  "topics": {
+    "sql--sql-v2--draft": {
+      "sql--sql-v2--draft-0": {
+        "intro_to_keys": {
+          "label": "Intro to Keys",
+          "summary": "Learn why an ID column helps identify rows clearly, even before you start joining tables.",
+          "cards": {
+            "sketch0": {
+              "title": "What a key does"
+            },
+            "sketch1": {
+              "title": "A key is different from an ordinary column"
+            },
+            "sketch2": {
+              "title": "Primary key as the main row identifier"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Use an ID column to identify rows"
+            }
+          },
+          "projectSteps": {
+            "ci_show_all_students": {
+              "title": "Guided check: show every student row"
+            },
+            "ci_show_id_and_name": {
+              "title": "Guided check: show the key with names"
+            },
+            "ci_show_id_name_city": {
+              "title": "Guided check: read key plus details"
+            }
+          },
+          "quiz": {
+            "sc-key-purpose": {
+              "title": "What is a key for?",
+              "prompt": "In a database table, what is the main purpose of a key such as `id`?",
+              "hint": "Think about how the database tells one row apart from another.",
+              "help": {
+                "concept": "A key is used to identify rows clearly. In this topic, `id` works as the row identifier in the `students` table.",
+                "hint_1": "Compare `id` with columns like `grade` or `city`, which can repeat across multiple rows.",
+                "hint_2": "Look for the choice about uniquely pointing to one row, not just describing the row."
+              },
+              "options": {
+                "a": "To uniquely identify a row",
+                "b": "To sort rows automatically",
+                "c": "To make every text value uppercase",
+                "d": "To hide columns from a query"
+              }
+            },
+            "sc-best-key-column": {
+              "title": "Best key candidate",
+              "prompt": "In the `students` table with columns `id`, `name`, `grade`, `age`, and `city`, which column is the best choice for identifying each row?",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "options": {
+                "a": "grade",
+                "b": "city",
+                "c": "id",
+                "d": "age"
+              }
+            },
+            "mc-columns-can-repeat": {
+              "title": "Columns that can repeat",
+              "prompt": "Choose all columns from the `students` table that clearly repeat in the sample data.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "options": {
+                "a": "grade",
+                "b": "age",
+                "c": "city",
+                "d": "id"
+              }
+            },
+            "mc-key-characteristics": {
+              "title": "Signs of a good key",
+              "prompt": "Choose all statements that describe why `id` is a strong key column in the `students` table.",
+              "hint": "Think about what makes a row identifier reliable.",
+              "help": {
+                "concept": "A strong key should identify one row clearly and avoid repeated values. It should be more stable than descriptive columns like city or grade.",
+                "hint_1": "Good key ideas include uniqueness and clear row identification.",
+                "hint_2": "Select the statements about identifying one row and avoiding repeated values, not statements about sorting or display style."
+              },
+              "options": {
+                "a": "It is meant to point to one specific row.",
+                "b": "Its values should not repeat across rows.",
+                "c": "It automatically sorts the table alphabetically.",
+                "d": "It is more reliable than using grade or city as the row identifier."
+              }
+            },
+            "dr-read-query-order": {
+              "title": "Read a simple query in order",
+              "prompt": "Arrange these parts in the correct order to form a valid query that shows `id` and `name` from the `students` table.",
+              "hint": "Arrange the pieces by following the order introduced in the lesson.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "SELECT",
+                "t2": "id, name",
+                "t3": "FROM",
+                "t4": "students"
+              }
+            },
+            "dr-key-thinking-order": {
+              "title": "Reason about a key",
+              "prompt": "Put these ideas in a sensible order for deciding whether a column is a good key.",
+              "hint": "Arrange the pieces by following the order introduced in the lesson.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "Pick a column to inspect",
+                "t2": "Check whether values repeat",
+                "t3": "Decide whether one value points to one row",
+                "t4": "Choose it as a strong key candidate"
+              }
+            },
+            "fb-primary-key-schema": {
+              "title": "Complete the schema phrase",
+              "prompt": "Fill in the missing word to complete the schema idea for the `students` table.",
+              "hint": "The schema says `id INTEGER PRIMARY the missing term`.",
+              "help": {
+                "concept": "A primary the missing term is the main identifier for rows in a table. In this schema, `id` has that role.",
+                "hint_1": "The missing word is the database term for the main row identifier.",
+                "hint_2": "It is the same word used after `PRIMARY` in the schema definition."
+              },
+              "template": "`id INTEGER PRIMARY [blank1]`",
+              "choices": [
+                "FROM",
+                "KEY",
+                "TABLE",
+                "ROW"
+              ]
+            },
+            "fb-select-key-column": {
+              "title": "Complete the query",
+              "prompt": "Fill in the missing column name so the query asks for the key column from `students`.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "template": "SELECT [blank1]\nFROM students;",
+              "choices": [
+                "grade",
+                "city",
+                "id",
+                "name"
+              ]
+            },
+            "ci-show-all-students": {
+              "title": "Guided check: show every student row",
+              "prompt": "Complete a simple SELECT query that shows all columns and all rows from the `students` table. Use the SQL editor, click Run query, and check the results table.",
+              "hint": "Follow the SELECT ... FROM ... pattern from the lesson.",
+              "help": {
+                "concept": "This guided SQL check uses a read-only SELECT query to help you connect the lesson idea to the results table.",
+                "hint_1": "Start with SELECT, choose the requested column or columns, then name the students table with FROM.",
+                "hint_2": "Run the query and compare the results table with the prompt."
+              },
+              "starterCode": "-- Show all rows and columns from students\nSELECT \nFROM students;"
+            },
+            "ci-show-id-and-name": {
+              "title": "Guided check: show the key with names",
+              "prompt": "Complete a simple SELECT query that shows only the `id` and `name` columns from the `students` table. Use the SQL editor, click Run query, and check that the results table has exactly those two columns.",
+              "hint": "Follow the SELECT ... FROM ... pattern from the lesson.",
+              "help": {
+                "concept": "This guided SQL check uses a read-only SELECT query to help you connect the lesson idea to the results table.",
+                "hint_1": "Start with SELECT, choose the requested column or columns, then name the students table with FROM.",
+                "hint_2": "Run the query and compare the results table with the prompt."
+              },
+              "starterCode": "-- Show only the key column and the student name\nSELECT \nFROM students;"
+            },
+            "ci-show-id-name-city": {
+              "title": "Guided check: read key plus details",
+              "prompt": "Complete a simple SELECT query that shows the `id`, `name`, and `city` columns from the `students` table. Use the SQL editor, click Run query, and use the results table to compare the key column with a repeating detail column like city.",
+              "hint": "Follow the SELECT ... FROM ... pattern from the lesson.",
+              "help": {
+                "concept": "This guided SQL check uses a read-only SELECT query to help you connect the lesson idea to the results table.",
+                "hint_1": "Start with SELECT, choose the requested column or columns, then name the students table with FROM.",
+                "hint_2": "Run the query and compare the results table with the prompt."
+              },
+              "starterCode": "-- Show the key, student name, and city\nSELECT \nFROM students;"
+            },
+            "try-intro_to_keys-sketch0": {
+              "title": "Query all students rows",
+              "prompt": "Write a query that returns all columns from the `students` table. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the selected columns and table name in the SQL editor.",
+                "hint_2": "Run the query and compare the result table with the expected result."
+              },
+              "starterCode": "-- Show every column from the students table\nSELECT *\nFROM students;"
+            },
+            "try-intro_to_keys-sketch1": {
+              "title": "Query name and grade from students",
+              "prompt": "Write a query that returns `name`, `grade` from the `students` table. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the selected columns and table name in the SQL editor.",
+                "hint_2": "Run the query and compare the result table with the expected result."
+              },
+              "starterCode": "-- Show names and grades from the students table\nSELECT \nFROM students;"
+            },
+            "try-intro_to_keys-sketch2": {
+              "title": "Query id and name from students",
+              "prompt": "Write a query that returns `id`, `name`, `city` from the `students` table. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the selected columns and table name in the SQL editor.",
+                "hint_2": "Run the query and compare the result table with the expected result."
+              },
+              "starterCode": "-- Show student ids, names, and cities\nSELECT \nFROM students;"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_intro_to_keys_sketch0": {
+              "title": "Query all students rows",
+              "prompt": "Write a query that returns all columns from the `students` table. Write the query in the SQL editor, click Run query, and check the results table."
+            },
+            "try_intro_to_keys_sketch1": {
+              "title": "Query name and grade from students",
+              "prompt": "Write a query that returns `name`, `grade` from the `students` table. Write the query in the SQL editor, click Run query, and check the results table."
+            },
+            "try_intro_to_keys_sketch2": {
+              "title": "Query id and name from students",
+              "prompt": "Write a query that returns `id`, `name`, `city` from the `students` table. Write the query in the SQL editor, click Run query, and check the results table."
+            }
+          }
+        }
+      },
+      "sql-v2-0": {
+        "intro_to_keys": {
+          "label": "Intro to Keys",
+          "summary": "Learn why an ID column helps identify rows clearly, even before you start joining tables.",
+          "cards": {
+            "sketch0": {
+              "title": "What a key does"
+            },
+            "sketch1": {
+              "title": "A key is different from an ordinary column"
+            },
+            "sketch2": {
+              "title": "Primary key as the main row identifier"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Use an ID column to identify rows"
+            }
+          },
+          "projectSteps": {
+            "ci_show_all_students": {
+              "title": "Guided check: show every student row"
+            },
+            "ci_show_id_and_name": {
+              "title": "Guided check: show the key with names"
+            },
+            "ci_show_id_name_city": {
+              "title": "Guided check: read key plus details"
+            }
+          },
+          "quiz": {
+            "sc-key-purpose": {
+              "title": "What is a key for?",
+              "prompt": "In a database table, what is the main purpose of a key such as `id`?",
+              "hint": "Think about how the database tells one row apart from another.",
+              "help": {
+                "concept": "A key is used to identify rows clearly. In this topic, `id` works as the row identifier in the `students` table.",
+                "hint_1": "Compare `id` with columns like `grade` or `city`, which can repeat across multiple rows.",
+                "hint_2": "Look for the choice about uniquely pointing to one row, not just describing the row."
+              },
+              "options": {
+                "a": "To uniquely identify a row",
+                "b": "To sort rows automatically",
+                "c": "To make every text value uppercase",
+                "d": "To hide columns from a query"
+              }
+            },
+            "sc-best-key-column": {
+              "title": "Best key candidate",
+              "prompt": "In the `students` table with columns `id`, `name`, `grade`, `age`, and `city`, which column is the best choice for identifying each row?",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "options": {
+                "a": "grade",
+                "b": "city",
+                "c": "id",
+                "d": "age"
+              }
+            },
+            "mc-columns-can-repeat": {
+              "title": "Columns that can repeat",
+              "prompt": "Choose all columns from the `students` table that clearly repeat in the sample data.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "options": {
+                "a": "grade",
+                "b": "age",
+                "c": "city",
+                "d": "id"
+              }
+            },
+            "mc-key-characteristics": {
+              "title": "Signs of a good key",
+              "prompt": "Choose all statements that describe why `id` is a strong key column in the `students` table.",
+              "hint": "Think about what makes a row identifier reliable.",
+              "help": {
+                "concept": "A strong key should identify one row clearly and avoid repeated values. It should be more stable than descriptive columns like city or grade.",
+                "hint_1": "Good key ideas include uniqueness and clear row identification.",
+                "hint_2": "Select the statements about identifying one row and avoiding repeated values, not statements about sorting or display style."
+              },
+              "options": {
+                "a": "It is meant to point to one specific row.",
+                "b": "Its values should not repeat across rows.",
+                "c": "It automatically sorts the table alphabetically.",
+                "d": "It is more reliable than using grade or city as the row identifier."
+              }
+            },
+            "dr-read-query-order": {
+              "title": "Read a simple query in order",
+              "prompt": "Arrange these parts in the correct order to form a valid query that shows `id` and `name` from the `students` table.",
+              "hint": "Arrange the pieces by following the order introduced in the lesson.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "SELECT",
+                "t2": "id, name",
+                "t3": "FROM",
+                "t4": "students"
+              }
+            },
+            "dr-key-thinking-order": {
+              "title": "Reason about a key",
+              "prompt": "Put these ideas in a sensible order for deciding whether a column is a good key.",
+              "hint": "Arrange the pieces by following the order introduced in the lesson.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "Pick a column to inspect",
+                "t2": "Check whether values repeat",
+                "t3": "Decide whether one value points to one row",
+                "t4": "Choose it as a strong key candidate"
+              }
+            },
+            "fb-primary-key-schema": {
+              "title": "Complete the schema phrase",
+              "prompt": "Fill in the missing word to complete the schema idea for the `students` table.",
+              "hint": "The schema says `id INTEGER PRIMARY the missing term`.",
+              "help": {
+                "concept": "A primary the missing term is the main identifier for rows in a table. In this schema, `id` has that role.",
+                "hint_1": "The missing word is the database term for the main row identifier.",
+                "hint_2": "It is the same word used after `PRIMARY` in the schema definition."
+              },
+              "template": "`id INTEGER PRIMARY [blank1]`",
+              "choices": [
+                "FROM",
+                "KEY",
+                "TABLE",
+                "ROW"
+              ]
+            },
+            "fb-select-key-column": {
+              "title": "Complete the query",
+              "prompt": "Fill in the missing column name so the query asks for the key column from `students`.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "template": "SELECT [blank1]\nFROM students;",
+              "choices": [
+                "grade",
+                "city",
+                "id",
+                "name"
+              ]
+            },
+            "ci-show-all-students": {
+              "title": "Guided check: show every student row",
+              "prompt": "Complete a simple SELECT query that shows all columns and all rows from the `students` table. Use the SQL editor, click Run query, and check the results table.",
+              "hint": "Follow the SELECT ... FROM ... pattern from the lesson.",
+              "help": {
+                "concept": "This guided SQL check uses a read-only SELECT query to help you connect the lesson idea to the results table.",
+                "hint_1": "Start with SELECT, choose the requested column or columns, then name the students table with FROM.",
+                "hint_2": "Run the query and compare the results table with the prompt."
+              },
+              "starterCode": "-- Show all rows and columns from students\nSELECT \nFROM students;"
+            },
+            "ci-show-id-and-name": {
+              "title": "Guided check: show the key with names",
+              "prompt": "Complete a simple SELECT query that shows only the `id` and `name` columns from the `students` table. Use the SQL editor, click Run query, and check that the results table has exactly those two columns.",
+              "hint": "Follow the SELECT ... FROM ... pattern from the lesson.",
+              "help": {
+                "concept": "This guided SQL check uses a read-only SELECT query to help you connect the lesson idea to the results table.",
+                "hint_1": "Start with SELECT, choose the requested column or columns, then name the students table with FROM.",
+                "hint_2": "Run the query and compare the results table with the prompt."
+              },
+              "starterCode": "-- Show only the key column and the student name\nSELECT \nFROM students;"
+            },
+            "ci-show-id-name-city": {
+              "title": "Guided check: read key plus details",
+              "prompt": "Complete a simple SELECT query that shows the `id`, `name`, and `city` columns from the `students` table. Use the SQL editor, click Run query, and use the results table to compare the key column with a repeating detail column like city.",
+              "hint": "Follow the SELECT ... FROM ... pattern from the lesson.",
+              "help": {
+                "concept": "This guided SQL check uses a read-only SELECT query to help you connect the lesson idea to the results table.",
+                "hint_1": "Start with SELECT, choose the requested column or columns, then name the students table with FROM.",
+                "hint_2": "Run the query and compare the results table with the prompt."
+              },
+              "starterCode": "-- Show the key, student name, and city\nSELECT \nFROM students;"
+            },
+            "try-intro_to_keys-sketch0": {
+              "title": "Query all students rows",
+              "prompt": "Write a query that returns all columns from the `students` table. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the selected columns and table name in the SQL editor.",
+                "hint_2": "Run the query and compare the result table with the expected result."
+              },
+              "starterCode": "-- Show every column from the students table\nSELECT *\nFROM students;"
+            },
+            "try-intro_to_keys-sketch1": {
+              "title": "Query name and grade from students",
+              "prompt": "Write a query that returns `name`, `grade` from the `students` table. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the selected columns and table name in the SQL editor.",
+                "hint_2": "Run the query and compare the result table with the expected result."
+              },
+              "starterCode": "-- Show names and grades from the students table\nSELECT \nFROM students;"
+            },
+            "try-intro_to_keys-sketch2": {
+              "title": "Query id and name from students",
+              "prompt": "Write a query that returns `id`, `name`, `city` from the `students` table. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the selected columns and table name in the SQL editor.",
+                "hint_2": "Run the query and compare the result table with the expected result."
+              },
+              "starterCode": "-- Show student ids, names, and cities\nSELECT \nFROM students;"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_intro_to_keys_sketch0": {
+              "title": "Query all students rows",
+              "prompt": "Write a query that returns all columns from the `students` table. Write the query in the SQL editor, click Run query, and check the results table."
+            },
+            "try_intro_to_keys_sketch1": {
+              "title": "Query name and grade from students",
+              "prompt": "Write a query that returns `name`, `grade` from the `students` table. Write the query in the SQL editor, click Run query, and check the results table."
+            },
+            "try_intro_to_keys_sketch2": {
+              "title": "Query id and name from students",
+              "prompt": "Write a query that returns `id`, `name`, `city` from the `students` table. Write the query in the SQL editor, click Run query, and check the results table."
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql--sql-v2--draft": {
+      "sql--sql-v2--draft-0": {
+        "intro_to_keys": {
+          "keys-idea": {
+            "title": "What a key does",
+            "bodyMarkdown": "A **key** helps a database identify a row. In this lesson, the `students` table has a column named `id`. Each student has a different `id`, so that column can act like a row label.\n\nThink of it this way:\n- `name` can repeat in real life\n- `city` can repeat\n- `grade` can repeat\n- but an `id` is meant to point to one specific row\n\nHere is the table idea in SQL:\n\n```sql\nSELECT id, name, grade, age, city\nFROM students;\n```\n\nIf you write this query in the SQL editor and click **Run query**, the results table shows all five rows.\n\nA worked example from this dataset:\n- Noor has `id` 1\n- Mia has `id` 2\n- Leo has `id` 3\n\nEven though Noor and Leo are both from Chicago, their `id` values are different. That is why a key is useful: it helps the database tell rows apart."
+          },
+          "keys-vs-regular-columns": {
+            "title": "A key is different from an ordinary column",
+            "bodyMarkdown": "Not every column is a good key. A good key should identify one row clearly.\n\nLook at the `students` data:\n- `grade` repeats: two students have `A`, two have `B`\n- `city` repeats: two students are from Chicago\n- `age` repeats: two students are 14 and two are 15\n- `name` might be unique in this tiny table, but names can repeat in larger real databases\n\nThat makes `id` the safest choice for identifying rows.\n\nExample query:\n\n```sql\nSELECT id, name\nFROM students;\n```\n\nLine by line:\n- `SELECT id, name` asks for two columns\n- `FROM students` says which table to read\n\nWhen you run it, each row still has a unique `id`, even if another column could repeat in a bigger dataset."
+          },
+          "reading-primary-key-idea": {
+            "title": "Primary key as the main row identifier",
+            "bodyMarkdown": "A **primary key** is the main key for a table. In beginner database thinking, you can think of it as the column chosen to uniquely identify each row.\n\nIn the `students` table, `id INTEGER PRIMARY KEY` appears in the schema. That tells us `id` is the main identifier for student rows.\n\nSchema idea:\n\n```sql\nSELECT id, name, city\nFROM students;\n```\n\nWorked example:\n- Row with `id = 4` is Ava from Oak Park\n- Row with `id = 5` is Zane from Naperville\n\nIf someone asks for the row with `id = 4`, there should be one clear match. That is the job of a primary key."
+          }
+        }
+      },
+      "sql-v2-0": {
+        "intro_to_keys": {
+          "keys-idea": {
+            "title": "What a key does",
+            "bodyMarkdown": "A **key** helps a database identify a row. In this lesson, the `students` table has a column named `id`. Each student has a different `id`, so that column can act like a row label.\n\nThink of it this way:\n- `name` can repeat in real life\n- `city` can repeat\n- `grade` can repeat\n- but an `id` is meant to point to one specific row\n\nHere is the table idea in SQL:\n\n```sql\nSELECT id, name, grade, age, city\nFROM students;\n```\n\nIf you write this query in the SQL editor and click **Run query**, the results table shows all five rows.\n\nA worked example from this dataset:\n- Noor has `id` 1\n- Mia has `id` 2\n- Leo has `id` 3\n\nEven though Noor and Leo are both from Chicago, their `id` values are different. That is why a key is useful: it helps the database tell rows apart."
+          },
+          "keys-vs-regular-columns": {
+            "title": "A key is different from an ordinary column",
+            "bodyMarkdown": "Not every column is a good key. A good key should identify one row clearly.\n\nLook at the `students` data:\n- `grade` repeats: two students have `A`, two have `B`\n- `city` repeats: two students are from Chicago\n- `age` repeats: two students are 14 and two are 15\n- `name` might be unique in this tiny table, but names can repeat in larger real databases\n\nThat makes `id` the safest choice for identifying rows.\n\nExample query:\n\n```sql\nSELECT id, name\nFROM students;\n```\n\nLine by line:\n- `SELECT id, name` asks for two columns\n- `FROM students` says which table to read\n\nWhen you run it, each row still has a unique `id`, even if another column could repeat in a bigger dataset."
+          },
+          "reading-primary-key-idea": {
+            "title": "Primary key as the main row identifier",
+            "bodyMarkdown": "A **primary key** is the main key for a table. In beginner database thinking, you can think of it as the column chosen to uniquely identify each row.\n\nIn the `students` table, `id INTEGER PRIMARY KEY` appears in the schema. That tells us `id` is the main identifier for student rows.\n\nSchema idea:\n\n```sql\nSELECT id, name, city\nFROM students;\n```\n\nWorked example:\n- Row with `id = 4` is Ava from Oak Park\n- Row with `id = 5` is Zane from Naperville\n\nIf someone asks for the row with `id = 4`, there should be one clear match. That is the job of a primary key."
+          }
+        }
+      }
+    }
+  }
+}

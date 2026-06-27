@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
+import { SUBJECT_ARTIFACTS } from "@/lib/subjects";
 import ModuleIntroClient from "./ModuleIntroClient";
 import { getResolvedModuleIntroFromManifest } from "@/lib/subjects/server/resolveSubjectPresentation";
 
@@ -30,13 +31,20 @@ export default async function ModuleIntroPage({
 
     if (!moduleDb) notFound();
 
-    const [sectionsCount, topicsCount, manifestView] = await Promise.all([
-        prisma.practiceSection.count({ where: { moduleId: moduleDb.id } }),
-        prisma.practiceTopic.count({ where: { moduleId: moduleDb.id } }),
-        getResolvedModuleIntroFromManifest(subjectSlug, moduleSlug),
-    ]);
+    const manifestView = await getResolvedModuleIntroFromManifest(subjectSlug, moduleSlug);
 
     if (!manifestView) notFound();
+
+    const manifestSections = SUBJECT_ARTIFACTS.sections.filter(
+        (s) => s.subjectSlug === subjectSlug && s.moduleSlug === moduleSlug,
+    );
+    const manifestTopicSlugs = new Set<string>();
+    for (const section of manifestSections) {
+        for (const topicSlug of section.topicSlugs) manifestTopicSlugs.add(topicSlug);
+    }
+
+    const sectionsCount = manifestSections.length;
+    const topicsCount = manifestTopicSlugs.size;
 
     return (
         <ModuleIntroClient

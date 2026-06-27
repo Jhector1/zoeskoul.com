@@ -1,16 +1,16 @@
 {
   "subjects": {
-    "sql-v2": {
+    "sql--sql-v2--draft": {
       "title": "SQL Foundations",
-      "description": "A beginner-friendly SQL Foundations course that teaches learners how databases store information, how to read tables, and how to write safe SELECT queries for filtering, sorting, text matching, ranges, and missing values.",
+      "description": "Learn to read tables, write SELECT queries, filter rows, sort results, and handle real-world beginner data.",
       "moreComingSoon": "More SQL Foundations lessons are coming soon."
     }
   },
   "modules": {
-    "sql-v2": {
+    "sql--sql-v2--draft": {
       "sql-v2-0": {
         "title": "Getting Started with SQL and Databases",
-        "description": "Build the learner's mental model before syntax: what SQL is, how databases organize information, and how questions become queries.",
+        "description": "Build a strong visual foundation for SQL: what SQL is, how tables work, how databases answer questions, and how to use the SQL workspace.",
         "outcomes": [
           "Explain what SQL is used for in real applications.",
           "Identify tables, rows, columns, records, and fields.",
@@ -18,8 +18,8 @@
           "Use the browser SQL workspace to run a beginner query."
         ],
         "why": [
-          "Builds the mental model learners need before SQL syntax gets more detailed.",
-          "Shows how tables, rows, columns, and simple read-only queries work together."
+          "Builds confidence with getting started with sql and databases.",
+          "Prepares learners for the next skills in the course."
         ]
       },
       "sql-v2-1": {
@@ -32,8 +32,8 @@
           "Read a query result table and explain what was returned."
         ],
         "why": [
-          "Gives learners a confident first pattern for reading data from one table.",
-          "Prepares learners to choose columns intentionally before adding filters."
+          "Builds confidence with your first queries with select.",
+          "Prepares learners for the next skills in the course."
         ]
       },
       "sql-v2-2": {
@@ -46,8 +46,8 @@
           "Debug common filtering mistakes in simple SQL queries."
         ],
         "why": [
-          "Shows how WHERE turns a full table into a focused answer.",
-          "Builds the comparison and logic skills needed for real SQL questions."
+          "Builds confidence with filtering data with where.",
+          "Prepares learners for the next skills in the course."
         ]
       },
       "sql-v2-3": {
@@ -60,8 +60,8 @@
           "Combine filtering, sorting, and limiting in one query."
         ],
         "why": [
-          "Helps learners control result order and size so answers are easier to inspect.",
-          "Prepares learners to combine filtering, sorting, and limiting in practical reports."
+          "Builds confidence with sorting and limiting results.",
+          "Prepares learners for the next skills in the course."
         ]
       },
       "sql-v2-4": {
@@ -74,316 +74,306 @@
           "Find missing and present values with IS NULL and IS NOT NULL."
         ],
         "why": [
-          "Expands filtering to real-world data issues like partial text, lists, ranges, and missing values.",
-          "Builds confidence with the common conditions learners will see in everyday SQL."
+          "Builds confidence with working with text, lists, ranges, and null.",
+          "Prepares learners for the next skills in the course."
         ]
       },
       "sql-v2-5": {
         "title": "Capstone: Customer Follow-Up Report",
-        "description": "Pull the course together in one final reporting task that feels like a beginner analyst handoff.",
+        "description": "Pull the course skills together in one final reporting task that feels like a beginner analyst handoff.",
         "outcomes": [
           "Combine selection, filtering, ordering, and limiting in one practical query flow.",
           "Revise a working query without losing earlier progress.",
           "Build a clean report that highlights real customer follow-up needs."
         ],
         "why": [
-          "Gives learners one full end-to-end project instead of isolated drills.",
-          "Shows how beginner SQL skills combine into a report another teammate could actually use."
+          "Builds confidence with capstone: customer follow-up report.",
+          "Prepares learners for the next skills in the course."
         ]
       }
     }
   },
   "sections": {
-    "sql-v2": {
+    "sql--sql-v2--draft": {
       "sql-v2-0": {
-        "sql-v2-0-1": {
+        "sql--sql-v2--draft-sql-v2-0-1": {
           "title": "What SQL Is",
-          "description": "Learn what SQL means, what a database is, why SQL is useful through focused examples AND practice.",
+          "description": "Understand what SQL means, what databases are, and why SQL is useful.",
           "weeks": null,
           "bullets": [
-            "what SQL means",
-            "what a database is",
-            "why SQL is useful",
-            "real world examples of databases"
+            "SQL means Structured Query Language",
+            "Databases store organized data",
+            "SQL helps answer questions about data",
+            "Real systems use databases every day"
           ]
         },
-        "sql-v2-0-2": {
+        "sql--sql-v2--draft-sql-v2-0-2": {
           "title": "Understanding Tables",
-          "description": "Learn rows AND columns, records AND fields, table names AND column names through focused examples AND practice.",
+          "description": "Learn how rows, columns, records, fields, and names make table data readable.",
           "weeks": null,
           "bullets": [
-            "rows AND columns",
-            "records AND fields",
-            "table names AND column names",
-            "reading data LIKE a spreadsheet"
+            "Rows and columns organize data",
+            "Records are full entries",
+            "Fields are individual values",
+            "Names help you understand the table"
           ]
         },
-        "sql-v2-0-3": {
+        "sql--sql-v2--draft-sql-v2-0-3": {
           "title": "Database Thinking",
-          "description": "Learn how data is organized, one table vs multiple tables, intro to keys through focused examples AND practice.",
+          "description": "Practice thinking about data as questions, structure, and reliable identifiers.",
           "weeks": null,
           "bullets": [
-            "how data is organized",
-            "one table vs multiple tables",
-            "intro to keys",
-            "thinking IN questions AND answers"
+            "Good structure makes questions easier",
+            "Tables should support future answers",
+            "Keys identify specific rows",
+            "Clear data design reduces confusion"
           ]
         },
-        "sql-v2-0-4": {
+        "sql--sql-v2--draft-sql-v2-0-4": {
           "title": "First SQL Environment",
-          "description": "Learn WHERE SQL runs, SQL editor basics, running your first query through focused examples AND practice.",
+          "description": "Use the Zoeskoul SQL workspace to run queries and read result tables.",
           "weeks": null,
           "bullets": [
-            "WHERE SQL runs",
-            "SQL editor basics",
-            "running your first query",
-            "reading query results"
+            "Type SQL in the editor",
+            "Run a query",
+            "Read the Results tab",
+            "Use the Tables view as support"
           ]
         },
-        "sql-v2-0-module-project": {
+        "sql--sql-v2--draft-sql-v2-0-module-project": {
           "title": "Module Project",
-          "description": "Build a student roster snapshot by extending one working query through several small revisions.",
+          "description": "Apply the module introduction by exploring a student roster.",
           "weeks": null,
           "bullets": [
-            "preview the full student table",
-            "narrow the roster to the fields that matter",
-            "finish a clean roster view for sharing"
+            "Run simple SQL queries",
+            "Read result tables",
+            "Make a clean first report"
           ]
         }
       },
       "sql-v2-1": {
-        "sql-v2-1-1": {
+        "sql--sql-v2--draft-sql-v2-1-1": {
           "title": "Intro to SELECT",
-          "description": "Learn what SELECT does, selecting all columns with star, selecting specific columns through focused examples AND practice.",
+          "description": "Learn what select does, selecting all columns with *, selecting specific columns through focused examples and practice.",
           "weeks": null,
           "bullets": [
-            "what SELECT does",
-            "selecting all columns with star",
-            "selecting specific columns",
-            "query structure basics"
+            "What SELECT Does",
+            "Selecting All Columns with *",
+            "Selecting Specific Columns",
+            "Query Structure Basics"
           ]
         },
-        "sql-v2-1-2": {
+        "sql--sql-v2--draft-sql-v2-1-2": {
           "title": "Reading Data from a Table",
-          "description": "Learn from AND table names, choosing the right columns, viewing clean results through focused examples AND practice.",
+          "description": "Learn from and table names, choosing the right columns, viewing clean results through focused examples and practice.",
           "weeks": null,
           "bullets": [
-            "from AND table names",
-            "choosing the right columns",
-            "viewing clean results",
-            "writing simple readable queries"
+            "FROM and Table Names",
+            "Choosing the Right Columns",
+            "Viewing Clean Results",
+            "Writing Simple, Readable Queries"
           ]
         },
-        "sql-v2-1-3": {
+        "sql--sql-v2--draft-sql-v2-1-3": {
           "title": "SQL Syntax Basics",
-          "description": "Learn keywords, semicolons, uppercase vs lowercase through focused examples AND practice.",
+          "description": "Learn sql keywords, semicolons, uppercase vs. lowercase through focused examples and practice.",
           "weeks": null,
           "bullets": [
-            "keywords",
-            "semicolons",
-            "uppercase vs lowercase",
-            "common beginner syntax mistakes"
+            "SQL Keywords",
+            "Semicolons",
+            "Uppercase vs. Lowercase",
+            "Common Beginner Syntax Mistakes"
           ]
         },
-        "sql-v2-1-4": {
+        "sql--sql-v2--draft-sql-v2-1-4": {
           "title": "Practice with Basic Queries",
-          "description": "Learn query one column, query multiple columns, query full tables through focused examples AND practice.",
+          "description": "Learn query one column, query multiple columns, query full tables through focused examples and practice.",
           "weeks": null,
           "bullets": [
-            "query one column",
-            "query multiple columns",
-            "query full tables",
-            "predicting result output"
+            "Query One Column",
+            "Query Multiple Columns",
+            "Query Full Tables",
+            "Predicting Result Output"
           ]
         },
-        "sql-v2-1-module-project": {
+        "sql--sql-v2--draft-sql-v2-1-module-project": {
           "title": "Module Project",
-          "description": "Build a starter product sheet by carrying one SELECT query forward from one finished step to the next.",
+          "description": "Learn module 1 product starter sheet project through focused examples and practice.",
           "weeks": null,
           "bullets": [
-            "start with a broad product preview",
-            "shape the report into a cleaner field set",
-            "finish a readable starter sheet"
+            "Module 1 Product Starter Sheet Project"
           ]
         }
       },
       "sql-v2-2": {
-        "sql-v2-2-1": {
+        "sql--sql-v2--draft-sql-v2-2-1": {
           "title": "Intro to Filtering",
-          "description": "Learn why filtering matters, the WHERE clause, matching exact values through focused examples AND practice.",
+          "description": "Learn why filtering matters, the where clause, matching exact values through focused examples and practice.",
           "weeks": null,
           "bullets": [
-            "why filtering matters",
-            "the WHERE clause",
-            "matching exact values",
-            "filtering numbers AND text"
+            "Why Filtering Matters",
+            "The WHERE Clause",
+            "Matching Exact Values",
+            "Filtering Numbers and Text"
           ]
         },
-        "sql-v2-2-2": {
+        "sql--sql-v2--draft-sql-v2-2-2": {
           "title": "Comparison Operators",
-          "description": "Learn equals comparison, NOT equal comparison, greater than comparison through focused examples AND practice.",
+          "description": "Learn equals comparison, not-equal comparison, greater-than comparison through focused examples and practice.",
           "weeks": null,
           "bullets": [
-            "equals comparison",
-            "NOT equal comparison",
-            "greater than comparison",
-            "less than comparison"
+            "Equals Comparison",
+            "Not-Equal Comparison",
+            "Greater-Than Comparison",
+            "Less-Than Comparison"
           ]
         },
-        "sql-v2-2-3": {
+        "sql--sql-v2--draft-sql-v2-2-3": {
           "title": "Filtering with Multiple Conditions",
-          "description": "Learn AND conditions, OR conditions, NOT conditions through focused examples AND practice.",
+          "description": "Learn and conditions, or conditions, not conditions through focused examples and practice.",
           "weeks": null,
           "bullets": [
-            "AND conditions",
-            "OR conditions",
-            "NOT conditions",
-            "combining conditions safely"
+            "AND Conditions",
+            "OR Conditions",
+            "NOT Conditions",
+            "Combining Conditions Safely"
           ]
         },
-        "sql-v2-2-4": {
+        "sql--sql-v2--draft-sql-v2-2-4": {
           "title": "Beginner Filtering Practice",
-          "description": "Learn filter by number, filter by text, filter by more than one rule through focused examples AND practice.",
+          "description": "Learn filter by number, filter by text, filter by more than one rule through focused examples and practice.",
           "weeks": null,
           "bullets": [
-            "filter by number",
-            "filter by text",
-            "filter by more than one rule",
-            "avoiding filtering mistakes"
+            "Filter By Number",
+            "Filter By Text",
+            "Filter By More Than One Rule",
+            "Avoiding Filtering Mistakes"
           ]
         },
-        "sql-v2-2-module-project": {
+        "sql--sql-v2--draft-sql-v2-2-module-project": {
           "title": "Module Project",
-          "description": "Build an inventory watchlist by adding one useful WHERE rule at a time to the same working query.",
+          "description": "Learn module 2 inventory watchlist project through focused examples and practice.",
           "weeks": null,
           "bullets": [
-            "start with a simple stock check",
-            "combine category and price rules",
-            "finish a focused watchlist query"
+            "Module 2 Inventory Watchlist Project"
           ]
         }
       },
       "sql-v2-3": {
-        "sql-v2-3-1": {
+        "sql--sql-v2--draft-sql-v2-3-1": {
           "title": "Sorting Data",
-          "description": "Learn why sorting matters, ORDER BY, ascending order through focused examples AND practice.",
+          "description": "Learn why sorting matters, order by, ascending order through focused examples and practice.",
           "weeks": null,
           "bullets": [
-            "why sorting matters",
+            "Why Sorting Matters",
             "ORDER BY",
-            "ascending order",
-            "descending order"
+            "Ascending Order",
+            "Descending Order"
           ]
         },
-        "sql-v2-3-2": {
+        "sql--sql-v2--draft-sql-v2-3-2": {
           "title": "Sorting by Multiple Columns",
-          "description": "Learn primary sort, secondary sort, sorting text through focused examples AND practice.",
+          "description": "Learn primary sort, secondary sort, sorting text through focused examples and practice.",
           "weeks": null,
           "bullets": [
-            "primary sort",
-            "secondary sort",
-            "sorting text",
-            "sorting numbers AND dates"
+            "Primary Sort",
+            "Secondary Sort",
+            "Sorting Text",
+            "Sorting Numbers and Dates"
           ]
         },
-        "sql-v2-3-3": {
+        "sql--sql-v2--draft-sql-v2-3-3": {
           "title": "Limiting Output",
-          "description": "Learn why LIMIT results, LIMIT clause, top rows only through focused examples AND practice.",
+          "description": "Learn why limit results, the limit clause, top rows only through focused examples and practice.",
           "weeks": null,
           "bullets": [
-            "why LIMIT results",
-            "LIMIT clause",
-            "top rows only",
-            "combining ORDER BY with LIMIT"
+            "Why Limit Results",
+            "The LIMIT Clause",
+            "Top Rows Only",
+            "Combining ORDER BY with LIMIT"
           ]
         },
-        "sql-v2-3-4": {
+        "sql--sql-v2--draft-sql-v2-3-4": {
           "title": "Practice with Output Control",
-          "description": "Learn find highest values, find lowest values, show top 5 records through focused examples AND practice.",
+          "description": "Learn find highest values, find lowest values, show top 5 records through focused examples and practice.",
           "weeks": null,
           "bullets": [
-            "find highest values",
-            "find lowest values",
-            "show top 5 records",
-            "build clear result sets"
+            "Find Highest Values",
+            "Find Lowest Values",
+            "Show Top 5 Records",
+            "Build Clear Result Sets"
           ]
         },
-        "sql-v2-3-module-project": {
+        "sql--sql-v2--draft-sql-v2-3-module-project": {
           "title": "Module Project",
-          "description": "Build a sales leaderboard by refining one report with clearer sorting and tighter limits.",
+          "description": "Learn module 3 sales leaderboard project through focused examples and practice.",
           "weeks": null,
           "bullets": [
-            "start with a broad ranked list",
-            "improve the sort order",
-            "finish a shortlist that is easy to scan"
+            "Module 3 Sales Leaderboard Project"
           ]
         }
       },
       "sql-v2-4": {
-        "sql-v2-4-1": {
+        "sql--sql-v2--draft-sql-v2-4-1": {
           "title": "Text Matching",
-          "description": "Learn intro to LIKE, percent wildcard, underscore wildcard through focused examples AND practice.",
+          "description": "Learn intro to like, percent wildcard (%), underscore wildcard (_) through focused examples and practice.",
           "weeks": null,
           "bullets": [
-            "intro to LIKE",
-            "percent wildcard",
-            "underscore wildcard",
-            "searching partial text"
+            "Intro to LIKE",
+            "Percent Wildcard (%)",
+            "Underscore Wildcard (_)",
+            "Searching Partial Text"
           ]
         },
-        "sql-v2-4-2": {
+        "sql--sql-v2--draft-sql-v2-4-2": {
           "title": "Lists and Ranges",
-          "description": "Learn IN list filter, NOT IN list filter, BETWEEN range filter through focused examples AND practice.",
+          "description": "Learn in list filter, not in list filter, between range filter through focused examples and practice.",
           "weeks": null,
           "bullets": [
-            "IN list filter",
-            "NOT IN list filter",
-            "BETWEEN range filter",
-            "range filtering practice"
+            "IN List Filter",
+            "NOT IN List Filter",
+            "BETWEEN Range Filter",
+            "Range Filtering Practice"
           ]
         },
-        "sql-v2-4-3": {
+        "sql--sql-v2--draft-sql-v2-4-3": {
           "title": "Missing Data",
-          "description": "Learn what NULL means, is NULL, is NOT NULL through focused examples AND practice.",
+          "description": "Learn what null means, is null, is not null through focused examples and practice.",
           "weeks": null,
           "bullets": [
-            "what NULL means",
-            "is NULL",
-            "is NOT NULL",
-            "common NULL mistakes"
+            "What NULL Means",
+            "IS NULL",
+            "IS NOT NULL",
+            "Common NULL Mistakes"
           ]
         },
-        "sql-v2-4-4": {
+        "sql--sql-v2--draft-sql-v2-4-4": {
           "title": "Search and Cleanup Practice",
-          "description": "Learn search names, filter statuses, find missing data through focused examples AND practice.",
+          "description": "Learn search names, filter statuses, find missing data through focused examples and practice.",
           "weeks": null,
           "bullets": [
-            "search names",
-            "filter statuses",
-            "find missing data",
-            "combine text AND NULL filters"
+            "Search Names",
+            "Filter Statuses",
+            "Find Missing Data",
+            "Combine Text and NULL Filters"
           ]
         },
-        "sql-v2-4-module-project": {
+        "sql--sql-v2--draft-sql-v2-4-module-project": {
           "title": "Module Project",
-          "description": "Build a cleanup worksheet by combining text, list, range, and NULL checks in one customer report.",
+          "description": "Learn module 4 customer cleanup project through focused examples and practice.",
           "weeks": null,
           "bullets": [
-            "search likely cleanup cases",
-            "add multi-rule customer filters",
-            "finish a cleanup-ready report"
+            "Module 4 Customer Cleanup Project"
           ]
         }
       },
       "sql-v2-5": {
-        "sql-v2-5-capstone-project": {
+        "sql--sql-v2--draft-sql-v2-5-capstone-project": {
           "title": "Capstone Project",
-          "description": "Build a final customer follow-up report by evolving one practical query from rough draft to final handoff.",
+          "description": "Learn module 5 customer follow-up capstone through focused examples and practice.",
           "weeks": null,
           "bullets": [
-            "identify the first follow-up slice",
-            "tighten the report with realistic rules",
-            "finish a polished analyst-style handoff"
+            "Module 5 Customer Follow-Up Capstone"
           ]
         }
       }

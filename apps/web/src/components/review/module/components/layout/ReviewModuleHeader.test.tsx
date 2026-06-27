@@ -9,7 +9,17 @@ vi.mock("@/components/HeaderSlick", () => ({
 }));
 
 vi.mock("@/components/ui/NavButton", () => ({
-    default: ({ children, href = "", ...props }: any) => (
+    default: ({
+        children,
+        href = "",
+        loadingText: _loadingText,
+        fullWidth: _fullWidth,
+        showSpinner: _showSpinner,
+        hardReload: _hardReload,
+        hardReloadCurrent: _hardReloadCurrent,
+        prefetch: _prefetch,
+        ...props
+    }: any) => (
         <a href={href} {...props}>
             {children}
         </a>
@@ -28,7 +38,14 @@ function renderHeader(overrides: Partial<React.ComponentProps<typeof ReviewModul
             modulesHref="/en/subjects/python/modules"
             onToggleLeftPanel={vi.fn()}
             onToggleRightPanel={vi.fn()}
-            onResetCurrentTopic={vi.fn()}
+            resetOptions={[
+                {
+                    id: "topic",
+                    label: "This topic",
+                    description: "Clear the current topic and start it over.",
+                    onSelect: vi.fn(),
+                },
+            ]}
             onPrevTopic={vi.fn()}
             onNextTopic={vi.fn()}
             prevTopic={{ id: "topic-1" }}
@@ -47,7 +64,7 @@ describe("ReviewModuleHeader compact toolbar", () => {
 
         expect(html).toContain("Topics");
         expect(html).toContain("Tools");
-        expect(html).toContain("Reset topic");
+        expect(html).toContain("Reset");
     });
 
     it("hides the duplicate desktop Topics and Tools buttons in compact mode", () => {
@@ -60,7 +77,7 @@ describe("ReviewModuleHeader compact toolbar", () => {
 
         expect(html).not.toContain("Topics");
         expect(html).not.toContain("Tools");
-        expect(html).toContain("Reset topic");
+        expect(html).toContain("Reset");
         expect(html).toContain("Modules");
     });
 
@@ -74,5 +91,14 @@ describe("ReviewModuleHeader compact toolbar", () => {
 
         expect(html).toContain("Topics");
         expect(html).toContain("Tools");
+    });
+
+    it("hides the Tools button when the active card disallows opening tools", () => {
+        const html = renderHeader({
+            toolsToggleAllowed: false,
+        });
+
+        expect(html).toContain("Topics");
+        expect(html).not.toContain("Tools");
     });
 });

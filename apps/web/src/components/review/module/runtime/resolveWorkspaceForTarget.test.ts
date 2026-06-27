@@ -841,6 +841,100 @@ describe("resolveWorkspaceForExerciseTarget", () => {
     );
   });
 
+
+  it("hydrates sql entry file from resolved registry starter files when raw manifest still has @: aliases", () => {
+    const resolvedSqlStarter = [
+      "-- Return only the name column from the products table.",
+      "SELECT ",
+      "FROM products;",
+      "",
+    ].join("\n");
+
+    const resolved = resolveWorkspaceForTarget({
+      targetKey: "exercise:sql-v2-query-one-column",
+      targetKind: "exercise",
+      language: "sql",
+      manifest: {
+        language: "sql",
+        starterCode:
+          "@:topics.sql-v2.sql-v2-1.query_one_column.quiz.ci_select_name_from_products.starterCode",
+        starterFiles: [
+          {
+            path: "query.sql",
+            content:
+              "@:topics.sql-v2.sql-v2-1.query_one_column.quiz.ci_select_name_from_products.starterCode",
+            isEntry: true,
+          },
+        ],
+        workspace: {
+          language: "sql",
+          entryFilePath: "query.sql",
+          starterFiles: [
+            {
+              path: "query.sql",
+              content:
+                "@:topics.sql-v2.sql-v2-1.query_one_column.quiz.ci_select_name_from_products.starterCode",
+              isEntry: true,
+            },
+          ],
+        },
+      },
+      entry: {
+        language: "sql",
+        starterCode: resolvedSqlStarter,
+        starterFiles: [
+          {
+            path: "query.sql",
+            content: resolvedSqlStarter,
+            isEntry: true,
+          },
+        ],
+      },
+      workspaceRequested: true,
+    });
+
+    expect(resolved.source).toBe("manifest");
+    expect(filePaths(resolved.workspace)).toEqual(["query.sql"]);
+    expect(fileContent(resolved.workspace, "query.sql")).toBe(resolvedSqlStarter);
+  });
+
+  it("uses resolved sql starterCode to fill a blank query.sql placeholder", () => {
+    const registrySqlStarter = [
+      "-- starter from registry",
+      "SELECT *",
+      "FROM products;",
+      "",
+    ].join("\n");
+
+    const resolved = resolveWorkspaceForTarget({
+      targetKey: "exercise:sql-v2-starter-code-only",
+      targetKind: "exercise",
+      language: "sql",
+      manifest: {
+        language: "sql",
+        workspace: {
+          language: "sql",
+          entryFilePath: "query.sql",
+          starterFiles: [
+            {
+              path: "query.sql",
+              content: "@:topics.sql-v2.demo.quiz.step.starterCode",
+              isEntry: true,
+            },
+          ],
+        },
+      },
+      entry: {
+        language: "sql",
+        starterCode: registrySqlStarter,
+      },
+      workspaceRequested: true,
+    });
+
+    expect(filePaths(resolved.workspace)).toEqual(["query.sql"]);
+    expect(fileContent(resolved.workspace, "query.sql")).toBe(registrySqlStarter);
+  });
+
 });
 
 describe("createManifestWorkspaceDefinition", () => {

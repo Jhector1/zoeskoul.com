@@ -1,0 +1,471 @@
+{
+  "topicId": "show_top_5_records",
+  "subjectSlug": "sql-v2",
+  "moduleSlug": "sql-v2-3",
+  "sectionSlug": "sql-v2-sql-v2-3-4",
+  "prefix": "sqlv2_3",
+  "minutes": 16,
+  "runtimeDefaults": {
+    "kind": "sql",
+    "showSchema": true,
+    "showErd": true,
+    "showChen": true,
+    "supportsTerminal": false,
+    "supportsMultiFile": false,
+    "supportsFileSystem": false,
+    "datasetId": "products_catalog",
+    "fixedSqlDialect": "sqlite",
+    "resultShape": "table"
+  },
+  "topic": {
+    "labelKey": "topics.sql-v2.sql-v2-3.show_top_5_records.label",
+    "summaryKey": "topics.sql-v2.sql-v2-3.show_top_5_records.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql-v2.sql-v2-3.show_top_5_records.cards.sketch0.title",
+      "sketchId": "sketch_limit_basics",
+      "height": 420,
+      "tryIt": {
+        "id": "try-show_top_5_records-sketch0",
+        "titleKey": "topics.sql-v2.sql-v2-3.show_top_5_records.tryIt.try_show_top_5_records_sketch0.title",
+        "promptKey": "topics.sql-v2.sql-v2-3.show_top_5_records.tryIt.try_show_top_5_records_sketch0.prompt",
+        "exerciseKey": "try-show_top_5_records-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql-v2.sql-v2-3.show_top_5_records.cards.sketch1.title",
+      "sketchId": "sketch_order_then_limit",
+      "height": 420,
+      "tryIt": {
+        "id": "try-show_top_5_records-sketch1",
+        "titleKey": "topics.sql-v2.sql-v2-3.show_top_5_records.tryIt.try_show_top_5_records_sketch1.title",
+        "promptKey": "topics.sql-v2.sql-v2-3.show_top_5_records.tryIt.try_show_top_5_records_sketch1.prompt",
+        "exerciseKey": "try-show_top_5_records-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.sql-v2.sql-v2-3.show_top_5_records.cards.sketch2.title",
+      "sketchId": "sketch_small_dataset_note",
+      "height": 420,
+      "tryIt": {
+        "id": "try-show_top_5_records-sketch2",
+        "titleKey": "topics.sql-v2.sql-v2-3.show_top_5_records.tryIt.try_show_top_5_records_sketch2.title",
+        "promptKey": "topics.sql-v2.sql-v2-3.show_top_5_records.tryIt.try_show_top_5_records_sketch2.prompt",
+        "exerciseKey": "try-show_top_5_records-sketch2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql-v2.sql-v2-3.show_top_5_records.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.sql-v2.sql-v2-3.show_top_5_records.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "ci_top5_expensive_products",
+            "titleKey": "topics.sql-v2.sql-v2-3.show_top_5_records.projectSteps.ci_top5_expensive_products.title",
+            "exerciseKey": "ci_top5_expensive_products",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "ci_newest_5_products",
+            "titleKey": "topics.sql-v2.sql-v2-3.show_top_5_records.projectSteps.ci_newest_5_products.title",
+            "exerciseKey": "ci_newest_5_products",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "ci_low_stock_top5",
+            "titleKey": "topics.sql-v2.sql-v2-3.show_top_5_records.projectSteps.ci_low_stock_top5.title",
+            "exerciseKey": "ci_low_stock_top5",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch_limit_basics",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql-v2.sql-v2-3.show_top_5_records.sketch_limit_basics.title",
+      "bodyKey": "sketches.sql-v2.sql-v2-3.show_top_5_records.sketch_limit_basics.bodyMarkdown"
+    },
+    {
+      "id": "sketch_order_then_limit",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql-v2.sql-v2-3.show_top_5_records.sketch_order_then_limit.title",
+      "bodyKey": "sketches.sql-v2.sql-v2-3.show_top_5_records.sketch_order_then_limit.bodyMarkdown"
+    },
+    {
+      "id": "sketch_small_dataset_note",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql-v2.sql-v2-3.show_top_5_records.sketch_small_dataset_note.title",
+      "bodyKey": "sketches.sql-v2.sql-v2-3.show_top_5_records.sketch_small_dataset_note.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "sc_limit_keyword",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-3.show_top_5_records.quiz.sc_limit_keyword",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "sc_top5_price_desc",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-3.show_top_5_records.quiz.sc_top5_price_desc",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "c"
+      }
+    },
+    {
+      "id": "mc_limit_true_statements",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-3.show_top_5_records.quiz.mc_limit_true_statements",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "c",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "mc_top5_patterns",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-3.show_top_5_records.quiz.mc_top5_patterns",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "dr_query_order_top5",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-3.show_top_5_records.quiz.dr_query_order_top5",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "dr_newest5_order",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-3.show_top_5_records.quiz.dr_newest5_order",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "fb_limit_number",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-3.show_top_5_records.quiz.fb_limit_number",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "5"
+      }
+    },
+    {
+      "id": "fb_desc_for_top",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-3.show_top_5_records.quiz.fb_desc_for_top",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "DESC"
+      }
+    },
+    {
+      "id": "ci_top5_expensive_products",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-3.show_top_5_records.quiz.ci_top5_expensive_products",
+      "language": "sql",
+      "starterCode": "@:topics.sql-v2.sql-v2-3.show_top_5_records.quiz.ci_top5_expensive_products.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "SELECT name, price\nFROM products\nORDER BY price DESC\nLIMIT 5;"
+      }
+    },
+    {
+      "id": "ci_newest_5_products",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-3.show_top_5_records.quiz.ci_newest_5_products",
+      "language": "sql",
+      "starterCode": "@:topics.sql-v2.sql-v2-3.show_top_5_records.quiz.ci_newest_5_products.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "SELECT name, created_at\nFROM products\nORDER BY created_at DESC\nLIMIT 5;"
+      }
+    },
+    {
+      "id": "ci_low_stock_top5",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-3.show_top_5_records.quiz.ci_low_stock_top5",
+      "language": "sql",
+      "starterCode": "@:topics.sql-v2.sql-v2-3.show_top_5_records.quiz.ci_low_stock_top5.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "SELECT name, stock\nFROM products\nORDER BY stock ASC\nLIMIT 5;"
+      }
+    },
+    {
+      "id": "try-show_top_5_records-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-3.show_top_5_records.quiz.try-show_top_5_records-sketch0",
+      "language": "sql",
+      "starterCode": "@:topics.sql-v2.sql-v2-3.show_top_5_records.quiz.try-show_top_5_records-sketch0.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "SELECT name, price\nFROM products\nORDER BY price DESC\nLIMIT 5;"
+      }
+    },
+    {
+      "id": "try-show_top_5_records-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-3.show_top_5_records.quiz.try-show_top_5_records-sketch1",
+      "language": "sql",
+      "starterCode": "@:topics.sql-v2.sql-v2-3.show_top_5_records.quiz.try-show_top_5_records-sketch1.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "SELECT name, created_at\nFROM products\nORDER BY created_at DESC\nLIMIT 5;"
+      }
+    },
+    {
+      "id": "try-show_top_5_records-sketch2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-3.show_top_5_records.quiz.try-show_top_5_records-sketch2",
+      "language": "sql",
+      "starterCode": "@:topics.sql-v2.sql-v2-3.show_top_5_records.quiz.try-show_top_5_records-sketch2.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "SELECT name, stock\nFROM products\nORDER BY stock ASC\nLIMIT 5;"
+      }
+    }
+  ]
+}

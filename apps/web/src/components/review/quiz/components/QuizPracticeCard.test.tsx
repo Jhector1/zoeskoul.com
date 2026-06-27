@@ -293,6 +293,113 @@ describe("QuizPracticeCard project-step fallback", () => {
         expect(html).not.toContain("@:topics.python-v2");
     });
 
+    it("does not let unresolved SQL starter aliases outrank localized project-step starter files", () => {
+        const html = renderToStaticMarkup(
+            <QuizPracticeCard
+                q={{
+                    id: "proj:ci_select_name_from_products:abc",
+                    kind: "practice",
+                    fetch: {
+                        subject: "sql-v2",
+                        module: "sql-v2-1",
+                        section: "sql-v2-sql-v2-1-1",
+                        topic: "query_one_column",
+                        exerciseKey: "ci_select_name_from_products",
+                    },
+                } as any}
+                ownerCardId="query-one-column-project"
+                projectStepManifest={{
+                    id: "ci_select_name_from_products",
+                    exerciseKey: "ci_select_name_from_products",
+                    title: "Select the product names",
+                    language: "sql",
+                    starterCode:
+                        "-- Return only the name column from the products table.\nSELECT name\nFROM products;\n",
+                    starterFiles: [
+                        {
+                            path: "query.sql",
+                            content:
+                                "-- Return only the name column from the products table.\nSELECT name\nFROM products;\n",
+                            isEntry: true,
+                        },
+                    ],
+                    workspace: {
+                        language: "sql",
+                        entryFilePath: "query.sql",
+                        starterCode:
+                            "-- Return only the name column from the products table.\nSELECT name\nFROM products;\n",
+                        starterFiles: [
+                            {
+                                path: "query.sql",
+                                content:
+                                    "-- Return only the name column from the products table.\nSELECT name\nFROM products;\n",
+                                isEntry: true,
+                            },
+                        ],
+                    },
+                }}
+                ps={{
+                    loading: false,
+                    error: null,
+                    busy: false,
+                    item: null,
+                    exercise: {
+                        id: "ci_select_name_from_products",
+                        kind: "code_input",
+                        language: "sql",
+                        starterCode:
+                            "@:topics.sql-v2.sql-v2-1.query_one_column.quiz.ci_select_name_from_products.starterCode",
+                        starterFiles: [
+                            {
+                                path: "query.sql",
+                                content:
+                                    "@:topics.sql-v2.sql-v2-1.query_one_column.quiz.ci_select_name_from_products.starterCode",
+                                isEntry: true,
+                            },
+                        ],
+                        workspace: {
+                            language: "sql",
+                            entryFilePath: "query.sql",
+                            starterCode:
+                                "@:topics.sql-v2.sql-v2-1.query_one_column.quiz.ci_select_name_from_products.starterCode",
+                            starterFiles: [
+                                {
+                                    path: "query.sql",
+                                    content:
+                                        "@:topics.sql-v2.sql-v2-1.query_one_column.quiz.ci_select_name_from_products.starterCode",
+                                    isEntry: true,
+                                },
+                            ],
+                        },
+                    },
+                    attempts: 0,
+                    maxAttempts: 3,
+                } as any}
+                toolsActive
+                unlocked
+                isCompleted={false}
+                locked={false}
+                unlimitedAttempts
+                strictSequential={false}
+                seqOrder={1}
+                padRef={{ current: null } as any}
+                onUpdateItem={vi.fn()}
+                onSubmit={vi.fn()}
+                onHelp={vi.fn()}
+                onRetryExercise={vi.fn()}
+                onExcused={vi.fn()}
+            />,
+        );
+
+        expect(html).toContain("SELECT name");
+        expect(html).not.toContain("@:topics.sql-v2");
+        const lastProps = mocked.exerciseRendererProps.at(-1);
+        expect(lastProps?.exercise?.starterCode).toContain("SELECT name");
+        expect(lastProps?.exercise?.starterCode).not.toContain("@:");
+        expect(lastProps?.exercise?.starterFiles?.[0]?.path).toBe("query.sql");
+        expect(lastProps?.exercise?.starterFiles?.[0]?.content).toContain("SELECT name");
+    });
+
     it("preserves project step ideConfig on fallback exercises", () => {
         renderToStaticMarkup(
             <QuizPracticeCard

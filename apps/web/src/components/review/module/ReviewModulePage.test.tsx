@@ -28,7 +28,7 @@ const mocked = vi.hoisted(() => ({
             modulesHref: "/modules",
             onToggleLeftPanel: vi.fn(),
             onToggleRightPanel: vi.fn(),
-            onResetCurrentTopic: vi.fn(),
+            resetOptions: [],
             onPrevTopic: vi.fn(),
             onNextTopic: vi.fn(),
             prevTopic: null,

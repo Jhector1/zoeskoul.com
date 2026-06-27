@@ -1,0 +1,443 @@
+{
+  "topics": {
+    "sql-v2": {
+      "sql-v2-0": {
+        "what_sql_is": {
+          "label": "What SQL Is",
+          "summary": "SQL is a language for working with organized data in databases.",
+          "cards": {
+            "sketch0": {
+              "title": "What does SQL mean?"
+            },
+            "sketch1": {
+              "title": "What is a database?"
+            },
+            "sketch2": {
+              "title": "Why is SQL useful?"
+            },
+            "sketch3": {
+              "title": "Where do databases appear in real life?"
+            },
+            "quiz": {
+              "title": "Quiz: What SQL Is"
+            }
+          },
+          "quiz": {
+            "try-what_sql_is-sketch0": {
+              "title": "Try it yourself: What does SQL mean?",
+              "prompt": "Use the SQL editor to practice the idea from this card. Run the query, then compare the result table with the lesson explanation.",
+              "hint": "Use the pattern shown in the lesson card.",
+              "help": {
+                "concept": "This try-it checks that you can connect the lesson idea to a small SQL query.",
+                "hint_1": "Check the selected columns and the table name.",
+                "hint_2": "Run the query and read the result table."
+              },
+              "starterCode": "-- Show every column from the students table\nSELECT *\nFROM students;"
+            },
+            "try-what_sql_is-sketch1": {
+              "title": "Try it yourself: What is a database?",
+              "prompt": "Use the SQL editor to practice the idea from this card. Run the query, then compare the result table with the lesson explanation.",
+              "hint": "Use the pattern shown in the lesson card.",
+              "help": {
+                "concept": "This try-it checks that you can connect the lesson idea to a small SQL query.",
+                "hint_1": "Check the selected columns and the table name.",
+                "hint_2": "Run the query and read the result table."
+              },
+              "starterCode": "-- Show every column from the students table\nSELECT *\nFROM students;"
+            },
+            "try-what_sql_is-sketch2": {
+              "title": "Try it yourself: Why is SQL useful?",
+              "prompt": "Use the SQL editor to practice the idea from this card. Run the query, then compare the result table with the lesson explanation.",
+              "hint": "Use the pattern shown in the lesson card.",
+              "help": {
+                "concept": "This try-it checks that you can connect the lesson idea to a small SQL query.",
+                "hint_1": "Check the selected columns and the table name.",
+                "hint_2": "Run the query and read the result table."
+              },
+              "starterCode": "-- Show every column from the students table\nSELECT *\nFROM students;"
+            },
+            "try-what_sql_is-sketch3": {
+              "title": "Try it yourself: Where do databases appear in real life?",
+              "prompt": "Use the SQL editor to practice the idea from this card. Run the query, then compare the result table with the lesson explanation.",
+              "hint": "Use the pattern shown in the lesson card.",
+              "help": {
+                "concept": "This try-it checks that you can connect the lesson idea to a small SQL query.",
+                "hint_1": "Check the selected columns and the table name.",
+                "hint_2": "Run the query and read the result table."
+              },
+              "starterCode": "-- Show every column from the students table\nSELECT *\nFROM students;"
+            },
+            "m0_s01_sql_stands_for": {
+              "title": "What does SQL stand for?",
+              "prompt": "What does SQL stand for?",
+              "help": {
+                "concept": "This checks the full name behind the abbreviation.",
+                "hint_1": "One word refers to asking for data.",
+                "hint_2": "Choose the formal language name."
+              },
+              "hint": "Think of the full expanded name.",
+              "options": {
+                "a": "Structured Query Language",
+                "b": "Simple Question Language",
+                "c": "Structured Quick Logic",
+                "d": "System Query Logic"
+              }
+            },
+            "m0_s01_sql_main_purpose": {
+              "title": "What is SQL mainly used for?",
+              "prompt": "Which choice best describes what SQL is mainly used for?",
+              "help": {
+                "concept": "Focus on what SQL helps people do with stored information.",
+                "hint_1": "Think about data in tables.",
+                "hint_2": "Pick the option about asking for and managing data."
+              },
+              "hint": "Think about working with stored data.",
+              "options": {
+                "a": "Designing logos and graphics",
+                "b": "Asking questions about data and changing stored data",
+                "c": "Building computer hardware",
+                "d": "Writing only game physics"
+              }
+            },
+            "m0_s01_database_definition": {
+              "title": "What is a database?",
+              "prompt": "Which definition best matches a database?",
+              "help": {
+                "concept": "A database is about organized stored information.",
+                "hint_1": "Think structure, not randomness.",
+                "hint_2": "Pick the broad definition."
+              },
+              "hint": "Focus on organized stored information.",
+              "options": {
+                "a": "A random list of files",
+                "b": "An organized collection of data",
+                "c": "Only a spreadsheet program",
+                "d": "A type of keyboard shortcut"
+              }
+            },
+            "m0_s01_database_vs_table": {
+              "title": "How is a database different from a table?",
+              "prompt": "Which statement is true?",
+              "help": {
+                "concept": "This checks the relationship between the larger container and the pieces inside it.",
+                "hint_1": "One is broader than the other.",
+                "hint_2": "Tables live inside something larger."
+              },
+              "hint": "One is broader than the other.",
+              "options": {
+                "a": "A table contains many databases",
+                "b": "A database can contain multiple tables",
+                "c": "A database and a table are always the same thing",
+                "d": "SQL works only without tables"
+              }
+            },
+            "m0_s01_table_shape": {
+              "title": "What does a row usually represent?",
+              "prompt": "In a table, what does a row usually represent?",
+              "help": {
+                "concept": "This checks the basic shape of tabular data.",
+                "hint_1": "Think about one student in a students table.",
+                "hint_2": "Look for one item or entry."
+              },
+              "hint": "Think of one line in a table.",
+              "options": {
+                "a": "One record",
+                "b": "One whole database",
+                "c": "Only the table name",
+                "d": "A programming loop"
+              }
+            },
+            "m0_s01_sql_command_recognition": {
+              "title": "What does SELECT do?",
+              "prompt": "Look at this command:\n\n~~~sql\nSELECT * FROM students;\n~~~\n\nWhat does `SELECT` most directly mean here?",
+              "help": {
+                "concept": "This checks the role of a common SQL keyword.",
+                "hint_1": "The command reads data.",
+                "hint_2": "Choose the option about showing information."
+              },
+              "hint": "Think about reading data.",
+              "options": {
+                "a": "Delete this data",
+                "b": "Show me data",
+                "c": "Rename the table",
+                "d": "Close the database"
+              }
+            },
+            "m0_s01_why_sql_useful": {
+              "title": "What is one thing SQL can help you do?",
+              "prompt": "Which of these is something SQL can help you do?",
+              "help": {
+                "concept": "This checks whether you connect SQL to practical data tasks.",
+                "hint_1": "Think about actions on stored information.",
+                "hint_2": "Pick the option about working with data."
+              },
+              "hint": "Think about actions on stored data.",
+              "options": {
+                "a": "Filter data in a table",
+                "b": "Physically repair a computer",
+                "c": "Charge a battery",
+                "d": "Draw a painting by hand"
+              }
+            },
+            "m0_s01_real_world_examples": {
+              "title": "Which real system likely uses a database?",
+              "prompt": "Which option is the best example of a system that would likely use a database?",
+              "help": {
+                "concept": "This checks where organized stored data is needed in real life.",
+                "hint_1": "Look for a system that must remember many records.",
+                "hint_2": "Choose the option that tracks items or activity."
+              },
+              "hint": "Think about systems with lots of records.",
+              "options": {
+                "a": "An online store tracking products and orders",
+                "b": "A blank sheet of paper",
+                "c": "A flashlight with no memory",
+                "d": "A ruler"
+              }
+            },
+            "m0_s01_select_all_true": {
+              "title": "Which foundation statements are true?",
+              "prompt": "Select all true statements about SQL and databases.",
+              "help": {
+                "concept": "This combines the main ideas from the section.",
+                "hint_1": "Match each choice to the core definitions.",
+                "hint_2": "Ignore unrelated tools or wrong definitions."
+              },
+              "hint": "Match each statement to the core ideas.",
+              "options": {
+                "a": "SQL is used to work with stored data.",
+                "b": "A database can contain tables.",
+                "c": "A row usually represents one record.",
+                "d": "SQL is only for drawing user interfaces.",
+                "e": "A database is the same thing as one single column."
+              }
+            },
+            "m0_s01_reorder_sql_name": {
+              "title": "Build the full name of SQL",
+              "prompt": "Reorder the parts to form the full expanded name of SQL.",
+              "hint": "SQL expands into three words.",
+              "concept": "Put the three words of SQL in order.",
+              "hint_1": "The first word is Structured.",
+              "hint_2": "The middle word is Query.",
+              "tokens": {
+                "t1": "Structured",
+                "t2": "Query",
+                "t3": "Language"
+              }
+            },
+            "m0_s01_reorder_select_meaning": {
+              "title": "What does this query mean?",
+              "prompt": "Put the ideas in order to match what this SQL query is saying.\n\n~~~sql\nSELECT * FROM students;\n~~~",
+              "hint": "Start with the action, then all data, then the table.",
+              "concept": "This query reads data from the students table.",
+              "hint_1": "SELECT means show.",
+              "hint_2": "* means all columns.",
+              "tokens": {
+                "t1": "show",
+                "t2": "all columns",
+                "t3": "from students"
+              }
+            },
+            "m0_s01_reorder_database_picture": {
+              "title": "Organize the big picture",
+              "prompt": "Reorder these from biggest container to smallest table idea.",
+              "hint": "A database holds tables. Tables contain rows and columns.",
+              "concept": "Think from the large data container to smaller table pieces.",
+              "hint_1": "Database comes before table.",
+              "hint_2": "Columns and rows belong inside a table.",
+              "tokens": {
+                "t1": "database",
+                "t2": "table",
+                "t3": "column",
+                "t4": "row"
+              }
+            },
+            "m0_s01_reorder_sql_workflow": {
+              "title": "SQL learning flow",
+              "prompt": "Reorder the steps in the usual SQL workflow.",
+              "hint": "You ask first, then run, then read the result.",
+              "concept": "SQL usually follows a question, run, result cycle.",
+              "hint_1": "A question comes first.",
+              "hint_2": "You see the result after running the query.",
+              "tokens": {
+                "t1": "ask a question",
+                "t2": "run the query",
+                "t3": "see the result"
+              }
+            },
+            "m0_s01_reorder_real_system": {
+              "title": "How a real system uses a database",
+              "prompt": "Put these ideas in the most logical order.",
+              "hint": "First information is stored, then organized, then queried.",
+              "concept": "Real software stores data before asking SQL questions about it.",
+              "hint_1": "Data must exist before you query it.",
+              "hint_2": "Tables organize the information before SQL asks questions.",
+              "tokens": {
+                "t1": "store information",
+                "t2": "organize it in tables",
+                "t3": "use SQL to ask questions"
+              }
+            },
+            "m0_s01_reorder_table_meaning": {
+              "title": "Understand a table",
+              "prompt": "Reorder the statements so they explain a table clearly.",
+              "hint": "Start with columns, then rows, then what a row represents.",
+              "concept": "Columns describe data types, rows hold entries, and a row is usually one record.",
+              "hint_1": "Columns explain what kind of data each part stores.",
+              "hint_2": "A row is usually one full item.",
+              "tokens": {
+                "t1": "columns describe types of information",
+                "t2": "rows hold actual entries",
+                "t3": "one row usually represents one record"
+              }
+            },
+            "m0_s01_fill_sql_full_name": {
+              "title": "Complete the SQL name",
+              "prompt": "Fill in the blank with the correct word.",
+              "help": {
+                "concept": "SQL stands for Structured Query Language.",
+                "hint_1": "The missing word is about asking for data.",
+                "hint_2": "The full phrase is Structured Query Language."
+              },
+              "hint": "Think about the Q in SQL.",
+              "template": "SQL stands for Structured ____ Language.",
+              "choices": [
+                "Query",
+                "Quick",
+                "Question",
+                "Queue"
+              ]
+            },
+            "m0_s01_fill_database_contains": {
+              "title": "What can a database contain?",
+              "prompt": "Choose the word that correctly completes the sentence.",
+              "help": {
+                "concept": "A database is the larger container.",
+                "hint_1": "It can hold more than one of these.",
+                "hint_2": "Tables live inside a database."
+              },
+              "hint": "Think about the bigger container.",
+              "template": "A database can contain multiple ____.",
+              "choices": [
+                "tables",
+                "batteries",
+                "monitors",
+                "rulers"
+              ]
+            },
+            "m0_s01_fill_row_meaning": {
+              "title": "What does a row represent?",
+              "prompt": "Fill in the blank with the best answer.",
+              "help": {
+                "concept": "In a table, a row usually holds one full item or entry.",
+                "hint_1": "Think about one student in a students table.",
+                "hint_2": "A row usually means one full record."
+              },
+              "hint": "One horizontal entry = one ____.",
+              "template": "In a table, one row usually represents one ____.",
+              "choices": [
+                "record",
+                "database",
+                "keyboard",
+                "loop"
+              ]
+            },
+            "m0_s01_fill_select_meaning": {
+              "title": "Meaning of SELECT",
+              "prompt": "Complete the sentence using the correct word.",
+              "help": {
+                "concept": "SELECT is used when you want to read or display data.",
+                "hint_1": "It does not delete or rename anything.",
+                "hint_2": "SELECT means show data."
+              },
+              "hint": "Think about reading data.",
+              "template": "In SQL, SELECT usually means ____ data.",
+              "choices": [
+                "show",
+                "delete",
+                "rename",
+                "close"
+              ]
+            },
+            "m0_s01_fill_sql_action": {
+              "title": "One common SQL action",
+              "prompt": "Pick the word that makes the sentence true.",
+              "help": {
+                "concept": "SQL can read, sort, filter, and summarize data.",
+                "hint_1": "This action helps narrow results.",
+                "hint_2": "You use this when you only want some rows."
+              },
+              "hint": "Think about narrowing data down.",
+              "template": "SQL can help you ____ data to find only what you need.",
+              "choices": [
+                "filter",
+                "paint",
+                "charge",
+                "repair"
+              ]
+            },
+            "m0_s01_fill_store_example": {
+              "title": "Real database example",
+              "prompt": "Complete the sentence with the best real-world answer.",
+              "help": {
+                "concept": "Online stores often save products, customers, and orders in a database.",
+                "hint_1": "This is something customers place.",
+                "hint_2": "Stores often track products and orders."
+              },
+              "hint": "Think about shopping data.",
+              "template": "An online store database may track products and ____.",
+              "choices": [
+                "orders",
+                "pillows",
+                "flashlights",
+                "rulers"
+              ]
+            }
+          },
+          "tryIt": {
+            "try_what_sql_is_sketch0": {
+              "title": "Try it yourself: What does SQL mean?",
+              "prompt": "Use the SQL editor to practice the idea from this card. Run the query, then compare the result table with the lesson explanation."
+            },
+            "try_what_sql_is_sketch1": {
+              "title": "Try it yourself: What is a database?",
+              "prompt": "Use the SQL editor to practice the idea from this card. Run the query, then compare the result table with the lesson explanation."
+            },
+            "try_what_sql_is_sketch2": {
+              "title": "Try it yourself: Why is SQL useful?",
+              "prompt": "Use the SQL editor to practice the idea from this card. Run the query, then compare the result table with the lesson explanation."
+            },
+            "try_what_sql_is_sketch3": {
+              "title": "Try it yourself: Where do databases appear in real life?",
+              "prompt": "Use the SQL editor to practice the idea from this card. Run the query, then compare the result table with the lesson explanation."
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql-v2": {
+      "sql-v2-0": {
+        "what_sql_is": {
+          "what_sql_means": {
+            "title": "SQL is a language for data.",
+            "bodyMarkdown": "SQL is used to work with data in a database.\n\n[[image:sql_language_overview]]\n\nIt stands for **Structured Query Language**.\n\nThe idea is simple:\n\n> SQL helps you retrieve data, sort it, filter it, and sometimes change it.\n\n[[image:sql_question_to_data_flow]]\n\nIf you had a table of students, SQL could help answer questions like:\n\n- Who got an A?\n- How many students are there?\n- What are all the names?\n\n[[image:students_table_example]]\n\nA first example looks like this:\n\n~~~sql\nSELECT * FROM students;\n~~~\n\nCopy the code above, paste it into the SQL editor, and click **Run**. A table with student information will appear in the results pane.\n\n[[image:select_from_breakdown]]\n\nFor now, just notice:\n\n- `SELECT` = show data\n- `FROM students` = from the students table\n\nSo SQL is a way to **talk to stored information**.\n\n---\n\n## Big idea\n\nMany languages focus on steps.\nSQL often focuses on the result:\n\n> What data do you want?\n\n[[image:sql_result_focus]]"
+          },
+          "what_a_database_is": {
+            "title": "A database stores organized information.",
+            "bodyMarkdown": "A **database** is an organized collection of data.\n\n[[image:database_overview]]\n\nInstead of scattered notes or random files, it keeps information structured so it can be searched, updated, and reused.\n\n[[image:messy_vs_structured_data]]\n\nA database might store:\n\n- students and grades\n- customers and orders\n- products and prices\n- employees and departments\n\n[[image:database_real_examples]]\n\nA simple way to picture a database is as a group of **tables**.\n\n[[image:database_contains_tables]][[image:table_row_column_labels]]\n\nIn a table:\n\n- a **row** is one record\n- a **column** is one kind of information\n\n[[image:row_vs_column_highlight]]\n\nA useful summary is:\n\n> a database holds tables\n\n[[image:database_container_model]]"
+          },
+          "why_sql_is_useful": {
+            "title": "SQL helps turn data into answers.",
+            "bodyMarkdown": "SQL is useful because data is everywhere.\n\n[[image:data_everywhere]]\n\nApps, stores, schools, and websites all save information. SQL helps you do something with that information.\n\nWith SQL, you can:\n\n- read data\n- filter data\n- sort data\n- summarize data\n- add or change records\n\n[[image:sql_actions_overview]]\n\nThat means SQL is useful for both building software and understanding information.\n\nFor example, SQL can help answer:\n\n- Which products cost more than 20?\n- How many students passed?\n- What is the highest price?\n\n[[image:sql_questions_and_answers]]\n\nA common pattern is:\n\n1. Ask a question\n2. Run the query\n3. See the result\n\n[[image:ask_run_result_cycle]]"
+          },
+          "real_world_examples_of_databases": {
+            "title": "Databases appear in many everyday systems.",
+            "bodyMarkdown": "Databases are everywhere.\n\n[[image:databases_in_daily_life]]\n\nAny system that needs to remember information probably uses one.\n\n### School system\nA school may store:\n\n- students\n- teachers\n- courses\n- grades\n\n[[image:school_database_example]]\n\n### Online store\nA store may store:\n\n- products\n- customers\n- orders\n- inventory\n\n[[image:store_database_example]]\n\n### Music or movie app\nA media app may store:\n\n- users\n- songs or movies\n- playlists\n- favorites\n\n[[image:media_database_example]]\n\n### Hospital or clinic\nA healthcare system may store:\n\n- patients\n- doctors\n- appointments\n- prescriptions\n\n[[image:hospital_database_example]]\n\nEven though these systems are different, the pattern is the same:\n\n1. store information in tables\n2. keep it organized\n3. use SQL to ask questions about it\n\n[[image:shared_database_pattern]]"
+          }
+        }
+      }
+    }
+  }
+}

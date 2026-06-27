@@ -1,15 +1,15 @@
 {
   "topicId": "not_in_list_filter",
-  "subjectSlug": "sql-v2",
+  "subjectSlug": "sql--sql-v2--draft",
   "moduleSlug": "sql-v2-4",
-  "sectionSlug": "sql-v2-4-2",
+  "sectionSlug": "sql--sql-v2--draft-sql-v2-4-2",
   "prefix": "sqlv2_4",
-  "minutes": 15,
+  "minutes": 16,
   "runtimeDefaults": {
     "kind": "sql",
     "showSchema": true,
-    "showErd": true,
-    "showChen": true,
+    "showErd": false,
+    "showChen": false,
     "supportsTerminal": false,
     "supportsMultiFile": false,
     "supportsFileSystem": false,
@@ -18,20 +18,20 @@
     "resultShape": "table"
   },
   "topic": {
-    "labelKey": "topics.sql-v2.sql-v2-4.not_in_list_filter.label",
-    "summaryKey": "topics.sql-v2.sql-v2-4.not_in_list_filter.summary"
+    "labelKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.not_in_list_filter.label",
+    "summaryKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.not_in_list_filter.summary"
   },
   "cards": [
     {
       "id": "sketch0",
       "kind": "sketch",
-      "titleKey": "topics.sql-v2.sql-v2-4.not_in_list_filter.cards.sketch0.title",
+      "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.not_in_list_filter.cards.sketch0.title",
       "sketchId": "sketch_not_in_basics",
       "height": 420,
       "tryIt": {
         "id": "try-not_in_list_filter-sketch0",
-        "titleKey": "topics.sql-v2.sql-v2-4.not_in_list_filter.tryIt.try_not_in_list_filter_sketch0.title",
-        "promptKey": "topics.sql-v2.sql-v2-4.not_in_list_filter.tryIt.try_not_in_list_filter_sketch0.prompt",
+        "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.not_in_list_filter.tryIt.try_not_in_list_filter_sketch0.title",
+        "promptKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.not_in_list_filter.tryIt.try_not_in_list_filter_sketch0.prompt",
         "exerciseKey": "try-not_in_list_filter-sketch0",
         "difficulty": "easy",
         "preferKind": "code_input",
@@ -44,13 +44,13 @@
     {
       "id": "sketch1",
       "kind": "sketch",
-      "titleKey": "topics.sql-v2.sql-v2-4.not_in_list_filter.cards.sketch1.title",
+      "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.not_in_list_filter.cards.sketch1.title",
       "sketchId": "sketch_not_in_with_real_example",
       "height": 420,
       "tryIt": {
         "id": "try-not_in_list_filter-sketch1",
-        "titleKey": "topics.sql-v2.sql-v2-4.not_in_list_filter.tryIt.try_not_in_list_filter_sketch1.title",
-        "promptKey": "topics.sql-v2.sql-v2-4.not_in_list_filter.tryIt.try_not_in_list_filter_sketch1.prompt",
+        "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.not_in_list_filter.tryIt.try_not_in_list_filter_sketch1.title",
+        "promptKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.not_in_list_filter.tryIt.try_not_in_list_filter_sketch1.prompt",
         "exerciseKey": "try-not_in_list_filter-sketch1",
         "difficulty": "easy",
         "preferKind": "code_input",
@@ -63,13 +63,13 @@
     {
       "id": "sketch2",
       "kind": "sketch",
-      "titleKey": "topics.sql-v2.sql-v2-4.not_in_list_filter.cards.sketch2.title",
+      "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.not_in_list_filter.cards.sketch2.title",
       "sketchId": "sketch_not_in_and_null",
       "height": 420,
       "tryIt": {
         "id": "try-not_in_list_filter-sketch2",
-        "titleKey": "topics.sql-v2.sql-v2-4.not_in_list_filter.tryIt.try_not_in_list_filter_sketch2.title",
-        "promptKey": "topics.sql-v2.sql-v2-4.not_in_list_filter.tryIt.try_not_in_list_filter_sketch2.prompt",
+        "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.not_in_list_filter.tryIt.try_not_in_list_filter_sketch2.title",
+        "promptKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.not_in_list_filter.tryIt.try_not_in_list_filter_sketch2.prompt",
         "exerciseKey": "try-not_in_list_filter-sketch2",
         "difficulty": "easy",
         "preferKind": "code_input",
@@ -82,7 +82,7 @@
     {
       "id": "quiz",
       "kind": "quiz",
-      "titleKey": "topics.sql-v2.sql-v2-4.not_in_list_filter.cards.quiz.title",
+      "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.not_in_list_filter.cards.quiz.title",
       "quiz": {
         "difficulty": "easy",
         "n": 4,
@@ -97,7 +97,7 @@
     {
       "id": "project",
       "kind": "project",
-      "titleKey": "topics.sql-v2.sql-v2-4.not_in_list_filter.cards.project.title",
+      "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.not_in_list_filter.cards.project.title",
       "project": {
         "difficulty": "easy",
         "allowReveal": true,
@@ -106,7 +106,7 @@
         "steps": [
           {
             "id": "ci_not_in_status_exclude",
-            "titleKey": "topics.sql-v2.sql-v2-4.not_in_list_filter.projectSteps.ci_not_in_status_exclude.title",
+            "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.not_in_list_filter.projectSteps.ci_not_in_status_exclude.title",
             "exerciseKey": "ci_not_in_status_exclude",
             "difficulty": "easy",
             "preferKind": "code_input",
@@ -115,7 +115,7 @@
           },
           {
             "id": "ci_not_in_city_exclude",
-            "titleKey": "topics.sql-v2.sql-v2-4.not_in_list_filter.projectSteps.ci_not_in_city_exclude.title",
+            "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.not_in_list_filter.projectSteps.ci_not_in_city_exclude.title",
             "exerciseKey": "ci_not_in_city_exclude",
             "difficulty": "easy",
             "preferKind": "code_input",
@@ -124,7 +124,7 @@
           },
           {
             "id": "ci_not_in_with_null_include",
-            "titleKey": "topics.sql-v2.sql-v2-4.not_in_list_filter.projectSteps.ci_not_in_with_null_include.title",
+            "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.not_in_list_filter.projectSteps.ci_not_in_with_null_include.title",
             "exerciseKey": "ci_not_in_with_null_include",
             "difficulty": "easy",
             "preferKind": "code_input",
@@ -139,20 +139,20 @@
     {
       "id": "sketch_not_in_basics",
       "archetype": "paragraph",
-      "titleKey": "sketches.sql-v2.sql-v2-4.not_in_list_filter.sketch_not_in_basics.title",
-      "bodyKey": "sketches.sql-v2.sql-v2-4.not_in_list_filter.sketch_not_in_basics.bodyMarkdown"
+      "titleKey": "sketches.sql--sql-v2--draft.sql--sql-v2--draft-4.not_in_list_filter.sketch_not_in_basics.title",
+      "bodyKey": "sketches.sql--sql-v2--draft.sql--sql-v2--draft-4.not_in_list_filter.sketch_not_in_basics.bodyMarkdown"
     },
     {
       "id": "sketch_not_in_with_real_example",
       "archetype": "paragraph",
-      "titleKey": "sketches.sql-v2.sql-v2-4.not_in_list_filter.sketch_not_in_with_real_example.title",
-      "bodyKey": "sketches.sql-v2.sql-v2-4.not_in_list_filter.sketch_not_in_with_real_example.bodyMarkdown"
+      "titleKey": "sketches.sql--sql-v2--draft.sql--sql-v2--draft-4.not_in_list_filter.sketch_not_in_with_real_example.title",
+      "bodyKey": "sketches.sql--sql-v2--draft.sql--sql-v2--draft-4.not_in_list_filter.sketch_not_in_with_real_example.bodyMarkdown"
     },
     {
       "id": "sketch_not_in_and_null",
       "archetype": "paragraph",
-      "titleKey": "sketches.sql-v2.sql-v2-4.not_in_list_filter.sketch_not_in_and_null.title",
-      "bodyKey": "sketches.sql-v2.sql-v2-4.not_in_list_filter.sketch_not_in_and_null.bodyMarkdown"
+      "titleKey": "sketches.sql--sql-v2--draft.sql--sql-v2--draft-4.not_in_list_filter.sketch_not_in_and_null.title",
+      "bodyKey": "sketches.sql--sql-v2--draft.sql--sql-v2--draft-4.not_in_list_filter.sketch_not_in_and_null.bodyMarkdown"
     }
   ],
   "exercises": [
@@ -161,9 +161,9 @@
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-4.not_in_list_filter.quiz.ci_not_in_status_exclude",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.not_in_list_filter.quiz.ci_not_in_status_exclude",
       "language": "sql",
-      "starterCode": "SELECT id, full_name, status\nFROM customers\nWHERE ;",
+      "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.not_in_list_filter.quiz.ci_not_in_status_exclude.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -171,8 +171,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -181,17 +181,69 @@
         "type": "sql_query",
         "datasetId": "customers_cleanup",
         "resultShape": "table",
-        "solutionCode": "SELECT id, full_name, status\nFROM customers\nWHERE status NOT IN ('inactive', 'draft')\nORDER BY id ASC;"
-      }
+        "solutionCode": "SELECT id, full_name, status\nFROM customers\nWHERE status NOT IN ('inactive', 'draft')\nORDER BY id ASC;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT id, full_name, status\nFROM customers\nWHERE status NOT IN ('inactive', 'draft')\nORDER BY id ASC;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.not_in_list_filter.quiz.ci_not_in_status_exclude.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT id, full_name, status\nFROM customers\nWHERE status NOT IN ('inactive', 'draft')\nORDER BY id ASC;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.not_in_list_filter.quiz.ci_not_in_status_exclude.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.not_in_list_filter.quiz.ci_not_in_status_exclude.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT id, full_name, status\nFROM customers\nWHERE status NOT IN ('inactive', 'draft')\nORDER BY id ASC;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     },
     {
       "id": "ci_not_in_city_exclude",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-4.not_in_list_filter.quiz.ci_not_in_city_exclude",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.not_in_list_filter.quiz.ci_not_in_city_exclude",
       "language": "sql",
-      "starterCode": "SELECT full_name, city\nFROM customers\n-- add your filter here\nORDER BY full_name ASC;",
+      "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.not_in_list_filter.quiz.ci_not_in_city_exclude.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -199,8 +251,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -209,17 +261,69 @@
         "type": "sql_query",
         "datasetId": "customers_cleanup",
         "resultShape": "table",
-        "solutionCode": "SELECT full_name, city\nFROM customers\nWHERE city NOT IN ('Chicago', 'Miami')\nORDER BY full_name ASC;"
-      }
+        "solutionCode": "SELECT full_name, city\nFROM customers\nWHERE city NOT IN ('Chicago', 'Miami')\nORDER BY full_name ASC;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT full_name, city\nFROM customers\nWHERE city NOT IN ('Chicago', 'Miami')\nORDER BY full_name ASC;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.not_in_list_filter.quiz.ci_not_in_city_exclude.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT full_name, city\nFROM customers\nWHERE city NOT IN ('Chicago', 'Miami')\nORDER BY full_name ASC;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.not_in_list_filter.quiz.ci_not_in_city_exclude.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.not_in_list_filter.quiz.ci_not_in_city_exclude.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT full_name, city\nFROM customers\nWHERE city NOT IN ('Chicago', 'Miami')\nORDER BY full_name ASC;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     },
     {
       "id": "ci_not_in_with_null_include",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-4.not_in_list_filter.quiz.ci_not_in_with_null_include",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.not_in_list_filter.quiz.ci_not_in_with_null_include",
       "language": "sql",
-      "starterCode": "SELECT id, full_name, city\nFROM customers\nWHERE city NOT IN ('Chicago', 'Miami')\n-- add one more condition so missing cities are included\n;",
+      "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.not_in_list_filter.quiz.ci_not_in_with_null_include.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -227,8 +331,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -237,15 +341,67 @@
         "type": "sql_query",
         "datasetId": "customers_cleanup",
         "resultShape": "table",
-        "solutionCode": "SELECT id, full_name, city\nFROM customers\nWHERE city NOT IN ('Chicago', 'Miami')\n   OR city IS NULL\nORDER BY id ASC;"
-      }
+        "solutionCode": "SELECT id, full_name, city\nFROM customers\nWHERE city NOT IN ('Chicago', 'Miami')\n   OR city IS NULL\nORDER BY id ASC;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT id, full_name, city\nFROM customers\nWHERE city NOT IN ('Chicago', 'Miami')\n   OR city IS NULL\nORDER BY id ASC;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.not_in_list_filter.quiz.ci_not_in_with_null_include.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT id, full_name, city\nFROM customers\nWHERE city NOT IN ('Chicago', 'Miami')\n   OR city IS NULL\nORDER BY id ASC;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.not_in_list_filter.quiz.ci_not_in_with_null_include.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.not_in_list_filter.quiz.ci_not_in_with_null_include.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT id, full_name, city\nFROM customers\nWHERE city NOT IN ('Chicago', 'Miami')\n   OR city IS NULL\nORDER BY id ASC;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     },
     {
       "id": "sc_not_in_meaning",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-4.not_in_list_filter.quiz.sc_not_in_meaning",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.not_in_list_filter.quiz.sc_not_in_meaning",
       "optionIds": [
         "a",
         "b",
@@ -262,7 +418,7 @@
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-4.not_in_list_filter.quiz.sc_not_in_vs_in",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.not_in_list_filter.quiz.sc_not_in_vs_in",
       "optionIds": [
         "a",
         "b",
@@ -279,7 +435,7 @@
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-4.not_in_list_filter.quiz.mc_not_in_good_uses",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.not_in_list_filter.quiz.mc_not_in_good_uses",
       "optionIds": [
         "a",
         "b",
@@ -299,7 +455,7 @@
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-4.not_in_list_filter.quiz.mc_not_in_null_truths",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.not_in_list_filter.quiz.mc_not_in_null_truths",
       "optionIds": [
         "a",
         "b",
@@ -319,7 +475,7 @@
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-4.not_in_list_filter.quiz.dr_not_in_query_order",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.not_in_list_filter.quiz.dr_not_in_query_order",
       "tokenIds": [
         "t1",
         "t2",
@@ -341,7 +497,7 @@
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-4.not_in_list_filter.quiz.dr_not_in_logic_order",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.not_in_list_filter.quiz.dr_not_in_logic_order",
       "tokenIds": [
         "t1",
         "t2",
@@ -363,7 +519,7 @@
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-4.not_in_list_filter.quiz.fb_not_in_keyword",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.not_in_list_filter.quiz.fb_not_in_keyword",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
@@ -375,7 +531,7 @@
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-4.not_in_list_filter.quiz.fb_not_in_column",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.not_in_list_filter.quiz.fb_not_in_column",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
@@ -387,9 +543,9 @@
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-4.not_in_list_filter.quiz.try-not_in_list_filter-sketch0",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.not_in_list_filter.quiz.try-not_in_list_filter-sketch0",
       "language": "sql",
-      "starterCode": "SELECT id, full_name, status\nFROM customers\nWHERE ;",
+      "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.not_in_list_filter.quiz.try-not_in_list_filter-sketch0.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -397,8 +553,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -407,17 +563,69 @@
         "type": "sql_query",
         "datasetId": "customers_cleanup",
         "resultShape": "table",
-        "solutionCode": "SELECT id, full_name, status\nFROM customers\nWHERE status NOT IN ('inactive', 'draft')\nORDER BY id ASC;"
-      }
+        "solutionCode": "SELECT id, full_name, status\nFROM customers\nWHERE status NOT IN ('inactive', 'draft')\nORDER BY id ASC;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT id, full_name, status\nFROM customers\nWHERE status NOT IN ('inactive', 'draft')\nORDER BY id ASC;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.not_in_list_filter.quiz.try-not_in_list_filter-sketch0.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT id, full_name, status\nFROM customers\nWHERE status NOT IN ('inactive', 'draft')\nORDER BY id ASC;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.not_in_list_filter.quiz.try-not_in_list_filter-sketch0.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.not_in_list_filter.quiz.try-not_in_list_filter-sketch0.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT id, full_name, status\nFROM customers\nWHERE status NOT IN ('inactive', 'draft')\nORDER BY id ASC;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     },
     {
       "id": "try-not_in_list_filter-sketch1",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-4.not_in_list_filter.quiz.try-not_in_list_filter-sketch1",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.not_in_list_filter.quiz.try-not_in_list_filter-sketch1",
       "language": "sql",
-      "starterCode": "SELECT full_name, city\nFROM customers\n-- add your filter here\nORDER BY full_name ASC;",
+      "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.not_in_list_filter.quiz.try-not_in_list_filter-sketch1.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -425,8 +633,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -435,17 +643,69 @@
         "type": "sql_query",
         "datasetId": "customers_cleanup",
         "resultShape": "table",
-        "solutionCode": "SELECT full_name, city\nFROM customers\nWHERE city NOT IN ('Chicago', 'Miami')\nORDER BY full_name ASC;"
-      }
+        "solutionCode": "SELECT full_name, city\nFROM customers\nWHERE city NOT IN ('Chicago', 'Miami')\nORDER BY full_name ASC;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT full_name, city\nFROM customers\nWHERE city NOT IN ('Chicago', 'Miami')\nORDER BY full_name ASC;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.not_in_list_filter.quiz.try-not_in_list_filter-sketch1.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT full_name, city\nFROM customers\nWHERE city NOT IN ('Chicago', 'Miami')\nORDER BY full_name ASC;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.not_in_list_filter.quiz.try-not_in_list_filter-sketch1.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.not_in_list_filter.quiz.try-not_in_list_filter-sketch1.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT full_name, city\nFROM customers\nWHERE city NOT IN ('Chicago', 'Miami')\nORDER BY full_name ASC;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     },
     {
       "id": "try-not_in_list_filter-sketch2",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-4.not_in_list_filter.quiz.try-not_in_list_filter-sketch2",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.not_in_list_filter.quiz.try-not_in_list_filter-sketch2",
       "language": "sql",
-      "starterCode": "SELECT id, full_name, city\nFROM customers\nWHERE city NOT IN ('Chicago', 'Miami')\n-- add one more condition so missing cities are included\n;",
+      "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.not_in_list_filter.quiz.try-not_in_list_filter-sketch2.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -453,8 +713,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -463,8 +723,60 @@
         "type": "sql_query",
         "datasetId": "customers_cleanup",
         "resultShape": "table",
-        "solutionCode": "SELECT id, full_name, city\nFROM customers\nWHERE city NOT IN ('Chicago', 'Miami')\n   OR city IS NULL\nORDER BY id ASC;"
-      }
+        "solutionCode": "SELECT id, full_name, city\nFROM customers\nWHERE city NOT IN ('Chicago', 'Miami')\n   OR city IS NULL\nORDER BY id ASC;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT id, full_name, city\nFROM customers\nWHERE city NOT IN ('Chicago', 'Miami')\n   OR city IS NULL\nORDER BY id ASC;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.not_in_list_filter.quiz.try-not_in_list_filter-sketch2.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT id, full_name, city\nFROM customers\nWHERE city NOT IN ('Chicago', 'Miami')\n   OR city IS NULL\nORDER BY id ASC;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.not_in_list_filter.quiz.try-not_in_list_filter-sketch2.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.not_in_list_filter.quiz.try-not_in_list_filter-sketch2.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT id, full_name, city\nFROM customers\nWHERE city NOT IN ('Chicago', 'Miami')\n   OR city IS NULL\nORDER BY id ASC;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     }
   ]
 }

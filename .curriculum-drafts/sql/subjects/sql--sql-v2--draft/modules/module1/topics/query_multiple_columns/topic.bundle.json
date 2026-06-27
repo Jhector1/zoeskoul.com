@@ -1,15 +1,15 @@
 {
   "topicId": "query_multiple_columns",
-  "subjectSlug": "sql-v2",
+  "subjectSlug": "sql--sql-v2--draft",
   "moduleSlug": "sql-v2-1",
-  "sectionSlug": "sql-v2-1-4",
+  "sectionSlug": "sql--sql-v2--draft-sql-v2-1-4",
   "prefix": "sqlv2_1",
-  "minutes": 15,
+  "minutes": 16,
   "runtimeDefaults": {
     "kind": "sql",
     "showSchema": true,
-    "showErd": true,
-    "showChen": true,
+    "showErd": false,
+    "showChen": false,
     "supportsTerminal": false,
     "supportsMultiFile": false,
     "supportsFileSystem": false,
@@ -18,35 +18,71 @@
     "resultShape": "table"
   },
   "topic": {
-    "labelKey": "topics.sql-v2.sql-v2-1.query_multiple_columns.label",
-    "summaryKey": "topics.sql-v2.sql-v2-1.query_multiple_columns.summary"
+    "labelKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.query_multiple_columns.label",
+    "summaryKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.query_multiple_columns.summary"
   },
   "cards": [
     {
       "id": "sketch0",
       "kind": "sketch",
-      "titleKey": "topics.sql-v2.sql-v2-1.query_multiple_columns.cards.sketch0.title",
+      "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.query_multiple_columns.cards.sketch0.title",
       "sketchId": "sketch_select_multiple_columns",
-      "height": 420
+      "height": 420,
+      "tryIt": {
+        "id": "try-query_multiple_columns-sketch0",
+        "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.query_multiple_columns.tryIt.try_query_multiple_columns_sketch0.title",
+        "promptKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.query_multiple_columns.tryIt.try_query_multiple_columns_sketch0.prompt",
+        "exerciseKey": "try-query_multiple_columns-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
     },
     {
       "id": "sketch1",
       "kind": "sketch",
-      "titleKey": "topics.sql-v2.sql-v2-1.query_multiple_columns.cards.sketch1.title",
+      "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.query_multiple_columns.cards.sketch1.title",
       "sketchId": "sketch_column_order_matters",
-      "height": 420
+      "height": 420,
+      "tryIt": {
+        "id": "try-query_multiple_columns-sketch1",
+        "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.query_multiple_columns.tryIt.try_query_multiple_columns_sketch1.title",
+        "promptKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.query_multiple_columns.tryIt.try_query_multiple_columns_sketch1.prompt",
+        "exerciseKey": "try-query_multiple_columns-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
     },
     {
       "id": "sketch2",
       "kind": "sketch",
-      "titleKey": "topics.sql-v2.sql-v2-1.query_multiple_columns.cards.sketch2.title",
+      "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.query_multiple_columns.cards.sketch2.title",
       "sketchId": "sketch_commas_and_column_names",
-      "height": 420
+      "height": 420,
+      "tryIt": {
+        "id": "try-query_multiple_columns-sketch2",
+        "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.query_multiple_columns.tryIt.try_query_multiple_columns_sketch2.title",
+        "promptKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.query_multiple_columns.tryIt.try_query_multiple_columns_sketch2.prompt",
+        "exerciseKey": "try-query_multiple_columns-sketch2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
     },
     {
       "id": "quiz",
       "kind": "quiz",
-      "titleKey": "topics.sql-v2.sql-v2-1.query_multiple_columns.cards.quiz.title",
+      "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.query_multiple_columns.cards.quiz.title",
       "quiz": {
         "difficulty": "easy",
         "n": 4,
@@ -61,7 +97,7 @@
     {
       "id": "project",
       "kind": "project",
-      "titleKey": "topics.sql-v2.sql-v2-1.query_multiple_columns.cards.project.title",
+      "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.query_multiple_columns.cards.project.title",
       "project": {
         "difficulty": "easy",
         "allowReveal": true,
@@ -70,7 +106,7 @@
         "steps": [
           {
             "id": "ci_select_name_category",
-            "titleKey": "topics.sql-v2.sql-v2-1.query_multiple_columns.projectSteps.ci_select_name_category.title",
+            "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.query_multiple_columns.projectSteps.ci_select_name_category.title",
             "exerciseKey": "ci_select_name_category",
             "difficulty": "easy",
             "preferKind": "code_input",
@@ -79,7 +115,7 @@
           },
           {
             "id": "ci_select_three_columns",
-            "titleKey": "topics.sql-v2.sql-v2-1.query_multiple_columns.projectSteps.ci_select_three_columns.title",
+            "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.query_multiple_columns.projectSteps.ci_select_three_columns.title",
             "exerciseKey": "ci_select_three_columns",
             "difficulty": "easy",
             "preferKind": "code_input",
@@ -88,7 +124,7 @@
           },
           {
             "id": "ci_select_category_stock_created",
-            "titleKey": "topics.sql-v2.sql-v2-1.query_multiple_columns.projectSteps.ci_select_category_stock_created.title",
+            "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.query_multiple_columns.projectSteps.ci_select_category_stock_created.title",
             "exerciseKey": "ci_select_category_stock_created",
             "difficulty": "easy",
             "preferKind": "code_input",
@@ -103,20 +139,20 @@
     {
       "id": "sketch_select_multiple_columns",
       "archetype": "paragraph",
-      "titleKey": "sketches.sql-v2.sql-v2-1.query_multiple_columns.sketch_select_multiple_columns.title",
-      "bodyKey": "sketches.sql-v2.sql-v2-1.query_multiple_columns.sketch_select_multiple_columns.bodyMarkdown"
+      "titleKey": "sketches.sql--sql-v2--draft.sql--sql-v2--draft-1.query_multiple_columns.sketch_select_multiple_columns.title",
+      "bodyKey": "sketches.sql--sql-v2--draft.sql--sql-v2--draft-1.query_multiple_columns.sketch_select_multiple_columns.bodyMarkdown"
     },
     {
       "id": "sketch_column_order_matters",
       "archetype": "paragraph",
-      "titleKey": "sketches.sql-v2.sql-v2-1.query_multiple_columns.sketch_column_order_matters.title",
-      "bodyKey": "sketches.sql-v2.sql-v2-1.query_multiple_columns.sketch_column_order_matters.bodyMarkdown"
+      "titleKey": "sketches.sql--sql-v2--draft.sql--sql-v2--draft-1.query_multiple_columns.sketch_column_order_matters.title",
+      "bodyKey": "sketches.sql--sql-v2--draft.sql--sql-v2--draft-1.query_multiple_columns.sketch_column_order_matters.bodyMarkdown"
     },
     {
       "id": "sketch_commas_and_column_names",
       "archetype": "paragraph",
-      "titleKey": "sketches.sql-v2.sql-v2-1.query_multiple_columns.sketch_commas_and_column_names.title",
-      "bodyKey": "sketches.sql-v2.sql-v2-1.query_multiple_columns.sketch_commas_and_column_names.bodyMarkdown"
+      "titleKey": "sketches.sql--sql-v2--draft.sql--sql-v2--draft-1.query_multiple_columns.sketch_commas_and_column_names.title",
+      "bodyKey": "sketches.sql--sql-v2--draft.sql--sql-v2--draft-1.query_multiple_columns.sketch_commas_and_column_names.bodyMarkdown"
     }
   ],
   "exercises": [
@@ -125,7 +161,7 @@
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-1.query_multiple_columns.quiz.sc_columns_comma",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.query_multiple_columns.quiz.sc_columns_comma",
       "optionIds": [
         "a",
         "b",
@@ -141,7 +177,7 @@
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-1.query_multiple_columns.quiz.sc_result_order",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.query_multiple_columns.quiz.sc_result_order",
       "optionIds": [
         "a",
         "b",
@@ -158,7 +194,7 @@
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-1.query_multiple_columns.quiz.mc_valid_multiple_column_queries",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.query_multiple_columns.quiz.mc_valid_multiple_column_queries",
       "optionIds": [
         "a",
         "b",
@@ -178,7 +214,7 @@
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-1.query_multiple_columns.quiz.mc_columns_in_products",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.query_multiple_columns.quiz.mc_columns_in_products",
       "optionIds": [
         "a",
         "b",
@@ -199,7 +235,7 @@
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-1.query_multiple_columns.quiz.dr_query_structure_two_columns",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.query_multiple_columns.quiz.dr_query_structure_two_columns",
       "tokenIds": [
         "t1",
         "t2",
@@ -223,7 +259,7 @@
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-1.query_multiple_columns.quiz.dr_query_structure_three_columns",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.query_multiple_columns.quiz.dr_query_structure_three_columns",
       "tokenIds": [
         "t1",
         "t2",
@@ -249,7 +285,7 @@
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-1.query_multiple_columns.quiz.fb_missing_column_name",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.query_multiple_columns.quiz.fb_missing_column_name",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
@@ -261,7 +297,7 @@
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-1.query_multiple_columns.quiz.fb_missing_table_name",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.query_multiple_columns.quiz.fb_missing_table_name",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
@@ -273,9 +309,9 @@
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-1.query_multiple_columns.quiz.ci_select_name_category",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.query_multiple_columns.quiz.ci_select_name_category",
       "language": "sql",
-      "starterCode": "-- Return the name and category columns from products\nSELECT\n  -- add columns here\nFROM products;",
+      "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.query_multiple_columns.quiz.ci_select_name_category.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -283,8 +319,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -293,17 +329,69 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT name, category\nFROM products;"
-      }
+        "solutionCode": "SELECT name, category\nFROM products;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, category\nFROM products;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.query_multiple_columns.quiz.ci_select_name_category.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT name, category\nFROM products;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.query_multiple_columns.quiz.ci_select_name_category.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.query_multiple_columns.quiz.ci_select_name_category.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, category\nFROM products;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     },
     {
       "id": "ci_select_three_columns",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-1.query_multiple_columns.quiz.ci_select_three_columns",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.query_multiple_columns.quiz.ci_select_three_columns",
       "language": "sql",
-      "starterCode": "-- Return id, name, and price from products\nSELECT\n  -- add three columns here\nFROM products;",
+      "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.query_multiple_columns.quiz.ci_select_three_columns.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -311,8 +399,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -321,17 +409,69 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT id, name, price\nFROM products;"
-      }
+        "solutionCode": "SELECT id, name, price\nFROM products;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT id, name, price\nFROM products;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.query_multiple_columns.quiz.ci_select_three_columns.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT id, name, price\nFROM products;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.query_multiple_columns.quiz.ci_select_three_columns.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.query_multiple_columns.quiz.ci_select_three_columns.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT id, name, price\nFROM products;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     },
     {
       "id": "ci_select_category_stock_created",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-1.query_multiple_columns.quiz.ci_select_category_stock_created",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.query_multiple_columns.quiz.ci_select_category_stock_created",
       "language": "sql",
-      "starterCode": "-- Return category, stock, and created_at from products\nSELECT\n  -- add the three columns here\nFROM products;",
+      "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.query_multiple_columns.quiz.ci_select_category_stock_created.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -339,8 +479,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -349,8 +489,300 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT category, stock, created_at\nFROM products;"
-      }
+        "solutionCode": "SELECT category, stock, created_at\nFROM products;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT category, stock, created_at\nFROM products;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.query_multiple_columns.quiz.ci_select_category_stock_created.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT category, stock, created_at\nFROM products;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.query_multiple_columns.quiz.ci_select_category_stock_created.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.query_multiple_columns.quiz.ci_select_category_stock_created.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT category, stock, created_at\nFROM products;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
+    },
+    {
+      "id": "try-query_multiple_columns-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.query_multiple_columns.quiz.try-query_multiple_columns-sketch0",
+      "language": "sql",
+      "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.query_multiple_columns.quiz.try-query_multiple_columns-sketch0.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": false,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "SELECT name, category\nFROM products;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, category\nFROM products;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.query_multiple_columns.quiz.try-query_multiple_columns-sketch0.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT name, category\nFROM products;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.query_multiple_columns.quiz.try-query_multiple_columns-sketch0.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.query_multiple_columns.quiz.try-query_multiple_columns-sketch0.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, category\nFROM products;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
+    },
+    {
+      "id": "try-query_multiple_columns-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.query_multiple_columns.quiz.try-query_multiple_columns-sketch1",
+      "language": "sql",
+      "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.query_multiple_columns.quiz.try-query_multiple_columns-sketch1.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": false,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "SELECT id, name, price\nFROM products;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT id, name, price\nFROM products;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.query_multiple_columns.quiz.try-query_multiple_columns-sketch1.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT id, name, price\nFROM products;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.query_multiple_columns.quiz.try-query_multiple_columns-sketch1.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.query_multiple_columns.quiz.try-query_multiple_columns-sketch1.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT id, name, price\nFROM products;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
+    },
+    {
+      "id": "try-query_multiple_columns-sketch2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.query_multiple_columns.quiz.try-query_multiple_columns-sketch2",
+      "language": "sql",
+      "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.query_multiple_columns.quiz.try-query_multiple_columns-sketch2.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": false,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "SELECT category, stock, created_at\nFROM products;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT category, stock, created_at\nFROM products;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.query_multiple_columns.quiz.try-query_multiple_columns-sketch2.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT category, stock, created_at\nFROM products;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.query_multiple_columns.quiz.try-query_multiple_columns-sketch2.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.query_multiple_columns.quiz.try-query_multiple_columns-sketch2.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT category, stock, created_at\nFROM products;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     }
   ]
 }

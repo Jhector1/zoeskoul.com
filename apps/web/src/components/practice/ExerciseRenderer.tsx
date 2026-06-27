@@ -40,6 +40,7 @@ import {
     resolveWorkspaceForExerciseTarget,
     resolveWorkspaceForTarget,
 } from "@/components/review/module/runtime/resolveWorkspaceForTarget";
+import { isUsableStarterCode } from "@/components/review/module/runtime/starterContent";
 
 type SqlTableSnapshot = {
     name: string;
@@ -783,7 +784,7 @@ export function shouldSkipEmbeddedEnsureExercise(args: {
 
     const manifestHasStarter =
         workspaceHasAnyFile(manifestStarterWorkspace) ||
-        Boolean(String(manifestStarterCode ?? "").trim());
+        isUsableStarterCode(manifestStarterCode);
 
     const existingHasContent =
         workspaceHasNonBlankFile(existingWorkspace) ||

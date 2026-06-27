@@ -34,7 +34,15 @@ import {
 } from "@/lib/practice/help/steps";
 import { normalizeCurrentPracticeItem } from "@/lib/practice/runtime";
 import { deriveEntryCode } from "@/components/review/module/runtime/exerciseWorkspaceResolver";
+import { createManifestWorkspaceDefinition } from "@/components/review/module/runtime/resolveWorkspaceForTarget";
 import { mergeLearningIdeConfigs } from "@/lib/ide/learningIdeConfig";
+import { defaultMainFile } from "@/components/ide/languageDefaults";
+import {
+  cleanStarterCode,
+  firstUsableStarterFilesValue,
+  pickEntryFileFromStarterFilesValue,
+  starterFileContentForPath,
+} from "@/components/review/module/runtime/starterContent";
 import type { CodeFeedback } from "@/lib/code/feedback/types";
 import { learnerUiFlags } from "@/lib/config/learnerUiFlags";
 
@@ -300,100 +308,69 @@ function firstRecord(...values: unknown[]) {
   return null;
 }
 
-function pickEntryFileFromFiles(files: unknown, fallback = "main.py") {
-  if (Array.isArray(files)) {
-    const entry = files.find(
-        (file) =>
-            isRecord(file) &&
-            (file.entry === true || file.isEntry === true || file.main === true) &&
-            typeof file.path === "string" &&
-            file.path.trim(),
-    );
-
-    if (isRecord(entry) && typeof entry.path === "string") {
-      return entry.path.trim();
-    }
-
-    const first = files.find(
-        (file) => isRecord(file) && typeof file.path === "string" && file.path.trim(),
-    );
-
-    if (isRecord(first) && typeof first.path === "string") {
-      return first.path.trim();
-    }
-  }
-
-  if (isRecord(files)) {
-    const keys = Object.keys(files).filter(Boolean);
-    if (keys.includes(fallback)) return fallback;
-    if (keys.length) return keys[0] ?? fallback;
-  }
-
-  return fallback;
+function pickEntryFileFromFiles(files: unknown, fallback: string) {
+  return pickEntryFileFromStarterFilesValue(files, fallback);
 }
 
 function fileContentFromFiles(files: unknown, path: string) {
-  if (Array.isArray(files)) {
-    const match = files.find(
-        (file) => isRecord(file) && file.path === path,
-    );
+  return starterFileContentForPath(files, path);
+}
 
-    if (isRecord(match) && typeof match.content === "string") {
-      return match.content;
-    }
-  }
+function firstUsableStarterFiles(...values: unknown[]) {
+  return firstUsableStarterFilesValue(...values);
+}
 
-  if (isRecord(files) && typeof files[path] === "string") {
-    return String(files[path]);
+function firstUsableStarterString(...values: unknown[]) {
+  for (const value of values) {
+    const cleaned = cleanStarterCode(value);
+    if (cleaned) return cleaned;
   }
 
   return "";
 }
 
+function canonicalizeCodeInputExerciseStarterContract(
+    exercise: Exercise | null | undefined,
+): Exercise | null {
+  if (!exercise || exercise.kind !== "code_input") return exercise ?? null;
 
+  const exAny = exercise as any;
+  const workspaceRecord = isRecord(exAny.workspace) ? exAny.workspace : {};
+  const language = normalizeWorkspaceLanguage(
+      firstNonBlankString(
+          exAny.language,
+          workspaceRecord.language,
+          workspaceRecord.lang,
+          "python",
+      ),
+  );
 
-function hasUsableStarterFileSource(value: unknown): boolean {
-  if (Array.isArray(value)) {
-    return value.some((file) => {
-      if (!isRecord(file)) return false;
-      return typeof file.content === "string" && file.content.trim().length > 0;
-    });
-  }
+  const manifest = createManifestWorkspaceDefinition({
+    language,
+    manifest: exercise,
+    workspaceRequested: true,
+  });
+  const starterCode =
+      deriveEntryCode(manifest.manifestWorkspace) ||
+      manifest.starterCode ||
+      "";
 
-  if (isRecord(value)) {
-    return Object.entries(value).some(([key, entry]) => {
-      if (
-          [
-            "entryFile",
-            "entryFilePath",
-            "mainFile",
-            "mainFilePath",
-            "language",
-            "lang",
-          ].includes(key)
-      ) {
-        return false;
-      }
-
-      if (typeof entry === "string") return entry.trim().length > 0;
-      if (isRecord(entry) && typeof entry.content === "string") {
-        return entry.content.trim().length > 0;
-      }
-
-      return false;
-    });
-  }
-
-  return false;
+  return {
+    ...exAny,
+    language,
+    starterCode,
+    starterFiles: manifest.starterFiles,
+    workspace: {
+      ...workspaceRecord,
+      language,
+      entryFilePath: manifest.entryFile,
+      entryFile: manifest.entryFile,
+      starterCode,
+      starterFiles: manifest.starterFiles,
+    },
+  } as Exercise;
 }
 
-function firstUsableStarterFiles(...values: unknown[]) {
-  for (const value of values) {
-    if (hasUsableStarterFileSource(value)) return value;
-  }
-
-  return undefined;
-}
 function buildWorkspaceFallbackFromProjectStep(step: unknown) {
   if (!isRecord(step)) return null;
 
@@ -408,23 +385,25 @@ function buildWorkspaceFallbackFromProjectStep(step: unknown) {
       step.workspaceFiles ??
       null;
 
+  const language = normalizeWorkspaceLanguage(
+      firstNonBlankString(
+          step.language,
+          rawWorkspace?.language,
+          rawWorkspace?.lang,
+      ) || "python",
+  );
+  const defaultEntryFile = defaultMainFile(language);
+
   const entryFile =
       firstNonBlankString(
           rawWorkspace?.entryFilePath,
           rawWorkspace?.entryFile,
           rawWorkspace?.mainFile,
           rawWorkspace?.mainFilePath,
-      ) || pickEntryFileFromFiles(starterFiles, "main.py");
-
-  const language =
-      firstNonBlankString(
-          step.language,
-          rawWorkspace?.language,
-          rawWorkspace?.lang,
-      ) || "python";
+      ) || pickEntryFileFromFiles(starterFiles, defaultEntryFile);
 
   const starterCode =
-      firstNonBlankString(
+      firstUsableStarterString(
           step.starterCode,
           rawWorkspace?.starterCode,
           fileContentFromFiles(starterFiles, entryFile),
@@ -446,6 +425,38 @@ function buildWorkspaceFallbackFromProjectStep(step: unknown) {
     workspaceFiles: step.workspaceFiles ?? rawWorkspace?.workspaceFiles,
     fixtures: step.fixtures ?? rawWorkspace?.fixtures,
     fileFixtures: step.fileFixtures ?? rawWorkspace?.fileFixtures,
+    runtime: firstRecord(step.runtime, rawWorkspace?.runtime),
+    recipe: firstRecord(step.recipe, rawWorkspace?.recipe),
+    datasetId: firstNonBlankString(
+        step.datasetId,
+        step.sqlDatasetId,
+        rawWorkspace?.datasetId,
+        rawWorkspace?.sqlDatasetId,
+    ),
+    sqlDatasetId: firstNonBlankString(
+        step.sqlDatasetId,
+        step.datasetId,
+        rawWorkspace?.sqlDatasetId,
+        rawWorkspace?.datasetId,
+    ),
+    fixedSqlDialect: firstNonBlankString(
+        step.fixedSqlDialect,
+        rawWorkspace?.fixedSqlDialect,
+    ),
+    sqlDialect: firstNonBlankString(
+        step.sqlDialect,
+        rawWorkspace?.sqlDialect,
+    ),
+    sqlSchemaSql: firstNonBlankString(
+        step.sqlSchemaSql,
+        rawWorkspace?.sqlSchemaSql,
+    ),
+    sqlSeedSql: firstNonBlankString(
+        step.sqlSeedSql,
+        rawWorkspace?.sqlSeedSql,
+    ),
+    sqlInitialTableSnapshots:
+        step.sqlInitialTableSnapshots ?? rawWorkspace?.sqlInitialTableSnapshots,
   };
 }
 
@@ -478,6 +489,15 @@ function mergeProjectStepFallbackExercise(
     starterCode: fallbackWorkspace.starterCode,
     starterFiles: fallbackWorkspace.starterFiles,
     workspace: fallbackWorkspace,
+    runtime: fallbackWorkspace.runtime,
+    recipe: fallbackWorkspace.recipe,
+    datasetId: fallbackWorkspace.datasetId,
+    sqlDatasetId: fallbackWorkspace.sqlDatasetId,
+    fixedSqlDialect: fallbackWorkspace.fixedSqlDialect,
+    sqlDialect: fallbackWorkspace.sqlDialect,
+    sqlSchemaSql: fallbackWorkspace.sqlSchemaSql,
+    sqlSeedSql: fallbackWorkspace.sqlSeedSql,
+    sqlInitialTableSnapshots: fallbackWorkspace.sqlInitialTableSnapshots,
     ideConfig: firstRecord(
         projectStepManifest.ideConfig,
         isRecord(projectStepManifest.workspace) ? projectStepManifest.workspace.ideConfig : null,
@@ -491,13 +511,15 @@ function mergeProjectStepFallbackExercise(
   };
 
   if (!exercise) {
-    return fallbackExercise as unknown as Exercise;
+    return canonicalizeCodeInputExerciseStarterContract(
+        fallbackExercise as unknown as Exercise,
+    );
   }
 
   const exAny = exercise as any;
   const exWorkspace = isRecord(exAny.workspace) ? exAny.workspace : null;
 
-  const mergedStarterCode = firstNonBlankString(
+  const mergedStarterCode = firstUsableStarterString(
       exAny.starterCode,
       exWorkspace?.starterCode,
       fallbackExercise.starterCode,
@@ -537,7 +559,7 @@ function mergeProjectStepFallbackExercise(
         fallbackWorkspace.entryFile,
     ),
 
-    starterCode: firstNonBlankString(
+    starterCode: firstUsableStarterString(
         exWorkspace?.starterCode,
         exAny.starterCode,
         fallbackWorkspace.starterCode,
@@ -546,7 +568,7 @@ function mergeProjectStepFallbackExercise(
     starterFiles: mergedWorkspaceStarterFiles,
   };
 
-  return {
+  return canonicalizeCodeInputExerciseStarterContract({
     ...fallbackExercise,
     ...exAny,
 
@@ -565,10 +587,42 @@ function mergeProjectStepFallbackExercise(
         firstRecord(exAny.ideConfig),
         fallbackExercise.ideConfig,
     ),
+    runtime: firstRecord(exAny.runtime, fallbackExercise.runtime),
+    recipe: firstRecord(exAny.recipe, fallbackExercise.recipe),
+    datasetId: firstNonBlankString(
+        exAny.datasetId,
+        exAny.sqlDatasetId,
+        fallbackExercise.datasetId,
+        fallbackExercise.sqlDatasetId,
+    ),
+    sqlDatasetId: firstNonBlankString(
+        exAny.sqlDatasetId,
+        exAny.datasetId,
+        fallbackExercise.sqlDatasetId,
+        fallbackExercise.datasetId,
+    ),
+    fixedSqlDialect: firstNonBlankString(
+        exAny.fixedSqlDialect,
+        fallbackExercise.fixedSqlDialect,
+    ),
+    sqlDialect: firstNonBlankString(
+        exAny.sqlDialect,
+        fallbackExercise.sqlDialect,
+    ),
+    sqlSchemaSql: firstNonBlankString(
+        exAny.sqlSchemaSql,
+        fallbackExercise.sqlSchemaSql,
+    ),
+    sqlSeedSql: firstNonBlankString(
+        exAny.sqlSeedSql,
+        fallbackExercise.sqlSeedSql,
+    ),
+    sqlInitialTableSnapshots:
+        exAny.sqlInitialTableSnapshots ?? fallbackExercise.sqlInitialTableSnapshots,
 
     solutionCode: firstNonBlankString(exAny.solutionCode, fallbackExercise.solutionCode),
     solutionFiles: exAny.solutionFiles ?? fallbackExercise.solutionFiles,
-  } as Exercise;
+  } as Exercise);
 }
 
 
@@ -588,16 +642,26 @@ function buildProjectStepFallbackPracticeItem(args: {
 
   const exAny = exercise as any;
   const workspaceRecord = isRecord(exAny.workspace) ? exAny.workspace : {};
-  const language = firstNonBlankString(
-      exAny.language,
-      workspaceRecord.language,
-      "python",
+  const language = normalizeWorkspaceLanguage(
+      firstNonBlankString(
+          exAny.language,
+          workspaceRecord.language,
+          "python",
+      ),
+  );
+  const defaultEntryFile = defaultMainFile(language);
+  const entryFile = firstNonBlankString(
+      workspaceRecord.entryFilePath,
+      workspaceRecord.entryFile,
+      workspaceRecord.mainFile,
+      workspaceRecord.mainFilePath,
+      pickEntryFileFromFiles(exAny.starterFiles ?? workspaceRecord.starterFiles, defaultEntryFile),
   );
 
-  const starterCode = firstNonBlankString(
+  const starterCode = firstUsableStarterString(
       exAny.starterCode,
       workspaceRecord.starterCode,
-      fileContentFromFiles(exAny.starterFiles ?? workspaceRecord.starterFiles, "main.py"),
+      fileContentFromFiles(exAny.starterFiles ?? workspaceRecord.starterFiles, entryFile),
   );
 
   const starterWorkspace =

@@ -1,0 +1,364 @@
+{
+  "topics": {
+    "sql-v2": {
+      "sql-v2-0": {
+        "database_thinking": {
+          "label": "Database Thinking",
+          "summary": "Database thinking means organizing data clearly so you can ask useful questions and identify records correctly.",
+          "cards": {
+            "sketch0": {
+              "title": "Why does database thinking matter?"
+            },
+            "sketch1": {
+              "title": "How do questions turn into answers?"
+            },
+            "sketch2": {
+              "title": "Why does structure matter?"
+            },
+            "sketch3": {
+              "title": "What is a key?"
+            },
+            "quiz": {
+              "title": "Quiz: Database Thinking"
+            }
+          },
+          "quiz": {
+            "try-database_thinking-sketch0": {
+              "title": "Try it yourself: Why does database thinking matter?",
+              "prompt": "Use the SQL editor to practice the idea from this card. Run the query, then compare the result table with the lesson explanation.",
+              "hint": "Use the pattern shown in the lesson card.",
+              "help": {
+                "concept": "This try-it checks that you can connect the lesson idea to a small SQL query.",
+                "hint_1": "Check the selected columns and the table name.",
+                "hint_2": "Run the query and read the result table."
+              },
+              "starterCode": "-- Show the requested columns from students\nSELECT \nFROM students;"
+            },
+            "try-database_thinking-sketch1": {
+              "title": "Try it yourself: How do questions turn into answers?",
+              "prompt": "Use the SQL editor to practice the idea from this card. Run the query, then compare the result table with the lesson explanation.",
+              "hint": "Use the pattern shown in the lesson card.",
+              "help": {
+                "concept": "This try-it checks that you can connect the lesson idea to a small SQL query.",
+                "hint_1": "Check the selected columns and the table name.",
+                "hint_2": "Run the query and read the result table."
+              },
+              "starterCode": "-- Show the requested student rows\nSELECT \nFROM students\nWHERE ;"
+            },
+            "try-database_thinking-sketch2": {
+              "title": "Try it yourself: Why does structure matter?",
+              "prompt": "Use the SQL editor to practice the idea from this card. Run the query, then compare the result table with the lesson explanation.",
+              "hint": "Use the pattern shown in the lesson card.",
+              "help": {
+                "concept": "This try-it checks that you can connect the lesson idea to a small SQL query.",
+                "hint_1": "Check the selected columns and the table name.",
+                "hint_2": "Run the query and read the result table."
+              },
+              "starterCode": "-- Show the requested columns from students\nSELECT \nFROM students;"
+            },
+            "try-database_thinking-sketch3": {
+              "title": "Try it yourself: What is a key?",
+              "prompt": "Use the SQL editor to practice the idea from this card. Run the query, then compare the result table with the lesson explanation.",
+              "hint": "Use the pattern shown in the lesson card.",
+              "help": {
+                "concept": "This try-it checks that you can connect the lesson idea to a small SQL query.",
+                "hint_1": "Check the selected columns and the table name.",
+                "hint_2": "Run the query and read the result table."
+              },
+              "starterCode": "-- Show id and name from students\nSELECT \nFROM students;"
+            },
+            "m0_s03_database_thinking_focus": {
+              "title": "What is database thinking mostly about?",
+              "prompt": "Which choice best describes database thinking?",
+              "help": {
+                "concept": "Database thinking is about organizing information so it stays useful and easy to question later.",
+                "hint_1": "Think about structure before queries become complicated.",
+                "hint_2": "Choose the answer about organizing data clearly for future use."
+              },
+              "hint": "Focus on structure and useful questions.",
+              "options": {
+                "a": "Organizing data so questions are easier to answer",
+                "b": "Drawing tables only for decoration",
+                "c": "Memorizing every SQL keyword immediately",
+                "d": "Replacing all rows with pictures"
+              }
+            },
+            "m0_s03_questions_matter": {
+              "title": "Why do people store data in a database?",
+              "prompt": "What is one main reason people store data in a database?",
+              "help": {
+                "concept": "A database is valuable because it helps answer questions about stored information.",
+                "hint_1": "Think beyond just saving data.",
+                "hint_2": "The best answer is about getting useful answers later."
+              },
+              "hint": "You store data so you can use it.",
+              "options": {
+                "a": "To ask useful questions about it later",
+                "b": "To make screens look brighter",
+                "c": "To replace internet access",
+                "d": "To avoid using rows and columns"
+              }
+            },
+            "m0_s03_structure_importance": {
+              "title": "Why is structure important?",
+              "prompt": "Why does structure matter in a database?",
+              "help": {
+                "concept": "Clear structure makes data easier to search, understand, and maintain.",
+                "hint_1": "Messy structure causes confusion.",
+                "hint_2": "Pick the choice about making data easier to query and manage."
+              },
+              "hint": "Think about clarity and fewer mistakes.",
+              "options": {
+                "a": "It makes data easier to query and maintain",
+                "b": "It makes every table identical",
+                "c": "It removes the need for keys",
+                "d": "It turns all rows into formulas"
+              }
+            },
+            "m0_s03_key_purpose": {
+              "title": "What is a key used for?",
+              "prompt": "In database design, what is a key mainly used for?",
+              "help": {
+                "concept": "A key helps identify a specific row or record in a table.",
+                "hint_1": "Think about an `id` column.",
+                "hint_2": "The best answer is about identification."
+              },
+              "hint": "A key points to the right record.",
+              "options": {
+                "a": "To identify a specific row",
+                "b": "To color a table",
+                "c": "To rename SQL",
+                "d": "To hide all columns"
+              }
+            },
+            "m0_s03_name_vs_id": {
+              "title": "Why is an id often better than a name?",
+              "prompt": "Why is a key like `student_id` often more useful than using a name alone?",
+              "help": {
+                "concept": "Names can repeat, but a good key should uniquely identify one row.",
+                "hint_1": "Two people can share the same name.",
+                "hint_2": "Look for the answer about uniqueness."
+              },
+              "hint": "Names can repeat.",
+              "options": {
+                "a": "Because an id can uniquely identify one row",
+                "b": "Because ids are always longer words",
+                "c": "Because names cannot be stored in tables",
+                "d": "Because ids remove the need for columns"
+              }
+            },
+            "m0_s03_select_all_foundations": {
+              "title": "Which database thinking statements are true?",
+              "prompt": "Select all true statements.",
+              "help": {
+                "concept": "This checks the core ideas of database thinking: useful questions, clean structure, and keys for identification.",
+                "hint_1": "Choose statements that match organization, clarity, and identification.",
+                "hint_2": "Avoid choices that sound random or unrelated to data design."
+              },
+              "hint": "Match each option to the main ideas from the lesson.",
+              "options": {
+                "a": "A database should help answer questions.",
+                "b": "Good structure makes queries easier.",
+                "c": "A key can identify a specific row.",
+                "d": "Messy tables always improve accuracy.",
+                "e": "Names never repeat, so ids are unnecessary."
+              }
+            },
+            "m0_s03_reorder_question_flow": {
+              "title": "Question to answer flow",
+              "prompt": "Reorder the ideas to match the database thinking flow.",
+              "hint": "Start with storing, then questioning, then results.",
+              "concept": "A database stores information so you can ask questions and get answers.",
+              "hint_1": "Data comes before the question.",
+              "hint_2": "An answer appears after the question is asked.",
+              "tokens": {
+                "t1": "store information",
+                "t2": "ask a question",
+                "t3": "get an answer"
+              }
+            },
+            "m0_s03_reorder_structure_logic": {
+              "title": "Why structure helps",
+              "prompt": "Put these ideas in the best logical order.",
+              "hint": "Good structure comes before clear queries.",
+              "concept": "Organized data makes accurate questions and results easier.",
+              "hint_1": "Organization comes first.",
+              "hint_2": "Good answers come after good questions.",
+              "tokens": {
+                "t1": "organize the data clearly",
+                "t2": "ask a clearer question",
+                "t3": "get a cleaner result"
+              }
+            },
+            "m0_s03_reorder_key_reasoning": {
+              "title": "Why keys matter",
+              "prompt": "Reorder these statements so they explain why a key is useful.",
+              "hint": "Start with repeated names, then the problem, then the solution.",
+              "concept": "Keys help when ordinary values like names are not enough to identify one record.",
+              "hint_1": "Names can repeat first.",
+              "hint_2": "The key solves the identification problem.",
+              "tokens": {
+                "t1": "names can repeat",
+                "t2": "that can cause confusion",
+                "t3": "a key identifies the correct row"
+              }
+            },
+            "m0_s03_reorder_table_focus": {
+              "title": "Keep tables focused",
+              "prompt": "Reorder the ideas to show a healthy table design mindset.",
+              "hint": "Start with one subject, then clear columns, then easier querying.",
+              "concept": "Focused tables are easier to understand and use.",
+              "hint_1": "A table should begin with one main subject.",
+              "hint_2": "Better clarity leads to easier querying.",
+              "tokens": {
+                "t1": "keep one main subject per table",
+                "t2": "use clear columns",
+                "t3": "make questions easier to answer"
+              }
+            },
+            "m0_s03_reorder_key_to_relationships": {
+              "title": "From keys to connections",
+              "prompt": "Reorder these ideas in the best learning order.",
+              "hint": "Identify first, connect later.",
+              "concept": "You first learn keys as identifiers, then later as connectors between tables.",
+              "hint_1": "The first use of a key is identifying a row.",
+              "hint_2": "Connections between tables come later.",
+              "tokens": {
+                "t1": "a key identifies one row",
+                "t2": "each record stays clear",
+                "t3": "later keys can connect tables"
+              }
+            },
+            "m0_s03_fill_database_goal": {
+              "title": "Main goal of a database",
+              "prompt": "Fill in the blank with the best answer.",
+              "help": {
+                "concept": "A database is useful when it helps answer questions about stored information.",
+                "hint_1": "Think about usefulness, not just storage.",
+                "hint_2": "The missing word is what you want from a query."
+              },
+              "hint": "Databases help you get ____.",
+              "template": "A good database helps turn stored data into useful ____.",
+              "choices": [
+                "answers",
+                "colors",
+                "stickers",
+                "batteries"
+              ]
+            },
+            "m0_s03_fill_structure_value": {
+              "title": "Why structure matters",
+              "prompt": "Choose the word that makes the sentence true.",
+              "help": {
+                "concept": "Clear structure reduces confusion and makes data easier to use.",
+                "hint_1": "Messy data creates the opposite of this.",
+                "hint_2": "The missing word is about being easy to understand."
+              },
+              "hint": "Good structure adds clarity.",
+              "template": "Good database structure makes data easier to ____.",
+              "choices": [
+                "understand",
+                "erase",
+                "hide",
+                "ignore"
+              ]
+            },
+            "m0_s03_fill_key_meaning": {
+              "title": "Meaning of a key",
+              "prompt": "Complete the sentence with the best answer.",
+              "help": {
+                "concept": "A key helps identify a specific record in a table.",
+                "hint_1": "Think about `student_id`.",
+                "hint_2": "The missing word is about finding the right row."
+              },
+              "hint": "A key helps you identify one ____.",
+              "template": "A key is used to identify one specific ____ in a table.",
+              "choices": [
+                "row",
+                "screen",
+                "query",
+                "keyboard"
+              ]
+            },
+            "m0_s03_fill_name_problem": {
+              "title": "Why names are not always enough",
+              "prompt": "Pick the best word to complete the sentence.",
+              "help": {
+                "concept": "Names can repeat, so they are not always reliable for unique identification.",
+                "hint_1": "Two students may share the same one of these.",
+                "hint_2": "That is why ids matter."
+              },
+              "hint": "People can share the same ____.",
+              "template": "A name alone may not be enough because names can ____.",
+              "choices": [
+                "repeat",
+                "sort",
+                "delete",
+                "connect"
+              ]
+            },
+            "m0_s03_fill_future_keys": {
+              "title": "What keys help with later",
+              "prompt": "Fill in the blank with the best answer.",
+              "help": {
+                "concept": "After learning that keys identify rows, you later learn they can help connect tables.",
+                "hint_1": "This comes after the idea of identification.",
+                "hint_2": "The missing word is about tables working together."
+              },
+              "hint": "Keys later help tables ____.",
+              "template": "Later, keys can also help ____ one table to another.",
+              "choices": [
+                "connect",
+                "paint",
+                "freeze",
+                "rotate"
+              ]
+            }
+          },
+          "tryIt": {
+            "try_database_thinking_sketch0": {
+              "title": "Try it yourself: Why does database thinking matter?",
+              "prompt": "Use the SQL editor to practice the idea from this card. Run the query, then compare the result table with the lesson explanation."
+            },
+            "try_database_thinking_sketch1": {
+              "title": "Try it yourself: How do questions turn into answers?",
+              "prompt": "Use the SQL editor to practice the idea from this card. Run the query, then compare the result table with the lesson explanation."
+            },
+            "try_database_thinking_sketch2": {
+              "title": "Try it yourself: Why does structure matter?",
+              "prompt": "Use the SQL editor to practice the idea from this card. Run the query, then compare the result table with the lesson explanation."
+            },
+            "try_database_thinking_sketch3": {
+              "title": "Try it yourself: What is a key?",
+              "prompt": "Use the SQL editor to practice the idea from this card. Run the query, then compare the result table with the lesson explanation."
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql-v2": {
+      "sql-v2-0": {
+        "database_thinking": {
+          "why_database_thinking_matters": {
+            "title": "Good structure makes data useful.",
+            "bodyMarkdown": "A database is helpful because it can answer questions.\n\n[[image:question_to_table_answer]]\n\nYou do not store data just to keep it.\nYou store it so you can **use it**.\n\nExamples:\n\n- Which students got an A?\n- How many courses are there?\n- Which products are out of stock?\n\nSo database thinking starts with one core idea:\n\n> organize data so questions are easier to answer"
+          },
+          "questions_turn_into_answers": {
+            "title": "A database should help you ask clear questions.",
+            "bodyMarkdown": "When data is organized well, you can ask better questions.\n\n[[image:data_question_flow]]\n\nThat is the mindset behind SQL:\n\n> ask a question, get an answer\n\nA messy system makes questions harder.\nA clear system makes questions easier.\n\nSo database thinking is not only about storing data.\nIt is also about preparing data for future questions."
+          },
+          "why_structure_matters": {
+            "title": "Clear tables reduce confusion.",
+            "bodyMarkdown": "Good database design keeps information organized.\n\n[[image:organized_vs_messy_table]]\n\nThat usually means:\n\n- one table focuses on one main subject\n- columns are clear\n- repeated information is reduced when possible\n\nIf structure is messy, mistakes become more likely.\n\nFor example:\n\n- duplicate data is harder to update\n- mixed meanings confuse queries\n- unclear columns create bad results\n\nSo strong structure makes the database easier to read, search, and maintain."
+          },
+          "what_a_key_is": {
+            "title": "A key helps identify the right row.",
+            "bodyMarkdown": "A **key** is a value used to identify something important in a table.\n\n[[image:primary_key_simple_example]]\n\nA common example is an `id`.\n\nExample:\n\n| student_id | name |\n|---|---|\n| 1 | Mia |\n| 2 | Leo |\n\nHere, `student_id` helps identify each student separately.\n\nKeys matter because names can repeat, but a key should point to one specific row.\n\nLater, keys also help connect one table to another."
+          }
+        }
+      }
+    }
+  }
+}

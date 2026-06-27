@@ -2,14 +2,14 @@
   "topicId": "equals_comparison",
   "subjectSlug": "sql-v2",
   "moduleSlug": "sql-v2-2",
-  "sectionSlug": "sql-v2-2-2",
+  "sectionSlug": "sql-v2-sql-v2-2-2",
   "prefix": "sqlv2_2",
-  "minutes": 15,
+  "minutes": 20,
   "runtimeDefaults": {
     "kind": "sql",
     "showSchema": true,
-    "showErd": true,
-    "showChen": true,
+    "showErd": false,
+    "showChen": false,
     "supportsTerminal": false,
     "supportsMultiFile": false,
     "supportsFileSystem": false,
@@ -301,7 +301,7 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-2.equals_comparison.quiz.eq-code-1",
       "language": "sql",
-      "starterCode": "SELECT \nFROM products\nWHERE ;",
+      "starterCode": "@:topics.sql-v2.sql-v2-2.equals_comparison.quiz.eq-code-1.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -309,8 +309,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -319,8 +319,60 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT id, name, category\nFROM products\nWHERE category = 'Art';"
-      }
+        "solutionCode": "SELECT id, name, category\nFROM products\nWHERE category = 'Art';",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT id, name, category\nFROM products\nWHERE category = 'Art';",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-2.equals_comparison.quiz.eq-code-1.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT id, name, category\nFROM products\nWHERE category = 'Art';",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-2.equals_comparison.quiz.eq-code-1.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-2.equals_comparison.quiz.eq-code-1.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT id, name, category\nFROM products\nWHERE category = 'Art';",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     },
     {
       "id": "eq-code-2",
@@ -329,7 +381,7 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-2.equals_comparison.quiz.eq-code-2",
       "language": "sql",
-      "starterCode": "SELECT name\nFROM products\nWHERE stock = ;",
+      "starterCode": "@:topics.sql-v2.sql-v2-2.equals_comparison.quiz.eq-code-2.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -337,8 +389,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -347,8 +399,60 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT name, stock\nFROM products\nWHERE stock = 3;"
-      }
+        "solutionCode": "SELECT name, stock\nFROM products\nWHERE stock = 3;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, stock\nFROM products\nWHERE stock = 3;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-2.equals_comparison.quiz.eq-code-2.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT name, stock\nFROM products\nWHERE stock = 3;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-2.equals_comparison.quiz.eq-code-2.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-2.equals_comparison.quiz.eq-code-2.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, stock\nFROM products\nWHERE stock = 3;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     },
     {
       "id": "eq-code-3",
@@ -357,7 +461,7 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-2.equals_comparison.quiz.eq-code-3",
       "language": "sql",
-      "starterCode": "SELECT *\nFROM products\nWHERE ;",
+      "starterCode": "@:topics.sql-v2.sql-v2-2.equals_comparison.quiz.eq-code-3.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -365,8 +469,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -375,8 +479,60 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT *\nFROM products\nWHERE name = 'Desk Lamp';"
-      }
+        "solutionCode": "SELECT *\nFROM products\nWHERE name = 'Desk Lamp';",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT *\nFROM products\nWHERE name = 'Desk Lamp';",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-2.equals_comparison.quiz.eq-code-3.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT *\nFROM products\nWHERE name = 'Desk Lamp';",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-2.equals_comparison.quiz.eq-code-3.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-2.equals_comparison.quiz.eq-code-3.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT *\nFROM products\nWHERE name = 'Desk Lamp';",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     },
     {
       "id": "try-equals_comparison-sketch0",
@@ -385,7 +541,7 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-2.equals_comparison.quiz.try-equals_comparison-sketch0",
       "language": "sql",
-      "starterCode": "SELECT \nFROM products\nWHERE ;",
+      "starterCode": "@:topics.sql-v2.sql-v2-2.equals_comparison.quiz.try-equals_comparison-sketch0.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -393,8 +549,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -403,8 +559,60 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT id, name, category\nFROM products\nWHERE category = 'Art';"
-      }
+        "solutionCode": "SELECT id, name, category\nFROM products\nWHERE category = 'Art';",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT id, name, category\nFROM products\nWHERE category = 'Art';",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-2.equals_comparison.quiz.try-equals_comparison-sketch0.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT id, name, category\nFROM products\nWHERE category = 'Art';",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-2.equals_comparison.quiz.try-equals_comparison-sketch0.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-2.equals_comparison.quiz.try-equals_comparison-sketch0.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT id, name, category\nFROM products\nWHERE category = 'Art';",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     },
     {
       "id": "try-equals_comparison-sketch1",
@@ -413,7 +621,7 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-2.equals_comparison.quiz.try-equals_comparison-sketch1",
       "language": "sql",
-      "starterCode": "SELECT name\nFROM products\nWHERE stock = ;",
+      "starterCode": "@:topics.sql-v2.sql-v2-2.equals_comparison.quiz.try-equals_comparison-sketch1.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -421,8 +629,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -431,8 +639,60 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT name, stock\nFROM products\nWHERE stock = 3;"
-      }
+        "solutionCode": "SELECT name, stock\nFROM products\nWHERE stock = 3;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, stock\nFROM products\nWHERE stock = 3;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-2.equals_comparison.quiz.try-equals_comparison-sketch1.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT name, stock\nFROM products\nWHERE stock = 3;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-2.equals_comparison.quiz.try-equals_comparison-sketch1.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-2.equals_comparison.quiz.try-equals_comparison-sketch1.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, stock\nFROM products\nWHERE stock = 3;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     },
     {
       "id": "try-equals_comparison-sketch2",
@@ -441,7 +701,7 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-2.equals_comparison.quiz.try-equals_comparison-sketch2",
       "language": "sql",
-      "starterCode": "SELECT *\nFROM products\nWHERE ;",
+      "starterCode": "@:topics.sql-v2.sql-v2-2.equals_comparison.quiz.try-equals_comparison-sketch2.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -449,8 +709,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -459,8 +719,60 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT *\nFROM products\nWHERE name = 'Desk Lamp';"
-      }
+        "solutionCode": "SELECT *\nFROM products\nWHERE name = 'Desk Lamp';",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT *\nFROM products\nWHERE name = 'Desk Lamp';",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-2.equals_comparison.quiz.try-equals_comparison-sketch2.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT *\nFROM products\nWHERE name = 'Desk Lamp';",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-2.equals_comparison.quiz.try-equals_comparison-sketch2.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-2.equals_comparison.quiz.try-equals_comparison-sketch2.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT *\nFROM products\nWHERE name = 'Desk Lamp';",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     }
   ]
 }

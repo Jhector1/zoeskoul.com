@@ -2,14 +2,14 @@
   "topicId": "combining_conditions_safely",
   "subjectSlug": "sql-v2",
   "moduleSlug": "sql-v2-2",
-  "sectionSlug": "sql-v2-2-3",
+  "sectionSlug": "sql-v2-sql-v2-2-3",
   "prefix": "sqlv2_2",
-  "minutes": 15,
+  "minutes": 16,
   "runtimeDefaults": {
     "kind": "sql",
     "showSchema": true,
-    "showErd": true,
-    "showChen": true,
+    "showErd": false,
+    "showChen": false,
     "supportsTerminal": false,
     "supportsMultiFile": false,
     "supportsFileSystem": false,
@@ -315,7 +315,7 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-2.combining_conditions_safely.quiz.ci_art_or_stationery_stock",
       "language": "sql",
-      "starterCode": "SELECT name, category, stock\nFROM products\nWHERE ;",
+      "starterCode": "@:topics.sql-v2.sql-v2-2.combining_conditions_safely.quiz.ci_art_or_stationery_stock.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -323,8 +323,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -333,8 +333,60 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT name, category, stock\nFROM products\nWHERE (category = 'Art' OR category = 'Stationery') AND stock > 20;"
-      }
+        "solutionCode": "SELECT name, category, stock\nFROM products\nWHERE (category = 'Art' OR category = 'Stationery') AND stock > 20;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, category, stock\nFROM products\nWHERE (category = 'Art' OR category = 'Stationery') AND stock > 20;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-2.combining_conditions_safely.quiz.ci_art_or_stationery_stock.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT name, category, stock\nFROM products\nWHERE (category = 'Art' OR category = 'Stationery') AND stock > 20;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-2.combining_conditions_safely.quiz.ci_art_or_stationery_stock.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-2.combining_conditions_safely.quiz.ci_art_or_stationery_stock.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, category, stock\nFROM products\nWHERE (category = 'Art' OR category = 'Stationery') AND stock > 20;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     },
     {
       "id": "ci_not_home_under_20",
@@ -343,7 +395,7 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-2.combining_conditions_safely.quiz.ci_not_home_under_20",
       "language": "sql",
-      "starterCode": "SELECT name, category, price\nFROM products\nWHERE ;",
+      "starterCode": "@:topics.sql-v2.sql-v2-2.combining_conditions_safely.quiz.ci_not_home_under_20.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -351,8 +403,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -361,8 +413,60 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT name, category, price\nFROM products\nWHERE NOT (category = 'Home') AND price < 20;"
-      }
+        "solutionCode": "SELECT name, category, price\nFROM products\nWHERE NOT (category = 'Home') AND price < 20;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, category, price\nFROM products\nWHERE NOT (category = 'Home') AND price < 20;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-2.combining_conditions_safely.quiz.ci_not_home_under_20.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT name, category, price\nFROM products\nWHERE NOT (category = 'Home') AND price < 20;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-2.combining_conditions_safely.quiz.ci_not_home_under_20.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-2.combining_conditions_safely.quiz.ci_not_home_under_20.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, category, price\nFROM products\nWHERE NOT (category = 'Home') AND price < 20;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     },
     {
       "id": "ci_stationery_or_low_stock",
@@ -371,7 +475,7 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-2.combining_conditions_safely.quiz.ci_stationery_or_low_stock",
       "language": "sql",
-      "starterCode": "SELECT name, category, stock\nFROM products\nWHERE ;",
+      "starterCode": "@:topics.sql-v2.sql-v2-2.combining_conditions_safely.quiz.ci_stationery_or_low_stock.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -379,8 +483,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -389,8 +493,60 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT name, category, stock\nFROM products\nWHERE category = 'Stationery' OR stock < 5;"
-      }
+        "solutionCode": "SELECT name, category, stock\nFROM products\nWHERE category = 'Stationery' OR stock < 5;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, category, stock\nFROM products\nWHERE category = 'Stationery' OR stock < 5;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-2.combining_conditions_safely.quiz.ci_stationery_or_low_stock.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT name, category, stock\nFROM products\nWHERE category = 'Stationery' OR stock < 5;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-2.combining_conditions_safely.quiz.ci_stationery_or_low_stock.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-2.combining_conditions_safely.quiz.ci_stationery_or_low_stock.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, category, stock\nFROM products\nWHERE category = 'Stationery' OR stock < 5;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     },
     {
       "id": "try-combining_conditions_safely-sketch0",
@@ -399,7 +555,7 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-2.combining_conditions_safely.quiz.try-combining_conditions_safely-sketch0",
       "language": "sql",
-      "starterCode": "SELECT name, category, stock\nFROM products\nWHERE ;",
+      "starterCode": "@:topics.sql-v2.sql-v2-2.combining_conditions_safely.quiz.try-combining_conditions_safely-sketch0.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -407,8 +563,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -417,8 +573,60 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT name, category, stock\nFROM products\nWHERE (category = 'Art' OR category = 'Stationery') AND stock > 20;"
-      }
+        "solutionCode": "SELECT name, category, stock\nFROM products\nWHERE (category = 'Art' OR category = 'Stationery') AND stock > 20;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, category, stock\nFROM products\nWHERE (category = 'Art' OR category = 'Stationery') AND stock > 20;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-2.combining_conditions_safely.quiz.try-combining_conditions_safely-sketch0.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT name, category, stock\nFROM products\nWHERE (category = 'Art' OR category = 'Stationery') AND stock > 20;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-2.combining_conditions_safely.quiz.try-combining_conditions_safely-sketch0.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-2.combining_conditions_safely.quiz.try-combining_conditions_safely-sketch0.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, category, stock\nFROM products\nWHERE (category = 'Art' OR category = 'Stationery') AND stock > 20;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     },
     {
       "id": "try-combining_conditions_safely-sketch1",
@@ -427,7 +635,7 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-2.combining_conditions_safely.quiz.try-combining_conditions_safely-sketch1",
       "language": "sql",
-      "starterCode": "SELECT name, category, price\nFROM products\nWHERE ;",
+      "starterCode": "@:topics.sql-v2.sql-v2-2.combining_conditions_safely.quiz.try-combining_conditions_safely-sketch1.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -435,8 +643,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -445,8 +653,60 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT name, category, price\nFROM products\nWHERE NOT (category = 'Home') AND price < 20;"
-      }
+        "solutionCode": "SELECT name, category, price\nFROM products\nWHERE NOT (category = 'Home') AND price < 20;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, category, price\nFROM products\nWHERE NOT (category = 'Home') AND price < 20;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-2.combining_conditions_safely.quiz.try-combining_conditions_safely-sketch1.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT name, category, price\nFROM products\nWHERE NOT (category = 'Home') AND price < 20;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-2.combining_conditions_safely.quiz.try-combining_conditions_safely-sketch1.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-2.combining_conditions_safely.quiz.try-combining_conditions_safely-sketch1.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, category, price\nFROM products\nWHERE NOT (category = 'Home') AND price < 20;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     },
     {
       "id": "try-combining_conditions_safely-sketch2",
@@ -455,7 +715,7 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-2.combining_conditions_safely.quiz.try-combining_conditions_safely-sketch2",
       "language": "sql",
-      "starterCode": "SELECT name, category, stock\nFROM products\nWHERE ;",
+      "starterCode": "@:topics.sql-v2.sql-v2-2.combining_conditions_safely.quiz.try-combining_conditions_safely-sketch2.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -463,8 +723,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -473,8 +733,60 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT name, category, stock\nFROM products\nWHERE category = 'Stationery' OR stock < 5;"
-      }
+        "solutionCode": "SELECT name, category, stock\nFROM products\nWHERE category = 'Stationery' OR stock < 5;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, category, stock\nFROM products\nWHERE category = 'Stationery' OR stock < 5;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-2.combining_conditions_safely.quiz.try-combining_conditions_safely-sketch2.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT name, category, stock\nFROM products\nWHERE category = 'Stationery' OR stock < 5;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-2.combining_conditions_safely.quiz.try-combining_conditions_safely-sketch2.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-2.combining_conditions_safely.quiz.try-combining_conditions_safely-sketch2.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, category, stock\nFROM products\nWHERE category = 'Stationery' OR stock < 5;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     }
   ]
 }

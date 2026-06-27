@@ -1,0 +1,187 @@
+{
+  "topicId": "rows_and_columns",
+  "subjectSlug": "sql-v2",
+  "moduleSlug": "sql-v2-0",
+  "sectionSlug": "sql-v2-sql-v2-0-2",
+  "prefix": "sqlv2_0",
+  "minutes": 12,
+  "runtimeDefaults": {
+    "kind": "sql",
+    "showSchema": true,
+    "showErd": true,
+    "showChen": true,
+    "supportsTerminal": false,
+    "supportsMultiFile": false,
+    "supportsFileSystem": false,
+    "datasetId": "students_intro",
+    "fixedSqlDialect": "sqlite",
+    "resultShape": "table"
+  },
+  "topic": {
+    "labelKey": "topics.sql-v2.sql-v2-0.rows_and_columns.label",
+    "summaryKey": "topics.sql-v2.sql-v2-0.rows_and_columns.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql-v2.sql-v2-0.rows_and_columns.cards.sketch0.title",
+      "sketchId": "rows-vs-columns",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql-v2.sql-v2-0.rows_and_columns.cards.sketch1.title",
+      "sketchId": "reading-a-simple-select",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql-v2.sql-v2-0.rows_and_columns.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "rows-vs-columns",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql-v2.sql-v2-0.rows_and_columns.rows-vs-columns.title",
+      "bodyKey": "sketches.sql-v2.sql-v2-0.rows_and_columns.rows-vs-columns.bodyMarkdown"
+    },
+    {
+      "id": "reading-a-simple-select",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql-v2.sql-v2-0.rows_and_columns.reading-a-simple-select.title",
+      "bodyKey": "sketches.sql-v2.sql-v2-0.rows_and_columns.reading-a-simple-select.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "sc-row-definition",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-0.rows_and_columns.quiz.sc-row-definition",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "sc-column-definition",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-0.rows_and_columns.quiz.sc-column-definition",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "c"
+      }
+    },
+    {
+      "id": "mc-select-star",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-0.rows_and_columns.quiz.mc-select-star",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "mc-column-examples",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-0.rows_and_columns.quiz.mc-column-examples",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "dr-query-order-all-columns",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-0.rows_and_columns.quiz.dr-query-order-all-columns",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t3",
+          "t2",
+          "t1"
+        ]
+      }
+    },
+    {
+      "id": "dr-query-order-two-columns",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-0.rows_and_columns.quiz.dr-query-order-two-columns",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t3",
+          "t1",
+          "t2"
+        ]
+      }
+    }
+  ]
+}

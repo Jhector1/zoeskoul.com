@@ -1,0 +1,193 @@
+{
+  "topicId": "table_names_and_column_names",
+  "subjectSlug": "sql-v2",
+  "moduleSlug": "sql-v2-0",
+  "sectionSlug": "sql-v2-sql-v2-0-2",
+  "prefix": "sqlv2_0",
+  "minutes": 12,
+  "runtimeDefaults": {
+    "kind": "sql",
+    "showSchema": true,
+    "showErd": true,
+    "showChen": true,
+    "supportsTerminal": false,
+    "supportsMultiFile": false,
+    "supportsFileSystem": false,
+    "datasetId": "students_intro",
+    "fixedSqlDialect": "sqlite",
+    "resultShape": "table"
+  },
+  "topic": {
+    "labelKey": "topics.sql-v2.sql-v2-0.table_names_and_column_names.label",
+    "summaryKey": "topics.sql-v2.sql-v2-0.table_names_and_column_names.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql-v2.sql-v2-0.table_names_and_column_names.cards.sketch0.title",
+      "sketchId": "sketch_1",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql-v2.sql-v2-0.table_names_and_column_names.cards.sketch1.title",
+      "sketchId": "sketch_2",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql-v2.sql-v2-0.table_names_and_column_names.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch_1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql-v2.sql-v2-0.table_names_and_column_names.sketch_1.title",
+      "bodyKey": "sketches.sql-v2.sql-v2-0.table_names_and_column_names.sketch_1.bodyMarkdown"
+    },
+    {
+      "id": "sketch_2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql-v2.sql-v2-0.table_names_and_column_names.sketch_2.title",
+      "bodyKey": "sketches.sql-v2.sql-v2-0.table_names_and_column_names.sketch_2.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "sc_table_name_students",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-0.table_names_and_column_names.quiz.sc_table_name_students",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "sc_column_name_city",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-0.table_names_and_column_names.quiz.sc_column_name_city",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "c"
+      }
+    },
+    {
+      "id": "mc_valid_students_columns",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-0.table_names_and_column_names.quiz.mc_valid_students_columns",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "mc_queries_with_real_names",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-0.table_names_and_column_names.quiz.mc_queries_with_real_names",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "dr_query_order_one_column",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-0.table_names_and_column_names.quiz.dr_query_order_one_column",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4",
+        "t5"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t4",
+          "t3",
+          "t2",
+          "t1",
+          "t5"
+        ]
+      }
+    },
+    {
+      "id": "dr_query_order_two_columns",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-0.table_names_and_column_names.quiz.dr_query_order_two_columns",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4",
+        "t5"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t3",
+          "t4",
+          "t1",
+          "t2",
+          "t5"
+        ]
+      }
+    }
+  ]
+}

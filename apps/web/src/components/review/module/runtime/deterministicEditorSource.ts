@@ -41,6 +41,13 @@ function manifestHasStarter(manifest: unknown, entry: ReviewTargetEntry) {
       manifestRecord?.starterWorkspace ??
       null;
 
+  /**
+   * Preserve unresolved @: aliases in the manifest/registry so localization can
+   * still resolve them later, but do not treat alias-only values as concrete
+   * starter content for deterministic runtime seeding. Otherwise a blank
+   * pre-localization shell can mount as "starter" and suppress the real
+   * localized workspace once it becomes available.
+   */
   return Boolean(
       hasUsableStarterFilesValue(entry.starterFiles) ||
       isUsableStarterCode(entry.starterCode) ||

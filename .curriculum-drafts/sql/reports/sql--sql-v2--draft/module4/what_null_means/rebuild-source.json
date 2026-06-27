@@ -1,0 +1,20 @@
+{
+  "mode": "rebuild-from-drafts",
+  "source": "current-draft-output",
+  "sourceBundlePath": "/Users/admin/Documents/NextJSProject/zoeskoul.com/.curriculum-drafts/sql/subjects/sql--sql-v2--draft/modules/module4/topics/what_null_means/topic.bundle.json",
+  "sourceMessagesPaths": {
+    "en": "/Users/admin/Documents/NextJSProject/zoeskoul.com/.curriculum-drafts/sql/messages/en/subjects/sql--sql-v2--draft/module4/what_null_means.json"
+  },
+  "identityNormalized": true,
+  "identityReplacements": [
+    [
+      "sql-v2-4-3",
+      "sql--sql-v2--draft-sql-v2-4-3"
+    ],
+    [
+      "sql-v2",
+      "sql--sql-v2--draft"
+    ]
+  ],
+  "syncedReports": true
+}

@@ -4,6 +4,7 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 import CodeRunner, {
     restartWorkspaceTerminalSession,
     shouldCollapseIdleOutputPanel,
+    shouldAutoOpenWorkspaceTerminal,
 } from "@/components/code/runner/CodeRunner";
 
 const mockedWorkspaceTerminalControllerCalls: any[] = [];
@@ -379,6 +380,43 @@ describe("shouldCollapseIdleOutputPanel", () => {
             shouldCollapseIdleOutputPanel({
                 ...baseArgs,
                 compactLearnerUi: false,
+            }),
+        ).toBe(false);
+    });
+});
+
+describe("shouldAutoOpenWorkspaceTerminal", () => {
+    const baseArgs = {
+        outputTab: "terminal" as const,
+        workspaceTerminalEnabled: true,
+        recoverState: "none",
+        state: "idle",
+        restarting: false,
+        stopping: false,
+        sessionId: null,
+        started: false,
+        starting: false,
+        autoOpenAlreadyRequested: false,
+    };
+
+    it("allows the first automatic open for an idle visible terminal", () => {
+        expect(shouldAutoOpenWorkspaceTerminal(baseArgs)).toBe(true);
+    });
+
+    it("does not auto-retry the same terminal scope after one automatic attempt", () => {
+        expect(
+            shouldAutoOpenWorkspaceTerminal({
+                ...baseArgs,
+                autoOpenAlreadyRequested: true,
+            }),
+        ).toBe(false);
+    });
+
+    it("does not auto-open after a failed terminal state", () => {
+        expect(
+            shouldAutoOpenWorkspaceTerminal({
+                ...baseArgs,
+                state: "failed",
             }),
         ).toBe(false);
     });

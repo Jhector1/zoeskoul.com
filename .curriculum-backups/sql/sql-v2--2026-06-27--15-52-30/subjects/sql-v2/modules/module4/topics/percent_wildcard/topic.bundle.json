@@ -1,0 +1,778 @@
+{
+  "topicId": "percent_wildcard",
+  "subjectSlug": "sql-v2",
+  "moduleSlug": "sql-v2-4",
+  "sectionSlug": "sql-v2-sql-v2-4-1",
+  "prefix": "sqlv2_4",
+  "minutes": 16,
+  "runtimeDefaults": {
+    "kind": "sql",
+    "showSchema": true,
+    "showErd": true,
+    "showChen": true,
+    "supportsTerminal": false,
+    "supportsMultiFile": false,
+    "supportsFileSystem": false,
+    "datasetId": "customers_cleanup",
+    "fixedSqlDialect": "sqlite",
+    "resultShape": "table"
+  },
+  "topic": {
+    "labelKey": "topics.sql-v2.sql-v2-4.percent_wildcard.label",
+    "summaryKey": "topics.sql-v2.sql-v2-4.percent_wildcard.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql-v2.sql-v2-4.percent_wildcard.cards.sketch0.title",
+      "sketchId": "percent_like_basics",
+      "height": 420,
+      "tryIt": {
+        "id": "try-percent_wildcard-sketch0",
+        "titleKey": "topics.sql-v2.sql-v2-4.percent_wildcard.tryIt.try_percent_wildcard_sketch0.title",
+        "promptKey": "topics.sql-v2.sql-v2-4.percent_wildcard.tryIt.try_percent_wildcard_sketch0.prompt",
+        "exerciseKey": "try-percent_wildcard-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql-v2.sql-v2-4.percent_wildcard.cards.sketch1.title",
+      "sketchId": "percent_positions",
+      "height": 420,
+      "tryIt": {
+        "id": "try-percent_wildcard-sketch1",
+        "titleKey": "topics.sql-v2.sql-v2-4.percent_wildcard.tryIt.try_percent_wildcard_sketch1.title",
+        "promptKey": "topics.sql-v2.sql-v2-4.percent_wildcard.tryIt.try_percent_wildcard_sketch1.prompt",
+        "exerciseKey": "try-percent_wildcard-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.sql-v2.sql-v2-4.percent_wildcard.cards.sketch2.title",
+      "sketchId": "percent_real_filters",
+      "height": 420,
+      "tryIt": {
+        "id": "try-percent_wildcard-sketch2",
+        "titleKey": "topics.sql-v2.sql-v2-4.percent_wildcard.tryIt.try_percent_wildcard_sketch2.title",
+        "promptKey": "topics.sql-v2.sql-v2-4.percent_wildcard.tryIt.try_percent_wildcard_sketch2.prompt",
+        "exerciseKey": "try-percent_wildcard-sketch2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql-v2.sql-v2-4.percent_wildcard.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.sql-v2.sql-v2-4.percent_wildcard.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "ci_find_example_domain",
+            "titleKey": "topics.sql-v2.sql-v2-4.percent_wildcard.projectSteps.ci_find_example_domain.title",
+            "exerciseKey": "ci_find_example_domain",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "ci_find_test_names",
+            "titleKey": "topics.sql-v2.sql-v2-4.percent_wildcard.projectSteps.ci_find_test_names.title",
+            "exerciseKey": "ci_find_test_names",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "ci_find_internal_or_test_email",
+            "titleKey": "topics.sql-v2.sql-v2-4.percent_wildcard.projectSteps.ci_find_internal_or_test_email.title",
+            "exerciseKey": "ci_find_internal_or_test_email",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "percent_like_basics",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql-v2.sql-v2-4.percent_wildcard.percent_like_basics.title",
+      "bodyKey": "sketches.sql-v2.sql-v2-4.percent_wildcard.percent_like_basics.bodyMarkdown"
+    },
+    {
+      "id": "percent_positions",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql-v2.sql-v2-4.percent_wildcard.percent_positions.title",
+      "bodyKey": "sketches.sql-v2.sql-v2-4.percent_wildcard.percent_positions.bodyMarkdown"
+    },
+    {
+      "id": "percent_real_filters",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql-v2.sql-v2-4.percent_wildcard.percent_real_filters.title",
+      "bodyKey": "sketches.sql-v2.sql-v2-4.percent_wildcard.percent_real_filters.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "sc_percent_contains",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-4.percent_wildcard.quiz.sc_percent_contains",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "sc_percent_startswith",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-4.percent_wildcard.quiz.sc_percent_startswith",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "c"
+      }
+    },
+    {
+      "id": "mc_percent_true_statements",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-4.percent_wildcard.quiz.mc_percent_true_statements",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "mc_customers_matching_patterns",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-4.percent_wildcard.quiz.mc_customers_matching_patterns",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "dr_build_contains_query",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-4.percent_wildcard.quiz.dr_build_contains_query",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
+    },
+    {
+      "id": "dr_build_endswith_query",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-4.percent_wildcard.quiz.dr_build_endswith_query",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t2",
+          "t3",
+          "t1"
+        ]
+      }
+    },
+    {
+      "id": "fb_contains_pattern",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-4.percent_wildcard.quiz.fb_contains_pattern",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "%ago%"
+      }
+    },
+    {
+      "id": "fb_startswith_pattern",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-4.percent_wildcard.quiz.fb_startswith_pattern",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "Mia%"
+      }
+    },
+    {
+      "id": "ci_find_example_domain",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-4.percent_wildcard.quiz.ci_find_example_domain",
+      "language": "sql",
+      "starterCode": "@:topics.sql-v2.sql-v2-4.percent_wildcard.quiz.ci_find_example_domain.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "customers_cleanup",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "customers_cleanup",
+        "resultShape": "table",
+        "solutionCode": "SELECT id, full_name, email\nFROM customers\nWHERE email LIKE '%example.com';",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT id, full_name, email\nFROM customers\nWHERE email LIKE '%example.com';",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-4.percent_wildcard.quiz.ci_find_example_domain.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT id, full_name, email\nFROM customers\nWHERE email LIKE '%example.com';",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-4.percent_wildcard.quiz.ci_find_example_domain.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-4.percent_wildcard.quiz.ci_find_example_domain.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT id, full_name, email\nFROM customers\nWHERE email LIKE '%example.com';",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
+    },
+    {
+      "id": "ci_find_test_names",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-4.percent_wildcard.quiz.ci_find_test_names",
+      "language": "sql",
+      "starterCode": "@:topics.sql-v2.sql-v2-4.percent_wildcard.quiz.ci_find_test_names.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "customers_cleanup",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "customers_cleanup",
+        "resultShape": "table",
+        "solutionCode": "SELECT id, full_name\nFROM customers\nWHERE full_name LIKE '%Test%';",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT id, full_name\nFROM customers\nWHERE full_name LIKE '%Test%';",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-4.percent_wildcard.quiz.ci_find_test_names.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT id, full_name\nFROM customers\nWHERE full_name LIKE '%Test%';",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-4.percent_wildcard.quiz.ci_find_test_names.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-4.percent_wildcard.quiz.ci_find_test_names.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT id, full_name\nFROM customers\nWHERE full_name LIKE '%Test%';",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
+    },
+    {
+      "id": "ci_find_internal_or_test_email",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-4.percent_wildcard.quiz.ci_find_internal_or_test_email",
+      "language": "sql",
+      "starterCode": "@:topics.sql-v2.sql-v2-4.percent_wildcard.quiz.ci_find_internal_or_test_email.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "customers_cleanup",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "customers_cleanup",
+        "resultShape": "table",
+        "solutionCode": "SELECT full_name, email\nFROM customers\nWHERE email LIKE '%internal%'\n   OR email LIKE '%test%';",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT full_name, email\nFROM customers\nWHERE email LIKE '%internal%'\n   OR email LIKE '%test%';",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-4.percent_wildcard.quiz.ci_find_internal_or_test_email.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT full_name, email\nFROM customers\nWHERE email LIKE '%internal%'\n   OR email LIKE '%test%';",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-4.percent_wildcard.quiz.ci_find_internal_or_test_email.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-4.percent_wildcard.quiz.ci_find_internal_or_test_email.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT full_name, email\nFROM customers\nWHERE email LIKE '%internal%'\n   OR email LIKE '%test%';",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
+    },
+    {
+      "id": "try-percent_wildcard-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-4.percent_wildcard.quiz.try-percent_wildcard-sketch0",
+      "language": "sql",
+      "starterCode": "@:topics.sql-v2.sql-v2-4.percent_wildcard.quiz.try-percent_wildcard-sketch0.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "customers_cleanup",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "customers_cleanup",
+        "resultShape": "table",
+        "solutionCode": "SELECT id, full_name, email\nFROM customers\nWHERE email LIKE '%example.com';",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT id, full_name, email\nFROM customers\nWHERE email LIKE '%example.com';",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-4.percent_wildcard.quiz.try-percent_wildcard-sketch0.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT id, full_name, email\nFROM customers\nWHERE email LIKE '%example.com';",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-4.percent_wildcard.quiz.try-percent_wildcard-sketch0.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-4.percent_wildcard.quiz.try-percent_wildcard-sketch0.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT id, full_name, email\nFROM customers\nWHERE email LIKE '%example.com';",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
+    },
+    {
+      "id": "try-percent_wildcard-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-4.percent_wildcard.quiz.try-percent_wildcard-sketch1",
+      "language": "sql",
+      "starterCode": "@:topics.sql-v2.sql-v2-4.percent_wildcard.quiz.try-percent_wildcard-sketch1.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "customers_cleanup",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "customers_cleanup",
+        "resultShape": "table",
+        "solutionCode": "SELECT id, full_name\nFROM customers\nWHERE full_name LIKE '%Test%';",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT id, full_name\nFROM customers\nWHERE full_name LIKE '%Test%';",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-4.percent_wildcard.quiz.try-percent_wildcard-sketch1.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT id, full_name\nFROM customers\nWHERE full_name LIKE '%Test%';",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-4.percent_wildcard.quiz.try-percent_wildcard-sketch1.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-4.percent_wildcard.quiz.try-percent_wildcard-sketch1.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT id, full_name\nFROM customers\nWHERE full_name LIKE '%Test%';",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
+    },
+    {
+      "id": "try-percent_wildcard-sketch2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-4.percent_wildcard.quiz.try-percent_wildcard-sketch2",
+      "language": "sql",
+      "starterCode": "@:topics.sql-v2.sql-v2-4.percent_wildcard.quiz.try-percent_wildcard-sketch2.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "customers_cleanup",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": true,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "customers_cleanup",
+        "resultShape": "table",
+        "solutionCode": "SELECT full_name, email\nFROM customers\nWHERE email LIKE '%internal%'\n   OR email LIKE '%test%';",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT full_name, email\nFROM customers\nWHERE email LIKE '%internal%'\n   OR email LIKE '%test%';",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-4.percent_wildcard.quiz.try-percent_wildcard-sketch2.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT full_name, email\nFROM customers\nWHERE email LIKE '%internal%'\n   OR email LIKE '%test%';",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-4.percent_wildcard.quiz.try-percent_wildcard-sketch2.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-4.percent_wildcard.quiz.try-percent_wildcard-sketch2.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT full_name, email\nFROM customers\nWHERE email LIKE '%internal%'\n   OR email LIKE '%test%';",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
+    }
+  ]
+}

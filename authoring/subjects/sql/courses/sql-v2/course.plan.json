@@ -1,0 +1,47 @@
+{
+  "subjectSlug": "sql",
+  "courseSlug": "sql-v2",
+  "catalogSlug": "sql",
+  "profileId": "sql",
+  "title": "SQL Foundations",
+  "moduleOrder": [
+    "sql-v2-0",
+    "sql-v2-1",
+    "sql-v2-2",
+    "sql-v2-3",
+    "sql-v2-4",
+    "sql-v2-5"
+  ],
+  "modules": [
+    {
+      "moduleSlug": "sql-v2-0",
+      "moduleNumber": 0,
+      "title": "Getting Started with SQL and Databases"
+    },
+    {
+      "moduleSlug": "sql-v2-1",
+      "moduleNumber": 1,
+      "title": "Your First Queries with SELECT"
+    },
+    {
+      "moduleSlug": "sql-v2-2",
+      "moduleNumber": 2,
+      "title": "Filtering Data with WHERE"
+    },
+    {
+      "moduleSlug": "sql-v2-3",
+      "moduleNumber": 3,
+      "title": "Sorting and Limiting Results"
+    },
+    {
+      "moduleSlug": "sql-v2-4",
+      "moduleNumber": 4,
+      "title": "Working with Text, Lists, Ranges, and NULL"
+    },
+    {
+      "moduleSlug": "sql-v2-5",
+      "moduleNumber": 5,
+      "title": "Capstone: Customer Follow-Up Report"
+    }
+  ]
+}

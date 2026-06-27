@@ -1,10 +1,14 @@
 import type { WorkspaceLanguage, SqlDialect } from "@/lib/practice/types";
 import { DEFAULT_SQL_DIALECT } from "@/components/code/runner/constants";
+import { defaultMainFile } from "@/components/ide/languageDefaults";
 import {
   resolveSqlRunnerConfig,
   type ResolvedSqlRunnerConfig,
 } from "@/lib/subjects/sql/sql/runtime/resolveSqlRunnerConfig";
-import {isUsableStarterCode} from "@/components/review/module/runtime/starterContent";
+import {
+  isUsableStarterCode,
+  mergeStarterFileSources,
+} from "@/components/review/module/runtime/starterContent";
 import { resolveEffectiveExerciseRuntime } from "@zoeskoul/curriculum-runtime/runtime";
 
 type UnknownRecord = Record<string, unknown>;
@@ -185,140 +189,15 @@ function firstFiles(...values: unknown[]) {
   return undefined;
 }
 
-type NormalizedSeedFile = {
-  path: string;
-  content: string;
-};
-
-function normalizeSeedPath(input: unknown, fallback: string) {
-  const raw = typeof input === "string" && input.trim() ? input : fallback;
-
-  const parts = raw
-    .replace(/\\/g, "/")
-    .replace(/^\/+/, "")
-    .split("/")
-    .map((part) => part.trim())
-    .filter((part) => part && part !== "." && part !== "..");
-
-  return parts.join("/") || fallback;
-}
-
-function unwrapSeedFiles(raw: unknown): unknown {
-  if (!isRecord(raw)) return raw;
-
-  return (
-    raw.starterFiles ??
-    raw.files ??
-    raw.initialFiles ??
-    raw.workspaceFiles ??
-    raw.entries ??
-    raw.items ??
-    raw
-  );
-}
-
-function seedFilePath(file: unknown, fallback: string) {
-  if (typeof file === "string") return normalizeSeedPath(file, fallback);
-  if (!isRecord(file)) return fallback;
-
-  return normalizeSeedPath(
-    file.path ?? file.filePath ?? file.filename ?? file.name,
-    fallback,
-  );
-}
-
-function seedFileContent(file: unknown): string {
-  if (typeof file === "string") return "";
-  if (!isRecord(file)) return "";
-
-  for (const key of [
-    "content",
-    "contents",
-    "text",
-    "code",
-    "source",
-    "body",
-    "value",
-  ] as const) {
-    if (typeof file[key] === "string") {
-      return isUsableStarterCode(file[key]) ? file[key] : "";
-    }
-  }
-
-  return "";
-}
-
-function normalizeSeedFiles(
-  raw: unknown,
-  fallbackEntryFile: string,
-): NormalizedSeedFile[] {
-  const source = unwrapSeedFiles(raw);
-
-  if (Array.isArray(source)) {
-    return source
-      .map((file, index) => {
-        const fallback =
-          index === 0 ? fallbackEntryFile : `file-${String(index + 1)}.txt`;
-
-        return {
-          path: normalizeSeedPath(seedFilePath(file, fallback), fallback),
-          content: seedFileContent(file),
-        };
-      })
-      .filter((file) => Boolean(file.path));
-  }
-
-  if (isRecord(source)) {
-    return Object.entries(source)
-      .filter(([path]) => {
-        return ![
-          "entryFile",
-          "entryFilePath",
-          "mainFile",
-          "mainFilePath",
-          "language",
-          "lang",
-        ].includes(path);
-      })
-      .map(([path, value]) => ({
-        path: normalizeSeedPath(path, fallbackEntryFile),
-        content:
-          typeof value === "string"
-            ? isUsableStarterCode(value)
-              ? value
-              : ""
-            : seedFileContent(value),
-      }))
-      .filter((file) => Boolean(file.path));
-  }
-
-  return [];
-}
-
 function mergeFiles(
   values: unknown[],
   fallbackEntryFile = "main.txt",
 ): unknown {
-  const byPath = new Map<string, NormalizedSeedFile>();
-
-  for (const value of values) {
-    const normalized = normalizeSeedFiles(value, fallbackEntryFile);
-
-    for (const file of normalized) {
-      const path = normalizeSeedPath(file.path, fallbackEntryFile);
-      if (!path || byPath.has(path)) continue;
-
-      byPath.set(path, {
-        path,
-        content: file.content ?? "",
-      });
-    }
-  }
-
-  return byPath.size > 0 ? Array.from(byPath.values()) : firstFiles(...values);
+  const merged = mergeStarterFileSources(values, fallbackEntryFile);
+  return merged.length > 0 ? merged : firstFiles(...values);
 }
 
-function firstCode(...values: unknown[]) {
+function firstCode(...values: unknown[]): string | undefined {
   for (const value of values) {
     if (isUsableStarterCode(value)) return value;
   }
@@ -330,7 +209,10 @@ function firstCode(...values: unknown[]) {
  * This is intentionally course-agnostic. Python, Java, SQL, and future runtimes
  * may all define starter/support files. SQL datasets are not resolved here.
  */
-export function resolveFileSeed(target: unknown): FileSeed {
+export function resolveFileSeed(
+  target: unknown,
+  fallbackEntryFile = "main.txt",
+): FileSeed {
   const targetRecord = isRecord(target) ? target : null;
   const source = isRecord(targetRecord?.spec) ? targetRecord.spec : target;
   if (!isRecord(source)) return {};
@@ -339,34 +221,40 @@ export function resolveFileSeed(target: unknown): FileSeed {
   const recipe = isRecord(source.recipe) ? source.recipe : {};
 
   return {
-    starterFiles: mergeFiles([
-      workspace.starterFiles,
-      workspace.files,
-      workspace.initialFiles,
-      workspace.workspaceFiles,
-      workspace.fixtureFiles,
-      workspace.fixtures,
-      workspace.fileFixtures,
-      source.starterFiles,
-      source.files,
-      source.initialFiles,
-      source.workspaceFiles,
-      source.fixtureFiles,
-      source.fixtures,
-      source.fileFixtures,
-      recipe.starterFiles,
-      recipe.files,
-      recipe.initialFiles,
-      recipe.workspaceFiles,
-      recipe.fixtureFiles,
-      recipe.fixtures,
-      recipe.fileFixtures,
-    ]),
-    solutionFiles: mergeFiles([
-      workspace.solutionFiles,
-      source.solutionFiles,
-      recipe.solutionFiles,
-    ]),
+    starterFiles: mergeFiles(
+      [
+        workspace.starterFiles,
+        workspace.files,
+        workspace.initialFiles,
+        workspace.workspaceFiles,
+        workspace.fixtureFiles,
+        workspace.fixtures,
+        workspace.fileFixtures,
+        source.starterFiles,
+        source.files,
+        source.initialFiles,
+        source.workspaceFiles,
+        source.fixtureFiles,
+        source.fixtures,
+        source.fileFixtures,
+        recipe.starterFiles,
+        recipe.files,
+        recipe.initialFiles,
+        recipe.workspaceFiles,
+        recipe.fixtureFiles,
+        recipe.fixtures,
+        recipe.fileFixtures,
+      ],
+      fallbackEntryFile,
+    ),
+    solutionFiles: mergeFiles(
+      [
+        workspace.solutionFiles,
+        source.solutionFiles,
+        recipe.solutionFiles,
+      ],
+      fallbackEntryFile,
+    ),
     starterCode: firstCode(
         workspace.starterCode,
         source.starterCode,
@@ -382,15 +270,18 @@ export function resolveFileSeed(target: unknown): FileSeed {
 
 
 export function resolvePythonFileSeed(target: unknown): FileSeed {
-  return resolveFileSeed(target);
+  return resolveFileSeed(target, defaultMainFile("python" as WorkspaceLanguage));
 }
 
 export function resolveJavaFileSeed(target: unknown): FileSeed {
-  return resolveFileSeed(target);
+  return resolveFileSeed(target, defaultMainFile("java" as WorkspaceLanguage));
 }
 
-export function resolveGenericFileSeed(target: unknown): FileSeed {
-  return resolveFileSeed(target);
+export function resolveGenericFileSeed(
+  target: unknown,
+  language: WorkspaceLanguage = "python" as WorkspaceLanguage,
+): FileSeed {
+  return resolveFileSeed(target, defaultMainFile(language));
 }
 
 export function resolveCourseFileSeed(args: {
@@ -409,15 +300,15 @@ export function resolveCourseFileSeed(args: {
 
   switch (profile.id) {
     case "python":
-      return resolvePythonFileSeed(args.target);
+      return resolveFileSeed(args.target, defaultMainFile("python" as WorkspaceLanguage));
     case "java":
-      return resolveJavaFileSeed(args.target);
+      return resolveFileSeed(args.target, defaultMainFile("java" as WorkspaceLanguage));
     case "sql":
       // SQL can still have starter/query/support files, but dataset resolution
       // remains SQL-only and is handled by resolveRuntimeDefaultDataset.
-      return resolveGenericFileSeed(args.target);
+      return resolveFileSeed(args.target, defaultMainFile("sql" as WorkspaceLanguage));
     default:
-      return resolveGenericFileSeed(args.target);
+      return resolveFileSeed(args.target, defaultMainFile(profile.defaultLanguage));
   }
 }
 

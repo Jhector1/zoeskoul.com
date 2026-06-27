@@ -1,15 +1,15 @@
 {
   "topicId": "underscore_wildcard",
-  "subjectSlug": "sql-v2",
+  "subjectSlug": "sql--sql-v2--draft",
   "moduleSlug": "sql-v2-4",
-  "sectionSlug": "sql-v2-4-1",
+  "sectionSlug": "sql--sql-v2--draft-sql-v2-4-1",
   "prefix": "sqlv2_4",
-  "minutes": 15,
+  "minutes": 16,
   "runtimeDefaults": {
     "kind": "sql",
     "showSchema": true,
-    "showErd": true,
-    "showChen": true,
+    "showErd": false,
+    "showChen": false,
     "supportsTerminal": false,
     "supportsMultiFile": false,
     "supportsFileSystem": false,
@@ -18,20 +18,20 @@
     "resultShape": "table"
   },
   "topic": {
-    "labelKey": "topics.sql-v2.sql-v2-4.underscore_wildcard.label",
-    "summaryKey": "topics.sql-v2.sql-v2-4.underscore_wildcard.summary"
+    "labelKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.underscore_wildcard.label",
+    "summaryKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.underscore_wildcard.summary"
   },
   "cards": [
     {
       "id": "sketch0",
       "kind": "sketch",
-      "titleKey": "topics.sql-v2.sql-v2-4.underscore_wildcard.cards.sketch0.title",
+      "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.underscore_wildcard.cards.sketch0.title",
       "sketchId": "sketch_1",
       "height": 420,
       "tryIt": {
         "id": "try-underscore_wildcard-sketch0",
-        "titleKey": "topics.sql-v2.sql-v2-4.underscore_wildcard.tryIt.try_underscore_wildcard_sketch0.title",
-        "promptKey": "topics.sql-v2.sql-v2-4.underscore_wildcard.tryIt.try_underscore_wildcard_sketch0.prompt",
+        "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.underscore_wildcard.tryIt.try_underscore_wildcard_sketch0.title",
+        "promptKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.underscore_wildcard.tryIt.try_underscore_wildcard_sketch0.prompt",
         "exerciseKey": "try-underscore_wildcard-sketch0",
         "difficulty": "easy",
         "preferKind": "code_input",
@@ -44,13 +44,13 @@
     {
       "id": "sketch1",
       "kind": "sketch",
-      "titleKey": "topics.sql-v2.sql-v2-4.underscore_wildcard.cards.sketch1.title",
+      "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.underscore_wildcard.cards.sketch1.title",
       "sketchId": "sketch_2",
       "height": 420,
       "tryIt": {
         "id": "try-underscore_wildcard-sketch1",
-        "titleKey": "topics.sql-v2.sql-v2-4.underscore_wildcard.tryIt.try_underscore_wildcard_sketch1.title",
-        "promptKey": "topics.sql-v2.sql-v2-4.underscore_wildcard.tryIt.try_underscore_wildcard_sketch1.prompt",
+        "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.underscore_wildcard.tryIt.try_underscore_wildcard_sketch1.title",
+        "promptKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.underscore_wildcard.tryIt.try_underscore_wildcard_sketch1.prompt",
         "exerciseKey": "try-underscore_wildcard-sketch1",
         "difficulty": "easy",
         "preferKind": "code_input",
@@ -63,13 +63,13 @@
     {
       "id": "sketch2",
       "kind": "sketch",
-      "titleKey": "topics.sql-v2.sql-v2-4.underscore_wildcard.cards.sketch2.title",
+      "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.underscore_wildcard.cards.sketch2.title",
       "sketchId": "sketch_3",
       "height": 420,
       "tryIt": {
         "id": "try-underscore_wildcard-sketch2",
-        "titleKey": "topics.sql-v2.sql-v2-4.underscore_wildcard.tryIt.try_underscore_wildcard_sketch2.title",
-        "promptKey": "topics.sql-v2.sql-v2-4.underscore_wildcard.tryIt.try_underscore_wildcard_sketch2.prompt",
+        "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.underscore_wildcard.tryIt.try_underscore_wildcard_sketch2.title",
+        "promptKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.underscore_wildcard.tryIt.try_underscore_wildcard_sketch2.prompt",
         "exerciseKey": "try-underscore_wildcard-sketch2",
         "difficulty": "easy",
         "preferKind": "code_input",
@@ -82,7 +82,7 @@
     {
       "id": "quiz",
       "kind": "quiz",
-      "titleKey": "topics.sql-v2.sql-v2-4.underscore_wildcard.cards.quiz.title",
+      "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.underscore_wildcard.cards.quiz.title",
       "quiz": {
         "difficulty": "easy",
         "n": 4,
@@ -97,7 +97,7 @@
     {
       "id": "project",
       "kind": "project",
-      "titleKey": "topics.sql-v2.sql-v2-4.underscore_wildcard.cards.project.title",
+      "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.underscore_wildcard.cards.project.title",
       "project": {
         "difficulty": "easy",
         "allowReveal": true,
@@ -106,7 +106,7 @@
         "steps": [
           {
             "id": "code_1",
-            "titleKey": "topics.sql-v2.sql-v2-4.underscore_wildcard.projectSteps.code_1.title",
+            "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.underscore_wildcard.projectSteps.code_1.title",
             "exerciseKey": "code_1",
             "difficulty": "easy",
             "preferKind": "code_input",
@@ -115,7 +115,7 @@
           },
           {
             "id": "code_2",
-            "titleKey": "topics.sql-v2.sql-v2-4.underscore_wildcard.projectSteps.code_2.title",
+            "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.underscore_wildcard.projectSteps.code_2.title",
             "exerciseKey": "code_2",
             "difficulty": "easy",
             "preferKind": "code_input",
@@ -124,7 +124,7 @@
           },
           {
             "id": "code_3",
-            "titleKey": "topics.sql-v2.sql-v2-4.underscore_wildcard.projectSteps.code_3.title",
+            "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.underscore_wildcard.projectSteps.code_3.title",
             "exerciseKey": "code_3",
             "difficulty": "easy",
             "preferKind": "code_input",
@@ -139,20 +139,20 @@
     {
       "id": "sketch_1",
       "archetype": "paragraph",
-      "titleKey": "sketches.sql-v2.sql-v2-4.underscore_wildcard.sketch_1.title",
-      "bodyKey": "sketches.sql-v2.sql-v2-4.underscore_wildcard.sketch_1.bodyMarkdown"
+      "titleKey": "sketches.sql--sql-v2--draft.sql--sql-v2--draft-4.underscore_wildcard.sketch_1.title",
+      "bodyKey": "sketches.sql--sql-v2--draft.sql--sql-v2--draft-4.underscore_wildcard.sketch_1.bodyMarkdown"
     },
     {
       "id": "sketch_2",
       "archetype": "paragraph",
-      "titleKey": "sketches.sql-v2.sql-v2-4.underscore_wildcard.sketch_2.title",
-      "bodyKey": "sketches.sql-v2.sql-v2-4.underscore_wildcard.sketch_2.bodyMarkdown"
+      "titleKey": "sketches.sql--sql-v2--draft.sql--sql-v2--draft-4.underscore_wildcard.sketch_2.title",
+      "bodyKey": "sketches.sql--sql-v2--draft.sql--sql-v2--draft-4.underscore_wildcard.sketch_2.bodyMarkdown"
     },
     {
       "id": "sketch_3",
       "archetype": "paragraph",
-      "titleKey": "sketches.sql-v2.sql-v2-4.underscore_wildcard.sketch_3.title",
-      "bodyKey": "sketches.sql-v2.sql-v2-4.underscore_wildcard.sketch_3.bodyMarkdown"
+      "titleKey": "sketches.sql--sql-v2--draft.sql--sql-v2--draft-4.underscore_wildcard.sketch_3.title",
+      "bodyKey": "sketches.sql--sql-v2--draft.sql--sql-v2--draft-4.underscore_wildcard.sketch_3.bodyMarkdown"
     }
   ],
   "exercises": [
@@ -161,7 +161,7 @@
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-4.underscore_wildcard.quiz.sc_1",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.underscore_wildcard.quiz.sc_1",
       "optionIds": [
         "a",
         "b",
@@ -178,7 +178,7 @@
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-4.underscore_wildcard.quiz.sc_2",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.underscore_wildcard.quiz.sc_2",
       "optionIds": [
         "a",
         "b",
@@ -195,7 +195,7 @@
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-4.underscore_wildcard.quiz.mc_1",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.underscore_wildcard.quiz.mc_1",
       "optionIds": [
         "a",
         "b",
@@ -216,7 +216,7 @@
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-4.underscore_wildcard.quiz.mc_2",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.underscore_wildcard.quiz.mc_2",
       "optionIds": [
         "a",
         "b",
@@ -236,7 +236,7 @@
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-4.underscore_wildcard.quiz.dr_1",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.underscore_wildcard.quiz.dr_1",
       "tokenIds": [
         "t1",
         "t2",
@@ -258,7 +258,7 @@
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-4.underscore_wildcard.quiz.dr_2",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.underscore_wildcard.quiz.dr_2",
       "tokenIds": [
         "t1",
         "t2",
@@ -280,7 +280,7 @@
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-4.underscore_wildcard.quiz.fb_1",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.underscore_wildcard.quiz.fb_1",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
@@ -292,7 +292,7 @@
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-4.underscore_wildcard.quiz.fb_2",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.underscore_wildcard.quiz.fb_2",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
@@ -304,9 +304,9 @@
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-4.underscore_wildcard.quiz.code_1",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.underscore_wildcard.quiz.code_1",
       "language": "sql",
-      "starterCode": "SELECT full_name\nFROM customers\nWHERE ;",
+      "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.underscore_wildcard.quiz.code_1.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -314,8 +314,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -324,17 +324,69 @@
         "type": "sql_query",
         "datasetId": "customers_cleanup",
         "resultShape": "table",
-        "solutionCode": "SELECT full_name\nFROM customers\nWHERE full_name LIKE '___ %';"
-      }
+        "solutionCode": "SELECT full_name\nFROM customers\nWHERE full_name LIKE '___ %';",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT full_name\nFROM customers\nWHERE full_name LIKE '___ %';",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.underscore_wildcard.quiz.code_1.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT full_name\nFROM customers\nWHERE full_name LIKE '___ %';",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.underscore_wildcard.quiz.code_1.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.underscore_wildcard.quiz.code_1.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT full_name\nFROM customers\nWHERE full_name LIKE '___ %';",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     },
     {
       "id": "code_2",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-4.underscore_wildcard.quiz.code_2",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.underscore_wildcard.quiz.code_2",
       "language": "sql",
-      "starterCode": "SELECT city\nFROM customers\nWHERE city LIKE '';",
+      "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.underscore_wildcard.quiz.code_2.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -342,8 +394,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -352,17 +404,69 @@
         "type": "sql_query",
         "datasetId": "customers_cleanup",
         "resultShape": "table",
-        "solutionCode": "SELECT city\nFROM customers\nWHERE city LIKE 'M____';"
-      }
+        "solutionCode": "SELECT city\nFROM customers\nWHERE city LIKE 'M____';",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT city\nFROM customers\nWHERE city LIKE 'M____';",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.underscore_wildcard.quiz.code_2.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT city\nFROM customers\nWHERE city LIKE 'M____';",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.underscore_wildcard.quiz.code_2.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.underscore_wildcard.quiz.code_2.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT city\nFROM customers\nWHERE city LIKE 'M____';",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     },
     {
       "id": "code_3",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-4.underscore_wildcard.quiz.code_3",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.underscore_wildcard.quiz.code_3",
       "language": "sql",
-      "starterCode": "SELECT email\nFROM customers\nWHERE email LIKE ;",
+      "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.underscore_wildcard.quiz.code_3.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -370,8 +474,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -380,17 +484,69 @@
         "type": "sql_query",
         "datasetId": "customers_cleanup",
         "resultShape": "table",
-        "solutionCode": "SELECT email\nFROM customers\nWHERE email LIKE '____@example.com';"
-      }
+        "solutionCode": "SELECT email\nFROM customers\nWHERE email LIKE '____@example.com';",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT email\nFROM customers\nWHERE email LIKE '____@example.com';",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.underscore_wildcard.quiz.code_3.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT email\nFROM customers\nWHERE email LIKE '____@example.com';",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.underscore_wildcard.quiz.code_3.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.underscore_wildcard.quiz.code_3.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT email\nFROM customers\nWHERE email LIKE '____@example.com';",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     },
     {
       "id": "try-underscore_wildcard-sketch0",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-4.underscore_wildcard.quiz.try-underscore_wildcard-sketch0",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.underscore_wildcard.quiz.try-underscore_wildcard-sketch0",
       "language": "sql",
-      "starterCode": "SELECT full_name\nFROM customers\nWHERE ;",
+      "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.underscore_wildcard.quiz.try-underscore_wildcard-sketch0.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -398,8 +554,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -408,17 +564,69 @@
         "type": "sql_query",
         "datasetId": "customers_cleanup",
         "resultShape": "table",
-        "solutionCode": "SELECT full_name\nFROM customers\nWHERE full_name LIKE '___ %';"
-      }
+        "solutionCode": "SELECT full_name\nFROM customers\nWHERE full_name LIKE '___ %';",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT full_name\nFROM customers\nWHERE full_name LIKE '___ %';",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.underscore_wildcard.quiz.try-underscore_wildcard-sketch0.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT full_name\nFROM customers\nWHERE full_name LIKE '___ %';",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.underscore_wildcard.quiz.try-underscore_wildcard-sketch0.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.underscore_wildcard.quiz.try-underscore_wildcard-sketch0.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT full_name\nFROM customers\nWHERE full_name LIKE '___ %';",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     },
     {
       "id": "try-underscore_wildcard-sketch1",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-4.underscore_wildcard.quiz.try-underscore_wildcard-sketch1",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.underscore_wildcard.quiz.try-underscore_wildcard-sketch1",
       "language": "sql",
-      "starterCode": "SELECT city\nFROM customers\nWHERE city LIKE '';",
+      "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.underscore_wildcard.quiz.try-underscore_wildcard-sketch1.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -426,8 +634,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -436,17 +644,69 @@
         "type": "sql_query",
         "datasetId": "customers_cleanup",
         "resultShape": "table",
-        "solutionCode": "SELECT city\nFROM customers\nWHERE city LIKE 'M____';"
-      }
+        "solutionCode": "SELECT city\nFROM customers\nWHERE city LIKE 'M____';",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT city\nFROM customers\nWHERE city LIKE 'M____';",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.underscore_wildcard.quiz.try-underscore_wildcard-sketch1.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT city\nFROM customers\nWHERE city LIKE 'M____';",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.underscore_wildcard.quiz.try-underscore_wildcard-sketch1.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.underscore_wildcard.quiz.try-underscore_wildcard-sketch1.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT city\nFROM customers\nWHERE city LIKE 'M____';",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     },
     {
       "id": "try-underscore_wildcard-sketch2",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-4.underscore_wildcard.quiz.try-underscore_wildcard-sketch2",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.underscore_wildcard.quiz.try-underscore_wildcard-sketch2",
       "language": "sql",
-      "starterCode": "SELECT email\nFROM customers\nWHERE email LIKE ;",
+      "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.underscore_wildcard.quiz.try-underscore_wildcard-sketch2.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -454,8 +714,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -464,8 +724,60 @@
         "type": "sql_query",
         "datasetId": "customers_cleanup",
         "resultShape": "table",
-        "solutionCode": "SELECT email\nFROM customers\nWHERE email LIKE '____@example.com';"
-      }
+        "solutionCode": "SELECT email\nFROM customers\nWHERE email LIKE '____@example.com';",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT email\nFROM customers\nWHERE email LIKE '____@example.com';",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.underscore_wildcard.quiz.try-underscore_wildcard-sketch2.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT email\nFROM customers\nWHERE email LIKE '____@example.com';",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.underscore_wildcard.quiz.try-underscore_wildcard-sketch2.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.underscore_wildcard.quiz.try-underscore_wildcard-sketch2.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT email\nFROM customers\nWHERE email LIKE '____@example.com';",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     }
   ]
 }

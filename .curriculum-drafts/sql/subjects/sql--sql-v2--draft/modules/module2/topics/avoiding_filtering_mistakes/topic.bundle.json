@@ -1,15 +1,15 @@
 {
   "topicId": "avoiding_filtering_mistakes",
-  "subjectSlug": "sql-v2",
+  "subjectSlug": "sql--sql-v2--draft",
   "moduleSlug": "sql-v2-2",
-  "sectionSlug": "sql-v2-2-4",
+  "sectionSlug": "sql--sql-v2--draft-sql-v2-2-4",
   "prefix": "sqlv2_2",
-  "minutes": 15,
+  "minutes": 16,
   "runtimeDefaults": {
     "kind": "sql",
     "showSchema": true,
-    "showErd": true,
-    "showChen": true,
+    "showErd": false,
+    "showChen": false,
     "supportsTerminal": false,
     "supportsMultiFile": false,
     "supportsFileSystem": false,
@@ -18,20 +18,20 @@
     "resultShape": "table"
   },
   "topic": {
-    "labelKey": "topics.sql-v2.sql-v2-2.avoiding_filtering_mistakes.label",
-    "summaryKey": "topics.sql-v2.sql-v2-2.avoiding_filtering_mistakes.summary"
+    "labelKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.avoiding_filtering_mistakes.label",
+    "summaryKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.avoiding_filtering_mistakes.summary"
   },
   "cards": [
     {
       "id": "sketch0",
       "kind": "sketch",
-      "titleKey": "topics.sql-v2.sql-v2-2.avoiding_filtering_mistakes.cards.sketch0.title",
+      "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.avoiding_filtering_mistakes.cards.sketch0.title",
       "sketchId": "sketch_where_precision",
       "height": 420,
       "tryIt": {
         "id": "try-avoiding_filtering_mistakes-sketch0",
-        "titleKey": "topics.sql-v2.sql-v2-2.avoiding_filtering_mistakes.tryIt.try_avoiding_filtering_mistakes_sketch0.title",
-        "promptKey": "topics.sql-v2.sql-v2-2.avoiding_filtering_mistakes.tryIt.try_avoiding_filtering_mistakes_sketch0.prompt",
+        "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.avoiding_filtering_mistakes.tryIt.try_avoiding_filtering_mistakes_sketch0.title",
+        "promptKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.avoiding_filtering_mistakes.tryIt.try_avoiding_filtering_mistakes_sketch0.prompt",
         "exerciseKey": "try-avoiding_filtering_mistakes-sketch0",
         "difficulty": "easy",
         "preferKind": "code_input",
@@ -44,13 +44,13 @@
     {
       "id": "sketch1",
       "kind": "sketch",
-      "titleKey": "topics.sql-v2.sql-v2-2.avoiding_filtering_mistakes.cards.sketch1.title",
+      "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.avoiding_filtering_mistakes.cards.sketch1.title",
       "sketchId": "sketch_and_or_mistakes",
       "height": 420,
       "tryIt": {
         "id": "try-avoiding_filtering_mistakes-sketch1",
-        "titleKey": "topics.sql-v2.sql-v2-2.avoiding_filtering_mistakes.tryIt.try_avoiding_filtering_mistakes_sketch1.title",
-        "promptKey": "topics.sql-v2.sql-v2-2.avoiding_filtering_mistakes.tryIt.try_avoiding_filtering_mistakes_sketch1.prompt",
+        "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.avoiding_filtering_mistakes.tryIt.try_avoiding_filtering_mistakes_sketch1.title",
+        "promptKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.avoiding_filtering_mistakes.tryIt.try_avoiding_filtering_mistakes_sketch1.prompt",
         "exerciseKey": "try-avoiding_filtering_mistakes-sketch1",
         "difficulty": "easy",
         "preferKind": "code_input",
@@ -63,13 +63,13 @@
     {
       "id": "sketch2",
       "kind": "sketch",
-      "titleKey": "topics.sql-v2.sql-v2-2.avoiding_filtering_mistakes.cards.sketch2.title",
+      "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.avoiding_filtering_mistakes.cards.sketch2.title",
       "sketchId": "sketch_reading_results",
       "height": 420,
       "tryIt": {
         "id": "try-avoiding_filtering_mistakes-sketch2",
-        "titleKey": "topics.sql-v2.sql-v2-2.avoiding_filtering_mistakes.tryIt.try_avoiding_filtering_mistakes_sketch2.title",
-        "promptKey": "topics.sql-v2.sql-v2-2.avoiding_filtering_mistakes.tryIt.try_avoiding_filtering_mistakes_sketch2.prompt",
+        "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.avoiding_filtering_mistakes.tryIt.try_avoiding_filtering_mistakes_sketch2.title",
+        "promptKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.avoiding_filtering_mistakes.tryIt.try_avoiding_filtering_mistakes_sketch2.prompt",
         "exerciseKey": "try-avoiding_filtering_mistakes-sketch2",
         "difficulty": "easy",
         "preferKind": "code_input",
@@ -82,7 +82,7 @@
     {
       "id": "quiz",
       "kind": "quiz",
-      "titleKey": "topics.sql-v2.sql-v2-2.avoiding_filtering_mistakes.cards.quiz.title",
+      "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.avoiding_filtering_mistakes.cards.quiz.title",
       "quiz": {
         "difficulty": "easy",
         "n": 4,
@@ -97,7 +97,7 @@
     {
       "id": "project",
       "kind": "project",
-      "titleKey": "topics.sql-v2.sql-v2-2.avoiding_filtering_mistakes.cards.project.title",
+      "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.avoiding_filtering_mistakes.cards.project.title",
       "project": {
         "difficulty": "easy",
         "allowReveal": true,
@@ -106,7 +106,7 @@
         "steps": [
           {
             "id": "ci_filter_expensive_products",
-            "titleKey": "topics.sql-v2.sql-v2-2.avoiding_filtering_mistakes.projectSteps.ci_filter_expensive_products.title",
+            "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.avoiding_filtering_mistakes.projectSteps.ci_filter_expensive_products.title",
             "exerciseKey": "ci_filter_expensive_products",
             "difficulty": "easy",
             "preferKind": "code_input",
@@ -115,7 +115,7 @@
           },
           {
             "id": "ci_filter_category_and_stock",
-            "titleKey": "topics.sql-v2.sql-v2-2.avoiding_filtering_mistakes.projectSteps.ci_filter_category_and_stock.title",
+            "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.avoiding_filtering_mistakes.projectSteps.ci_filter_category_and_stock.title",
             "exerciseKey": "ci_filter_category_and_stock",
             "difficulty": "easy",
             "preferKind": "code_input",
@@ -124,7 +124,7 @@
           },
           {
             "id": "ci_filter_recent_products",
-            "titleKey": "topics.sql-v2.sql-v2-2.avoiding_filtering_mistakes.projectSteps.ci_filter_recent_products.title",
+            "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.avoiding_filtering_mistakes.projectSteps.ci_filter_recent_products.title",
             "exerciseKey": "ci_filter_recent_products",
             "difficulty": "easy",
             "preferKind": "code_input",
@@ -139,20 +139,20 @@
     {
       "id": "sketch_where_precision",
       "archetype": "paragraph",
-      "titleKey": "sketches.sql-v2.sql-v2-2.avoiding_filtering_mistakes.sketch_where_precision.title",
-      "bodyKey": "sketches.sql-v2.sql-v2-2.avoiding_filtering_mistakes.sketch_where_precision.bodyMarkdown"
+      "titleKey": "sketches.sql--sql-v2--draft.sql--sql-v2--draft-2.avoiding_filtering_mistakes.sketch_where_precision.title",
+      "bodyKey": "sketches.sql--sql-v2--draft.sql--sql-v2--draft-2.avoiding_filtering_mistakes.sketch_where_precision.bodyMarkdown"
     },
     {
       "id": "sketch_and_or_mistakes",
       "archetype": "paragraph",
-      "titleKey": "sketches.sql-v2.sql-v2-2.avoiding_filtering_mistakes.sketch_and_or_mistakes.title",
-      "bodyKey": "sketches.sql-v2.sql-v2-2.avoiding_filtering_mistakes.sketch_and_or_mistakes.bodyMarkdown"
+      "titleKey": "sketches.sql--sql-v2--draft.sql--sql-v2--draft-2.avoiding_filtering_mistakes.sketch_and_or_mistakes.title",
+      "bodyKey": "sketches.sql--sql-v2--draft.sql--sql-v2--draft-2.avoiding_filtering_mistakes.sketch_and_or_mistakes.bodyMarkdown"
     },
     {
       "id": "sketch_reading_results",
       "archetype": "paragraph",
-      "titleKey": "sketches.sql-v2.sql-v2-2.avoiding_filtering_mistakes.sketch_reading_results.title",
-      "bodyKey": "sketches.sql-v2.sql-v2-2.avoiding_filtering_mistakes.sketch_reading_results.bodyMarkdown"
+      "titleKey": "sketches.sql--sql-v2--draft.sql--sql-v2--draft-2.avoiding_filtering_mistakes.sketch_reading_results.title",
+      "bodyKey": "sketches.sql--sql-v2--draft.sql--sql-v2--draft-2.avoiding_filtering_mistakes.sketch_reading_results.bodyMarkdown"
     }
   ],
   "exercises": [
@@ -161,7 +161,7 @@
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-2.avoiding_filtering_mistakes.quiz.sc_where_wrong_operator",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.avoiding_filtering_mistakes.quiz.sc_where_wrong_operator",
       "optionIds": [
         "a",
         "b",
@@ -178,7 +178,7 @@
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-2.avoiding_filtering_mistakes.quiz.sc_text_quotes",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.avoiding_filtering_mistakes.quiz.sc_text_quotes",
       "optionIds": [
         "a",
         "b"
@@ -193,7 +193,7 @@
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-2.avoiding_filtering_mistakes.quiz.mc_and_vs_or",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.avoiding_filtering_mistakes.quiz.mc_and_vs_or",
       "optionIds": [
         "a",
         "b",
@@ -213,7 +213,7 @@
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-2.avoiding_filtering_mistakes.quiz.mc_check_result_clues",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.avoiding_filtering_mistakes.quiz.mc_check_result_clues",
       "optionIds": [
         "a",
         "b",
@@ -233,7 +233,7 @@
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-2.avoiding_filtering_mistakes.quiz.dr_build_basic_filter",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.avoiding_filtering_mistakes.quiz.dr_build_basic_filter",
       "tokenIds": [
         "t1",
         "t2",
@@ -253,7 +253,7 @@
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-2.avoiding_filtering_mistakes.quiz.dr_build_sorted_filter",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.avoiding_filtering_mistakes.quiz.dr_build_sorted_filter",
       "tokenIds": [
         "t1",
         "t2",
@@ -275,7 +275,7 @@
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-2.avoiding_filtering_mistakes.quiz.fb_choose_and",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.avoiding_filtering_mistakes.quiz.fb_choose_and",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
@@ -287,7 +287,7 @@
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-2.avoiding_filtering_mistakes.quiz.fb_choose_quoted_text",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.avoiding_filtering_mistakes.quiz.fb_choose_quoted_text",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
@@ -299,9 +299,9 @@
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-2.avoiding_filtering_mistakes.quiz.ci_filter_expensive_products",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.avoiding_filtering_mistakes.quiz.ci_filter_expensive_products",
       "language": "sql",
-      "starterCode": "SELECT \n  name,\n  price\nFROM products\n-- TODO: keep only rows with price greater than 20\n-- TODO: sort by price from highest to lowest\n;",
+      "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.avoiding_filtering_mistakes.quiz.ci_filter_expensive_products.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -309,8 +309,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -319,17 +319,69 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT name, price\nFROM products\nWHERE price > 20\nORDER BY price DESC;"
-      }
+        "solutionCode": "SELECT name, price\nFROM products\nWHERE price > 20\nORDER BY price DESC;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, price\nFROM products\nWHERE price > 20\nORDER BY price DESC;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.avoiding_filtering_mistakes.quiz.ci_filter_expensive_products.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT name, price\nFROM products\nWHERE price > 20\nORDER BY price DESC;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.avoiding_filtering_mistakes.quiz.ci_filter_expensive_products.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.avoiding_filtering_mistakes.quiz.ci_filter_expensive_products.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, price\nFROM products\nWHERE price > 20\nORDER BY price DESC;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     },
     {
       "id": "ci_filter_category_and_stock",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-2.avoiding_filtering_mistakes.quiz.ci_filter_category_and_stock",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.avoiding_filtering_mistakes.quiz.ci_filter_category_and_stock",
       "language": "sql",
-      "starterCode": "SELECT \n  name,\n  category,\n  stock\nFROM products\n-- TODO: add a WHERE clause for Stationery items with enough stock\n-- TODO: sort by stock from highest to lowest\n;",
+      "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.avoiding_filtering_mistakes.quiz.ci_filter_category_and_stock.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -337,8 +389,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -347,17 +399,69 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT name, category, stock\nFROM products\nWHERE category = 'Stationery' AND stock >= 15\nORDER BY stock DESC;"
-      }
+        "solutionCode": "SELECT name, category, stock\nFROM products\nWHERE category = 'Stationery' AND stock >= 15\nORDER BY stock DESC;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, category, stock\nFROM products\nWHERE category = 'Stationery' AND stock >= 15\nORDER BY stock DESC;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.avoiding_filtering_mistakes.quiz.ci_filter_category_and_stock.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT name, category, stock\nFROM products\nWHERE category = 'Stationery' AND stock >= 15\nORDER BY stock DESC;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.avoiding_filtering_mistakes.quiz.ci_filter_category_and_stock.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.avoiding_filtering_mistakes.quiz.ci_filter_category_and_stock.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, category, stock\nFROM products\nWHERE category = 'Stationery' AND stock >= 15\nORDER BY stock DESC;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     },
     {
       "id": "ci_filter_recent_products",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-2.avoiding_filtering_mistakes.quiz.ci_filter_recent_products",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.avoiding_filtering_mistakes.quiz.ci_filter_recent_products",
       "language": "sql",
-      "starterCode": "SELECT \n  name,\n  created_at\nFROM products\n-- TODO: keep products created on or after 2026-01-25\n-- TODO: sort from earliest date to latest date\n;",
+      "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.avoiding_filtering_mistakes.quiz.ci_filter_recent_products.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -365,8 +469,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -375,17 +479,69 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT name, created_at\nFROM products\nWHERE created_at >= '2026-01-25'\nORDER BY created_at ASC;"
-      }
+        "solutionCode": "SELECT name, created_at\nFROM products\nWHERE created_at >= '2026-01-25'\nORDER BY created_at ASC;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, created_at\nFROM products\nWHERE created_at >= '2026-01-25'\nORDER BY created_at ASC;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.avoiding_filtering_mistakes.quiz.ci_filter_recent_products.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT name, created_at\nFROM products\nWHERE created_at >= '2026-01-25'\nORDER BY created_at ASC;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.avoiding_filtering_mistakes.quiz.ci_filter_recent_products.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.avoiding_filtering_mistakes.quiz.ci_filter_recent_products.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, created_at\nFROM products\nWHERE created_at >= '2026-01-25'\nORDER BY created_at ASC;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     },
     {
       "id": "try-avoiding_filtering_mistakes-sketch0",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-2.avoiding_filtering_mistakes.quiz.try-avoiding_filtering_mistakes-sketch0",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.avoiding_filtering_mistakes.quiz.try-avoiding_filtering_mistakes-sketch0",
       "language": "sql",
-      "starterCode": "SELECT \n  name,\n  price\nFROM products\n-- TODO: keep only rows with price greater than 20\n-- TODO: sort by price from highest to lowest\n;",
+      "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.avoiding_filtering_mistakes.quiz.try-avoiding_filtering_mistakes-sketch0.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -393,8 +549,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -403,17 +559,69 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT name, price\nFROM products\nWHERE price > 20\nORDER BY price DESC;"
-      }
+        "solutionCode": "SELECT name, price\nFROM products\nWHERE price > 20\nORDER BY price DESC;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, price\nFROM products\nWHERE price > 20\nORDER BY price DESC;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.avoiding_filtering_mistakes.quiz.try-avoiding_filtering_mistakes-sketch0.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT name, price\nFROM products\nWHERE price > 20\nORDER BY price DESC;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.avoiding_filtering_mistakes.quiz.try-avoiding_filtering_mistakes-sketch0.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.avoiding_filtering_mistakes.quiz.try-avoiding_filtering_mistakes-sketch0.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, price\nFROM products\nWHERE price > 20\nORDER BY price DESC;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     },
     {
       "id": "try-avoiding_filtering_mistakes-sketch1",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-2.avoiding_filtering_mistakes.quiz.try-avoiding_filtering_mistakes-sketch1",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.avoiding_filtering_mistakes.quiz.try-avoiding_filtering_mistakes-sketch1",
       "language": "sql",
-      "starterCode": "SELECT \n  name,\n  category,\n  stock\nFROM products\n-- TODO: add a WHERE clause for Stationery items with enough stock\n-- TODO: sort by stock from highest to lowest\n;",
+      "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.avoiding_filtering_mistakes.quiz.try-avoiding_filtering_mistakes-sketch1.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -421,8 +629,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -431,17 +639,69 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT name, category, stock\nFROM products\nWHERE category = 'Stationery' AND stock >= 15\nORDER BY stock DESC;"
-      }
+        "solutionCode": "SELECT name, category, stock\nFROM products\nWHERE category = 'Stationery' AND stock >= 15\nORDER BY stock DESC;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, category, stock\nFROM products\nWHERE category = 'Stationery' AND stock >= 15\nORDER BY stock DESC;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.avoiding_filtering_mistakes.quiz.try-avoiding_filtering_mistakes-sketch1.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT name, category, stock\nFROM products\nWHERE category = 'Stationery' AND stock >= 15\nORDER BY stock DESC;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.avoiding_filtering_mistakes.quiz.try-avoiding_filtering_mistakes-sketch1.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.avoiding_filtering_mistakes.quiz.try-avoiding_filtering_mistakes-sketch1.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, category, stock\nFROM products\nWHERE category = 'Stationery' AND stock >= 15\nORDER BY stock DESC;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     },
     {
       "id": "try-avoiding_filtering_mistakes-sketch2",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-2.avoiding_filtering_mistakes.quiz.try-avoiding_filtering_mistakes-sketch2",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.avoiding_filtering_mistakes.quiz.try-avoiding_filtering_mistakes-sketch2",
       "language": "sql",
-      "starterCode": "SELECT \n  name,\n  created_at\nFROM products\n-- TODO: keep products created on or after 2026-01-25\n-- TODO: sort from earliest date to latest date\n;",
+      "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.avoiding_filtering_mistakes.quiz.try-avoiding_filtering_mistakes-sketch2.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -449,8 +709,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -459,8 +719,60 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT name, created_at\nFROM products\nWHERE created_at >= '2026-01-25'\nORDER BY created_at ASC;"
-      }
+        "solutionCode": "SELECT name, created_at\nFROM products\nWHERE created_at >= '2026-01-25'\nORDER BY created_at ASC;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, created_at\nFROM products\nWHERE created_at >= '2026-01-25'\nORDER BY created_at ASC;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.avoiding_filtering_mistakes.quiz.try-avoiding_filtering_mistakes-sketch2.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT name, created_at\nFROM products\nWHERE created_at >= '2026-01-25'\nORDER BY created_at ASC;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.avoiding_filtering_mistakes.quiz.try-avoiding_filtering_mistakes-sketch2.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.avoiding_filtering_mistakes.quiz.try-avoiding_filtering_mistakes-sketch2.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, created_at\nFROM products\nWHERE created_at >= '2026-01-25'\nORDER BY created_at ASC;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     }
   ]
 }

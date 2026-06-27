@@ -94,6 +94,26 @@ export type RunFeedbackEntry = {
   tick: number;
 };
 
+export function isSameCodeFeedback(
+  left: CodeFeedback | null | undefined,
+  right: CodeFeedback | null | undefined,
+) {
+  if (left === right) return true;
+  if (!left || !right) return false;
+
+  return (
+    left.area === right.area &&
+    left.source === right.source &&
+    left.kind === right.kind &&
+    left.tone === right.tone &&
+    left.title === right.title &&
+    left.message === right.message &&
+    left.line === right.line &&
+    left.column === right.column &&
+    left.raw === right.raw
+  );
+}
+
 export type CodeInputMeta = {
   order: number;
   eligible: boolean;
@@ -408,10 +428,16 @@ export function ReviewToolsProvider({
 
     setRunFeedbackById((prev) => {
       const cur = prev[id];
+      const nextFeedback = feedback ?? null;
+
+      if (isSameCodeFeedback(cur?.feedback, nextFeedback)) {
+        return prev;
+      }
+
       return {
         ...prev,
         [id]: {
-          feedback: feedback ?? null,
+          feedback: nextFeedback,
           tick: (cur?.tick ?? 0) + 1,
         },
       };

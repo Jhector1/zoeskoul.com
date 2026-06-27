@@ -11,12 +11,12 @@
       "subjectSlug": "sql",
       "path": "subjects/sql",
       "courseOrder": [
-        "sql-foundations"
+        "sql-v2"
       ],
       "courses": [
         {
-          "courseSlug": "sql-foundations",
-          "path": "subjects/sql/courses/sql-foundations/course.spec.json"
+          "courseSlug": "sql-v2",
+          "path": "subjects/sql/courses/sql-v2/course.spec.json"
         }
       ]
     },

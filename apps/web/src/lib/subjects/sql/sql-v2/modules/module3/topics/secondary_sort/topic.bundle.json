@@ -2,14 +2,14 @@
   "topicId": "secondary_sort",
   "subjectSlug": "sql-v2",
   "moduleSlug": "sql-v2-3",
-  "sectionSlug": "sql-v2-3-2",
+  "sectionSlug": "sql-v2-sql-v2-3-2",
   "prefix": "sqlv2_3",
-  "minutes": 15,
+  "minutes": 16,
   "runtimeDefaults": {
     "kind": "sql",
     "showSchema": true,
-    "showErd": true,
-    "showChen": true,
+    "showErd": false,
+    "showChen": false,
     "supportsTerminal": false,
     "supportsMultiFile": false,
     "supportsFileSystem": false,
@@ -301,7 +301,7 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-3.secondary_sort.quiz.ci-sort-category-then-price",
       "language": "sql",
-      "starterCode": "SELECT name, category, price\nFROM products\n-- TODO: add a two-column ORDER BY clause",
+      "starterCode": "@:topics.sql-v2.sql-v2-3.secondary_sort.quiz.ci-sort-category-then-price.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -309,8 +309,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -319,8 +319,60 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT name, category, price\nFROM products\nORDER BY category ASC, price DESC;"
-      }
+        "solutionCode": "SELECT name, category, price\nFROM products\nORDER BY category ASC, price DESC;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, category, price\nFROM products\nORDER BY category ASC, price DESC;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-3.secondary_sort.quiz.ci-sort-category-then-price.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT name, category, price\nFROM products\nORDER BY category ASC, price DESC;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-3.secondary_sort.quiz.ci-sort-category-then-price.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-3.secondary_sort.quiz.ci-sort-category-then-price.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, category, price\nFROM products\nORDER BY category ASC, price DESC;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     },
     {
       "id": "ci-sort-stock-then-name",
@@ -329,7 +381,7 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-3.secondary_sort.quiz.ci-sort-stock-then-name",
       "language": "sql",
-      "starterCode": "SELECT name, stock\nFROM products\n-- TODO: sort by stock, then by name",
+      "starterCode": "@:topics.sql-v2.sql-v2-3.secondary_sort.quiz.ci-sort-stock-then-name.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -337,8 +389,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -347,8 +399,60 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT name, stock\nFROM products\nORDER BY stock DESC, name ASC;"
-      }
+        "solutionCode": "SELECT name, stock\nFROM products\nORDER BY stock DESC, name ASC;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, stock\nFROM products\nORDER BY stock DESC, name ASC;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-3.secondary_sort.quiz.ci-sort-stock-then-name.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT name, stock\nFROM products\nORDER BY stock DESC, name ASC;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-3.secondary_sort.quiz.ci-sort-stock-then-name.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-3.secondary_sort.quiz.ci-sort-stock-then-name.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, stock\nFROM products\nORDER BY stock DESC, name ASC;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     },
     {
       "id": "ci-sort-category-then-created",
@@ -357,7 +461,7 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-3.secondary_sort.quiz.ci-sort-category-then-created",
       "language": "sql",
-      "starterCode": "SELECT name, category, created_at\nFROM products\n-- TODO: sort by category, then by created_at",
+      "starterCode": "@:topics.sql-v2.sql-v2-3.secondary_sort.quiz.ci-sort-category-then-created.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -365,8 +469,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -375,8 +479,60 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT name, category, created_at\nFROM products\nORDER BY category ASC, created_at ASC;"
-      }
+        "solutionCode": "SELECT name, category, created_at\nFROM products\nORDER BY category ASC, created_at ASC;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, category, created_at\nFROM products\nORDER BY category ASC, created_at ASC;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-3.secondary_sort.quiz.ci-sort-category-then-created.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT name, category, created_at\nFROM products\nORDER BY category ASC, created_at ASC;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-3.secondary_sort.quiz.ci-sort-category-then-created.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-3.secondary_sort.quiz.ci-sort-category-then-created.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, category, created_at\nFROM products\nORDER BY category ASC, created_at ASC;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     },
     {
       "id": "try-secondary_sort-sketch0",
@@ -385,7 +541,7 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-3.secondary_sort.quiz.try-secondary_sort-sketch0",
       "language": "sql",
-      "starterCode": "SELECT name, category, price\nFROM products\n-- TODO: add a two-column ORDER BY clause",
+      "starterCode": "@:topics.sql-v2.sql-v2-3.secondary_sort.quiz.try-secondary_sort-sketch0.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -393,8 +549,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -403,8 +559,60 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT name, category, price\nFROM products\nORDER BY category ASC, price DESC;"
-      }
+        "solutionCode": "SELECT name, category, price\nFROM products\nORDER BY category ASC, price DESC;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, category, price\nFROM products\nORDER BY category ASC, price DESC;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-3.secondary_sort.quiz.try-secondary_sort-sketch0.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT name, category, price\nFROM products\nORDER BY category ASC, price DESC;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-3.secondary_sort.quiz.try-secondary_sort-sketch0.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-3.secondary_sort.quiz.try-secondary_sort-sketch0.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, category, price\nFROM products\nORDER BY category ASC, price DESC;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     },
     {
       "id": "try-secondary_sort-sketch1",
@@ -413,7 +621,7 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-3.secondary_sort.quiz.try-secondary_sort-sketch1",
       "language": "sql",
-      "starterCode": "SELECT name, stock\nFROM products\n-- TODO: sort by stock, then by name",
+      "starterCode": "@:topics.sql-v2.sql-v2-3.secondary_sort.quiz.try-secondary_sort-sketch1.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -421,8 +629,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -431,8 +639,60 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT name, stock\nFROM products\nORDER BY stock DESC, name ASC;"
-      }
+        "solutionCode": "SELECT name, stock\nFROM products\nORDER BY stock DESC, name ASC;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, stock\nFROM products\nORDER BY stock DESC, name ASC;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-3.secondary_sort.quiz.try-secondary_sort-sketch1.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT name, stock\nFROM products\nORDER BY stock DESC, name ASC;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-3.secondary_sort.quiz.try-secondary_sort-sketch1.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-3.secondary_sort.quiz.try-secondary_sort-sketch1.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, stock\nFROM products\nORDER BY stock DESC, name ASC;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     },
     {
       "id": "try-secondary_sort-sketch2",
@@ -441,7 +701,7 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-3.secondary_sort.quiz.try-secondary_sort-sketch2",
       "language": "sql",
-      "starterCode": "SELECT name, category, created_at\nFROM products\n-- TODO: sort by category, then by created_at",
+      "starterCode": "@:topics.sql-v2.sql-v2-3.secondary_sort.quiz.try-secondary_sort-sketch2.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -449,8 +709,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -459,8 +719,60 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT name, category, created_at\nFROM products\nORDER BY category ASC, created_at ASC;"
-      }
+        "solutionCode": "SELECT name, category, created_at\nFROM products\nORDER BY category ASC, created_at ASC;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, category, created_at\nFROM products\nORDER BY category ASC, created_at ASC;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-3.secondary_sort.quiz.try-secondary_sort-sketch2.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT name, category, created_at\nFROM products\nORDER BY category ASC, created_at ASC;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-3.secondary_sort.quiz.try-secondary_sort-sketch2.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-3.secondary_sort.quiz.try-secondary_sort-sketch2.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, category, created_at\nFROM products\nORDER BY category ASC, created_at ASC;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     }
   ]
 }

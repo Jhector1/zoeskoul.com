@@ -1,0 +1,536 @@
+{
+  "topics": {
+    "sql--sql-v2--draft": {
+      "sql--sql-v2--draft-1": {
+        "viewing_clean_results": {
+          "label": "Viewing Clean Results",
+          "summary": "Learn how to choose only the columns you need so query results are easier to read in the products table.",
+          "cards": {
+            "sketch0": {
+              "title": "Why clean results matter"
+            },
+            "sketch1": {
+              "title": "Reading columns in the order you choose"
+            },
+            "sketch2": {
+              "title": "Choosing specific columns instead of *"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Build a clean results query set"
+            }
+          },
+          "projectSteps": {
+            "ci_clean_1": {
+              "title": "Show only names and prices"
+            },
+            "ci_clean_2": {
+              "title": "Put category first"
+            },
+            "ci_clean_3": {
+              "title": "Show names and dates only"
+            }
+          },
+          "quiz": {
+            "sc_clean_1": {
+              "title": "Pick the cleaner result",
+              "prompt": "Which query returns only the `name` and `price` columns from the `products` table?",
+              "hint": "Look for a query that lists exactly two column names before `FROM products`.",
+              "help": {
+                "concept": "To get clean results, list only the columns you want in the SELECT clause instead of using `*`.",
+                "hint_1": "The correct query should mention `name` and `price`, and no other columns.",
+                "hint_2": "Check which option uses `SELECT name, price` followed by the table name `products`."
+              },
+              "options": {
+                "a": "SELECT * FROM products;",
+                "b": "SELECT name, price FROM products;",
+                "c": "FROM products SELECT name, price;",
+                "d": "SELECT products FROM name, price;"
+              }
+            },
+            "sc_clean_2": {
+              "title": "Understand column order",
+              "prompt": "If you run `SELECT category, name FROM products;`, which column appears first in the results table?",
+              "hint": "SQL shows selected columns in the same order you list them.",
+              "help": {
+                "concept": "The SELECT clause controls both which columns appear and the left-to-right order of those columns in the results.",
+                "hint_1": "Read the query from left to right after the word `SELECT`.",
+                "hint_2": "The first listed column name becomes the first column in the results table."
+              },
+              "options": {
+                "a": "name",
+                "b": "price",
+                "c": "category",
+                "d": "id"
+              }
+            },
+            "mc_clean_1": {
+              "title": "Choose queries with fewer columns",
+              "prompt": "Which queries would produce a results table with fewer columns than `SELECT * FROM products;`? Choose all that apply.",
+              "hint": "Any query that lists specific columns instead of `*` will show fewer columns here.",
+              "help": {
+                "concept": "In this table, `SELECT *` returns all six columns, while selecting named columns returns only those listed columns.",
+                "hint_1": "Count how many columns each query asks for.",
+                "hint_2": "Any option that names one or two columns from `products` will return fewer columns than all six."
+              },
+              "options": {
+                "a": "SELECT name FROM products;",
+                "b": "SELECT name, category FROM products;",
+                "c": "SELECT * FROM products;",
+                "d": "SELECT id, name, category, price, stock, created_at FROM products;"
+              }
+            },
+            "mc_clean_2": {
+              "title": "Find valid column selections",
+              "prompt": "Which queries are valid ways to show only existing columns from the `products` table? Choose all that apply.",
+              "hint": "Use only real column names from the schema: `id`, `name`, `category`, `price`, `stock`, `created_at`.",
+              "help": {
+                "concept": "A valid SELECT query must use real column names from the table schema and proper SELECT ... FROM syntax.",
+                "hint_1": "Check each option against the `products` schema shown in the browser workspace.",
+                "hint_2": "Reject any option that uses a made-up column name like `product_name` or leaves out proper SQL structure."
+              },
+              "options": {
+                "a": "SELECT name, stock FROM products;",
+                "b": "SELECT category, created_at FROM products;",
+                "c": "SELECT product_name, price FROM products;",
+                "d": "SELECT FROM products name, price;"
+              }
+            },
+            "dr_clean_1": {
+              "title": "Build a basic clean query",
+              "prompt": "Arrange the tokens to make a query that shows only the `name` column from `products`.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "products;",
+                "t2": "FROM",
+                "t3": "name",
+                "t4": "SELECT"
+              }
+            },
+            "dr_clean_2": {
+              "title": "Order a two-column query",
+              "prompt": "Arrange the tokens to make a query that shows `category` first and `name` second from the `products` table.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "FROM",
+                "t2": "products;",
+                "t3": "SELECT",
+                "t4": "category, name"
+              }
+            },
+            "fb_clean_1": {
+              "title": "Complete the table name",
+              "prompt": "Fill in the missing table name to query product names.",
+              "hint": "The dataset has one table named `the missing term`.",
+              "help": {
+                "concept": "The FROM clause names the table SQL should read from.",
+                "hint_1": "Look at the schema browser for the table that contains `name`, `category`, and `price`.",
+                "hint_2": "Use the table that stores all six product rows in this lesson."
+              },
+              "template": "SELECT name FROM [blank1];",
+              "choices": [
+                "products",
+                "product",
+                "catalog",
+                "items"
+              ]
+            },
+            "fb_clean_2": {
+              "title": "Complete the selected column",
+              "prompt": "Fill in the missing column so the query shows product categories.",
+              "hint": "Choose the column that stores values like `Art`, `Home`, and `Stationery`.",
+              "help": {
+                "concept": "The SELECT clause should name the exact column whose values you want to display.",
+                "hint_1": "Think about which column contains product types rather than names or numbers.",
+                "hint_2": "It is the text column used to group products like Sketchbook and Acrylic Paint Set under the same type."
+              },
+              "template": "SELECT [blank1] FROM products;",
+              "choices": [
+                "category",
+                "price",
+                "stock",
+                "created_at"
+              ]
+            },
+            "ci_clean_1": {
+              "title": "Show only names and prices",
+              "prompt": "Write a query that returns only the `name` and `price` columns from the `products` table. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "SELECT \nFROM products;"
+            },
+            "ci_clean_2": {
+              "title": "Put category first",
+              "prompt": "Write a query that returns the `category`, `name`, and `stock` columns from `products`, in that order. Write the query in the SQL editor, click Run query, and check that `category` appears as the first column in the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "SELECT \nFROM products;"
+            },
+            "ci_clean_3": {
+              "title": "Show names and dates only",
+              "prompt": "Write a query that returns only the `name` and `created_at` columns from the `products` table. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "SELECT \nFROM products;"
+            },
+            "try-viewing_clean_results-sketch0": {
+              "title": "Query name and price from products",
+              "prompt": "Write a query that returns `name`, `price` from the `products` table. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the selected columns and table name in the SQL editor.",
+                "hint_2": "Run the query and compare the result table with the expected result."
+              },
+              "starterCode": "SELECT \nFROM products;"
+            },
+            "try-viewing_clean_results-sketch1": {
+              "title": "Query category and name from products",
+              "prompt": "Write a query that returns `category`, `name`, `stock` from the `products` table. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the selected columns and table name in the SQL editor.",
+                "hint_2": "Run the query and compare the result table with the expected result."
+              },
+              "starterCode": "SELECT \nFROM products;"
+            },
+            "try-viewing_clean_results-sketch2": {
+              "title": "Query name and created_at from products",
+              "prompt": "Write a query that returns `name`, `created_at` from the `products` table. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the selected columns and table name in the SQL editor.",
+                "hint_2": "Run the query and compare the result table with the expected result."
+              },
+              "starterCode": "SELECT \nFROM products;"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_viewing_clean_results_sketch0": {
+              "title": "Query name and price from products",
+              "prompt": "Write a query that returns `name`, `price` from the `products` table. Write the query in the SQL editor, click Run query, and check the results table."
+            },
+            "try_viewing_clean_results_sketch1": {
+              "title": "Query category and name from products",
+              "prompt": "Write a query that returns `category`, `name`, `stock` from the `products` table. Write the query in the SQL editor, click Run query, and check the results table."
+            },
+            "try_viewing_clean_results_sketch2": {
+              "title": "Query name and created_at from products",
+              "prompt": "Write a query that returns `name`, `created_at` from the `products` table. Write the query in the SQL editor, click Run query, and check the results table."
+            }
+          }
+        }
+      },
+      "sql-v2-1": {
+        "viewing_clean_results": {
+          "label": "Viewing Clean Results",
+          "summary": "Learn how to choose only the columns you need so query results are easier to read in the products table.",
+          "cards": {
+            "sketch0": {
+              "title": "Why clean results matter"
+            },
+            "sketch1": {
+              "title": "Reading columns in the order you choose"
+            },
+            "sketch2": {
+              "title": "Choosing specific columns instead of *"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Build a clean results query set"
+            }
+          },
+          "projectSteps": {
+            "ci_clean_1": {
+              "title": "Show only names and prices"
+            },
+            "ci_clean_2": {
+              "title": "Put category first"
+            },
+            "ci_clean_3": {
+              "title": "Show names and dates only"
+            }
+          },
+          "quiz": {
+            "sc_clean_1": {
+              "title": "Pick the cleaner result",
+              "prompt": "Which query returns only the `name` and `price` columns from the `products` table?",
+              "hint": "Look for a query that lists exactly two column names before `FROM products`.",
+              "help": {
+                "concept": "To get clean results, list only the columns you want in the SELECT clause instead of using `*`.",
+                "hint_1": "The correct query should mention `name` and `price`, and no other columns.",
+                "hint_2": "Check which option uses `SELECT name, price` followed by the table name `products`."
+              },
+              "options": {
+                "a": "SELECT * FROM products;",
+                "b": "SELECT name, price FROM products;",
+                "c": "FROM products SELECT name, price;",
+                "d": "SELECT products FROM name, price;"
+              }
+            },
+            "sc_clean_2": {
+              "title": "Understand column order",
+              "prompt": "If you run `SELECT category, name FROM products;`, which column appears first in the results table?",
+              "hint": "SQL shows selected columns in the same order you list them.",
+              "help": {
+                "concept": "The SELECT clause controls both which columns appear and the left-to-right order of those columns in the results.",
+                "hint_1": "Read the query from left to right after the word `SELECT`.",
+                "hint_2": "The first listed column name becomes the first column in the results table."
+              },
+              "options": {
+                "a": "name",
+                "b": "price",
+                "c": "category",
+                "d": "id"
+              }
+            },
+            "mc_clean_1": {
+              "title": "Choose queries with fewer columns",
+              "prompt": "Which queries would produce a results table with fewer columns than `SELECT * FROM products;`? Choose all that apply.",
+              "hint": "Any query that lists specific columns instead of `*` will show fewer columns here.",
+              "help": {
+                "concept": "In this table, `SELECT *` returns all six columns, while selecting named columns returns only those listed columns.",
+                "hint_1": "Count how many columns each query asks for.",
+                "hint_2": "Any option that names one or two columns from `products` will return fewer columns than all six."
+              },
+              "options": {
+                "a": "SELECT name FROM products;",
+                "b": "SELECT name, category FROM products;",
+                "c": "SELECT * FROM products;",
+                "d": "SELECT id, name, category, price, stock, created_at FROM products;"
+              }
+            },
+            "mc_clean_2": {
+              "title": "Find valid column selections",
+              "prompt": "Which queries are valid ways to show only existing columns from the `products` table? Choose all that apply.",
+              "hint": "Use only real column names from the schema: `id`, `name`, `category`, `price`, `stock`, `created_at`.",
+              "help": {
+                "concept": "A valid SELECT query must use real column names from the table schema and proper SELECT ... FROM syntax.",
+                "hint_1": "Check each option against the `products` schema shown in the browser workspace.",
+                "hint_2": "Reject any option that uses a made-up column name like `product_name` or leaves out proper SQL structure."
+              },
+              "options": {
+                "a": "SELECT name, stock FROM products;",
+                "b": "SELECT category, created_at FROM products;",
+                "c": "SELECT product_name, price FROM products;",
+                "d": "SELECT FROM products name, price;"
+              }
+            },
+            "dr_clean_1": {
+              "title": "Build a basic clean query",
+              "prompt": "Arrange the tokens to make a query that shows only the `name` column from `products`.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "products;",
+                "t2": "FROM",
+                "t3": "name",
+                "t4": "SELECT"
+              }
+            },
+            "dr_clean_2": {
+              "title": "Order a two-column query",
+              "prompt": "Arrange the tokens to make a query that shows `category` first and `name` second from the `products` table.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "FROM",
+                "t2": "products;",
+                "t3": "SELECT",
+                "t4": "category, name"
+              }
+            },
+            "fb_clean_1": {
+              "title": "Complete the table name",
+              "prompt": "Fill in the missing table name to query product names.",
+              "hint": "The dataset has one table named `the missing term`.",
+              "help": {
+                "concept": "The FROM clause names the table SQL should read from.",
+                "hint_1": "Look at the schema browser for the table that contains `name`, `category`, and `price`.",
+                "hint_2": "Use the table that stores all six product rows in this lesson."
+              },
+              "template": "SELECT name FROM [blank1];",
+              "choices": [
+                "products",
+                "product",
+                "catalog",
+                "items"
+              ]
+            },
+            "fb_clean_2": {
+              "title": "Complete the selected column",
+              "prompt": "Fill in the missing column so the query shows product categories.",
+              "hint": "Choose the column that stores values like `Art`, `Home`, and `Stationery`.",
+              "help": {
+                "concept": "The SELECT clause should name the exact column whose values you want to display.",
+                "hint_1": "Think about which column contains product types rather than names or numbers.",
+                "hint_2": "It is the text column used to group products like Sketchbook and Acrylic Paint Set under the same type."
+              },
+              "template": "SELECT [blank1] FROM products;",
+              "choices": [
+                "category",
+                "price",
+                "stock",
+                "created_at"
+              ]
+            },
+            "ci_clean_1": {
+              "title": "Show only names and prices",
+              "prompt": "Write a query that returns only the `name` and `price` columns from the `products` table. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "SELECT \nFROM products;"
+            },
+            "ci_clean_2": {
+              "title": "Put category first",
+              "prompt": "Write a query that returns the `category`, `name`, and `stock` columns from `products`, in that order. Write the query in the SQL editor, click Run query, and check that `category` appears as the first column in the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "SELECT \nFROM products;"
+            },
+            "ci_clean_3": {
+              "title": "Show names and dates only",
+              "prompt": "Write a query that returns only the `name` and `created_at` columns from the `products` table. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "SELECT \nFROM products;"
+            },
+            "try-viewing_clean_results-sketch0": {
+              "title": "Query name and price from products",
+              "prompt": "Write a query that returns `name`, `price` from the `products` table. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the selected columns and table name in the SQL editor.",
+                "hint_2": "Run the query and compare the result table with the expected result."
+              },
+              "starterCode": "SELECT \nFROM products;"
+            },
+            "try-viewing_clean_results-sketch1": {
+              "title": "Query category and name from products",
+              "prompt": "Write a query that returns `category`, `name`, `stock` from the `products` table. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the selected columns and table name in the SQL editor.",
+                "hint_2": "Run the query and compare the result table with the expected result."
+              },
+              "starterCode": "SELECT \nFROM products;"
+            },
+            "try-viewing_clean_results-sketch2": {
+              "title": "Query name and created_at from products",
+              "prompt": "Write a query that returns `name`, `created_at` from the `products` table. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the selected columns and table name in the SQL editor.",
+                "hint_2": "Run the query and compare the result table with the expected result."
+              },
+              "starterCode": "SELECT \nFROM products;"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_viewing_clean_results_sketch0": {
+              "title": "Query name and price from products",
+              "prompt": "Write a query that returns `name`, `price` from the `products` table. Write the query in the SQL editor, click Run query, and check the results table."
+            },
+            "try_viewing_clean_results_sketch1": {
+              "title": "Query category and name from products",
+              "prompt": "Write a query that returns `category`, `name`, `stock` from the `products` table. Write the query in the SQL editor, click Run query, and check the results table."
+            },
+            "try_viewing_clean_results_sketch2": {
+              "title": "Query name and created_at from products",
+              "prompt": "Write a query that returns `name`, `created_at` from the `products` table. Write the query in the SQL editor, click Run query, and check the results table."
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql--sql-v2--draft": {
+      "sql--sql-v2--draft-1": {
+        "viewing_clean_results": {
+          "sketch_clean_results_1": {
+            "title": "Why clean results matter",
+            "bodyMarkdown": "When you write a SQL query, you do not always want every column. Clean results mean showing only the information you need, in a clear order.\n\nIf you ask for every column with `SELECT *`, the results table may feel crowded. In the `products` table, that includes `id`, `name`, `category`, `price`, `stock`, and `created_at`.\n\nA cleaner query can focus on just the columns you want to read:\n\n```sql\nSELECT name, price\nFROM products;\n```\n\nThis returns a simpler results table with only product names and prices.\n\nWorked example:\n- `SELECT name, price` tells SQL which columns to show.\n- `FROM products` tells SQL which table to read.\n- The results table will have 2 columns instead of 6.\n\nThat makes it easier to scan values like `12.99`, `24.50`, and `129.00` next to each product name."
+          },
+          "sketch_clean_results_2": {
+            "title": "Reading columns in the order you choose",
+            "bodyMarkdown": "SQL shows columns in the order you list them in `SELECT`.\n\nFor example:\n\n```sql\nSELECT category, name, stock\nFROM products;\n```\n\nStep by step:\n- `category` appears first in the results table.\n- `name` appears second.\n- `stock` appears third.\n- `FROM products` reads rows from the `products` table.\n\nSo even though the table was created with `id` first, your results table can start with `category` if that is more useful for reading.\n\nConcrete example rows would include values like:\n- `Art | Sketchbook | 25`\n- `Home | Desk Lamp | 8`\n- `Stationery | Notebook | 50`\n\nThis is helpful when you want to compare a specific kind of information first."
+          },
+          "sketch_clean_results_3": {
+            "title": "Choosing specific columns instead of *",
+            "bodyMarkdown": "Beginners often start with `SELECT *`, and that is okay for exploring a table. But when you want clean results, listing columns is usually better.\n\nCompare these two queries:\n\n```sql\nSELECT *\nFROM products;\n```\n\n```sql\nSELECT name, category\nFROM products;\n```\n\nThe first query shows every column. The second query shows only product names and categories.\n\nWorked example:\n- If you only want to check what kinds of products exist, `name` and `category` may be enough.\n- You do not need `stock` or `created_at` for that task.\n- A smaller results table is easier to read and explain.\n\nA good beginner habit is: ask yourself, \"Which columns answer my question?\""
+          }
+        }
+      },
+      "sql-v2-1": {
+        "viewing_clean_results": {
+          "sketch_clean_results_1": {
+            "title": "Why clean results matter",
+            "bodyMarkdown": "When you write a SQL query, you do not always want every column. Clean results mean showing only the information you need, in a clear order.\n\nIf you ask for every column with `SELECT *`, the results table may feel crowded. In the `products` table, that includes `id`, `name`, `category`, `price`, `stock`, and `created_at`.\n\nA cleaner query can focus on just the columns you want to read:\n\n```sql\nSELECT name, price\nFROM products;\n```\n\nThis returns a simpler results table with only product names and prices.\n\nWorked example:\n- `SELECT name, price` tells SQL which columns to show.\n- `FROM products` tells SQL which table to read.\n- The results table will have 2 columns instead of 6.\n\nThat makes it easier to scan values like `12.99`, `24.50`, and `129.00` next to each product name."
+          },
+          "sketch_clean_results_2": {
+            "title": "Reading columns in the order you choose",
+            "bodyMarkdown": "SQL shows columns in the order you list them in `SELECT`.\n\nFor example:\n\n```sql\nSELECT category, name, stock\nFROM products;\n```\n\nStep by step:\n- `category` appears first in the results table.\n- `name` appears second.\n- `stock` appears third.\n- `FROM products` reads rows from the `products` table.\n\nSo even though the table was created with `id` first, your results table can start with `category` if that is more useful for reading.\n\nConcrete example rows would include values like:\n- `Art | Sketchbook | 25`\n- `Home | Desk Lamp | 8`\n- `Stationery | Notebook | 50`\n\nThis is helpful when you want to compare a specific kind of information first."
+          },
+          "sketch_clean_results_3": {
+            "title": "Choosing specific columns instead of *",
+            "bodyMarkdown": "Beginners often start with `SELECT *`, and that is okay for exploring a table. But when you want clean results, listing columns is usually better.\n\nCompare these two queries:\n\n```sql\nSELECT *\nFROM products;\n```\n\n```sql\nSELECT name, category\nFROM products;\n```\n\nThe first query shows every column. The second query shows only product names and categories.\n\nWorked example:\n- If you only want to check what kinds of products exist, `name` and `category` may be enough.\n- You do not need `stock` or `created_at` for that task.\n- A smaller results table is easier to read and explain.\n\nA good beginner habit is: ask yourself, \"Which columns answer my question?\""
+          }
+        }
+      }
+    }
+  }
+}

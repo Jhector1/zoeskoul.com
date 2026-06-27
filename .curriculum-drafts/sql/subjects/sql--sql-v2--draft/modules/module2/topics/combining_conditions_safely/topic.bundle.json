@@ -1,15 +1,15 @@
 {
   "topicId": "combining_conditions_safely",
-  "subjectSlug": "sql-v2",
+  "subjectSlug": "sql--sql-v2--draft",
   "moduleSlug": "sql-v2-2",
-  "sectionSlug": "sql-v2-2-3",
+  "sectionSlug": "sql--sql-v2--draft-sql-v2-2-3",
   "prefix": "sqlv2_2",
-  "minutes": 15,
+  "minutes": 16,
   "runtimeDefaults": {
     "kind": "sql",
     "showSchema": true,
-    "showErd": true,
-    "showChen": true,
+    "showErd": false,
+    "showChen": false,
     "supportsTerminal": false,
     "supportsMultiFile": false,
     "supportsFileSystem": false,
@@ -18,20 +18,20 @@
     "resultShape": "table"
   },
   "topic": {
-    "labelKey": "topics.sql-v2.sql-v2-2.combining_conditions_safely.label",
-    "summaryKey": "topics.sql-v2.sql-v2-2.combining_conditions_safely.summary"
+    "labelKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.combining_conditions_safely.label",
+    "summaryKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.combining_conditions_safely.summary"
   },
   "cards": [
     {
       "id": "sketch0",
       "kind": "sketch",
-      "titleKey": "topics.sql-v2.sql-v2-2.combining_conditions_safely.cards.sketch0.title",
+      "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.combining_conditions_safely.cards.sketch0.title",
       "sketchId": "sketch_and_or_basics",
       "height": 420,
       "tryIt": {
         "id": "try-combining_conditions_safely-sketch0",
-        "titleKey": "topics.sql-v2.sql-v2-2.combining_conditions_safely.tryIt.try_combining_conditions_safely_sketch0.title",
-        "promptKey": "topics.sql-v2.sql-v2-2.combining_conditions_safely.tryIt.try_combining_conditions_safely_sketch0.prompt",
+        "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.combining_conditions_safely.tryIt.try_combining_conditions_safely_sketch0.title",
+        "promptKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.combining_conditions_safely.tryIt.try_combining_conditions_safely_sketch0.prompt",
         "exerciseKey": "try-combining_conditions_safely-sketch0",
         "difficulty": "easy",
         "preferKind": "code_input",
@@ -44,13 +44,13 @@
     {
       "id": "sketch1",
       "kind": "sketch",
-      "titleKey": "topics.sql-v2.sql-v2-2.combining_conditions_safely.cards.sketch1.title",
+      "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.combining_conditions_safely.cards.sketch1.title",
       "sketchId": "sketch_parentheses_safety",
       "height": 420,
       "tryIt": {
         "id": "try-combining_conditions_safely-sketch1",
-        "titleKey": "topics.sql-v2.sql-v2-2.combining_conditions_safely.tryIt.try_combining_conditions_safely_sketch1.title",
-        "promptKey": "topics.sql-v2.sql-v2-2.combining_conditions_safely.tryIt.try_combining_conditions_safely_sketch1.prompt",
+        "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.combining_conditions_safely.tryIt.try_combining_conditions_safely_sketch1.title",
+        "promptKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.combining_conditions_safely.tryIt.try_combining_conditions_safely_sketch1.prompt",
         "exerciseKey": "try-combining_conditions_safely-sketch1",
         "difficulty": "easy",
         "preferKind": "code_input",
@@ -63,13 +63,13 @@
     {
       "id": "sketch2",
       "kind": "sketch",
-      "titleKey": "topics.sql-v2.sql-v2-2.combining_conditions_safely.cards.sketch2.title",
+      "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.combining_conditions_safely.cards.sketch2.title",
       "sketchId": "sketch_not_grouping",
       "height": 420,
       "tryIt": {
         "id": "try-combining_conditions_safely-sketch2",
-        "titleKey": "topics.sql-v2.sql-v2-2.combining_conditions_safely.tryIt.try_combining_conditions_safely_sketch2.title",
-        "promptKey": "topics.sql-v2.sql-v2-2.combining_conditions_safely.tryIt.try_combining_conditions_safely_sketch2.prompt",
+        "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.combining_conditions_safely.tryIt.try_combining_conditions_safely_sketch2.title",
+        "promptKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.combining_conditions_safely.tryIt.try_combining_conditions_safely_sketch2.prompt",
         "exerciseKey": "try-combining_conditions_safely-sketch2",
         "difficulty": "easy",
         "preferKind": "code_input",
@@ -82,7 +82,7 @@
     {
       "id": "quiz",
       "kind": "quiz",
-      "titleKey": "topics.sql-v2.sql-v2-2.combining_conditions_safely.cards.quiz.title",
+      "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.combining_conditions_safely.cards.quiz.title",
       "quiz": {
         "difficulty": "easy",
         "n": 4,
@@ -97,7 +97,7 @@
     {
       "id": "project",
       "kind": "project",
-      "titleKey": "topics.sql-v2.sql-v2-2.combining_conditions_safely.cards.project.title",
+      "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.combining_conditions_safely.cards.project.title",
       "project": {
         "difficulty": "easy",
         "allowReveal": true,
@@ -106,7 +106,7 @@
         "steps": [
           {
             "id": "ci_art_or_stationery_stock",
-            "titleKey": "topics.sql-v2.sql-v2-2.combining_conditions_safely.projectSteps.ci_art_or_stationery_stock.title",
+            "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.combining_conditions_safely.projectSteps.ci_art_or_stationery_stock.title",
             "exerciseKey": "ci_art_or_stationery_stock",
             "difficulty": "easy",
             "preferKind": "code_input",
@@ -115,7 +115,7 @@
           },
           {
             "id": "ci_not_home_under_20",
-            "titleKey": "topics.sql-v2.sql-v2-2.combining_conditions_safely.projectSteps.ci_not_home_under_20.title",
+            "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.combining_conditions_safely.projectSteps.ci_not_home_under_20.title",
             "exerciseKey": "ci_not_home_under_20",
             "difficulty": "easy",
             "preferKind": "code_input",
@@ -124,7 +124,7 @@
           },
           {
             "id": "ci_stationery_or_low_stock",
-            "titleKey": "topics.sql-v2.sql-v2-2.combining_conditions_safely.projectSteps.ci_stationery_or_low_stock.title",
+            "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.combining_conditions_safely.projectSteps.ci_stationery_or_low_stock.title",
             "exerciseKey": "ci_stationery_or_low_stock",
             "difficulty": "easy",
             "preferKind": "code_input",
@@ -139,20 +139,20 @@
     {
       "id": "sketch_and_or_basics",
       "archetype": "paragraph",
-      "titleKey": "sketches.sql-v2.sql-v2-2.combining_conditions_safely.sketch_and_or_basics.title",
-      "bodyKey": "sketches.sql-v2.sql-v2-2.combining_conditions_safely.sketch_and_or_basics.bodyMarkdown"
+      "titleKey": "sketches.sql--sql-v2--draft.sql--sql-v2--draft-2.combining_conditions_safely.sketch_and_or_basics.title",
+      "bodyKey": "sketches.sql--sql-v2--draft.sql--sql-v2--draft-2.combining_conditions_safely.sketch_and_or_basics.bodyMarkdown"
     },
     {
       "id": "sketch_parentheses_safety",
       "archetype": "paragraph",
-      "titleKey": "sketches.sql-v2.sql-v2-2.combining_conditions_safely.sketch_parentheses_safety.title",
-      "bodyKey": "sketches.sql-v2.sql-v2-2.combining_conditions_safely.sketch_parentheses_safety.bodyMarkdown"
+      "titleKey": "sketches.sql--sql-v2--draft.sql--sql-v2--draft-2.combining_conditions_safely.sketch_parentheses_safety.title",
+      "bodyKey": "sketches.sql--sql-v2--draft.sql--sql-v2--draft-2.combining_conditions_safely.sketch_parentheses_safety.bodyMarkdown"
     },
     {
       "id": "sketch_not_grouping",
       "archetype": "paragraph",
-      "titleKey": "sketches.sql-v2.sql-v2-2.combining_conditions_safely.sketch_not_grouping.title",
-      "bodyKey": "sketches.sql-v2.sql-v2-2.combining_conditions_safely.sketch_not_grouping.bodyMarkdown"
+      "titleKey": "sketches.sql--sql-v2--draft.sql--sql-v2--draft-2.combining_conditions_safely.sketch_not_grouping.title",
+      "bodyKey": "sketches.sql--sql-v2--draft.sql--sql-v2--draft-2.combining_conditions_safely.sketch_not_grouping.bodyMarkdown"
     }
   ],
   "exercises": [
@@ -161,7 +161,7 @@
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-2.combining_conditions_safely.quiz.sc_and_requires_both",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.combining_conditions_safely.quiz.sc_and_requires_both",
       "optionIds": [
         "a",
         "b",
@@ -178,7 +178,7 @@
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-2.combining_conditions_safely.quiz.sc_parentheses_clarity",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.combining_conditions_safely.quiz.sc_parentheses_clarity",
       "optionIds": [
         "a",
         "b",
@@ -195,7 +195,7 @@
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-2.combining_conditions_safely.quiz.mc_queries_with_or",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.combining_conditions_safely.quiz.mc_queries_with_or",
       "optionIds": [
         "a",
         "b",
@@ -215,7 +215,7 @@
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-2.combining_conditions_safely.quiz.mc_parentheses_same_meaning",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.combining_conditions_safely.quiz.mc_parentheses_same_meaning",
       "optionIds": [
         "a",
         "b",
@@ -235,7 +235,7 @@
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-2.combining_conditions_safely.quiz.dr_build_grouped_filter",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.combining_conditions_safely.quiz.dr_build_grouped_filter",
       "tokenIds": [
         "t1",
         "t2",
@@ -265,7 +265,7 @@
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-2.combining_conditions_safely.quiz.dr_build_not_filter",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.combining_conditions_safely.quiz.dr_build_not_filter",
       "tokenIds": [
         "t1",
         "t2",
@@ -289,7 +289,7 @@
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-2.combining_conditions_safely.quiz.fb_and_keyword",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.combining_conditions_safely.quiz.fb_and_keyword",
       "choiceCount": 3,
       "expected": {
         "kind": "fill_blank_choice",
@@ -301,7 +301,7 @@
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-2.combining_conditions_safely.quiz.fb_parenthesis_open",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.combining_conditions_safely.quiz.fb_parenthesis_open",
       "choiceCount": 3,
       "expected": {
         "kind": "fill_blank_choice",
@@ -313,9 +313,9 @@
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-2.combining_conditions_safely.quiz.ci_art_or_stationery_stock",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.combining_conditions_safely.quiz.ci_art_or_stationery_stock",
       "language": "sql",
-      "starterCode": "SELECT name, category, stock\nFROM products\nWHERE ;",
+      "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.combining_conditions_safely.quiz.ci_art_or_stationery_stock.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -323,8 +323,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -333,17 +333,69 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT name, category, stock\nFROM products\nWHERE (category = 'Art' OR category = 'Stationery') AND stock > 20;"
-      }
+        "solutionCode": "SELECT name, category, stock\nFROM products\nWHERE (category = 'Art' OR category = 'Stationery') AND stock > 20;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, category, stock\nFROM products\nWHERE (category = 'Art' OR category = 'Stationery') AND stock > 20;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.combining_conditions_safely.quiz.ci_art_or_stationery_stock.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT name, category, stock\nFROM products\nWHERE (category = 'Art' OR category = 'Stationery') AND stock > 20;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.combining_conditions_safely.quiz.ci_art_or_stationery_stock.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.combining_conditions_safely.quiz.ci_art_or_stationery_stock.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, category, stock\nFROM products\nWHERE (category = 'Art' OR category = 'Stationery') AND stock > 20;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     },
     {
       "id": "ci_not_home_under_20",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-2.combining_conditions_safely.quiz.ci_not_home_under_20",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.combining_conditions_safely.quiz.ci_not_home_under_20",
       "language": "sql",
-      "starterCode": "SELECT name, category, price\nFROM products\nWHERE ;",
+      "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.combining_conditions_safely.quiz.ci_not_home_under_20.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -351,8 +403,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -361,17 +413,69 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT name, category, price\nFROM products\nWHERE NOT (category = 'Home') AND price < 20;"
-      }
+        "solutionCode": "SELECT name, category, price\nFROM products\nWHERE NOT (category = 'Home') AND price < 20;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, category, price\nFROM products\nWHERE NOT (category = 'Home') AND price < 20;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.combining_conditions_safely.quiz.ci_not_home_under_20.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT name, category, price\nFROM products\nWHERE NOT (category = 'Home') AND price < 20;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.combining_conditions_safely.quiz.ci_not_home_under_20.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.combining_conditions_safely.quiz.ci_not_home_under_20.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, category, price\nFROM products\nWHERE NOT (category = 'Home') AND price < 20;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     },
     {
       "id": "ci_stationery_or_low_stock",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-2.combining_conditions_safely.quiz.ci_stationery_or_low_stock",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.combining_conditions_safely.quiz.ci_stationery_or_low_stock",
       "language": "sql",
-      "starterCode": "SELECT name, category, stock\nFROM products\nWHERE ;",
+      "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.combining_conditions_safely.quiz.ci_stationery_or_low_stock.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -379,8 +483,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -389,17 +493,69 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT name, category, stock\nFROM products\nWHERE category = 'Stationery' OR stock < 5;"
-      }
+        "solutionCode": "SELECT name, category, stock\nFROM products\nWHERE category = 'Stationery' OR stock < 5;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, category, stock\nFROM products\nWHERE category = 'Stationery' OR stock < 5;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.combining_conditions_safely.quiz.ci_stationery_or_low_stock.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT name, category, stock\nFROM products\nWHERE category = 'Stationery' OR stock < 5;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.combining_conditions_safely.quiz.ci_stationery_or_low_stock.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.combining_conditions_safely.quiz.ci_stationery_or_low_stock.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, category, stock\nFROM products\nWHERE category = 'Stationery' OR stock < 5;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     },
     {
       "id": "try-combining_conditions_safely-sketch0",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-2.combining_conditions_safely.quiz.try-combining_conditions_safely-sketch0",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.combining_conditions_safely.quiz.try-combining_conditions_safely-sketch0",
       "language": "sql",
-      "starterCode": "SELECT name, category, stock\nFROM products\nWHERE ;",
+      "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.combining_conditions_safely.quiz.try-combining_conditions_safely-sketch0.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -407,8 +563,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -417,17 +573,69 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT name, category, stock\nFROM products\nWHERE (category = 'Art' OR category = 'Stationery') AND stock > 20;"
-      }
+        "solutionCode": "SELECT name, category, stock\nFROM products\nWHERE (category = 'Art' OR category = 'Stationery') AND stock > 20;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, category, stock\nFROM products\nWHERE (category = 'Art' OR category = 'Stationery') AND stock > 20;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.combining_conditions_safely.quiz.try-combining_conditions_safely-sketch0.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT name, category, stock\nFROM products\nWHERE (category = 'Art' OR category = 'Stationery') AND stock > 20;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.combining_conditions_safely.quiz.try-combining_conditions_safely-sketch0.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.combining_conditions_safely.quiz.try-combining_conditions_safely-sketch0.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, category, stock\nFROM products\nWHERE (category = 'Art' OR category = 'Stationery') AND stock > 20;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     },
     {
       "id": "try-combining_conditions_safely-sketch1",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-2.combining_conditions_safely.quiz.try-combining_conditions_safely-sketch1",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.combining_conditions_safely.quiz.try-combining_conditions_safely-sketch1",
       "language": "sql",
-      "starterCode": "SELECT name, category, price\nFROM products\nWHERE ;",
+      "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.combining_conditions_safely.quiz.try-combining_conditions_safely-sketch1.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -435,8 +643,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -445,17 +653,69 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT name, category, price\nFROM products\nWHERE NOT (category = 'Home') AND price < 20;"
-      }
+        "solutionCode": "SELECT name, category, price\nFROM products\nWHERE NOT (category = 'Home') AND price < 20;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, category, price\nFROM products\nWHERE NOT (category = 'Home') AND price < 20;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.combining_conditions_safely.quiz.try-combining_conditions_safely-sketch1.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT name, category, price\nFROM products\nWHERE NOT (category = 'Home') AND price < 20;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.combining_conditions_safely.quiz.try-combining_conditions_safely-sketch1.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.combining_conditions_safely.quiz.try-combining_conditions_safely-sketch1.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, category, price\nFROM products\nWHERE NOT (category = 'Home') AND price < 20;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     },
     {
       "id": "try-combining_conditions_safely-sketch2",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-2.combining_conditions_safely.quiz.try-combining_conditions_safely-sketch2",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-2.combining_conditions_safely.quiz.try-combining_conditions_safely-sketch2",
       "language": "sql",
-      "starterCode": "SELECT name, category, stock\nFROM products\nWHERE ;",
+      "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.combining_conditions_safely.quiz.try-combining_conditions_safely-sketch2.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -463,8 +723,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -473,8 +733,60 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT name, category, stock\nFROM products\nWHERE category = 'Stationery' OR stock < 5;"
-      }
+        "solutionCode": "SELECT name, category, stock\nFROM products\nWHERE category = 'Stationery' OR stock < 5;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, category, stock\nFROM products\nWHERE category = 'Stationery' OR stock < 5;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.combining_conditions_safely.quiz.try-combining_conditions_safely-sketch2.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT name, category, stock\nFROM products\nWHERE category = 'Stationery' OR stock < 5;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.combining_conditions_safely.quiz.try-combining_conditions_safely-sketch2.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.combining_conditions_safely.quiz.try-combining_conditions_safely-sketch2.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, category, stock\nFROM products\nWHERE category = 'Stationery' OR stock < 5;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     }
   ]
 }

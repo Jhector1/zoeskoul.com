@@ -1,0 +1,826 @@
+{
+  "ok": true,
+  "profileId": "sql",
+  "subjectSlug": "sql--sql-v2--draft",
+  "courseSlug": "sql-v2",
+  "summary": {
+    "modules": 6,
+    "topicsTotal": 88,
+    "exercises": 993,
+    "exerciseKinds": {
+      "single_choice": 164,
+      "multi_choice": 164,
+      "drag_reorder": 164,
+      "code_input": 369,
+      "fill_blank_choice": 132
+    },
+    "codeInputs": 369,
+    "projects": 369,
+    "capstones": 364,
+    "thinFixedTestCount": 0,
+    "blockers": 0,
+    "errors": 0,
+    "warnings": 88,
+    "infos": 0
+  },
+  "severityCounts": {
+    "blocker": 0,
+    "error": 0,
+    "warning": 88,
+    "info": 0
+  },
+  "issues": [
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-0/sql-v2-0-1/what_sql_means",
+      "profileId": "sql",
+      "moduleId": "sql-v2-0",
+      "topicId": "what_sql_means",
+      "message": "Topic \"what_sql_means\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-0/sql-v2-0-1/what_a_database_is",
+      "profileId": "sql",
+      "moduleId": "sql-v2-0",
+      "topicId": "what_a_database_is",
+      "message": "Topic \"what_a_database_is\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-0/sql-v2-0-1/why_sql_is_useful",
+      "profileId": "sql",
+      "moduleId": "sql-v2-0",
+      "topicId": "why_sql_is_useful",
+      "message": "Topic \"why_sql_is_useful\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-0/sql-v2-0-1/real_world_examples_of_databases",
+      "profileId": "sql",
+      "moduleId": "sql-v2-0",
+      "topicId": "real_world_examples_of_databases",
+      "message": "Topic \"real_world_examples_of_databases\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-0/sql-v2-0-2/rows_and_columns",
+      "profileId": "sql",
+      "moduleId": "sql-v2-0",
+      "topicId": "rows_and_columns",
+      "message": "Topic \"rows_and_columns\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-0/sql-v2-0-2/records_and_fields",
+      "profileId": "sql",
+      "moduleId": "sql-v2-0",
+      "topicId": "records_and_fields",
+      "message": "Topic \"records_and_fields\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-0/sql-v2-0-2/table_names_and_column_names",
+      "profileId": "sql",
+      "moduleId": "sql-v2-0",
+      "topicId": "table_names_and_column_names",
+      "message": "Topic \"table_names_and_column_names\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-0/sql-v2-0-2/reading_data_like_a_spreadsheet",
+      "profileId": "sql",
+      "moduleId": "sql-v2-0",
+      "topicId": "reading_data_like_a_spreadsheet",
+      "message": "Topic \"reading_data_like_a_spreadsheet\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-0/sql-v2-0-3/how_data_is_organized",
+      "profileId": "sql",
+      "moduleId": "sql-v2-0",
+      "topicId": "how_data_is_organized",
+      "message": "Topic \"how_data_is_organized\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-0/sql-v2-0-3/one_table_vs_multiple_tables",
+      "profileId": "sql",
+      "moduleId": "sql-v2-0",
+      "topicId": "one_table_vs_multiple_tables",
+      "message": "Topic \"one_table_vs_multiple_tables\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-0/sql-v2-0-3/intro_to_keys",
+      "profileId": "sql",
+      "moduleId": "sql-v2-0",
+      "topicId": "intro_to_keys",
+      "message": "Topic \"intro_to_keys\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-0/sql-v2-0-3/thinking_in_questions_and_answers",
+      "profileId": "sql",
+      "moduleId": "sql-v2-0",
+      "topicId": "thinking_in_questions_and_answers",
+      "message": "Topic \"thinking_in_questions_and_answers\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-0/sql-v2-0-4/where_sql_runs",
+      "profileId": "sql",
+      "moduleId": "sql-v2-0",
+      "topicId": "where_sql_runs",
+      "message": "Topic \"where_sql_runs\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-0/sql-v2-0-4/sql_editor_basics",
+      "profileId": "sql",
+      "moduleId": "sql-v2-0",
+      "topicId": "sql_editor_basics",
+      "message": "Topic \"sql_editor_basics\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-0/sql-v2-0-4/running_your_first_query",
+      "profileId": "sql",
+      "moduleId": "sql-v2-0",
+      "topicId": "running_your_first_query",
+      "message": "Topic \"running_your_first_query\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-0/sql-v2-0-4/reading_query_results",
+      "profileId": "sql",
+      "moduleId": "sql-v2-0",
+      "topicId": "reading_query_results",
+      "message": "Topic \"reading_query_results\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-0/sql-v2-0-module-project/module-0-student-roster-project",
+      "profileId": "sql",
+      "moduleId": "sql-v2-0",
+      "topicId": "module-0-student-roster-project",
+      "message": "Topic \"module-0-student-roster-project\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-1/sql-v2-1-1/what_select_does",
+      "profileId": "sql",
+      "moduleId": "sql-v2-1",
+      "topicId": "what_select_does",
+      "message": "Topic \"what_select_does\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-1/sql-v2-1-1/selecting_all_columns_with_star",
+      "profileId": "sql",
+      "moduleId": "sql-v2-1",
+      "topicId": "selecting_all_columns_with_star",
+      "message": "Topic \"selecting_all_columns_with_star\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-1/sql-v2-1-1/selecting_specific_columns",
+      "profileId": "sql",
+      "moduleId": "sql-v2-1",
+      "topicId": "selecting_specific_columns",
+      "message": "Topic \"selecting_specific_columns\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-1/sql-v2-1-1/query_structure_basics",
+      "profileId": "sql",
+      "moduleId": "sql-v2-1",
+      "topicId": "query_structure_basics",
+      "message": "Topic \"query_structure_basics\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-1/sql-v2-1-2/from_and_table_names",
+      "profileId": "sql",
+      "moduleId": "sql-v2-1",
+      "topicId": "from_and_table_names",
+      "message": "Topic \"from_and_table_names\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-1/sql-v2-1-2/choosing_the_right_columns",
+      "profileId": "sql",
+      "moduleId": "sql-v2-1",
+      "topicId": "choosing_the_right_columns",
+      "message": "Topic \"choosing_the_right_columns\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-1/sql-v2-1-2/viewing_clean_results",
+      "profileId": "sql",
+      "moduleId": "sql-v2-1",
+      "topicId": "viewing_clean_results",
+      "message": "Topic \"viewing_clean_results\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-1/sql-v2-1-2/writing_simple_readable_queries",
+      "profileId": "sql",
+      "moduleId": "sql-v2-1",
+      "topicId": "writing_simple_readable_queries",
+      "message": "Topic \"writing_simple_readable_queries\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-1/sql-v2-1-3/keywords",
+      "profileId": "sql",
+      "moduleId": "sql-v2-1",
+      "topicId": "keywords",
+      "message": "Topic \"keywords\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-1/sql-v2-1-3/semicolons",
+      "profileId": "sql",
+      "moduleId": "sql-v2-1",
+      "topicId": "semicolons",
+      "message": "Topic \"semicolons\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-1/sql-v2-1-3/uppercase_vs_lowercase",
+      "profileId": "sql",
+      "moduleId": "sql-v2-1",
+      "topicId": "uppercase_vs_lowercase",
+      "message": "Topic \"uppercase_vs_lowercase\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-1/sql-v2-1-3/common_beginner_syntax_mistakes",
+      "profileId": "sql",
+      "moduleId": "sql-v2-1",
+      "topicId": "common_beginner_syntax_mistakes",
+      "message": "Topic \"common_beginner_syntax_mistakes\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-1/sql-v2-1-4/query_one_column",
+      "profileId": "sql",
+      "moduleId": "sql-v2-1",
+      "topicId": "query_one_column",
+      "message": "Topic \"query_one_column\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-1/sql-v2-1-4/query_multiple_columns",
+      "profileId": "sql",
+      "moduleId": "sql-v2-1",
+      "topicId": "query_multiple_columns",
+      "message": "Topic \"query_multiple_columns\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-1/sql-v2-1-4/query_full_tables",
+      "profileId": "sql",
+      "moduleId": "sql-v2-1",
+      "topicId": "query_full_tables",
+      "message": "Topic \"query_full_tables\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-1/sql-v2-1-4/predicting_result_output",
+      "profileId": "sql",
+      "moduleId": "sql-v2-1",
+      "topicId": "predicting_result_output",
+      "message": "Topic \"predicting_result_output\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-1/sql-v2-1-module-project/module-1-product-starter-sheet-project",
+      "profileId": "sql",
+      "moduleId": "sql-v2-1",
+      "topicId": "module-1-product-starter-sheet-project",
+      "message": "Topic \"module-1-product-starter-sheet-project\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-2/sql-v2-2-1/why_filtering_matters",
+      "profileId": "sql",
+      "moduleId": "sql-v2-2",
+      "topicId": "why_filtering_matters",
+      "message": "Topic \"why_filtering_matters\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-2/sql-v2-2-1/the_where_clause",
+      "profileId": "sql",
+      "moduleId": "sql-v2-2",
+      "topicId": "the_where_clause",
+      "message": "Topic \"the_where_clause\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-2/sql-v2-2-1/matching_exact_values",
+      "profileId": "sql",
+      "moduleId": "sql-v2-2",
+      "topicId": "matching_exact_values",
+      "message": "Topic \"matching_exact_values\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-2/sql-v2-2-1/filtering_numbers_and_text",
+      "profileId": "sql",
+      "moduleId": "sql-v2-2",
+      "topicId": "filtering_numbers_and_text",
+      "message": "Topic \"filtering_numbers_and_text\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-2/sql-v2-2-2/equals_comparison",
+      "profileId": "sql",
+      "moduleId": "sql-v2-2",
+      "topicId": "equals_comparison",
+      "message": "Topic \"equals_comparison\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-2/sql-v2-2-2/not_equal_comparison",
+      "profileId": "sql",
+      "moduleId": "sql-v2-2",
+      "topicId": "not_equal_comparison",
+      "message": "Topic \"not_equal_comparison\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-2/sql-v2-2-2/greater_than_comparison",
+      "profileId": "sql",
+      "moduleId": "sql-v2-2",
+      "topicId": "greater_than_comparison",
+      "message": "Topic \"greater_than_comparison\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-2/sql-v2-2-2/less_than_comparison",
+      "profileId": "sql",
+      "moduleId": "sql-v2-2",
+      "topicId": "less_than_comparison",
+      "message": "Topic \"less_than_comparison\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-2/sql-v2-2-2/greater_than_or_equal_and_less_than_or_equal",
+      "profileId": "sql",
+      "moduleId": "sql-v2-2",
+      "topicId": "greater_than_or_equal_and_less_than_or_equal",
+      "message": "Topic \"greater_than_or_equal_and_less_than_or_equal\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-2/sql-v2-2-2/choosing_the_right_comparison",
+      "profileId": "sql",
+      "moduleId": "sql-v2-2",
+      "topicId": "choosing_the_right_comparison",
+      "message": "Topic \"choosing_the_right_comparison\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-2/sql-v2-2-3/and_conditions",
+      "profileId": "sql",
+      "moduleId": "sql-v2-2",
+      "topicId": "and_conditions",
+      "message": "Topic \"and_conditions\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-2/sql-v2-2-3/or_conditions",
+      "profileId": "sql",
+      "moduleId": "sql-v2-2",
+      "topicId": "or_conditions",
+      "message": "Topic \"or_conditions\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-2/sql-v2-2-3/not_conditions",
+      "profileId": "sql",
+      "moduleId": "sql-v2-2",
+      "topicId": "not_conditions",
+      "message": "Topic \"not_conditions\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-2/sql-v2-2-3/combining_conditions_safely",
+      "profileId": "sql",
+      "moduleId": "sql-v2-2",
+      "topicId": "combining_conditions_safely",
+      "message": "Topic \"combining_conditions_safely\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-2/sql-v2-2-4/filter_by_number",
+      "profileId": "sql",
+      "moduleId": "sql-v2-2",
+      "topicId": "filter_by_number",
+      "message": "Topic \"filter_by_number\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-2/sql-v2-2-4/filter_by_text",
+      "profileId": "sql",
+      "moduleId": "sql-v2-2",
+      "topicId": "filter_by_text",
+      "message": "Topic \"filter_by_text\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-2/sql-v2-2-4/filter_by_more_than_one_rule",
+      "profileId": "sql",
+      "moduleId": "sql-v2-2",
+      "topicId": "filter_by_more_than_one_rule",
+      "message": "Topic \"filter_by_more_than_one_rule\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-2/sql-v2-2-4/avoiding_filtering_mistakes",
+      "profileId": "sql",
+      "moduleId": "sql-v2-2",
+      "topicId": "avoiding_filtering_mistakes",
+      "message": "Topic \"avoiding_filtering_mistakes\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-2/sql-v2-2-module-project/module-2-inventory-watchlist-project",
+      "profileId": "sql",
+      "moduleId": "sql-v2-2",
+      "topicId": "module-2-inventory-watchlist-project",
+      "message": "Topic \"module-2-inventory-watchlist-project\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-3/sql-v2-3-1/why_sorting_matters",
+      "profileId": "sql",
+      "moduleId": "sql-v2-3",
+      "topicId": "why_sorting_matters",
+      "message": "Topic \"why_sorting_matters\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-3/sql-v2-3-1/order_by",
+      "profileId": "sql",
+      "moduleId": "sql-v2-3",
+      "topicId": "order_by",
+      "message": "Topic \"order_by\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-3/sql-v2-3-1/ascending_order",
+      "profileId": "sql",
+      "moduleId": "sql-v2-3",
+      "topicId": "ascending_order",
+      "message": "Topic \"ascending_order\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-3/sql-v2-3-1/descending_order",
+      "profileId": "sql",
+      "moduleId": "sql-v2-3",
+      "topicId": "descending_order",
+      "message": "Topic \"descending_order\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-3/sql-v2-3-2/primary_sort",
+      "profileId": "sql",
+      "moduleId": "sql-v2-3",
+      "topicId": "primary_sort",
+      "message": "Topic \"primary_sort\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-3/sql-v2-3-2/secondary_sort",
+      "profileId": "sql",
+      "moduleId": "sql-v2-3",
+      "topicId": "secondary_sort",
+      "message": "Topic \"secondary_sort\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-3/sql-v2-3-2/sorting_text",
+      "profileId": "sql",
+      "moduleId": "sql-v2-3",
+      "topicId": "sorting_text",
+      "message": "Topic \"sorting_text\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-3/sql-v2-3-2/sorting_numbers_and_dates",
+      "profileId": "sql",
+      "moduleId": "sql-v2-3",
+      "topicId": "sorting_numbers_and_dates",
+      "message": "Topic \"sorting_numbers_and_dates\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-3/sql-v2-3-3/why_limit_results",
+      "profileId": "sql",
+      "moduleId": "sql-v2-3",
+      "topicId": "why_limit_results",
+      "message": "Topic \"why_limit_results\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-3/sql-v2-3-3/limit_clause",
+      "profileId": "sql",
+      "moduleId": "sql-v2-3",
+      "topicId": "limit_clause",
+      "message": "Topic \"limit_clause\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-3/sql-v2-3-3/top_rows_only",
+      "profileId": "sql",
+      "moduleId": "sql-v2-3",
+      "topicId": "top_rows_only",
+      "message": "Topic \"top_rows_only\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-3/sql-v2-3-3/combining_order_by_with_limit",
+      "profileId": "sql",
+      "moduleId": "sql-v2-3",
+      "topicId": "combining_order_by_with_limit",
+      "message": "Topic \"combining_order_by_with_limit\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-3/sql-v2-3-4/find_highest_values",
+      "profileId": "sql",
+      "moduleId": "sql-v2-3",
+      "topicId": "find_highest_values",
+      "message": "Topic \"find_highest_values\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-3/sql-v2-3-4/find_lowest_values",
+      "profileId": "sql",
+      "moduleId": "sql-v2-3",
+      "topicId": "find_lowest_values",
+      "message": "Topic \"find_lowest_values\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-3/sql-v2-3-4/show_top_5_records",
+      "profileId": "sql",
+      "moduleId": "sql-v2-3",
+      "topicId": "show_top_5_records",
+      "message": "Topic \"show_top_5_records\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-3/sql-v2-3-4/build_clear_result_sets",
+      "profileId": "sql",
+      "moduleId": "sql-v2-3",
+      "topicId": "build_clear_result_sets",
+      "message": "Topic \"build_clear_result_sets\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-3/sql-v2-3-module-project/module-3-sales-leaderboard-project",
+      "profileId": "sql",
+      "moduleId": "sql-v2-3",
+      "topicId": "module-3-sales-leaderboard-project",
+      "message": "Topic \"module-3-sales-leaderboard-project\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-4/sql-v2-4-1/intro_to_like",
+      "profileId": "sql",
+      "moduleId": "sql-v2-4",
+      "topicId": "intro_to_like",
+      "message": "Topic \"intro_to_like\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-4/sql-v2-4-1/percent_wildcard",
+      "profileId": "sql",
+      "moduleId": "sql-v2-4",
+      "topicId": "percent_wildcard",
+      "message": "Topic \"percent_wildcard\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-4/sql-v2-4-1/underscore_wildcard",
+      "profileId": "sql",
+      "moduleId": "sql-v2-4",
+      "topicId": "underscore_wildcard",
+      "message": "Topic \"underscore_wildcard\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-4/sql-v2-4-1/searching_partial_text",
+      "profileId": "sql",
+      "moduleId": "sql-v2-4",
+      "topicId": "searching_partial_text",
+      "message": "Topic \"searching_partial_text\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-4/sql-v2-4-2/in_list_filter",
+      "profileId": "sql",
+      "moduleId": "sql-v2-4",
+      "topicId": "in_list_filter",
+      "message": "Topic \"in_list_filter\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-4/sql-v2-4-2/not_in_list_filter",
+      "profileId": "sql",
+      "moduleId": "sql-v2-4",
+      "topicId": "not_in_list_filter",
+      "message": "Topic \"not_in_list_filter\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-4/sql-v2-4-2/between_range_filter",
+      "profileId": "sql",
+      "moduleId": "sql-v2-4",
+      "topicId": "between_range_filter",
+      "message": "Topic \"between_range_filter\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-4/sql-v2-4-2/range_filtering_practice",
+      "profileId": "sql",
+      "moduleId": "sql-v2-4",
+      "topicId": "range_filtering_practice",
+      "message": "Topic \"range_filtering_practice\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-4/sql-v2-4-3/what_null_means",
+      "profileId": "sql",
+      "moduleId": "sql-v2-4",
+      "topicId": "what_null_means",
+      "message": "Topic \"what_null_means\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-4/sql-v2-4-3/is_null",
+      "profileId": "sql",
+      "moduleId": "sql-v2-4",
+      "topicId": "is_null",
+      "message": "Topic \"is_null\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-4/sql-v2-4-3/is_not_null",
+      "profileId": "sql",
+      "moduleId": "sql-v2-4",
+      "topicId": "is_not_null",
+      "message": "Topic \"is_not_null\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-4/sql-v2-4-3/common_null_mistakes",
+      "profileId": "sql",
+      "moduleId": "sql-v2-4",
+      "topicId": "common_null_mistakes",
+      "message": "Topic \"common_null_mistakes\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-4/sql-v2-4-4/search_names",
+      "profileId": "sql",
+      "moduleId": "sql-v2-4",
+      "topicId": "search_names",
+      "message": "Topic \"search_names\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-4/sql-v2-4-4/filter_statuses",
+      "profileId": "sql",
+      "moduleId": "sql-v2-4",
+      "topicId": "filter_statuses",
+      "message": "Topic \"filter_statuses\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-4/sql-v2-4-4/find_missing_data",
+      "profileId": "sql",
+      "moduleId": "sql-v2-4",
+      "topicId": "find_missing_data",
+      "message": "Topic \"find_missing_data\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-4/sql-v2-4-4/combine_text_and_null_filters",
+      "profileId": "sql",
+      "moduleId": "sql-v2-4",
+      "topicId": "combine_text_and_null_filters",
+      "message": "Topic \"combine_text_and_null_filters\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-4/sql-v2-4-module-project/module-4-customer-cleanup-project",
+      "profileId": "sql",
+      "moduleId": "sql-v2-4",
+      "topicId": "module-4-customer-cleanup-project",
+      "message": "Topic \"module-4-customer-cleanup-project\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "sql-v2-5/sql-v2-5-capstone-project/module-5-customer-follow-up-capstone",
+      "profileId": "sql",
+      "moduleId": "sql-v2-5",
+      "topicId": "module-5-customer-follow-up-capstone",
+      "message": "Topic \"module-5-customer-follow-up-capstone\" has no learning goals on its seed metadata."
+    }
+  ]
+}

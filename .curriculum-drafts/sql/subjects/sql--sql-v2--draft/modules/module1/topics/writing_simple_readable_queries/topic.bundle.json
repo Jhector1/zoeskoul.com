@@ -1,15 +1,15 @@
 {
   "topicId": "writing_simple_readable_queries",
-  "subjectSlug": "sql-v2",
+  "subjectSlug": "sql--sql-v2--draft",
   "moduleSlug": "sql-v2-1",
-  "sectionSlug": "sql-v2-1-2",
+  "sectionSlug": "sql--sql-v2--draft-sql-v2-1-2",
   "prefix": "sqlv2_1",
-  "minutes": 15,
+  "minutes": 16,
   "runtimeDefaults": {
     "kind": "sql",
     "showSchema": true,
-    "showErd": true,
-    "showChen": true,
+    "showErd": false,
+    "showChen": false,
     "supportsTerminal": false,
     "supportsMultiFile": false,
     "supportsFileSystem": false,
@@ -18,35 +18,71 @@
     "resultShape": "table"
   },
   "topic": {
-    "labelKey": "topics.sql-v2.sql-v2-1.writing_simple_readable_queries.label",
-    "summaryKey": "topics.sql-v2.sql-v2-1.writing_simple_readable_queries.summary"
+    "labelKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.writing_simple_readable_queries.label",
+    "summaryKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.writing_simple_readable_queries.summary"
   },
   "cards": [
     {
       "id": "sketch0",
       "kind": "sketch",
-      "titleKey": "topics.sql-v2.sql-v2-1.writing_simple_readable_queries.cards.sketch0.title",
+      "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.writing_simple_readable_queries.cards.sketch0.title",
       "sketchId": "sketch_select_from_basics",
-      "height": 420
+      "height": 420,
+      "tryIt": {
+        "id": "try-writing_simple_readable_queries-sketch0",
+        "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.writing_simple_readable_queries.tryIt.try_writing_simple_readable_queries_sketch0.title",
+        "promptKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.writing_simple_readable_queries.tryIt.try_writing_simple_readable_queries_sketch0.prompt",
+        "exerciseKey": "try-writing_simple_readable_queries-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
     },
     {
       "id": "sketch1",
       "kind": "sketch",
-      "titleKey": "topics.sql-v2.sql-v2-1.writing_simple_readable_queries.cards.sketch1.title",
+      "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.writing_simple_readable_queries.cards.sketch1.title",
       "sketchId": "sketch_column_order_and_star",
-      "height": 420
+      "height": 420,
+      "tryIt": {
+        "id": "try-writing_simple_readable_queries-sketch1",
+        "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.writing_simple_readable_queries.tryIt.try_writing_simple_readable_queries_sketch1.title",
+        "promptKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.writing_simple_readable_queries.tryIt.try_writing_simple_readable_queries_sketch1.prompt",
+        "exerciseKey": "try-writing_simple_readable_queries-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
     },
     {
       "id": "sketch2",
       "kind": "sketch",
-      "titleKey": "topics.sql-v2.sql-v2-1.writing_simple_readable_queries.cards.sketch2.title",
+      "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.writing_simple_readable_queries.cards.sketch2.title",
       "sketchId": "sketch_readable_formatting",
-      "height": 420
+      "height": 420,
+      "tryIt": {
+        "id": "try-writing_simple_readable_queries-sketch2",
+        "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.writing_simple_readable_queries.tryIt.try_writing_simple_readable_queries_sketch2.title",
+        "promptKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.writing_simple_readable_queries.tryIt.try_writing_simple_readable_queries_sketch2.prompt",
+        "exerciseKey": "try-writing_simple_readable_queries-sketch2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
     },
     {
       "id": "quiz",
       "kind": "quiz",
-      "titleKey": "topics.sql-v2.sql-v2-1.writing_simple_readable_queries.cards.quiz.title",
+      "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.writing_simple_readable_queries.cards.quiz.title",
       "quiz": {
         "difficulty": "easy",
         "n": 4,
@@ -61,7 +97,7 @@
     {
       "id": "project",
       "kind": "project",
-      "titleKey": "topics.sql-v2.sql-v2-1.writing_simple_readable_queries.cards.project.title",
+      "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.writing_simple_readable_queries.cards.project.title",
       "project": {
         "difficulty": "easy",
         "allowReveal": true,
@@ -70,7 +106,7 @@
         "steps": [
           {
             "id": "ci_select_name_price",
-            "titleKey": "topics.sql-v2.sql-v2-1.writing_simple_readable_queries.projectSteps.ci_select_name_price.title",
+            "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.writing_simple_readable_queries.projectSteps.ci_select_name_price.title",
             "exerciseKey": "ci_select_name_price",
             "difficulty": "easy",
             "preferKind": "code_input",
@@ -79,7 +115,7 @@
           },
           {
             "id": "ci_select_all_columns",
-            "titleKey": "topics.sql-v2.sql-v2-1.writing_simple_readable_queries.projectSteps.ci_select_all_columns.title",
+            "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.writing_simple_readable_queries.projectSteps.ci_select_all_columns.title",
             "exerciseKey": "ci_select_all_columns",
             "difficulty": "easy",
             "preferKind": "code_input",
@@ -88,7 +124,7 @@
           },
           {
             "id": "ci_select_name_category_stock",
-            "titleKey": "topics.sql-v2.sql-v2-1.writing_simple_readable_queries.projectSteps.ci_select_name_category_stock.title",
+            "titleKey": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.writing_simple_readable_queries.projectSteps.ci_select_name_category_stock.title",
             "exerciseKey": "ci_select_name_category_stock",
             "difficulty": "easy",
             "preferKind": "code_input",
@@ -103,20 +139,20 @@
     {
       "id": "sketch_select_from_basics",
       "archetype": "paragraph",
-      "titleKey": "sketches.sql-v2.sql-v2-1.writing_simple_readable_queries.sketch_select_from_basics.title",
-      "bodyKey": "sketches.sql-v2.sql-v2-1.writing_simple_readable_queries.sketch_select_from_basics.bodyMarkdown"
+      "titleKey": "sketches.sql--sql-v2--draft.sql--sql-v2--draft-1.writing_simple_readable_queries.sketch_select_from_basics.title",
+      "bodyKey": "sketches.sql--sql-v2--draft.sql--sql-v2--draft-1.writing_simple_readable_queries.sketch_select_from_basics.bodyMarkdown"
     },
     {
       "id": "sketch_column_order_and_star",
       "archetype": "paragraph",
-      "titleKey": "sketches.sql-v2.sql-v2-1.writing_simple_readable_queries.sketch_column_order_and_star.title",
-      "bodyKey": "sketches.sql-v2.sql-v2-1.writing_simple_readable_queries.sketch_column_order_and_star.bodyMarkdown"
+      "titleKey": "sketches.sql--sql-v2--draft.sql--sql-v2--draft-1.writing_simple_readable_queries.sketch_column_order_and_star.title",
+      "bodyKey": "sketches.sql--sql-v2--draft.sql--sql-v2--draft-1.writing_simple_readable_queries.sketch_column_order_and_star.bodyMarkdown"
     },
     {
       "id": "sketch_readable_formatting",
       "archetype": "paragraph",
-      "titleKey": "sketches.sql-v2.sql-v2-1.writing_simple_readable_queries.sketch_readable_formatting.title",
-      "bodyKey": "sketches.sql-v2.sql-v2-1.writing_simple_readable_queries.sketch_readable_formatting.bodyMarkdown"
+      "titleKey": "sketches.sql--sql-v2--draft.sql--sql-v2--draft-1.writing_simple_readable_queries.sketch_readable_formatting.title",
+      "bodyKey": "sketches.sql--sql-v2--draft.sql--sql-v2--draft-1.writing_simple_readable_queries.sketch_readable_formatting.bodyMarkdown"
     }
   ],
   "exercises": [
@@ -125,7 +161,7 @@
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-1.writing_simple_readable_queries.quiz.sc_select_clause_role",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.writing_simple_readable_queries.quiz.sc_select_clause_role",
       "optionIds": [
         "a",
         "b",
@@ -142,7 +178,7 @@
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-1.writing_simple_readable_queries.quiz.sc_from_clause_role",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.writing_simple_readable_queries.quiz.sc_from_clause_role",
       "optionIds": [
         "a",
         "b",
@@ -159,7 +195,7 @@
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-1.writing_simple_readable_queries.quiz.mc_readable_query_habits",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.writing_simple_readable_queries.quiz.mc_readable_query_habits",
       "optionIds": [
         "a",
         "b",
@@ -180,7 +216,7 @@
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-1.writing_simple_readable_queries.quiz.mc_select_star_truths",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.writing_simple_readable_queries.quiz.mc_select_star_truths",
       "optionIds": [
         "a",
         "b",
@@ -200,7 +236,7 @@
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-1.writing_simple_readable_queries.quiz.dr_query_clause_order_basic",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.writing_simple_readable_queries.quiz.dr_query_clause_order_basic",
       "tokenIds": [
         "t1",
         "t2",
@@ -224,7 +260,7 @@
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-1.writing_simple_readable_queries.quiz.dr_query_clause_order_star",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.writing_simple_readable_queries.quiz.dr_query_clause_order_star",
       "tokenIds": [
         "t1",
         "t2",
@@ -248,7 +284,7 @@
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-1.writing_simple_readable_queries.quiz.fb_table_name_products",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.writing_simple_readable_queries.quiz.fb_table_name_products",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
@@ -260,7 +296,7 @@
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-1.writing_simple_readable_queries.quiz.fb_star_for_all_columns",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.writing_simple_readable_queries.quiz.fb_star_for_all_columns",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
@@ -272,9 +308,9 @@
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-1.writing_simple_readable_queries.quiz.ci_select_name_price",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.writing_simple_readable_queries.quiz.ci_select_name_price",
       "language": "sql",
-      "starterCode": "SELECT \nFROM products;",
+      "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.writing_simple_readable_queries.quiz.ci_select_name_price.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -282,8 +318,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -292,17 +328,69 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT name, price\nFROM products;"
-      }
+        "solutionCode": "SELECT name, price\nFROM products;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, price\nFROM products;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.writing_simple_readable_queries.quiz.ci_select_name_price.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT name, price\nFROM products;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.writing_simple_readable_queries.quiz.ci_select_name_price.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.writing_simple_readable_queries.quiz.ci_select_name_price.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, price\nFROM products;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     },
     {
       "id": "ci_select_all_columns",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-1.writing_simple_readable_queries.quiz.ci_select_all_columns",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.writing_simple_readable_queries.quiz.ci_select_all_columns",
       "language": "sql",
-      "starterCode": "SELECT \nFROM ;",
+      "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.writing_simple_readable_queries.quiz.ci_select_all_columns.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -310,8 +398,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -320,17 +408,69 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT *\nFROM products;"
-      }
+        "solutionCode": "SELECT *\nFROM products;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT *\nFROM products;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.writing_simple_readable_queries.quiz.ci_select_all_columns.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT *\nFROM products;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.writing_simple_readable_queries.quiz.ci_select_all_columns.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.writing_simple_readable_queries.quiz.ci_select_all_columns.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT *\nFROM products;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     },
     {
       "id": "ci_select_name_category_stock",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-1.writing_simple_readable_queries.quiz.ci_select_name_category_stock",
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.writing_simple_readable_queries.quiz.ci_select_name_category_stock",
       "language": "sql",
-      "starterCode": "SELECT name\nFROM products;",
+      "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.writing_simple_readable_queries.quiz.ci_select_name_category_stock.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -338,8 +478,8 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table",
         "showSchema": true,
-        "showErd": true,
-        "showChen": true,
+        "showErd": false,
+        "showChen": false,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false
@@ -348,8 +488,300 @@
         "type": "sql_query",
         "datasetId": "products_catalog",
         "resultShape": "table",
-        "solutionCode": "SELECT name, category, stock\nFROM products;"
-      }
+        "solutionCode": "SELECT name, category, stock\nFROM products;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, category, stock\nFROM products;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.writing_simple_readable_queries.quiz.ci_select_name_category_stock.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT name, category, stock\nFROM products;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.writing_simple_readable_queries.quiz.ci_select_name_category_stock.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.writing_simple_readable_queries.quiz.ci_select_name_category_stock.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, category, stock\nFROM products;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
+    },
+    {
+      "id": "try-writing_simple_readable_queries-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.writing_simple_readable_queries.quiz.try-writing_simple_readable_queries-sketch0",
+      "language": "sql",
+      "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.writing_simple_readable_queries.quiz.try-writing_simple_readable_queries-sketch0.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": false,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "SELECT name, price\nFROM products;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, price\nFROM products;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.writing_simple_readable_queries.quiz.try-writing_simple_readable_queries-sketch0.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT name, price\nFROM products;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.writing_simple_readable_queries.quiz.try-writing_simple_readable_queries-sketch0.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.writing_simple_readable_queries.quiz.try-writing_simple_readable_queries-sketch0.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, price\nFROM products;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
+    },
+    {
+      "id": "try-writing_simple_readable_queries-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.writing_simple_readable_queries.quiz.try-writing_simple_readable_queries-sketch1",
+      "language": "sql",
+      "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.writing_simple_readable_queries.quiz.try-writing_simple_readable_queries-sketch1.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": false,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "SELECT *\nFROM products;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT *\nFROM products;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.writing_simple_readable_queries.quiz.try-writing_simple_readable_queries-sketch1.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT *\nFROM products;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.writing_simple_readable_queries.quiz.try-writing_simple_readable_queries-sketch1.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.writing_simple_readable_queries.quiz.try-writing_simple_readable_queries-sketch1.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT *\nFROM products;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
+    },
+    {
+      "id": "try-writing_simple_readable_queries-sketch2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.writing_simple_readable_queries.quiz.try-writing_simple_readable_queries-sketch2",
+      "language": "sql",
+      "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.writing_simple_readable_queries.quiz.try-writing_simple_readable_queries-sketch2.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": false,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "SELECT name, category, stock\nFROM products;",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, category, stock\nFROM products;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.writing_simple_readable_queries.quiz.try-writing_simple_readable_queries-sketch2.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "SELECT name, category, stock\nFROM products;",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.writing_simple_readable_queries.quiz.try-writing_simple_readable_queries-sketch2.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.writing_simple_readable_queries.quiz.try-writing_simple_readable_queries-sketch2.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "SELECT name, category, stock\nFROM products;",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true
     }
   ]
 }

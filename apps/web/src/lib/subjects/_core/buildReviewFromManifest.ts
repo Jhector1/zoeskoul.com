@@ -24,6 +24,92 @@ function asString(value: unknown) {
     return typeof value === "string" ? value.trim() : "";
 }
 
+function asOptionalBoolean(value: unknown) {
+    return typeof value === "boolean" ? value : undefined;
+}
+
+function asToolsSpec(value: unknown) {
+    const tools = asRecord(value);
+    if (!tools) return null;
+
+    const defaultVisible = asOptionalBoolean(tools.defaultVisible);
+    const allowOpen = asOptionalBoolean(tools.allowOpen);
+    if (defaultVisible === undefined && allowOpen === undefined) return null;
+
+    return {
+        ...(defaultVisible !== undefined ? { defaultVisible } : {}),
+        ...(allowOpen !== undefined ? { allowOpen } : {}),
+    };
+}
+
+const TRY_IT_EXERCISE_STEP_FIELDS = [
+    "kind",
+    "purpose",
+    "language",
+    "lang",
+    "starterCode",
+    "starterFiles",
+    "workspace",
+    "files",
+    "initialFiles",
+    "workspaceFiles",
+    "fixtureFiles",
+    "fixtures",
+    "fileFixtures",
+    "runtime",
+    "recipe",
+    "ideConfig",
+    "solutionCode",
+    "solutionFiles",
+    "tests",
+    "expected",
+    "messageBase",
+    "datasetId",
+    "sqlDatasetId",
+    "fixedSqlDialect",
+    "sqlDialect",
+    "sqlSchemaSql",
+    "sqlSeedSql",
+    "sqlInitialTableSnapshots",
+] as const;
+
+function pickExerciseStepFields(exercise: Record<string, unknown> | null) {
+    if (!exercise) return {};
+
+    const picked: Record<string, unknown> = {};
+    for (const key of TRY_IT_EXERCISE_STEP_FIELDS) {
+        if (Object.prototype.hasOwnProperty.call(exercise, key)) {
+            const value = exercise[key];
+            if (value !== undefined) {
+                picked[key] = value;
+            }
+        }
+    }
+
+    return picked;
+}
+
+function findExerciseManifestByKey(
+    manifest: TopicBundleManifest,
+    exerciseKey: string,
+) {
+    const exercises = Array.isArray(manifest.exercises) ? manifest.exercises : [];
+    for (const exercise of exercises) {
+        const record = asRecord(exercise);
+        if (!record) continue;
+
+        const id = asString(record.id);
+        const key = asString(record.exerciseKey);
+        const exerciseId = asString(record.exerciseId);
+        const stableId = asString(record.stableExerciseId);
+        if (id === exerciseKey || key === exerciseKey || exerciseId === exerciseKey || stableId === exerciseKey) {
+            return record;
+        }
+    }
+
+    return null;
+}
+
 export function buildReviewFromManifest(args: {
     manifest: TopicBundleManifest;
     pool: readonly { key: string; w: number; kind?: any; purpose?: any }[];
@@ -51,14 +137,25 @@ export function buildReviewFromManifest(args: {
                 }),
             );
         if (!rawCard) return card;
-        if (card.type !== "text" && card.type !== "sketch") return card;
+
+        const rawToolsSpec = asToolsSpec(rawCard.tools);
+        const cardWithTools = rawToolsSpec
+            ? {
+                ...card,
+                tools: rawToolsSpec,
+            }
+            : card;
+
+        if (cardWithTools.type !== "text" && cardWithTools.type !== "sketch") {
+            return cardWithTools;
+        }
 
         const rawTryIt = asRecord(rawCard.tryIt);
-        if (!rawTryIt) return card;
+        if (!rawTryIt) return cardWithTools;
 
         const tryItId = asString(rawTryIt.id);
         const exerciseKey = asString(rawTryIt.exerciseKey);
-        if (!tryItId || !exerciseKey) return card;
+        if (!tryItId || !exerciseKey) return cardWithTools;
 
         const titleKey = asString(rawTryIt.titleKey);
         const promptKey = asString(rawTryIt.promptKey);
@@ -74,6 +171,20 @@ export function buildReviewFromManifest(args: {
                 ? null
                 : null;
 
+        const authoredExercise = findExerciseManifestByKey(args.manifest, exerciseKey);
+        const authoredExerciseStepFields = pickExerciseStepFields(authoredExercise);
+
+        const tryItStep = {
+            ...authoredExerciseStepFields,
+            id: tryItId.replace(/-/g, "_"),
+            title,
+            exerciseKey,
+            difficulty,
+            preferKind,
+            seedPolicy,
+            maxAttempts,
+        };
+
         const spec: ReviewProjectSpec = {
             mode: "project",
             subject: args.manifest.subjectSlug,
@@ -84,17 +195,7 @@ export function buildReviewFromManifest(args: {
             preferKind,
             allowReveal: true,
             maxAttempts,
-            steps: [
-                {
-                    id: tryItId.replace(/-/g, "_"),
-                    title,
-                    exerciseKey,
-                    difficulty,
-                    preferKind,
-                    seedPolicy,
-                    maxAttempts,
-                },
-            ],
+            steps: [tryItStep as any],
             runtime: args.manifest.runtimeDefaults ?? null,
             tryIt: true,
             uiKind: "try_it",
@@ -116,7 +217,7 @@ export function buildReviewFromManifest(args: {
         };
 
         return {
-            ...card,
+            ...cardWithTools,
             tryIt,
         };
     });

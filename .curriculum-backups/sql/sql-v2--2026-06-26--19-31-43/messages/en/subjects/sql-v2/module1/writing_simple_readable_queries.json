@@ -1,0 +1,227 @@
+{
+  "topics": {
+    "sql-v2": {
+      "sql-v2-1": {
+        "writing_simple_readable_queries": {
+          "label": "Writing Simple Readable Queries",
+          "summary": "Learn how to write clear beginner SELECT queries that are easy to read and return the columns you want from the products table.",
+          "cards": {
+            "sketch0": {
+              "title": "Start with SELECT and FROM"
+            },
+            "sketch1": {
+              "title": "Choose columns in a clear order"
+            },
+            "sketch2": {
+              "title": "Make queries easy to read"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Starter Query Sheet"
+            }
+          },
+          "projectSteps": {
+            "ci_select_name_price": {
+              "title": "Show product names and prices"
+            },
+            "ci_select_all_columns": {
+              "title": "Inspect the whole table"
+            },
+            "ci_select_name_category_stock": {
+              "title": "Choose three useful columns"
+            }
+          },
+          "quiz": {
+            "sc_select_clause_role": {
+              "title": "What SELECT does",
+              "prompt": "In a query like `SELECT name, price FROM products;`, what does the `SELECT` part do?",
+              "hint": "Look at the part before `FROM`.",
+              "help": {
+                "concept": "`SELECT` chooses which columns appear in the results table.",
+                "hint_1": "In this query, `name` and `price` are written right after `SELECT`.",
+                "hint_2": "Ask yourself which part controls the visible fields in the output, not the source table."
+              },
+              "options": {
+                "a": "It chooses which columns to show",
+                "b": "It chooses which table to read",
+                "c": "It sorts the rows alphabetically",
+                "d": "It removes duplicate rows automatically"
+              }
+            },
+            "sc_from_clause_role": {
+              "title": "What FROM does",
+              "prompt": "In `SELECT name FROM products;`, what does `FROM products` tell SQL?",
+              "hint": "It points SQL to the data source.",
+              "help": {
+                "concept": "`FROM` names the table that SQL should read.",
+                "hint_1": "The word after `FROM` is the table name in this lesson.",
+                "hint_2": "Think about where SQL gets the `name` values before showing them in the results table."
+              },
+              "options": {
+                "a": "Which rows to hide",
+                "b": "Which table to read",
+                "c": "Which column to rename",
+                "d": "Which values to calculate"
+              }
+            },
+            "mc_readable_query_habits": {
+              "title": "Readable query habits",
+              "prompt": "Which choices help make a beginner SQL query more readable? Choose all that apply.",
+              "hint": "Think about layout and clarity, not advanced features.",
+              "help": {
+                "concept": "Readable SQL uses clear clause order and formatting so the query is easier to scan.",
+                "hint_1": "Consider whether putting major clauses on separate lines helps someone read the query.",
+                "hint_2": "Look for choices about clear formatting and explicit column lists rather than unrelated SQL behavior."
+              },
+              "options": {
+                "a": "Put `SELECT` and `FROM` on separate lines",
+                "b": "Separate column names with commas",
+                "c": "List needed columns instead of always using `*`",
+                "d": "Replace the table name with any word you like"
+              }
+            },
+            "mc_select_star_truths": {
+              "title": "Understanding SELECT *",
+              "prompt": "Which statements about `SELECT * FROM products;` are correct? Choose all that apply.",
+              "hint": "Think about what `*` means in a SELECT list.",
+              "help": {
+                "concept": "In SQL, `*` means all columns from the table named in `FROM`.",
+                "hint_1": "This query returns every column in `products`, not just one or two.",
+                "hint_2": "Check which choices describe all columns and which ones incorrectly describe filtering or sorting."
+              },
+              "options": {
+                "a": "It returns all columns from the `products` table",
+                "b": "It can be useful for quickly inspecting the whole table",
+                "c": "It automatically sorts rows by `name`",
+                "d": "It means the same thing as selecting only `name` and `price`"
+              }
+            },
+            "dr_query_clause_order_basic": {
+              "title": "Build the query in order",
+              "prompt": "Arrange these tokens to form a readable query that shows `name` and `price` from `products`.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "SELECT",
+                "t2": "name, price",
+                "t3": "FROM",
+                "t4": "products",
+                "t5": ";"
+              }
+            },
+            "dr_query_clause_order_star": {
+              "title": "Order a full-table query",
+              "prompt": "Arrange these tokens to make a query that returns every column from `products`.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "SELECT",
+                "t2": "*",
+                "t3": "FROM",
+                "t4": "products",
+                "t5": ";"
+              }
+            },
+            "fb_table_name_products": {
+              "title": "Fill in the table name",
+              "prompt": "Complete the query so it reads from the products table.",
+              "hint": "Use the table name shown in the schema browser.",
+              "help": {
+                "concept": "The `FROM` clause must name the table that contains the columns you want to read.",
+                "hint_1": "This lesson uses one table with columns like `id`, `name`, and `price`.",
+                "hint_2": "Choose the table name that matches the dataset schema, not a column name."
+              },
+              "template": "SELECT name, price FROM [blank1];",
+              "choices": [
+                "products",
+                "price",
+                "category",
+                "created_at"
+              ]
+            },
+            "fb_star_for_all_columns": {
+              "title": "Fill in all columns",
+              "prompt": "Complete the query so it returns every column from `products`.",
+              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+              "help": {
+                "concept": "The blank should be filled with the term that makes the statement accurate.",
+                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+                "hint_2": "Choose the option that completes the statement with the clearest meaning."
+              },
+              "template": "SELECT [blank1] FROM products;",
+              "choices": [
+                "*",
+                "all",
+                "products",
+                "id, name only"
+              ]
+            },
+            "ci_select_name_price": {
+              "title": "Show product names and prices",
+              "prompt": "Write a readable SQL query that returns the `name` and `price` columns from the `products` table. Put `SELECT` and `FROM` on separate lines. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "SELECT \nFROM products;"
+            },
+            "ci_select_all_columns": {
+              "title": "Inspect the whole table",
+              "prompt": "Write a query that returns every column from the `products` table. Use a readable two-line format in the SQL editor, then click Run query and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "SELECT \nFROM ;"
+            },
+            "ci_select_name_category_stock": {
+              "title": "Choose three useful columns",
+              "prompt": "Write a readable query that returns `name`, `category`, and `stock` from the `products` table. Write the query in the SQL editor, click Run query, and check that the results table shows those columns in that order.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "SELECT name\nFROM products;"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql-v2": {
+      "sql-v2-1": {
+        "writing_simple_readable_queries": {
+          "sketch_select_from_basics": {
+            "title": "Start with SELECT and FROM",
+            "bodyMarkdown": "A simple readable SQL query usually answers two questions:\n\n1. **What columns do I want to see?** → `SELECT`\n2. **Which table should SQL read from?** → `FROM`\n\nHere is a beginner-friendly example using the `products` table:\n\n```sql\nSELECT name, price\nFROM products;\n```\n\nLine by line:\n\n- `SELECT name, price` asks for the `name` and `price` columns.\n- `FROM products` tells SQL which table to read.\n- `;` ends the query.\n\nIf you run this in the SQL editor, the results table will show product names and prices only, not every column in the table.\n\nA readable query puts each main clause on its own line. That makes it easier to scan and edit later."
+          },
+          "sketch_column_order_and_star": {
+            "title": "Choose columns in a clear order",
+            "bodyMarkdown": "The order of columns in `SELECT` becomes the order of columns in the results table.\n\nExample:\n\n```sql\nSELECT id, name, category\nFROM products;\n```\n\nThis returns the columns in this order:\n\n1. `id`\n2. `name`\n3. `category`\n\nYou can also ask for every column with `*`:\n\n```sql\nSELECT *\nFROM products;\n```\n\nThat is useful when you want a quick look at the whole table. In the `products` table, this shows `id`, `name`, `category`, `price`, `stock`, and `created_at`.\n\nFor example, one row includes:\n\n- `1`\n- `Sketchbook`\n- `Art`\n- `12.99`\n- `25`\n- `2026-01-10`\n\nBut when you only need a few columns, listing them is usually more readable than using `*`."
+          },
+          "sketch_readable_formatting": {
+            "title": "Make queries easy to read",
+            "bodyMarkdown": "Readable SQL is not just correct SQL. It should also be easy for you and other people to understand.\n\nCompare these two versions:\n\n```sql\nSELECT name, category, price FROM products;\n```\n\n```sql\nSELECT name, category, price\nFROM products;\n```\n\nBoth work, but the second version is easier to read because each main part has its own line.\n\nHere is another worked example:\n\n```sql\nSELECT name, stock, created_at\nFROM products;\n```\n\nStep by step:\n\n- `name` shows the product name.\n- `stock` shows how many are available.\n- `created_at` shows the stored date text.\n- `FROM products` reads from the only table in this lesson.\n\nA good beginner habit is:\n\n- put `SELECT` first\n- separate column names with commas\n- put `FROM` on the next line\n- end with a semicolon"
+          }
+        }
+      }
+    }
+  }
+}

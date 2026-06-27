@@ -1,0 +1,216 @@
+{
+  "status": "ok",
+  "generatedAt": "2026-06-26T21:25:50.528018+00:00",
+  "inputZip": "/mnt/data/sql.zip",
+  "changes": {
+    "topicCountBefore": 88,
+    "topicCountAfter": 66,
+    "topicsArchived": 22,
+    "tryItPromptScenarioUpdates": 1092,
+    "remainingSketchCards": 182,
+    "remainingCodeInputExercises": 352
+  },
+  "validation": {
+    "remainingSketchCardsWithoutTryIt": [],
+    "remainingCodeInputsWithoutWorkspaceOrStarterFiles": [],
+    "remainingStarterCodeAliases": []
+  },
+  "keptTopicsByModule": {
+    "module0": [
+      "what_sql_means",
+      "what_a_database_is",
+      "why_sql_is_useful",
+      "rows_and_columns",
+      "table_names_and_column_names",
+      "how_data_is_organized",
+      "one_table_vs_multiple_tables",
+      "thinking_in_questions_and_answers",
+      "sql_editor_basics",
+      "running_your_first_query",
+      "reading_query_results",
+      "module-0-student-roster-project"
+    ],
+    "module1": [
+      "what_select_does",
+      "selecting_all_columns_with_star",
+      "selecting_specific_columns",
+      "query_structure_basics",
+      "from_and_table_names",
+      "choosing_the_right_columns",
+      "writing_simple_readable_queries",
+      "common_beginner_syntax_mistakes",
+      "query_one_column",
+      "query_multiple_columns",
+      "predicting_result_output",
+      "module-1-product-starter-sheet-project"
+    ],
+    "module2": [
+      "why_filtering_matters",
+      "the_where_clause",
+      "filtering_numbers_and_text",
+      "equals_comparison",
+      "not_equal_comparison",
+      "greater_than_comparison",
+      "less_than_comparison",
+      "greater_than_or_equal_and_less_than_or_equal",
+      "choosing_the_right_comparison",
+      "and_conditions",
+      "or_conditions",
+      "not_conditions",
+      "combining_conditions_safely",
+      "avoiding_filtering_mistakes",
+      "module-2-inventory-watchlist-project"
+    ],
+    "module3": [
+      "why_sorting_matters",
+      "order_by",
+      "ascending_order",
+      "descending_order",
+      "primary_sort",
+      "secondary_sort",
+      "sorting_text",
+      "sorting_numbers_and_dates",
+      "limit_clause",
+      "combining_order_by_with_limit",
+      "build_clear_result_sets",
+      "module-3-sales-leaderboard-project"
+    ],
+    "module4": [
+      "intro_to_like",
+      "percent_wildcard",
+      "underscore_wildcard",
+      "searching_partial_text",
+      "in_list_filter",
+      "not_in_list_filter",
+      "between_range_filter",
+      "what_null_means",
+      "is_null",
+      "is_not_null",
+      "common_null_mistakes",
+      "search_names",
+      "combine_text_and_null_filters",
+      "module-4-customer-cleanup-project"
+    ],
+    "module5": [
+      "module-5-customer-follow-up-capstone"
+    ]
+  },
+  "archivedTopics": [
+    {
+      "module": "module0",
+      "topic": "real_world_examples_of_databases",
+      "reason": "Merged into the opening SQL/database motivation path to reduce introductory repetition."
+    },
+    {
+      "module": "module0",
+      "topic": "records_and_fields",
+      "reason": "Merged into rows_and_columns and table_names_and_column_names so beginner table vocabulary is taught in fewer stronger topics."
+    },
+    {
+      "module": "module0",
+      "topic": "reading_data_like_a_spreadsheet",
+      "reason": "Merged into how_data_is_organized and rows_and_columns."
+    },
+    {
+      "module": "module0",
+      "topic": "intro_to_keys",
+      "reason": "Deferred out of the beginner read-query course; keys matter more once joins/relationships are introduced."
+    },
+    {
+      "module": "module0",
+      "topic": "where_sql_runs",
+      "reason": "Merged into sql_editor_basics and running_your_first_query."
+    },
+    {
+      "module": "module1",
+      "topic": "viewing_clean_results",
+      "reason": "Merged into writing_simple_readable_queries and predicting_result_output."
+    },
+    {
+      "module": "module1",
+      "topic": "keywords",
+      "reason": "Merged into common_beginner_syntax_mistakes."
+    },
+    {
+      "module": "module1",
+      "topic": "semicolons",
+      "reason": "Merged into common_beginner_syntax_mistakes."
+    },
+    {
+      "module": "module1",
+      "topic": "uppercase_vs_lowercase",
+      "reason": "Merged into common_beginner_syntax_mistakes."
+    },
+    {
+      "module": "module1",
+      "topic": "query_full_tables",
+      "reason": "Merged into selecting_all_columns_with_star."
+    },
+    {
+      "module": "module2",
+      "topic": "matching_exact_values",
+      "reason": "Merged into equals_comparison and the_where_clause."
+    },
+    {
+      "module": "module2",
+      "topic": "filter_by_number",
+      "reason": "Merged into filtering_numbers_and_text."
+    },
+    {
+      "module": "module2",
+      "topic": "filter_by_text",
+      "reason": "Merged into filtering_numbers_and_text."
+    },
+    {
+      "module": "module2",
+      "topic": "filter_by_more_than_one_rule",
+      "reason": "Merged into and_conditions/or_conditions and combining_conditions_safely."
+    },
+    {
+      "module": "module3",
+      "topic": "why_limit_results",
+      "reason": "Merged into limit_clause."
+    },
+    {
+      "module": "module3",
+      "topic": "top_rows_only",
+      "reason": "Merged into limit_clause and combining_order_by_with_limit."
+    },
+    {
+      "module": "module3",
+      "topic": "find_highest_values",
+      "reason": "Merged into descending_order and combining_order_by_with_limit."
+    },
+    {
+      "module": "module3",
+      "topic": "find_lowest_values",
+      "reason": "Merged into ascending_order and combining_order_by_with_limit."
+    },
+    {
+      "module": "module3",
+      "topic": "show_top_5_records",
+      "reason": "Merged into combining_order_by_with_limit."
+    },
+    {
+      "module": "module4",
+      "topic": "range_filtering_practice",
+      "reason": "Merged into between_range_filter."
+    },
+    {
+      "module": "module4",
+      "topic": "filter_statuses",
+      "reason": "Merged into in_list_filter/not_in_list_filter."
+    },
+    {
+      "module": "module4",
+      "topic": "find_missing_data",
+      "reason": "Merged into what_null_means/is_null/is_not_null."
+    }
+  ],
+  "notes": [
+    "The course is now manifest-compressed from repeated micro-topics to a tighter beginner path.",
+    "Archived topics are moved under sql/archived/repetitive-topics so they are not compiler-visible under modules/*/topics.",
+    "All remaining SQL code_input exercises keep Python-style starterCode + starterFiles + workspace + solutionFiles shape.",
+    "Try-it message prompts are scenario-framed but starter SQL is preserved."
+  ]
+}

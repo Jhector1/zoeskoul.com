@@ -1,0 +1,488 @@
+{
+  "topics": {
+    "sql--sql-v2--draft": {
+      "sql--sql-v2--draft-4": {
+        "range_filtering_practice": {
+          "label": "Range Filtering Practice",
+          "summary": "Practice filtering customer records with IN, NOT IN, BETWEEN, LIKE, and NULL checks using the customers dataset.",
+          "cards": {
+            "sketch0": {
+              "title": "Filtering by lists, ranges, and missing values"
+            },
+            "sketch1": {
+              "title": "Using NULL checks and text patterns together"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Customer search and cleanup filters"
+            }
+          },
+          "projectSteps": {
+            "ci_city_list_filter": {
+              "title": "Filter customers by a city list"
+            },
+            "ci_signup_date_range": {
+              "title": "Find customers in a signup date range"
+            },
+            "ci_missing_email_non_test": {
+              "title": "Find real customers with missing email"
+            }
+          },
+          "quiz": {
+            "ci_city_list_filter": {
+              "title": "Filter customers by a city list",
+              "prompt": "Write a query that shows `full_name`, `city`, and `status` for customers whose city is either `Chicago` or `Miami`. Sort the results by `full_name` in ascending order. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "SELECT \n  full_name,\n  city,\n  status\nFROM customers\nWHERE city IN (/* add cities here */)\nORDER BY /* add column here */;"
+            },
+            "ci_signup_date_range": {
+              "title": "Find customers in a signup date range",
+              "prompt": "Write a query that shows `id`, `full_name`, and `signup_date` for customers who signed up between `2026-01-12` and `2026-01-25`, inclusive. Sort by `signup_date` in ascending order.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "SELECT id, full_name, signup_date\nFROM customers\nWHERE signup_date BETWEEN /* start date */ AND /* end date */\nORDER BY signup_date;"
+            },
+            "ci_missing_email_non_test": {
+              "title": "Find real customers with missing email",
+              "prompt": "Write a query that shows `full_name`, `email`, and `is_test` for customers whose email is missing and who are not test accounts. Sort by `full_name` in ascending order.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "SELECT full_name, email, is_test\nFROM customers\nWHERE /* missing email condition */\n  AND /* real customer condition */\nORDER BY full_name;"
+            },
+            "sc_between_inclusive": {
+              "title": "Understand BETWEEN",
+              "prompt": "What does `BETWEEN '2026-01-12' AND '2026-01-25'` do in a `WHERE` clause?",
+              "hint": "Think about whether the start and end values are included.",
+              "help": {
+                "concept": "`BETWEEN` checks whether a value falls inside a range, and in SQL the boundary values are included.",
+                "hint_1": "A row with exactly `2026-01-12` or exactly `2026-01-25` still matches.",
+                "hint_2": "Choose the option that describes an inclusive range, not one that excludes the endpoints."
+              },
+              "options": {
+                "a": "It matches only values strictly greater than the first date and strictly less than the second date.",
+                "b": "It matches values from the first date through the second date, including both dates.",
+                "c": "It matches only the two exact dates and nothing in between.",
+                "d": "It matches any date except the two listed dates."
+              }
+            },
+            "sc_null_comparison": {
+              "title": "Check for missing values correctly",
+              "prompt": "Which condition correctly finds rows where `email` is missing?",
+              "hint": "SQL uses a special NULL check instead of `=`.",
+              "help": {
+                "concept": "Because `NULL` represents missing data, SQL uses `IS NULL` and `IS NOT NULL` rather than equality operators.",
+                "hint_1": "A comparison like `email = NULL` will not work the way beginners often expect.",
+                "hint_2": "Look for the option that uses the dedicated NULL syntax with the `email` column."
+              },
+              "options": {
+                "a": "email = NULL",
+                "b": "email == NULL",
+                "c": "email IS NULL",
+                "d": "email IN NULL"
+              }
+            },
+            "mc_valid_list_filters": {
+              "title": "Choose valid list-style filters",
+              "prompt": "Which `WHERE` clauses correctly filter the `customers` table to rows in Chicago or Miami? Choose all that apply.",
+              "hint": "More than one SQL pattern can express the same two-city filter.",
+              "help": {
+                "concept": "A list filter can be written with `IN (...)` or with separate equality checks joined by `OR`.",
+                "hint_1": "Check whether each option keeps exactly the two cities named in the prompt.",
+                "hint_2": "One matching answer uses `IN`, and another uses two `city = ...` conditions joined with `OR`."
+              },
+              "options": {
+                "a": "city IN ('Chicago', 'Miami')",
+                "b": "city = 'Chicago' OR city = 'Miami'",
+                "c": "city BETWEEN 'Chicago' AND 'Miami'",
+                "d": "city IS NULL OR 'Miami'"
+              }
+            },
+            "mc_missing_or_blank_fields": {
+              "title": "Identify rows with incomplete contact info",
+              "prompt": "You want rows where contact information may be incomplete. Which conditions could correctly help find missing customer details in this dataset? Choose all that apply.",
+              "hint": "Look for conditions that test for missing email or missing city.",
+              "help": {
+                "concept": "When data is missing in SQL, use `IS NULL` on the specific column that may be empty.",
+                "hint_1": "The dataset includes some rows with `email` set to NULL and one row with `city` set to NULL.",
+                "hint_2": "Choose the conditions that directly test `email` or `city` with `IS NULL`."
+              },
+              "options": {
+                "a": "email IS NULL",
+                "b": "city IS NULL",
+                "c": "status IN ('active', 'inactive')",
+                "d": "signup_date BETWEEN '2026-01-10' AND '2026-02-03'"
+              }
+            },
+            "dr_build_range_query": {
+              "title": "Build a date range query",
+              "prompt": "Arrange these SQL parts to make a query that returns `full_name` and `signup_date` for customers who signed up between `2026-01-12` and `2026-01-25`.",
+              "hint": "Start with `SELECT`, then `FROM`, then the filter.",
+              "help": {
+                "concept": "A basic filtered query follows the order `SELECT`, `FROM`, then `WHERE`.",
+                "hint_1": "The date condition belongs after the table name because it is part of the `WHERE` clause.",
+                "hint_2": "Put the column list first, then the table, then the `BETWEEN` condition on `signup_date`."
+              },
+              "tokens": {
+                "t1": "SELECT full_name, signup_date",
+                "t2": "FROM customers",
+                "t3": "WHERE signup_date BETWEEN '2026-01-12' AND '2026-01-25'"
+              }
+            },
+            "dr_build_null_filter_query": {
+              "title": "Build a missing-email query",
+              "prompt": "Arrange these SQL parts to make a query that returns `full_name` and `email` for customers whose email is missing.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "SELECT full_name, email",
+                "t2": "FROM customers",
+                "t3": "WHERE email IS NULL"
+              }
+            },
+            "fb_like_suffix": {
+              "title": "Complete an email pattern filter",
+              "prompt": "Fill in the blank to match emails that end with `@example.com`.",
+              "hint": "Use the wildcard pattern that allows any characters before the domain.",
+              "help": {
+                "concept": "In a `LIKE` pattern, `%` stands for any sequence of characters, so it is useful for matching prefixes or suffixes.",
+                "hint_1": "To match the end of an email, the wildcard should come before `@example.com`.",
+                "hint_2": "Choose the pattern that means “anything, then `@example.com`.”"
+              },
+              "template": "email LIKE '[blank1]'",
+              "choices": [
+                "%@example.com",
+                "@example.com%",
+                "_@example.com",
+                "example.com%"
+              ]
+            },
+            "fb_not_in_status": {
+              "title": "Complete a NOT IN filter",
+              "prompt": "Fill in the blank to exclude draft customers.",
+              "hint": "Use the status value that should be left out.",
+              "help": {
+                "concept": "`NOT IN` excludes rows whose column matches one of the listed values.",
+                "hint_1": "The prompt says to exclude the missing term customers, so the missing value belongs inside the list.",
+                "hint_2": "Choose the status text that matches the the missing term rows in this dataset."
+              },
+              "template": "status NOT IN ('[blank1]')",
+              "choices": [
+                "active",
+                "inactive",
+                "draft",
+                "Chicago"
+              ]
+            },
+            "try-range_filtering_practice-sketch0": {
+              "title": "Filter customers by a city list",
+              "prompt": "Write a query that shows `full_name`, `city`, and `status` for customers whose city is either `Chicago` or `Miami`. Sort the results by `full_name` in ascending order. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "SELECT \n  full_name,\n  city,\n  status\nFROM customers\nWHERE city IN (/* add cities here */)\nORDER BY /* add column here */;"
+            },
+            "try-range_filtering_practice-sketch1": {
+              "title": "Find customers in a signup date range",
+              "prompt": "Write a query that shows `id`, `full_name`, and `signup_date` for customers who signed up between `2026-01-12` and `2026-01-25`, inclusive. Sort by `signup_date` in ascending order.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "SELECT id, full_name, signup_date\nFROM customers\nWHERE signup_date BETWEEN /* start date */ AND /* end date */\nORDER BY signup_date;"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_range_filtering_practice_sketch0": {
+              "title": "Filter customers by a city list",
+              "prompt": "Write a query that shows `full_name`, `city`, and `status` for customers whose city is either `Chicago` or `Miami`. Sort the results by `full_name` in ascending order. Write the query in the SQL editor, click Run query, and check the results table."
+            },
+            "try_range_filtering_practice_sketch1": {
+              "title": "Find customers in a signup date range",
+              "prompt": "Write a query that shows `id`, `full_name`, and `signup_date` for customers who signed up between `2026-01-12` and `2026-01-25`, inclusive. Sort by `signup_date` in ascending order."
+            }
+          }
+        }
+      },
+      "sql-v2-4": {
+        "range_filtering_practice": {
+          "label": "Range Filtering Practice",
+          "summary": "Practice filtering customer records with IN, NOT IN, BETWEEN, LIKE, and NULL checks using the customers dataset.",
+          "cards": {
+            "sketch0": {
+              "title": "Filtering by lists, ranges, and missing values"
+            },
+            "sketch1": {
+              "title": "Using NULL checks and text patterns together"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Customer search and cleanup filters"
+            }
+          },
+          "projectSteps": {
+            "ci_city_list_filter": {
+              "title": "Filter customers by a city list"
+            },
+            "ci_signup_date_range": {
+              "title": "Find customers in a signup date range"
+            },
+            "ci_missing_email_non_test": {
+              "title": "Find real customers with missing email"
+            }
+          },
+          "quiz": {
+            "ci_city_list_filter": {
+              "title": "Filter customers by a city list",
+              "prompt": "Write a query that shows `full_name`, `city`, and `status` for customers whose city is either `Chicago` or `Miami`. Sort the results by `full_name` in ascending order. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "SELECT \n  full_name,\n  city,\n  status\nFROM customers\nWHERE city IN (/* add cities here */)\nORDER BY /* add column here */;"
+            },
+            "ci_signup_date_range": {
+              "title": "Find customers in a signup date range",
+              "prompt": "Write a query that shows `id`, `full_name`, and `signup_date` for customers who signed up between `2026-01-12` and `2026-01-25`, inclusive. Sort by `signup_date` in ascending order.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "SELECT id, full_name, signup_date\nFROM customers\nWHERE signup_date BETWEEN /* start date */ AND /* end date */\nORDER BY signup_date;"
+            },
+            "ci_missing_email_non_test": {
+              "title": "Find real customers with missing email",
+              "prompt": "Write a query that shows `full_name`, `email`, and `is_test` for customers whose email is missing and who are not test accounts. Sort by `full_name` in ascending order.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "SELECT full_name, email, is_test\nFROM customers\nWHERE /* missing email condition */\n  AND /* real customer condition */\nORDER BY full_name;"
+            },
+            "sc_between_inclusive": {
+              "title": "Understand BETWEEN",
+              "prompt": "What does `BETWEEN '2026-01-12' AND '2026-01-25'` do in a `WHERE` clause?",
+              "hint": "Think about whether the start and end values are included.",
+              "help": {
+                "concept": "`BETWEEN` checks whether a value falls inside a range, and in SQL the boundary values are included.",
+                "hint_1": "A row with exactly `2026-01-12` or exactly `2026-01-25` still matches.",
+                "hint_2": "Choose the option that describes an inclusive range, not one that excludes the endpoints."
+              },
+              "options": {
+                "a": "It matches only values strictly greater than the first date and strictly less than the second date.",
+                "b": "It matches values from the first date through the second date, including both dates.",
+                "c": "It matches only the two exact dates and nothing in between.",
+                "d": "It matches any date except the two listed dates."
+              }
+            },
+            "sc_null_comparison": {
+              "title": "Check for missing values correctly",
+              "prompt": "Which condition correctly finds rows where `email` is missing?",
+              "hint": "SQL uses a special NULL check instead of `=`.",
+              "help": {
+                "concept": "Because `NULL` represents missing data, SQL uses `IS NULL` and `IS NOT NULL` rather than equality operators.",
+                "hint_1": "A comparison like `email = NULL` will not work the way beginners often expect.",
+                "hint_2": "Look for the option that uses the dedicated NULL syntax with the `email` column."
+              },
+              "options": {
+                "a": "email = NULL",
+                "b": "email == NULL",
+                "c": "email IS NULL",
+                "d": "email IN NULL"
+              }
+            },
+            "mc_valid_list_filters": {
+              "title": "Choose valid list-style filters",
+              "prompt": "Which `WHERE` clauses correctly filter the `customers` table to rows in Chicago or Miami? Choose all that apply.",
+              "hint": "More than one SQL pattern can express the same two-city filter.",
+              "help": {
+                "concept": "A list filter can be written with `IN (...)` or with separate equality checks joined by `OR`.",
+                "hint_1": "Check whether each option keeps exactly the two cities named in the prompt.",
+                "hint_2": "One matching answer uses `IN`, and another uses two `city = ...` conditions joined with `OR`."
+              },
+              "options": {
+                "a": "city IN ('Chicago', 'Miami')",
+                "b": "city = 'Chicago' OR city = 'Miami'",
+                "c": "city BETWEEN 'Chicago' AND 'Miami'",
+                "d": "city IS NULL OR 'Miami'"
+              }
+            },
+            "mc_missing_or_blank_fields": {
+              "title": "Identify rows with incomplete contact info",
+              "prompt": "You want rows where contact information may be incomplete. Which conditions could correctly help find missing customer details in this dataset? Choose all that apply.",
+              "hint": "Look for conditions that test for missing email or missing city.",
+              "help": {
+                "concept": "When data is missing in SQL, use `IS NULL` on the specific column that may be empty.",
+                "hint_1": "The dataset includes some rows with `email` set to NULL and one row with `city` set to NULL.",
+                "hint_2": "Choose the conditions that directly test `email` or `city` with `IS NULL`."
+              },
+              "options": {
+                "a": "email IS NULL",
+                "b": "city IS NULL",
+                "c": "status IN ('active', 'inactive')",
+                "d": "signup_date BETWEEN '2026-01-10' AND '2026-02-03'"
+              }
+            },
+            "dr_build_range_query": {
+              "title": "Build a date range query",
+              "prompt": "Arrange these SQL parts to make a query that returns `full_name` and `signup_date` for customers who signed up between `2026-01-12` and `2026-01-25`.",
+              "hint": "Start with `SELECT`, then `FROM`, then the filter.",
+              "help": {
+                "concept": "A basic filtered query follows the order `SELECT`, `FROM`, then `WHERE`.",
+                "hint_1": "The date condition belongs after the table name because it is part of the `WHERE` clause.",
+                "hint_2": "Put the column list first, then the table, then the `BETWEEN` condition on `signup_date`."
+              },
+              "tokens": {
+                "t1": "SELECT full_name, signup_date",
+                "t2": "FROM customers",
+                "t3": "WHERE signup_date BETWEEN '2026-01-12' AND '2026-01-25'"
+              }
+            },
+            "dr_build_null_filter_query": {
+              "title": "Build a missing-email query",
+              "prompt": "Arrange these SQL parts to make a query that returns `full_name` and `email` for customers whose email is missing.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "SELECT full_name, email",
+                "t2": "FROM customers",
+                "t3": "WHERE email IS NULL"
+              }
+            },
+            "fb_like_suffix": {
+              "title": "Complete an email pattern filter",
+              "prompt": "Fill in the blank to match emails that end with `@example.com`.",
+              "hint": "Use the wildcard pattern that allows any characters before the domain.",
+              "help": {
+                "concept": "In a `LIKE` pattern, `%` stands for any sequence of characters, so it is useful for matching prefixes or suffixes.",
+                "hint_1": "To match the end of an email, the wildcard should come before `@example.com`.",
+                "hint_2": "Choose the pattern that means “anything, then `@example.com`.”"
+              },
+              "template": "email LIKE '[blank1]'",
+              "choices": [
+                "%@example.com",
+                "@example.com%",
+                "_@example.com",
+                "example.com%"
+              ]
+            },
+            "fb_not_in_status": {
+              "title": "Complete a NOT IN filter",
+              "prompt": "Fill in the blank to exclude draft customers.",
+              "hint": "Use the status value that should be left out.",
+              "help": {
+                "concept": "`NOT IN` excludes rows whose column matches one of the listed values.",
+                "hint_1": "The prompt says to exclude the missing term customers, so the missing value belongs inside the list.",
+                "hint_2": "Choose the status text that matches the the missing term rows in this dataset."
+              },
+              "template": "status NOT IN ('[blank1]')",
+              "choices": [
+                "active",
+                "inactive",
+                "draft",
+                "Chicago"
+              ]
+            },
+            "try-range_filtering_practice-sketch0": {
+              "title": "Filter customers by a city list",
+              "prompt": "Write a query that shows `full_name`, `city`, and `status` for customers whose city is either `Chicago` or `Miami`. Sort the results by `full_name` in ascending order. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "SELECT \n  full_name,\n  city,\n  status\nFROM customers\nWHERE city IN (/* add cities here */)\nORDER BY /* add column here */;"
+            },
+            "try-range_filtering_practice-sketch1": {
+              "title": "Find customers in a signup date range",
+              "prompt": "Write a query that shows `id`, `full_name`, and `signup_date` for customers who signed up between `2026-01-12` and `2026-01-25`, inclusive. Sort by `signup_date` in ascending order.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "SELECT id, full_name, signup_date\nFROM customers\nWHERE signup_date BETWEEN /* start date */ AND /* end date */\nORDER BY signup_date;"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_range_filtering_practice_sketch0": {
+              "title": "Filter customers by a city list",
+              "prompt": "Write a query that shows `full_name`, `city`, and `status` for customers whose city is either `Chicago` or `Miami`. Sort the results by `full_name` in ascending order. Write the query in the SQL editor, click Run query, and check the results table."
+            },
+            "try_range_filtering_practice_sketch1": {
+              "title": "Find customers in a signup date range",
+              "prompt": "Write a query that shows `id`, `full_name`, and `signup_date` for customers who signed up between `2026-01-12` and `2026-01-25`, inclusive. Sort by `signup_date` in ascending order."
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql--sql-v2--draft": {
+      "sql--sql-v2--draft-4": {
+        "range_filtering_practice": {
+          "range_filters_overview": {
+            "title": "Filtering by lists, ranges, and missing values",
+            "bodyMarkdown": "Range filtering helps you narrow a table to the rows you actually want. In this lesson, you will work with the `customers` table and use `IN`, `NOT IN`, `BETWEEN`, `LIKE`, `IS NULL`, and `IS NOT NULL`.\n\nA common pattern is checking whether a value belongs to a small list.\n\n```sql\nSELECT full_name, city, status\nFROM customers\nWHERE city IN ('Chicago', 'Miami');\n```\n\nStep by step:\n- `SELECT full_name, city, status` chooses the columns to show.\n- `FROM customers` reads from the `customers` table.\n- `WHERE city IN ('Chicago', 'Miami')` keeps only rows where `city` matches one of those two values.\n\nYou can also filter a date range.\n\n```sql\nSELECT full_name, signup_date\nFROM customers\nWHERE signup_date BETWEEN '2026-01-12' AND '2026-01-25';\n```\n\nThis keeps rows whose `signup_date` falls inside the range, including both end dates.\n\nWorked example: in the dataset, `Leo Grant` signed up on `2026-01-12` and `Liam Scott` signed up on `2026-01-25`, so both are included."
+          },
+          "null_and_text_patterns": {
+            "title": "Using NULL checks and text patterns together",
+            "bodyMarkdown": "`NULL` means missing data, so you cannot test it with `=`. Instead, use `IS NULL` or `IS NOT NULL`.\n\n```sql\nSELECT full_name, email\nFROM customers\nWHERE email IS NULL;\n```\n\nLine by line:\n- `SELECT full_name, email` shows the customer name and email.\n- `FROM customers` uses the customer table.\n- `WHERE email IS NULL` keeps only rows where the email is missing.\n\nIn this dataset, `Leo Grant` and `Liam Scott` match that condition.\n\nYou can also search text with `LIKE`.\n\n```sql\nSELECT full_name, email\nFROM customers\nWHERE email LIKE '%@example.com';\n```\n\nHere, `%` means “any characters.” So this pattern finds emails that end with `@example.com`.\n\nWorked example: `mia@example.com` matches, but `test@internal.dev` does not."
+          }
+        }
+      },
+      "sql-v2-4": {
+        "range_filtering_practice": {
+          "range_filters_overview": {
+            "title": "Filtering by lists, ranges, and missing values",
+            "bodyMarkdown": "Range filtering helps you narrow a table to the rows you actually want. In this lesson, you will work with the `customers` table and use `IN`, `NOT IN`, `BETWEEN`, `LIKE`, `IS NULL`, and `IS NOT NULL`.\n\nA common pattern is checking whether a value belongs to a small list.\n\n```sql\nSELECT full_name, city, status\nFROM customers\nWHERE city IN ('Chicago', 'Miami');\n```\n\nStep by step:\n- `SELECT full_name, city, status` chooses the columns to show.\n- `FROM customers` reads from the `customers` table.\n- `WHERE city IN ('Chicago', 'Miami')` keeps only rows where `city` matches one of those two values.\n\nYou can also filter a date range.\n\n```sql\nSELECT full_name, signup_date\nFROM customers\nWHERE signup_date BETWEEN '2026-01-12' AND '2026-01-25';\n```\n\nThis keeps rows whose `signup_date` falls inside the range, including both end dates.\n\nWorked example: in the dataset, `Leo Grant` signed up on `2026-01-12` and `Liam Scott` signed up on `2026-01-25`, so both are included."
+          },
+          "null_and_text_patterns": {
+            "title": "Using NULL checks and text patterns together",
+            "bodyMarkdown": "`NULL` means missing data, so you cannot test it with `=`. Instead, use `IS NULL` or `IS NOT NULL`.\n\n```sql\nSELECT full_name, email\nFROM customers\nWHERE email IS NULL;\n```\n\nLine by line:\n- `SELECT full_name, email` shows the customer name and email.\n- `FROM customers` uses the customer table.\n- `WHERE email IS NULL` keeps only rows where the email is missing.\n\nIn this dataset, `Leo Grant` and `Liam Scott` match that condition.\n\nYou can also search text with `LIKE`.\n\n```sql\nSELECT full_name, email\nFROM customers\nWHERE email LIKE '%@example.com';\n```\n\nHere, `%` means “any characters.” So this pattern finds emails that end with `@example.com`.\n\nWorked example: `mia@example.com` matches, but `test@internal.dev` does not."
+          }
+        }
+      }
+    }
+  }
+}

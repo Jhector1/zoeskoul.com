@@ -1,6 +1,251 @@
 {
   "topics": {
-    "sql-v2": {
+    "sql--sql-v2--draft": {
+      "sql--sql-v2--draft-2": {
+        "or_conditions": {
+          "label": "or conditions",
+          "summary": "Learn how to keep rows that match one condition or another by using OR in a WHERE clause.",
+          "cards": {
+            "sketch0": {
+              "title": "Using OR to match either condition"
+            },
+            "sketch1": {
+              "title": "Using OR with numeric conditions"
+            },
+            "sketch2": {
+              "title": "OR is broader than AND"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Practice OR filters on the products table"
+            }
+          },
+          "projectSteps": {
+            "ci_art_or_home": {
+              "title": "Query two categories with OR"
+            },
+            "ci_price_or_low_stock": {
+              "title": "Find inexpensive or low-stock products"
+            },
+            "ci_stationery_or_under_20": {
+              "title": "Mix text and numeric conditions with OR"
+            }
+          },
+          "quiz": {
+            "sc-or-meaning": {
+              "title": "What OR means",
+              "prompt": "In a `WHERE` clause, what does `OR` do?",
+              "hint": "A row can stay even if only one of the conditions is true.",
+              "help": {
+                "concept": "`OR` is a logical operator that keeps rows when at least one condition evaluates to true.",
+                "hint_1": "Compare it with `AND`: `AND` needs both parts to be true, but this operator is less strict.",
+                "hint_2": "Think about a row that matches the first condition but not the second. With this operator, that row still remains."
+              },
+              "options": {
+                "a": "It keeps rows only when both conditions are true.",
+                "b": "It keeps rows when at least one condition is true.",
+                "c": "It sorts rows into alphabetical order.",
+                "d": "It removes duplicate rows."
+              }
+            },
+            "sc-or-broader-than-and": {
+              "title": "Which filter is broader?",
+              "prompt": "Which statement is usually true when comparing similar filters with `OR` and `AND`?",
+              "hint": "One operator accepts rows that match either side, so it often returns more rows.",
+              "help": {
+                "concept": "Because `OR` needs only one true condition, it usually matches more rows than `AND`, which needs all combined conditions to be true.",
+                "hint_1": "Imagine checking `category = 'Art'` and `price < 20`. Which operator would keep rows that satisfy just one of those?",
+                "hint_2": "The broader filter is the one that does not require both tests to pass at the same time."
+              },
+              "options": {
+                "a": "`AND` usually returns more rows than `OR`.",
+                "b": "`OR` usually returns more rows than `AND`.",
+                "c": "`AND` and `OR` always return exactly the same rows.",
+                "d": "`OR` can only be used with text columns."
+              }
+            },
+            "mc-or-matching-rows": {
+              "title": "Rows matched by an OR filter",
+              "prompt": "Choose all products that match this filter: `WHERE category = 'Art' OR stock < 5`.",
+              "hint": "Check each product for either the Art category or very low stock.",
+              "help": {
+                "concept": "With `OR`, a row matches if it satisfies the category test, the stock test, or both.",
+                "hint_1": "Look for all `Art` products first, then separately look for products with `stock < 5`.",
+                "hint_2": "Combine both groups without removing a row just because it fails one side of the `OR`."
+              },
+              "options": {
+                "a": "Sketchbook",
+                "b": "Acrylic Paint Set",
+                "c": "Notebook",
+                "d": "Office Chair"
+              }
+            },
+            "mc-valid-or-queries": {
+              "title": "Queries that use OR correctly",
+              "prompt": "Choose all queries that correctly return rows from `products` where the category is `Home` or `Stationery`.",
+              "hint": "A correct query must compare the `category` column on both sides of `OR`.",
+              "help": {
+                "concept": "Each side of an `OR` should be a complete condition, such as `category = 'Home'`.",
+                "hint_1": "Look for statements where `category` is explicitly checked against one value and then explicitly checked against the other value.",
+                "hint_2": "If one side is just a string like `'Stationery'` without a comparison, that is not a proper condition."
+              },
+              "options": {
+                "a": "SELECT * FROM products WHERE category = 'Home' OR category = 'Stationery';",
+                "b": "SELECT * FROM products WHERE category = 'Home' OR 'Stationery';",
+                "c": "SELECT * FROM products WHERE category = 'Stationery' OR category = 'Home';",
+                "d": "SELECT * FROM products WHERE category = 'Home' AND category = 'Stationery';"
+              }
+            },
+            "dr-build-or-query": {
+              "title": "Build a basic OR query",
+              "prompt": "Arrange the tokens to make a query that shows `name` and `category` for products in the `Art` or `Home` categories.",
+              "hint": "Start with SELECT and end with the full OR condition.",
+              "help": {
+                "concept": "A SQL query follows a clause order: `SELECT`, `FROM`, then `WHERE` with the complete OR filter.",
+                "hint_1": "The selected columns come first, then the table name, then the filter.",
+                "hint_2": "The last token should contain both category checks joined by `OR`."
+              },
+              "tokens": {
+                "t1": "SELECT name, category",
+                "t2": "FROM products",
+                "t3": "WHERE category = 'Art' OR category = 'Home';"
+              }
+            },
+            "dr-read-query-order": {
+              "title": "Read the filter in order",
+              "prompt": "Arrange these parts in the order SQL reads them for this query idea: show product names from `products` where `price < 10 OR stock < 5`.",
+              "hint": "Put the selected column first, then the table, then the filter.",
+              "help": {
+                "concept": "Even when the filter contains `OR`, the overall query still follows the standard clause order.",
+                "hint_1": "The `WHERE` clause comes after `FROM`, not before it.",
+                "hint_2": "The condition token should be last because it depends on the table already being named."
+              },
+              "tokens": {
+                "t1": "WHERE price < 10 OR stock < 5;",
+                "t2": "FROM products",
+                "t3": "SELECT name"
+              }
+            },
+            "fb-or-keyword": {
+              "title": "Choose the logical operator",
+              "prompt": "Complete the query so it keeps rows where either category matches.",
+              "hint": "Focus on the missing concept rather than the exact missing term.",
+              "help": {
+                "concept": "The blank should be completed with the term that fits the job being described.",
+                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+                "hint_2": "Choose the term that best completes the meaning of the statement."
+              },
+              "template": "SELECT * FROM products WHERE category = 'Art' [blank1] category = 'Home';",
+              "choices": [
+                "AND",
+                "OR",
+                "FROM",
+                "ORDER BY"
+              ]
+            },
+            "fb-complete-condition": {
+              "title": "Complete the second condition",
+              "prompt": "Fill in the missing value so the query returns Stationery products or Home products.",
+              "hint": "The second comparison should check for the other category named in the prompt.",
+              "help": {
+                "concept": "Each side of an `OR` must be a full condition, and the compared value must match the category you want to include.",
+                "hint_1": "The first side already checks for `Stationery`, so the blank should be the other category mentioned.",
+                "hint_2": "You are not choosing a column name or keyword here; you are choosing the text value for the second category."
+              },
+              "template": "SELECT * FROM products WHERE category = 'Stationery' OR category = '[blank1]';",
+              "choices": [
+                "Art",
+                "Home",
+                "price",
+                "stock"
+              ]
+            },
+            "ci-art-or-home": {
+              "title": "Query two categories with OR",
+              "prompt": "Write a query that returns the `name` and `category` columns for products where the category is `Art` or `Home`. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "-- Return the name and category columns for products where the category is Art or Home.\nSELECT name, category\nFROM products\nWHERE ;"
+            },
+            "ci-price-or-low-stock": {
+              "title": "Find inexpensive or low-stock products",
+              "prompt": "Write a query that returns `name`, `price`, and `stock` for products where `price < 10` or `stock < 5`. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "-- Return name, price, and stock for products where price < 10 or stock < 5.\nSELECT name, price, stock\nFROM products\nWHERE ;"
+            },
+            "ci-stationery-or-under-20": {
+              "title": "Mix text and numeric conditions with OR",
+              "prompt": "Write a query that returns `name`, `category`, and `price` for products where the category is `Stationery` or the price is less than 20. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "-- Return name, category, and price for products where the category is Stationery or the price is less than 20.\nSELECT name, category, price\nFROM products\nWHERE ;"
+            },
+            "try-or_conditions-sketch0": {
+              "title": "Query two categories with OR",
+              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that returns the `name` and `category` columns for products where the category is `Art` or `Home`. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "-- Return the name and category columns for products where the category is Art or Home.\nSELECT name, category\nFROM products\nWHERE ;"
+            },
+            "try-or_conditions-sketch1": {
+              "title": "Find inexpensive or low-stock products",
+              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that returns `name`, `price`, and `stock` for products where `price < 10` or `stock < 5`. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "-- Return name, price, and stock for products where price < 10 or stock < 5.\nSELECT name, price, stock\nFROM products\nWHERE ;"
+            },
+            "try-or_conditions-sketch2": {
+              "title": "Mix text and numeric conditions with OR",
+              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that returns `name`, `category`, and `price` for products where the category is `Stationery` or the price is less than 20. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "-- Return name, category, and price for products where the category is Stationery or the price is less than 20.\nSELECT name, category, price\nFROM products\nWHERE ;"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_or_conditions_sketch0": {
+              "title": "Query two categories with OR",
+              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that returns the `name` and `category` columns for products where the category is `Art` or `Home`. Write the query in the SQL editor, click Run query, and check the results table."
+            },
+            "try_or_conditions_sketch1": {
+              "title": "Find inexpensive or low-stock products",
+              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that returns `name`, `price`, and `stock` for products where `price < 10` or `stock < 5`. Write the query in the SQL editor, click Run query, and check the results table."
+            },
+            "try_or_conditions_sketch2": {
+              "title": "Mix text and numeric conditions with OR",
+              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that returns `name`, `category`, and `price` for products where the category is `Stationery` or the price is less than 20. Write the query in the SQL editor, click Run query, and check the results table."
+            }
+          }
+        }
+      },
       "sql-v2-2": {
         "or_conditions": {
           "label": "or conditions",
@@ -171,7 +416,7 @@
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
                 "hint_2": "Run the query and compare the results table."
               },
-              "starterCode": "SELECT name, category\nFROM products\nWHERE ;"
+              "starterCode": "-- Return the name and category columns for products where the category is Art or Home.\nSELECT name, category\nFROM products\nWHERE ;"
             },
             "ci-price-or-low-stock": {
               "title": "Find inexpensive or low-stock products",
@@ -182,7 +427,7 @@
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
                 "hint_2": "Run the query and compare the results table."
               },
-              "starterCode": "SELECT name, price, stock\nFROM products\nWHERE ;"
+              "starterCode": "-- Return name, price, and stock for products where price < 10 or stock < 5.\nSELECT name, price, stock\nFROM products\nWHERE ;"
             },
             "ci-stationery-or-under-20": {
               "title": "Mix text and numeric conditions with OR",
@@ -193,55 +438,55 @@
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
                 "hint_2": "Run the query and compare the results table."
               },
-              "starterCode": "SELECT name, category, price\nFROM products\nWHERE ;"
+              "starterCode": "-- Return name, category, and price for products where the category is Stationery or the price is less than 20.\nSELECT name, category, price\nFROM products\nWHERE ;"
             },
             "try-or_conditions-sketch0": {
               "title": "Query two categories with OR",
-              "prompt": "Write a query that returns the `name` and `category` columns for products where the category is `Art` or `Home`. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
+              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that returns the `name` and `category` columns for products where the category is `Art` or `Home`. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
               "help": {
                 "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
                 "hint_2": "Run the query and compare the results table."
               },
-              "starterCode": "SELECT name, category\nFROM products\nWHERE ;"
+              "starterCode": "-- Return the name and category columns for products where the category is Art or Home.\nSELECT name, category\nFROM products\nWHERE ;"
             },
             "try-or_conditions-sketch1": {
               "title": "Find inexpensive or low-stock products",
-              "prompt": "Write a query that returns `name`, `price`, and `stock` for products where `price < 10` or `stock < 5`. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
+              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that returns `name`, `price`, and `stock` for products where `price < 10` or `stock < 5`. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
               "help": {
                 "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
                 "hint_2": "Run the query and compare the results table."
               },
-              "starterCode": "SELECT name, price, stock\nFROM products\nWHERE ;"
+              "starterCode": "-- Return name, price, and stock for products where price < 10 or stock < 5.\nSELECT name, price, stock\nFROM products\nWHERE ;"
             },
             "try-or_conditions-sketch2": {
               "title": "Mix text and numeric conditions with OR",
-              "prompt": "Write a query that returns `name`, `category`, and `price` for products where the category is `Stationery` or the price is less than 20. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson.",
+              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that returns `name`, `category`, and `price` for products where the category is `Stationery` or the price is less than 20. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
               "help": {
                 "concept": "This SQL exercise checks whether your query returns the requested result.",
                 "hint_1": "Check the table name and selected columns in the SQL editor.",
                 "hint_2": "Run the query and compare the results table."
               },
-              "starterCode": "SELECT name, category, price\nFROM products\nWHERE ;"
+              "starterCode": "-- Return name, category, and price for products where the category is Stationery or the price is less than 20.\nSELECT name, category, price\nFROM products\nWHERE ;"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_or_conditions_sketch0": {
               "title": "Query two categories with OR",
-              "prompt": "Write a query that returns the `name` and `category` columns for products where the category is `Art` or `Home`. Write the query in the SQL editor, click Run query, and check the results table."
+              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that returns the `name` and `category` columns for products where the category is `Art` or `Home`. Write the query in the SQL editor, click Run query, and check the results table."
             },
             "try_or_conditions_sketch1": {
               "title": "Find inexpensive or low-stock products",
-              "prompt": "Write a query that returns `name`, `price`, and `stock` for products where `price < 10` or `stock < 5`. Write the query in the SQL editor, click Run query, and check the results table."
+              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that returns `name`, `price`, and `stock` for products where `price < 10` or `stock < 5`. Write the query in the SQL editor, click Run query, and check the results table."
             },
             "try_or_conditions_sketch2": {
               "title": "Mix text and numeric conditions with OR",
-              "prompt": "Write a query that returns `name`, `category`, and `price` for products where the category is `Stationery` or the price is less than 20. Write the query in the SQL editor, click Run query, and check the results table."
+              "prompt": "Scenario: The inventory team needs a focused list, not the whole products table. Write a query that returns `name`, `category`, and `price` for products where the category is `Stationery` or the price is less than 20. Write the query in the SQL editor, click Run query, and check the results table."
             }
           }
         }
@@ -249,7 +494,23 @@
     }
   },
   "sketches": {
-    "sql-v2": {
+    "sql--sql-v2--draft": {
+      "sql--sql-v2--draft-2": {
+        "or_conditions": {
+          "or-basics": {
+            "title": "Using OR to match either condition",
+            "bodyMarkdown": "The `OR` operator lets a row pass the `WHERE` filter when **at least one** condition is true.\n\nA simple pattern looks like this:\n\n```sql\nSELECT name, category, price\nFROM products\nWHERE category = 'Art' OR category = 'Home';\n```\n\nStep by step:\n- `SELECT name, category, price` chooses which columns to show.\n- `FROM products` reads from the `products` table.\n- `WHERE category = 'Art' OR category = 'Home'` keeps rows in either category.\n\nWith the dataset in this lesson, that query returns products such as:\n- `Sketchbook` because its category is `Art`\n- `Acrylic Paint Set` because its category is `Art`\n- `Desk Lamp` because its category is `Home`\n- `Office Chair` because its category is `Home`\n\nSo `OR` is useful when you want **this value or that value**."
+          },
+          "or-with-numbers": {
+            "title": "Using OR with numeric conditions",
+            "bodyMarkdown": "You can also use `OR` with numbers, not just text.\n\nExample:\n\n```sql\nSELECT name, price, stock\nFROM products\nWHERE price < 10 OR stock < 5;\n```\n\nLine by line:\n- `SELECT name, price, stock` shows the product name and the two values we want to inspect.\n- `FROM products` tells SQL which table to read.\n- `WHERE price < 10 OR stock < 5` keeps a row if the product is inexpensive, or low in stock, or both.\n\nIn this dataset:\n- `Notebook` matches because `price < 10`\n- `Office Chair` matches because `stock < 5`\n\nA row does **not** need both parts to be true. One true part is enough with `OR`."
+          },
+          "or-vs-and": {
+            "title": "OR is broader than AND",
+            "bodyMarkdown": "`OR` and `AND` both combine conditions, but they behave differently:\n- `OR` keeps rows when **either** condition is true.\n- `AND` keeps rows only when **both** conditions are true.\n\nCompare these two queries:\n\n```sql\nSELECT name, category, price\nFROM products\nWHERE category = 'Stationery' OR price < 10;\n```\n\n```sql\nSELECT name, category, price\nFROM products\nWHERE category = 'Stationery' AND price < 10;\n```\n\nWhat happens here?\n- With `OR`, both `Notebook` and `Fountain Pen` match because they are in `Stationery`, and `Notebook` also has a price under 10.\n- With `AND`, only `Notebook` matches because it must be in `Stationery` **and** have `price < 10`.\n\nA good beginner check is this: if you want a wider filter, `OR` often returns more rows than `AND`."
+          }
+        }
+      },
       "sql-v2-2": {
         "or_conditions": {
           "or-basics": {

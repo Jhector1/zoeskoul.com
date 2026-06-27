@@ -78,7 +78,7 @@ docker compose -f docker-compose.prod.yml logs -f runner
 
 
 
-pnpm curr:course -- publish linux linux-terminal-fundamentals --live-subject linux-terminal-fundamentals  --force
+pnpm curr:course -- publish sql sql-v2 --live-subject sql-v2  --force
 
 
 
@@ -156,7 +156,7 @@ sudo docker compose up -d judge0 worker
 
 
 
-RUN_DRAFT_CODE_INPUT_GOLDENS=1 pnpm curr:course -- draft-goldens linux linux-terminal-fundamentals
+RUN_DRAFT_CODE_INPUT_GOLDENS=1 pnpm curr:course -- draft-goldens sql sql-v2
 
 sudo scp -r deploy@5.78.159.224:/opt/edge-proxy ~/Downloads/
 
@@ -198,6 +198,11 @@ ssh deploy@5.78.227.155
 
 
 
+pnpm --filter @zoeskoul/curriculum-cli exec node dist/index.js compile-course \
+  sql sql-2 \
+  --draft-only \
+  --rebuild-from-drafts \
+  --prefer-current-draft-output
 
 
 

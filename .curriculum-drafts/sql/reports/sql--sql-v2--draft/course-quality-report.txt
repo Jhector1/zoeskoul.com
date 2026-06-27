@@ -1,0 +1,96 @@
+subject: sql--sql-v2--draft
+profile: sql
+course: sql-v2
+modules: 6
+topics: 88
+exercise counts: {"single_choice":164,"multi_choice":164,"drag_reorder":164,"code_input":369,"fill_blank_choice":132}
+code_input count: 369
+severity counts: {"blocker":0,"error":0,"warning":88,"info":0}
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "what_sql_means" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "what_a_database_is" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "why_sql_is_useful" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "real_world_examples_of_databases" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "rows_and_columns" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "records_and_fields" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "table_names_and_column_names" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "reading_data_like_a_spreadsheet" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "how_data_is_organized" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "one_table_vs_multiple_tables" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "intro_to_keys" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "thinking_in_questions_and_answers" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "where_sql_runs" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "sql_editor_basics" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "running_your_first_query" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "reading_query_results" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "module-0-student-roster-project" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "what_select_does" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "selecting_all_columns_with_star" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "selecting_specific_columns" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "query_structure_basics" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "from_and_table_names" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "choosing_the_right_columns" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "viewing_clean_results" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "writing_simple_readable_queries" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "keywords" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "semicolons" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "uppercase_vs_lowercase" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "common_beginner_syntax_mistakes" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "query_one_column" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "query_multiple_columns" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "query_full_tables" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "predicting_result_output" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "module-1-product-starter-sheet-project" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "why_filtering_matters" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "the_where_clause" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "matching_exact_values" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "filtering_numbers_and_text" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "equals_comparison" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "not_equal_comparison" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "greater_than_comparison" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "less_than_comparison" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "greater_than_or_equal_and_less_than_or_equal" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "choosing_the_right_comparison" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "and_conditions" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "or_conditions" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "not_conditions" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "combining_conditions_safely" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "filter_by_number" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "filter_by_text" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "filter_by_more_than_one_rule" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "avoiding_filtering_mistakes" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "module-2-inventory-watchlist-project" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "why_sorting_matters" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "order_by" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "ascending_order" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "descending_order" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "primary_sort" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "secondary_sort" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "sorting_text" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "sorting_numbers_and_dates" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "why_limit_results" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "limit_clause" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "top_rows_only" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "combining_order_by_with_limit" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "find_highest_values" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "find_lowest_values" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "show_top_5_records" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "build_clear_result_sets" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "module-3-sales-leaderboard-project" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "intro_to_like" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "percent_wildcard" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "underscore_wildcard" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "searching_partial_text" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "in_list_filter" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "not_in_list_filter" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "between_range_filter" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "range_filtering_practice" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "what_null_means" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "is_null" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "is_not_null" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "common_null_mistakes" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "search_names" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "filter_statuses" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "find_missing_data" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "combine_text_and_null_filters" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "module-4-customer-cleanup-project" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "module-5-customer-follow-up-capstone" has no learning goals on its seed metadata.

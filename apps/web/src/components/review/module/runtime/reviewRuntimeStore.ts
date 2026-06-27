@@ -23,8 +23,7 @@ import {reviewSaveDebug, summarizeWorkspaceForSave} from "./reviewSaveDebug";
 import {languagesCompatible} from "@/components/review/module/utils";
 import {normalizeWorkspaceLanguage} from "./workspaceCodeSource";
 import {
-    hasUsableStarterFilesValue,
-    isUsableStarterCode,
+    hasStarterIntentValue,
     workspaceHasUsableStarterContent
 } from "@/components/review/module/runtime/starterContent";
 
@@ -1127,19 +1126,19 @@ function targetHasStarter(
         isWorkspaceValue(source?.initialWorkspace) ||
         isWorkspaceValue(source?.starterWorkspace) ||
         isWorkspaceValue(entry?.starterWorkspace) ||
-        hasUsableStarterFilesValue(entry?.starterFiles) ||
-        isUsableStarterCode(entry?.starterCode) ||
-        hasUsableStarterFilesValue(workspace?.starterFiles) ||
-        hasUsableStarterFilesValue(workspace?.initialFiles) ||
-        hasUsableStarterFilesValue(workspace?.workspaceFiles) ||
-        isUsableStarterCode(workspace?.starterCode) ||
-        hasUsableStarterFilesValue(source?.starterFiles) ||
-        hasUsableStarterFilesValue(source?.initialFiles) ||
-        hasUsableStarterFilesValue(source?.workspaceFiles) ||
-        isUsableStarterCode(source?.starterCode) ||
-        hasUsableStarterFilesValue(recipe?.starterFiles) ||
-        hasUsableStarterFilesValue(recipe?.initialFiles) ||
-        isUsableStarterCode(recipe?.starterCode)
+        hasStarterIntentValue(entry?.starterFiles) ||
+        hasStarterIntentValue(entry?.starterCode) ||
+        hasStarterIntentValue(workspace?.starterFiles) ||
+        hasStarterIntentValue(workspace?.initialFiles) ||
+        hasStarterIntentValue(workspace?.workspaceFiles) ||
+        hasStarterIntentValue(workspace?.starterCode) ||
+        hasStarterIntentValue(source?.starterFiles) ||
+        hasStarterIntentValue(source?.initialFiles) ||
+        hasStarterIntentValue(source?.workspaceFiles) ||
+        hasStarterIntentValue(source?.starterCode) ||
+        hasStarterIntentValue(recipe?.starterFiles) ||
+        hasStarterIntentValue(recipe?.initialFiles) ||
+        hasStarterIntentValue(recipe?.starterCode)
     );
 }
 function workspaceHasUsableFile(workspace: WorkspaceStateV2 | null | undefined) {

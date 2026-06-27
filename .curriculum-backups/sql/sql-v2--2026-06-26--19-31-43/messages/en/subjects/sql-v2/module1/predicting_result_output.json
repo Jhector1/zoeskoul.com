@@ -1,0 +1,225 @@
+{
+  "topics": {
+    "sql-v2": {
+      "sql-v2-1": {
+        "predicting_result_output": {
+          "label": "Predicting Result Output",
+          "summary": "Practice reading simple SELECT queries and predicting the exact rows and columns they return from the products table.",
+          "cards": {
+            "sketch0": {
+              "title": "Read a query by asking: columns first, then table"
+            },
+            "sketch1": {
+              "title": "What changes when you use SELECT *"
+            },
+            "sketch2": {
+              "title": "The output column order follows the SELECT list"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Predict Results from Starter SELECT Queries"
+            }
+          },
+          "projectSteps": {
+            "ci_predict_name_price": {
+              "title": "Show product names and prices"
+            },
+            "ci_predict_all_columns": {
+              "title": "Show every column"
+            },
+            "ci_predict_category_name_order": {
+              "title": "Return category before name"
+            }
+          },
+          "quiz": {
+            "ci_predict_name_price": {
+              "title": "Show product names and prices",
+              "prompt": "Write a query that returns exactly the `name` and `price` columns from the `products` table, for all rows. Write the query in the SQL editor, click Run query, and check the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "SELECT \nFROM products;"
+            },
+            "ci_predict_all_columns": {
+              "title": "Show every column",
+              "prompt": "Write a query that returns all columns from the `products` table. Use the SQL editor and run it so the results table shows the full product records.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "SELECT \nFROM products;"
+            },
+            "ci_predict_category_name_order": {
+              "title": "Return category before name",
+              "prompt": "Write a query that returns the `category` column first and the `name` column second from the `products` table. The goal is to practice predicting output column order in the results table.",
+              "hint": "Use the query pattern from the lesson.",
+              "help": {
+                "concept": "This SQL exercise checks whether your query returns the requested result.",
+                "hint_1": "Check the table name and selected columns in the SQL editor.",
+                "hint_2": "Run the query and compare the results table."
+              },
+              "starterCode": "SELECT name, category\nFROM products;"
+            },
+            "sc_select_star_meaning": {
+              "title": "Meaning of SELECT *",
+              "prompt": "What does `SELECT * FROM products;` return?",
+              "hint": "Think about what `*` stands for in a SELECT list.",
+              "help": {
+                "concept": "The asterisk in a SELECT statement is shorthand for every column in the chosen table.",
+                "hint_1": "This query does not name specific columns like `name` or `price`.",
+                "hint_2": "It still reads from only one table: `products`."
+              },
+              "options": {
+                "a": "Only the first column from products",
+                "b": "All columns from products",
+                "c": "Only the rows with prices",
+                "d": "A count of products"
+              }
+            },
+            "sc_no_where_all_rows": {
+              "title": "Rows returned without WHERE",
+              "prompt": "If a query is `SELECT name FROM products;`, how many product rows can appear in the results table with this dataset?",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "options": {
+                "a": "1 row",
+                "b": "2 rows",
+                "c": "6 rows",
+                "d": "0 rows"
+              }
+            },
+            "mc_predict_same_rows_different_columns": {
+              "title": "What changes the output layout",
+              "prompt": "Choose all true statements about these two queries:\n\n`SELECT name, category FROM products;`\n`SELECT category, name FROM products;`",
+              "hint": "Compare the selected columns and their order.",
+              "help": {
+                "concept": "When two queries read from the same table without filtering, they return the same set of rows, but the visible column order depends on the SELECT list.",
+                "hint_1": "Neither query uses WHERE, so think about row count first.",
+                "hint_2": "The two queries name the same two columns, but not in the same order."
+              },
+              "options": {
+                "a": "They return the same number of rows",
+                "b": "They show the columns in different positions",
+                "c": "One query returns all columns and the other does not",
+                "d": "Both queries read from the products table"
+              }
+            },
+            "mc_valid_basic_select_parts": {
+              "title": "Parts of a basic query",
+              "prompt": "Choose all pieces that correctly match the query `SELECT price, stock FROM products;`.",
+              "hint": "Separate the selected columns from the source table.",
+              "help": {
+                "concept": "A basic SELECT query has a list of requested columns and a table named in the FROM clause.",
+                "hint_1": "Look for the two column names that appear after SELECT.",
+                "hint_2": "There is only one table name in the query, and it appears after FROM."
+              },
+              "options": {
+                "a": "`price` is a selected column",
+                "b": "`stock` is a selected column",
+                "c": "`products` is the source table",
+                "d": "`created_at` is a selected column"
+              }
+            },
+            "dr_read_query_order": {
+              "title": "Read the query in a useful order",
+              "prompt": "Arrange these steps in a good order for predicting the output of `SELECT name, price FROM products;`.",
+              "hint": "Start by identifying the columns, then the table, then the shape of the result.",
+              "help": {
+                "concept": "Predicting output is easier when you first identify requested columns, then the source table, then infer the result layout and rows.",
+                "hint_1": "The SELECT list tells you what columns appear before you think about row data.",
+                "hint_2": "After finding the table, decide how many columns the results table will show and whether all rows appear."
+              },
+              "tokens": {
+                "t1": "Notice the selected columns are `name` and `price`",
+                "t2": "Notice the table is `products`",
+                "t3": "Predict that the results table has 2 columns",
+                "t4": "Predict that all product rows appear"
+              }
+            },
+            "dr_build_basic_select": {
+              "title": "Build a simple query",
+              "prompt": "Put these tokens in the correct order to form a query that returns `name` and `category` from `products`.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "SELECT",
+                "t2": "name, category",
+                "t3": "FROM",
+                "t4": "products;"
+              }
+            },
+            "fb_table_name_products": {
+              "title": "Complete the FROM clause",
+              "prompt": "Fill in the missing table name.",
+              "hint": "Use the table from this lesson's dataset.",
+              "help": {
+                "concept": "The FROM clause names the table that SQL reads rows from.",
+                "hint_1": "This topic uses one table with product records.",
+                "hint_2": "The table name is the same one shown in the schema browser."
+              },
+              "template": "SELECT name, price FROM [blank1];",
+              "choices": [
+                "products",
+                "price",
+                "category",
+                "stock"
+              ]
+            },
+            "fb_all_columns_symbol": {
+              "title": "Complete SELECT all columns",
+              "prompt": "Fill in the missing symbol so the query returns every column from `products`.",
+              "hint": "SQL has a one-character shortcut for all columns.",
+              "help": {
+                "concept": "The asterisk is the standard SQL shorthand for selecting every column from a table.",
+                "hint_1": "It is not a column name like `id` or `name`.",
+                "hint_2": "This symbol appears immediately after `SELECT` when you want the full row shape."
+              },
+              "template": "SELECT [blank1] FROM products;",
+              "choices": [
+                "*",
+                "all",
+                "id, name",
+                "products"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql-v2": {
+      "sql-v2-1": {
+        "predicting_result_output": {
+          "sketch_reading_select_order": {
+            "title": "Read a query by asking: columns first, then table",
+            "bodyMarkdown": "A beginner-friendly way to predict SQL output is to read a query in two parts:\n\n1. **Which columns are being requested?**\n2. **Which table are they coming from?**\n\nFor example:\n\n```sql\nSELECT name, price\nFROM products;\n```\n\nThis query asks for the `name` and `price` columns from the `products` table.\n\nUsing the dataset in this lesson, the results table would have **2 columns** and **6 rows**:\n\n- Sketchbook | 12.99\n- Acrylic Paint Set | 24.50\n- Desk Lamp | 39.99\n- Notebook | 6.75\n- Fountain Pen | 18.00\n- Office Chair | 129.00\n\nStep by step:\n\n- `SELECT name, price` means only show those two columns.\n- `FROM products` means read rows from the `products` table.\n- Because there is no `WHERE`, every row in `products` appears."
+          },
+          "sketch_select_star_output": {
+            "title": "What changes when you use SELECT *",
+            "bodyMarkdown": "`SELECT *` means \"show all columns\" from the table.\n\nExample:\n\n```sql\nSELECT *\nFROM products;\n```\n\nIn this dataset, `products` has these columns:\n\n- `id`\n- `name`\n- `category`\n- `price`\n- `stock`\n- `created_at`\n\nSo the results table will show **all 6 columns** for every product row.\n\nA sample row would look like this:\n\n- `1 | Sketchbook | Art | 12.99 | 25 | 2026-01-10`\n\nLine by line:\n\n- `SELECT *` asks for every column in the table.\n- `FROM products` tells SQL which table to read.\n\nThis is different from `SELECT name, price FROM products;`, which shows only two columns."
+          },
+          "sketch_column_order_matters": {
+            "title": "The output column order follows the SELECT list",
+            "bodyMarkdown": "The order of columns in the results table usually matches the order written after `SELECT`.\n\nCompare these two queries:\n\n```sql\nSELECT name, category\nFROM products;\n```\n\n```sql\nSELECT category, name\nFROM products;\n```\n\nBoth queries use the same table and the same data, but the results table columns appear in a different order.\n\nWorked example with the first product row:\n\nFor `SELECT name, category`:\n\n- `Sketchbook | Art`\n\nFor `SELECT category, name`:\n\n- `Art | Sketchbook`\n\nSo when you predict output, do not just ask **which columns** appear. Also ask **in what order** they appear."
+          }
+        }
+      }
+    }
+  }
+}
