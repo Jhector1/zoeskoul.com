@@ -6,6 +6,7 @@ import { usePathname, useRouter } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import { Loader2 } from "lucide-react";
 import { cn } from "@/lib/cn";
+import { startGlobalNavigationPending } from "@/components/navigation/GlobalNavigationProgress";
 
 type NavHref = Parameters<ReturnType<typeof useRouter>["push"]>[0];
 
@@ -119,6 +120,11 @@ export default function NavButton({
                     const clickResult = onClick?.();
 
                     if (hardReload || hardReloadCurrent) {
+                        startGlobalNavigationPending({
+                            label: typeof loadingText === "string" ? loadingText : "Loading…",
+                            source: "nav-button-reload",
+                            minVisibleMs: 500,
+                        });
                         /**
                          * Let React paint the loading spinner before the browser reloads.
                          */
@@ -157,6 +163,12 @@ export default function NavButton({
                      * Preserve old behavior: call optional onClick, then push.
                      * The clicked state resets when pathname/search changes.
                      */
+                    startGlobalNavigationPending({
+                        label: typeof loadingText === "string" ? loadingText : "Loading…",
+                        source: "nav-button",
+                        minVisibleMs: 350,
+                    });
+
                     startTransition(() => {
                         router.push(normalizedHref);
                     });

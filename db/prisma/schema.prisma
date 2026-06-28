@@ -1,0 +1,876 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model PracticeRunPreset {
+  id              String               @id @default(cuid())
+  key             PracticeRunPresetKey @unique
+  allowedKinds    PracticeKind[]       @default([])
+  allowedPurposes PracticePurpose[]    @default([])
+  lockDifficulty  PracticeDifficulty?
+  lockTopic       String?
+  allowReveal     Boolean?
+  createdAt       DateTime             @default(now())
+  updatedAt       DateTime             @updatedAt
+  helpPolicy      Json?
+  modules         PracticeModule[]
+  sessions        PracticeSession[]
+}
+
+model FeatureGrant {
+  id        String          @id @default(cuid())
+  actorKey  String
+  userId    String?
+  feature   FeatureKey
+  type      AccessGrantType
+  startsAt  DateTime?
+  endsAt    DateTime?
+  revokedAt DateTime?
+  meta      Json?
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+  user      User?           @relation("UserFeatureGrants", fields: [userId], references: [id])
+
+  @@index([actorKey, feature, revokedAt])
+  @@index([actorKey, feature, endsAt])
+  @@index([actorKey])
+  @@index([userId])
+  @@index([feature])
+  @@index([type])
+}
+
+model CodeProject {
+  id             String                @id @default(cuid())
+  ownerId        String
+  title          String
+  description    String?
+  language       String
+  scopeKind      CodeProjectScopeKind  @default(personal)
+  subjectId      String?
+  moduleId       String?
+  assignmentId   String?
+  scopeKey       String?
+  visibility     CodeProjectVisibility @default(private)
+  shareToken     String?               @unique
+  schemaVersion  Int                   @default(1)
+  currentVersion Int                   @default(1)
+  entryPath      String?
+  activePath     String?
+  workspaceHash  String?               @db.VarChar(64)
+  workspace      Json
+  settings       Json?
+  meta           Json?
+  archivedAt     DateTime?
+  lastOpenedAt   DateTime?
+  createdAt      DateTime              @default(now())
+  updatedAt      DateTime              @updatedAt
+  assignment     Assignment?           @relation("AssignmentCodeProjects", fields: [assignmentId], references: [id])
+  module         PracticeModule?       @relation("ModuleCodeProjects", fields: [moduleId], references: [id])
+  owner          User                  @relation("UserCodeProjects", fields: [ownerId], references: [id], onDelete: Cascade)
+  subject        PracticeSubject?      @relation("SubjectCodeProjects", fields: [subjectId], references: [id])
+  grants         CodeProjectGrant[]
+  revisions      CodeProjectRevision[]
+
+  @@index([ownerId, updatedAt])
+  @@index([ownerId, scopeKind, updatedAt])
+  @@index([subjectId, updatedAt])
+  @@index([moduleId, updatedAt])
+  @@index([assignmentId, updatedAt])
+  @@index([visibility])
+  @@index([archivedAt])
+}
+
+model CodeProjectRevision {
+  id            String      @id @default(cuid())
+  projectId     String
+  version       Int
+  workspaceHash String?     @db.VarChar(64)
+  snapshot      Json
+  settings      Json?
+  note          String?
+  meta          Json?
+  createdById   String?
+  createdAt     DateTime    @default(now())
+  createdBy     User?       @relation("UserCodeProjectRevisions", fields: [createdById], references: [id])
+  project       CodeProject @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@unique([projectId, version])
+  @@index([projectId, createdAt])
+  @@index([projectId, workspaceHash])
+}
+
+model CodeProjectGrant {
+  id        String          @id @default(cuid())
+  projectId String
+  actorKey  String
+  userId    String?
+  role      CodeProjectRole @default(viewer)
+  startsAt  DateTime?
+  endsAt    DateTime?
+  revokedAt DateTime?
+  meta      Json?
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+  project   CodeProject     @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  user      User?           @relation("UserCodeProjectGrants", fields: [userId], references: [id])
+
+  @@index([projectId, actorKey, revokedAt])
+  @@index([projectId, actorKey, endsAt])
+  @@index([actorKey])
+  @@index([userId])
+  @@index([role])
+}
+
+model ModuleAccessGrant {
+  id        String          @id @default(cuid())
+  actorKey  String
+  userId    String?
+  moduleId  String
+  type      AccessGrantType
+  startsAt  DateTime?
+  endsAt    DateTime?
+  revokedAt DateTime?
+  meta      Json?
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+  module    PracticeModule  @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+  user      User?           @relation(fields: [userId], references: [id])
+
+  @@index([actorKey, moduleId, revokedAt])
+  @@index([actorKey, moduleId, endsAt])
+  @@index([actorKey])
+  @@index([moduleId])
+  @@index([type])
+  @@index([endsAt])
+  @@index([revokedAt])
+}
+
+model PracticeModule {
+  id                 String              @id @default(cuid())
+  slug               String              @unique
+  title              String
+  description        String?
+  order              Int                 @default(0)
+  weekStart          Int?
+  weekEnd            Int?
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
+  subjectId          String?
+  meta               Json?
+  practicePresetId   String?
+  accessOverride     AccessOverride      @default(inherit)
+  entitlementKey     String?
+  codeProjects       CodeProject[]       @relation("ModuleCodeProjects")
+  moduleAccessGrants ModuleAccessGrant[]
+  practicePreset     PracticeRunPreset?  @relation(fields: [practicePresetId], references: [id])
+  subject            PracticeSubject?    @relation(fields: [subjectId], references: [id])
+  sections           PracticeSection[]
+  sessions           PracticeSession[]   @relation("ModuleSessions")
+  topics             PracticeTopic[]
+
+  @@index([practicePresetId])
+  @@index([order])
+  @@index([subjectId, order])
+}
+
+model PracticeTopic {
+  id              String                     @id @default(cuid())
+  slug            String                     @unique
+  titleKey        String
+  description     String?
+  order           Int                        @default(0)
+  meta            Json?
+  moduleId        String?
+  createdAt       DateTime                   @default(now())
+  updatedAt       DateTime                   @updatedAt
+  genKey          String?
+  subjectId       String?
+  assignmentLinks AssignmentTopic[]
+  instances       PracticeQuestionInstance[]
+  sectionLinks    PracticeSectionTopic[]
+  module          PracticeModule?            @relation(fields: [moduleId], references: [id])
+  subject         PracticeSubject?           @relation(fields: [subjectId], references: [id])
+
+  @@index([moduleId, order])
+  @@index([genKey])
+  @@index([subjectId, order])
+}
+
+model PracticeSectionTopic {
+  sectionId String
+  topicId   String
+  order     Int             @default(0)
+  section   PracticeSection @relation(fields: [sectionId], references: [id], onDelete: Cascade)
+  topic     PracticeTopic   @relation(fields: [topicId], references: [id], onDelete: Cascade)
+
+  @@id([sectionId, topicId])
+  @@index([topicId])
+  @@index([sectionId, order])
+}
+
+model AssignmentTopic {
+  assignmentId String
+  topicId      String
+  order        Int           @default(0)
+  assignment   Assignment    @relation(fields: [assignmentId], references: [id], onDelete: Cascade)
+  topic        PracticeTopic @relation(fields: [topicId], references: [id], onDelete: Cascade)
+
+  @@id([assignmentId, topicId])
+  @@index([topicId])
+  @@index([assignmentId, order])
+}
+
+model PracticeQuestionInstance {
+  id                 String              @id @default(cuid())
+  sessionId          String?
+  kind               PracticeKind
+  difficulty         PracticeDifficulty
+  title              String
+  prompt             String
+  publicPayload      Json
+  secretPayload      Json
+  createdAt          DateTime            @default(now())
+  answeredAt         DateTime?
+  topicId            String
+  purpose            PracticePurpose     @default(quiz)
+  attempts           PracticeAttempt[]
+  practiceHelpEvents PracticeHelpEvent[]
+  session            PracticeSession?    @relation(fields: [sessionId], references: [id])
+  topic              PracticeTopic       @relation(fields: [topicId], references: [id])
+
+  @@index([sessionId])
+  @@index([topicId, difficulty])
+  @@index([purpose])
+  @@index([sessionId, answeredAt])
+}
+
+model PracticeAttempt {
+  id            String                   @id @default(cuid())
+  sessionId     String?
+  instanceId    String
+  userId        String?
+  guestId       String?
+  answerPayload Json
+  ok            Boolean
+  revealUsed    Boolean                  @default(false)
+  createdAt     DateTime                 @default(now())
+  instance      PracticeQuestionInstance @relation(fields: [instanceId], references: [id], onDelete: Cascade)
+  session       PracticeSession?         @relation(fields: [sessionId], references: [id])
+
+  @@index([sessionId])
+  @@index([instanceId])
+  @@index([userId])
+  @@index([guestId])
+  @@index([instanceId, revealUsed, userId, createdAt])
+  @@index([instanceId, revealUsed, guestId, createdAt])
+  @@index([sessionId, revealUsed, createdAt])
+}
+
+model UserOnboardingProfile {
+  id                String                     @id @default(cuid())
+  userId            String?                    @unique
+  guestId           String?                    @unique
+  preferredLanguage String?
+  level             String?
+  studyTime         String?
+  completedAt       DateTime?
+  skippedAt         DateTime?
+  claimedAt         DateTime?
+  expiresAt         DateTime?
+  createdAt         DateTime                   @default(now())
+  updatedAt         DateTime                   @updatedAt
+  analyticsEvents   OnboardingAnalyticsEvent[]
+  interests         UserOnboardingInterest[]
+  user              User?                      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([guestId])
+  @@index([userId])
+  @@index([expiresAt])
+}
+
+model UserOnboardingInterest {
+  id        String                @id @default(cuid())
+  profileId String
+  subjectId String
+  createdAt DateTime              @default(now())
+  profile   UserOnboardingProfile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  subject   PracticeSubject       @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+
+  @@unique([profileId, subjectId])
+  @@index([subjectId])
+}
+
+model OnboardingAnalyticsEvent {
+  id              String                @id @default(cuid())
+  profileId       String
+  discoverySource String?
+  eventType       String
+  createdAt       DateTime              @default(now())
+  profile         UserOnboardingProfile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+
+  @@index([profileId])
+  @@index([eventType])
+  @@index([discoverySource])
+}
+
+model PracticeSection {
+  id          String                 @id @default(cuid())
+  slug        String                 @unique
+  title       String
+  description String?
+  order       Int                    @default(0)
+  createdAt   DateTime               @default(now())
+  updatedAt   DateTime               @updatedAt
+  meta        Json?
+  moduleId    String?
+  subjectId   String?
+  assignments Assignment[]           @relation("SectionAssignments")
+  module      PracticeModule?        @relation(fields: [moduleId], references: [id])
+  subject     PracticeSubject?       @relation(fields: [subjectId], references: [id])
+  topics      PracticeSectionTopic[]
+  sessions    PracticeSession[]
+
+  @@index([moduleId])
+  @@index([subjectId, order])
+}
+
+model PracticeSession {
+  id             String                     @id @default(cuid())
+  status         PracticeSessionStatus      @default(active)
+  userId         String?
+  guestId        String?
+  sectionId      String
+  difficulty     PracticeDifficulty
+  targetCount    Int                        @default(10)
+  total          Int                        @default(0)
+  correct        Int                        @default(0)
+  startedAt      DateTime                   @default(now())
+  completedAt    DateTime?
+  lastInstanceId String?
+  assignmentId   String?
+  moduleId       String?
+  returnUrl      String?
+  presetId       String?
+  preferPurpose  PracticePurpose            @default(quiz)
+  meta           Json?
+  mode           PracticeSessionMode        @default(standard)
+  helpPolicy     Json?
+  attempts       PracticeAttempt[]
+  helpEvents     PracticeHelpEvent[]
+  instances      PracticeQuestionInstance[]
+  assignment     Assignment?                @relation("AssignmentSessions", fields: [assignmentId], references: [id])
+  module         PracticeModule?            @relation("ModuleSessions", fields: [moduleId], references: [id])
+  preset         PracticeRunPreset?         @relation(fields: [presetId], references: [id])
+  section        PracticeSection            @relation(fields: [sectionId], references: [id])
+
+  @@index([mode])
+  @@index([presetId])
+  @@index([assignmentId])
+  @@index([moduleId])
+  @@index([sectionId])
+}
+
+model Assignment {
+  id            String             @id @default(cuid())
+  slug          String             @unique
+  title         String
+  description   String?
+  status        AssignmentStatus   @default(draft)
+  sectionId     String
+  difficulty    PracticeDifficulty
+  questionCount Int                @default(10)
+  availableFrom DateTime?
+  dueAt         DateTime?
+  timeLimitSec  Int?
+  maxAttempts   Int?
+  allowReveal   Boolean            @default(false)
+  showDebug     Boolean            @default(false)
+  createdAt     DateTime           @default(now())
+  updatedAt     DateTime           @updatedAt
+  helpPolicy    Json?
+  section       PracticeSection    @relation("SectionAssignments", fields: [sectionId], references: [id])
+  topics        AssignmentTopic[]
+  codeProjects  CodeProject[]      @relation("AssignmentCodeProjects")
+  sessions      PracticeSession[]  @relation("AssignmentSessions")
+
+  @@index([sectionId])
+}
+
+model User {
+  id                   String                 @id @default(cuid())
+  name                 String?
+  email                String?                @unique
+  emailVerified        DateTime?
+  image                String?
+  stripeCustomerId     String?                @unique
+  trialUsedAt          DateTime?
+  createdAt            DateTime               @default(now())
+  updatedAt            DateTime               @updatedAt
+  roles                UserRole[]             @default([student])
+  accounts             Account[]
+  codeProjects         CodeProject[]          @relation("UserCodeProjects")
+  codeProjectGrants    CodeProjectGrant[]     @relation("UserCodeProjectGrants")
+  codeProjectRevisions CodeProjectRevision[]  @relation("UserCodeProjectRevisions")
+  featureGrants        FeatureGrant[]         @relation("UserFeatureGrants")
+  moduleAccessGrants   ModuleAccessGrant[]
+  sessions             Session[]
+  subjectAccessGrants  SubjectAccessGrant[]
+  subjectEnrollments   SubjectEnrollment[]
+  subscriptions        Subscription[]
+  onboardingProfile    UserOnboardingProfile?
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@index([userId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model Subscription {
+  id                   String                   @id @default(cuid())
+  userId               String
+  stripeCustomerId     String
+  stripeSubscriptionId String                   @unique
+  status               StripeSubscriptionStatus
+  priceId              String?
+  currentPeriodEnd     DateTime?
+  cancelAtPeriodEnd    Boolean                  @default(false)
+  trialEnd             DateTime?
+  createdAt            DateTime                 @default(now())
+  updatedAt            DateTime                 @updatedAt
+  user                 User                     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([stripeCustomerId])
+  @@index([status])
+}
+
+model PracticeCatalog {
+  id                 String            @id @default(cuid())
+  slug               String            @unique
+  title              String
+  description        String?
+  order              Int               @default(0)
+  meta               Json?
+  createdAt          DateTime          @default(now())
+  updatedAt          DateTime          @updatedAt
+  imageAlt           String?
+  imagePublicId      String?
+  status             SubjectStatus     @default(active)
+  defaultSubjectSlug String?
+  subjects           PracticeSubject[]
+
+  @@index([order])
+  @@index([status, order])
+}
+
+model PracticeSubject {
+  id                  String                   @id @default(cuid())
+  slug                String                   @unique
+  title               String
+  description         String?
+  order               Int                      @default(0)
+  meta                Json?
+  createdAt           DateTime                 @default(now())
+  updatedAt           DateTime                 @updatedAt
+  imageAlt            String?
+  imagePublicId       String?
+  accessPolicy        AccessPolicy             @default(free)
+  entitlementKey      String?
+  status              SubjectStatus            @default(active)
+  catalogId           String?
+  showInOnboarding    Boolean                  @default(true)
+  catalog             PracticeCatalog?         @relation(fields: [catalogId], references: [id])
+  codeProjects        CodeProject[]            @relation("SubjectCodeProjects")
+  modules             PracticeModule[]
+  sections            PracticeSection[]
+  topics              PracticeTopic[]
+  accessGrants        SubjectAccessGrant[]
+  enrollments         SubjectEnrollment[]
+  onboardingInterests UserOnboardingInterest[]
+
+  @@index([order])
+  @@index([catalogId, order])
+  @@index([status, order])
+  @@index([showInOnboarding, status, order])
+}
+
+model ReviewProgress {
+  id          String   @id @default(cuid())
+  subjectSlug String
+  moduleId    String
+  locale      String
+  state       Json
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  actorKey    String
+
+  @@unique([actorKey, subjectSlug, moduleId, locale])
+  @@index([actorKey])
+  @@index([subjectSlug, moduleId, locale])
+}
+
+model ReviewQuizInstance {
+  id        String   @id @default(cuid())
+  actorKey  String
+  quizKey   String
+  spec      Json
+  questions Json
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([actorKey, quizKey], name: "actorKey_quizKey")
+  @@index([actorKey])
+}
+
+model StripeEvent {
+  id         String   @id
+  type       String
+  livemode   Boolean
+  created    Int
+  receivedAt DateTime @default(now())
+}
+
+model CourseCertificate {
+  id          String    @id @default(cuid())
+  actorKey    String
+  subjectSlug String
+  locale      String
+  issuedAt    DateTime  @default(now())
+  completedAt DateTime?
+  meta        Json?
+
+  @@unique([actorKey, subjectSlug, locale])
+  @@index([actorKey])
+  @@index([subjectSlug, locale])
+}
+
+model ToolDoc {
+  id          String        @id @default(cuid())
+  actorKey    String
+  subjectSlug String
+  moduleId    String
+  locale      String
+  toolId      String
+  scopeKey    String
+  format      ToolDocFormat @default(markdown)
+  body        String
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  @@unique([actorKey, subjectSlug, moduleId, locale, toolId, scopeKey], name: "actor_tool_scope")
+  @@index([actorKey])
+  @@index([subjectSlug, moduleId, locale])
+  @@index([toolId])
+}
+
+model SubjectAccessGrant {
+  id        String          @id @default(cuid())
+  actorKey  String
+  userId    String?
+  subjectId String
+  type      AccessGrantType
+  startsAt  DateTime?
+  endsAt    DateTime?
+  revokedAt DateTime?
+  meta      Json?
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+  subject   PracticeSubject @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  user      User?           @relation(fields: [userId], references: [id])
+
+  @@index([actorKey, subjectId, revokedAt])
+  @@index([actorKey, subjectId, endsAt])
+  @@index([actorKey])
+  @@index([actorKey, subjectId])
+  @@index([subjectId])
+  @@index([type])
+  @@index([endsAt])
+  @@index([revokedAt])
+}
+
+model SubjectEnrollment {
+  id          String           @id @default(cuid())
+  actorKey    String
+  userId      String?
+  subjectId   String
+  status      EnrollmentStatus @default(enrolled)
+  source      EnrollmentSource @default(self)
+  startedAt   DateTime         @default(now())
+  lastSeenAt  DateTime?
+  completedAt DateTime?
+  archivedAt  DateTime?
+  meta        Json?
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+  subject     PracticeSubject  @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  user        User?            @relation(fields: [userId], references: [id])
+
+  @@unique([actorKey, subjectId])
+  @@index([actorKey, lastSeenAt])
+  @@index([userId])
+  @@index([subjectId])
+  @@index([actorKey, status])
+}
+
+model PracticeHelpEvent {
+  id         String                   @id @default(cuid())
+  sessionId  String?
+  instanceId String
+  userId     String?
+  guestId    String?
+  stepKey    String
+  stepIndex  Int?
+  kind       String?
+  source     String?
+  content    Json?
+  createdAt  DateTime                 @default(now())
+  instance   PracticeQuestionInstance @relation(fields: [instanceId], references: [id], onDelete: Cascade)
+  session    PracticeSession?         @relation(fields: [sessionId], references: [id])
+
+  @@index([sessionId, createdAt])
+  @@index([instanceId, createdAt])
+  @@index([instanceId, stepKey, createdAt])
+  @@index([instanceId, userId, createdAt])
+  @@index([instanceId, guestId, createdAt])
+}
+
+enum UserRole {
+  student
+  teacher
+  admin
+}
+
+enum PracticePurpose {
+  quiz
+  project
+}
+
+enum AccessPolicy {
+  free
+  paid
+}
+
+enum SubjectStatus {
+  active
+  coming_soon
+  disabled
+}
+
+enum AccessOverride {
+  inherit
+  free
+  paid
+}
+
+enum PracticeRunPresetKey {
+  MODULE_QUIZ_ONLY
+  MIXED_PRACTICE
+}
+
+enum FeatureKey {
+  ide_multi_file
+  ide_save_cloud
+  ide_project_create
+  ide_project_revisions
+  ide_project_scope_module
+  ide_project_scope_assignment
+  ide_project_share
+  ide_project_unlimited
+}
+
+enum CodeProjectScopeKind {
+  personal
+  module
+  assignment
+  template
+}
+
+enum CodeProjectVisibility {
+  private
+  unlisted
+  shared
+}
+
+enum CodeProjectRole {
+  owner
+  editor
+  viewer
+}
+
+enum PracticeKind {
+  single_choice
+  multi_choice
+  numeric
+  vector_drag_target
+  vector_drag_dot
+  matrix_input
+  code_input
+  text_input
+  drag_reorder
+  voice_input
+  word_bank_arrange
+  listen_build
+  fill_blank_choice
+}
+
+enum PracticeDifficulty {
+  easy
+  medium
+  hard
+}
+
+enum PracticeSessionStatus {
+  active
+  completed
+}
+
+enum AssignmentStatus {
+  draft
+  published
+  archived
+}
+
+enum PracticeSessionMode {
+  standard
+  onboarding_trial
+}
+
+enum StripeSubscriptionStatus {
+  trialing
+  active
+  past_due
+  unpaid
+  canceled
+  incomplete
+  incomplete_expired
+  paused
+}
+
+enum ToolDocFormat {
+  markdown
+  plain
+}
+
+enum EnrollmentStatus {
+  enrolled
+  completed
+  archived
+}
+
+enum EnrollmentSource {
+  self
+  assignment
+  admin
+  import
+}
+
+enum AccessGrantType {
+  subscription
+  purchase
+  assignment
+  admin
+  trial
+}
+
+model LearnerProgress {
+  id            String    @id @default(cuid())
+  actorKey      String    @unique
+  userId        String?
+  totalXp       Int       @default(0)
+  level         Int       @default(1)
+  currentStreak Int       @default(0)
+  longestStreak Int       @default(0)
+  lastActiveOn  DateTime? @db.Date
+  streakFreezes Int       @default(0)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@index([userId])
+}
+
+model DailyLearningStat {
+  id             String   @id @default(cuid())
+  actorKey       String
+  userId         String?
+  day            DateTime @db.Date
+  xpEarned       Int      @default(0)
+  answeredCount  Int      @default(0)
+  correctCount   Int      @default(0)
+  sessionCount   Int      @default(0)
+  minutesStudied Int      @default(0)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@unique([actorKey, day])
+  @@index([userId])
+  @@index([day])
+}
+
+model XpEvent {
+  id             String       @id @default(cuid())
+  actorKey       String
+  userId         String?
+  sourceType     XpSourceType
+  sourceId       String?
+  subjectId      String?
+  moduleId       String?
+  topicId        String?
+  instanceId     String?
+  sessionId      String?
+  xpDelta        Int
+  reason         String
+  idempotencyKey String?      @unique
+  createdAt      DateTime     @default(now())
+
+  @@index([actorKey, createdAt])
+  @@index([userId])
+  @@index([sourceType, sourceId])
+  @@index([subjectId, moduleId])
+}
+
+enum XpSourceType {
+  answer_correct
+  answer_retry_correct
+  session_complete
+  topic_complete
+  module_complete
+  streak_bonus
+  daily_goal
+  project_step
+}

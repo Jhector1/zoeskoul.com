@@ -353,6 +353,26 @@ function ideConfigContentKey(value: unknown): string {
     return stableContentKey(value ?? null);
 }
 
+function isPassiveEnsureRuntimeState(value: Partial<ExerciseRuntimeState> | null | undefined) {
+    if (!value) return false;
+
+    if ((value.result as any)?.ok === true || (value as any).correct === true || value.status === "completed") {
+        return false;
+    }
+
+    if (value.userEdited === true) return false;
+
+    const origin = String(value.workspaceOrigin ?? "").trim().toLowerCase();
+    return (
+        !origin ||
+        origin === "starter" ||
+        origin === "manifest" ||
+        origin === "default" ||
+        origin === "empty" ||
+        origin === "seed"
+    );
+}
+
 
 function workspacePathForNode(
     nodes: WorkspaceStateV2["nodes"],
@@ -1930,6 +1950,7 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
                 (typeof workspaceForState.stdin === "string" ? workspaceForState.stdin : "");
 
             const nextExercise: ExerciseRuntimeState = {
+                ...(existing ?? {}),
                 exerciseKey,
                 subjectSlug: args.subjectSlug,
                 moduleSlug: args.moduleSlug,
@@ -1962,6 +1983,12 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
                 updatedAt: existing?.updatedAt ?? Date.now(),
             };
 
+            const passiveOwnershipEquivalent = Boolean(
+                existing &&
+                isPassiveEnsureRuntimeState(existing) &&
+                isPassiveEnsureRuntimeState(nextExercise)
+            );
+
             const noMeaningfulChange = Boolean(
                 existing &&
                 existing.subjectSlug === nextExercise.subjectSlug &&
@@ -1975,8 +2002,14 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
                 String(existing.code ?? "") === String(codeForState ?? "") &&
                 String(existing.stdin ?? existing.codeStdin ?? "") === String(stdinForState ?? "") &&
                 existing.workspaceStatus === nextExercise.workspaceStatus &&
-                existing.workspaceOrigin === nextExercise.workspaceOrigin &&
-                Boolean(existing.userEdited) === Boolean(nextExercise.userEdited) &&
+                (
+                    passiveOwnershipEquivalent ||
+                    existing.workspaceOrigin === nextExercise.workspaceOrigin
+                ) &&
+                (
+                    passiveOwnershipEquivalent ||
+                    Boolean(existing.userEdited) === Boolean(nextExercise.userEdited)
+                ) &&
                 String(existing.starterHash ?? "") ===
                 String(nextExercise.starterHash ?? "") &&
                 terminalEvidenceContentKey((existing as any)?.terminalEvidence) ===

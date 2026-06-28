@@ -17,6 +17,7 @@ import { ROUTES } from "@/utils";
 import { useSearchParams } from "next/navigation";
 import SoundToggle from "@/lib/sfx/SoundToggle";
 import {useAuthHref} from "@/hooks/useAuthHref";
+import { startGlobalNavigationPending } from "@/components/navigation/GlobalNavigationProgress";
 
 type NavItem = { href: string; label: string };
 type SessionStatus = "loading" | "authenticated" | "unauthenticated";
@@ -29,8 +30,18 @@ type HeaderSlotCtx = {
 };
 
 async function hardLogout(locale: string) {
-  await signOut({ redirect: false });
-  window.location.href = `/api/auth/keycloak-logout?postLogoutRedirect=${encodeURIComponent(`/${locale}`)}`;
+  startGlobalNavigationPending({
+    label: "Logging out…",
+    description: "Closing your session securely.",
+    source: "logout",
+    minVisibleMs: 700,
+  });
+
+  try {
+    await signOut({ redirect: false });
+  } finally {
+    window.location.href = `/api/auth/keycloak-logout?postLogoutRedirect=${encodeURIComponent(`/${locale}`)}`;
+  }
 }
 
 const FONT_SIZE_STORAGE_KEY = "APP_FONT_SIZE_PX";

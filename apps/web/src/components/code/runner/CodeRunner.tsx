@@ -141,6 +141,8 @@ const SPLIT_BAR_ACTIVE = "hover:bg-neutral-300/60 focus:bg-neutral-300/60";
 // a blank "Idle" terminal until the learner clicks/presses something.
 const TERMINAL_AUTO_OPEN_COOLDOWN_MS = 2_500;
 const TERMINAL_AUTO_OPEN_DELAY_MS = 180;
+const TERMINAL_AUTO_OPEN_VERIFY_DELAY_MS = 700;
+const TERMINAL_AUTO_OPEN_MAX_RECOVERY_ATTEMPTS = 2;
 const terminalAutoOpenClaims = new Map<string, number>();
 
 function pruneTerminalAutoOpenClaims(now: number) {
@@ -760,6 +762,47 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         cwd: workspaceTerminal?.cwd,
     });
 
+    const [terminalAutoOpenRetryTick, setTerminalAutoOpenRetryTick] = useState(0);
+    const terminalAutoOpenRetryCountsRef = useRef<Map<string, number>>(new Map());
+    const latestWorkspaceTerminalAutoOpenStateRef = useRef<
+        (WorkspaceTerminalAutoOpenArgs & { terminalAutoOpenKey: string }) | null
+    >(null);
+
+    const scheduleTerminalAutoOpenRecoveryCheck = useCallback((key: string) => {
+        window.setTimeout(() => {
+            const latest = latestWorkspaceTerminalAutoOpenStateRef.current;
+            if (!latest || latest.terminalAutoOpenKey !== key) {
+                return;
+            }
+
+            /**
+             * React StrictMode, route hydration, or review-runtime reseeding can
+             * unmount the first terminal owner while its automatic start is still
+             * in flight. The old owner correctly refuses to attach to the session,
+             * but the new visible owner may have been blocked by the module-level
+             * anti-hammer claim. If the terminal is still visibly idle after the
+             * first open promise settles, allow a tiny bounded recovery retry.
+             */
+            if (
+                !shouldAutoOpenWorkspaceTerminal({
+                    ...latest,
+                    autoOpenAlreadyRequested: false,
+                })
+            ) {
+                return;
+            }
+
+            const attempts = terminalAutoOpenRetryCountsRef.current.get(key) ?? 0;
+            if (attempts >= TERMINAL_AUTO_OPEN_MAX_RECOVERY_ATTEMPTS) {
+                return;
+            }
+
+            terminalAutoOpenRetryCountsRef.current.set(key, attempts + 1);
+            terminalAutoOpenRequestedKeyRef.current = null;
+            setTerminalAutoOpenRetryTick((value) => value + 1);
+        }, TERMINAL_AUTO_OPEN_VERIFY_DELAY_MS);
+    }, []);
+
     useEffect(() => {
         requestLayout();
     }, [effectiveDock, split.termW, split.bottomEditorH, split.bottomTermH, split.rightTotalH]);
@@ -787,6 +830,34 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
     }, [terminalOnlyMode, outputTab]);
 
     useEffect(() => {
+        latestWorkspaceTerminalAutoOpenStateRef.current = {
+            terminalAutoOpenKey,
+            outputTab,
+            workspaceTerminalEnabled,
+            recoverState: workspaceTerm.recoverState,
+            state: workspaceTerm.state,
+            restarting: workspaceTerm.restarting,
+            stopping: workspaceTerm.stopping,
+            sessionId: workspaceTerm.sessionId,
+            started: workspaceTerm.started,
+            starting: workspaceTerm.starting,
+            autoOpenAlreadyRequested:
+                terminalAutoOpenRequestedKeyRef.current === terminalAutoOpenKey,
+        };
+    }, [
+        outputTab,
+        workspaceTerminalEnabled,
+        workspaceTerm.recoverState,
+        workspaceTerm.state,
+        workspaceTerm.restarting,
+        workspaceTerm.stopping,
+        workspaceTerm.sessionId,
+        workspaceTerm.started,
+        workspaceTerm.starting,
+        terminalAutoOpenKey,
+    ]);
+
+    useEffect(() => {
         if ((lang === "sql" || isWeb) && outputTab === "terminal") {
             setOutputTab("output");
         }
@@ -794,9 +865,21 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
 
     useEffect(() => {
         terminalAutoOpenRequestedKeyRef.current = null;
+        terminalAutoOpenRetryCountsRef.current.delete(terminalAutoOpenKey);
     }, [
         terminalAutoOpenKey,
         workspaceTerminalEnabled,
+    ]);
+
+    useEffect(() => {
+        if (workspaceTerm.sessionId || workspaceTerm.started || workspaceTerm.starting) {
+            terminalAutoOpenRetryCountsRef.current.delete(terminalAutoOpenKey);
+        }
+    }, [
+        terminalAutoOpenKey,
+        workspaceTerm.sessionId,
+        workspaceTerm.started,
+        workspaceTerm.starting,
     ]);
 
     useEffect(() => {
@@ -838,12 +921,17 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
 
             void workspaceTerm.open({ userInitiated: false }).finally(() => {
                 releaseTerminalAutoOpenClaim(terminalAutoOpenKey);
+
+                if (!cancelled) {
+                    scheduleTerminalAutoOpenRecoveryCheck(terminalAutoOpenKey);
+                }
             });
         }, TERMINAL_AUTO_OPEN_DELAY_MS);
 
         return () => {
             cancelled = true;
             window.clearTimeout(timer);
+            releaseTerminalAutoOpenClaim(terminalAutoOpenKey);
         };
     }, [
         outputTab,
@@ -857,6 +945,8 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         workspaceTerm.recoverState,
         workspaceTerm.open,
         terminalAutoOpenKey,
+        terminalAutoOpenRetryTick,
+        scheduleTerminalAutoOpenRecoveryCheck,
     ]);
 
 

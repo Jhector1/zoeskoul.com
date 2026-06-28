@@ -5,6 +5,8 @@ import {Metadata} from "next";
 import {buildMetadata} from "@/lib/seo/buildMetadata";
 import {getRouteSeo, getSharedSeo} from "@/lib/seo/getSeo";
 import {AppLocale} from "@/lib/seo/types";
+import { resolveSubjectTitle } from "@/lib/subjects/resolveSubjectTitle";
+import { resolveModuleTitle } from "@/lib/subjects/resolveModuleTitle";
 
 type SearchParams = Record<string, string | string[] | undefined>;
 
@@ -47,19 +49,43 @@ export async function generateMetadata(
 
 
 export default async function BillingPage({
+                                              params,
                                               searchParams,
                                           }: {
+    params: Promise<{ locale: string }>;
     searchParams?: SearchParams | Promise<SearchParams>;
 }) {
+    const { locale } = await params;
     const sp = await Promise.resolve(searchParams ?? {});
 
     const next = pickString(sp, "next");
     const callbackUrl = safeInternalPath(next ?? pickString(sp, "callbackUrl") ?? "/");
+    const subjectSlug = pickString(sp, "subject") ?? null;
+    const moduleSlug = pickString(sp, "module") ?? null;
+    const localeForTitles = locale || "en";
+
+    const subjectTitle = subjectSlug
+        ? await resolveSubjectTitle({
+            subjectSlug,
+            locale: localeForTitles,
+            fallback: subjectSlug,
+        })
+        : null;
+
+    const moduleTitle =
+        subjectSlug && moduleSlug
+            ? await resolveModuleTitle({
+                subjectSlug,
+                moduleSlug,
+                locale: localeForTitles,
+                fallback: moduleSlug,
+            })
+            : moduleSlug;
 
     const paywall = {
         reason: pickString(sp, "reason") ?? null,
-        subject: pickString(sp, "subject") ?? null,
-        module: pickString(sp, "module") ?? null,
+        subject: subjectTitle,
+        module: moduleTitle,
         next: next ? safeInternalPath(next) : null,
         back: pickString(sp, "back") ? safeInternalPath(pickString(sp, "back")!) : null, // ✅ NEW
     };

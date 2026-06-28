@@ -2066,7 +2066,9 @@ export function useReviewModuleController({
             nextModuleId: nav?.nextModuleId ?? null,
             nextLocked,
             nextBillingHref,
-            canGoNext: Boolean(nav?.nextModuleId) && canGoNextModule && !nextLocked,
+            canGoNext:
+                Boolean(nav?.nextModuleId) &&
+                (nextLocked || canGoNextModule),
 
             showCertificateCta:
                 !navLoading &&

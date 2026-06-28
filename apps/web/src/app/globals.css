@@ -32,3 +32,56 @@
     background-color: rgba(147, 197, 253, 0.28) !important;
 }
 
+
+
+@keyframes app-global-navigation-progress {
+    0% {
+        transform: translateX(-120%);
+        opacity: 0.48;
+    }
+
+    45% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateX(340%);
+        opacity: 0.48;
+    }
+}
+
+.app-global-navigation-progress-bar {
+    animation: app-global-navigation-progress 1.15s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .app-global-navigation-progress-bar {
+        animation-duration: 2.4s;
+    }
+}
+
+
+@keyframes app-global-navigation-toast-in {
+    0% {
+        opacity: 0;
+        transform: translateY(-0.75rem) scale(0.96);
+        filter: blur(6px);
+    }
+
+    65% {
+        opacity: 1;
+        transform: translateY(0.0625rem) scale(1.01);
+        filter: blur(0);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+}
+
+.app-global-navigation-toast {
+    animation: app-global-navigation-toast-in 220ms cubic-bezier(0.16, 1, 0.3, 1) both;
+    transform-origin: top center;
+}

@@ -1,7 +1,10 @@
 import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import QuizPracticeCard, { flushReviewToolsBeforeSubmit } from "./QuizPracticeCard";
+import QuizPracticeCard, {
+    flushReviewToolsBeforeSubmit,
+    workspaceStableKey,
+} from "./QuizPracticeCard";
 import type { CodeInputExercise, ValidateResponse } from "@/lib/practice/types";
 import type { QItem } from "@/lib/practice/uiTypes";
 import { DEFAULT_PRACTICE_HELP_POLICY } from "@/lib/practice/help/steps";
@@ -153,6 +156,42 @@ describe("QuizPracticeCard project-step fallback", () => {
         steps.push("submit");
 
         expect(steps).toEqual(["flush:start", "flush:end", "flush:start", "flush:end", "submit"]);
+    });
+
+    it("treats workspace snapshots with only timestamp churn as the same starter workspace", () => {
+        const firstWorkspace = {
+            version: 2,
+            language: "sql",
+            entryFileId: "file:query.sql",
+            activeFileId: "file:query.sql",
+            stdin: "",
+            openTabs: ["file:query.sql"],
+            expanded: [],
+            nodes: [
+                {
+                    id: "file:query.sql",
+                    kind: "file",
+                    name: "query.sql",
+                    parentId: null,
+                    content: "SELECT name\nFROM students;\n",
+                    createdAt: 1,
+                    updatedAt: 2,
+                },
+            ],
+        } as any;
+
+        const secondWorkspace = {
+            ...firstWorkspace,
+            nodes: [
+                {
+                    ...(firstWorkspace.nodes[0] as any),
+                    createdAt: 999,
+                    updatedAt: 123456,
+                },
+            ],
+        } as any;
+
+        expect(workspaceStableKey(firstWorkspace)).toBe(workspaceStableKey(secondWorkspace));
     });
 
     it("renders a project step starter even before a fetched practice item exists", () => {

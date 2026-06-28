@@ -4,6 +4,7 @@ import * as React from "react";
 import { SessionProvider } from "next-auth/react";
 import type { Session } from "next-auth";
 import { ThemeProvider } from "next-themes";
+import { GlobalNavigationProgress } from "@/components/navigation/GlobalNavigationProgress";
 
 function isBenignMonacoCanceledError(reason: unknown) {
     const message = String((reason as any)?.message ?? reason ?? "");
@@ -66,6 +67,7 @@ export default function Providers({
                 disableTransitionOnChange
             >
                 <MonacoCanceledErrorGuard />
+                <GlobalNavigationProgress />
                 {children}
             </ThemeProvider>
         </SessionProvider>

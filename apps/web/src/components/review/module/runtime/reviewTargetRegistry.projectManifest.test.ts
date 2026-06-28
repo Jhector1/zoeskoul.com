@@ -138,7 +138,7 @@ describe("buildReviewTargetRegistry project manifest binding", () => {
     const registry = buildReviewTargetRegistry({
       subjectSlug: "sql-v2",
       moduleSlug: "sql-v2-1",
-      resolveMessage: (key) => (key === starterKey ? sqlStarter : undefined),
+      resolveMessage: (key: string) => (key === starterKey ? sqlStarter : undefined),
       mod: {
         id: "sql-v2-1",
         title: "SQL v2",

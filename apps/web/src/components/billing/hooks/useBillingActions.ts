@@ -3,6 +3,7 @@
 import { useCallback, useState } from "react";
 import { useRouter } from "next/navigation";
 import type { BillingStatus } from "@/lib/billing/types";
+import { startGlobalNavigationPending } from "@/components/navigation/GlobalNavigationProgress";
 
 export function useBillingActions(args: {
     status: BillingStatus | null;
@@ -14,6 +15,7 @@ export function useBillingActions(args: {
     const [busy, setBusy] = useState(false);
 
     const authRedirect = useCallback(() => {
+        startGlobalNavigationPending({ label: "Loading…", source: "billing-auth-redirect" });
         router.push(`/authenticate?callbackUrl=${encodeURIComponent(callbackUrl || "/")}`);
     }, [router, callbackUrl]);
 
@@ -37,7 +39,9 @@ export function useBillingActions(args: {
                 const data = await r.json();
                 if (!r.ok) throw new Error(data?.message ?? "Checkout failed");
 
-                window.location.href = data.url;
+                startGlobalNavigationPending({ label: "Opening checkout…", source: "billing-checkout", minVisibleMs: 700 });
+                startGlobalNavigationPending({ label: "Opening billing portal…", source: "billing-portal", minVisibleMs: 700 });
+            window.location.href = data.url;
             } catch (e: any) {
                 onError(e?.message ?? "Checkout failed");
             } finally {

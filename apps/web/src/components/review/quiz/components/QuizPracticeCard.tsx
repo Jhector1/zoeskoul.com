@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { ReviewQuestion } from "@/lib/subjects/types";
 import type { PracticeState } from "@/components/review/quiz/hooks/useQuizPracticeBank";
 import { isEmptyPracticeAnswer } from "@/components/review/quiz/hooks/useQuizPracticeBank";
@@ -266,6 +266,104 @@ function getWorkspaceFromAnyState(value: any): WorkspaceStateV2 | null {
   if (value?.codeWorkspace?.version === 2) return value.codeWorkspace as WorkspaceStateV2;
   if (value?.ideWorkspace?.version === 2) return value.ideWorkspace as WorkspaceStateV2;
   return null;
+}
+
+function workspaceHasNonBlankFileForPracticeCard(workspace: any) {
+  if (
+      !workspace ||
+      typeof workspace !== "object" ||
+      workspace.version !== 2 ||
+      !Array.isArray(workspace.nodes)
+  ) {
+    return false;
+  }
+
+  return workspace.nodes.some((node: any) => {
+    return node?.kind === "file" && String(node.content ?? "").trim().length > 0;
+  });
+}
+
+function isLearnerOwnedPracticeSnapshot(value: any) {
+  if (!value || typeof value !== "object") return false;
+
+  const origin = String(value.workspaceOrigin ?? "").trim().toLowerCase();
+  const workspace = getWorkspaceFromAnyState(value);
+  const hasContent =
+      workspaceHasNonBlankFileForPracticeCard(workspace) ||
+      firstNonBlankString(value.code, value.source).trim().length > 0;
+
+  if ((value.result as any)?.ok === true || value.correct === true || value.status === "completed") {
+    return true;
+  }
+
+  if (value.userEdited === true) return true;
+  if (origin === "user" || origin === "restored" || origin === "reveal-fill") return true;
+
+  // Treat saved blank shells as passive. Older starter bugs could persist
+  // workspaceOrigin="saved" without real learner work, and letting those
+  // snapshots fight ensureExercise causes starter/runtime oscillation.
+  if (origin === "saved") return hasContent;
+
+  return false;
+}
+
+export function workspaceStableKey(workspace: WorkspaceStateV2 | null | undefined) {
+  if (!workspace || workspace.version !== 2 || !Array.isArray(workspace.nodes)) {
+    return "null";
+  }
+
+  const folderPathById = new Map<string, string>();
+  let changed = true;
+
+  while (changed) {
+    changed = false;
+
+    for (const node of workspace.nodes as any[]) {
+      if (!node || node.kind !== "folder") continue;
+
+      const id = String(node.id ?? "");
+      if (!id || folderPathById.has(id)) continue;
+
+      const name = String(node.name ?? "");
+      const parentId = node.parentId == null ? null : String(node.parentId);
+      if (parentId && !folderPathById.has(parentId)) continue;
+
+      const parentPath = parentId ? folderPathById.get(parentId) || "" : "";
+      folderPathById.set(id, parentPath ? `${parentPath}/${name}` : name);
+      changed = true;
+    }
+  }
+
+  const nodePath = (node: any) => {
+    const name = String(node?.name ?? "");
+    const parentId = node?.parentId == null ? null : String(node.parentId);
+    const parentPath = parentId ? folderPathById.get(parentId) || "" : "";
+    return parentPath ? `${parentPath}/${name}` : name;
+  };
+
+  const files = (workspace.nodes as any[])
+      .filter((node) => node?.kind === "file")
+      .map((node) => ({
+        path: nodePath(node),
+        content: String(node.content ?? ""),
+      }))
+      .sort((a, b) => a.path.localeCompare(b.path));
+
+  const activeNode = (workspace.nodes as any[]).find(
+      (node) => node?.kind === "file" && node.id === workspace.activeFileId,
+  );
+  const entryNode = (workspace.nodes as any[]).find(
+      (node) => node?.kind === "file" && node.id === workspace.entryFileId,
+  );
+
+  return JSON.stringify({
+    version: 2,
+    language: workspace.language ?? null,
+    stdin: typeof workspace.stdin === "string" ? workspace.stdin : "",
+    activePath: activeNode ? nodePath(activeNode) : null,
+    entryPath: entryNode ? nodePath(entryNode) : null,
+    files,
+  });
 }
 
 function getManifestExerciseLanguage(exercise: Exercise | null | undefined) {
@@ -992,9 +1090,9 @@ export default function QuizPracticeCard(props: {
       (livePracticeItem as any)?.starterFiles ??
       null,
   );
-  const practiceWorkspaceKey = JSON.stringify(
-      (livePracticeManifest as any)?.workspace ??
-      (livePracticeItem as any)?.workspace ??
+  const practiceWorkspaceKey = workspaceStableKey(
+      getWorkspaceFromAnyState(livePracticeManifest) ??
+      getWorkspaceFromAnyState(livePracticeItem) ??
       null,
   );
   const practiceIdeConfigKey = JSON.stringify(
@@ -1010,7 +1108,7 @@ export default function QuizPracticeCard(props: {
     );
   }, [runtimeExercise]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (!livePracticeManifest) return;
     if (livePracticeManifest.kind !== "code_input") return;
     if (!livePracticeItem && !resolvedProjectStepManifest) return;
@@ -1122,7 +1220,7 @@ export default function QuizPracticeCard(props: {
     resolvedProjectStepManifest,
   ]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (!livePracticeManifest) return;
     if (livePracticeManifest.kind !== "code_input") return;
 
@@ -1135,6 +1233,7 @@ export default function QuizPracticeCard(props: {
     const existingWorkspace = getWorkspaceFromAnyState(runtimeExercise);
     const existingEntryCode = getWorkspaceEntryCodeForPracticeCard(existingWorkspace);
     const starterEntryCode = getWorkspaceEntryCodeForPracticeCard(itemWorkspace);
+    const itemWorkspaceIsLearnerOwned = isLearnerOwnedPracticeSnapshot(livePracticeItem);
     const existingIsProtected =
         runtimeExercise?.userEdited === true ||
         runtimeExercise?.workspaceOrigin === "user" ||
@@ -1143,13 +1242,29 @@ export default function QuizPracticeCard(props: {
 
     if (existingIsProtected && !protectedButBlank) return;
 
-    const existingWorkspaceKey = JSON.stringify(existingWorkspace ?? null);
-    const liveWorkspaceKey = JSON.stringify(itemWorkspace);
+    /**
+     * Passive practice items are often synthetic starter snapshots.
+     * ensureExercise is the single owner of starter seeding; this hydration
+     * effect should only restore real learner/saved work or replace an old
+     * blank protected shell. Without this guard, a passive item workspace and
+     * the manifest-resolved workspace can alternate forever during embedded
+     * try-it/project rendering.
+     */
+    if (!itemWorkspaceIsLearnerOwned && existingWorkspace && !protectedButBlank) return;
+
+    const existingWorkspaceKey = workspaceStableKey(existingWorkspace);
+    const liveWorkspaceKey = workspaceStableKey(itemWorkspace);
     if (existingWorkspaceKey === liveWorkspaceKey) return;
 
     const code = deriveEntryCode(itemWorkspace) || "";
     const stdin = typeof itemWorkspace.stdin === "string" ? itemWorkspace.stdin : "";
     const language = getManifestExerciseLanguage(livePracticeManifest);
+
+    const hydratedWorkspaceOrigin = itemWorkspaceIsLearnerOwned
+        ? String((livePracticeItem as any)?.workspaceOrigin ?? "").trim().toLowerCase() === "user"
+            ? "user"
+            : "saved"
+        : "starter";
 
     patchRuntimeExercise(exerciseKeyForTools, {
       workspace: itemWorkspace,
@@ -1162,8 +1277,8 @@ export default function QuizPracticeCard(props: {
       language,
       lang: language,
       codeLang: language,
-      userEdited: false,
-      workspaceOrigin: "starter",
+      userEdited: itemWorkspaceIsLearnerOwned,
+      workspaceOrigin: hydratedWorkspaceOrigin,
       updatedAt: Date.now(),
     });
     patchEditorWorkspace(exerciseKeyForTools, itemWorkspace);

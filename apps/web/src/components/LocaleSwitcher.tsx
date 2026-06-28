@@ -8,6 +8,7 @@ import { routing } from "@/i18n/routing";
 import { cn } from "@/lib/cn";
 import ConfirmResetModal from "./practice/ConfirmResetModal";
 import { persistLocale } from "@/lib/locale/persistLocale";
+import { startGlobalNavigationPending } from "@/components/navigation/GlobalNavigationProgress";
 
 function Spinner({ className }: { className?: string }) {
   return (
@@ -71,6 +72,11 @@ export default function LocaleSwitcher({
     setChangingTo(nextLocale);
     persistLocale(nextLocale);
     setConfirmOpen(false);
+    startGlobalNavigationPending({
+      label: t("changingTo", { locale: nextLocale.toUpperCase() }),
+      source: "locale-switcher",
+      minVisibleMs: 500,
+    });
 
     startTransition(() => {
       router.replace(href, { locale: nextLocale });

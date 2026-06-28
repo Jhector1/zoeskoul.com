@@ -339,7 +339,7 @@ test.describe("dev review module workspace sync", () => {
         await runCreateDeleteWorkspaceFlow(page, "judge0");
     });
 
-    (process.env.RUNNER_E2E === \"1\" ? test : test.skip)("PTY run creates and deletes files in the Explorer without cross-file overwrite (requires RUNNER_E2E=1)", async ({
+    (process.env.RUNNER_E2E === "1" ? test : test.skip)("PTY run creates and deletes files in the Explorer without cross-file overwrite (requires RUNNER_E2E=1)", async ({
                                                                                                       page,
                                                                                                   }) => {
         await mockPtyWorkspaceRuns(page);

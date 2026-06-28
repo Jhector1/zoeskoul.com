@@ -45,6 +45,8 @@ const CLIENT_RECOVERY_RETRY_COOLDOWN_MS = 6_000;
 const TERMINAL_AUTO_REVIVE_STALE_MS = 60_000;
 const TERMINAL_INPUT_STALE_MS = 60_000;
 const TERMINAL_REVIVE_WATCHDOG_INTERVAL_MS = 15_000;
+const TERMINAL_PROMPT_PRIME_DELAY_MS = 700;
+const TERMINAL_PROMPT_PRIME_MAX_ATTEMPTS = 3;
 
 /**
  * Docker/runner recycle often appears to the browser as a shell exit 137
@@ -113,6 +115,26 @@ function currentLeaseMountGeneration(workspaceKey: string) {
 type OpenWorkspaceTerminalOptions = {
     userInitiated?: boolean;
 };
+
+export function shouldPrimeWorkspacePrompt(args: {
+    sessionId: string | null;
+    workspaceReady: boolean;
+    terminalHasVisibleOutput: boolean;
+    pendingStartupInput: string | null;
+    stopping: boolean;
+    restarting: boolean;
+    terminalProcessExited: boolean;
+}) {
+    return Boolean(
+        args.sessionId &&
+        args.workspaceReady &&
+        !args.terminalHasVisibleOutput &&
+        !args.pendingStartupInput &&
+        !args.stopping &&
+        !args.restarting &&
+        !args.terminalProcessExited,
+    );
+}
 
 function shouldAllowAutomaticTerminalStart(key: string) {
     const now = Date.now();
@@ -718,6 +740,8 @@ export function useWorkspaceTerminalController(
     const staleStartingTimerRef = React.useRef<number | null>(null);
     const recycleRestartTimerRef = React.useRef<number | null>(null);
     const startupCwdFlushTimerRef = React.useRef<number | null>(null);
+    const promptPrimeTimerRef = React.useRef<number | null>(null);
+    const promptPrimeAttemptsRef = React.useRef(0);
     const lastRecycleRestartAtRef = React.useRef(0);
     const interactiveReadyRef = React.useRef(false);
     const recoverStateRef = React.useRef<TerminalRecoverState>("none");
@@ -746,6 +770,7 @@ export function useWorkspaceTerminalController(
     const pendingStartupInputRef = React.useRef<string | null>(null);
     const pendingStartupCwdRef = React.useRef<string | undefined>(undefined);
     const lastAuthoredCwdAppliedRef = React.useRef<string | undefined>(initialEvidenceCwd);
+    const terminalHasVisibleOutputRef = React.useRef(false);
     const mountedRef = React.useRef(false);
     const leaseMountGenerationRef = React.useRef(0);
 
@@ -755,6 +780,10 @@ export function useWorkspaceTerminalController(
 
         return () => {
             mountedRef.current = false;
+            if (promptPrimeTimerRef.current != null) {
+                window.clearTimeout(promptPrimeTimerRef.current);
+                promptPrimeTimerRef.current = null;
+            }
         };
     }, [terminalLeaseKey]);
 
@@ -958,9 +987,18 @@ export function useWorkspaceTerminalController(
         );
     }, [args.getWorkspaceFiles, args.initialFiles]);
 
+    const clearPromptPrimeTimer = React.useCallback(() => {
+        if (promptPrimeTimerRef.current != null) {
+            window.clearTimeout(promptPrimeTimerRef.current);
+            promptPrimeTimerRef.current = null;
+        }
+    }, []);
+
     const pushChunk = React.useCallback(
         (kind: TerminalChunk["kind"], data: string) => {
             if (!data) return;
+            terminalHasVisibleOutputRef.current = true;
+            clearPromptPrimeTimer();
 
             setTerminalEvidenceNow((prev) => appendTerminalEvidenceOutput(prev, data));
             setTerminalFeed((prev) => {
@@ -972,7 +1010,7 @@ export function useWorkspaceTerminalController(
                 return next;
             });
         },
-        [setTerminalEvidenceNow],
+        [clearPromptPrimeTimer, setTerminalEvidenceNow],
     );
 
     const clearQuietTimer = React.useCallback(() => {
@@ -981,6 +1019,56 @@ export function useWorkspaceTerminalController(
             quietTimerRef.current = null;
         }
     }, []);
+
+    const schedulePromptPrime = React.useCallback(
+        (delayMs = TERMINAL_PROMPT_PRIME_DELAY_MS) => {
+            if (
+                !shouldPrimeWorkspacePrompt({
+                    sessionId: sessionIdRef.current,
+                    workspaceReady: workspaceReadyRef.current,
+                    terminalHasVisibleOutput: terminalHasVisibleOutputRef.current,
+                    pendingStartupInput: pendingStartupInputRef.current,
+                    stopping: stoppingRef.current,
+                    restarting: restartingRef.current,
+                    terminalProcessExited: terminalProcessExitedRef.current,
+                })
+            ) {
+                clearPromptPrimeTimer();
+                return;
+            }
+
+            if (promptPrimeAttemptsRef.current >= TERMINAL_PROMPT_PRIME_MAX_ATTEMPTS) {
+                clearPromptPrimeTimer();
+                return;
+            }
+
+            clearPromptPrimeTimer();
+            promptPrimeTimerRef.current = window.setTimeout(() => {
+                promptPrimeTimerRef.current = null;
+
+                if (
+                    !shouldPrimeWorkspacePrompt({
+                        sessionId: sessionIdRef.current,
+                        workspaceReady: workspaceReadyRef.current,
+                        terminalHasVisibleOutput: terminalHasVisibleOutputRef.current,
+                        pendingStartupInput: pendingStartupInputRef.current,
+                        stopping: stoppingRef.current,
+                        restarting: restartingRef.current,
+                        terminalProcessExited: terminalProcessExitedRef.current,
+                    })
+                ) {
+                    return;
+                }
+
+                promptPrimeAttemptsRef.current += 1;
+
+                void sendInput("\n").catch(() => {
+                    schedulePromptPrime(Math.min(delayMs + 250, 1400));
+                });
+            }, delayMs);
+        },
+        [clearPromptPrimeTimer, sendInput],
+    );
 
     const clearStaleStartingTimer = React.useCallback(() => {
         if (staleStartingTimerRef.current != null) {
@@ -1020,11 +1108,14 @@ export function useWorkspaceTerminalController(
         snapshotInFlightRef.current = null;
         openInFlightRef.current = null;
         clearRecycleRestartTimer();
+        clearPromptPrimeTimer();
         clearStartupCwdFlushTimer();
         pendingInputLineRef.current = "";
         escapeSequenceRef.current = "";
         terminalProcessExitedRef.current = false;
         terminalExitCodeRef.current = null;
+        terminalHasVisibleOutputRef.current = false;
+        promptPrimeAttemptsRef.current = 0;
         pendingStartupInputRef.current = null;
         pendingStartupCwdRef.current = undefined;
         startedRef.current = false;
@@ -1045,6 +1136,7 @@ export function useWorkspaceTerminalController(
         setStopping(false);
     }, [
         clearRecycleRestartTimer,
+        clearPromptPrimeTimer,
         clearStartupCwdFlushTimer,
         clearTerminalRecovery,
         initialEvidenceCwd,
@@ -1220,8 +1312,9 @@ export function useWorkspaceTerminalController(
             !terminalProcessExitedRef.current
         ) {
             setInputEnabled(true);
+            schedulePromptPrime();
         }
-    }, [clearStartupCwdFlushTimer, sendInput, setTerminalEvidenceNow]);
+    }, [clearStartupCwdFlushTimer, schedulePromptPrime, sendInput, setTerminalEvidenceNow]);
 
     const scheduleStartupCwdFlush = React.useCallback(
         (delayMs = 175): void => {
@@ -1362,6 +1455,8 @@ export function useWorkspaceTerminalController(
                 escapeSequenceRef.current = "";
                 terminalProcessExitedRef.current = false;
                 terminalExitCodeRef.current = null;
+                terminalHasVisibleOutputRef.current = false;
+                promptPrimeAttemptsRef.current = 0;
                 terminalFeedRef.current = [];
                 setTerminalFeed([]);
                 setInputEnabled(false);
@@ -1373,6 +1468,7 @@ export function useWorkspaceTerminalController(
                 setStarting(true);
                 setSyncStatus("idle");
                 clearTerminalRecovery();
+                clearPromptPrimeTimer();
                 clearStaleStartingTimer();
 
                 staleStartingTimerRef.current = window.setTimeout(() => {
@@ -1491,6 +1587,7 @@ export function useWorkspaceTerminalController(
                             await flushPendingStartupInput();
                         } else {
                             setInputEnabled(true);
+                            schedulePromptPrime();
                         }
                     }
                 } catch (e: any) {
@@ -1613,7 +1710,7 @@ export function useWorkspaceTerminalController(
                  * It must respect normal start-rate guards so one blocked start
                  * does not fan out into repeated /sessions/start attempts.
                  */
-                await open();
+                await open({ userInitiated: true });
             } finally {
                 setStopping(false);
                 setRestarting(false);
@@ -2099,15 +2196,19 @@ export function useWorkspaceTerminalController(
                     terminalExitCodeRef.current = null;
                     clearTerminalRecovery();
                     setBusy(true);
-                    setInputEnabled(
-                        workspaceReadyRef.current && !pendingStartupInputRef.current,
-                    );
+                    const canAcceptInput =
+                        workspaceReadyRef.current && !pendingStartupInputRef.current;
+                    setInputEnabled(canAcceptInput);
                     setStarted(true);
                     setStarting(false);
 
                     if (workspaceReadyRef.current) {
                         void flushPendingStartupInput();
                         scheduleStartupCwdFlush(125);
+                    }
+
+                    if (canAcceptInput) {
+                        schedulePromptPrime();
                     }
 
 
@@ -2154,13 +2255,18 @@ export function useWorkspaceTerminalController(
                 clearTerminalRecovery();
                 setState("waiting_for_input");
                 setBusy(true);
-                setInputEnabled(!pendingStartupInputRef.current);
+                const canAcceptInput = !pendingStartupInputRef.current;
+                setInputEnabled(canAcceptInput);
                 setStarted(true);
                 setStarting(false);
 
                 if (workspaceReadyRef.current) {
                     void flushPendingStartupInput();
                     scheduleStartupCwdFlush(125);
+                }
+
+                if (canAcceptInput) {
+                    schedulePromptPrime();
                 }
 
                 if (awaitingPostEnterSnapshotRef.current) {
@@ -2250,6 +2356,7 @@ export function useWorkspaceTerminalController(
         pushChunk,
         schedulePostEnterSnapshot,
         flushPendingStartupInput,
+        schedulePromptPrime,
         scheduleStartupCwdFlush,
         clearStaleStartingTimer,
         scheduleRestartAfterRunnerRecycle,

@@ -200,7 +200,71 @@ function listCatalogFileNames() {
     .sort();
 }
 
-function buildSeedData() {
+
+export type SeedDataSelection = {
+  /** Live subject slugs, for example: sql-v2, python-v2. */
+  subjectSlugs?: readonly string[] | null;
+  /** Course references. Supports either live slugs or catalog/live-slug refs, for example: sql-v2 or sql/sql-v2. */
+  courseRefs?: readonly string[] | null;
+};
+
+function normalizeSeedList(values: readonly string[] | null | undefined) {
+  return (values ?? [])
+    .flatMap((value) => String(value).split(","))
+    .map((value) => value.trim())
+    .filter(Boolean);
+}
+
+function subjectSlugFromCourseRef(courseRef: string) {
+  const parts = courseRef.split("/").map((part) => part.trim()).filter(Boolean);
+  if (parts.length === 0) return courseRef.trim();
+  if (parts.length > 2) {
+    throw new Error(
+      `Invalid seed course ref "${courseRef}". Use a live subject slug like "sql-v2" or catalog/live-subject like "sql/sql-v2".`,
+    );
+  }
+  return parts[parts.length - 1] ?? courseRef.trim();
+}
+
+export function resolveSeedSubjectSlugsForSeed(selection: SeedDataSelection = {}) {
+  const refs = [
+    ...normalizeSeedList(selection.subjectSlugs),
+    ...normalizeSeedList(selection.courseRefs),
+  ];
+
+  if (refs.length === 0) return null;
+
+  const availableSubjectSlugs = new Set(listSubjectSlugs());
+  const selected = new Set<string>();
+
+  for (const ref of refs) {
+    const subjectSlug = subjectSlugFromCourseRef(ref);
+
+    if (!availableSubjectSlugs.has(subjectSlug)) {
+      const available = [...availableSubjectSlugs].sort().join(", ");
+      throw new Error(
+        `Cannot seed unknown subject/course "${ref}". Resolved live subject slug "${subjectSlug}" was not found. Available live subjects: ${available}`,
+      );
+    }
+
+    const parts = ref.split("/").map((part) => part.trim()).filter(Boolean);
+    if (parts.length === 2) {
+      const [catalogSlug] = parts;
+      const actualCatalogSlug = resolveCatalogSlugForSubject(subjectSlug);
+      if (catalogSlug !== actualCatalogSlug) {
+        throw new Error(
+          `Cannot seed course "${ref}". Subject "${subjectSlug}" belongs to catalog "${actualCatalogSlug}", not "${catalogSlug}".`,
+        );
+      }
+    }
+
+    selected.add(subjectSlug);
+  }
+
+  return selected;
+}
+
+export function buildSeedData(selection: SeedDataSelection = {}) {
   const catalogs: CatalogSeed[] = [];
   const subjects: SubjectSeed[] = [];
   const modules: ModuleSeed[] = [];
@@ -208,6 +272,7 @@ function buildSeedData() {
   const topics: TopicSeed[] = [];
   const subjectToCatalog = new Map<string, string>();
   const subjectCatalogOrder = new Map<string, number>();
+  const selectedSubjectSlugs = resolveSeedSubjectSlugsForSeed(selection);
 
   for (const fileName of listCatalogFileNames()) {
     const manifest = loadCatalogManifest(fileName);
@@ -248,6 +313,8 @@ function buildSeedData() {
   }
 
   for (const subjectSlug of listSubjectSlugs()) {
+    if (selectedSubjectSlugs && !selectedSubjectSlugs.has(subjectSlug)) continue;
+
     const manifest = loadSubjectManifest(subjectSlug);
     const subject = manifest.subject;
     const catalogSlug = String(

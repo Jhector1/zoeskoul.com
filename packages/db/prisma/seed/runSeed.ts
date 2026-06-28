@@ -1,15 +1,24 @@
 import "dotenv/config";
 import { Prisma, prisma } from "../../src/client.js";
 
-import { CATALOGS, SUBJECTS, MODULES, TOPICS, SECTIONS } from "./data";
+import { buildSeedData, type SeedDataSelection } from "./data";
+
+export type RunSeedOptions = SeedDataSelection;
 
 function toJson(value: unknown): Prisma.InputJsonValue | undefined {
   if (value === undefined) return undefined;
   return JSON.parse(JSON.stringify(value)) as Prisma.InputJsonValue;
 }
 
-export async function runSeed() {
+export async function runSeed(options: RunSeedOptions = {}) {
   const started = Date.now();
+  const {
+    catalogs: CATALOGS,
+    subjects: SUBJECTS,
+    modules: MODULES,
+    topics: TOPICS,
+    sections: SECTIONS,
+  } = buildSeedData(options);
 
   try {
     return await prisma.$transaction(async (tx) => {

@@ -1,8 +1,9 @@
 import { describe, expect, it } from "vitest";
 
+import type { ReviewModule } from "@/lib/subjects/types";
 import { resolveCompactAssignmentCtaVisibility } from "./assignmentCtaVisibility";
 
-const topics = [
+const topics: ReviewModule["topics"] = [
     {
         id: "topic-1",
         label: "Intro",

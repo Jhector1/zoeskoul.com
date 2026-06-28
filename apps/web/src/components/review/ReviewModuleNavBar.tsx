@@ -94,7 +94,10 @@ const ReviewModuleNavBar = React.forwardRef<HTMLDivElement, Props>(
         const showNextCta = Boolean(nextModuleId) && !showCertificateCta;
         const nextLabel = nextLocked ? "Unlock next" : t("buttons.nextModule");
 
-        const showUnlockHint = !showCertificateCta && !canGoNext && Boolean(nextModuleId);
+        const showUnlockHint =
+            !showCertificateCta &&
+            Boolean(nextModuleId) &&
+            (nextLocked || !canGoNext);
         const showCertificateHint =
             Boolean(showCertificateCta) && Boolean(certificateHint) && !canGetCertificate;
         const showHint = showUnlockHint || showCertificateHint;
