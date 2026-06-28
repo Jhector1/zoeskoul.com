@@ -65,6 +65,7 @@ import {resolveRightRailSqlProps} from "../runtime/resolveRightRailSqlProps";
 import { resolveTopicStageRuntimeDefaults } from "../runtime/topicStageRuntimeDefaults";
 import { shouldUseWorkspaceCodeSurface } from "@/components/practice/workspaceExercise";
 import { resolveRightRailIdeConfig } from "./rightRailIdeConfig";
+import { buildBillingHref } from "@/lib/billing/moduleAccess";
 import { clearReviewWorkspaceDrafts } from "@/components/tools/panes/reviewWorkspaceDrafts";
 import {
     cardHasAuthoredExerciseSurface,
@@ -1225,7 +1226,23 @@ export function useReviewModuleController({
     // }, [beginRouteTransition, router, subjectSlug]);
 
     const nextLocked = Boolean(nav?.nextLocked);
-    const nextBillingHref = nav?.nextBillingHref ?? null;
+    const nextBillingHref = useMemo(() => {
+        if (!nextLocked || !nav?.nextModuleId) {
+            return nav?.nextBillingHref ?? null;
+        }
+
+        const currentBackPath =
+            (typeof window !== "undefined" ? window.location.pathname : pathname) || pathname || "/";
+
+        return buildBillingHref({
+            locale,
+            next: `/${ROUTES.learningPath(subjectSlug, nav.nextModuleId)}`,
+            back: currentBackPath,
+            reason: "module",
+            subject: subjectSlug,
+            module: nav.nextModuleId,
+        });
+    }, [locale, nav?.nextBillingHref, nav?.nextModuleId, nextLocked, pathname, subjectSlug]);
 
     const goModule = useCallback(
         (mid: string) => {

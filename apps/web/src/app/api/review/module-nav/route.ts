@@ -12,6 +12,8 @@ import { getLocaleFromCookie } from "@/serverUtils";
 import { resolveReviewModuleForSubject } from "@/lib/review/api/shared/modules";
 import { resolveSubjectRuntimeWindow } from "@/lib/review/api/shared/resolveSubjectFinishState";
 import { SUBJECTS } from "@/lib/subjects";
+import { buildBillingHref } from "@/lib/billing/moduleAccess";
+import { ROUTES } from "@/utils";
 
 export async function GET(req: Request) {
     const { searchParams } = new URL(req.url);
@@ -106,6 +108,7 @@ export async function GET(req: Request) {
             : null;
 
     let nextLocked = false;
+    let nextBillingHref: string | null = null;
 
     if (next) {
         const nextAccess = await resolvePracticeAccess({
@@ -124,6 +127,17 @@ export async function GET(req: Request) {
         });
 
         nextLocked = !nextAccess.ok;
+
+        if (nextLocked) {
+            nextBillingHref = buildBillingHref({
+                locale,
+                next: `/${ROUTES.learningPath(subject.slug, next.slug)}`,
+                back: `/${ROUTES.learningPath(subject.slug, resolved.module.slug)}`,
+                reason: "module",
+                subject: subject.slug,
+                module: next.slug,
+            });
+        }
     }
 
     return bodyJsonWithGuestCookie(
@@ -133,7 +147,7 @@ export async function GET(req: Request) {
             prevModuleId: prev?.slug ?? null,
             nextModuleId: next?.slug ?? null,
             nextLocked,
-            nextBillingHref: null,
+            nextBillingHref,
         },
         200,
         setGuestId,
