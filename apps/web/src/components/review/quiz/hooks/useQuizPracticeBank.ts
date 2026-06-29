@@ -1700,7 +1700,7 @@ export function useQuizPracticeBank(args: {
     });
 
     let idleHandle: number | null = null;
-    let timeoutHandle: number | null = null;
+    let timeoutHandle: ReturnType<typeof setTimeout> | null = null;
 
     if (prefetch.length && activeQuestionIds?.length) {
       const runPrefetch = () => {
@@ -1710,20 +1710,22 @@ export function useQuizPracticeBank(args: {
         }
       };
 
-      if (typeof window !== "undefined" && "requestIdleCallback" in window) {
-        idleHandle = (window as any).requestIdleCallback(runPrefetch, { timeout: 1600 });
-      } else if (typeof window !== "undefined") {
-        timeoutHandle = window.setTimeout(runPrefetch, 600);
+      const idleApi = typeof globalThis !== "undefined" ? (globalThis as any) : null;
+      if (idleApi && typeof idleApi.requestIdleCallback === "function") {
+        idleHandle = idleApi.requestIdleCallback(runPrefetch, { timeout: 1600 }) as number;
+      } else if (typeof setTimeout === "function") {
+        timeoutHandle = setTimeout(runPrefetch, 600);
       }
     }
 
     return () => {
       cancelledRef.current = true;
-      if (idleHandle != null && typeof window !== "undefined" && "cancelIdleCallback" in window) {
-        (window as any).cancelIdleCallback(idleHandle);
+      const idleApi = typeof globalThis !== "undefined" ? (globalThis as any) : null;
+      if (idleHandle != null && idleApi && typeof idleApi.cancelIdleCallback === "function") {
+        idleApi.cancelIdleCallback(idleHandle);
       }
-      if (timeoutHandle != null && typeof window !== "undefined") {
-        window.clearTimeout(timeoutHandle);
+      if (timeoutHandle != null && typeof clearTimeout === "function") {
+        clearTimeout(timeoutHandle);
       }
     };
   }, [

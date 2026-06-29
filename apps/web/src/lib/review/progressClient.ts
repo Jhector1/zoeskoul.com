@@ -3,6 +3,8 @@
 import type { ReviewProgressState } from "@/lib/review/progressTypes";
 import { normalizeProgressTopics, normalizeTopicProgressKey } from "@/lib/review/progressTopicKeys";
 
+const reviewProgressGetInFlight = new Map<string, Promise<ReviewProgressState>>();
+
 export function emptyReviewProgress(): ReviewProgressState {
     return {
         topics: {},
@@ -63,11 +65,30 @@ export async function fetchReviewProgressGET(args: {
         `&moduleSlug=${encodeURIComponent(moduleSlug)}` +
         `&locale=${encodeURIComponent(locale)}`;
 
-    const res = await fetch(url, { signal, cache: "no-store" });
-    if (!res.ok) return emptyReviewProgress();
+    if (signal?.aborted) {
+        throw new DOMException("Review progress fetch was aborted before it started.", "AbortError");
+    }
 
-    const data = await res.json().catch(() => null);
-    return normalizeProgressTopics(
-        ((data?.progress ?? null) as ReviewProgressState | null) ?? emptyReviewProgress(),
-    );
+    const existing = reviewProgressGetInFlight.get(url);
+    if (existing) return existing;
+
+    const promise = (async () => {
+        /**
+         * Do not pass each caller's AbortSignal into the shared GET. Multiple
+         * hydration/save paths can ask for the same progress row; one cancelled
+         * component must not abort the canonical request for the others.
+         */
+        const res = await fetch(url, { cache: "no-store" });
+        if (!res.ok) return emptyReviewProgress();
+
+        const data = await res.json().catch(() => null);
+        return normalizeProgressTopics(
+            ((data?.progress ?? null) as ReviewProgressState | null) ?? emptyReviewProgress(),
+        );
+    })().finally(() => {
+        reviewProgressGetInFlight.delete(url);
+    });
+
+    reviewProgressGetInFlight.set(url, promise);
+    return promise;
 }

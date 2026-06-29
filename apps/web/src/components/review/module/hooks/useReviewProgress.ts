@@ -794,52 +794,12 @@ export function useReviewProgress(args: {
             }
 
             /**
-             * Cross-device safety:
-             * Before a normal autosave, fetch the newest DB progress and merge
-             * this tab's workspace changes on top of it. This prevents a stale
-             * tab/device from writing an older snapshot that hides SQL/Python
-             * files created elsewhere. Page-exit keepalive saves skip the extra
-             * GET because browsers may cancel that request; the server still
-             * performs its own merge/revision check for those emergency saves.
+             * Fast path: do not GET the latest progress before every autosave.
+             * The server already merges incoming state with the stored row and
+             * rejects stale revisions. Fetching before every PUT was competing
+             * with first exercise delivery and practice validation. We only pay
+             * the extra GET cost on a real 409 conflict below.
              */
-            if (!options?.keepalive) {
-                try {
-                    const latestRemote = await fetchReviewProgressGET({
-                        subjectSlug: payloadToSave.subjectSlug,
-                        moduleSlug: payloadToSave.moduleSlug,
-                        locale: payloadToSave.locale,
-                    });
-
-                    const remoteRevision = getSaveRevision(latestRemote);
-                    const localRevision = getSaveRevision(payloadToSave.state);
-
-                    if (remoteRevision > localRevision || remoteRevision > 0) {
-                        const mergedState = mergeProgressStatesForSave(
-                            latestRemote,
-                            payloadToSave.state as ReviewProgressState,
-                        );
-
-                        payloadToSave = buildReviewProgressPayload({
-                            subjectSlug: payloadToSave.subjectSlug,
-                            moduleSlug: payloadToSave.moduleSlug,
-                            locale: payloadToSave.locale,
-                            state: mergedState,
-                            activeTopicId: normalizeTopicProgressKey(
-                                (payloadToSave.state as any).activeTopicId ?? activeTopicIdRef.current,
-                            ),
-                        }) as typeof payload;
-
-                        progressRef.current = payloadToSave.state as ReviewProgressState;
-                        body = stableJson(payloadToSave);
-                        meaningfulBody = meaningfulBodyForPayload(payloadToSave);
-                    }
-                } catch (error: any) {
-                    console.warn("[review-progress] pre-save remote merge failed", {
-                        reason: options?.reason,
-                        message: error?.message ?? String(error),
-                    });
-                }
-            }
 
             const ac = options?.keepalive ? null : new AbortController();
             const timeout = ac ? window.setTimeout(() => ac.abort(), 15000) : null;
