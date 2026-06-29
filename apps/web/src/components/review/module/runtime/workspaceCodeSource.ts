@@ -42,13 +42,12 @@ function stateHasSqlSignals(state: any) {
     if (!state || typeof state !== "object") return false;
 
     return (
-        Boolean(state.fixedSqlDialect) ||
-        Boolean(state.sqlDialect) ||
-        Boolean(state.sqlDatasetId) ||
-        Boolean(state.datasetId) ||
-        Boolean(state.runtime?.datasetId) ||
-        typeof state.sqlSchemaSql === "string" ||
-        typeof state.sqlSeedSql === "string"
+        hasNonBlankText(state.fixedSqlDialect) ||
+        hasNonBlankText(state.sqlDatasetId) ||
+        hasNonBlankText(state.datasetId) ||
+        hasNonBlankText(state.runtime?.datasetId) ||
+        hasNonBlankText(state.sqlSchemaSql) ||
+        hasNonBlankText(state.sqlSeedSql)
     );
 }
 

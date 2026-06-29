@@ -130,6 +130,10 @@ function hasWorkspaceFiles(value: unknown): boolean {
     return FILE_SOURCE_KEYS.some((key) => hasStarterFiles(value[key]));
 }
 
+function hasNonBlankSqlSignal(value: unknown) {
+    return typeof value === "string" && value.trim().length > 0;
+}
+
 function hasAnyFileSources(record: Record<string, unknown>) {
     return FILE_SOURCE_KEYS.some((key) => hasStarterFiles(record[key]));
 }
@@ -137,12 +141,12 @@ function hasAnyFileSources(record: Record<string, unknown>) {
 function isSqlWorkspaceExercise(exercise: Record<string, unknown>) {
     return (
         exercise.language === "sql" ||
-        Boolean(exercise.fixedSqlDialect) ||
-        Boolean((exercise.runtime as Record<string, unknown> | undefined)?.datasetId) ||
-        typeof exercise.sqlSchemaSql === "string" ||
-        typeof exercise.sqlSeedSql === "string" ||
-        typeof exercise.sqlSetupSql === "string" ||
-        Boolean(exercise.sqlDatasetId) ||
+        hasNonBlankSqlSignal(exercise.fixedSqlDialect) ||
+        hasNonBlankSqlSignal((exercise.runtime as Record<string, unknown> | undefined)?.datasetId) ||
+        hasNonBlankSqlSignal(exercise.sqlDatasetId) ||
+        hasNonBlankSqlSignal(exercise.sqlSchemaSql) ||
+        hasNonBlankSqlSignal(exercise.sqlSeedSql) ||
+        hasNonBlankSqlSignal(exercise.sqlSetupSql) ||
         Boolean(exercise.sqlInitialTableSnapshots)
     );
 }

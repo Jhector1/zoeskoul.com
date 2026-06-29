@@ -744,6 +744,32 @@ export default function QuizBlock({
 
   const local = useQuizLocalAnswers();
 
+  const activePracticeLoadIds = useMemo(() => {
+    const ids = [
+      questions[activeIndex]?.id,
+      routeExerciseQuestionId,
+    ]
+        .map((value) => String(value ?? "").trim())
+        .filter(Boolean);
+
+    return Array.from(new Set(ids));
+  }, [questions, activeIndex, routeExerciseQuestionId]);
+
+  const prefetchPracticeLoadIds = useMemo(() => {
+    const ids: string[] = [];
+
+    for (let index = activeIndex + 1; index < questions.length; index += 1) {
+      const nextQuestion = questions[index];
+      if (!nextQuestion) continue;
+      if (nextQuestion.kind !== "practice") continue;
+
+      ids.push(nextQuestion.id);
+      break;
+    }
+
+    return ids;
+  }, [questions, activeIndex]);
+
   const practiceBank = useQuizPracticeBank({
     questions,
     spec,
@@ -752,6 +778,8 @@ export default function QuizBlock({
     resetKey,
     isCompleted,
     locked,
+    activeQuestionIds: activePracticeLoadIds,
+    prefetchQuestionIds: prefetchPracticeLoadIds,
   });
 
   useEffect(() => {

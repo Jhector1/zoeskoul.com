@@ -41,7 +41,8 @@ export type PracticeState = PracticeItemState & {
   sectionSlug?: string;
 };
 
-const LOAD_TIMEOUT_MS = 12000;
+
+const LOAD_TIMEOUT_MS = 60000;
 
 function normalizePracticeKeyPart(value: unknown) {
   return String(value ?? "")
@@ -85,9 +86,17 @@ function buildScopedPracticeQuestionKey(q: Extract<ReviewQuestion, { kind: "prac
 }
 
 
-function withTimeout<T>(promise: Promise<T>, ms: number, message: string) {
+function withTimeout<T>(
+    promise: Promise<T>,
+    ms: number,
+    message: string,
+    onTimeout?: () => void,
+) {
   return new Promise<T>((resolve, reject) => {
-    const timer = setTimeout(() => reject(new Error(message)), ms);
+    const timer = setTimeout(() => {
+      onTimeout?.();
+      reject(new Error(message));
+    }, ms);
 
     promise.then(
         (value) => {
@@ -1058,6 +1067,35 @@ function stablePracticeJson(value: any) {
   }
 }
 
+function buildPracticeLoadFailureKey(
+    q: Extract<ReviewQuestion, { kind: "practice" }>,
+) {
+  const anyQ = q as any;
+  const fetch = anyQ.fetch ?? {};
+
+  return stablePracticeJson({
+    stableKey: getStablePracticeQuestionKey(q),
+    questionId: q.id,
+    subject: fetch.subject ?? fetch.subjectSlug ?? anyQ.subjectSlug ?? null,
+    module: fetch.module ?? fetch.moduleSlug ?? anyQ.moduleSlug ?? null,
+    section: fetch.section ?? fetch.sectionSlug ?? anyQ.sectionSlug ?? null,
+    topic: fetch.topic ?? fetch.topicId ?? anyQ.topicId ?? anyQ.topic ?? null,
+    exerciseKey:
+        fetch.exerciseKey ??
+        anyQ.exerciseKey ??
+        anyQ.item?.exerciseKey ??
+        anyQ.exercise?.exerciseKey ??
+        anyQ.exercise?.id ??
+        anyQ.item?.id ??
+        null,
+    preferKind: fetch.preferKind ?? anyQ.preferKind ?? null,
+    preferPurpose: fetch.preferPurpose ?? anyQ.preferPurpose ?? null,
+    seedPolicy: fetch.seedPolicy ?? null,
+    salt: fetch.salt ?? null,
+    resetSafeVersion: "practice-load-v1",
+  });
+}
+
 function stablePracticeItemJsonForNoopCompare(value: any) {
   if (!value || typeof value !== "object") {
     return stablePracticeJson(value);
@@ -1067,20 +1105,27 @@ function stablePracticeItemJsonForNoopCompare(value: any) {
   return stablePracticeJson(rest);
 }
 
+function hasNonBlankSqlSignal(value: unknown) {
+  return typeof value === "string" && value.trim().length > 0;
+}
+
 function getPracticeExerciseLanguage(exercise: any) {
   if (!exercise || exercise.kind !== "code_input") return null;
 
   const isSql =
       exercise.language === "sql" ||
-      Boolean(exercise?.fixedSqlDialect) ||
-      Boolean(exercise?.runtime?.datasetId) ||
-      typeof exercise?.sqlSchemaSql === "string" ||
-      typeof exercise?.sqlSeedSql === "string";
+      hasNonBlankSqlSignal(exercise?.fixedSqlDialect) ||
+      hasNonBlankSqlSignal(exercise?.runtime?.datasetId) ||
+      hasNonBlankSqlSignal(exercise?.sqlDatasetId) ||
+      hasNonBlankSqlSignal(exercise?.sqlSchemaSql) ||
+      hasNonBlankSqlSignal(exercise?.sqlSeedSql) ||
+      hasNonBlankSqlSignal(exercise?.sqlSetupSql);
 
   return isSql
       ? "sql"
       : normalizeWorkspaceLanguage(exercise.language ?? "python");
 }
+
 
 function mergeSavedPatchIntoPracticeItem(item: any, savedPatch: any) {
   if (!item || !savedPatch) return item;
@@ -1195,6 +1240,18 @@ export function useQuizPracticeBank(args: {
   resetKey: string;
   isCompleted: boolean;
   locked: boolean;
+
+  /**
+   * Loading every practice question in a card at once creates a burst of
+   * /api/practice requests, DB instance inserts, and signed-key work. The
+   * visible editor/exercise only needs the active question now; nearby questions
+   * can be warmed after idle time.
+   *
+   * Omit these props to preserve the old eager-all behavior for tests or
+   * callers that render every question at once.
+   */
+  activeQuestionIds?: string[];
+  prefetchQuestionIds?: string[];
 }) {
   const {
     questions,
@@ -1204,9 +1261,20 @@ export function useQuizPracticeBank(args: {
     resetKey,
     isCompleted,
     locked,
+    activeQuestionIds,
+    prefetchQuestionIds,
   } = args;
 
   const specMaxAttempts = (spec as any).maxAttempts;
+
+  const activeQuestionIdsKey = useMemo(
+      () => stablePracticeJson(activeQuestionIds ?? null),
+      [activeQuestionIds],
+  );
+  const prefetchQuestionIdsKey = useMemo(
+      () => stablePracticeJson(prefetchQuestionIds ?? null),
+      [prefetchQuestionIds],
+  );
 
   const tt = useTaggedT();
   const rawKeyRef = useRef<(key: string) => string>((key) => key);
@@ -1224,9 +1292,14 @@ export function useQuizPracticeBank(args: {
   const practiceRef = useRef(practice);
 
   const loadTokenRef = useRef<Record<string, number>>({});
+  const loadFailureKeyRef = useRef<Record<string, string>>({});
   const loadCycleRef = useRef(0);
 
   const idToStableKeyRef = useRef<Record<string, string>>({});
+
+  useEffect(() => {
+    loadFailureKeyRef.current = {};
+  }, [resetKey]);
 
   useEffect(() => {
     const nextMap: Record<string, string> = {};
@@ -1329,7 +1402,13 @@ export function useQuizPracticeBank(args: {
 
         const alreadyResolved = doesPracticeStateMatchQuestion(existing, q);
 
+        const loadFailureKey = buildPracticeLoadFailureKey(q);
 
+        if (force) {
+          delete loadFailureKeyRef.current[stableKey];
+        } else if (loadFailureKeyRef.current[stableKey] === loadFailureKey) {
+          return existing ?? null;
+        }
 
         if (!force && alreadyResolved) {
           const savedPatch = getSavedPracticePatch(initialState, q);
@@ -1351,7 +1430,7 @@ export function useQuizPracticeBank(args: {
             });
           }
 
-          return;
+          return existing;
         }
 
         const token = (loadTokenRef.current[stableKey] ?? 0) + 1;
@@ -1361,6 +1440,7 @@ export function useQuizPracticeBank(args: {
         const fallbackMax = unlimitedAttempts
             ? null
             : coerceMaxAttempts((q as any).maxAttempts ?? specMaxAttempts ?? null);
+
 
         setPractice((prev) => {
           const prevState = prev[stableKey] ?? prev[q.id];
@@ -1413,8 +1493,11 @@ export function useQuizPracticeBank(args: {
                   ? "project"
                   : "mixed");
 
+          const fetchCtrl = typeof AbortController !== "undefined" ? new AbortController() : null;
+
           const loaded = await withTimeout(
               fetchResolvedPracticeItem({
+                signal: fetchCtrl?.signal,
                 request: {
                   subject: fetchSpec.subject,
                   module: fetchSpec.module,
@@ -1459,6 +1542,7 @@ export function useQuizPracticeBank(args: {
               }),
               LOAD_TIMEOUT_MS,
               "Exercise took too long to load. Please retry.",
+              () => fetchCtrl?.abort(),
           );
 
           reviewDebug("7_RESTORE_LOADED useQuizPracticeBank.loadPracticeQuestion", {
@@ -1472,60 +1556,75 @@ export function useQuizPracticeBank(args: {
           if (loadCycleRef.current !== cycle) return;
           if (loadTokenRef.current[stableKey] !== token) return;
 
-          setPractice((prev) => {
-            const base = prev[stableKey] ?? prev[q.id];
-            if (!base) return prev;
+          const baseForLoaded =
+              practiceRef.current[stableKey] ??
+              practiceRef.current[q.id] ??
+              ({
+                loading: false,
+                error: null,
+                busy: false,
+                exercise: null,
+                item: null,
+                attempts: 0,
+                ok: null,
+                maxAttempts: fallbackMax,
+                helpPolicy: DEFAULT_PRACTICE_HELP_POLICY,
+              } as PracticeState);
 
-            const meta = getSavedPracticeMeta(initialState, q);
+          const meta = getSavedPracticeMeta(initialState, q);
+          const savedPatch = getSavedPracticePatch(initialState, q);
+          const nextItem = mergeSavedPatchIntoPracticeItem(
+              normalizeCurrentPracticeItem(
+                  loaded.item,
+                  loaded.exercise,
+                  loaded.item,
+              ),
+              savedPatch,
+          );
 
-            const savedPatch = getSavedPracticePatch(initialState, q);
-            const nextItem = mergeSavedPatchIntoPracticeItem(
-                normalizeCurrentPracticeItem(
-                    loaded.item,
-                    loaded.exercise,
-                    loaded.item,
-                ),
-                savedPatch,
-            );
+          const nextState: PracticeState = {
+            ...baseForLoaded,
+            loading: false,
+            error: null,
+            exerciseKey: questionIdentity.exerciseKey || stableKey,
+            topicId: questionIdentity.topicId,
+            subjectSlug: questionIdentity.subjectSlug,
+            moduleSlug: questionIdentity.moduleSlug,
+            sectionSlug: questionIdentity.sectionSlug,
+            exercise: loaded.exercise,
+            item: nextItem,
+            attempts: meta?.attempts ?? baseForLoaded.attempts ?? 0,
+            ok: meta?.ok ?? baseForLoaded.ok ?? null,
+            maxAttempts: loaded.maxAttempts ?? baseForLoaded.maxAttempts ?? null,
+            helpPolicy:
+                loaded.helpPolicy ??
+                baseForLoaded.helpPolicy ??
+                DEFAULT_PRACTICE_HELP_POLICY,
+          };
 
-            const nextState: PracticeState = {
-              ...base,
-              loading: false,
-              error: null,
-              exerciseKey: questionIdentity.exerciseKey || stableKey,
-              topicId: questionIdentity.topicId,
-              subjectSlug: questionIdentity.subjectSlug,
-              moduleSlug: questionIdentity.moduleSlug,
-              sectionSlug: questionIdentity.sectionSlug,
-              exercise: loaded.exercise,
-              item: nextItem,
-              attempts: meta?.attempts ?? base.attempts ?? 0,
-              ok: meta?.ok ?? base.ok ?? null,
-              maxAttempts: loaded.maxAttempts ?? base.maxAttempts ?? null,
-              helpPolicy:
-                  loaded.helpPolicy ??
-                  base.helpPolicy ??
-                  DEFAULT_PRACTICE_HELP_POLICY,
-            };
+          // D_SQL_LOOP_GUARD_SUCCESS_CLEAR
+          delete loadFailureKeyRef.current[stableKey];
 
-            exerciseDebug("D_useQuizPracticeBank_setPractice_loaded", {
-              qid: q.id,
-              stableKey,
-              selectedKeyWillWrite: stableKey,
-              alsoWritesQId: q.id !== stableKey,
-              exerciseKind: loaded.exercise?.kind,
-              loadedItem: summarizeExercisePatch(loaded.item),
-              savedPatchAtSet: summarizeExercisePatch(savedPatch),
-              previousItem: summarizeExercisePatch(base.item),
-              nextItem: summarizeExercisePatch(nextState.item),
-            });
-
-            return setPracticeForQuestion(prev, q, nextState);
+          exerciseDebug("D_useQuizPracticeBank_setPractice_loaded", {
+            qid: q.id,
+            stableKey,
+            selectedKeyWillWrite: stableKey,
+            alsoWritesQId: q.id !== stableKey,
+            exerciseKind: loaded.exercise?.kind,
+            loadedItem: summarizeExercisePatch(loaded.item),
+            savedPatchAtSet: summarizeExercisePatch(savedPatch),
+            previousItem: summarizeExercisePatch(baseForLoaded.item),
+            nextItem: summarizeExercisePatch(nextState.item),
           });
+
+          setPractice((prev) => setPracticeForQuestion(prev, q, nextState));
+          return nextState;
         } catch (e: any) {
           if (cancelledRef?.current) return;
           if (loadCycleRef.current !== cycle) return;
           if (loadTokenRef.current[stableKey] !== token) return;
+
+          loadFailureKeyRef.current[stableKey] = loadFailureKey;
 
           setPractice((prev) => {
             const current = prev[stableKey] ?? prev[q.id];
@@ -1548,6 +1647,7 @@ export function useQuizPracticeBank(args: {
 
             return setPracticeForQuestion(prev, q, nextState);
           });
+          return null;
         }
       },
       [initialState, questions, spec, specMaxAttempts, unlimitedAttempts],
@@ -1558,15 +1658,81 @@ export function useQuizPracticeBank(args: {
 
     const cancelledRef = { current: false };
 
-    for (const q of questions) {
-      if (q.kind !== "practice") continue;
+    const practiceQuestions = questions.filter(
+        (q): q is Extract<ReviewQuestion, { kind: "practice" }> => q.kind === "practice",
+    );
+
+    const byAnyId = new Map<string, Extract<ReviewQuestion, { kind: "practice" }>>();
+    for (const q of practiceQuestions) {
+      byAnyId.set(q.id, q);
+      byAnyId.set(getStablePracticeQuestionKey(q), q);
+    }
+
+    const pickQuestions = (ids: string[] | undefined) => {
+      if (!ids?.length) return [];
+      const out: Extract<ReviewQuestion, { kind: "practice" }>[] = [];
+      const seen = new Set<string>();
+
+      for (const id of ids) {
+        const q = byAnyId.get(String(id ?? "").trim());
+        if (!q) continue;
+
+        const key = getStablePracticeQuestionKey(q);
+        if (seen.has(key)) continue;
+        seen.add(key);
+        out.push(q);
+      }
+
+      return out;
+    };
+
+    const immediate = activeQuestionIds?.length
+        ? pickQuestions(activeQuestionIds)
+        : practiceQuestions;
+
+    for (const q of immediate) {
       void loadPracticeQuestion(q, { cancelledRef });
+    }
+
+    const prefetch = pickQuestions(prefetchQuestionIds).filter((q) => {
+      const key = getStablePracticeQuestionKey(q);
+      return !immediate.some((activeQ) => getStablePracticeQuestionKey(activeQ) === key);
+    });
+
+    let idleHandle: number | null = null;
+    let timeoutHandle: number | null = null;
+
+    if (prefetch.length && activeQuestionIds?.length) {
+      const runPrefetch = () => {
+        if (cancelledRef.current) return;
+        for (const q of prefetch) {
+          void loadPracticeQuestion(q, { cancelledRef });
+        }
+      };
+
+      if (typeof window !== "undefined" && "requestIdleCallback" in window) {
+        idleHandle = (window as any).requestIdleCallback(runPrefetch, { timeout: 1600 });
+      } else if (typeof window !== "undefined") {
+        timeoutHandle = window.setTimeout(runPrefetch, 600);
+      }
     }
 
     return () => {
       cancelledRef.current = true;
+      if (idleHandle != null && typeof window !== "undefined" && "cancelIdleCallback" in window) {
+        (window as any).cancelIdleCallback(idleHandle);
+      }
+      if (timeoutHandle != null && typeof window !== "undefined") {
+        window.clearTimeout(timeoutHandle);
+      }
     };
-  }, [questions, loadPracticeQuestion, resetKey]);
+  }, [
+    questions,
+    loadPracticeQuestion,
+    resetKey,
+    activeQuestionIdsKey,
+    prefetchQuestionIdsKey,
+  ]);
 
   const retryPracticeQuestion = useCallback(
       async (id: string) => {
@@ -1682,9 +1848,37 @@ export function useQuizPracticeBank(args: {
         if (isCompleted || locked) return;
 
         const key = getStablePracticeQuestionKey(q);
-        const ps = practice[key] ?? practice[q.id];
+        let ps = practice[key] ?? practice[q.id];
 
-        if (!ps || ps.loading || ps.busy || !ps.item || !ps.exercise) return;
+        if (!ps || ps.busy) return;
+
+        /**
+         * The editor/exercise shell is allowed to be ready from the manifest
+         * before /api/practice finishes issuing the signed validation key.
+         * On the first Check click, resolve that key and continue with the same
+         * submit instead of making the learner wait or click twice.
+         */
+        if (
+            ps.loading ||
+            !ps.item ||
+            !ps.exercise ||
+            !String((ps.item as any)?.key ?? "").trim()
+        ) {
+          const loadedState = await loadPracticeQuestion(q, { force: true });
+          ps =
+              loadedState ??
+              practiceRef.current[key] ??
+              practiceRef.current[q.id] ??
+              ps;
+        }
+
+        if (
+            !ps ||
+            ps.busy ||
+            !ps.item ||
+            !ps.exercise ||
+            !String((ps.item as any)?.key ?? "").trim()
+        ) return;
 
         const attemptsCapped =
             !unlimitedAttempts &&

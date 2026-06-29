@@ -371,6 +371,10 @@ function normalizeCodePatchFromWorkspace<T extends Partial<QItem> | null>(patch:
             : {}),
     } as T;
 }
+function hasNonBlankSqlSignal(value: unknown) {
+    return typeof value === "string" && value.trim().length > 0;
+}
+
 function getExerciseStarterCode(exercise: Exercise) {
     return String((exercise as any)?.starterCode ?? "").trim();
 }
@@ -382,10 +386,12 @@ function resolvedExerciseLanguage(exercise: Exercise) {
     const codeExercise = exercise as Extract<Exercise, { kind: "code_input" }>;
     const isSql =
         codeExercise.language === "sql" ||
-        Boolean(exerciseAny?.fixedSqlDialect) ||
-        Boolean(exerciseAny?.runtime?.datasetId) ||
-        typeof exerciseAny?.sqlSchemaSql === "string" ||
-        typeof exerciseAny?.sqlSeedSql === "string";
+        hasNonBlankSqlSignal(exerciseAny?.fixedSqlDialect) ||
+        hasNonBlankSqlSignal(exerciseAny?.runtime?.datasetId) ||
+        hasNonBlankSqlSignal(exerciseAny?.sqlDatasetId) ||
+        hasNonBlankSqlSignal(exerciseAny?.sqlSchemaSql) ||
+        hasNonBlankSqlSignal(exerciseAny?.sqlSeedSql) ||
+        hasNonBlankSqlSignal(exerciseAny?.sqlSetupSql);
 
     return isSql
         ? "sql"

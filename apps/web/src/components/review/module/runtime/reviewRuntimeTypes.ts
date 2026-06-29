@@ -60,6 +60,7 @@ export type ExerciseRuntimeState = {
   sketch?: SketchState | null;
   status: ExerciseRuntimeStatus;
   workspaceStatus: "pending" | "ready" | "error";
+  workspaceError?: string | null;
   workspaceOrigin?: WorkspaceOrigin;
   userEdited?: boolean;
   starterHash?: string;

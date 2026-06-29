@@ -344,16 +344,21 @@ function getWorkspaceFromAnyState(value: any): WorkspaceStateV2 | null {
     return null;
 }
 
+function hasNonBlankSqlSignal(value: unknown) {
+    return typeof value === "string" && value.trim().length > 0;
+}
+
 function isSqlExerciseManifest(exercise: CodeInputExerciseWithSqlExtras | null | undefined) {
     if (!exercise) return false;
 
     return (
         exercise.language === "sql" ||
-        Boolean((exercise as any)?.fixedSqlDialect) ||
-        Boolean((exercise as any)?.runtime?.datasetId) ||
-        typeof exercise.sqlSchemaSql === "string" ||
-        typeof exercise.sqlSeedSql === "string" ||
-        Boolean(exercise.sqlDatasetId)
+        hasNonBlankSqlSignal((exercise as any)?.fixedSqlDialect) ||
+        hasNonBlankSqlSignal((exercise as any)?.runtime?.datasetId) ||
+        hasNonBlankSqlSignal(exercise.sqlDatasetId) ||
+        hasNonBlankSqlSignal(exercise.sqlSchemaSql) ||
+        hasNonBlankSqlSignal(exercise.sqlSeedSql) ||
+        hasNonBlankSqlSignal((exercise as any)?.sqlSetupSql)
     );
 }
 
@@ -1065,10 +1070,12 @@ function CodeInputWithTools(props: {
     const isSqlExercise =
         curLang === "sql" ||
         exercise?.language === "sql" ||
-        Boolean((exercise as any)?.fixedSqlDialect) ||
-        Boolean((exercise as any)?.runtime?.datasetId) ||
-        typeof exercise?.sqlSchemaSql === "string" ||
-        typeof exercise?.sqlSeedSql === "string";
+        hasNonBlankSqlSignal((exercise as any)?.fixedSqlDialect) ||
+        hasNonBlankSqlSignal((exercise as any)?.runtime?.datasetId) ||
+        hasNonBlankSqlSignal((exercise as any)?.sqlDatasetId) ||
+        hasNonBlankSqlSignal(exercise?.sqlSchemaSql) ||
+        hasNonBlankSqlSignal(exercise?.sqlSeedSql) ||
+        hasNonBlankSqlSignal((exercise as any)?.sqlSetupSql);
 
     const exerciseSqlDialect = isSqlExercise ? exercise?.fixedSqlDialect : undefined;
 

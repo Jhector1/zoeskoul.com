@@ -3,6 +3,7 @@ import type { PrismaClient } from "@/lib/prisma";
 import type { TopicSlug } from "@/lib/practice/types";
 import { rngFromActor } from "@/lib/practice/catalog";
 import { toDbTopicSlug } from "@/lib/practice/topicSlugs";
+import { resolveTopicBundleManifest } from "@/lib/curriculum/resolveTopicBundleManifest";
 
 type RngSeedParts = {
   userId?: string | null;
@@ -50,6 +51,84 @@ async function findModuleIdBySlug(prisma: PrismaClient, moduleSlug: string) {
     select: { id: true },
   });
   return row?.id ?? null;
+}
+
+
+function lastTopicSegment(value: string) {
+  const parts = String(value ?? "").split(".").map((part) => part.trim()).filter(Boolean);
+  return parts.length ? parts[parts.length - 1] : String(value ?? "").trim();
+}
+
+function manifestConfirmsTopicScope(args: {
+  subjectSlug?: string;
+  moduleSlug?: string;
+  sectionSlug?: string;
+  rawTopic?: string | null;
+  rowSlug?: string | null;
+}) {
+  const subjectSlug = String(args.subjectSlug ?? "").trim();
+  if (!subjectSlug) return false;
+
+  const topicRef = String(args.rawTopic ?? args.rowSlug ?? "").trim();
+  if (!topicRef || topicRef === "all") return false;
+
+  const topicBundle = resolveTopicBundleManifest({
+    subjectSlug,
+    topicSlugOrId: topicRef,
+  });
+
+  if (!topicBundle) return false;
+
+  const bundleTopicId = String((topicBundle as any).topicId ?? "").trim();
+  const requestedBase = lastTopicSegment(topicRef);
+  const rowBase = lastTopicSegment(String(args.rowSlug ?? ""));
+
+  if (bundleTopicId && requestedBase && bundleTopicId !== requestedBase) return false;
+  if (bundleTopicId && rowBase && bundleTopicId !== rowBase) return false;
+
+  const bundleModuleSlug = String((topicBundle as any).moduleSlug ?? "").trim();
+  if (args.moduleSlug && bundleModuleSlug && bundleModuleSlug !== args.moduleSlug) {
+    return false;
+  }
+
+  const bundleSectionSlug = String((topicBundle as any).sectionSlug ?? "").trim();
+  if (args.sectionSlug && bundleSectionSlug && bundleSectionSlug !== args.sectionSlug) {
+    return false;
+  }
+
+  return true;
+}
+
+function okResolvedTopicFromManifestScope(args: {
+  row: {
+    id: string;
+    slug: string;
+    genKey: string | null;
+    meta: unknown;
+  };
+  requestedTopic: string | null;
+  reason: string;
+}) {
+  return {
+    kind: "ok" as const,
+    topicId: args.row.id,
+    topicSlug: args.row.slug as TopicSlug,
+    genKey: args.row.genKey ? String(args.row.genKey) : null,
+    variant: readVariantFromMeta(args.row),
+    meta: args.row.meta ?? null,
+    requestedTopic: args.requestedTopic,
+    topicFallbackUsed: true,
+    topicFallbackReason: args.reason,
+  };
+}
+
+function topicLookupSlugs(rawTopic: string) {
+  const primary = toDbTopicSlug(rawTopic);
+  const suffix = primary.includes(".")
+      ? primary.split(".").filter(Boolean).at(-1) ?? ""
+      : "";
+
+  return Array.from(new Set([primary, suffix].filter(Boolean)));
 }
 
 export async function resolveTopicFromScope
@@ -120,21 +199,36 @@ export async function resolveTopicFromScope
   // ----------------------------
   if (!wantsAll) {
     const dbSlug = toDbTopicSlug(requestedRaw);
+    const candidateDbSlugs = topicLookupSlugs(requestedRaw);
 
-    const row = await prisma.practiceTopic.findUnique({
-      where: { slug: dbSlug },
-      select: {
-        id: true,
-        slug: true,
-        genKey: true,
-        meta: true,
-        subjectId: true,
-        moduleId: true,
-      },
-    });
+    let row: {
+      id: string;
+      slug: string;
+      genKey: string | null;
+      meta: unknown;
+      subjectId: string | null;
+      moduleId: string | null;
+    } | null = null;
+
+    for (const candidateDbSlug of candidateDbSlugs) {
+      row = await prisma.practiceTopic.findUnique({
+        where: { slug: candidateDbSlug },
+        select: {
+          id: true,
+          slug: true,
+          genKey: true,
+          meta: true,
+          subjectId: true,
+          moduleId: true,
+        },
+      });
+
+      if (row) break;
+    }
 
     if (!row) {
-      if (!fallbackOnMissing) return { kind: "missing", message: `Topic "${dbSlug}" not found.` };
+      const tried = candidateDbSlugs.join(" or ") || dbSlug;
+      if (!fallbackOnMissing) return { kind: "missing", message: `Topic "${tried}" not found.` };
       // fallback -> pick any valid
       return resolveTopicFromScope({
         ...args,
@@ -223,6 +317,30 @@ export async function resolveTopicFromScope
     if (!moduleIdFromSession && sectionSlug) {
       const ok = await topicInSection(prisma, sectionSlug, row.id);
       if (!ok) {
+        /**
+         * Review/Try-it routes are generated from the compiled subject manifest.
+         * In dev, or after course-generation changes, the DB section-topic join can
+         * lag behind the manifest even though the exact authored exercise is valid.
+         * Trust the compiled manifest for an exact requested topic when it confirms
+         * the subject/module/section scope; keep DB topic row usage for the saved
+         * PracticeQuestionInstance topicId.
+         */
+        if (
+          manifestConfirmsTopicScope({
+            subjectSlug,
+            moduleSlug,
+            sectionSlug,
+            rawTopic: requestedRaw,
+            rowSlug: row.slug,
+          })
+        ) {
+          return okResolvedTopicFromManifestScope({
+            row,
+            requestedTopic,
+            reason: "requested_topic_section_mismatch_manifest_confirmed",
+          });
+        }
+
         const requestedModuleId = moduleSlug
             ? await findModuleIdBySlug(prisma, moduleSlug)
             : null;

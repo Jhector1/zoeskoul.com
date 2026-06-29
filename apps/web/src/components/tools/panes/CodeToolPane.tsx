@@ -268,6 +268,16 @@ export function shouldUseLocalReviewDraft(args: {
     return !Number.isFinite(runtimeUpdatedAt) || draft.savedAt >= runtimeUpdatedAt;
 }
 
+function firstNonBlankToolPaneString(...values: unknown[]) {
+    for (const value of values) {
+        if (typeof value === "string" && value.trim().length > 0) {
+            return value.trim();
+        }
+    }
+
+    return "";
+}
+
 function asWorkspaceLanguage(language: string | null | undefined): WorkspaceLanguage {
     const value = String(language ?? "");
     if (
@@ -731,6 +741,22 @@ export function pickDirectReviewRuntimeWorkspace(args: {
     effectiveLanguage: string | null | undefined;
     targetKey?: string | null;
 }) {
+    const blockingRuntimeStatus =
+        args.exerciseRuntime?.workspaceStatus === "pending" ||
+        args.exerciseRuntime?.workspaceStatus === "error" ||
+        args.editorRuntime?.workspaceStatus === "pending" ||
+        args.editorRuntime?.workspaceStatus === "error";
+
+    /**
+     * In review exercise routes, the practice card and right-side editor must
+     * share the same readiness contract. Do not let a route/registry starter or
+     * a stale bound Tools workspace make the editor look ready while the card is
+     * still loading or has failed to resolve its practice item.
+     */
+    if (blockingRuntimeStatus) {
+        return null;
+    }
+
     const editorCandidate = selectReadyRuntimeWorkspace(
         args.editorRuntime,
         args.effectiveLanguage,
@@ -1309,6 +1335,12 @@ export default function CodeToolPane(props: {
         typeof normalizedToolWorkspace?.language === "string"
             ? normalizedToolWorkspace.language
             : null;
+    const canonicalReviewWorkspaceLanguage =
+        isReviewRouteMode && typeof canonicalReviewRuntime?.workspace?.language === "string"
+            ? canonicalReviewRuntime.workspace.language
+            : null;
+    const runtimeBackedLanguage =
+        canonicalReviewWorkspaceLanguage ?? runtimeLanguage;
 
     const hasReadyDeterministicExerciseWorkspace = Boolean(
         exerciseRuntime?.workspaceStatus === "ready" &&
@@ -1326,13 +1358,14 @@ export default function CodeToolPane(props: {
         isReviewRouteMode &&
         !hasReadyDeterministicExerciseWorkspace &&
         normalizedToolWorkspaceLanguage &&
-        runtimeLanguage &&
-        !languagesCompatible(normalizedToolWorkspaceLanguage, runtimeLanguage),
+        runtimeBackedLanguage &&
+        !languagesCompatible(normalizedToolWorkspaceLanguage, runtimeBackedLanguage),
     );
 
     const effectiveLanguage = shouldPreferBoundToolLanguage
         ? (normalizedToolWorkspaceLanguage as RunnerLanguage)
-        : runtimeLanguage ?? toolLang;    const isSql = effectiveLanguage === "sql";
+        : runtimeBackedLanguage ?? toolLang;
+    const isSql = effectiveLanguage === "sql";
     const reviewTargetKey = resolvedEditorOwnerKey ?? exerciseKey ?? cardRuntimeKey ?? null;
     const reviewDirectWorkspace = useMemo(
         () =>
@@ -1483,6 +1516,13 @@ export default function CodeToolPane(props: {
     const runtimeWorkspaceError = Boolean(
         isReviewRouteMode && canonicalReviewRuntime?.workspaceStatus === "error",
     );
+    const runtimeWorkspaceErrorMessage =
+        firstNonBlankToolPaneString(
+            (canonicalReviewRuntime as any)?.workspaceError,
+            (canonicalReviewRuntime as any)?.error,
+            (editorRuntime as any)?.workspaceError,
+            (editorRuntime as any)?.error,
+        ) || "This exercise could not load. Retry the exercise or refresh the page.";
 
     const directRuntimeWorkspace = useMemo(() => {
         if (isReviewRouteMode) {
@@ -1568,11 +1608,7 @@ export default function CodeToolPane(props: {
         !toolHydrated,
     );
     const shouldHoldEditorForPendingExerciseBinding = Boolean(
-        pendingExerciseBinding &&
-        (
-            !isExerciseEditorMode ||
-            !reviewDirectWorkspaceReady
-        ),
+        pendingExerciseBinding,
     );
     const reviewWorkspaceNeedsMultiFile = Boolean(
         isReviewRouteMode &&
@@ -1616,6 +1652,7 @@ export default function CodeToolPane(props: {
         shouldMountFullIde &&
         !shouldHoldEditorForToolHydration &&
         !shouldHoldEditorForPendingExerciseBinding &&
+        !runtimeWorkspacePending &&
         finalReviewWorkspace &&
         !runtimeWorkspaceError &&
         finalWorkspaceMatchesLanguage &&
@@ -1650,6 +1687,12 @@ export default function CodeToolPane(props: {
         !canRenderEditor &&
         shouldWaitForWorkspace;
 
+    const showWorkspaceError =
+        runtimeWorkspaceError &&
+        !canRenderEditor &&
+        isReviewRouteMode &&
+        hasBindableEditorTarget;
+
     const showNoEditorTarget =
         !runtimeWorkspaceError &&
         !canRenderEditor &&
@@ -1666,9 +1709,19 @@ export default function CodeToolPane(props: {
             return;
         }
 
-        const timer = window.setTimeout(() => setLoadingTimedOut(true), 10000);
+        /**
+         * In review exercise mode the exercise card is the canonical readiness
+         * source. While it is still pending, the editor must wait with it instead
+         * of showing a separate timeout card. A real exercise failure is mirrored
+         * through runtimeWorkspaceError and rendered by showWorkspaceError.
+         */
+        if (pendingExerciseBinding || runtimeWorkspacePending) {
+            return;
+        }
+
+        const timer = window.setTimeout(() => setLoadingTimedOut(true), 60000);
         return () => window.clearTimeout(timer);
-    }, [showLoadingMask, workspaceContextKey]);
+    }, [showLoadingMask, workspaceContextKey, pendingExerciseBinding, runtimeWorkspacePending]);
 
     const retryEditorLoad = useCallback(() => {
         setLoadingTimedOut(false);
@@ -2484,7 +2537,23 @@ export default function CodeToolPane(props: {
                     </div>
                 ) : null}
 
-                {showLoadingMask ? (
+                {showWorkspaceError ? (
+                    <div className="absolute inset-0 z-20 flex items-center justify-center bg-neutral-950/70 backdrop-blur-sm">
+                        <div className="max-w-md rounded-2xl border border-white/10 bg-black/50 p-5 text-center text-white shadow-2xl">
+                            <div className="text-sm font-semibold">Editor is waiting for the exercise.</div>
+                            <div className="mt-2 text-xs text-white/65">
+                                {runtimeWorkspaceErrorMessage}
+                            </div>
+                            <button
+                                type="button"
+                                onClick={retryEditorLoad}
+                                className="mt-4 rounded-full bg-white px-4 py-2 text-xs font-bold text-neutral-950 hover:bg-white/90"
+                            >
+                                Retry editor
+                            </button>
+                        </div>
+                    </div>
+                ) : showLoadingMask ? (
                     <div className="absolute inset-0 z-20 flex items-center justify-center bg-neutral-950/70 backdrop-blur-sm">
                         {loadingTimedOut ? (
                             <div className="max-w-md rounded-2xl border border-white/10 bg-black/50 p-5 text-center text-white shadow-2xl">

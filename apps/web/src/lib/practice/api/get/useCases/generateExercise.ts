@@ -23,6 +23,7 @@ import {
     getAssignmentDifficulty,
 } from "../policies/session.policy";
 import { resolveTopicFromScope } from "../services/topicResolver.service";
+import { toDbTopicSlug } from "@/lib/practice/topicSlugs";
 
 function isGeneratorTopicMismatch(e: any) {
     const code = String((e as any)?.code ?? "");
@@ -105,6 +106,216 @@ function resolveAuthoredProjectExercise(args: {
     };
 }
 
+
+function readVariantFromAuthoredTopicMeta(meta: unknown) {
+    const v = (meta as any)?.variant;
+    return typeof v === "string" && v.trim() ? v.trim() : null;
+}
+
+function authoredTopicLookupSlugs(rawTopic: string) {
+    const primary = String(toDbTopicSlug(String(rawTopic ?? ""))).trim();
+    const suffix = primary.includes(".")
+        ? primary.split(".").filter(Boolean).at(-1) ?? ""
+        : "";
+
+    return Array.from(new Set([primary, suffix].filter(Boolean)));
+}
+
+// D_SQL_AUTHORED_MANIFEST_TOPIC_SELF_HEAL
+type AuthoredFallbackTopicRow = {
+    id: string;
+    slug: string;
+    genKey: string | null;
+    meta: unknown;
+};
+
+function lastAuthoredTopicSegment(value: unknown) {
+    const parts = String(value ?? "")
+        .split(".")
+        .map((part) => part.trim())
+        .filter(Boolean);
+    return parts.length ? parts[parts.length - 1] : String(value ?? "").trim();
+}
+
+function authoredTopicRowToResolved(args: {
+    row: AuthoredFallbackTopicRow;
+    requestedTopic: string;
+    reason: string;
+}) {
+    return {
+        kind: "ok" as const,
+        topicId: args.row.id,
+        topicSlug: args.row.slug as TopicSlug,
+        genKey: args.row.genKey ? String(args.row.genKey) : null,
+        variant: readVariantFromAuthoredTopicMeta(args.row.meta),
+        meta: args.row.meta ?? null,
+        requestedTopic: args.requestedTopic,
+        topicFallbackUsed: true,
+        topicFallbackReason: args.reason,
+    };
+}
+
+async function findAuthoredFallbackTopicRow(
+    prisma: PracticeGetContext["prisma"],
+    candidateSlugs: string[],
+): Promise<AuthoredFallbackTopicRow | null> {
+    for (const slug of candidateSlugs) {
+        const row = await prisma.practiceTopic.findUnique({
+            where: { slug },
+            select: {
+                id: true,
+                slug: true,
+                genKey: true,
+                meta: true,
+            },
+        });
+
+        if (row) return row;
+    }
+
+    return null;
+}
+
+async function ensureAuthoredManifestPracticeTopicRow(args: {
+    prisma: PracticeGetContext["prisma"];
+    subjectSlug: string;
+    rawTopic: string;
+    topicBundle: SlimTopicManifest;
+    originalMessage: string;
+}): Promise<AuthoredFallbackTopicRow | null> {
+    const topicId =
+        String((args.topicBundle as any)?.topicId ?? "").trim() ||
+        lastAuthoredTopicSegment(args.rawTopic);
+
+    if (!topicId) return null;
+
+    const candidateSlugs = Array.from(
+        new Set([...authoredTopicLookupSlugs(args.rawTopic), topicId].filter(Boolean)),
+    );
+
+    const existing = await findAuthoredFallbackTopicRow(args.prisma, candidateSlugs);
+    if (existing) return existing;
+
+    const subjectSlug = String(args.subjectSlug ?? "").trim();
+    const moduleSlug = String((args.topicBundle as any)?.moduleSlug ?? "").trim();
+    const sectionSlug = String((args.topicBundle as any)?.sectionSlug ?? "").trim();
+
+    const [subjectRow, moduleRow] = await Promise.all([
+        subjectSlug
+            ? args.prisma.practiceSubject.findUnique({
+                where: { slug: subjectSlug },
+                select: { id: true },
+            })
+            : Promise.resolve(null),
+        moduleSlug
+            ? args.prisma.practiceModule.findUnique({
+                where: { slug: moduleSlug },
+                select: { id: true },
+            })
+            : Promise.resolve(null),
+    ]);
+
+    const topicMeta =
+        (args.topicBundle as any)?.topic && typeof (args.topicBundle as any).topic === "object"
+            ? ((args.topicBundle as any).topic as Record<string, unknown>)
+            : {};
+
+    const titleKey =
+        typeof topicMeta.labelKey === "string" && topicMeta.labelKey.trim()
+            ? topicMeta.labelKey.trim()
+            : `topics.${subjectSlug || "subject"}.${moduleSlug || "module"}.${topicId}.label`;
+
+    const data: Record<string, unknown> = {
+        slug: topicId,
+        titleKey,
+        description: null,
+        order: 0,
+        genKey: null,
+        meta: {
+            ...topicMeta,
+            source: "manifest-authored-topic-self-heal",
+            subjectSlug: subjectSlug || null,
+            moduleSlug: moduleSlug || null,
+            sectionSlug: sectionSlug || null,
+            topicId,
+            requestedTopic: args.rawTopic,
+            reason: args.originalMessage,
+        },
+    };
+
+    if (subjectRow?.id) data.subjectId = subjectRow.id;
+    if (moduleRow?.id) data.moduleId = moduleRow.id;
+
+    try {
+        const created = await args.prisma.practiceTopic.create({
+            data: data as any,
+            select: {
+                id: true,
+                slug: true,
+                genKey: true,
+                meta: true,
+            },
+        });
+
+        return created;
+    } catch {
+        return findAuthoredFallbackTopicRow(args.prisma, candidateSlugs);
+    }
+}
+
+async function resolveAuthoredTopicFromManifestFallback(args: {
+    prisma: PracticeGetContext["prisma"];
+    subjectSlug: string;
+    rawTopic: string;
+    exerciseKey: string;
+    originalMessage: string;
+}) {
+    const topicBundle = resolveTopicBundleManifest({
+        subjectSlug: args.subjectSlug,
+        topicSlugOrId: args.rawTopic,
+    });
+
+    if (!topicBundle) return null;
+
+    try {
+        resolveManifestExercise({
+            topicBundle,
+            exerciseKey: args.exerciseKey,
+        });
+    } catch {
+        return null;
+    }
+
+    const candidateSlugs = authoredTopicLookupSlugs(args.rawTopic);
+
+    const existingRow = await findAuthoredFallbackTopicRow(args.prisma, candidateSlugs);
+    if (existingRow) {
+        return authoredTopicRowToResolved({
+            row: existingRow,
+            requestedTopic: args.rawTopic,
+            reason: `manifest_authored_topic_scope_bypass: ${args.originalMessage}`,
+        });
+    }
+
+    const ensuredRow = await ensureAuthoredManifestPracticeTopicRow({
+        prisma: args.prisma,
+        subjectSlug: args.subjectSlug,
+        rawTopic: args.rawTopic,
+        topicBundle,
+        originalMessage: args.originalMessage,
+    });
+
+    if (ensuredRow) {
+        return authoredTopicRowToResolved({
+            row: ensuredRow,
+            requestedTopic: args.rawTopic,
+            reason: `manifest_authored_topic_db_self_healed: ${args.originalMessage}`,
+        });
+    }
+
+    return null;
+}
+
 export async function generatePracticeExercise(
     ctx: PracticeGetContext,
     decision: Extract<PracticePurposeDecision, { ok: true }>,
@@ -182,7 +393,7 @@ export async function generatePracticeExercise(
         Boolean(effectiveSubjectSlug);
 
     if (canResolveExactAuthoredProjectExercise) {
-        const authoredResolved = await resolveTopicFromScope({
+        let authoredResolved = await resolveTopicFromScope({
             prisma,
             subjectSlug: session ? undefined : subject,
             moduleSlug: session ? undefined : module,
@@ -202,14 +413,26 @@ export async function generatePracticeExercise(
         } as any);
 
         if (authoredResolved.kind !== "ok") {
-            return {
-                kind: "json",
-                status: 400,
-                body: {
-                    message: "Invalid topic/filters",
-                    explanation: authoredResolved.message,
-                },
-            };
+            const manifestFallback = await resolveAuthoredTopicFromManifestFallback({
+                prisma,
+                subjectSlug: String(effectiveSubjectSlug),
+                rawTopic: String(topic),
+                exerciseKey: String(exerciseKey),
+                originalMessage: authoredResolved.message,
+            });
+
+            if (!manifestFallback) {
+                return {
+                    kind: "json",
+                    status: 400,
+                    body: {
+                        message: "Invalid topic/filters",
+                        explanation: authoredResolved.message,
+                    },
+                };
+            }
+
+            authoredResolved = manifestFallback;
         }
 
         const authored = resolveAuthoredProjectExercise({

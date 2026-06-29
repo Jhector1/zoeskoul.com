@@ -956,6 +956,23 @@ export function useReviewModuleController({
             ) ?? null;
     }, [runtimeExercises, viewTid, activeCard?.id]);
 
+    const activeCardRegistryExerciseEntry = useMemo(() => {
+        if (!targetRegistry || !activeCard?.id || !viewTid) return null;
+
+        return (targetRegistry.orderedKeys ?? [])
+            .map((key) => targetRegistry.byKey[key])
+            .find(
+                (entry) =>
+                    entry?.ownerKind === "exercise" &&
+                    entry.cardId === activeCard.id &&
+                    entry.topicId === viewTid &&
+                    Boolean(entry.exerciseStateKey) &&
+                    shouldUseWorkspaceCodeSurface({
+                        exercise: entry.toolManifest as any,
+                    }),
+            ) ?? null;
+    }, [targetRegistry, activeCard?.id, viewTid]);
+
     const shouldDefaultCollapseRightRail = shouldDefaultCollapseToolsRailForCompactQuiz({
         compactLearnerUi: learnerUiFlags.compactLearnerUi,
         showDebugLearningUi: learnerUiFlags.showDebugLearningUi,
@@ -994,6 +1011,7 @@ export function useReviewModuleController({
                 routeTarget?.cardId ?? activeCard?.id ?? "",
                 routeExerciseStateKey,
                 activeCard?.type ?? "",
+                activeCardRegistryExerciseEntry?.exerciseStateKey ?? "",
                 activeCardWorkspaceExercise?.exerciseKey ?? "",
                 activeCardTryItKey,
                 shouldDefaultCollapseRightRail ? "collapsed" : "open",
@@ -1003,6 +1021,7 @@ export function useReviewModuleController({
             activeCard?.type,
             activeCardTryItKey,
             activeCardWorkspaceExercise?.exerciseKey,
+            activeCardRegistryExerciseEntry?.exerciseStateKey,
             routeTarget?.cardId,
             routeTarget?.kind,
             routeTarget?.sectionSlug,
@@ -1719,7 +1738,7 @@ export function useReviewModuleController({
             : null;
     const shouldRenderStackedTools = Boolean(
         toolsRailVisibility.isAvailable &&
-        (routeWorkspaceExercise || activeCardWorkspaceExercise),
+        (routeWorkspaceExercise || activeCardWorkspaceExercise || activeCardRegistryExerciseEntry),
     );
 
     useEffect(() => {
@@ -1734,6 +1753,7 @@ export function useReviewModuleController({
 
     const stackedToolsExerciseKey =
         activeExerciseTarget?.exerciseStateKey ??
+        activeCardRegistryExerciseEntry?.exerciseStateKey ??
         activeCardWorkspaceExercise?.exerciseKey ??
         routeWorkspaceExercise?.exerciseStateKey ??
         null;
@@ -1748,6 +1768,7 @@ export function useReviewModuleController({
     );
     const expectedExerciseBindingKey =
         activeExerciseTarget?.exerciseStateKey ??
+        activeCardRegistryExerciseEntry?.exerciseStateKey ??
         routeWorkspaceExercise?.exerciseStateKey ??
         activeCardWorkspaceExercise?.exerciseKey ??
         null;
@@ -1769,6 +1790,7 @@ export function useReviewModuleController({
 
     const rightRailExerciseKey = routeCanUseBoundExercise
         ? activeExerciseTarget?.exerciseStateKey ??
+          activeCardRegistryExerciseEntry?.exerciseStateKey ??
           (boundExerciseMatchesActiveCard ? tool.boundId : null)
         : null;
     const rightRailExerciseRuntime = useReviewRuntimeStore((s) =>

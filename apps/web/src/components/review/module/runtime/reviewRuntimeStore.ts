@@ -1,6 +1,6 @@
 import {create} from "zustand";
 import type {WorkspaceStateV2} from "@/components/ide/types";
-import type {LooseManifestRecord} from "./reviewTargetRegistry";
+import type {LooseManifestRecord, ReviewTargetRegistry} from "./reviewTargetRegistry";
 import type {
     CardRuntimeState,
     EditorRuntimeState,
@@ -13,6 +13,7 @@ import type {
 import {getCardStateKey} from "./exerciseKeys";
 import {resolveExerciseWorkspace} from "./exerciseWorkspaceResolver";
 import type { ReviewTargetEntry } from "./reviewTargetRegistry";
+import type { ReviewResolvedRouteTarget } from "./reviewRoute";
 import { resolveWorkspaceForTarget } from "./resolveWorkspaceForTarget";
 import {resolveCourseLanguage, resolveCourseSqlRunnerConfig} from "./courseProfiles";
 import {resolveDeterministicEditorSource, type ReviewDeterministicEditorSource} from "./deterministicEditorSource";
@@ -847,6 +848,34 @@ function findTargetRegistryEntry(
     }
 
     return best?.entry ?? null;
+}
+
+function findCardAuthoredExerciseEntry(
+    registry: ReviewTargetRegistry | null | undefined,
+    target: ReviewResolvedRouteTarget | null | undefined,
+): ReviewTargetEntry | null {
+    if (!registry || !target || target.kind !== "card") return null;
+
+    const sectionSlug = String(target.sectionSlug ?? "").trim();
+    const topicId = String(target.topicId ?? "").trim();
+    const topicSlug = String(target.topicSlug ?? "").trim();
+    const cardId = String(target.cardId ?? "").trim();
+
+    if (!cardId) return null;
+
+    for (const key of registry.orderedKeys ?? []) {
+        const entry = registry.byKey[key];
+        if (!entry) continue;
+        if (entry.ownerKind !== "exercise") continue;
+        if (!entry.exerciseStateKey) continue;
+        if (entry.cardId !== cardId) continue;
+        if (sectionSlug && entry.sectionSlug !== sectionSlug) continue;
+        if (topicId && entry.topicId !== topicId) continue;
+        if (topicSlug && entry.topicSlug !== topicSlug) continue;
+        return entry;
+    }
+
+    return null;
 }
 
 function buildRouteExerciseManifestFromEntry(
@@ -2292,6 +2321,12 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
             const nextStdin = String(stdin ?? "");
             const existingLanguage = String(existing?.language ?? existing?.lang ?? "");
             const nextLanguageComparable = String(nextLanguage ?? nextLang ?? "");
+            const existingWorkspaceStatus = String(existing?.workspaceStatus ?? "");
+            const nextWorkspaceStatus = String((effectivePatch as any).workspaceStatus ?? existing?.workspaceStatus ?? "ready");
+            const existingWorkspaceError = String((existing as any)?.workspaceError ?? "");
+            const nextWorkspaceError = Object.prototype.hasOwnProperty.call(effectivePatch, "workspaceError")
+                ? String((effectivePatch as any).workspaceError ?? "")
+                : existingWorkspaceError;
 
             const noMeaningfulChange = Boolean(
                 existing &&
@@ -2300,6 +2335,8 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
                 existingCode === nextCode &&
                 existingStdin === nextStdin &&
                 existingLanguage === nextLanguageComparable &&
+                existingWorkspaceStatus === nextWorkspaceStatus &&
+                existingWorkspaceError === nextWorkspaceError &&
                 existing.workspaceOrigin === nextWorkspaceOrigin &&
                 Boolean(existing.userEdited) === Boolean(nextUserEdited) &&
                 String(existing.starterHash ?? "") === String(nextStarterHash ?? ""),
@@ -2317,6 +2354,10 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
                 nextStdinLength: nextStdin.length,
                 existingLanguage,
                 nextLanguage: nextLanguageComparable,
+                existingWorkspaceStatus,
+                nextWorkspaceStatus,
+                existingWorkspaceError,
+                nextWorkspaceError,
                 noop: noMeaningfulChange,
                 patchKeys: Object.keys(effectivePatch ?? {}),
             });
@@ -3221,7 +3262,46 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
                 toolManifest: registryEntry?.toolManifest ?? registryEntry?.item ?? null,
                 toolKey: registryEntry?.toolScopeKey ?? `${cardKey}:general`,
             });
-            // Unbind exercise if we moved to a regular card
+
+            /**
+             * Text/sketch cards may own an embedded authored Try-it exercise.
+             * In that case the card route is only the lesson surface; the right rail
+             * editor must bind to the embedded exercise owner immediately from the
+             * manifest registry. Waiting for the QuizPracticeCard network load to
+             * register/bind it produces the broken state seen in dev:
+             *
+             *   card route /sketch/sketch-1
+             *   -> Tools says "Loading exercise..." forever
+             *   -> embedded card times out
+             *
+             * Manifest route registry is the source of truth, so create and bind the
+             * child exercise here during route sync. DB/progress can still overlay
+             * saved user code later through ensureExercise.
+             */
+            const embeddedExerciseEntry = findCardAuthoredExerciseEntry(
+                targetRegistry,
+                target,
+            );
+
+            if (embeddedExerciseEntry?.exerciseStateKey) {
+                const routeExerciseManifest =
+                    buildRouteExerciseManifestFromEntry(embeddedExerciseEntry);
+
+                get().ensureExercise({
+                    exerciseKey: embeddedExerciseEntry.exerciseStateKey,
+                    subjectSlug: subjectSlug ?? "",
+                    moduleSlug: moduleSlug ?? "",
+                    sectionSlug: embeddedExerciseEntry.sectionSlug,
+                    topicId: embeddedExerciseEntry.topicId,
+                    cardId: embeddedExerciseEntry.cardId,
+                    manifest: routeExerciseManifest,
+                    entry: embeddedExerciseEntry,
+                });
+                get().bindExerciseTool(embeddedExerciseEntry.exerciseStateKey);
+                return;
+            }
+
+            // Unbind exercise only for cards that do not expose an authored editor surface.
             get().unbindExerciseTool(get().tool.boundExerciseKey ?? "");
         }
     },

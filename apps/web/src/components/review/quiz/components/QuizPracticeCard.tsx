@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import type { ReviewQuestion } from "@/lib/subjects/types";
 import type { PracticeState } from "@/components/review/quiz/hooks/useQuizPracticeBank";
 import { isEmptyPracticeAnswer } from "@/components/review/quiz/hooks/useQuizPracticeBank";
@@ -193,7 +193,7 @@ export async function flushReviewToolsBeforeSubmit(
   }
 }
 
-const LOADING_TIMEOUT_MS = 8000;
+const LOADING_TIMEOUT_MS = 30000;
 
 function cleanPracticeSlotPart(value: unknown) {
   return String(value ?? "")
@@ -366,17 +366,22 @@ export function workspaceStableKey(workspace: WorkspaceStateV2 | null | undefine
   });
 }
 
+function hasNonBlankSqlSignal(value: unknown) {
+  return typeof value === "string" && value.trim().length > 0;
+}
+
 function getManifestExerciseLanguage(exercise: Exercise | null | undefined) {
   const exAny = exercise as any;
   const isSqlExercise =
       exercise?.kind === "code_input" &&
       (
           exAny?.language === "sql" ||
-          Boolean(exAny?.fixedSqlDialect) ||
-          Boolean(exAny?.runtime?.datasetId) ||
-          typeof exAny?.sqlSchemaSql === "string" ||
-          typeof exAny?.sqlSeedSql === "string" ||
-          Boolean(exAny?.sqlDatasetId)
+          hasNonBlankSqlSignal(exAny?.fixedSqlDialect) ||
+          hasNonBlankSqlSignal(exAny?.runtime?.datasetId) ||
+          hasNonBlankSqlSignal(exAny?.sqlDatasetId) ||
+          hasNonBlankSqlSignal(exAny?.sqlSchemaSql) ||
+          hasNonBlankSqlSignal(exAny?.sqlSeedSql) ||
+          hasNonBlankSqlSignal(exAny?.sqlSetupSql)
       );
 
   if (isSqlExercise) return "sql";
@@ -1074,11 +1079,19 @@ export default function QuizPracticeCard(props: {
   const practiceExerciseRuntimeDatasetId = String(
       (livePracticeManifest as any)?.runtime?.datasetId ?? "",
   );
-  const practiceExerciseSqlDatasetId = String((livePracticeManifest as any)?.sqlDatasetId ?? "");
+  const practiceExerciseSqlDatasetId = firstNonBlankString(
+      (livePracticeManifest as any)?.sqlDatasetId,
+  );
   const practiceExerciseHasSqlSchema =
-      typeof (livePracticeManifest as any)?.sqlSchemaSql === "string";
+      hasNonBlankSqlSignal((livePracticeManifest as any)?.sqlSchemaSql);
   const practiceExerciseHasSqlSeed =
-      typeof (livePracticeManifest as any)?.sqlSeedSql === "string";
+      hasNonBlankSqlSignal((livePracticeManifest as any)?.sqlSeedSql);
+  const practiceResolvedForToolBinding = Boolean(
+      ps?.exercise &&
+      ps?.item &&
+      !ps.loading &&
+      !ps.error,
+  );
   const practiceItemReady = Boolean(livePracticeItem);
   const practiceStarterCode = String(
       (livePracticeManifest as any)?.starterCode ??
@@ -1109,6 +1122,7 @@ export default function QuizPracticeCard(props: {
   }, [runtimeExercise]);
 
   useEffect(() => {
+    if (!practiceResolvedForToolBinding) return;
     if (!livePracticeManifest) return;
     if (livePracticeManifest.kind !== "code_input") return;
     if (!livePracticeItem && !resolvedProjectStepManifest) return;
@@ -1212,6 +1226,7 @@ export default function QuizPracticeCard(props: {
     practiceExerciseSqlDatasetId,
     practiceExerciseHasSqlSchema,
     practiceExerciseHasSqlSeed,
+    practiceResolvedForToolBinding,
     practiceItemReady,
     practiceStarterCode,
     practiceStarterFilesKey,
@@ -1313,15 +1328,23 @@ export default function QuizPracticeCard(props: {
     return ps.attempts >= max;
   }, [ps, unlimitedAttempts]);
 
+  /**
+   * The visible exercise/editor can be ready from the authored project-step
+   * starter before /api/practice has finished minting the signed validation
+   * item. Readiness must follow the same live item that ExerciseRenderer uses,
+   * not only ps.item from the async practice bank.
+   */
+  const answerItemForReadiness = livePracticeItem ?? ps?.item ?? null;
+
   const hasInput = useMemo(() => {
-    if (!ex || !ps?.item) return false;
+    if (!ex || !answerItemForReadiness) return false;
 
     if (ex.kind === "code_input" && runtimeExerciseCode.trim().length > 0) {
       return true;
     }
 
-    return !isEmptyPracticeAnswer(ex, ps.item, padRef?.current);
-  }, [ex, ps?.item, padRef, runtimeExerciseCode]);
+    return !isEmptyPracticeAnswer(ex, answerItemForReadiness, padRef?.current);
+  }, [ex, answerItemForReadiness, padRef, runtimeExerciseCode]);
 
   const isCodeExerciseWithInput = ex?.kind === "code_input" && hasInput;
   const compactLearnerUi = learnerUiFlags.compactLearnerUi;
@@ -1448,6 +1471,7 @@ export default function QuizPracticeCard(props: {
       lastToolsBindKeyRef.current = null;
       return;
     }
+    if (!practiceResolvedForToolBinding) return;
     if (!toolsEnabled) return;
     if (!toolsAny) return;
     if (!isCodeInput) return;
@@ -1470,6 +1494,7 @@ export default function QuizPracticeCard(props: {
     return () => window.clearTimeout(timer);
   }, [
     toolsActive,
+    practiceResolvedForToolBinding,
     toolsEnabled,
     toolsAny,
     isCodeInput,
@@ -1479,6 +1504,7 @@ export default function QuizPracticeCard(props: {
     exerciseKeyForTools,
     toolsAny.boundId,
   ]);
+
 
   const disableCheck =
       (!isCodeExerciseWithInput && !unlocked) ||
@@ -1529,12 +1555,12 @@ export default function QuizPracticeCard(props: {
 
   const maxForRenderer = ps?.maxAttempts ?? Number.POSITIVE_INFINITY;
 
-  const hasExercise = Boolean(ex && livePracticeItem);
+  const hasExercise = Boolean(ex && livePracticeItem && practiceResolvedForToolBinding);
   const hasProjectStepFallback = Boolean(
-      resolvedProjectStepManifest && projectStepFallbackItem,
+      resolvedProjectStepManifest && projectStepFallbackItem && practiceResolvedForToolBinding,
   );
   const isInitialLoading = Boolean(
-      ps?.loading && !hasExercise && !hasProjectStepFallback && !ps?.error,
+      (!ps || ps.loading) && !hasExercise && !hasProjectStepFallback && !ps?.error,
   );
   const isRefreshing = Boolean(ps?.loading && hasExercise && !hasProjectStepFallback);
   const hasBlockingError = Boolean(ps?.error && !hasExercise && !hasProjectStepFallback);
@@ -1558,19 +1584,89 @@ export default function QuizPracticeCard(props: {
     return () => window.clearTimeout(timer);
   }, [isInitialLoading, q.id]);
 
-  useEffect(() => {
-    if (!isInitialLoading) return;
-    if (!loadTimedOut) return;
-    if (!props.onRetryExercise) return;
-
-    const retryKey = `${q.id}:${ps?.attempts ?? 0}`;
-    if (autoRetriedRef.current === retryKey) return;
-
-    autoRetriedRef.current = retryKey;
-    props.onRetryExercise();
-  }, [isInitialLoading, loadTimedOut, props.onRetryExercise, q.id, ps?.attempts]);
+  /**
+   * A slow /api/practice response is not a failed exercise. Do not auto-retry
+   * while the original request is still in flight; that creates duplicate GETs
+   * and can cause the successful first response to be discarded by a newer load.
+   * Manual Retry below still force-loads if the learner wants to retry.
+   */
 
   const showStuckLoading = isInitialLoading && loadTimedOut;
+  const practiceLoadErrorForTools = hasBlockingError
+      ? String(ps?.error ?? "Failed to load practice exercise.")
+      : "";
+
+  useLayoutEffect(() => {
+    if (!exerciseKeyForTools) return;
+
+    const store = useReviewRuntimeStore.getState();
+    let existing = store.exercises[exerciseKeyForTools];
+
+    if (!existing && livePracticeManifest?.kind === "code_input") {
+      ensureRuntimeExercise({
+        exerciseKey: exerciseKeyForTools,
+        subjectSlug: fetchSubjectSlug,
+        moduleSlug: fetchModuleSlug,
+        sectionSlug: fetchSectionSlug,
+        topicId: fetchTopicId,
+        cardId: fetchOwnerCardId,
+        manifest: livePracticeManifest,
+        saved: livePracticeItem ?? livePracticeManifest,
+      });
+
+      existing = useReviewRuntimeStore.getState().exercises[exerciseKeyForTools];
+    }
+
+    if (!existing) return;
+
+    const nextWorkspaceStatus = hasBlockingError
+        ? "error"
+        : isInitialLoading || showStuckLoading
+            ? "pending"
+            : practiceResolvedForToolBinding
+                ? "ready"
+                : null;
+
+    if (!nextWorkspaceStatus) return;
+
+    const nextWorkspaceError =
+        nextWorkspaceStatus === "error" ? practiceLoadErrorForTools : null;
+
+    if (
+        existing.workspaceStatus === nextWorkspaceStatus &&
+        String((existing as any).workspaceError ?? "") === String(nextWorkspaceError ?? "")
+    ) {
+      return;
+    }
+
+    patchRuntimeExercise(exerciseKeyForTools, {
+      workspaceStatus: nextWorkspaceStatus,
+      workspaceError: nextWorkspaceError,
+      workspace: existing.workspace,
+      codeWorkspace: existing.workspace,
+      ideWorkspace: existing.workspace,
+      code: existing.code,
+      source: existing.source,
+      stdin: existing.stdin,
+      codeStdin: existing.codeStdin,
+    } as any);
+  }, [
+    ensureRuntimeExercise,
+    exerciseKeyForTools,
+    fetchOwnerCardId,
+    fetchModuleSlug,
+    fetchSectionSlug,
+    fetchSubjectSlug,
+    fetchTopicId,
+    hasBlockingError,
+    isInitialLoading,
+    livePracticeItem,
+    livePracticeManifest,
+    patchRuntimeExercise,
+    practiceLoadErrorForTools,
+    practiceResolvedForToolBinding,
+    showStuckLoading,
+  ]);
 
   return (
       <div className={["p-2", !unlocked ? "opacity-70" : ""].join(" ")}>
@@ -1585,12 +1681,12 @@ export default function QuizPracticeCard(props: {
         ) : null}
 
         {showStuckLoading ? (
-            <div className="ui-quiz-note-danger">
+            <div className="ui-quiz-status-soft">
               <div>
                 {ui.t(
-                    "practice.loadingStuck",
+                    "practice.loadingSlow",
                     {},
-                    "This exercise is taking longer than expected to load.",
+                    "Still loading the exercise. Please wait a moment.",
                 )}
               </div>
 
@@ -1654,7 +1750,7 @@ export default function QuizPracticeCard(props: {
                 </button>
               </div>
             </div>
-        ) : ex && livePracticeItem ? (
+        ) : ex && livePracticeItem && practiceResolvedForToolBinding ? (
             <div className="mt-1">
               {isRefreshing ? (
                   <div className="mb-2 ui-quiz-status-soft flex items-center gap-2">
