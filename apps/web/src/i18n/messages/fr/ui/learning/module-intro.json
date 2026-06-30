@@ -1,0 +1,45 @@
+{
+  "moduleIntroUi": {
+    "kicker": "{subject} • Module {n}",
+    "introVideoKicker": "Vidéo d’introduction",
+    "introVideoHint": "Regardez d’abord si vous voulez une vue d’ensemble avant la pratique.",
+    "openLink": "Ouvrir ↗",
+    "labels": {
+      "sections": "Sections",
+      "topics": "Thèmes",
+      "weeks": "Semaines",
+      "est": "Est.",
+      "status": "Statut"
+    },
+    "status": {
+      "syncing": "Synchronisation…",
+      "completed": "Terminé",
+      "inProgress": "En cours",
+      "new": "Nouveau"
+    },
+    "cta": {
+      "review": "Revoir le module →",
+      "continue": "Continuer →",
+      "start": "Commencer →"
+    },
+    "actions": {
+      "back": "← Retour",
+      "practice": "Pratiquer →"
+    },
+    "sections": {
+      "prereqs": "Prérequis",
+      "whatLearn": "Ce que vous allez apprendre",
+      "whyMatters": "Pourquoi c’est important"
+    },
+    "defaults": {
+      "outcome1": "Comprendre les idées clés avec des exemples guidés",
+      "outcome2": "S’entraîner avec des questions interactives et un feedback immédiat",
+      "outcome3": "Gagner en confiance pour la suite des modules",
+      "why1": "Ce module débloque des compétences que vous réutiliserez souvent",
+      "why2": "Il améliore la vitesse et la précision sur de vrais problèmes",
+      "why3": "C’est une base pour les entretiens et les projets réels"
+    },
+    "videoTitle": "{module} — Introduction",
+    "minutesShort": "{n} min"
+  }
+}

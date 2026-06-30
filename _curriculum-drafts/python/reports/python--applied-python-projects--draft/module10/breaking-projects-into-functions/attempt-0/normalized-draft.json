@@ -1,0 +1,277 @@
+{
+  "title": "Breaking Projects Into Functions",
+  "summary": "Plan a capstone project by splitting one useful automation program into small functions with clear inputs, outputs, files, and tests.",
+  "minutes": 25,
+  "sketchBlocks": [
+    {
+      "id": "plan-functions",
+      "title": "Turn one big project into small jobs",
+      "bodyMarkdown": "A capstone project feels easier when you stop thinking about it as **one giant script** and start thinking about it as **a team of small functions**.\n\nFor example, imagine a simple **expense summary** project. Instead of writing everything in one place, you can break it into jobs like:\n\n- `load_expenses(path)` → read lines from a file\n- `parse_expenses(lines)` → turn text into numbers and categories\n- `total_by_category(records)` → calculate totals\n- `save_report(path, totals)` → write the final report\n\nHere is a small planning example in code:\n\n```python\ndef load_expenses(path):\n    with open(path, \"r\") as file:\n        return file.readlines()\n\n\ndef parse_expenses(lines):\n    records = []\n    for line in lines:\n        category, amount = line.strip().split(\",\")\n        records.append({\"category\": category, \"amount\": float(amount)})\n    return records\n```\n\nLine by line:\n\n- `load_expenses(path)` takes a file path as input.\n- It opens the file and returns all lines.\n- `parse_expenses(lines)` takes those lines.\n- It splits each line into a category and amount.\n- It builds a list of records and returns it.\n\nNotice how each function has **one clear responsibility**. That makes testing and debugging much easier.\n\n**Try it yourself:** In the first project step below, you will build a planning helper that prints the names of project stages. Run it, then change one stage name or add a new stage to see how a small function can control part of a bigger project."
+    },
+    {
+      "id": "inputs-outputs-flow",
+      "title": "Plan inputs, outputs, and data flow",
+      "bodyMarkdown": "When you design a function, ask three questions:\n\n1. **What goes in?**\n2. **What comes out?**\n3. **What job happens in the middle?**\n\nA good project plan often looks like a chain:\n\n`file text -> cleaned lines -> summary data -> report text -> saved file`\n\nHere is a worked example for a text analyzer project:\n\n```python\ndef clean_words(text):\n    words = text.lower().split()\n    cleaned = []\n    for word in words:\n        cleaned.append(word.strip(\".,!?\"))\n    return cleaned\n\n\ndef count_long_words(words):\n    count = 0\n    for word in words:\n        if len(word) >= 5:\n            count += 1\n    return count\n```\n\nStep by step:\n\n- `clean_words(text)` receives one string.\n- It lowers the text and splits it into words.\n- It removes simple punctuation.\n- It returns a cleaned list.\n- `count_long_words(words)` receives that list.\n- It counts words with length 5 or more.\n- It returns one number.\n\nThis is **data flow**: one function's output becomes the next function's input.\n\n**Your turn:** Pick a project idea such as a quiz game, task tracker, or text analyzer. Write down 3 function names and a short note for each function's input and output before you code."
+    },
+    {
+      "id": "test-small-parts",
+      "title": "Test and polish one piece at a time",
+      "bodyMarkdown": "Small functions are easier to test than one huge script. You can check each piece before connecting everything together.\n\nFor example:\n\n```python\ndef format_report(title, total):\n    return f\"{title}\\nTotal: {total}\"\n\n\nassert format_report(\"Expenses\", 42) == \"Expenses\\nTotal: 42\"\nassert format_report(\"Tasks\", 3) == \"Tasks\\nTotal: 3\"\n```\n\nWhat this does:\n\n- `format_report` builds a report string.\n- The first `assert` checks one example.\n- The second `assert` checks another example.\n- If an assertion fails, you know exactly which small part needs fixing.\n\nIn a capstone project, this helps you polish the final result:\n\n- test helper functions first\n- connect them in `main`\n- check file reading and writing\n- improve names and structure\n\n**Try this:** After you finish a project step, change one input value and click **Run** again. If the output changes in the way you expect, your function design is probably clear and reusable."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "project-step-1",
+      "kind": "code_input",
+      "title": "Plan the project stages",
+      "prompt": "You are starting a capstone text-report project. Complete the program so it defines a function named `build_plan()` that returns this list of stage names in order: `['load data', 'clean data', 'summarize data', 'save report']`. Then print each stage on its own line by looping over the returned list. Keep the provided structure and use the function to drive the output.",
+      "starterCode": "def build_plan():\n    # TODO: return the project stages as a list\n    pass\n\n\nstages = build_plan()\n\n# TODO: print each stage on its own line\n",
+      "solutionCode": "def build_plan():\n    return ['load data', 'clean data', 'summarize data', 'save report']\n\n\nstages = build_plan()\n\nfor stage in stages:\n    print(stage)\n",
+      "tests": [
+        {
+          "stdin": "",
+          "stdout": "load data\nclean data\nsummarize data\nsave report\n",
+          "match": "exact"
+        },
+        {
+          "stdin": "",
+          "stdout": "load data\nclean data\nsummarize data\nsave report\n",
+          "match": "exact"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Return the list from `build_plan()`, then loop through that returned list and print each item.",
+      "help": {
+        "concept": "This step practices breaking a project into named stages. A function can return a reusable plan, and the main part of the program can use that returned value to control output.",
+        "hint_1": "`build_plan()` should create and return one list containing four strings in the required order.",
+        "hint_2": "After calling `build_plan()`, store the result in a variable and use a `for` loop to print each stage on a separate line."
+      }
+    },
+    {
+      "id": "project-step-2",
+      "kind": "code_input",
+      "title": "Read and clean report lines",
+      "prompt": "Build on the project by organizing file input and cleaning into functions. Complete `load_lines(path)` so it reads all lines from `data/raw_notes.txt` and returns them. Complete `clean_lines(lines)` so it strips spaces, skips blank lines, and returns only the cleaned non-empty lines. Then print each cleaned line on its own line. Use the provided file path exactly.",
+      "starterCode": "def build_plan():\n    return ['load data', 'clean data', 'summarize data', 'save report']\n\n\ndef load_lines(path):\n    # TODO: read and return all lines from the file\n    pass\n\n\ndef clean_lines(lines):\n    cleaned = []\n    # TODO: strip each line and keep only non-empty lines\n    return cleaned\n\n\nraw_lines = load_lines('data/raw_notes.txt')\ncleaned_lines = clean_lines(raw_lines)\n\nfor line in cleaned_lines:\n    print(line)\n",
+      "solutionCode": "def build_plan():\n    return ['load data', 'clean data', 'summarize data', 'save report']\n\n\ndef load_lines(path):\n    with open(path, 'r') as file:\n        return file.readlines()\n\n\ndef clean_lines(lines):\n    cleaned = []\n    for line in lines:\n        stripped = line.strip()\n        if stripped != '':\n            cleaned.append(stripped)\n    return cleaned\n\n\nraw_lines = load_lines('data/raw_notes.txt')\ncleaned_lines = clean_lines(raw_lines)\n\nfor line in cleaned_lines:\n    print(line)\n",
+      "tests": [
+        {
+          "stdin": "",
+          "stdout": "Buy milk\nCall Sam\nFinish report\n",
+          "match": "exact",
+          "files": [
+            {
+              "path": "data/raw_notes.txt",
+              "content": "  Buy milk  \n\nCall Sam\n   \nFinish report   \n\n\nn/a ignored? "
+            }
+          ]
+        },
+        {
+          "stdin": "",
+          "stdout": "Plan trip\nPack bag\n",
+          "match": "exact",
+          "files": [
+            {
+              "path": "data/raw_notes.txt",
+              "content": "\n Plan trip \n\nPack bag  "
+            }
+          ]
+        }
+      ],
+      "files": [
+        {
+          "path": "data/raw_notes.txt",
+          "content": "  Buy milk  \n\nCall Sam\n   \nFinish report   "
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "One function should read the file, and the next should strip each line and ignore empty results.",
+      "help": {
+        "concept": "This step separates file input from data cleaning. One function reads raw text, and another function transforms that text into cleaner data for later project steps.",
+        "hint_1": "In `load_lines`, open the given path in read mode and return `file.readlines()` or an equivalent list of lines.",
+        "hint_2": "In `clean_lines`, use `line.strip()` inside a loop. Only add the stripped line to the result if it is not an empty string."
+      }
+    },
+    {
+      "id": "project-step-3",
+      "kind": "code_input",
+      "title": "Summarize the cleaned notes",
+      "prompt": "Continue the same project. Keep the earlier functions, then complete a new function named `summarize_lines(lines)`. It should return a dictionary with two entries: `count` for the number of cleaned lines and `longest` for the longest cleaned line. If two lines tie for longest, keep the first one found. Do not print inside the function. After calling it, print exactly two lines in this format:\n`Count: X`\n`Longest: Y`",
+      "starterCode": "def build_plan():\n    return ['load data', 'clean data', 'summarize data', 'save report']\n\n\ndef load_lines(path):\n    with open(path, 'r') as file:\n        return file.readlines()\n\n\ndef clean_lines(lines):\n    cleaned = []\n    for line in lines:\n        stripped = line.strip()\n        if stripped != '':\n            cleaned.append(stripped)\n    return cleaned\n\n\ndef summarize_lines(lines):\n    # TODO: return a dictionary with count and longest\n    pass\n\n\nraw_lines = load_lines('data/raw_notes.txt')\ncleaned_lines = clean_lines(raw_lines)\nsummary = summarize_lines(cleaned_lines)\n\nprint(f\"Count: {summary['count']}\")\nprint(f\"Longest: {summary['longest']}\")\n",
+      "solutionCode": "def build_plan():\n    return ['load data', 'clean data', 'summarize data', 'save report']\n\n\ndef load_lines(path):\n    with open(path, 'r') as file:\n        return file.readlines()\n\n\ndef clean_lines(lines):\n    cleaned = []\n    for line in lines:\n        stripped = line.strip()\n        if stripped != '':\n            cleaned.append(stripped)\n    return cleaned\n\n\ndef summarize_lines(lines):\n    summary = {'count': len(lines), 'longest': ''}\n    for line in lines:\n        if len(line) > len(summary['longest']):\n            summary['longest'] = line\n    return summary\n\n\nraw_lines = load_lines('data/raw_notes.txt')\ncleaned_lines = clean_lines(raw_lines)\nsummary = summarize_lines(cleaned_lines)\n\nprint(f\"Count: {summary['count']}\")\nprint(f\"Longest: {summary['longest']}\")\n",
+      "tests": [
+        {
+          "stdin": "",
+          "stdout": "Count: 3\nLongest: Finish report draft\n",
+          "match": "exact",
+          "files": [
+            {
+              "path": "data/raw_notes.txt",
+              "content": " Buy milk \n\nFinish report draft\nCall Sam"
+            }
+          ]
+        },
+        {
+          "stdin": "",
+          "stdout": "Count: 2\nLongest: Water plants\n",
+          "match": "exact",
+          "files": [
+            {
+              "path": "data/raw_notes.txt",
+              "content": "Water plants\nRead"
+            }
+          ]
+        }
+      ],
+      "files": [
+        {
+          "path": "data/raw_notes.txt",
+          "content": " Buy milk \n\nFinish report draft\nCall Sam"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Track how many cleaned lines there are and compare lengths to keep the current longest line.",
+      "help": {
+        "concept": "A summary function should take prepared data and return a compact result. Returning a dictionary makes it easy to pass multiple named results to later steps of the project.",
+        "hint_1": "Start with something like `summary = {'count': len(lines), 'longest': ''}` and update `longest` while looping.",
+        "hint_2": "Only replace the current longest line when the new line is strictly longer, so the first tied line stays in place."
+      }
+    },
+    {
+      "id": "project-step-4",
+      "kind": "code_input",
+      "title": "Format and save the final report",
+      "prompt": "Now finish the reporting part of the same project. Keep the earlier functions and add two new functions:\n- `format_report(summary)` should return one string exactly like this:\n  `Project Notes Report\\nCount: X\\nLongest: Y`\n- `save_report(path, text)` should write that text to `data/report.txt`\n\nAfter saving, reopen `data/report.txt` and print its full contents so the output panel shows the final report.",
+      "starterCode": "def build_plan():\n    return ['load data', 'clean data', 'summarize data', 'save report']\n\n\ndef load_lines(path):\n    with open(path, 'r') as file:\n        return file.readlines()\n\n\ndef clean_lines(lines):\n    cleaned = []\n    for line in lines:\n        stripped = line.strip()\n        if stripped != '':\n            cleaned.append(stripped)\n    return cleaned\n\n\ndef summarize_lines(lines):\n    summary = {'count': len(lines), 'longest': ''}\n    for line in lines:\n        if len(line) > len(summary['longest']):\n            summary['longest'] = line\n    return summary\n\n\ndef format_report(summary):\n    # TODO: return the final report string\n    pass\n\n\ndef save_report(path, text):\n    # TODO: write the report text to the file\n    pass\n\n\nraw_lines = load_lines('data/raw_notes.txt')\ncleaned_lines = clean_lines(raw_lines)\nsummary = summarize_lines(cleaned_lines)\nreport_text = format_report(summary)\nsave_report('data/report.txt', report_text)\n\nwith open('data/report.txt', 'r') as file:\n    print(file.read())\n",
+      "solutionCode": "def build_plan():\n    return ['load data', 'clean data', 'summarize data', 'save report']\n\n\ndef load_lines(path):\n    with open(path, 'r') as file:\n        return file.readlines()\n\n\ndef clean_lines(lines):\n    cleaned = []\n    for line in lines:\n        stripped = line.strip()\n        if stripped != '':\n            cleaned.append(stripped)\n    return cleaned\n\n\ndef summarize_lines(lines):\n    summary = {'count': len(lines), 'longest': ''}\n    for line in lines:\n        if len(line) > len(summary['longest']):\n            summary['longest'] = line\n    return summary\n\n\ndef format_report(summary):\n    return f\"Project Notes Report\\nCount: {summary['count']}\\nLongest: {summary['longest']}\"\n\n\ndef save_report(path, text):\n    with open(path, 'w') as file:\n        file.write(text)\n\n\nraw_lines = load_lines('data/raw_notes.txt')\ncleaned_lines = clean_lines(raw_lines)\nsummary = summarize_lines(cleaned_lines)\nreport_text = format_report(summary)\nsave_report('data/report.txt', report_text)\n\nwith open('data/report.txt', 'r') as file:\n    print(file.read())\n",
+      "tests": [
+        {
+          "stdin": "",
+          "stdout": "Project Notes Report\nCount: 3\nLongest: Finish report draft\n",
+          "match": "exact",
+          "files": [
+            {
+              "path": "data/raw_notes.txt",
+              "content": " Buy milk \n\nFinish report draft\nCall Sam"
+            }
+          ]
+        },
+        {
+          "stdin": "",
+          "stdout": "Project Notes Report\nCount: 2\nLongest: Water plants\n",
+          "match": "exact",
+          "files": [
+            {
+              "path": "data/raw_notes.txt",
+              "content": "Water plants\nRead"
+            }
+          ]
+        }
+      ],
+      "files": [
+        {
+          "path": "data/raw_notes.txt",
+          "content": " Buy milk \n\nFinish report draft\nCall Sam"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Build one report string with newline characters, write it to the file, then read the file back and print it.",
+      "help": {
+        "concept": "A polished project often separates calculation from presentation. One function formats the final text, and another handles file output so each part stays easy to test and reuse.",
+        "hint_1": "Use the keys `summary['count']` and `summary['longest']` inside an f-string or string building expression.",
+        "hint_2": "After calling `save_report`, open `data/report.txt` in read mode and print the text you read so the saved result is visible."
+      }
+    },
+    {
+      "id": "project-step-5",
+      "kind": "code_input",
+      "title": "Refactor into helper files and add checks",
+      "prompt": "Polish the capstone by splitting the project into helper files. Complete the provided files so the project works across modules:\n- In `helpers/processing.py`, finish `clean_lines(lines)` and `summarize_lines(lines)`.\n- In `helpers/reporting.py`, finish `format_report(summary)`.\n- In `main.py`, load `data/raw_notes.txt`, use the helper functions, save the report to `data/report.txt`, and print the saved report.\n\nAlso keep the provided `assert` checks working in `main.py` before the final project run.",
+      "starterCode": "# Open the provided files in the files panel and complete the TODOs.\n# Click Run to execute main.py.\n",
+      "solutionCode": "# main.py\nfrom helpers.processing import clean_lines, summarize_lines\nfrom helpers.reporting import format_report\n\nassert clean_lines(['  A  ', '', ' B ']) == ['A', 'B']\nassert summarize_lines(['A', 'Long line']) == {'count': 2, 'longest': 'Long line'}\nassert format_report({'count': 2, 'longest': 'Long line'}) == 'Project Notes Report\\nCount: 2\\nLongest: Long line'\n\nwith open('data/raw_notes.txt', 'r') as file:\n    raw_lines = file.readlines()\n\ncleaned_lines = clean_lines(raw_lines)\nsummary = summarize_lines(cleaned_lines)\nreport_text = format_report(summary)\n\nwith open('data/report.txt', 'w') as file:\n    file.write(report_text)\n\nwith open('data/report.txt', 'r') as file:\n    print(file.read())\n",
+      "tests": [
+        {
+          "stdin": "",
+          "stdout": "Project Notes Report\nCount: 3\nLongest: Finish report draft\n",
+          "match": "exact",
+          "files": [
+            {
+              "path": "data/raw_notes.txt",
+              "content": " Buy milk \n\nFinish report draft\nCall Sam"
+            },
+            {
+              "path": "helpers/processing.py",
+              "content": "def clean_lines(lines):\n    cleaned = []\n    for line in lines:\n        stripped = line.strip()\n        if stripped != '':\n            cleaned.append(stripped)\n    return cleaned\n\n\ndef summarize_lines(lines):\n    summary = {'count': len(lines), 'longest': ''}\n    for line in lines:\n        if len(line) > len(summary['longest']):\n            summary['longest'] = line\n    return summary"
+            },
+            {
+              "path": "helpers/reporting.py",
+              "content": "def format_report(summary):\n    return f\"Project Notes Report\\nCount: {summary['count']}\\nLongest: {summary['longest']}\""
+            },
+            {
+              "path": "main.py",
+              "content": "from helpers.processing import clean_lines, summarize_lines\nfrom helpers.reporting import format_report\n\nassert clean_lines(['  A  ', '', ' B ']) == ['A', 'B']\nassert summarize_lines(['A', 'Long line']) == {'count': 2, 'longest': 'Long line'}\nassert format_report({'count': 2, 'longest': 'Long line'}) == 'Project Notes Report\\nCount: 2\\nLongest: Long line'\n\nwith open('data/raw_notes.txt', 'r') as file:\n    raw_lines = file.readlines()\n\ncleaned_lines = clean_lines(raw_lines)\nsummary = summarize_lines(cleaned_lines)\nreport_text = format_report(summary)\n\nwith open('data/report.txt', 'w') as file:"
+            }
+          ]
+        },
+        {
+          "stdin": "",
+          "stdout": "Project Notes Report\nCount: 2\nLongest: Water plants\n",
+          "match": "exact",
+          "files": [
+            {
+              "path": "data/raw_notes.txt",
+              "content": "Water plants\nRead"
+            },
+            {
+              "path": "helpers/processing.py",
+              "content": "def clean_lines(lines):\n    cleaned = []\n    for line in lines:\n        stripped = line.strip()\n        if stripped != '':\n            cleaned.append(stripped)\n    return cleaned\n\n\ndef summarize_lines(lines):\n    summary = {'count': len(lines), 'longest': ''}\n    for line in lines:\n        if len(line) > len(summary['longest']):\n            summary['longest'] = line\n    return summary"
+            },
+            {
+              "path": "helpers/reporting.py",
+              "content": "def format_report(summary):\n    return f\"Project Notes Report\\nCount: {summary['count']}\\nLongest: {summary['longest']}\""
+            },
+            {
+              "path": "main.py",
+              "content": "from helpers.processing import clean_lines, summarize_lines\nfrom helpers.reporting import format_report\n\nassert clean_lines(['  A  ', '', ' B ']) == ['A', 'B']\nassert summarize_lines(['A', 'Long line']) == {'count': 2, 'longest': 'Long line'}\nassert format_report({'count': 2, 'longest': 'Long line'}) == 'Project Notes Report\\nCount: 2\\nLongest: Long line'\n\nwith open('data/raw_notes.txt', 'r') as file:\n    raw_lines = file.readlines()\n\ncleaned_lines = clean_lines(raw_lines)\nsummary = summarize_lines(cleaned_lines)\nreport_text = format_report(summary)\n\nwith open('data/report.txt', 'w') as file:"
+            }
+          ]
+        }
+      ],
+      "files": [
+        {
+          "path": "main.py",
+          "content": "from helpers.processing import clean_lines, summarize_lines\nfrom helpers.reporting import format_report\n\nassert clean_lines(['  A  ', '', ' B ']) == ['A', 'B']\nassert summarize_lines(['A', 'Long line']) == {'count': 2, 'longest': 'Long line'}\nassert format_report({'count': 2, 'longest': 'Long line'}) == 'Project Notes Report\\nCount: 2\\nLongest: Long line'\n\nwith open('data/raw_notes.txt', 'r') as file:\n    raw_lines = file.readlines()\n\ncleaned_lines = clean_lines(raw_lines)\nsummary = summarize_lines(cleaned_lines)\nreport_text = format_report(summary)\n\nwith open('data/report.txt', 'w') as file:"
+        },
+        {
+          "path": "helpers/processing.py",
+          "content": "def clean_lines(lines):\n    cleaned = []\n    # TODO: strip each line and keep only non-empty lines\n    return cleaned\n\n\ndef summarize_lines(lines):\n    # TODO: return {'count': ..., 'longest': ...}\n    pass"
+        },
+        {
+          "path": "helpers/reporting.py",
+          "content": "def format_report(summary):\n    # TODO: return the final report string\n    pass"
+        },
+        {
+          "path": "data/raw_notes.txt",
+          "content": " Buy milk \n\nFinish report draft\nCall Sam"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Put cleaning and summarizing logic in `helpers/processing.py`, report formatting in `helpers/reporting.py`, then import and use those functions in `main.py`.",
+      "help": {
+        "concept": "Refactoring means moving related jobs into helper modules without changing the program's behavior. Assertions help confirm that each small piece still works after the code is reorganized.",
+        "hint_1": "`main.py` should import from both helper files, run the asserts, then read the input file, build the summary, format the report, save it, and print the saved text.",
+        "hint_2": "Make sure `summarize_lines` returns the same dictionary shape as before, and `format_report` returns exactly the same multi-line report text used in the previous step."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Capstone Project: Notes Report Refactor",
+    "stepIds": [
+      "project-step-1",
+      "project-step-2",
+      "project-step-3",
+      "project-step-4",
+      "project-step-5"
+    ]
+  }
+}

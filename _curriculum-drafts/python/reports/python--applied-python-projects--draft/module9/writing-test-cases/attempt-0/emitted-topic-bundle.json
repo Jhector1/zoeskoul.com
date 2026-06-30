@@ -1,0 +1,543 @@
+{
+  "topicId": "writing-test-cases",
+  "subjectSlug": "python--applied-python-projects--draft",
+  "moduleSlug": "python-9-testing-debugging-and-style",
+  "sectionSlug": "python--applied-python-projects--draft-python-9-testing-basics",
+  "prefix": "py9",
+  "minutes": 25,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "python",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "topic": {
+    "labelKey": "topics.python--applied-python-projects--draft.python-9-testing-debugging-and-style.writing-test-cases.label",
+    "summaryKey": "topics.python--applied-python-projects--draft.python-9-testing-debugging-and-style.writing-test-cases.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python--applied-python-projects--draft.python-9-testing-debugging-and-style.writing-test-cases.cards.sketch0.title",
+      "sketchId": "sk1",
+      "height": 420,
+      "tryIt": {
+        "id": "try-writing-test-cases-sketch0",
+        "titleKey": "topics.python--applied-python-projects--draft.python-9-testing-debugging-and-style.writing-test-cases.tryIt.try_writing_test_cases_sketch0.title",
+        "promptKey": "topics.python--applied-python-projects--draft.python-9-testing-debugging-and-style.writing-test-cases.tryIt.try_writing_test_cases_sketch0.prompt",
+        "exerciseKey": "ex1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python--applied-python-projects--draft.python-9-testing-debugging-and-style.writing-test-cases.cards.sketch1.title",
+      "sketchId": "sk2",
+      "height": 420,
+      "tryIt": {
+        "id": "try-writing-test-cases-sketch1",
+        "titleKey": "topics.python--applied-python-projects--draft.python-9-testing-debugging-and-style.writing-test-cases.tryIt.try_writing_test_cases_sketch1.title",
+        "promptKey": "topics.python--applied-python-projects--draft.python-9-testing-debugging-and-style.writing-test-cases.tryIt.try_writing_test_cases_sketch1.prompt",
+        "exerciseKey": "ex6",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python--applied-python-projects--draft.python-9-testing-debugging-and-style.writing-test-cases.cards.sketch2.title",
+      "sketchId": "sk3",
+      "height": 420,
+      "tryIt": {
+        "id": "try-writing-test-cases-sketch2",
+        "titleKey": "topics.python--applied-python-projects--draft.python-9-testing-debugging-and-style.writing-test-cases.tryIt.try_writing_test_cases_sketch2.title",
+        "promptKey": "topics.python--applied-python-projects--draft.python-9-testing-debugging-and-style.writing-test-cases.tryIt.try_writing_test_cases_sketch2.prompt",
+        "exerciseKey": "ex11",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.python--applied-python-projects--draft.python-9-testing-debugging-and-style.writing-test-cases.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python--applied-python-projects--draft.python-9-testing-debugging-and-style.writing-test-cases.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "ex1",
+            "titleKey": "topics.python--applied-python-projects--draft.python-9-testing-debugging-and-style.writing-test-cases.projectSteps.ex1.title",
+            "exerciseKey": "ex1",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "ex6",
+            "titleKey": "topics.python--applied-python-projects--draft.python-9-testing-debugging-and-style.writing-test-cases.projectSteps.ex6.title",
+            "exerciseKey": "ex6",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "ex11",
+            "titleKey": "topics.python--applied-python-projects--draft.python-9-testing-debugging-and-style.writing-test-cases.projectSteps.ex11.title",
+            "exerciseKey": "ex11",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sk1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--applied-python-projects--draft.python-9-testing-debugging-and-style.writing-test-cases.sk1.title",
+      "bodyKey": "sketches.python--applied-python-projects--draft.python-9-testing-debugging-and-style.writing-test-cases.sk1.bodyMarkdown"
+    },
+    {
+      "id": "sk2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--applied-python-projects--draft.python-9-testing-debugging-and-style.writing-test-cases.sk2.title",
+      "bodyKey": "sketches.python--applied-python-projects--draft.python-9-testing-debugging-and-style.writing-test-cases.sk2.bodyMarkdown"
+    },
+    {
+      "id": "sk3",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--applied-python-projects--draft.python-9-testing-debugging-and-style.writing-test-cases.sk3.title",
+      "bodyKey": "sketches.python--applied-python-projects--draft.python-9-testing-debugging-and-style.writing-test-cases.sk3.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "ex1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-9-testing-debugging-and-style.writing-test-cases.quiz.ex1",
+      "language": "python",
+      "starterCode": "def is_even(n):\n    # return True if n is even, otherwise False\n    pass\n\nassert is_even(4) == True\nassert is_even(5) == False\nassert is_even(0) == True\n\n# Add one more assert below",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def is_even(n):\n    # return True if n is even, otherwise False\n    pass\n\nassert is_even(4) == True\nassert is_even(5) == False\nassert is_even(0) == True\n\n# Add one more assert below",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def is_even(n):\n    return n % 2 == 0\n\nassert is_even(4) == True\nassert is_even(5) == False\nassert is_even(0) == True\nassert is_even(12) == True\n\nprint(\"All tests passed\")",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def is_even(n):\n    # return True if n is even, otherwise False\n    pass\n\nassert is_even(4) == True\nassert is_even(5) == False\nassert is_even(0) == True\n\n# Add one more assert below",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def is_even(n):\n    # return True if n is even, otherwise False\n    pass\n\nassert is_even(4) == True\nassert is_even(5) == False\nassert is_even(0) == True\n\n# Add one more assert below",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def is_even(n):\n    return n % 2 == 0\n\nassert is_even(4) == True\nassert is_even(5) == False\nassert is_even(0) == True\nassert is_even(12) == True\n\nprint(\"All tests passed\")",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def is_even(n):\n    return n % 2 == 0\n\nassert is_even(4) == True\nassert is_even(5) == False\nassert is_even(0) == True\nassert is_even(12) == True\n\nprint(\"All tests passed\")",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "is_even",
+            "args": [
+              ""
+            ],
+            "argKinds": [],
+            "expected": "All tests passed",
+            "message": "Return the expected result for is_even(n)."
+          },
+          {
+            "type": "function_returns",
+            "functionName": "is_even",
+            "args": [
+              ""
+            ],
+            "argKinds": [],
+            "expected": "All tests passed",
+            "message": "Return the expected result for is_even(n)."
+          },
+          {
+            "type": "no_stdout",
+            "message": "This task should return a value instead of printing output."
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex2",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-9-testing-debugging-and-style.writing-test-cases.quiz.ex2",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "c"
+      }
+    },
+    {
+      "id": "ex3",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-9-testing-debugging-and-style.writing-test-cases.quiz.ex3",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "ex4",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-9-testing-debugging-and-style.writing-test-cases.quiz.ex4",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "12"
+      }
+    },
+    {
+      "id": "ex5",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-9-testing-debugging-and-style.writing-test-cases.quiz.ex5",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "ex6",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-9-testing-debugging-and-style.writing-test-cases.quiz.ex6",
+      "language": "python",
+      "starterCode": "def greet(name):\n    # return a greeting string\n    pass\n\nassert greet(\"Ava\") == \"Hello, Ava\"\nassert greet(\"Ben\") == \"Hello, Ben\"\n\n# Add one more assert below",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def greet(name):\n    # return a greeting string\n    pass\n\nassert greet(\"Ava\") == \"Hello, Ava\"\nassert greet(\"Ben\") == \"Hello, Ben\"\n\n# Add one more assert below",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def greet(name):\n    return \"Hello, \" + name\n\nassert greet(\"Ava\") == \"Hello, Ava\"\nassert greet(\"Ben\") == \"Hello, Ben\"\nassert greet(\"Mia\") == \"Hello, Mia\"\n\nprint(\"All tests passed\")",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def greet(name):\n    # return a greeting string\n    pass\n\nassert greet(\"Ava\") == \"Hello, Ava\"\nassert greet(\"Ben\") == \"Hello, Ben\"\n\n# Add one more assert below",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def greet(name):\n    # return a greeting string\n    pass\n\nassert greet(\"Ava\") == \"Hello, Ava\"\nassert greet(\"Ben\") == \"Hello, Ben\"\n\n# Add one more assert below",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def greet(name):\n    return \"Hello, \" + name\n\nassert greet(\"Ava\") == \"Hello, Ava\"\nassert greet(\"Ben\") == \"Hello, Ben\"\nassert greet(\"Mia\") == \"Hello, Mia\"\n\nprint(\"All tests passed\")",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def greet(name):\n    return \"Hello, \" + name\n\nassert greet(\"Ava\") == \"Hello, Ava\"\nassert greet(\"Ben\") == \"Hello, Ben\"\nassert greet(\"Mia\") == \"Hello, Mia\"\n\nprint(\"All tests passed\")",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "greet",
+            "args": [
+              ""
+            ],
+            "argKinds": [],
+            "expected": "All tests passed",
+            "message": "Return the expected result for greet(name)."
+          },
+          {
+            "type": "function_returns",
+            "functionName": "greet",
+            "args": [
+              ""
+            ],
+            "argKinds": [],
+            "expected": "All tests passed",
+            "message": "Return the expected result for greet(name)."
+          },
+          {
+            "type": "no_stdout",
+            "message": "This task should return a value instead of printing output."
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex7",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-9-testing-debugging-and-style.writing-test-cases.quiz.ex7",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "ex8",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-9-testing-debugging-and-style.writing-test-cases.quiz.ex8",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "ex9",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-9-testing-debugging-and-style.writing-test-cases.quiz.ex9",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "\"A\""
+      }
+    },
+    {
+      "id": "ex10",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-9-testing-debugging-and-style.writing-test-cases.quiz.ex10",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
+    },
+    {
+      "id": "ex11",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-9-testing-debugging-and-style.writing-test-cases.quiz.ex11",
+      "language": "python",
+      "starterCode": "def count_items(items):\n    # return the number of items in the list\n    pass\n\nassert count_items([1, 2, 3]) == 3\nassert count_items([]) == 0\n\n# Add one more assert below",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def count_items(items):\n    # return the number of items in the list\n    pass\n\nassert count_items([1, 2, 3]) == 3\nassert count_items([]) == 0\n\n# Add one more assert below",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def count_items(items):\n    return len(items)\n\nassert count_items([1, 2, 3]) == 3\nassert count_items([]) == 0\nassert count_items([\"a\"]) == 1\n\nprint(\"All tests passed\")",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def count_items(items):\n    # return the number of items in the list\n    pass\n\nassert count_items([1, 2, 3]) == 3\nassert count_items([]) == 0\n\n# Add one more assert below",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def count_items(items):\n    # return the number of items in the list\n    pass\n\nassert count_items([1, 2, 3]) == 3\nassert count_items([]) == 0\n\n# Add one more assert below",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def count_items(items):\n    return len(items)\n\nassert count_items([1, 2, 3]) == 3\nassert count_items([]) == 0\nassert count_items([\"a\"]) == 1\n\nprint(\"All tests passed\")",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def count_items(items):\n    return len(items)\n\nassert count_items([1, 2, 3]) == 3\nassert count_items([]) == 0\nassert count_items([\"a\"]) == 1\n\nprint(\"All tests passed\")",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "count_items",
+            "args": [
+              ""
+            ],
+            "argKinds": [],
+            "expected": "All tests passed",
+            "message": "Return the expected result for count_items(items)."
+          },
+          {
+            "type": "function_returns",
+            "functionName": "count_items",
+            "args": [
+              ""
+            ],
+            "argKinds": [],
+            "expected": "All tests passed",
+            "message": "Return the expected result for count_items(items)."
+          },
+          {
+            "type": "no_stdout",
+            "message": "This task should return a value instead of printing output."
+          }
+        ]
+      }
+    }
+  ]
+}

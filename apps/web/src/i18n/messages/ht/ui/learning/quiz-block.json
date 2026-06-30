@@ -1,0 +1,52 @@
+{
+  "reviewQuizUi": {
+    "unlockHint": "Reponn kestyon anvan an byen pou w debloke kestyon sa a.",
+    "noQuestions": "Pa gen kestyon.",
+    "autoAdvance": "Avanse otomatikman",
+    "buttons": {
+      "next": "Pwochen →",
+      "finish": "Fini →",
+      "checkQuestion": "Verifye kestyon sa a",
+      "checkAnswer": "Verifye repons sa a",
+      "reveal": "Revele",
+      "resetQuiz": "Reyinisyalize quiz la",
+      "skip": "Sote",
+      "skipped": "Sote",
+      "continue": "Kontinye",
+      "excused": "Eskize"
+    },
+    "placeholders": {
+      "enterNumber": "Antre yon nimewo"
+    },
+    "status": {
+      "notChecked": "Poko verifye",
+      "correct": "✓ Kòrèk",
+      "notCorrect": "✕ Pa kòrèk",
+      "skipped": "↷ Sote",
+      "locked": "Bloke",
+      "completed": "✓ Fini",
+      "passed": "✓ Reyisi"
+    },
+    "practice": {
+      "loadingExercise": "Ap chaje egzèsis la…",
+      "noExercise": "Pa gen egzèsis.",
+      "checking": "Ap verifye…",
+      "attempts": "Tantativ: {n}/{max}"
+    },
+    "footer": {
+      "summary": "Verifye: {checked}/{total} • Kòrèk: {correct}/{total} • Nòt: {score}%",
+      "progressAria": "Pwogrè quiz la",
+      "sequentialHint": "Verifye chak kestyon nan lòd pou w reyisi",
+      "nonSequentialHint": "Verifye tout kestyon yo pou w reyisi"
+    },
+    "resetDialog": {
+      "title": "Reyinisyalize quiz sa a?",
+      "confirm": "Reyinisyalize quiz la",
+      "intro": "Sa ap:",
+      "b1": "Efase repons ou te chwazi yo ak eta verifikasyon an.",
+      "b2": "Efase tantativ egzèsis yo ak eta lokal pou quiz sa a.",
+      "b3": "Rechaje menm seri kestyon yo (li pa jenere yon nouvo seri).",
+      "cannotUndo": "Sa pa ka defèt."
+    }
+  }
+}

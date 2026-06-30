@@ -1,0 +1,35 @@
+{
+  "MatricesPart2Landing": {
+    "pageTitle": "Matriks — Pati 2",
+    "pageIntro": "Bati bon entwisyon sou nòrm, ran (rank), tolerans nimerik, ak estabilite. Konprann poukisa yon ti bri (noise) ka chanje repons yo, epi kijan pou konpare matriks byen nan pratik.",
+    "quickStartEasy": "Kòmanse vit (Fasil)",
+    "whatYouLearn": "Sa w pral aprann",
+    "readMaterial": "Li materyèl la",
+    "practiceNow": "Pratike kounye a",
+    "practiceNowHint": "Konsèy : kòmanse ak ti matriks, epi ogmante dimansyon yo lè modèl la vin fasil.",
+    "parts": {
+      "part2": {
+        "badge": "ENTWISYON NIMERIK",
+        "title": "Matriks : nòrm, ran, tolerans, ak estabilite",
+        "subtitle": "Mezi ‘gwosè’, detekte estrikti, epi jere reyalite floating-point ak ε",
+        "bullets": {
+          "0": "Kalkile nòrm Frobenius la soti nan valè yo epi konprann sa li mezire",
+          "1": "Konprann nòrm 2 (nòrm espèktral) kòm pi gwo faktè detire (maximum stretch)",
+          "2": "Konpare nòrm yo epi konnen kilè pou w itilize chak (rapid vs sans jeyometrik)",
+          "3": "Kalkile ran (rank) ak pivò / RREF epi konekte ran ak endepandans lineyè",
+          "4": "Sèvi ak tolerans ε pou defini yon ran efikas (rankε) lè gen bri",
+          "5": "Wè kijan yon ti perturbasyon ka fè ran chanje, epi poukisa “prèske depandan” enpòtan",
+          "6": "Rekonèt matriks ki prèske singilye / mal kondisyone ak kijan solisyon yo sansib",
+          "7": "Pratike bon metòd : tolerans, awondi, ak tès egalite ki pi an sekirite"
+        }
+      }
+    },
+    "recommendedPathTitle": "Chemen rekòmande",
+    "recommended": {
+      "0": "Kòmanse ak egzèsis nòrm Frobenius jiskaske ou reponn vit.",
+      "1": "Apre sa, pase sou ran ak pivò, epi konpare ran vs rankε lè gen bri.",
+      "2": "Fini ak entwisyon sou estabilite/kondisyònman ak egzanp prèske singilye."
+    },
+    "routeHint": "Wout : /practice/review/matrices_part2 (li) • /practice?section=module-3-matrices (pratike)"
+  }
+}

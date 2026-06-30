@@ -1,0 +1,20 @@
+{
+  "topicId": "capstone-automation-project",
+  "ok": false,
+  "issues": [
+    {
+      "code": "PYTHON_FUNCTION_RETURNS_CHECK_MISSING",
+      "category": "tests",
+      "severity": "error",
+      "exerciseId": "capstone-step-2-load-tasks",
+      "message": "Exercise \"capstone-step-2-load-tasks\" is a function-return task but semanticChecks[] does not include a function_returns check for load_tasks."
+    },
+    {
+      "code": "PYTHON_FUNCTION_RETURNS_CHECK_MISSING",
+      "category": "tests",
+      "severity": "error",
+      "exerciseId": "capstone-step-4-write-report-file",
+      "message": "Exercise \"capstone-step-4-write-report-file\" is a function-return task but semanticChecks[] does not include a function_returns check for load_tasks, count_done, build_report, save_report."
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "subjectModulesUi": {
+    "kickerSubject": "Subject",
+    "unlockEnabled": "UNLOCK ENABLED",
+    "overallProgress": "Overall progress",
+    "syncing": "Syncing…",
+    "overallSummary": "{doneTopics}/{totalTopics} • {doneModules}/{totalModules} modules",
+    "topicsRatio": "{done}/{total} topics",
+    "sectionsCount": "{count} sections",
+    "weeksRange": "Weeks {start}–{end}",
+    "modulesRatio": "• {done}/{total} modules",
+    "changeSubject": "Change subject",
+    "kickerModule": "Module",
+    "pillCompleted": "✓ Completed",
+    "pillLocked": "🔒 Locked",
+    "pillPremium": "💎 Premium",
+    "pillInProgress": "↻ In progress",
+    "pillNotStarted": "• Not started",
+    "weeksLabel": "Weeks",
+    "sectionsLabel": "Sections",
+    "topicsLabel": "Topics",
+    "noTopics": "No topics",
+    "topicsComplete": "{done}/{total} topics complete",
+    "completedShort": "Completed",
+    "cta": {
+      "signInToUnlock": "Sign in to unlock →",
+      "unlock": "Unlock →",
+      "review": "Review module →",
+      "continue": "Continue →",
+      "start": "Start module →"
+    },
+    "empty": {
+      "title": "No modules yet",
+      "desc": "Seed at least one module for this subject to enable navigation."
+    },
+    "errors": {
+      "missingSubjectTitle": "Missing subject",
+      "missingSubjectDesc": "subjectSlug param is missing.",
+      "notFoundTitle": "Subject not found",
+      "notFoundDesc": "No subject with slug “{slug}”."
+    }
+  }
+}

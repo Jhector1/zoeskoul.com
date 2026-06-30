@@ -2,6 +2,7 @@
 
 import React from "react";
 import { createPortal } from "react-dom";
+import { useTranslations } from "next-intl";
 import HeaderSlick from "@/components/HeaderSlick";
 import type { HeaderGamificationVm } from "../../types";
 import NavButton from "@/components/ui/NavButton";
@@ -69,6 +70,7 @@ export default function ReviewModuleHeader({
                                                saveStatus = "idle",
                                                lastSaveError,
                                            }: Props) {
+    const t = useTranslations("review.header");
     const resetMenuId = React.useId();
     const [resetMenuOpen, setResetMenuOpen] = React.useState(false);
     const [resetMenuPlacement, setResetMenuPlacement] = React.useState<ResetMenuPlacement | null>(null);
@@ -182,7 +184,7 @@ export default function ReviewModuleHeader({
                     ref={resetMenuRef}
                     id={resetMenuId}
                     role="menu"
-                    aria-label="Reset progress options"
+                    aria-label={t("resetMenuAriaLabel")}
                     style={resetMenuPlacement.style}
                     className="overflow-visible rounded-2xl border border-[rgb(var(--ui-border)/0.95)] bg-[rgb(var(--ui-surface)/0.98)] p-2 shadow-[0_24px_70px_rgba(2,6,23,0.36)] ring-1 ring-white/5 backdrop-blur-xl"
                 >
@@ -194,10 +196,10 @@ export default function ReviewModuleHeader({
                     <div className="relative">
                         <div className="px-3 pb-2 pt-2">
                             <div className="text-[11px] font-black uppercase tracking-[0.16em] text-[rgb(var(--ui-text-muted)/0.78)]">
-                                Reset progress
+                                {t("resetMenuTitle")}
                             </div>
                             <div className="mt-1 text-xs font-semibold leading-snug text-[rgb(var(--ui-text-muted)/0.96)]">
-                                Choose how much work to clear. You will confirm before anything is deleted.
+                                {t("resetMenuDescription")}
                             </div>
                         </div>
 
@@ -244,10 +246,10 @@ export default function ReviewModuleHeader({
                         <NavButton
                             href={modulesHref}
                             className="ui-btn ui-btn-secondary text-xs font-extrabold whitespace-nowrap"
-                            title="Go to modules"
-                            loadingText="Opening modules..."
+                            title={t("modulesTitle")}
+                            loadingText={t("modulesLoading")}
                         >
-                            ← Modules
+                            {t("modulesButton")}
                         </NavButton>
 
                         {showTopicsButton ? (
@@ -255,13 +257,13 @@ export default function ReviewModuleHeader({
                                 type="button"
                                 onClick={onToggleLeftPanel}
                                 className="ui-btn ui-btn-secondary text-xs font-extrabold whitespace-nowrap"
-                                title="Topics"
+                                title={t("topicsTitle")}
                             >
                                 {showDesktopLeft
                                     ? leftCollapsed
-                                        ? "Topics ▶"
-                                        : "Topics"
-                                    : "Topics"}
+                                        ? t("topicsButtonCollapsed")
+                                        : t("topicsButton")
+                                    : t("topicsButton")}
                             </button>
                         ) : null}
 
@@ -270,9 +272,9 @@ export default function ReviewModuleHeader({
                                 type="button"
                                 onClick={onToggleRightPanel}
                                 className="ui-btn ui-btn-secondary text-xs font-extrabold whitespace-nowrap"
-                                title="Tools"
+                                title={t("toolsTitle")}
                             >
-                                {rightCollapsed ? "Tools ▶" : "Tools ◀"}
+                                {rightCollapsed ? t("toolsButtonCollapsed") : t("toolsButtonExpanded")}
                             </button>
                         ) : null}
 
@@ -286,7 +288,7 @@ export default function ReviewModuleHeader({
                                 aria-controls={resetMenuOpen ? resetMenuId : undefined}
                                 className="ui-btn ui-btn-secondary gap-1.5 text-xs font-extrabold whitespace-nowrap"
                             >
-                                <span>Reset</span>
+                                <span>{t("resetButton")}</span>
                                 <span
                                     aria-hidden="true"
                                     className={`text-[10px] leading-none opacity-75 transition-transform ${resetMenuOpen ? "rotate-180" : ""}`}
@@ -301,7 +303,7 @@ export default function ReviewModuleHeader({
                             onClick={onPrevTopic}
                             className="ui-btn ui-btn-secondary text-xs font-extrabold whitespace-nowrap"
                             disabled={!prevTopic?.id}
-                            title={!prevTopic?.id ? "No previous topic" : "Previous topic"}
+                            title={!prevTopic?.id ? t("prevDisabledTitle") : t("prevTitle")}
                         >
                             ←
                         </button>
@@ -313,10 +315,10 @@ export default function ReviewModuleHeader({
                             disabled={!nextTopic?.id || (!unlockAll && !viewIsComplete)}
                             title={
                                 !nextTopic?.id
-                                    ? "No next topic"
+                                    ? t("nextDisabledTitle")
                                     : !unlockAll && !viewIsComplete
-                                        ? "Complete the topic to continue"
-                                        : "Next topic"
+                                        ? t("nextLockedTitle")
+                                        : t("nextTitle")
                             }
                         >
                             →
@@ -330,12 +332,12 @@ export default function ReviewModuleHeader({
                                 title={lastSaveError ?? undefined}
                             >
                                 {saveStatus === "saving"
-                                    ? "Saving..."
+                                    ? t("saveStatus.saving")
                                     : saveStatus === "error"
-                                        ? "Save failed"
+                                        ? t("saveStatus.error")
                                         : saveStatus === "conflict"
-                                            ? "Sync conflict"
-                                            : "Saved"}
+                                            ? t("saveStatus.conflict")
+                                            : t("saveStatus.saved")}
                             </div>
                         ) : null}
 
@@ -346,11 +348,11 @@ export default function ReviewModuleHeader({
                             </div>
 
                             <div className="rounded-full border border-[rgb(var(--ui-border)/0.9)] bg-[rgb(var(--ui-surface)/0.88)] px-2.5 py-1 text-xs font-semibold text-[rgb(var(--ui-text)/0.96)]">
-                                Lv {headerGamification.level}
+                                {t("level", { level: headerGamification.level })}
                             </div>
 
                             <div className="rounded-full border border-[rgb(var(--ui-border)/0.9)] bg-[rgb(var(--ui-surface)/0.88)] px-2.5 py-1 text-xs font-semibold text-[rgb(var(--ui-text)/0.96)]">
-                                {headerGamification.totalXp.toLocaleString()} XP
+                                {t("xp", { count: headerGamification.totalXp.toLocaleString() })}
                             </div>
                         </>
                     ) : null}

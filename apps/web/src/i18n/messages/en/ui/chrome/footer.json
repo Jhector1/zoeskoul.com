@@ -1,0 +1,46 @@
+{
+  "Footer": {
+    "tagline": "Interactive learning for programming, math, AI, languages, and more.",
+    "badge": "Learn • Practice • Grow",
+    "highlights": {
+      "practiceFirst": "Practice-first learning",
+      "multilingual": "Multilingual experience",
+      "legal": "Clear legal & privacy pages",
+      "paths": "Structured learning paths"
+    },
+    "sections": {
+      "explore": "Explore",
+      "subjects": "Subjects",
+      "company": "Company",
+      "legal": "Legal"
+    },
+    "links": {
+      "home": "Home",
+      "subjects": "Subjects",
+      "pricing": "Pricing",
+      "sandbox": "Sandbox",
+      "python": "Python",
+      "linearAlgebra": "Linear Algebra",
+      "aiChatgpt": "AI & ChatGPT",
+      "cybersecurity": "Cybersecurity",
+      "haitianCreole": "Haitian Creole",
+      "contact": "Contact",
+      "support": "Support",
+      "legalCenter": "Legal Center",
+      "terms": "Terms",
+      "privacy": "Privacy",
+      "cookies": "Cookies",
+      "refunds": "Refunds",
+      "acceptableUse": "Acceptable Use"
+    },
+    "actions": {
+      "browseSubjects": "Browse subjects",
+      "legalCenter": "Legal center"
+    },
+    "bottom": {
+      "rights": "All rights reserved.",
+      "locale": "Locale",
+      "builtFor": "Built for accessible, guided learning"
+    }
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "achievements": {
+    "title": "Achievements",
+    "kicker": "Your learning",
+    "loading": "Loading…",
+    "back": "Back",
+    "loadFailed": "Unable to load achievements.",
+    "downloadFailed": "Unable to download certificate.",
+    "downloadPreparing": "Preparing…",
+    "downloadPdf": "Download PDF",
+    "sections": {
+      "badges": "Badges",
+      "rewards": "Rewards",
+      "certificates": "Certificates",
+      "learnerBadges": "Learner badges",
+      "unlockedRewards": "Unlocked rewards",
+      "moreComing": "More coming soon",
+      "inProgress": "In progress",
+      "noEnrollments": "No enrollments yet"
+    },
+    "descriptions": {
+      "hero": "Rewards, badges, capstones, and certificates appear here as you finish each subject path.",
+      "badges": "Earned for finishing subject milestones and final rewards.",
+      "rewards": "Final unlocks before certificate issuance.",
+      "certificates": "Official completions you can open or download.",
+      "noBadges": "No badges yet. Finish a subject path to unlock your first badge.",
+      "noRewards": "No standalone rewards are waiting right now.",
+      "noCertificates": "No certificates yet. Keep going — your unlocked certificates will appear here.",
+      "noMoreComing": "Nothing is waiting in the “more coming soon” state right now.",
+      "completedPublished": "You completed everything published so far.",
+      "noProgress": "Nothing in progress right now.",
+      "noEnrollments": "Enroll in a subject to start tracking progress and earning rewards, badges, and certificates.",
+      "badgeFallback": "Final path milestone earned",
+      "rewardFallback": "You unlocked the final reward for this subject."
+    },
+    "counts": {
+      "earned": "{count} earned",
+      "ready": "{count} ready",
+      "unlocked": "{count} unlocked",
+      "completePct": "{pct}% complete"
+    },
+    "state": {
+      "earned": "Earned",
+      "unlocked": "Unlocked",
+      "issued": "Issued",
+      "ready": "Ready",
+      "moreComing": "More coming",
+      "inProgress": "In progress"
+    },
+    "actions": {
+      "openSubject": "Open subject",
+      "continue": "Continue",
+      "capstone": "Capstone",
+      "view": "View",
+      "viewSubject": "View subject",
+      "checklist": "Checklist"
+    },
+    "meta": {
+      "completed": "Completed: {date}",
+      "issued": "• Issued: {date}",
+      "notIssued": "• Not issued yet",
+      "certificateId": "Certificate ID:",
+      "modules": "Modules: {done}/{total}",
+      "assignmentsDone": "• Assignments done: {count}",
+      "lastActivity": "• Last activity: {date}",
+      "topicsAssignment": "Topics: {topics} • Assignment: {assignment}"
+    },
+    "value": {
+      "done": "done",
+      "notDone": "not done",
+      "emptyDate": "—"
+    },
+    "fallbacks": {
+      "badgeLabel": "{subject} Finisher"
+    }
+  }
+}

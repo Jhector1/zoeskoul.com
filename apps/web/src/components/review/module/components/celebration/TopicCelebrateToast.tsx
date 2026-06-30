@@ -2,6 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import type { TopicCelebrateToast as TopicCelebrateToastVm } from "../../hooks/useReviewCelebrations";
 
 const TOPIC_TOAST_ANIM = {
@@ -30,6 +31,8 @@ export default function TopicCelebrateToast({
                                                 onPauseChange,
                                                 onDismiss,
                                             }: Props) {
+    const t = useTranslations("review.celebration.topicToast");
+
     return (
         <motion.div
             key={toast.id}
@@ -52,7 +55,7 @@ export default function TopicCelebrateToast({
                 <button
                     type="button"
                     onClick={onDismiss}
-                    aria-label="Dismiss progress saved message"
+                    aria-label={t("dismiss")}
                     className="absolute right-3 top-3 inline-flex h-8 w-8 items-center justify-center rounded-full text-sm font-semibold text-[rgb(var(--ui-text-muted)/0.8)] transition hover:bg-[rgb(var(--ui-accent)/0.1)] hover:text-[rgb(var(--ui-text)/0.96)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--ui-accent)/0.28)]"
                 >
                     <span aria-hidden>x</span>
@@ -64,7 +67,7 @@ export default function TopicCelebrateToast({
                     </div>
 
                     <div className="min-w-0 flex-1">
-                        <div className="ui-celebrate-kicker">Progress saved</div>
+                        <div className="ui-celebrate-kicker">{t("kicker")}</div>
 
                         <div className="mt-1 text-sm font-semibold tracking-tight text-[rgb(var(--ui-text)/0.99)]">
                             {toast.title}
@@ -78,13 +81,13 @@ export default function TopicCelebrateToast({
                             <div className="mt-3 flex flex-wrap gap-2">
                                 {toast.streak ? (
                                     <span className="ui-celebrate-badge ui-celebrate-badge-success">
-                                        🔥 {toast.streak} streak
+                                        🔥 {t("streak", { count: toast.streak })}
                                     </span>
                                 ) : null}
 
                                 {toast.xp ? (
                                     <span className="ui-celebrate-badge ui-celebrate-badge-success">
-                                        +{toast.xp} XP
+                                        {t("xp", { count: toast.xp })}
                                     </span>
                                 ) : null}
                             </div>

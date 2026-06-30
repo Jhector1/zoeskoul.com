@@ -1,0 +1,55 @@
+{
+  "moduleIntroUi": {
+    "kicker": "{subject} • Module {n}",
+    "introVideoKicker": "Intro video",
+    "introVideoHint": "Watch first if you want the big picture before practice.",
+    "openLink": "Open ↗",
+    "progress": {
+      "title": "Progress",
+      "summary": "{done}/{total} • {pct}%",
+      "moduleNumber": "Module #{n}",
+      "topicsCompleted": "Topics completed"
+    },
+    "labels": {
+      "sections": "Sections",
+      "topics": "Topics",
+      "weeks": "Weeks",
+      "est": "Est.",
+      "status": "Status"
+    },
+    "status": {
+      "syncing": "Syncing…",
+      "completed": "Completed",
+      "inProgress": "In progress",
+      "new": "New"
+    },
+    "cta": {
+      "review": "Review module →",
+      "continue": "Continue →",
+      "start": "Start module →"
+    },
+    "actions": {
+      "back": "Back",
+      "practice": "Practice →"
+    },
+    "sections": {
+      "prereqs": "Prereqs",
+      "beforeStart": "Before you start",
+      "readyToBegin": "Ready to begin",
+      "noPrereqs": "This module is ready to start with no required prerequisites listed.",
+      "whatLearn": "What you’ll learn",
+      "whyMatters": "Why it matters"
+    },
+    "defaults": {
+      "outcome1": "Learn the core ideas with clear, guided examples",
+      "outcome2": "Practice with interactive questions and instant feedback",
+      "outcome3": "Build confidence to use this in the next modules",
+      "why1": "This module unlocks skills you’ll reuse constantly",
+      "why2": "It improves speed and accuracy on real problems",
+      "why3": "It’s a foundation for interviews and real-world projects"
+    },
+    "videoTitle": "{module} — Introduction",
+    "minutesShort": "{n} min",
+    "emptyValue": "—"
+  }
+}

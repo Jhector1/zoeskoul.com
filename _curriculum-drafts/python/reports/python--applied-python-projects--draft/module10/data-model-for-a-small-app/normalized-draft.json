@@ -1,0 +1,164 @@
+{
+  "title": "Data Model for a Small App",
+  "summary": "Plan and build a small task-tracker data model using classes, methods, lists of objects, and simple file output.",
+  "minutes": 25,
+  "sketchBlocks": [
+    {
+      "id": "data-model-overview",
+      "title": "Choosing a data model for a small app",
+      "bodyMarkdown": "A small app works better when each piece of data has a clear home.\n\nFor a task tracker, a **class** is a strong choice when each task has the same fields and behavior:\n\n- a title\n- a status such as done or not done\n- methods that describe what a task can do\n\nHere is a simple example:\n\n```python\nclass Task:\n    def __init__(self, title):\n        self.title = title\n        self.done = False\n\n    def mark_done(self):\n        self.done = True\n\n    def summary(self):\n        return f\"{self.title} - done: {self.done}\"\n\nitem = Task(\"Write outline\")\nprint(item.summary())\nitem.mark_done()\nprint(item.summary())\n```\n\nStep by step:\n\n1. `__init__` sets up each new task.\n2. `self.title` stores the task name.\n3. `self.done` starts as `False`.\n4. `mark_done()` changes the task's state.\n5. `summary()` returns a readable string for display or saving.\n\nA list can then hold many task objects:\n\n```python\ntasks = [Task(\"Write outline\"), Task(\"Review draft\")]\n```\n\nThat gives you a clean model: **one object per task, one list for the whole collection**.\n\nTry it yourself: in the first project step, change one task title, run the code, and predict how the summary output changes."
+    },
+    {
+      "id": "project-planning-note",
+      "title": "Why classes help in a capstone project",
+      "bodyMarkdown": "In a capstone project, your data model should make later features easier.\n\nIf you store tasks as plain text only, adding features like marking a task done or saving a formatted summary becomes harder. A class keeps related data and behavior together.\n\nA good beginner plan is:\n\n```python\n# one task\nTask(\"Plan project\")\n\n# many tasks\nall_tasks = [\n    Task(\"Plan project\"),\n    Task(\"Build tracker\"),\n    Task(\"Test output\")\n]\n```\n\nThis structure supports common project goals:\n\n- display all tasks\n- count completed tasks\n- save summaries to a text file\n- refactor repeated logic into methods\n\nYour turn: as you work through the steps, notice how each new feature builds on the same `Task` model instead of replacing it."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "project-step-1-task-class",
+      "kind": "code_input",
+      "title": "Create the Task class",
+      "prompt": "Start your capstone data model by defining a `Task` class. Each task should store a `title` and a `done` value. In `__init__`, set `done` to `False` by default. Then create one task from input text and print its title and done status on separate lines.",
+      "starterCode": "class Task:\n    def __init__(self, title):\n        # TODO: store the title\n        # TODO: set done to False\n        pass\n\n# Read a title, create a Task, and print its attributes\n",
+      "solutionCode": "class Task:\n    def __init__(self, title):\n        self.title = title\n        self.done = False\n\n\ntitle = input()\ntask = Task(title)\nprint(task.title)\nprint(task.done)\n",
+      "tests": [
+        {
+          "stdin": "Plan project\n",
+          "stdout": "Plan project\nFalse\n",
+          "match": "exact"
+        },
+        {
+          "stdin": "Review notes\n",
+          "stdout": "Review notes\nFalse\n",
+          "match": "exact"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Use `__init__` to store the input title and set `done` to `False`.",
+      "help": {
+        "concept": "A class groups related data into one reusable object. Here, each `Task` instance needs attributes for its title and completion state.",
+        "hint_1": "Read one line with `input()`, pass it into `Task(...)`, and store it as `self.title`.",
+        "hint_2": "After creating the object, print `task.title` and then print `task.done` so the output panel shows both values."
+      }
+    },
+    {
+      "id": "project-step-2-task-methods",
+      "kind": "code_input",
+      "title": "Add task behavior methods",
+      "prompt": "Build on the Task model by adding two methods: `mark_done()` should change `done` to `True`, and `summary()` should return text in this format: `title - done: status`. Read a title and a command. If the command is `done`, mark the task done. Then print the summary.",
+      "starterCode": "class Task:\n    def __init__(self, title):\n        self.title = title\n        self.done = False\n\n    def mark_done(self):\n        # TODO: update the task status\n        pass\n\n    def summary(self):\n        # TODO: return the formatted summary string\n        pass\n\n\ntitle = input()\ncommand = input()\ntask = Task(title)\n\n# TODO: if command is \"done\", mark the task done\n# TODO: print the summary\n",
+      "solutionCode": "class Task:\n    def __init__(self, title):\n        self.title = title\n        self.done = False\n\n    def mark_done(self):\n        self.done = True\n\n    def summary(self):\n        return f\"{self.title} - done: {self.done}\"\n\n\ntitle = input()\ncommand = input()\ntask = Task(title)\n\nif command == \"done\":\n    task.mark_done()\n\nprint(task.summary())\n",
+      "tests": [
+        {
+          "stdin": "Plan project\ndone\n",
+          "stdout": "Plan project - done: True\n",
+          "match": "exact"
+        },
+        {
+          "stdin": "Plan project\nkeep\n",
+          "stdout": "Plan project - done: False\n",
+          "match": "exact"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "One method changes the attribute, and the other returns a formatted string.",
+      "help": {
+        "concept": "Methods let an object manage its own behavior. A state-changing method updates attributes, and a summary method returns a readable description of the object.",
+        "hint_1": "Inside `mark_done`, assign `True` to `self.done`. Inside `summary`, build an f-string using `self.title` and `self.done`.",
+        "hint_2": "After reading the command, call `task.mark_done()` only when the command is `done`, then print `task.summary()`."
+      }
+    },
+    {
+      "id": "project-step-3-build-task-list",
+      "kind": "code_input",
+      "title": "Store multiple tasks in a list",
+      "prompt": "Now model a small collection of tasks. Keep the `Task` class with `mark_done()` and `summary()`. Read three task titles. Create a list of three `Task` objects. Mark the second task as done. Then print each task summary on its own line in list order.",
+      "starterCode": "class Task:\n    def __init__(self, title):\n        self.title = title\n        self.done = False\n\n    def mark_done(self):\n        self.done = True\n\n    def summary(self):\n        return f\"{self.title} - done: {self.done}\"\n\n# Read three titles\n# TODO: create a list of Task objects\n# TODO: mark the second task done\n# TODO: print each summary on its own line\n",
+      "solutionCode": "class Task:\n    def __init__(self, title):\n        self.title = title\n        self.done = False\n\n    def mark_done(self):\n        self.done = True\n\n    def summary(self):\n        return f\"{self.title} - done: {self.done}\"\n\n\ntitle1 = input()\ntitle2 = input()\ntitle3 = input()\n\ntasks = [Task(title1), Task(title2), Task(title3)]\ntasks[1].mark_done()\n\nfor task in tasks:\n    print(task.summary())\n",
+      "tests": [
+        {
+          "stdin": "Plan\nBuild\nTest\n",
+          "stdout": "Plan - done: False\nBuild - done: True\nTest - done: False\n",
+          "match": "exact"
+        },
+        {
+          "stdin": "Draft\nReview\nShare\n",
+          "stdout": "Draft - done: False\nReview - done: True\nShare - done: False\n",
+          "match": "exact"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Create three Task objects, store them in a list, and update the second one before printing.",
+      "help": {
+        "concept": "A list of objects is a common project data model when your app manages many items with the same structure.",
+        "hint_1": "Append or place three `Task(...)` objects into a list, then use index `1` for the second task.",
+        "hint_2": "Call `tasks[1].mark_done()` before looping through the list and printing `task.summary()` for each object."
+      }
+    },
+    {
+      "id": "project-step-4-count-completed",
+      "kind": "code_input",
+      "title": "Count completed tasks with a helper function",
+      "prompt": "Extend the project by adding a function named `count_done(tasks)` that returns how many Task objects are completed. Keep the same `Task` class. Read three titles, create three tasks, mark the first and third tasks as done, and print the result of `count_done(tasks)`.",
+      "starterCode": "class Task:\n    def __init__(self, title):\n        self.title = title\n        self.done = False\n\n    def mark_done(self):\n        self.done = True\n\n    def summary(self):\n        return f\"{self.title} - done: {self.done}\"\n\n\ndef count_done(tasks):\n    # TODO: return the number of completed tasks\n    pass\n\n# Read three titles\n# TODO: create tasks\n# TODO: mark the first and third tasks done\n# TODO: print the completed count\n",
+      "solutionCode": "class Task:\n    def __init__(self, title):\n        self.title = title\n        self.done = False\n\n    def mark_done(self):\n        self.done = True\n\n    def summary(self):\n        return f\"{self.title} - done: {self.done}\"\n\n\ndef count_done(tasks):\n    total = 0\n    for task in tasks:\n        if task.done:\n            total += 1\n    return total\n\n\ntitle1 = input()\ntitle2 = input()\ntitle3 = input()\n\ntasks = [Task(title1), Task(title2), Task(title3)]\ntasks[0].mark_done()\ntasks[2].mark_done()\n\nprint(count_done(tasks))\n",
+      "tests": [
+        {
+          "stdin": "Plan\nBuild\nTest\n",
+          "stdout": "2\n",
+          "match": "exact"
+        },
+        {
+          "stdin": "Write\nCheck\nShip\n",
+          "stdout": "2\n",
+          "match": "exact"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Loop through the list and count tasks whose `done` attribute is `True`.",
+      "help": {
+        "concept": "A helper function can process a list of objects and return a useful project summary, such as the number of completed tasks.",
+        "hint_1": "Inside `count_done`, start a counter at 0 and inspect each task in the list.",
+        "hint_2": "Increase the counter only when `task.done` is `True`, then return the counter and print that returned value."
+      }
+    },
+    {
+      "id": "project-step-5-save-task-report",
+      "kind": "code_input",
+      "title": "Save a task report to a file",
+      "prompt": "Finish the capstone data model with simple file output. Keep the `Task` class and `count_done(tasks)` function. Read three task titles, create three tasks, mark the second task as done, and write a report to `report.txt`. The file should contain each task summary on its own line, followed by a final line in this format: `Completed: number`. After writing the file, read it back and print its contents.",
+      "starterCode": "class Task:\n    def __init__(self, title):\n        self.title = title\n        self.done = False\n\n    def mark_done(self):\n        self.done = True\n\n    def summary(self):\n        return f\"{self.title} - done: {self.done}\"\n\n\ndef count_done(tasks):\n    total = 0\n    for task in tasks:\n        if task.done:\n            total += 1\n    return total\n\n# Read three titles\n# TODO: create tasks and mark the second one done\n# TODO: build the report text\n# TODO: write it to report.txt\n# TODO: read report.txt and print its contents\n",
+      "solutionCode": "class Task:\n    def __init__(self, title):\n        self.title = title\n        self.done = False\n\n    def mark_done(self):\n        self.done = True\n\n    def summary(self):\n        return f\"{self.title} - done: {self.done}\"\n\n\ndef count_done(tasks):\n    total = 0\n    for task in tasks:\n        if task.done:\n            total += 1\n    return total\n\n\ntitle1 = input()\ntitle2 = input()\ntitle3 = input()\n\ntasks = [Task(title1), Task(title2), Task(title3)]\ntasks[1].mark_done()\n\nlines = []\nfor task in tasks:\n    lines.append(task.summary())\nlines.append(f\"Completed: {count_done(tasks)}\")\nreport_text = \"\\n\".join(lines)\n\nwith open(\"report.txt\", \"w\") as file:\n    file.write(report_text)\n\nwith open(\"report.txt\", \"r\") as file:\n    print(file.read())\n",
+      "tests": [
+        {
+          "stdin": "Plan\nBuild\nTest\n",
+          "stdout": "Plan - done: False\nBuild - done: True\nTest - done: False\nCompleted: 1\n",
+          "match": "exact"
+        },
+        {
+          "stdin": "Draft\nReview\nShare\n",
+          "stdout": "Draft - done: False\nReview - done: True\nShare - done: False\nCompleted: 1\n",
+          "match": "exact"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Build the report text first, write it, then reopen the same path and print what was saved.",
+      "help": {
+        "concept": "File output lets a small app keep a result outside the running program. Reading the saved text back is a simple way to verify the report content.",
+        "hint_1": "Create the task list, mark the second task done, and collect summary lines in a list before joining them with newline characters.",
+        "hint_2": "Add one final line using `count_done(tasks)`, write the full text to `report.txt`, then reopen that path with `read()` and print the saved text."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Capstone Task Tracker Data Model",
+    "stepIds": [
+      "project-step-1-task-class",
+      "project-step-2-task-methods",
+      "project-step-3-build-task-list",
+      "project-step-4-count-completed",
+      "project-step-5-save-task-report"
+    ]
+  }
+}

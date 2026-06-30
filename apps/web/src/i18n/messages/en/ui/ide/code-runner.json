@@ -1,0 +1,12 @@
+{
+  "ide": {
+    "codeRunner": {
+      "defaultTitle": "Try it",
+      "outputTab": "Output",
+      "resultsTab": "Results",
+      "stdinPlaceholder": "Type stdin here. Each new line becomes one input line.",
+      "previewTab": "Preview",
+      "terminalTab": "Terminal"
+    }
+  }
+}

@@ -1,0 +1,219 @@
+{
+  "topics": {
+    "python--applied-python-projects--draft": {
+      "python-9-testing-debugging-and-style": {
+        "debugging-with-print-and-trace": {
+          "label": "Debugging With Print and Trace",
+          "summary": "Use temporary output and tracing to find bugs.",
+          "cards": {
+            "sketch0": {
+              "title": "Use print to inspect changing values"
+            },
+            "sketch1": {
+              "title": "Trace the path, not just the final result"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Practice print debugging and tracing"
+            }
+          },
+          "projectSteps": {},
+          "tryIt": {
+            "allowReveal": true,
+            "try_debugging_with_print_and_trace_sketch0": {
+              "title": "Try it yourself",
+              "prompt": "Write a program that reads one integer `n`. Count from 1 through `n`, printing a trace line on each loop in this exact format: `adding X total was Y`, where `X` is the current number and `Y` is the total before adding. After the loop, print `final total: Z` with the completed sum. This is a debugging-style trace, so show each step clearly."
+            },
+            "try_debugging_with_print_and_trace_sketch1": {
+              "title": "Try it yourself",
+              "prompt": "Write a program that reads one integer score. Print `checking score: X` first. Then print exactly one branch message and one final grade line. Use these rules: score 90 or more is `A`, score 80 through 89 is `B`, otherwise `C`. Branch messages must be exactly `entered A branch`, `entered B branch`, or `entered lower branch`. Final line must be `grade: Y`."
+            }
+          },
+          "quiz": {
+            "ex1": {
+              "title": "Trace a running total",
+              "prompt": "You are debugging a running-total program and want to watch every update. Read `n`, trace each addition in the exact format shown, and then print the final total.",
+              "hint": "Print the trace line before you add the current number into the total.",
+              "help": {
+                "concept": "A useful trace shows the state right before it changes. That makes it much easier to see which loop step introduced a wrong value.",
+                "hint_1": "Keep a running total variable as you count upward.",
+                "hint_2": "For each loop step, print the current number and the old total before updating it."
+              },
+              "starterCode": "n = int(input())\n\n# Create a running total.\n# Print a trace line before each addition.\n# Then print the final total."
+            },
+            "ex2": {
+              "title": "Best place for a debug print",
+              "prompt": "A loop is producing the wrong total. Where is the most useful place to add a temporary `print()` first?",
+              "hint": "Put the print where you can see the value change during each loop step.",
+              "help": {
+                "concept": "The most helpful debug print is placed near the code where the suspicious value changes, so you can observe each update.",
+                "hint_1": "A print after the whole program ends only shows the final result, not how it got there.",
+                "hint_2": "Choose the option that lets you inspect the loop variable or running total on every iteration."
+              },
+              "options": {
+                "a": "Inside the loop, next to the line that updates the total",
+                "b": "Only at the very top of the program before the loop starts",
+                "c": "Only after the program finishes all calculations",
+                "d": "In a notes panel instead of in the code"
+              }
+            },
+            "ex3": {
+              "title": "What a trace can reveal",
+              "prompt": "Choose all things that a good print trace can help you discover.",
+              "hint": "Think about values changing over time and which branch or loop step ran.",
+              "help": {
+                "concept": "Tracing is useful because it exposes the program's path and intermediate state, not just the final answer.",
+                "hint_1": "Look for options about variable values, loop behavior, or branch selection.",
+                "hint_2": "Do not choose options that are unrelated to code behavior, like changing visual settings."
+              },
+              "options": {
+                "a": "A variable has an unexpected value during the loop",
+                "b": "An `if` statement entered a different branch than expected",
+                "c": "The code editor theme is too dark",
+                "d": "A loop runs fewer times than you thought"
+              }
+            },
+            "ex4": {
+              "title": "Trace before updating",
+              "prompt": "Complete the trace line so it shows the value before the update happens.",
+              "hint": "The trace should show the current the missing term before `the missing term += number` changes it.",
+              "help": {
+                "concept": "When debugging a running the missing term, printing the old value before the update helps you compare before-and-after state.",
+                "hint_1": "The missing expression should be the variable that stores the running sum.",
+                "hint_2": "Choose the name that would change as numbers are added."
+              },
+              "template": "print(\"total was\", [blank1])",
+              "choices": [
+                "number",
+                "total",
+                "range",
+                "input"
+              ]
+            },
+            "ex5": {
+              "title": "Order a simple debugging routine",
+              "prompt": "Put these debugging steps in a sensible order when a program gives the wrong result.",
+              "hint": "Start by reproducing the bug, then inspect values near the suspicious code.",
+              "help": {
+                "concept": "Systematic debugging works best when you confirm the bug, inspect the path, fix the cause, and then verify the result.",
+                "hint_1": "You should not change code before you know where the behavior goes wrong.",
+                "hint_2": "The final step is to run again and confirm the output is now correct."
+              },
+              "tokens": {
+                "t1": "Run the code and notice the wrong output",
+                "t2": "Add temporary prints near the suspicious logic",
+                "t3": "Use the trace to identify the incorrect step",
+                "t4": "Change the code and test again"
+              }
+            },
+            "ex6": {
+              "title": "Trace branch decisions",
+              "prompt": "Now trace how a grading decision moves through its branches. Read one score, print the score being checked, then show which branch ran and the final grade.",
+              "hint": "Only one branch message should print, and it should match the path your `if`/`elif`/`else` logic takes.",
+              "help": {
+                "concept": "Branch tracing helps you debug decisions, not just numbers. The goal is to make the program's path visible so you can see exactly why a grade was chosen.",
+                "hint_1": "Print the `checking score` line before the conditionals.",
+                "hint_2": "Inside each branch, print that branch's message and set or print the matching grade."
+              },
+              "starterCode": "score = int(input())\n\n# Print the score being checked.\n# Print one branch message.\n# Print the final grade."
+            },
+            "ex7": {
+              "title": "Why remove debug prints later",
+              "prompt": "After you find and fix the bug, why should you usually remove temporary debug prints?",
+              "hint": "Think about what those prints were for once the bug is understood.",
+              "help": {
+                "concept": "Temporary debug output is useful during investigation, but leaving it in can clutter normal program output and make code harder to read.",
+                "hint_1": "The prints helped diagnose a problem, not define the program's final behavior.",
+                "hint_2": "Choose the answer about keeping output clean and focused."
+              },
+              "options": {
+                "a": "Because Python stops allowing `print()` after debugging",
+                "b": "Because temporary trace output can clutter normal output and distract from the real result",
+                "c": "Because `print()` only works once per program",
+                "d": "Because the output panel cannot show more than one line"
+              }
+            },
+            "ex8": {
+              "title": "Useful trace messages",
+              "prompt": "Choose all trace messages that would help debug a loop counting items in a list.",
+              "hint": "Helpful traces show the current step and the changing count.",
+              "help": {
+                "concept": "A useful loop trace reports values tied directly to the loop's behavior, such as the current item or running count.",
+                "hint_1": "Pick messages that reveal what the loop is processing and how the count changes.",
+                "hint_2": "Ignore options about unrelated interface settings or decorative text."
+              },
+              "options": {
+                "a": "`print(\"item:\", item)`",
+                "b": "`print(\"count before:\", count)`",
+                "c": "`print(\"theme changed\")`",
+                "d": "`print(\"count after:\", count)`"
+              }
+            },
+            "ex9": {
+              "title": "Trace the loop variable",
+              "prompt": "Fill in the missing part so the trace prints the current loop value.",
+              "hint": "The missing name should be the variable that changes each iteration.",
+              "help": {
+                "concept": "Printing the loop variable helps you verify which values the loop is actually visiting.",
+                "hint_1": "In `for the missing term in range(...)`, the changing value is stored in `the missing term`.",
+                "hint_2": "Choose the variable name, not a function name."
+              },
+              "template": "print(\"adding\", [blank1])",
+              "choices": [
+                "print",
+                "number",
+                "range",
+                "total"
+              ]
+            },
+            "ex10": {
+              "title": "Read a trace in order",
+              "prompt": "Arrange these trace lines in the order they would appear for a loop that adds 1, then 2.",
+              "hint": "The total starts at 0, and each 'after' line follows its matching 'before' line.",
+              "help": {
+                "concept": "To read a trace correctly, follow the exact sequence of state changes as the program runs.",
+                "hint_1": "The first line should show adding 1 before any update has happened.",
+                "hint_2": "After total becomes 1, the next 'before' line should use that new total while adding 2."
+              },
+              "tokens": {
+                "t1": "adding 1 total was 0",
+                "t2": "total after: 1",
+                "t3": "adding 2 total was 1",
+                "t4": "total after: 3"
+              }
+            },
+            "ex11": {
+              "title": "Find the first mismatch with a trace",
+              "prompt": "Finish with a trace that helps you spot exactly where two words stop matching. Compare them one character at a time, print the index trace for each comparison, and report the first mismatch or confirm that the words match.",
+              "hint": "Loop through the positions in order, print each comparison, and stop as soon as you find the first different pair.",
+              "help": {
+                "concept": "This kind of trace is useful when you care about the first point where two values diverge. The printed index history shows what matched before the bug or mismatch appeared.",
+                "hint_1": "Use one loop index to read the character from each word at the same position.",
+                "hint_2": "After printing the trace line, check whether the two characters differ and stop immediately if they do."
+              },
+              "starterCode": "first = input()\nsecond = input()\n\n# Compare the words one character at a time.\n# Print each comparison.\n# Stop at the first mismatch, or report that the words match."
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python--applied-python-projects--draft": {
+      "python-9-testing-debugging-and-style": {
+        "debugging-with-print-and-trace": {
+          "sk1": {
+            "title": "Use print to inspect changing values",
+            "bodyMarkdown": "A fast way to debug is to print the values that matter **right before** and **inside** the code you suspect.\n\nFor example, this program is supposed to add numbers from 1 to `n`, but it has a bug:\n\n```python\ndef total_up_to(n):\n    total = 0\n    for number in range(1, n):\n        print(\"number:\", number, \"total before:\", total)\n        total += number\n        print(\"total after:\", total)\n    return total\n\nprint(total_up_to(4))\n```\n\nStep by step:\n\n- `total` starts at `0`\n- each loop prints the current `number`\n- then it prints `total` before and after the update\n- the trace helps you notice that `range(1, n)` stops too early\n\nIf `n` is `4`, the loop uses `1, 2, 3` and misses `4`.\n\nA good debugging print answers a specific question, such as:\n\n- What value is this variable holding?\n- Did this loop run the number of times I expected?\n- Which branch of my `if` statement ran?"
+          },
+          "sk2": {
+            "title": "Trace the path, not just the final result",
+            "bodyMarkdown": "Sometimes the final output is wrong, but the real bug happened earlier. In that case, trace the program's path.\n\n```python\ndef describe_score(score):\n    print(\"checking score:\", score)\n    if score >= 90:\n        print(\"entered A branch\")\n        return \"A\"\n    if score >= 80:\n        print(\"entered B branch\")\n        return \"B\"\n    print(\"entered lower branch\")\n    return \"C\"\n```\n\nLine by line, the trace shows:\n\n- the input value being checked\n- which condition matched\n- where the function returned\n\nThis is useful when:\n\n- an `if` statement chooses the wrong branch\n- a loop stops too soon or runs too long\n- a variable changes earlier than expected\n\nAfter you find the bug, remove temporary debug prints so the program stays clean and readable."
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { useTranslations } from "next-intl";
 import { cn } from "@/components/ide/utils";
 
 const MODAL_BTN =
@@ -27,10 +28,11 @@ export default function SaveBeforeSwitchModal(props: {
     onDiscardAndContinue: () => void;
     onCancel: () => void;
 }) {
+    const t = useTranslations("ide.projects.modals");
     const {
         open,
         busy = false,
-        title = "You have unsaved changes.",
+        title = t("unsavedTitle"),
         onSaveAndContinue,
         onDiscardAndContinue,
         onCancel,
@@ -46,7 +48,7 @@ export default function SaveBeforeSwitchModal(props: {
                 </div>
 
                 <p className="mt-1.5 text-[12px] font-medium text-neutral-500 dark:text-white/50">
-                    Save the current project before switching, or discard local changes and continue.
+                    {t("unsavedDescription")}
                 </p>
 
                 <div className="mt-4 flex items-center justify-end gap-1.5">
@@ -56,7 +58,7 @@ export default function SaveBeforeSwitchModal(props: {
                         disabled={busy}
                         className={cn(MODAL_BTN, MODAL_BTN_GHOST)}
                     >
-                        Cancel
+                        {t("cancel")}
                     </button>
 
                     <button
@@ -65,7 +67,7 @@ export default function SaveBeforeSwitchModal(props: {
                         disabled={busy}
                         className={cn(MODAL_BTN, MODAL_BTN_DANGER)}
                     >
-                        Discard
+                        {t("discardAndContinue")}
                     </button>
 
                     <button
@@ -74,7 +76,7 @@ export default function SaveBeforeSwitchModal(props: {
                         disabled={busy}
                         className={cn(MODAL_BTN, MODAL_BTN_PRIMARY)}
                     >
-                        {busy ? "Saving…" : "Save"}
+                        {busy ? t("saving") : t("saveAndContinue")}
                     </button>
                 </div>
             </div>

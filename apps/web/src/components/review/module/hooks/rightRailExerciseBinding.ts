@@ -18,8 +18,14 @@ export function shouldRightRailUseBoundExercise(args: {
 }) {
     if (args.routeOwnsExercise) return true;
 
-    if (args.activeCard?.type === "quiz" || args.activeCard?.type === "project") {
+    if (args.activeCard?.type === "project") {
         return true;
+    }
+
+    // Plain quiz cards are usually non-code checks. Do not let the right rail
+    // open a default terminal/editor before a generated exercise actually binds.
+    if (args.activeCard?.type === "quiz") {
+        return false;
     }
 
     return cardHasAuthoredExerciseSurface(args.activeCard);

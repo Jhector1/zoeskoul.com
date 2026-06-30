@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
+import { useTranslations } from "next-intl";
 import type { FileNode, FSNode, NodeId } from "../types";
 import { cn } from "../utils";
 import { pathOf } from "../fsTree";
@@ -12,6 +13,7 @@ export default function TabsBar(props: {
     setActiveFileId: (id: NodeId) => void;
     closeTab: (id: NodeId) => void;
 }) {
+    const t = useTranslations("ide.explorer.tabs");
     const { nodes, tabFiles, activeFileId, setActiveFileId, closeTab } = props;
     const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
 
@@ -36,7 +38,7 @@ export default function TabsBar(props: {
     return (
         <div
             role="tablist"
-            aria-label="Open files"
+            aria-label={t("openFiles")}
             className="min-w-0 overflow-x-auto overflow-y-hidden"
         >
             <div className="flex min-w-max items-center gap-1 px-1.5 py-1.5">
@@ -108,8 +110,8 @@ export default function TabsBar(props: {
                             <button
                                 type="button"
                                 onClick={() => closeTab(f.id)}
-                                aria-label={`Close ${tabLabel}`}
-                                title={`Close ${tabLabel}`}
+                                aria-label={t("closeFile", { name: tabLabel })}
+                                title={t("closeFile", { name: tabLabel })}
                                 className="grid h-4 w-4 shrink-0 place-items-center rounded text-[10px] font-medium text-neutral-400 hover:bg-black/5 hover:text-neutral-700 dark:text-white/40 dark:hover:bg-white/10 dark:hover:text-white/75"
                             >
                                 ×

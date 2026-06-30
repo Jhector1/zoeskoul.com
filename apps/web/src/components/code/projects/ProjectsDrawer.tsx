@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useMemo, useState } from "react";
+import { useTranslations } from "next-intl";
 import type { ProjectSummary } from "@/lib/projects/projectApiTypes";
 import { cn } from "@/components/ide/utils";
 import type { WorkspaceLanguage } from "@/lib/practice/types";
@@ -12,33 +13,33 @@ function formatWhen(iso: string) {
     return new Date(iso).toLocaleString();
 }
 
-function scopeLabel(scopeKind: string) {
+function scopeLabel(scopeKind: string, t: ReturnType<typeof useTranslations>) {
     switch (scopeKind) {
         case "module":
-            return "Module";
+            return t("scope.module");
         case "assignment":
-            return "Assignment";
+            return t("scope.assignment");
         case "template":
-            return "Template";
+            return t("scope.template");
         default:
-            return "Personal";
+            return t("scope.personal");
     }
 }
 
-function languageLabel(language: string) {
+function languageLabel(language: string, t: ReturnType<typeof useTranslations>) {
     switch (language) {
         case "javascript":
-            return "JavaScript";
+            return t("language.javascript");
         case "cpp":
-            return "C++";
+            return t("language.cpp");
         case "c":
-            return "C";
+            return t("language.c");
         case "python":
-            return "Python";
+            return t("language.python");
         case "java":
-            return "Java";
+            return t("language.java");
         case "sql":
-            return "SQL";
+            return t("language.sql");
         default:
             return language;
     }
@@ -61,6 +62,7 @@ export default function ProjectsDrawer(props: {
     onRenameProject: (project: ProjectSummary) => void;
     onArchiveProject: (projectId: string) => void;
 }) {
+    const t = useTranslations("ide.projects");
     const {
         open,
         onOpenChange,
@@ -110,7 +112,7 @@ export default function ProjectsDrawer(props: {
         <div className="fixed inset-0 z-[70] flex justify-end bg-black/30 backdrop-blur-[1px]">
             <button
                 type="button"
-                aria-label="Close projects panel"
+                aria-label={t("drawer.closePanel")}
                 className="flex-1 cursor-default"
                 onClick={() => onOpenChange(false)}
             />
@@ -118,17 +120,17 @@ export default function ProjectsDrawer(props: {
             <aside className="flex h-full w-full max-w-[440px] flex-col border-l border-neutral-200 bg-white/96 shadow-2xl dark:border-white/10 dark:bg-neutral-950/96">
                 <div className="flex items-center justify-between gap-3 border-b border-neutral-200 px-4 py-3 dark:border-white/10">
                     <div className="min-w-0">
-                        <div className="ui-kicker">Projects</div>
+                        <div className="ui-kicker">{t("drawer.title")}</div>
                         <div className="truncate text-sm font-semibold text-neutral-900 dark:text-white">
                             {currentProjectTitle}
                         </div>
                         <div className="mt-1 text-[11px] font-medium text-neutral-500 dark:text-white/45">
-                            {languageLabel(currentLanguage)}
+                            {languageLabel(currentLanguage, t)}
                         </div>
                     </div>
 
                     <button type="button" onClick={() => onOpenChange(false)} className="ui-btn-ide-ghost">
-                        Close
+                        {t("drawer.close")}
                     </button>
                 </div>
 
@@ -137,12 +139,12 @@ export default function ProjectsDrawer(props: {
                         <input
                             value={query}
                             onChange={(e) => setQuery(e.target.value)}
-                            placeholder="Search projects…"
+                            placeholder={t("drawer.searchPlaceholder")}
                             className="ui-input-ide flex-1"
                         />
 
                         <button type="button" onClick={onRefresh} className="ui-btn-ide-border">
-                            Refresh
+                            {t("drawer.refresh")}
                         </button>
                     </div>
 
@@ -152,7 +154,7 @@ export default function ProjectsDrawer(props: {
                             onClick={() => setLanguageFilter("current")}
                             className={languageFilter === "current" ? "ui-btn-ide-active" : "ui-btn-ide-border"}
                         >
-                            Current
+                            {t("drawer.current")}
                         </button>
 
                         <button
@@ -160,7 +162,7 @@ export default function ProjectsDrawer(props: {
                             onClick={() => setLanguageFilter("all")}
                             className={languageFilter === "all" ? "ui-btn-ide-active" : "ui-btn-ide-border"}
                         >
-                            All languages
+                            {t("drawer.allLanguages")}
                         </button>
                     </div>
 
@@ -175,7 +177,7 @@ export default function ProjectsDrawer(props: {
                                     onClick={() => setScope(item)}
                                     className={selected ? "ui-btn-ide-active" : "ui-btn-ide-border"}
                                 >
-                                    {item[0].toUpperCase() + item.slice(1)}
+                                    {t(`drawer.filters.${item}` as any)}
                                 </button>
                             );
                         })}
@@ -183,16 +185,16 @@ export default function ProjectsDrawer(props: {
 
                     <div className="flex flex-wrap items-center gap-1.5">
                         <button type="button" onClick={onCreateBlankProject} className="ui-btn-premium">
-                            New Project
+                            {t("drawer.newProject")}
                         </button>
 
                         <button type="button" onClick={onSaveAsProject} className="ui-btn-ide-success">
-                            Save As
+                            {t("drawer.saveAs")}
                         </button>
 
                         {!canCreateProjects ? (
                             <div className="text-[11px] font-medium text-amber-700 dark:text-amber-200">
-                                Cloud save required
+                                {t("drawer.cloudSaveRequired")}
                             </div>
                         ) : null}
                     </div>
@@ -201,7 +203,7 @@ export default function ProjectsDrawer(props: {
                 <div className="min-h-0 flex-1 overflow-y-auto p-4">
                     {loading ? (
                         <div className="ui-surface-muted px-3 py-3 text-[12px] font-medium text-neutral-600 dark:text-white/60">
-                            Loading projects…
+                            {t("drawer.loading")}
                         </div>
                     ) : error ? (
                         <div className="rounded-lg border border-rose-300/20 bg-rose-50/70 px-3 py-3 text-[12px] font-medium text-rose-700 dark:border-rose-300/15 dark:bg-rose-950/20 dark:text-rose-200">
@@ -209,7 +211,11 @@ export default function ProjectsDrawer(props: {
                         </div>
                     ) : filtered.length === 0 ? (
                         <div className="ui-surface-muted px-3 py-3 text-[12px] font-medium text-neutral-600 dark:text-white/60">
-                            No saved {languageFilter === "current" ? languageLabel(currentLanguage) : ""} projects found.
+                            {languageFilter === "current"
+                                ? t("drawer.emptyCurrent", {
+                                      language: languageLabel(currentLanguage, t),
+                                  })
+                                : t("drawer.emptyAll")}
                         </div>
                     ) : (
                         <div className="space-y-2">
@@ -239,20 +245,22 @@ export default function ProjectsDrawer(props: {
                                                 ) : null}
 
                                                 <div className="mt-2 flex flex-wrap gap-2 text-[11px] font-medium text-neutral-500 dark:text-white/45">
-                                                    <span>{languageLabel(project.language)}</span>
+                                                    <span>{languageLabel(project.language, t)}</span>
                                                     <span>•</span>
-                                                    <span>{scopeLabel(project.scopeKind)}</span>
+                                                    <span>{scopeLabel(project.scopeKind, t)}</span>
                                                     <span>•</span>
                                                     <span>v{project.currentVersion}</span>
                                                 </div>
 
                                                 <div className="mt-1.5 text-[11px] font-medium text-neutral-500 dark:text-white/40">
-                                                    Updated {formatWhen(project.updatedAt)}
+                                                    {t("drawer.updatedAt", {
+                                                        time: formatWhen(project.updatedAt),
+                                                    })}
                                                 </div>
                                             </div>
 
                                             {active ? (
-                                                <span className="ui-pill-neutral">Open</span>
+                                                <span className="ui-pill-neutral">{t("drawer.open")}</span>
                                             ) : null}
                                         </div>
 
@@ -262,7 +270,7 @@ export default function ProjectsDrawer(props: {
                                                 onClick={() => onSelectProject(project.id)}
                                                 className="ui-btn-ide-border"
                                             >
-                                                {active ? "Reload" : "Open"}
+                                                {active ? t("drawer.reload") : t("drawer.open")}
                                             </button>
 
                                             <button
@@ -270,7 +278,7 @@ export default function ProjectsDrawer(props: {
                                                 onClick={() => onRenameProject(project)}
                                                 className="ui-btn-ide-border"
                                             >
-                                                Rename
+                                                {t("drawer.rename")}
                                             </button>
 
                                             <button
@@ -278,7 +286,7 @@ export default function ProjectsDrawer(props: {
                                                 onClick={() => onArchiveProject(project.id)}
                                                 className="ui-btn-ide-danger"
                                             >
-                                                Archive
+                                                {t("drawer.archive")}
                                             </button>
                                         </div>
                                     </div>

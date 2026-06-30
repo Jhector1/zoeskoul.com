@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 import { useTheme } from "next-themes";
 import MathMarkdown from "@/components/markdown/MathMarkdown";
 
@@ -283,9 +284,10 @@ export async function restartWorkspaceTerminalSession(args: {
 }
 
 function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
+    const t = useTranslations("ide.codeRunner");
     const {
         frame = "card" as CodeRunnerFrame,
-        title = "Try it",
+        title = t("defaultTitle"),
         height = 320,
         hintMarkdown,
 
@@ -334,7 +336,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         webPreviewEntries = [],
         sqlInitialTableSnapshots,
         sqlPaneOptions,
-        stdinPlaceholder = "Type stdin here. Each new line becomes one input line.",
+        stdinPlaceholder = t("stdinPlaceholder"),
         workspaceTerminal,
         onTerminalEvidenceChange,
         onTerminalSyncReady,
@@ -1038,7 +1040,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
     const regionStyle: React.CSSProperties | undefined =
         typeof height === "number" ? undefined : rootStyle;
 
-    const outputLabel = isWeb ? "Preview" : lang === "sql" ? "Results" : "Output";
+    const outputLabel = isWeb ? t("previewTab") : lang === "sql" ? t("resultsTab") : t("outputTab");
     const mobileTabAttention = !isWeb && (term.runState !== "idle" || !!term.lastResult);
     const mobileBodyHeight = Math.max(240, (split.mainH || numericHeight) - 48);
     const surfaceBodyHeight = Math.max(240, split.mainH || numericHeight);
@@ -1065,7 +1067,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
             return {
                 kind: "web-preview",
                 entries: webPreviewEntries,
-                title: "Preview",
+                title: t("previewTab"),
             };
         }
 
@@ -1120,6 +1122,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                     recoverMessage={workspaceTerm.recoverMessage}
                     restarting={workspaceTerm.restarting}
                     interactiveReady={workspaceTerm.interactiveReady}
+                    cwdLabel={workspaceTerm.terminalEvidence.cwd ?? workspaceTerminal?.cwd ?? null}
                     captureInactiveInput={workspaceTerm.disconnectedInputGuardActive}
                     onRestart={() =>
                         restartWorkspaceTerminalSession({
@@ -1180,7 +1183,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                                 )}
                                 aria-pressed={outputTab === "terminal"}
                             >
-                                <span>{workspaceTerminal?.title ?? "Terminal"}</span>
+                                <span>{workspaceTerminal?.title ?? t("terminalTab")}</span>
                                 {(workspaceTerm.started || workspaceTerm.busy || workspaceTerm.starting) ? (
                                     <span className="inline-flex h-2 w-2 rounded-full bg-emerald-500" />
                                 ) : null}

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 import type { ReviewQuestion } from "@/lib/subjects/types";
 import type { PracticeState } from "@/components/review/quiz/hooks/useQuizPracticeBank";
 import { isEmptyPracticeAnswer } from "@/components/review/quiz/hooks/useQuizPracticeBank";
@@ -57,7 +58,10 @@ function uniqueTruthyStrings(values: Array<unknown>) {
 }
 
 
-function buildCheckFeedbackFromResult(result: any): CodeFeedback | null {
+function buildCheckFeedbackFromResult(
+  result: any,
+  labels: { checkAnswerTryAgain: string; notCorrectYet: string },
+): CodeFeedback | null {
   if (!result || typeof result !== "object") return null;
 
   const authored = result.feedback;
@@ -73,14 +77,14 @@ function buildCheckFeedbackFromResult(result: any): CodeFeedback | null {
           ? result.explanation.trim()
           : typeof result.message === "string" && result.message.trim().length > 0
               ? result.message.trim()
-              : "Check the answer and try again.";
+              : labels.checkAnswerTryAgain;
 
   return {
     area: "code",
     source: "check",
     kind: "logic",
     tone: "warning",
-    title: "Not correct yet",
+    title: labels.notCorrectYet,
     message: explanation,
   };
 }
@@ -883,6 +887,8 @@ export default function QuizPracticeCard(props: {
   const excused = Boolean(props.excused);
 
   const ui = useTaggedT("reviewQuizUi");
+  const t = useTranslations("review.quiz");
+  const practiceT = useTranslations("practice.exerciseRenderer");
   const { raw } = useTaggedT();
   const resolvedProjectStepManifest = useMemo(
       () =>
@@ -1375,7 +1381,10 @@ export default function QuizPracticeCard(props: {
     if (resultOk !== false) return;
     if (feedbackDismissed) return;
 
-    const feedback = buildCheckFeedbackFromResult(checkedResult);
+    const feedback = buildCheckFeedbackFromResult(checkedResult, {
+      checkAnswerTryAgain: practiceT("checkAnswerTryAgain"),
+      notCorrectYet: practiceT("notCorrectYet"),
+    });
     if (!feedback) return;
 
     /**
@@ -1547,10 +1556,10 @@ export default function QuizPracticeCard(props: {
   const btnLabel = ps?.busy ? (
       <span className="inline-flex items-center gap-2">
       <span className="ui-quiz-spinner" />
-        {ui.t("practice.checking", {}, "Checking…")}
+        {ui.t("practice.checking")}
     </span>
   ) : (
-      ui.t("buttons.checkAnswer", {}, "Check this answer")
+      ui.t("buttons.checkAnswer")
   );
 
   const maxForRenderer = ps?.maxAttempts ?? Number.POSITIVE_INFINITY;
@@ -1672,22 +1681,14 @@ export default function QuizPracticeCard(props: {
       <div className={["p-2", !unlocked ? "opacity-70" : ""].join(" ")}>
         {!unlocked ? (
             <div className="ui-quiz-hint">
-              {ui.t(
-                  "unlockHint",
-                  {},
-                  "Answer the previous question correctly to unlock this one.",
-              )}
+              {t("unlockHint")}
             </div>
         ) : null}
 
         {showStuckLoading ? (
             <div className="ui-quiz-status-soft">
               <div>
-                {ui.t(
-                    "practice.loadingSlow",
-                    {},
-                    "Still loading the exercise. Please wait a moment.",
-                )}
+                {t("loadingSlow")}
               </div>
 
               <div className="mt-2 flex flex-wrap gap-2">
@@ -1697,7 +1698,7 @@ export default function QuizPracticeCard(props: {
                         onClick={props.onRetryExercise}
                         className="ui-quiz-action ui-quiz-action--ghost"
                     >
-                      {ui.t("buttons.retry", {}, "Retry")}
+                      {t("retry")}
                     </button>
                 ) : null}
 
@@ -1711,14 +1712,14 @@ export default function QuizPracticeCard(props: {
                     ].join(" ")}
                 >
                   {props.excused
-                      ? ui.t("buttons.excused", {}, "Excused")
-                      : ui.t("buttons.continue", {}, "Continue")}
+                      ? t("excused")
+                      : t("continue")}
                 </button>
               </div>
             </div>
         ) : isInitialLoading ? (
             <div className="mt-2 ui-quiz-status-soft flex items-center gap-2">
-              <span>{ui.t("practice.loadingExercise", {}, "Loading exercise…")}</span>
+              <span>{t("loadingExercise")}</span>
             </div>
         ) : hasBlockingError ? (
             <div className="ui-quiz-note-danger">
@@ -1731,7 +1732,7 @@ export default function QuizPracticeCard(props: {
                         onClick={props.onRetryExercise}
                         className="ui-quiz-action ui-quiz-action--ghost"
                     >
-                      {ui.t("buttons.retry", {}, "Retry")}
+                      {t("retry")}
                     </button>
                 ) : null}
 
@@ -1745,8 +1746,8 @@ export default function QuizPracticeCard(props: {
                     ].join(" ")}
                 >
                   {props.excused
-                      ? ui.t("buttons.excused", {}, "Excused")
-                      : ui.t("buttons.continue", {}, "Continue")}
+                      ? t("excused")
+                      : t("continue")}
                 </button>
               </div>
             </div>
@@ -1754,7 +1755,7 @@ export default function QuizPracticeCard(props: {
             <div className="mt-1">
               {isRefreshing ? (
                   <div className="mb-2 ui-quiz-status-soft flex items-center gap-2">
-                    <span>{ui.t("practice.refreshing", {}, "Refreshing…")}</span>
+                    <span>{ui.t("practice.refreshing")}</span>
                   </div>
               ) : null}
 
@@ -1769,7 +1770,7 @@ export default function QuizPracticeCard(props: {
                               onClick={props.onRetryExercise}
                               className="ui-quiz-action ui-quiz-action--ghost"
                           >
-                            {ui.t("buttons.retry", {}, "Retry")}
+                            {t("retry")}
                           </button>
                       ) : null}
                     </div>
@@ -1886,7 +1887,7 @@ export default function QuizPracticeCard(props: {
                             disableHelp ? "ui-quiz-action--disabled" : "ui-quiz-action--ghost",
                           ].join(" ")}
                       >
-                        {nextHelpLabel ?? ui.t("buttons.help", {}, "Help")}
+                        {nextHelpLabel ?? ui.t("buttons.help")}
                       </button>
                   ) : null}
                 </div>
@@ -1895,14 +1896,10 @@ export default function QuizPracticeCard(props: {
                   <div className="ui-quiz-checkrow-status">
                     {!compactLearnerUi ? (
                       <span className="whitespace-normal">
-                        {ui.t(
-                            "practice.attempts",
-                            {
-                              n: ps?.attempts ?? 0,
-                              max: ps?.maxAttempts == null ? "∞" : ps.maxAttempts,
-                            },
-                            `Attempts: ${ps?.attempts ?? 0}/${ps?.maxAttempts == null ? "∞" : ps.maxAttempts}`,
-                        )}
+                        {t("attempts", {
+                          n: ps?.attempts ?? 0,
+                          max: ps?.maxAttempts == null ? "∞" : ps.maxAttempts,
+                        })}
                       </span>
                     ) : null}
 
@@ -1911,14 +1908,14 @@ export default function QuizPracticeCard(props: {
                             className={!compactLearnerUi ? "ml-2 whitespace-nowrap ui-quiz-status-good" : "whitespace-nowrap ui-quiz-status-good"}
                             data-testid="review-practice-result-correct"
                         >
-        ✓ Correct
+        {t("correct")}
       </span>
                     ) : !feedbackDismissed && resultOk === false && ps?.item?.result ? (
                         <span
                             className={!compactLearnerUi ? "ml-2 whitespace-nowrap ui-quiz-status-danger" : "whitespace-nowrap ui-quiz-status-danger"}
                             data-testid="review-practice-result-incorrect"
                         >
-        ✕ Not correct
+        {t("notCorrect")}
       </span>
                     ) : null}
                   </div>
@@ -1937,7 +1934,7 @@ export default function QuizPracticeCard(props: {
             </div>
         ) : (
             <div className="mt-2 ui-quiz-status-soft">
-              {ui.t("practice.noExercise", {}, "No exercise.")}
+              {ui.t("practice.noExercise")}
             </div>
         )}
       </div>

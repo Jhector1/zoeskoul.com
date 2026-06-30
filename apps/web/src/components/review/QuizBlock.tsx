@@ -1523,7 +1523,7 @@ export default function QuizBlock({
   if (!questions.length) {
     return (
         <div className="mt-2 ui-quiz-status-soft">
-          {ui.t("noQuestions", {}, "No questions.")}
+          {ui.t("noQuestions")}
         </div>
     );
   }
@@ -1680,9 +1680,7 @@ export default function QuizBlock({
                       else advanceFrom(q.id);
                     }}
                 >
-                  {isLast
-                      ? ui.t("buttons.finish", {}, "Finish →")
-                      : ui.t("buttons.next", {}, "Next →")}
+                  {isLast ? ui.t("buttons.finish") : ui.t("buttons.next")}
                 </button>
               </div>
           ) : null}
@@ -1705,7 +1703,6 @@ export default function QuizBlock({
                 ui.t(
                     "progress.question",
                     { current: index + 1, total },
-                    `Question ${index + 1} of ${total}`,
                 )
             }
             canGoPrev={activeIndex > 0}
@@ -1738,7 +1735,7 @@ export default function QuizBlock({
                       setAutoAdvance(e.target.checked);
                     }}
                 />
-                {ui.t("autoAdvance", {}, "Auto-advance")}
+                {ui.t("autoAdvance")}
               </label>
             </div>
 
@@ -1758,36 +1755,18 @@ export default function QuizBlock({
             open={confirmResetQuiz}
             onOpenChange={setConfirmResetQuiz}
             danger
-            title={ui.t("resetDialog.title", {}, "Reset this quiz?")}
-            confirmLabel={ui.t("resetDialog.confirm", {}, "Reset quiz")}
+            title={ui.t("resetDialog.title")}
+            confirmLabel={ui.t("resetDialog.confirm")}
             description={
               <div className="grid gap-2">
-                <div>{ui.t("resetDialog.intro", {}, "This will:")}</div>
+                <div>{ui.t("resetDialog.intro")}</div>
                 <ul className="list-disc space-y-1 pl-5">
-                  <li>
-                    {ui.t(
-                        "resetDialog.b1",
-                        {},
-                        "Clear your selected answers and checked status.",
-                    )}
-                  </li>
-                  <li>
-                    {ui.t(
-                        "resetDialog.b2",
-                        {},
-                        "Clear practice attempts and local state for this quiz.",
-                    )}
-                  </li>
-                  <li>
-                    {ui.t(
-                        "resetDialog.b3",
-                        {},
-                        "Reload the same question set (it does not generate a new set).",
-                    )}
-                  </li>
+                  <li>{ui.t("resetDialog.b1")}</li>
+                  <li>{ui.t("resetDialog.b2")}</li>
+                  <li>{ui.t("resetDialog.b3")}</li>
                 </ul>
                 <div className="ui-quiz-dialog-note">
-                  {ui.t("resetDialog.cannotUndo", {}, "This can’t be undone.")}
+                  {ui.t("resetDialog.cannotUndo")}
                 </div>
               </div>
             }

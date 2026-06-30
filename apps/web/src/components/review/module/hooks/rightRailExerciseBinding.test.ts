@@ -33,6 +33,28 @@ describe("shouldRightRailUseBoundExercise", () => {
         ).toBe(true);
     });
 
+
+
+    it("does not switch to bound exercise for plain quiz cards before a generated practice question binds", () => {
+        expect(
+            shouldRightRailUseBoundExercise({
+                routeOwnsExercise: false,
+                activeCard: {
+                    type: "quiz",
+                    id: "quiz",
+                    title: "Practice check",
+                    passScore: 1,
+                    spec: {
+                        subject: "linux-terminal-fundamentals",
+                        moduleSlug: "linux-module-1-terminal-navigation",
+                        topic: "where-am-i",
+                        n: 4,
+                    },
+                } as any,
+            }),
+        ).toBe(false);
+    });
+
     it("does not switch to bound exercise for plain reading cards", () => {
         expect(
             shouldRightRailUseBoundExercise({

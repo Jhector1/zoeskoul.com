@@ -1,0 +1,9 @@
+{
+  "UserMenu": {
+    "ariaLabel": "Meni itilizatè",
+    "avatarAlt": "Imaj pwofil {name}",
+    "profile": "Pwofil",
+    "progress": "Pwogrè",
+    "logout": "Dekonekte"
+  }
+}

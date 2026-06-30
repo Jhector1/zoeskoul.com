@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { useTranslations } from "next-intl";
 import type {
     ReviewModule,
     ReviewModuleSection,
@@ -55,18 +56,26 @@ function getReviewTopicLookupKey(topic: ReviewTopicShape): string {
     return String(topic.id);
 }
 
-function getSectionTitle(section: ReviewModuleSection, index: number): string {
+function getSectionTitle(
+    section: ReviewModuleSection,
+    index: number,
+    sectionFallback: string,
+): string {
     return (
         asText(section.title) ??
         asText(section.slug) ??
         asText(section.id) ??
-        `Section ${index + 1}`
+        sectionFallback.replace("{index}", String(index + 1))
     );
 }
 
 function buildSectionItemsFromModule(
     mod: ReviewModule,
     topicItems: SidebarTopicItemVm[],
+    labels: {
+        otherTopics: string;
+        sectionFallback: string;
+    },
 ): SidebarSectionItemVm[] {
     const rawSections = Array.isArray(mod.sections) ? mod.sections : [];
     if (!rawSections.length) return [];
@@ -92,7 +101,7 @@ function buildSectionItemsFromModule(
             return {
                 id: section.id,
                 slug: section.slug,
-                title: getSectionTitle(section, sectionIndex),
+                title: getSectionTitle(section, sectionIndex, labels.sectionFallback),
                 summary: section.summary ?? section.description ?? null,
                 order: section.order,
                 topics,
@@ -106,7 +115,7 @@ function buildSectionItemsFromModule(
         sections.push({
             id: "__unsectioned_topics__",
             slug: "__unsectioned_topics__",
-            title: "Other topics",
+            title: labels.otherTopics,
             summary: null,
             order: Number.MAX_SAFE_INTEGER,
             topics: unsectionedTopics,
@@ -116,12 +125,12 @@ function buildSectionItemsFromModule(
     return sections;
 }
 
-function buildFallbackSections(topicItems: SidebarTopicItemVm[]): SidebarSectionItemVm[] {
+function buildFallbackSections(topicItems: SidebarTopicItemVm[], topicsLabel: string): SidebarSectionItemVm[] {
     return [
         {
             id: "__all_topics__",
             slug: "__all_topics__",
-            title: "Topics",
+            title: topicsLabel,
             summary: null,
             order: 0,
             topics: topicItems,
@@ -175,7 +184,7 @@ function SidebarTopicRow({
                         <div className="flex shrink-0 items-center gap-1.5">
                             {item.isActive ? (
                                 <span className="ui-pill-neutral shrink-0">
-                                    {ui.t("current", {}, "CURRENT")}
+                                    {ui.t("current")}
                                 </span>
                             ) : null}
 
@@ -237,6 +246,7 @@ function SidebarSectionGroup({
     onGoToTopic: (tid: string) => void;
 }) {
     const ui = useTaggedT("moduleSidebarUi");
+    const t = useTranslations("review.sidebar");
 
     const done = section.topics.filter((topic) => topic.done).length;
     const total = section.topics.length;
@@ -309,15 +319,15 @@ function SidebarSectionGroup({
 
                         {isCurrentSection ? (
                             <span className="ui-pill-neutral shrink-0">
-                                {ui.t("currentSection", {}, "Current")}
+                                {t("currentSection")}
                             </span>
                         ) : isComplete ? (
                             <span className="ui-pill-good shrink-0">
-                                {ui.t("completedSection", {}, "Done")}
+                                {t("completedSection")}
                             </span>
                         ) : isStarted ? (
                             <span className="ui-pill-info shrink-0">
-                                {ui.t("inProgressSection", {}, "Progress")}
+                                {t("inProgressSection")}
                             </span>
                         ) : null}
                     </div>
@@ -414,6 +424,7 @@ function ModuleSidebar({
     canGoNextModule: boolean;
 }) {
     const ui = useTaggedT("moduleSidebarUi");
+    const t = useTranslations("review.sidebar");
 
     const modTitle = String((mod as any)?.title ?? "");
     const modSubtitle = ((mod as any)?.subtitle ?? null) as string | null;
@@ -423,14 +434,17 @@ function ModuleSidebar({
             return sectionItems.filter((section) => section.topics.length > 0);
         }
 
-        const fromModule = buildSectionItemsFromModule(mod, topicItems);
+        const fromModule = buildSectionItemsFromModule(mod, topicItems, {
+            otherTopics: t("otherTopics"),
+            sectionFallback: t("sectionFallback", { index: "{index}" }),
+        });
 
         if (fromModule.length > 0) {
             return fromModule;
         }
 
-        return buildFallbackSections(topicItems);
-    }, [mod, sectionItems, topicItems]);
+        return buildFallbackSections(topicItems, t("topics"));
+    }, [mod, sectionItems, topicItems, t]);
 
     const currentSectionId = React.useMemo(() => {
         return (
@@ -494,7 +508,7 @@ function ModuleSidebar({
                             data-testid="review-module-progress-label"
                         >
     <span className="ui-review-progress-text">
-        {ui.t("topicsLabel", {}, "Topics")}
+        {ui.t("topicsLabel")}
     </span>
 
                             <span className="ui-review-progress-value">
@@ -513,7 +527,7 @@ function ModuleSidebar({
 
                         {unlockAll ? (
                             <div className="ui-pill-warn mt-2.5">
-                                {ui.t("unlockEnabled", {}, "UNLOCK ENABLED")}
+                                {ui.t("unlockEnabled")}
                             </div>
                         ) : null}
                     </div>
@@ -523,7 +537,7 @@ function ModuleSidebar({
                             type="button"
                             onClick={onCollapse}
                             className="ui-btn-secondary px-3"
-                            title={ui.t("collapseTitle", {}, "Collapse sidebar")}
+                            title={ui.t("collapseTitle")}
                         >
                             ◀
                         </button>
@@ -563,45 +577,33 @@ function ModuleSidebar({
                 {navLoading ? (
                     <div className={cn("ui-review-note", showAssignmentCta ? "mt-2.5" : "")}>
                         <div className="ui-title-sm">
-                            {ui.t("nextModule.title", {}, "Next module")}
+                            {t("nextModuleTitle")}
                         </div>
                         <div className="mt-1 ui-meta">
-                            {ui.t("nextModule.loading", {}, "Loading…")}
+                            {t("nextModuleLoading")}
                         </div>
                     </div>
                 ) : navError ? (
                     <div className={cn("ui-review-note-danger", showAssignmentCta ? "mt-2.5" : "")}>
                         <div className="ui-title-sm">
-                            {ui.t("nextModule.title", {}, "Next module")}
+                            {t("nextModuleTitle")}
                         </div>
                         <div className="mt-1 text-rose-700/80 dark:text-rose-200/80">
-                            {ui.t(
-                                "nextModule.error",
-                                {},
-                                "Couldn’t load navigation.",
-                            )}
+                            {t("nextModuleError")}
                         </div>
                     </div>
                 ) : hasNextModule ? (
                     <div className={cn("ui-review-note", showAssignmentCta ? "mt-2.5" : "")}>
                         <div className="ui-title-sm">
-                            {ui.t("nextModule.title", {}, "Next module")}
+                            {t("nextModuleTitle")}
                         </div>
 
                         <div className="mt-1 ui-meta">
                             {canGoNextModule
                                 ? unlockAll
-                                    ? ui.t("nextModule.unlocked", {}, "Unlocked.")
-                                    : ui.t(
-                                        "nextModule.unlockedAfterAssignment",
-                                        {},
-                                        "Unlocked after assignment.",
-                                    )
-                                : ui.t(
-                                    "nextModule.locked",
-                                    {},
-                                    "Finish topics + assignment to unlock.",
-                                )}
+                                    ? t("nextModuleUnlocked")
+                                    : t("nextModuleUnlockedAfterAssignment")
+                                : t("nextModuleLocked")}
                         </div>
                     </div>
                 ) : null}

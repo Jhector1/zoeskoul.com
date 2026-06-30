@@ -1,0 +1,35 @@
+{
+  "review": {
+    "cardRenderer": {
+      "completeTryItToRead": "Complete the Try it yourself task to mark this lesson as read.",
+      "completeTryItToDone": "Complete the Try it yourself task to mark this lesson as done.",
+      "tryItYourself": "Try it yourself",
+      "loadingSavedState": "Loading saved try it yourself state…"
+    },
+    "sidebar": {
+      "otherTopics": "Other topics",
+      "topics": "Topics",
+      "sectionFallback": "Section {index}",
+      "currentSection": "Current",
+      "completedSection": "Done",
+      "inProgressSection": "Progress",
+      "nextModuleTitle": "Next module",
+      "nextModuleLoading": "Loading…",
+      "nextModuleError": "Couldn’t load navigation.",
+      "nextModuleUnlocked": "Unlocked.",
+      "nextModuleUnlockedAfterAssignment": "Unlocked after assignment.",
+      "nextModuleLocked": "Finish topics + assignment to unlock."
+    },
+    "quiz": {
+      "unlockHint": "Answer the previous question correctly to unlock this one.",
+      "loadingSlow": "Still loading the exercise. Please wait a moment.",
+      "retry": "Retry",
+      "excused": "Excused",
+      "continue": "Continue",
+      "loadingExercise": "Loading exercise…",
+      "attempts": "Attempts: {n}/{max}",
+      "correct": "✓ Correct",
+      "notCorrect": "✕ Not correct"
+    }
+  }
+}

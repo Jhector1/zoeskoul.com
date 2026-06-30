@@ -72,10 +72,13 @@ export function buildExerciseFromManifest(
     manifest?: Pick<TopicBundleManifest, "serviceDefaults" | "runtimeDefaults">,
 ) {
     const resolved = resolveBase(def.messageBase);
+    const authoredIdeConfig = (def as any).ideConfig ?? null;
+
     const ideConfig = mergeLearningIdeConfigs(
         learningIdeFromRuntimeDefaults(manifest?.runtimeDefaults ?? null),
         learningIdeFromRuntimeDefaults(def.runtime ?? null),
         manifest?.serviceDefaults ?? null,
+        authoredIdeConfig,
         def.serviceOverrides ?? null,
     );
 

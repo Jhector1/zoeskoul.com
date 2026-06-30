@@ -3,36 +3,72 @@ import type { ReviewQuizSpec } from "@/lib/subjects/types";
 // src/lib/review/clientApi.ts
 // import type { ReviewQuizSpec } from "@/lib/review/types";
 
-export async function fetchReviewQuiz(spec: ReviewQuizSpec, signal?: AbortSignal) {
-  const res = await fetch("/api/review/quiz", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(spec),
-    signal,
-    cache: "no-store",
+type ReviewQuizResponse = { questions: any[]; quizKey: string };
+
+const reviewQuizInFlight = new Map<string, Promise<ReviewQuizResponse>>();
+
+function abortError() {
+  const error = new Error("Aborted");
+  error.name = "AbortError";
+  return error;
+}
+
+function waitForAbort(signal: AbortSignal): Promise<never> {
+  if (signal.aborted) return Promise.reject(abortError());
+
+  return new Promise((_, reject) => {
+    signal.addEventListener("abort", () => reject(abortError()), { once: true });
   });
+}
 
-  const text = await res.text();
+export async function fetchReviewQuiz(spec: ReviewQuizSpec, signal?: AbortSignal) {
+  const body = JSON.stringify(spec);
+  const existing = reviewQuizInFlight.get(body);
 
-  const json = text ? JSON.parse(text) : null;
-  if (!res.ok) {
-    const issues = Array.isArray(json?.issues)
-        ? json.issues
-            .map((issue: any) => {
-              const path = Array.isArray(issue.path) ? issue.path.join(".") : "";
-              return path ? `${path}: ${issue.message}` : issue.message;
-            })
-            .join("; ")
-        : "";
-
-    throw new Error(
-        issues
-            ? `${json?.message ?? "Failed to load quiz."}: ${issues}`
-            : json?.message ?? "Failed to load quiz.",
-    );
+  if (existing) {
+    return signal ? Promise.race([existing, waitForAbort(signal)]) : existing;
   }
-  // ✅ server returns quizKey too
-  return json as { questions: any[]; quizKey: string };
+
+  const promise = (async () => {
+    const res = await fetch("/api/review/quiz", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body,
+      signal,
+      cache: "no-store",
+    });
+
+    const text = await res.text();
+
+    const json = text ? JSON.parse(text) : null;
+    if (!res.ok) {
+      const issues = Array.isArray(json?.issues)
+          ? json.issues
+              .map((issue: any) => {
+                const path = Array.isArray(issue.path) ? issue.path.join(".") : "";
+                return path ? `${path}: ${issue.message}` : issue.message;
+              })
+              .join("; ")
+          : "";
+
+      throw new Error(
+          issues
+              ? `${json?.message ?? "Failed to load quiz."}: ${issues}`
+              : json?.message ?? "Failed to load quiz.",
+      );
+    }
+    // ✅ server returns quizKey too
+    return json as ReviewQuizResponse;
+  })();
+
+  reviewQuizInFlight.set(body, promise);
+  promise.finally(() => {
+    if (reviewQuizInFlight.get(body) === promise) {
+      reviewQuizInFlight.delete(body);
+    }
+  }).catch(() => undefined);
+
+  return promise;
 }
 
 

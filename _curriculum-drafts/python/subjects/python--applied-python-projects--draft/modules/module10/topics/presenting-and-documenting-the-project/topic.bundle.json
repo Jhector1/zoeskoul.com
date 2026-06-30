@@ -1,0 +1,223 @@
+{
+  "topicId": "presenting-and-documenting-the-project",
+  "subjectSlug": "python--applied-python-projects--draft",
+  "moduleSlug": "python-10-capstone-automation-project",
+  "sectionSlug": "python--applied-python-projects--draft-python-10-building-and-polishing",
+  "prefix": "py10",
+  "minutes": 20,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "python",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "topic": {
+    "labelKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.presenting-and-documenting-the-project.label",
+    "summaryKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.presenting-and-documenting-the-project.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.presenting-and-documenting-the-project.cards.sketch0.title",
+      "sketchId": "sketch-1",
+      "height": 420,
+      "tryIt": {
+        "id": "try-presenting-and-documenting-the-project-sketch0",
+        "titleKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.presenting-and-documenting-the-project.tryIt.try_presenting_and_documenting_the_project_sketch0.title",
+        "promptKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.presenting-and-documenting-the-project.tryIt.try_presenting_and_documenting_the_project_sketch0.prompt",
+        "exerciseKey": "project-readme-generator",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.presenting-and-documenting-the-project.cards.sketch1.title",
+      "sketchId": "sketch-2",
+      "height": 420
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.presenting-and-documenting-the-project.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "displayKind": "capstone",
+        "uiKind": "capstone",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "project-launch-checklist",
+            "titleKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.presenting-and-documenting-the-project.projectSteps.project-launch-checklist.title",
+            "exerciseKey": "project-launch-checklist",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch-1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--applied-python-projects--draft.python-10-capstone-automation-project.presenting-and-documenting-the-project.sketch-1.title",
+      "bodyKey": "sketches.python--applied-python-projects--draft.python-10-capstone-automation-project.presenting-and-documenting-the-project.sketch-1.bodyMarkdown"
+    },
+    {
+      "id": "sketch-2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--applied-python-projects--draft.python-10-capstone-automation-project.presenting-and-documenting-the-project.sketch-2.title",
+      "bodyKey": "sketches.python--applied-python-projects--draft.python-10-capstone-automation-project.presenting-and-documenting-the-project.sketch-2.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "project-readme-generator",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.presenting-and-documenting-the-project.quiz.project-readme-generator",
+      "language": "python",
+      "starterCode": "# Read project details and print a README-style summary.\n# Input order:\n# 1) project title\n# 2) short description\n# 3) main file path\n# 4) input file path\n\nproject_title = input()\ndescription = input()\nmain_file = input()\ninput_file = input()\n\n# TODO: print the five required lines in the correct order.\n# Use the exact labels from the prompt.",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "# Read project details and print a README-style summary.\n# Input order:\n# 1) project title\n# 2) short description\n# 3) main file path\n# 4) input file path\n\nproject_title = input()\ndescription = input()\nmain_file = input()\ninput_file = input()\n\n# TODO: print the five required lines in the correct order.\n# Use the exact labels from the prompt.",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "project_title = input()\ndescription = input()\nmain_file = input()\ninput_file = input()\n\nprint(f\"Project: {project_title}\")\nprint(f\"Description: {description}\")\nprint(f\"Main file: {main_file}\")\nprint(f\"Input file: {input_file}\")\nprint(f\"How to run: Open {main_file}, click Run, and check the output panel.\")",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "# Read project details and print a README-style summary.\n# Input order:\n# 1) project title\n# 2) short description\n# 3) main file path\n# 4) input file path\n\nproject_title = input()\ndescription = input()\nmain_file = input()\ninput_file = input()\n\n# TODO: print the five required lines in the correct order.\n# Use the exact labels from the prompt.",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "# Read project details and print a README-style summary.\n# Input order:\n# 1) project title\n# 2) short description\n# 3) main file path\n# 4) input file path\n\nproject_title = input()\ndescription = input()\nmain_file = input()\ninput_file = input()\n\n# TODO: print the five required lines in the correct order.\n# Use the exact labels from the prompt.",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "Task Tracker\nTracks tasks and shows completed items\nsrc/main.py\ndata/tasks.txt\n",
+            "stdout": "Project: Task Tracker\nDescription: Tracks tasks and shows completed items\nMain file: src/main.py\nInput file: data/tasks.txt\nHow to run: Open src/main.py, click Run, and check the output panel.\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "Expense Summarizer\nReads expenses and prints category totals\napp.py\nexpenses.csv\n",
+            "stdout": "Project: Expense Summarizer\nDescription: Reads expenses and prints category totals\nMain file: app.py\nInput file: expenses.csv\nHow to run: Open app.py, click Run, and check the output panel.\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "project_title = input()\ndescription = input()\nmain_file = input()\ninput_file = input()\n\nprint(f\"Project: {project_title}\")\nprint(f\"Description: {description}\")\nprint(f\"Main file: {main_file}\")\nprint(f\"Input file: {input_file}\")\nprint(f\"How to run: Open {main_file}, click Run, and check the output panel.\")",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "project_title = input()\ndescription = input()\nmain_file = input()\ninput_file = input()\n\nprint(f\"Project: {project_title}\")\nprint(f\"Description: {description}\")\nprint(f\"Main file: {main_file}\")\nprint(f\"Input file: {input_file}\")\nprint(f\"How to run: Open {main_file}, click Run, and check the output panel.\")",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "project-launch-checklist",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.presenting-and-documenting-the-project.quiz.project-launch-checklist",
+      "language": "python",
+      "starterCode": "# Read project details and print a short launch checklist.\n# Input order:\n# 1) project title\n# 2) main file path\n# 3) report file path\n\nproject_title = input()\nmain_file = input()\nreport_file = input()\n\n# TODO: print the four required lines in the correct order.",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "# Read project details and print a short launch checklist.\n# Input order:\n# 1) project title\n# 2) main file path\n# 3) report file path\n\nproject_title = input()\nmain_file = input()\nreport_file = input()\n\n# TODO: print the four required lines in the correct order.",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "project_title = input()\nmain_file = input()\nreport_file = input()\n\nprint(f\"Project: {project_title}\")\nprint(f\"Run: Open {main_file}\")\nprint(f\"Save report: {report_file}\")\nprint(\"Ready to share: yes\")",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "# Read project details and print a short launch checklist.\n# Input order:\n# 1) project title\n# 2) main file path\n# 3) report file path\n\nproject_title = input()\nmain_file = input()\nreport_file = input()\n\n# TODO: print the four required lines in the correct order.",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "# Read project details and print a short launch checklist.\n# Input order:\n# 1) project title\n# 2) main file path\n# 3) report file path\n\nproject_title = input()\nmain_file = input()\nreport_file = input()\n\n# TODO: print the four required lines in the correct order.",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "Task Tracker\nsrc/main.py\nreports/tasks.txt\n",
+            "stdout": "Project: Task Tracker\nRun: Open src/main.py\nSave report: reports/tasks.txt\nReady to share: yes\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "Expense Summary\napp.py\nout/summary.txt\n",
+            "stdout": "Project: Expense Summary\nRun: Open app.py\nSave report: out/summary.txt\nReady to share: yes\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "project_title = input()\nmain_file = input()\nreport_file = input()\n\nprint(f\"Project: {project_title}\")\nprint(f\"Run: Open {main_file}\")\nprint(f\"Save report: {report_file}\")\nprint(\"Ready to share: yes\")",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "project_title = input()\nmain_file = input()\nreport_file = input()\n\nprint(f\"Project: {project_title}\")\nprint(f\"Run: Open {main_file}\")\nprint(f\"Save report: {report_file}\")\nprint(\"Ready to share: yes\")",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    }
+  ]
+}

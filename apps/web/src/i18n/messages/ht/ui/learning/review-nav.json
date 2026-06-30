@@ -1,0 +1,18 @@
+{
+  "reviewNav": {
+    "buttons": {
+      "prevModule": "Modil anvan",
+      "nextModule": "Modil apre",
+      "getCertificate": "Jwenn sètifika"
+    },
+    "hints": {
+      "unlockNext": "Fini modil sa a pou ouvri <next>Pwochen</next>.",
+      "unlockCertificate": "Fini modil sa a pou ouvri <certificate>sètifika</certificate> ou."
+    },
+    "aria": {
+      "noPrev": "Pa gen modil anvan",
+      "lockedCertificate": "Fini modil la pou ouvri sètifika a",
+      "lockedNext": "Debloke pwochen modil la"
+    }
+  }
+}

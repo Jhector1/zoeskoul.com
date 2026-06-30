@@ -48,6 +48,16 @@ const TERMINAL_REVIVE_WATCHDOG_INTERVAL_MS = 15_000;
 const TERMINAL_PROMPT_PRIME_DELAY_MS = 700;
 const TERMINAL_PROMPT_PRIME_MAX_ATTEMPTS = 3;
 
+const STARTUP_CWD_READY_MARKER = "__ZOESKOUL_STARTUP_CWD_READY__";
+const STARTUP_CWD_OUTPUT_SUPPRESSION_MS = 10_000;
+
+type StartupCwdOutputSuppression = {
+    marker: string;
+    buffer: string;
+    deadline: number;
+    clearLineBeforeRelease?: boolean;
+};
+
 /**
  * Docker/runner recycle often appears to the browser as a shell exit 137
  * (SIGKILL) or 143 (SIGTERM). Treat those as recoverable infrastructure
@@ -769,6 +779,7 @@ export function useWorkspaceTerminalController(
     const currentCwdRef = React.useRef<string | undefined>(initialEvidenceCwd);
     const pendingStartupInputRef = React.useRef<string | null>(null);
     const pendingStartupCwdRef = React.useRef<string | undefined>(undefined);
+    const startupCwdOutputSuppressionRef = React.useRef<StartupCwdOutputSuppression | null>(null);
     const lastAuthoredCwdAppliedRef = React.useRef<string | undefined>(initialEvidenceCwd);
     const terminalHasVisibleOutputRef = React.useRef(false);
     const mountedRef = React.useRef(false);
@@ -927,7 +938,10 @@ export function useWorkspaceTerminalController(
         terminalProcessExitedRef.current = false;
         terminalExitCodeRef.current = null;
         currentCwdRef.current = initialEvidenceCwd;
-        lastAuthoredCwdAppliedRef.current = initialEvidenceCwd;
+        lastAuthoredCwdAppliedRef.current =
+            initialEvidenceCwd && initialEvidenceCwd !== "/workspace"
+                ? undefined
+                : initialEvidenceCwd;
         setTerminalEvidenceNow(createTerminalEvidence(initialEvidenceCwd));
         void ensureHistoryLoaded();
     }, [ensureHistoryLoaded, initialEvidenceCwd, setTerminalEvidenceNow]);
@@ -997,6 +1011,49 @@ export function useWorkspaceTerminalController(
     const pushChunk = React.useCallback(
         (kind: TerminalChunk["kind"], data: string) => {
             if (!data) return;
+
+            const startupSuppression = startupCwdOutputSuppressionRef.current;
+            if (startupSuppression && kind === "pty") {
+                const combined = startupSuppression.buffer + data;
+                const markerIndex = combined.indexOf(startupSuppression.marker);
+
+                if (markerIndex >= 0) {
+                    startupCwdOutputSuppressionRef.current = null;
+                    const shouldClearStalePrompt = startupSuppression.clearLineBeforeRelease === true;
+                    data = combined.slice(markerIndex + startupSuppression.marker.length);
+                    data = data.replace(/^(?:\r?\n)+/, "");
+
+                    if (shouldClearStalePrompt) {
+                        const clearPromptChunk: TerminalChunk = {
+                            id: nextChunkIdRef.current++,
+                            kind: "pty",
+                            data: "\r\x1b[2K",
+                        };
+                        setTerminalFeed((prev) => {
+                            const next = [...prev, clearPromptChunk];
+                            terminalFeedRef.current = next;
+                            return next;
+                        });
+                    }
+
+                    if (!data) {
+                        terminalHasVisibleOutputRef.current = true;
+                        clearPromptPrimeTimer();
+                        return;
+                    }
+                } else if (Date.now() <= startupSuppression.deadline) {
+                    startupCwdOutputSuppressionRef.current = {
+                        ...startupSuppression,
+                        buffer: combined.slice(-8192),
+                    };
+                    return;
+                } else {
+                    // If the marker was lost, fail open instead of hiding learner output forever.
+                    startupCwdOutputSuppressionRef.current = null;
+                    return;
+                }
+            }
+
             terminalHasVisibleOutputRef.current = true;
             clearPromptPrimeTimer();
 
@@ -1118,10 +1175,15 @@ export function useWorkspaceTerminalController(
         promptPrimeAttemptsRef.current = 0;
         pendingStartupInputRef.current = null;
         pendingStartupCwdRef.current = undefined;
+        startupCwdOutputSuppressionRef.current = null;
         startedRef.current = false;
         startingRef.current = false;
         stateRef.current = "idle";
         currentCwdRef.current = initialEvidenceCwd;
+        lastAuthoredCwdAppliedRef.current =
+            initialEvidenceCwd && initialEvidenceCwd !== "/workspace"
+                ? undefined
+                : initialEvidenceCwd;
         terminalFeedRef.current = [];
         setTerminalFeed([]);
         setTerminalEvidenceNow(createTerminalEvidence(initialEvidenceCwd));
@@ -1298,6 +1360,7 @@ export function useWorkspaceTerminalController(
 
         if (nextCwd) {
             currentCwdRef.current = nextCwd;
+            lastAuthoredCwdAppliedRef.current = nextCwd;
             setTerminalEvidenceNow((prev) => ({
                 ...prev,
                 cwd: nextCwd,
@@ -1345,9 +1408,29 @@ export function useWorkspaceTerminalController(
 
     const queueAuthoredCwd = React.useCallback(
         (cwd: string) => {
-            pendingStartupInputRef.current = `cd -- ${shellQuotePosix(cwd)}\n`;
-            pendingStartupCwdRef.current = cwd;
-            lastAuthoredCwdAppliedRef.current = cwd;
+            const normalizedCwd = normalizePath(cwd);
+            if (!normalizedCwd || normalizedCwd === "/workspace") return;
+
+            const startupMarker = `${STARTUP_CWD_READY_MARKER}_${Date.now().toString(36)}_${Math.random()
+                .toString(36)
+                .slice(2)}`;
+
+            const markerPartA = startupMarker.slice(0, Math.ceil(startupMarker.length / 3));
+            const markerPartB = startupMarker.slice(
+                markerPartA.length,
+                Math.ceil((startupMarker.length * 2) / 3),
+            );
+            const markerPartC = startupMarker.slice(markerPartA.length + markerPartB.length);
+
+            startupCwdOutputSuppressionRef.current = {
+                marker: startupMarker,
+                buffer: "",
+                deadline: Date.now() + STARTUP_CWD_OUTPUT_SUPPRESSION_MS,
+                clearLineBeforeRelease: true,
+            };
+            pendingStartupInputRef.current =
+                `cd -- ${shellQuotePosix(normalizedCwd)} && export PS1='[zoeskoul]\\w\\$ ' && printf '%s%s%s\\n' ${shellQuotePosix(markerPartA)} ${shellQuotePosix(markerPartB)} ${shellQuotePosix(markerPartC)}\n`;
+            pendingStartupCwdRef.current = normalizedCwd;
 
             if (
                 sessionIdRef.current &&
@@ -1490,6 +1573,11 @@ export function useWorkspaceTerminalController(
 
                 pushChunk("sys", "[starting workspace terminal]\r\n");
 
+                const normalizedInitialCwd = normalizePath(args.cwd ?? "");
+                if (normalizedInitialCwd && normalizedInitialCwd !== "/workspace") {
+                    queueAuthoredCwd(normalizedInitialCwd);
+                }
+
                 try {
                     openedLeaseKeyRef.current = terminalLeaseKey;
 
@@ -1558,7 +1646,9 @@ export function useWorkspaceTerminalController(
                     const normalizedStartCwd = normalizePath(args.cwd ?? "");
                     if (
                         normalizedStartCwd &&
-                        normalizedStartCwd !== "/workspace"
+                        normalizedStartCwd !== "/workspace" &&
+                        pendingStartupCwdRef.current !== normalizedStartCwd &&
+                        lastAuthoredCwdAppliedRef.current !== normalizedStartCwd
                     ) {
                         /**
                          * The runner starts the shell before the synced workspace is
@@ -1595,6 +1685,7 @@ export function useWorkspaceTerminalController(
                     const tooManySessions = isTooManySessionsMessage(message);
                     pendingStartupInputRef.current = null;
                     pendingStartupCwdRef.current = undefined;
+                    startupCwdOutputSuppressionRef.current = null;
 
                         pushChunk("err", `${message}\r\n`);
                     setTerminalRecovery(normalizeRecoverableTerminalError(message));
@@ -1786,6 +1877,15 @@ export function useWorkspaceTerminalController(
             return;
         }
 
+        if (desiredCwd && lastAuthoredCwdAppliedRef.current !== desiredCwd) {
+            setInputEnabled(false);
+        }
+
+        if (pendingStartupCwdRef.current === desiredCwd) {
+            scheduleStartupCwdFlush(125);
+            return;
+        }
+
         if (
             !sessionIdRef.current ||
             !openedLeaseKeyRef.current ||
@@ -1799,13 +1899,8 @@ export function useWorkspaceTerminalController(
             return;
         }
 
-        if (currentCwdRef.current === desiredCwd) {
-            lastAuthoredCwdAppliedRef.current = desiredCwd;
-            return;
-        }
-
         queueAuthoredCwd(desiredCwd);
-    }, [args.cwd, queueAuthoredCwd, terminalLeaseKey]);
+    }, [args.cwd, queueAuthoredCwd, scheduleStartupCwdFlush, terminalLeaseKey]);
 
     React.useEffect(() => {
         return () => {

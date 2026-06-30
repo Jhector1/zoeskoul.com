@@ -1,0 +1,414 @@
+{
+  "title": "Testing Edge Cases",
+  "summary": "Check empty inputs, boundaries, and unusual values.",
+  "minutes": 24,
+  "sketchBlocks": [
+    {
+      "id": "testing-edge-cases-sketch-1",
+      "title": "Why edge cases matter",
+      "bodyMarkdown": "A program can look correct on a normal example and still fail on unusual input. **Edge cases** are inputs near the limits of what your code should handle, such as an empty string, zero, a negative number, or a list with one item.\n\nFor example, suppose you want a function that returns the first character of a word, or an empty string if the word is empty:\n\n```python\ndef first_char(text):\n    if text == \"\":\n        return \"\"\n    return text[0]\n\nprint(first_char(\"cat\"))\nprint(first_char(\"\"))\n```\n\nStep by step:\n- `if text == \"\":` checks the empty-input edge case first.\n- `return \"\"` avoids trying to access `text[0]` when there is no character.\n- `return text[0]` handles the normal case.\n\nWithout that first check, the code would crash on an empty string.\n\nTry it yourself: change one value, run the code, and predict the new output. For example, try `\"A\"` or `\"hello\"` or another empty string."
+    },
+    {
+      "id": "testing-edge-cases-sketch-2",
+      "title": "Boundaries and unusual values",
+      "bodyMarkdown": "Another common source of bugs is a **boundary value**. Boundaries are values right at the edge of a rule, such as `0`, `1`, the smallest allowed score, or the largest allowed size.\n\nExample:\n\n```python\ndef is_passing(score):\n    return score >= 50\n\nprint(is_passing(49))\nprint(is_passing(50))\nprint(is_passing(51))\n```\n\nHere, `50` is the important boundary.\n- `49` should be `False`\n- `50` should be `True`\n- `51` should also be `True`\n\nTesting only `80` would miss mistakes like using `>` instead of `>=`.\n\nYour turn: when you write tests, include at least one normal case and at least one edge case near the rule boundary."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "edge-sc-empty-input",
+      "kind": "single_choice",
+      "title": "Empty input check",
+      "prompt": "Why is an empty string an important test case for a function that reads `text[0]`?",
+      "options": [
+        "Because empty strings are faster to process",
+        "Because an empty string has no character at index 0",
+        "Because Python automatically turns empty strings into spaces",
+        "Because indexing always skips empty values"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Think about what happens when there is no first character to access.",
+      "help": {
+        "concept": "Indexing with `[0]` assumes the string has at least one character. An empty string is an edge case because that assumption is false.",
+        "hint_1": "Ask whether position `0` exists in an empty string.",
+        "hint_2": "If the string has length 0, accessing the first character will fail unless the code checks for that case first."
+      }
+    },
+    {
+      "id": "edge-mc-good-cases",
+      "kind": "multi_choice",
+      "title": "Useful edge-case tests",
+      "prompt": "Which test inputs are especially useful when checking edge cases for beginner Python functions? Choose all that apply.",
+      "options": [
+        "An empty string when a function works with text",
+        "A score exactly at the pass cutoff",
+        "A list with one item",
+        "A random normal value from the middle of the range"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "hint": "Look for values that are empty, minimal, or just at a rule boundary.",
+      "help": {
+        "concept": "Edge cases often include empty inputs, boundary values, and unusual but valid values that can reveal hidden assumptions.",
+        "hint_1": "Think about inputs like nothing entered, the smallest allowed number, or a one-item collection.",
+        "hint_2": "Pick the options that challenge assumptions about size or limits, not just ordinary middle-of-the-road examples."
+      }
+    },
+    {
+      "id": "edge-dr-test-order",
+      "kind": "drag_reorder",
+      "title": "Order your test thinking",
+      "prompt": "Put these steps in a sensible order for checking edge cases in a small function.",
+      "tokens": [
+        "Read the function rule",
+        "Identify boundary or empty inputs",
+        "Run the function with those inputs",
+        "Compare the result to the expected behavior"
+      ],
+      "correctOrder": [
+        "Read the function rule",
+        "Identify boundary or empty inputs",
+        "Run the function with those inputs",
+        "Compare the result to the expected behavior"
+      ],
+      "hint": "Start by understanding the rule before choosing special inputs.",
+      "help": {
+        "concept": "Good edge-case testing starts with the rule, then identifies boundaries, then tries unusual inputs, and finally checks the actual result.",
+        "hint_1": "You need to know what the function should do before picking boundary values.",
+        "hint_2": "After identifying the rule and edge inputs, run the tests and compare the output to the expected behavior."
+      }
+    },
+    {
+      "id": "edge-fb-greater-equal",
+      "kind": "fill_blank_choice",
+      "title": "Boundary operator",
+      "prompt": "Complete the condition so a score of 50 counts as passing.",
+      "template": "return score [blank1] 50",
+      "choices": [
+        ">",
+        ">=",
+        "==",
+        "<"
+      ],
+      "correctValue": ">=",
+      "hint": "The boundary value itself should be included.",
+      "help": {
+        "concept": "When the cutoff value should count, use an operator that includes equality.",
+        "hint_1": "A passing score of exactly 50 means the comparison cannot be strictly greater than 50.",
+        "hint_2": "Choose the operator that means greater than or equal to."
+      }
+    },
+    {
+      "id": "edge-code-safe-divide",
+      "kind": "code_input",
+      "title": "Handle division edge cases",
+      "prompt": "Write a function `safe_divide(total, count)` that returns `0` when `count` is `0`. Otherwise, return `total / count`.",
+      "starterCode": "def safe_divide(total, count):\n    # return 0 when count is 0\n    # otherwise return total / count\n    pass\n",
+      "solutionCode": "def safe_divide(total, count):\n    if count == 0:\n        return 0\n    return total / count\n",
+      "recipeType": "semantic",
+      "semanticChecks": [
+        {
+          "type": "function_returns",
+          "functionName": "safe_divide",
+          "args": [
+            10,
+            2
+          ],
+          "argKinds": [
+            "value",
+            "value"
+          ],
+          "expected": 5,
+          "expectedKind": "value",
+          "message": "Returns the normal division result for a non-zero count."
+        },
+        {
+          "type": "function_returns",
+          "functionName": "safe_divide",
+          "args": [
+            7,
+            0
+          ],
+          "argKinds": [
+            "value",
+            "value"
+          ],
+          "expected": 0,
+          "expectedKind": "value",
+          "message": "Returns 0 for the zero-count edge case."
+        },
+        {
+          "type": "function_returns",
+          "functionName": "safe_divide",
+          "args": [
+            0,
+            5
+          ],
+          "argKinds": [
+            "value",
+            "value"
+          ],
+          "expected": 0,
+          "expectedKind": "value",
+          "message": "Handles a zero total with a non-zero count."
+        },
+        {
+          "type": "no_stdout",
+          "message": "This function should return values instead of printing them."
+        }
+      ],
+      "hint": "Check the zero-count case before dividing.",
+      "help": {
+        "concept": "Division by zero is a classic edge case. Guard against the invalid case first, then handle the normal calculation.",
+        "hint_1": "Your function should return a special value for `count == 0` instead of dividing.",
+        "hint_2": "Use an `if` statement for the zero case, and only divide in the other branch."
+      }
+    },
+    {
+      "id": "edge-sc-boundary-value",
+      "kind": "single_choice",
+      "title": "Best boundary test",
+      "prompt": "A function should allow usernames with length 3 or more. Which single test best checks the boundary itself?",
+      "options": [
+        "\"alex\"",
+        "\"hi\"",
+        "\"sam\"",
+        "\"welcome\""
+      ],
+      "correctOptionIds": [
+        "c"
+      ],
+      "hint": "Use the value right at the minimum allowed length.",
+      "help": {
+        "concept": "A boundary test uses the exact edge of the rule, not just values far away from it.",
+        "hint_1": "The rule changes at length 3.",
+        "hint_2": "Choose the username whose length is exactly 3 characters."
+      }
+    },
+    {
+      "id": "edge-mc-bug-signs",
+      "kind": "multi_choice",
+      "title": "Signs of a missing edge-case test",
+      "prompt": "Which situations suggest you should add an edge-case test? Choose all that apply.",
+      "options": [
+        "The code uses `items[0]`",
+        "The code divides by a variable",
+        "The code checks whether a score passes at a cutoff",
+        "The code prints a welcome message with fixed text only"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "hint": "Look for places where the code assumes something is present or non-zero.",
+      "help": {
+        "concept": "Edge-case bugs often appear when code assumes input is non-empty, positive, or safely inside a range.",
+        "hint_1": "Check for indexing, division, and cutoff comparisons.",
+        "hint_2": "Choose the cases where a small change in input could break the logic or flip the result."
+      }
+    },
+    {
+      "id": "edge-dr-debug-flow",
+      "kind": "drag_reorder",
+      "title": "Debug an edge-case failure",
+      "prompt": "Arrange these debugging actions after a test fails on an unusual input.",
+      "tokens": [
+        "Run the failing test again",
+        "Find the line that assumes too much about the input",
+        "Change the code to handle the edge case",
+        "Run the tests again to confirm the fix"
+      ],
+      "correctOrder": [
+        "Run the failing test again",
+        "Find the line that assumes too much about the input",
+        "Change the code to handle the edge case",
+        "Run the tests again to confirm the fix"
+      ],
+      "hint": "First reproduce the failure, then inspect the assumption that broke.",
+      "help": {
+        "concept": "Debugging edge cases works best when you reproduce the failure, inspect the risky assumption, fix the logic, and retest.",
+        "hint_1": "You should see the failure happen before changing the code.",
+        "hint_2": "After reproducing it, find the line that assumes too much about the input, then fix and rerun."
+      }
+    },
+    {
+      "id": "edge-fb-empty-check",
+      "kind": "fill_blank_choice",
+      "title": "Empty string condition",
+      "prompt": "Fill in the missing value to check whether `name` is empty.",
+      "template": "if name == [blank1]:",
+      "choices": [
+        "\"\"",
+        "\" \"",
+        "0",
+        "None"
+      ],
+      "correctValue": "\"\"",
+      "hint": "Compare `name` to the empty string literal.",
+      "help": {
+        "concept": "An empty string is written as two quotes with nothing between them.",
+        "hint_1": "The condition should be true only when `name` has no characters.",
+        "hint_2": "Choose the choice that represents a string of length 0."
+      }
+    },
+    {
+      "id": "edge-code-blank-lines",
+      "kind": "code_input",
+      "title": "Ignore blank lines",
+      "prompt": "Write a function `count_names(lines)` that takes a list of strings and returns how many entries are real names. Ignore entries that are empty strings or contain only spaces.",
+      "starterCode": "def count_names(lines):\n    # count only entries that still have text after stripping spaces\n    pass\n",
+      "solutionCode": "def count_names(lines):\n    count = 0\n    for line in lines:\n        if line.strip() != \"\":\n            count += 1\n    return count\n",
+      "recipeType": "semantic",
+      "semanticChecks": [
+        {
+          "type": "function_returns",
+          "functionName": "count_names",
+          "args": [
+            [
+              "Ava",
+              "",
+              "Ben",
+              "   ",
+              "Kai"
+            ]
+          ],
+          "argKinds": [
+            "value"
+          ],
+          "expected": 3,
+          "expectedKind": "value",
+          "message": "Counts only non-blank names in a mixed list."
+        },
+        {
+          "type": "function_returns",
+          "functionName": "count_names",
+          "args": [
+            [
+              "",
+              "   ",
+              "\t"
+            ]
+          ],
+          "argKinds": [
+            "value"
+          ],
+          "expected": 0,
+          "expectedKind": "value",
+          "message": "Returns 0 when every entry is blank or whitespace only."
+        },
+        {
+          "type": "function_returns",
+          "functionName": "count_names",
+          "args": [
+            [
+              "Zoe"
+            ]
+          ],
+          "argKinds": [
+            "value"
+          ],
+          "expected": 1,
+          "expectedKind": "value",
+          "message": "Handles a single real name correctly."
+        },
+        {
+          "type": "no_stdout",
+          "message": "This function should return the count instead of printing it."
+        }
+      ],
+      "hint": "Clean each line before deciding whether it counts.",
+      "help": {
+        "concept": "Blank-looking text may still contain spaces. Stripping whitespace lets you treat `\"   \"` like an empty entry.",
+        "hint_1": "Use `.strip()` on each string before checking whether it is empty.",
+        "hint_2": "Loop through the list, strip each line, and count only the ones that still contain characters."
+      }
+    },
+    {
+      "id": "edge-code-clamp-score",
+      "kind": "code_input",
+      "title": "Clamp scores to a valid range",
+      "prompt": "Write a function `clamp_score(score)` that returns `0` for values below `0`, returns `100` for values above `100`, and otherwise returns the original score.",
+      "starterCode": "def clamp_score(score):\n    # keep score between 0 and 100\n    pass\n",
+      "solutionCode": "def clamp_score(score):\n    if score < 0:\n        return 0\n    if score > 100:\n        return 100\n    return score\n",
+      "recipeType": "semantic",
+      "semanticChecks": [
+        {
+          "type": "function_returns",
+          "functionName": "clamp_score",
+          "args": [
+            -5
+          ],
+          "argKinds": [
+            "value"
+          ],
+          "expected": 0,
+          "expectedKind": "value",
+          "message": "Values below the minimum are clamped to 0."
+        },
+        {
+          "type": "function_returns",
+          "functionName": "clamp_score",
+          "args": [
+            120
+          ],
+          "argKinds": [
+            "value"
+          ],
+          "expected": 100,
+          "expectedKind": "value",
+          "message": "Values above the maximum are clamped to 100."
+        },
+        {
+          "type": "function_returns",
+          "functionName": "clamp_score",
+          "args": [
+            100
+          ],
+          "argKinds": [
+            "value"
+          ],
+          "expected": 100,
+          "expectedKind": "value",
+          "message": "The upper boundary itself stays valid."
+        },
+        {
+          "type": "function_returns",
+          "functionName": "clamp_score",
+          "args": [
+            42
+          ],
+          "argKinds": [
+            "value"
+          ],
+          "expected": 42,
+          "expectedKind": "value",
+          "message": "A value inside the range is returned unchanged."
+        },
+        {
+          "type": "no_stdout",
+          "message": "This function should return the score instead of printing it."
+        }
+      ],
+      "hint": "There are three cases: below range, above range, and inside range.",
+      "help": {
+        "concept": "Boundary handling often means forcing values back into an allowed range.",
+        "hint_1": "Check the low boundary first and the high boundary second.",
+        "hint_2": "If the score is less than 0 return the minimum, if greater than 100 return the maximum, otherwise keep the value unchanged."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Practice edge-case handling",
+    "stepIds": [
+      "edge-code-safe-divide",
+      "edge-code-blank-lines",
+      "edge-code-clamp-score"
+    ]
+  }
+}

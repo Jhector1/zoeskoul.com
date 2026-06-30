@@ -1,0 +1,279 @@
+{
+  "title": "Breaking Projects Into Functions",
+  "summary": "Plan a capstone project by splitting one larger automation idea into small functions with clear inputs, outputs, and data flow.",
+  "minutes": 25,
+  "sketchBlocks": [
+    {
+      "id": "sketch-1",
+      "title": "Turn one big project into small jobs",
+      "bodyMarkdown": "When a project feels too big, break it into **functions**. Each function should do one clear job.\n\nFor a simple text report project, you might split the work like this:\n\n1. read the raw lines\n2. clean each line\n3. count useful values\n4. build a summary\n5. save the summary\n\nHere is a small example:\n\n```python\ndef clean_tasks(lines):\n    cleaned = []\n    for line in lines:\n        task = line.strip()\n        if task != \"\":\n            cleaned.append(task)\n    return cleaned\n\nsample = [\" email client \", \"\", \"write report \"]\nprint(clean_tasks(sample))\n```\n\nStep by step:\n\n- `clean_tasks(lines)` receives a list of text lines.\n- `line.strip()` removes extra spaces.\n- The `if task != \"\"` check skips blank lines.\n- The function returns a new cleaned list.\n\nThis is easier to test than writing one giant block of code.\n\nTry it yourself: change one item in `sample`, click Run, and predict the new output before you check the output panel."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "project-step-1",
+      "kind": "code_input",
+      "title": "Create a cleaning function",
+      "prompt": "You are starting a capstone task-summary project. Write a function named `clean_tasks(lines)` that takes a list of strings and returns a new list with each task stripped of extra spaces and all blank results removed. Keep the original order.",
+      "starterCode": "def clean_tasks(lines):\n    # Return a cleaned list of task names.\n    # Remove extra spaces and skip blank items.\n    pass",
+      "solutionCode": "def clean_tasks(lines):\n    cleaned = []\n    for line in lines:\n        task = line.strip()\n        if task != \"\":\n            cleaned.append(task)\n    return cleaned",
+      "recipeType": "semantic",
+      "semanticChecks": [
+        {
+          "type": "function_returns",
+          "functionName": "clean_tasks",
+          "args": [
+            [
+              " email client ",
+              "",
+              "write report  ",
+              "  plan meeting"
+            ]
+          ],
+          "argKinds": [
+            "value"
+          ],
+          "expected": [
+            "email client",
+            "write report",
+            "plan meeting"
+          ],
+          "expectedKind": "value",
+          "message": "clean_tasks should strip spaces and remove blank entries."
+        },
+        {
+          "type": "function_returns",
+          "functionName": "clean_tasks",
+          "args": [
+            [
+              "  ",
+              "Call team",
+              " review notes "
+            ]
+          ],
+          "argKinds": [
+            "value"
+          ],
+          "expected": [
+            "Call team",
+            "review notes"
+          ],
+          "expectedKind": "value",
+          "message": "clean_tasks should keep the original order of remaining tasks."
+        },
+        {
+          "type": "no_stdout",
+          "message": "This function should return a value instead of printing during checks."
+        }
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "project-step-2",
+      "kind": "code_input",
+      "title": "Count completed tasks",
+      "prompt": "Build the next project function. Write `count_completed(tasks)` so it returns how many task strings start with `[done]`. Assume the list has already been cleaned.",
+      "starterCode": "def count_completed(tasks):\n    # Return the number of tasks that start with [done]\n    pass",
+      "solutionCode": "def count_completed(tasks):\n    total = 0\n    for task in tasks:\n        if task.startswith(\"[done]\"):\n            total += 1\n    return total",
+      "recipeType": "semantic",
+      "semanticChecks": [
+        {
+          "type": "function_returns",
+          "functionName": "count_completed",
+          "args": [
+            [
+              "[done] email client",
+              "write report",
+              "[done] plan meeting"
+            ]
+          ],
+          "argKinds": [
+            "value"
+          ],
+          "expected": 2,
+          "expectedKind": "value",
+          "message": "count_completed should count every task that starts with [done]."
+        },
+        {
+          "type": "function_returns",
+          "functionName": "count_completed",
+          "args": [
+            [
+              "review notes",
+              "draft summary"
+            ]
+          ],
+          "argKinds": [
+            "value"
+          ],
+          "expected": 0,
+          "expectedKind": "value",
+          "message": "count_completed should return 0 when no tasks are marked done."
+        },
+        {
+          "type": "no_stdout",
+          "message": "This function should return the count."
+        }
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "project-step-3",
+      "kind": "code_input",
+      "title": "Build the summary text",
+      "prompt": "Now connect the project pieces. Write a function `build_summary(tasks)` that returns exactly this format:\n\n`Total tasks: X\\nCompleted tasks: Y`\n\nHere, `X` is the number of tasks in the list and `Y` is the number returned by `count_completed(tasks)`. Include a helper function `count_completed(tasks)` in your code so `build_summary(tasks)` works by calling it.",
+      "starterCode": "def count_completed(tasks):\n    # Reuse your counting logic here.\n    pass\n\n\ndef build_summary(tasks):\n    # Return the two-line summary string.\n    pass",
+      "solutionCode": "def count_completed(tasks):\n    total = 0\n    for task in tasks:\n        if task.startswith(\"[done]\"):\n            total += 1\n    return total\n\n\ndef build_summary(tasks):\n    total_tasks = len(tasks)\n    completed_tasks = count_completed(tasks)\n    return f\"Total tasks: {total_tasks}\\nCompleted tasks: {completed_tasks}\"",
+      "recipeType": "semantic",
+      "semanticChecks": [
+        {
+          "type": "function_returns",
+          "functionName": "build_summary",
+          "args": [
+            [
+              "[done] email client",
+              "write report",
+              "[done] plan meeting"
+            ]
+          ],
+          "argKinds": [
+            "value"
+          ],
+          "expected": "Total tasks: 3\nCompleted tasks: 2",
+          "expectedKind": "value",
+          "message": "build_summary should return the exact two-line summary text."
+        },
+        {
+          "type": "function_returns",
+          "functionName": "build_summary",
+          "args": [
+            [
+              "review notes"
+            ]
+          ],
+          "argKinds": [
+            "value"
+          ],
+          "expected": "Total tasks: 1\nCompleted tasks: 0",
+          "expectedKind": "value",
+          "message": "build_summary should work for a one-item list too."
+        },
+        {
+          "type": "no_stdout",
+          "message": "Return the summary string instead of printing during checks."
+        }
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "project-step-4",
+      "kind": "code_input",
+      "title": "Read tasks and save a report",
+      "prompt": "Finish the project flow with files. The exercise includes `data/tasks.txt`. Read every line from that file, clean the tasks, build the summary, write the summary to `data/report.txt`, then print the summary.\n\nUse these function names in your code:\n- `clean_tasks(lines)`\n- `count_completed(tasks)`\n- `build_summary(tasks)`\n\nYour program should connect those functions into one working report generator.",
+      "starterCode": "def clean_tasks(lines):\n    cleaned = []\n    for line in lines:\n        task = line.strip()\n        if task != \"\":\n            cleaned.append(task)\n    return cleaned\n\n\ndef count_completed(tasks):\n    total = 0\n    for task in tasks:\n        if task.startswith(\"[done]\"):\n            total += 1\n    return total\n\n\ndef build_summary(tasks):\n    total_tasks = len(tasks)\n    completed_tasks = count_completed(tasks)\n    return f\"Total tasks: {total_tasks}\\nCompleted tasks: {completed_tasks}\"\n\n# Read the task lines, build the summary, save it, and print it.",
+      "solutionCode": "def clean_tasks(lines):\n    cleaned = []\n    for line in lines:\n        task = line.strip()\n        if task != \"\":\n            cleaned.append(task)\n    return cleaned\n\n\ndef count_completed(tasks):\n    total = 0\n    for task in tasks:\n        if task.startswith(\"[done]\"):\n            total += 1\n    return total\n\n\ndef build_summary(tasks):\n    total_tasks = len(tasks)\n    completed_tasks = count_completed(tasks)\n    return f\"Total tasks: {total_tasks}\\nCompleted tasks: {completed_tasks}\"\n\nwith open(\"data/tasks.txt\", \"r\") as source:\n    lines = source.readlines()\n\ncleaned_tasks = clean_tasks(lines)\nsummary = build_summary(cleaned_tasks)\n\nwith open(\"data/report.txt\", \"w\") as target:\n    target.write(summary)\n\nprint(summary)",
+      "files": [
+        {
+          "path": "data/tasks.txt",
+          "content": "[done] email client\nwrite report\n\n [done] plan meeting \n\n\n'}],"
+        }
+      ],
+      "recipeType": "semantic",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      },
+      "semanticChecks": [
+        {
+          "type": "function_returns",
+          "functionName": "clean_tasks",
+          "args": [
+            ""
+          ],
+          "expected": "Total tasks: 3\nCompleted tasks: 2",
+          "message": "Return the expected result for clean_tasks(lines)."
+        },
+        {
+          "type": "no_stdout",
+          "message": "This task should return a value instead of printing output."
+        }
+      ]
+    },
+    {
+      "id": "project-step-5",
+      "kind": "code_input",
+      "title": "Add a final status line",
+      "prompt": "Polish the capstone output. Starting from the previous working project, update `build_summary(tasks)` so it returns three lines instead of two:\n\n- `Total tasks: X`\n- `Completed tasks: Y`\n- `Project status: complete` when all tasks are done\n- `Project status: in progress` otherwise\n\nThen keep the same flow: read `data/tasks.txt`, clean the tasks, build the summary, write it to `data/report.txt`, and print the summary.",
+      "starterCode": "def clean_tasks(lines):\n    cleaned = []\n    for line in lines:\n        task = line.strip()\n        if task != \"\":\n            cleaned.append(task)\n    return cleaned\n\n\ndef count_completed(tasks):\n    total = 0\n    for task in tasks:\n        if task.startswith(\"[done]\"):\n            total += 1\n    return total\n\n\ndef build_summary(tasks):\n    total_tasks = len(tasks)\n    completed_tasks = count_completed(tasks)\n    # Add the project status line here.\n    pass\n\nwith open(\"data/tasks.txt\", \"r\") as source:\n    lines = source.readlines()\n\ncleaned_tasks = clean_tasks(lines)\nsummary = build_summary(cleaned_tasks)\n\nwith open(\"data/report.txt\", \"w\") as target:\n    target.write(summary)\n\nprint(summary)",
+      "solutionCode": "def clean_tasks(lines):\n    cleaned = []\n    for line in lines:\n        task = line.strip()\n        if task != \"\":\n            cleaned.append(task)\n    return cleaned\n\n\ndef count_completed(tasks):\n    total = 0\n    for task in tasks:\n        if task.startswith(\"[done]\"):\n            total += 1\n    return total\n\n\ndef build_summary(tasks):\n    total_tasks = len(tasks)\n    completed_tasks = count_completed(tasks)\n    if total_tasks == completed_tasks:\n        status = \"complete\"\n    else:\n        status = \"in progress\"\n    return f\"Total tasks: {total_tasks}\\nCompleted tasks: {completed_tasks}\\nProject status: {status}\"\n\nwith open(\"data/tasks.txt\", \"r\") as source:\n    lines = source.readlines()\n\ncleaned_tasks = clean_tasks(lines)\nsummary = build_summary(cleaned_tasks)\n\nwith open(\"data/report.txt\", \"w\") as target:\n    target.write(summary)\n\nprint(summary)",
+      "files": [
+        {
+          "path": "data/tasks.txt",
+          "content": "[done] email client\nwrite report\nplan meeting\n},{"
+        },
+        {
+          "path": "data/report.txt",
+          "content": ""
+        }
+      ],
+      "recipeType": "semantic",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      },
+      "semanticChecks": [
+        {
+          "type": "function_returns",
+          "functionName": "clean_tasks",
+          "args": [
+            ""
+          ],
+          "expected": "Total tasks: 2\nCompleted tasks: 2\nProject status: complete",
+          "message": "Return the expected result for clean_tasks(lines)."
+        },
+        {
+          "type": "function_returns",
+          "functionName": "clean_tasks",
+          "args": [
+            ""
+          ],
+          "expected": "Total tasks: 3\nCompleted tasks: 1\nProject status: in progress",
+          "message": "Return the expected result for clean_tasks(lines)."
+        },
+        {
+          "type": "no_stdout",
+          "message": "This task should return a value instead of printing output."
+        }
+      ]
+    }
+  ],
+  "projectDraft": {
+    "title": "Capstone Task Summary Project",
+    "stepIds": [
+      "project-step-1",
+      "project-step-2",
+      "project-step-3",
+      "project-step-4",
+      "project-step-5"
+    ]
+  }
+}

@@ -28,14 +28,14 @@ describe("resolveCodeToolPaneFullIdeMode", () => {
     });
 
 
-    it("lets the current bound exercise cwd override stale runtime cwd in review mode", () => {
+    it("lets the active runtime cwd override stale tool prop cwd in review mode", () => {
         const resolved = resolveEffectiveCodeToolPaneIdeConfig({
             isReviewRouteMode: true,
             propIdeConfig: {
                 runnerBackend: "pty",
                 layoutMode: "terminal_workspace",
-                terminalCwd: "/workspace/park-terminal-map",
-                terminalSessionScope: "exercise",
+                terminalCwd: "/workspace",
+                terminalSessionScope: "topic",
                 requires: {
                     files: true,
                     terminal: true,
@@ -44,8 +44,8 @@ describe("resolveCodeToolPaneFullIdeMode", () => {
             exerciseIdeConfig: {
                 runnerBackend: "pty",
                 layoutMode: "terminal_workspace",
-                terminalCwd: "/workspace",
-                terminalSessionScope: "topic",
+                terminalCwd: "/workspace/park-terminal-map",
+                terminalSessionScope: "exercise",
             },
         });
 
@@ -72,5 +72,31 @@ describe("resolveCodeToolPaneFullIdeMode", () => {
         expect(resolved.ideShell.services.explorer?.enabled).toBe(true);
         expect(resolved.ideShell.services.editor?.showEditor).toBe(true);
         expect(resolved.ideShell.services.runner?.showTerminal).not.toBe(true);
+    });
+
+    it("lets the currently bound runtime exercise cwd override stale tool props in review mode", () => {
+        const resolved = resolveEffectiveCodeToolPaneIdeConfig({
+            isReviewRouteMode: true,
+            propIdeConfig: {
+                runnerBackend: "pty",
+                layoutMode: "terminal_workspace",
+                terminalCwd: "/workspace",
+                terminalSessionScope: "exercise",
+                requires: {
+                    files: true,
+                    terminal: true,
+                },
+            },
+            exerciseIdeConfig: {
+                runnerBackend: "pty",
+                layoutMode: "terminal_workspace",
+                terminalCwd: "/workspace/park-terminal-map",
+                terminalSessionScope: "exercise",
+            },
+        });
+
+        expect(resolved?.terminalCwd).toBe("/workspace/park-terminal-map");
+        expect(resolved?.requires?.files).toBe(true);
+        expect(resolved?.terminalSessionScope).toBe("exercise");
     });
 });

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 import type { FSNode, InlineEdit, NodeId } from "../types";
 import { cn } from "../utils";
 import {
@@ -85,6 +86,7 @@ function InlineNameRow(props: {
     } = props;
 
     const inputRef = useRef<HTMLInputElement | null>(null);
+    const t = useTranslations("ide.explorer.tree");
 
     useEffect(() => {
         if (!initialFocus) return;
@@ -135,7 +137,7 @@ function InlineNameRow(props: {
                     }}
                     className="inline-flex h-8 items-center justify-center rounded-md border border-emerald-600/20 bg-emerald-500/10 px-2.5 text-[11px] font-medium text-emerald-900 transition-colors hover:bg-emerald-500/15 dark:border-emerald-300/20 dark:bg-emerald-300/10 dark:text-emerald-100 dark:hover:bg-emerald-300/15"
                 >
-                    Save
+                    {t("save")}
                 </button>
 
                 <button
@@ -147,7 +149,7 @@ function InlineNameRow(props: {
                     }}
                     className="inline-flex h-8 items-center justify-center rounded-md px-2.5 text-[11px] font-medium text-neutral-600 transition-colors hover:bg-neutral-100 hover:text-neutral-900 dark:text-white/65 dark:hover:bg-white/[0.06] dark:hover:text-white/90"
                 >
-                    Cancel
+                    {t("cancel")}
                 </button>
             </div>
         </div>
@@ -227,6 +229,7 @@ type TreeProps = {
 };
 
 function Tree(props: TreeProps) {
+    const t = useTranslations("ide.explorer.tree");
     const {
         parentId,
         depth,
@@ -331,7 +334,7 @@ function Tree(props: TreeProps) {
                     ...(!isSql && allowSetEntry
                         ? [
                             {
-                                label: isEntry ? "Entry file" : "Set as Entry",
+                                label: isEntry ? t("entryFile") : t("setAsEntry"),
                                 onClick: () => setEntry(n.id),
                                 icon: <IconPlay className="h-4 w-4" />,
                                 disabled: isEntry,
@@ -341,7 +344,7 @@ function Tree(props: TreeProps) {
                     ...(policy.canRenameNodes
                         ? [
                             {
-                                label: "Rename",
+                                label: t("rename"),
                                 onClick: () => startRename(n.id),
                                 icon: <IconPencil className="h-4 w-4" />,
                             },
@@ -350,7 +353,7 @@ function Tree(props: TreeProps) {
                     ...(policy.canDeleteNodes
                         ? [
                             {
-                                label: "Delete",
+                                label: t("delete"),
                                 onClick: () => requestDelete(n.id),
                                 icon: <IconTrash className="h-4 w-4" />,
                                 danger: true,
@@ -364,7 +367,7 @@ function Tree(props: TreeProps) {
                     ...(policy.canCreateFiles
                         ? [
                             {
-                                label: "New file",
+                                label: t("newFile"),
                                 onClick: () => startNewFile(n.id),
                                 icon: <IconPlus className="h-4 w-4" />,
                             },
@@ -373,7 +376,7 @@ function Tree(props: TreeProps) {
                     ...(policy.canCreateFolders
                         ? [
                             {
-                                label: "New folder",
+                                label: t("newFolder"),
                                 onClick: () => startNewFolder(n.id),
                                 icon: <IconFolder className="h-4 w-4" />,
                             },
@@ -382,7 +385,7 @@ function Tree(props: TreeProps) {
                     ...(policy.canRenameNodes
                         ? [
                             {
-                                label: "Rename",
+                                label: t("rename"),
                                 onClick: () => startRename(n.id),
                                 icon: <IconPencil className="h-4 w-4" />,
                             },
@@ -391,7 +394,7 @@ function Tree(props: TreeProps) {
                     ...(policy.canDeleteNodes
                         ? [
                             {
-                                label: "Delete",
+                                label: t("delete"),
                                 onClick: () => requestDelete(n.id),
                                 icon: <IconTrash className="h-4 w-4" />,
                                 danger: true,
@@ -407,7 +410,7 @@ function Tree(props: TreeProps) {
                     isTouchLike && policy.canMoveNodes
                         ? [
                             {
-                                label: "Move to…",
+                                label: t("moveTo"),
                                 onClick: () => setPendingMoveId(n.id),
                                 icon: <IconFolder className="h-4 w-4" />,
                             },
@@ -570,15 +573,15 @@ function Tree(props: TreeProps) {
                                     !policy.canMoveNodes
                                         ? ""
                                         : isTouchLike
-                                            ? "Use Move to… from the menu"
-                                            : "Drag to move"
+                                            ? t("moveUsingMenu")
+                                            : t("dragToMove")
                                 }
                                 aria-label={
                                     !policy.canMoveNodes
-                                        ? "Move disabled"
+                                        ? t("moveDisabled")
                                         : isTouchLike
-                                            ? "Use Move to action"
-                                            : "Drag handle"
+                                            ? t("useMoveAction")
+                                            : t("dragHandle")
                                 }
                             >
                                 <span className="select-none text-[12px] font-medium leading-none">⋮⋮</span>                            </div>
@@ -596,7 +599,7 @@ function Tree(props: TreeProps) {
                                     !isFolder && "pointer-events-none opacity-0",
                                     isFolder && !hasChildren && "opacity-40",
                                 )}
-                                title={isFolder ? (isOpen ? "Collapse" : "Expand") : ""}
+                                title={isFolder ? (isOpen ? t("collapse") : t("expand")) : ""}
                             >
                                 {isFolder ? (
                                     isOpen ? (
@@ -634,9 +637,9 @@ function Tree(props: TreeProps) {
                             </button>
 
                             {isEntry ? (
-                                <div className="mr-1 ui-pill-good" title="Runs when you click Run">
+                                <div className="mr-1 ui-pill-good" title={t("entryRunsOnClick")}>
                                     <IconPlay className="h-3 w-3" />
-                                    ENTRY
+                                    {t("entryBadge")}
                                 </div>
                             ) : null}
 
@@ -715,6 +718,7 @@ export default function ExplorerTree(props: {
     policy: IdeWorkspacePolicy;
 
 }) {
+    const t = useTranslations("ide.explorer.tree");
     const {
         nodes,
         expanded,
@@ -884,7 +888,7 @@ export default function ExplorerTree(props: {
             ...(policy.canCreateFiles
                 ? [
                     {
-                        label: "New file",
+                        label: t("newFile"),
                         onClick: () => startNewFile(null),
                         icon: <IconPlus className="h-4 w-4" />,
                     },
@@ -893,14 +897,14 @@ export default function ExplorerTree(props: {
             ...(policy.canCreateFolders
                 ? [
                     {
-                        label: "New folder",
+                        label: t("newFolder"),
                         onClick: () => startNewFolder(null),
                         icon: <IconFolder className="h-4 w-4" />,
                     },
                 ]
                 : []),
         ],
-        [policy, startNewFile, startNewFolder],
+        [policy, startNewFile, startNewFolder, t],
     );
     const canDropToRoot =
         policy.canMoveNodes &&
@@ -922,10 +926,10 @@ export default function ExplorerTree(props: {
                     <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
                         <div className="min-w-0">
                             <div className="text-sm font-medium text-sky-950 dark:text-white/90">
-                                Move {movingNode?.name ?? "item"}
+                                {t("moveItem", { name: movingNode?.name ?? t("moveFallback") })}
                             </div>
                             <div className="mt-1 text-[11px] font-medium text-sky-800/80 dark:text-white/60">
-                                Tap a folder to move into it, or move it back to root.
+                                {t("moveHint")}
                             </div>
                         </div>
 
@@ -935,7 +939,7 @@ export default function ExplorerTree(props: {
                                 onClick={() => finishMove(null)}
                                 className="inline-flex h-8 items-center justify-center rounded-md border border-sky-300/30 bg-white px-2.5 text-[11px] font-medium text-sky-900 transition-colors hover:bg-sky-50 dark:border-white/10 dark:bg-white/[0.06] dark:text-white/85 dark:hover:bg-white/[0.08]"
                             >
-                                Move to root
+                                {t("moveToRoot")}
                             </button>
 
                             <button
@@ -943,7 +947,7 @@ export default function ExplorerTree(props: {
                                 onClick={() => setPendingMoveId(null)}
                                 className="inline-flex h-8 items-center justify-center rounded-md px-2.5 text-[11px] font-medium text-neutral-600 transition-colors hover:bg-neutral-100 hover:text-neutral-900 dark:text-white/65 dark:hover:bg-white/[0.06] dark:hover:text-white/90"
                             >
-                                Cancel
+                                {t("cancel")}
                             </button>
                         </div>
                     </div>

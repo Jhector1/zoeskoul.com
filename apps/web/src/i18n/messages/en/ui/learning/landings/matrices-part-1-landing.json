@@ -1,0 +1,35 @@
+{
+  "MatricesPart1Landing": {
+    "pageTitle": "Matrices — Part 1",
+    "pageIntro": "Learn what matrices are, how to read their shapes, index/slice them like NumPy, and build intuition for multiplication, transpose, and symmetry.",
+    "quickStartEasy": "Quick start (Easy)",
+    "whatYouLearn": "What you’ll learn",
+    "readMaterial": "Read material",
+    "practiceNow": "Practice now",
+    "practiceNowHint": "Tip: choose a difficulty and repeat until it feels automatic.",
+    "parts": {
+      "part1": {
+        "badge": "FOUNDATIONS",
+        "title": "Matrices: meaning, shape, and core operations",
+        "subtitle": "From data tables to transformations: indexing, special matrices, multiplication, transpose, symmetry",
+        "bullets": {
+          "0": "Read matrix shape (rows × columns) and count total entries",
+          "1": "Interpret a matrix as a data table or stacked column vectors",
+          "2": "Convert between math indexing and NumPy (0-based) indexing",
+          "3": "Predict slice shapes using Python’s half-open intervals",
+          "4": "Identify identity, diagonal, and triangular matrices",
+          "5": "Understand element-wise vs matrix multiplication (* vs @), plus shifting A + λI",
+          "6": "Find AB shapes, validate multiplication, and compute a single entry via dot product",
+          "7": "Use transpose rules (LIVE EVIL), transpose shapes, and recognize symmetric matrices"
+        }
+      }
+    },
+    "recommendedPathTitle": "Recommended path",
+    "recommended": {
+      "0": "Start with shape + indexing questions until you answer fast.",
+      "1": "Move to multiplication shape/validity, then compute entries.",
+      "2": "Finish with transpose and symmetry patterns."
+    },
+    "routeHint": "Routes: /practice/review/matrices_part1 (read) • /practice?section=module-2-matrices (practice)"
+  }
+}

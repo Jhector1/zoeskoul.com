@@ -1,0 +1,712 @@
+{
+  "topicId": "implementing-the-core-loop",
+  "subjectSlug": "python--applied-python-projects--draft",
+  "moduleSlug": "python-10-capstone-automation-project",
+  "sectionSlug": "python--applied-python-projects--draft-python-10-building-and-polishing",
+  "prefix": "py10",
+  "minutes": 28,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "python",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "topic": {
+    "labelKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.implementing-the-core-loop.label",
+    "summaryKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.implementing-the-core-loop.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.implementing-the-core-loop.cards.sketch0.title",
+      "sketchId": "core-loop-overview",
+      "height": 420,
+      "tryIt": {
+        "id": "try-implementing-the-core-loop-sketch0",
+        "titleKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.implementing-the-core-loop.tryIt.try_implementing_the_core_loop_sketch0.title",
+        "promptKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.implementing-the-core-loop.tryIt.try_implementing_the_core_loop_sketch0.prompt",
+        "exerciseKey": "step1-load-lines",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.implementing-the-core-loop.cards.sketch1.title",
+      "sketchId": "breaking-the-loop-into-parts",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.implementing-the-core-loop.cards.sketch2.title",
+      "sketchId": "polishing-the-final-workflow",
+      "height": 420
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.implementing-the-core-loop.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "displayKind": "capstone",
+        "uiKind": "capstone",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "step1_load_lines",
+            "titleKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.implementing-the-core-loop.projectSteps.step1_load_lines.title",
+            "exerciseKey": "step1-load-lines",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "step2_parse_line",
+            "titleKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.implementing-the-core-loop.projectSteps.step2_parse_line.title",
+            "exerciseKey": "step2-parse-line",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "step3_build_summary",
+            "titleKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.implementing-the-core-loop.projectSteps.step3_build_summary.title",
+            "exerciseKey": "step3-build-summary",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "step4_format_report",
+            "titleKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.implementing-the-core-loop.projectSteps.step4_format_report.title",
+            "exerciseKey": "step4-format-report",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "step5_run_project",
+            "titleKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.implementing-the-core-loop.projectSteps.step5_run_project.title",
+            "exerciseKey": "step5-run-project",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "core-loop-overview",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--applied-python-projects--draft.python-10-capstone-automation-project.implementing-the-core-loop.core-loop-overview.title",
+      "bodyKey": "sketches.python--applied-python-projects--draft.python-10-capstone-automation-project.implementing-the-core-loop.core-loop-overview.bodyMarkdown"
+    },
+    {
+      "id": "breaking-the-loop-into-parts",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--applied-python-projects--draft.python-10-capstone-automation-project.implementing-the-core-loop.breaking-the-loop-into-parts.title",
+      "bodyKey": "sketches.python--applied-python-projects--draft.python-10-capstone-automation-project.implementing-the-core-loop.breaking-the-loop-into-parts.bodyMarkdown"
+    },
+    {
+      "id": "polishing-the-final-workflow",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--applied-python-projects--draft.python-10-capstone-automation-project.implementing-the-core-loop.polishing-the-final-workflow.title",
+      "bodyKey": "sketches.python--applied-python-projects--draft.python-10-capstone-automation-project.implementing-the-core-loop.polishing-the-final-workflow.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "step1-load-lines",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.implementing-the-core-loop.quiz.step1-load-lines",
+      "language": "python",
+      "starterCode": "def load_task_lines(path):\n    # Return a list of cleaned, non-empty lines from the file.\n    # TODO: write your code here\n    pass",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def load_task_lines(path):\n    # Return a list of cleaned, non-empty lines from the file.\n    # TODO: write your code here\n    pass",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def load_task_lines(path):\n    lines = []\n    with open(path, \"r\") as file:\n        for line in file:\n            cleaned = line.strip()\n            if cleaned:\n                lines.append(cleaned)\n    return lines",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def load_task_lines(path):\n    # Return a list of cleaned, non-empty lines from the file.\n    # TODO: write your code here\n    pass",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def load_task_lines(path):\n    # Return a list of cleaned, non-empty lines from the file.\n    # TODO: write your code here\n    pass",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "files": [
+          {
+            "path": "data/tasks.txt",
+            "content": "Email client,done\n\nWrite report,todo\nCall supplier,done\n  \nReview notes,todo\n\n\nCheck inventory,done\n\nPlan meeting,todo\n\nArchive files,done\n\nSend invoice,todo\n\nUpdate tracker,done\n\nPrepare slides,todo\n\nConfirm booking,done\n\nDraft summary,todo\n\nClean desk,done\n\nReply to team,todo\n\nBackup folder,done\n\nSchedule review,todo\n\nPrint labels,done\n\nOrganize receipts,todo\n\nClose project,done\n\nFollow up,todo\n\nSort samples,done\n\nRefill forms,todo\n\nLabel boxes,done\n\nReview budget,todo\n\nTest script,done\n\nFix typo,todo\n\nShare notes,done\n\nPlan next step,todo\n\nMerge updates,done\n\nCheck status,todo\n\nWrap package"
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def load_task_lines(path):\n    lines = []\n    with open(path, \"r\") as file:\n        for line in file:\n            cleaned = line.strip()\n            if cleaned:\n                lines.append(cleaned)\n    return lines",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def load_task_lines(path):\n    lines = []\n    with open(path, \"r\") as file:\n        for line in file:\n            cleaned = line.strip()\n            if cleaned:\n                lines.append(cleaned)\n    return lines",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "load_task_lines",
+            "args": [
+              "data/tasks.txt"
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": [
+              "Email client,done",
+              "Write report,todo",
+              "Call supplier,done",
+              "Review notes,todo",
+              "Check inventory,done",
+              "Plan meeting,todo",
+              "Archive files,done",
+              "Send invoice,todo",
+              "Update tracker,done",
+              "Prepare slides,todo",
+              "Confirm booking,done",
+              "Draft summary,todo",
+              "Clean desk,done",
+              "Reply to team,todo",
+              "Backup folder,done",
+              "Schedule review,todo",
+              "Print labels,done",
+              "Organize receipts,todo",
+              "Close project,done",
+              "Follow up,todo",
+              "Sort samples,done",
+              "Refill forms,todo",
+              "Label boxes,done",
+              "Review budget,todo",
+              "Test script,done",
+              "Fix typo,todo",
+              "Share notes,done",
+              "Plan next step,todo",
+              "Merge updates,done",
+              "Check status,todo",
+              "Wrap package"
+            ],
+            "expectedKind": "value"
+          },
+          {
+            "type": "no_stdout"
+          }
+        ]
+      }
+    },
+    {
+      "id": "step2-parse-line",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.implementing-the-core-loop.quiz.step2-parse-line",
+      "language": "python",
+      "starterCode": "def load_task_lines(path):\n    lines = []\n    with open(path, \"r\") as file:\n        for line in file:\n            cleaned = line.strip()\n            if cleaned:\n                lines.append(cleaned)\n    return lines\n# Capstone step 2: Parse one task line into a Task object\n# Keep the working code above from the previous step.\n# Next, Now connect file data to your class\n# Add only the focused change for this step below or inside the existing work.",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def load_task_lines(path):\n    lines = []\n    with open(path, \"r\") as file:\n        for line in file:\n            cleaned = line.strip()\n            if cleaned:\n                lines.append(cleaned)\n    return lines\n# Capstone step 2: Parse one task line into a Task object\n# Keep the working code above from the previous step.\n# Next, Now connect file data to your class\n# Add only the focused change for this step below or inside the existing work.",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "class Task:\n    def __init__(self, name, status):\n        self.name = name\n        self.status = status\n\n    def is_done(self):\n        return self.status == \"done\"\n\n\ndef parse_task_line(line):\n    cleaned = line.strip()\n    if \",\" in cleaned:\n        name, status = cleaned.split(\",\", 1)\n        return Task(name.strip(), status.strip())\n    return Task(cleaned, \"todo\")",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def load_task_lines(path):\n    lines = []\n    with open(path, \"r\") as file:\n        for line in file:\n            cleaned = line.strip()\n            if cleaned:\n                lines.append(cleaned)\n    return lines\n# Capstone step 2: Parse one task line into a Task object\n# Keep the working code above from the previous step.\n# Next, Now connect file data to your class\n# Add only the focused change for this step below or inside the existing work.",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def load_task_lines(path):\n    lines = []\n    with open(path, \"r\") as file:\n        for line in file:\n            cleaned = line.strip()\n            if cleaned:\n                lines.append(cleaned)\n    return lines\n# Capstone step 2: Parse one task line into a Task object\n# Keep the working code above from the previous step.\n# Next, Now connect file data to your class\n# Add only the focused change for this step below or inside the existing work.",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class Task:\n    def __init__(self, name, status):\n        self.name = name\n        self.status = status\n\n    def is_done(self):\n        return self.status == \"done\"\n\n\ndef parse_task_line(line):\n    cleaned = line.strip()\n    if \",\" in cleaned:\n        name, status = cleaned.split(\",\", 1)\n        return Task(name.strip(), status.strip())\n    return Task(cleaned, \"todo\")",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "class Task:\n    def __init__(self, name, status):\n        self.name = name\n        self.status = status\n\n    def is_done(self):\n        return self.status == \"done\"\n\n\ndef parse_task_line(line):\n    cleaned = line.strip()\n    if \",\" in cleaned:\n        name, status = cleaned.split(\",\", 1)\n        return Task(name.strip(), status.strip())\n    return Task(cleaned, \"todo\")",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Task"
+          },
+          {
+            "type": "constructible",
+            "className": "Task",
+            "constructorArgs": [
+              "Email client",
+              "done"
+            ]
+          },
+          {
+            "type": "instance_attributes",
+            "className": "Task",
+            "constructorArgs": [
+              "Write report",
+              "todo"
+            ],
+            "attributes": [
+              "name",
+              "status"
+            ]
+          },
+          {
+            "type": "method_returns",
+            "className": "Task",
+            "constructorArgs": [
+              "Call supplier",
+              "done"
+            ],
+            "constructorArgKinds": [
+              "value",
+              "value"
+            ],
+            "methodName": "is_done",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": true,
+            "expectedKind": "value"
+          },
+          {
+            "type": "method_returns",
+            "className": "Task",
+            "constructorArgs": [
+              "Review notes",
+              "todo"
+            ],
+            "constructorArgKinds": [
+              "value",
+              "value"
+            ],
+            "methodName": "is_done",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": false,
+            "expectedKind": "value"
+          },
+          {
+            "type": "created_instances",
+            "className": "Task",
+            "min": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "step3-build-summary",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.implementing-the-core-loop.quiz.step3-build-summary",
+      "language": "python",
+      "starterCode": "class Task:\n    def __init__(self, name, status):\n        self.name = name\n        self.status = status\n\n    def is_done(self):\n        return self.status == \"done\"\n\n\ndef parse_task_line(line):\n    cleaned = line.strip()\n    if \",\" in cleaned:\n        name, status = cleaned.split(\",\", 1)\n        return Task(name.strip(), status.strip())\n    return Task(cleaned, \"todo\")\n# Capstone step 3: Build a summary from a list of Task objects\n# Keep the working code above from the previous step.\n# Next, Continue the same project\n# Add only the focused change for this step below or inside the existing work.",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "class Task:\n    def __init__(self, name, status):\n        self.name = name\n        self.status = status\n\n    def is_done(self):\n        return self.status == \"done\"\n\n\ndef parse_task_line(line):\n    cleaned = line.strip()\n    if \",\" in cleaned:\n        name, status = cleaned.split(\",\", 1)\n        return Task(name.strip(), status.strip())\n    return Task(cleaned, \"todo\")\n# Capstone step 3: Build a summary from a list of Task objects\n# Keep the working code above from the previous step.\n# Next, Continue the same project\n# Add only the focused change for this step below or inside the existing work.",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "class Task:\n    def __init__(self, name, status):\n        self.name = name\n        self.status = status\n\n    def is_done(self):\n        return self.status == \"done\"\n\n\ndef parse_task_line(line):\n    cleaned = line.strip()\n    if \",\" in cleaned:\n        name, status = cleaned.split(\",\", 1)\n        return Task(name.strip(), status.strip())\n    return Task(cleaned, \"todo\")\n\n\ndef build_summary(tasks):\n    done_count = 0\n    for task in tasks:\n        if task.is_done():\n            done_count += 1\n    total = len(tasks)\n    todo_count = total - done_count\n    return {\n        \"total\": total,\n        \"done\": done_count,\n        \"todo\": todo_count,\n    }",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "class Task:\n    def __init__(self, name, status):\n        self.name = name\n        self.status = status\n\n    def is_done(self):\n        return self.status == \"done\"\n\n\ndef parse_task_line(line):\n    cleaned = line.strip()\n    if \",\" in cleaned:\n        name, status = cleaned.split(\",\", 1)\n        return Task(name.strip(), status.strip())\n    return Task(cleaned, \"todo\")\n# Capstone step 3: Build a summary from a list of Task objects\n# Keep the working code above from the previous step.\n# Next, Continue the same project\n# Add only the focused change for this step below or inside the existing work.",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "class Task:\n    def __init__(self, name, status):\n        self.name = name\n        self.status = status\n\n    def is_done(self):\n        return self.status == \"done\"\n\n\ndef parse_task_line(line):\n    cleaned = line.strip()\n    if \",\" in cleaned:\n        name, status = cleaned.split(\",\", 1)\n        return Task(name.strip(), status.strip())\n    return Task(cleaned, \"todo\")\n# Capstone step 3: Build a summary from a list of Task objects\n# Keep the working code above from the previous step.\n# Next, Continue the same project\n# Add only the focused change for this step below or inside the existing work.",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class Task:\n    def __init__(self, name, status):\n        self.name = name\n        self.status = status\n\n    def is_done(self):\n        return self.status == \"done\"\n\n\ndef parse_task_line(line):\n    cleaned = line.strip()\n    if \",\" in cleaned:\n        name, status = cleaned.split(\",\", 1)\n        return Task(name.strip(), status.strip())\n    return Task(cleaned, \"todo\")\n\n\ndef build_summary(tasks):\n    done_count = 0\n    for task in tasks:\n        if task.is_done():\n            done_count += 1\n    total = len(tasks)\n    todo_count = total - done_count\n    return {\n        \"total\": total,\n        \"done\": done_count,\n        \"todo\": todo_count,\n    }",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "class Task:\n    def __init__(self, name, status):\n        self.name = name\n        self.status = status\n\n    def is_done(self):\n        return self.status == \"done\"\n\n\ndef parse_task_line(line):\n    cleaned = line.strip()\n    if \",\" in cleaned:\n        name, status = cleaned.split(\",\", 1)\n        return Task(name.strip(), status.strip())\n    return Task(cleaned, \"todo\")\n\n\ndef build_summary(tasks):\n    done_count = 0\n    for task in tasks:\n        if task.is_done():\n            done_count += 1\n    total = len(tasks)\n    todo_count = total - done_count\n    return {\n        \"total\": total,\n        \"done\": done_count,\n        \"todo\": todo_count,\n    }",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "build_summary",
+            "args": [
+              [
+                [
+                  "Email client",
+                  "done"
+                ],
+                [
+                  "Write report",
+                  "todo"
+                ],
+                [
+                  "Call supplier",
+                  "done"
+                ]
+              ]
+            ],
+            "argKinds": [
+              "dict_entries"
+            ],
+            "expected": [
+              [
+                "total",
+                3
+              ],
+              [
+                "done",
+                2
+              ],
+              [
+                "todo",
+                1
+              ]
+            ],
+            "expectedKind": "dict_entries",
+            "message": "build_summary should return the correct counts for mixed task statuses."
+          },
+          {
+            "type": "function_returns",
+            "functionName": "build_summary",
+            "args": [
+              [
+                [
+                  "Draft summary",
+                  "todo"
+                ],
+                [
+                  "Plan meeting",
+                  "todo"
+                ]
+              ]
+            ],
+            "argKinds": [
+              "dict_entries"
+            ],
+            "expected": [
+              [
+                "total",
+                2
+              ],
+              [
+                "done",
+                0
+              ],
+              [
+                "todo",
+                2
+              ]
+            ],
+            "expectedKind": "dict_entries",
+            "message": "build_summary should handle a list with no completed tasks."
+          },
+          {
+            "type": "no_stdout"
+          }
+        ]
+      }
+    },
+    {
+      "id": "step4-format-report",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.implementing-the-core-loop.quiz.step4-format-report",
+      "language": "python",
+      "starterCode": "class Task:\n    def __init__(self, name, status):\n        self.name = name\n        self.status = status\n\n    def is_done(self):\n        return self.status == \"done\"\n\n\ndef parse_task_line(line):\n    cleaned = line.strip()\n    if \",\" in cleaned:\n        name, status = cleaned.split(\",\", 1)\n        return Task(name.strip(), status.strip())\n    return Task(cleaned, \"todo\")\n\n\ndef build_summary(tasks):\n    done_count = 0\n    for task in tasks:\n        if task.is_done():\n            done_count += 1\n    total = len(tasks)\n    todo_count = total - done_count\n    return {\n        \"total\": total,\n        \"done\": done_count,\n        \"todo\": todo_count,\n    }\n# Capstone step 4: Format the final report text\n# Keep the working code above from the previous step.\n# Next, Add the next project step\n# Add only the focused change for this step below or inside the existing work.",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "class Task:\n    def __init__(self, name, status):\n        self.name = name\n        self.status = status\n\n    def is_done(self):\n        return self.status == \"done\"\n\n\ndef parse_task_line(line):\n    cleaned = line.strip()\n    if \",\" in cleaned:\n        name, status = cleaned.split(\",\", 1)\n        return Task(name.strip(), status.strip())\n    return Task(cleaned, \"todo\")\n\n\ndef build_summary(tasks):\n    done_count = 0\n    for task in tasks:\n        if task.is_done():\n            done_count += 1\n    total = len(tasks)\n    todo_count = total - done_count\n    return {\n        \"total\": total,\n        \"done\": done_count,\n        \"todo\": todo_count,\n    }\n# Capstone step 4: Format the final report text\n# Keep the working code above from the previous step.\n# Next, Add the next project step\n# Add only the focused change for this step below or inside the existing work.",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "class Task:\n    def __init__(self, name, status):\n        self.name = name\n        self.status = status\n\n    def is_done(self):\n        return self.status == \"done\"\n\n\ndef parse_task_line(line):\n    cleaned = line.strip()\n    if \",\" in cleaned:\n        name, status = cleaned.split(\",\", 1)\n        return Task(name.strip(), status.strip())\n    return Task(cleaned, \"todo\")\n\n\ndef build_summary(tasks):\n    done_count = 0\n    for task in tasks:\n        if task.is_done():\n            done_count += 1\n    total = len(tasks)\n    todo_count = total - done_count\n    return {\n        \"total\": total,\n        \"done\": done_count,\n        \"todo\": todo_count,\n    }\n\n\ndef format_report(summary):\n    return (\n        f\"Task Report\\n\"\n        f\"Done: {summary['done']}\\n\"\n        f\"Todo: {summary['todo']}/{summary['total']}\"\n    )",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "class Task:\n    def __init__(self, name, status):\n        self.name = name\n        self.status = status\n\n    def is_done(self):\n        return self.status == \"done\"\n\n\ndef parse_task_line(line):\n    cleaned = line.strip()\n    if \",\" in cleaned:\n        name, status = cleaned.split(\",\", 1)\n        return Task(name.strip(), status.strip())\n    return Task(cleaned, \"todo\")\n\n\ndef build_summary(tasks):\n    done_count = 0\n    for task in tasks:\n        if task.is_done():\n            done_count += 1\n    total = len(tasks)\n    todo_count = total - done_count\n    return {\n        \"total\": total,\n        \"done\": done_count,\n        \"todo\": todo_count,\n    }\n# Capstone step 4: Format the final report text\n# Keep the working code above from the previous step.\n# Next, Add the next project step\n# Add only the focused change for this step below or inside the existing work.",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "class Task:\n    def __init__(self, name, status):\n        self.name = name\n        self.status = status\n\n    def is_done(self):\n        return self.status == \"done\"\n\n\ndef parse_task_line(line):\n    cleaned = line.strip()\n    if \",\" in cleaned:\n        name, status = cleaned.split(\",\", 1)\n        return Task(name.strip(), status.strip())\n    return Task(cleaned, \"todo\")\n\n\ndef build_summary(tasks):\n    done_count = 0\n    for task in tasks:\n        if task.is_done():\n            done_count += 1\n    total = len(tasks)\n    todo_count = total - done_count\n    return {\n        \"total\": total,\n        \"done\": done_count,\n        \"todo\": todo_count,\n    }\n# Capstone step 4: Format the final report text\n# Keep the working code above from the previous step.\n# Next, Add the next project step\n# Add only the focused change for this step below or inside the existing work.",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class Task:\n    def __init__(self, name, status):\n        self.name = name\n        self.status = status\n\n    def is_done(self):\n        return self.status == \"done\"\n\n\ndef parse_task_line(line):\n    cleaned = line.strip()\n    if \",\" in cleaned:\n        name, status = cleaned.split(\",\", 1)\n        return Task(name.strip(), status.strip())\n    return Task(cleaned, \"todo\")\n\n\ndef build_summary(tasks):\n    done_count = 0\n    for task in tasks:\n        if task.is_done():\n            done_count += 1\n    total = len(tasks)\n    todo_count = total - done_count\n    return {\n        \"total\": total,\n        \"done\": done_count,\n        \"todo\": todo_count,\n    }\n\n\ndef format_report(summary):\n    return (\n        f\"Task Report\\n\"\n        f\"Done: {summary['done']}\\n\"\n        f\"Todo: {summary['todo']}/{summary['total']}\"\n    )",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "class Task:\n    def __init__(self, name, status):\n        self.name = name\n        self.status = status\n\n    def is_done(self):\n        return self.status == \"done\"\n\n\ndef parse_task_line(line):\n    cleaned = line.strip()\n    if \",\" in cleaned:\n        name, status = cleaned.split(\",\", 1)\n        return Task(name.strip(), status.strip())\n    return Task(cleaned, \"todo\")\n\n\ndef build_summary(tasks):\n    done_count = 0\n    for task in tasks:\n        if task.is_done():\n            done_count += 1\n    total = len(tasks)\n    todo_count = total - done_count\n    return {\n        \"total\": total,\n        \"done\": done_count,\n        \"todo\": todo_count,\n    }\n\n\ndef format_report(summary):\n    return (\n        f\"Task Report\\n\"\n        f\"Done: {summary['done']}\\n\"\n        f\"Todo: {summary['todo']}/{summary['total']}\"\n    )",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "format_report",
+            "args": [
+              [
+                [
+                  [
+                    "total",
+                    5
+                  ],
+                  [
+                    "done",
+                    3
+                  ],
+                  [
+                    "todo",
+                    2
+                  ]
+                ]
+              ]
+            ],
+            "argKinds": [
+              "dict_entries"
+            ],
+            "expected": "Task Report\nDone: 3\nTodo: 2/5",
+            "expectedKind": "value",
+            "message": "format_report should return the report text in the required three-line format."
+          },
+          {
+            "type": "function_returns",
+            "functionName": "format_report",
+            "args": [
+              [
+                [
+                  [
+                    "total",
+                    2
+                  ],
+                  [
+                    "done",
+                    0
+                  ],
+                  [
+                    "todo",
+                    2
+                  ]
+                ]
+              ]
+            ],
+            "argKinds": [
+              "dict_entries"
+            ],
+            "expected": "Task Report\nDone: 0\nTodo: 2/2",
+            "expectedKind": "value",
+            "message": "format_report should work for a summary with no completed tasks."
+          },
+          {
+            "type": "no_stdout"
+          }
+        ]
+      }
+    },
+    {
+      "id": "step5-run-project",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.implementing-the-core-loop.quiz.step5-run-project",
+      "language": "python",
+      "starterCode": "class Task:\n    def __init__(self, name, status):\n        self.name = name\n        self.status = status\n\n    def is_done(self):\n        return self.status == \"done\"\n\n\ndef parse_task_line(line):\n    cleaned = line.strip()\n    if \",\" in cleaned:\n        name, status = cleaned.split(\",\", 1)\n        return Task(name.strip(), status.strip())\n    return Task(cleaned, \"todo\")\n\n\ndef build_summary(tasks):\n    done_count = 0\n    for task in tasks:\n        if task.is_done():\n            done_count += 1\n    total = len(tasks)\n    todo_count = total - done_count\n    return {\n        \"total\": total,\n        \"done\": done_count,\n        \"todo\": todo_count,\n    }\n\n\ndef format_report(summary):\n    return (\n        f\"Task Report\\n\"\n        f\"Done: {summary['done']}\\n\"\n        f\"Todo: {summary['todo']}/{summary['total']}\"\n    )\n# Capstone step 5: Run the full project workflow and save the report\n# Keep the working code above from the previous step.\n# Next, Finish the capstone workflow\n# Add only the focused change for this step below or inside the existing work.",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "class Task:\n    def __init__(self, name, status):\n        self.name = name\n        self.status = status\n\n    def is_done(self):\n        return self.status == \"done\"\n\n\ndef parse_task_line(line):\n    cleaned = line.strip()\n    if \",\" in cleaned:\n        name, status = cleaned.split(\",\", 1)\n        return Task(name.strip(), status.strip())\n    return Task(cleaned, \"todo\")\n\n\ndef build_summary(tasks):\n    done_count = 0\n    for task in tasks:\n        if task.is_done():\n            done_count += 1\n    total = len(tasks)\n    todo_count = total - done_count\n    return {\n        \"total\": total,\n        \"done\": done_count,\n        \"todo\": todo_count,\n    }\n\n\ndef format_report(summary):\n    return (\n        f\"Task Report\\n\"\n        f\"Done: {summary['done']}\\n\"\n        f\"Todo: {summary['todo']}/{summary['total']}\"\n    )\n# Capstone step 5: Run the full project workflow and save the report\n# Keep the working code above from the previous step.\n# Next, Finish the capstone workflow\n# Add only the focused change for this step below or inside the existing work.",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def load_task_lines(path):\n    lines = []\n    with open(path, \"r\") as file:\n        for line in file:\n            cleaned = line.strip()\n            if cleaned:\n                lines.append(cleaned)\n    return lines\n\n\nclass Task:\n    def __init__(self, name, status):\n        self.name = name\n        self.status = status\n\n    def is_done(self):\n        return self.status == \"done\"\n\n\ndef parse_task_line(line):\n    cleaned = line.strip()\n    if \",\" in cleaned:\n        name, status = cleaned.split(\",\", 1)\n        return Task(name.strip(), status.strip())\n    return Task(cleaned, \"todo\")\n\n\ndef build_summary(tasks):\n    done_count = 0\n    for task in tasks:\n        if task.is_done():\n            done_count += 1\n    total = len(tasks)\n    todo_count = total - done_count\n    return {\n        \"total\": total,\n        \"done\": done_count,\n        \"todo\": todo_count,\n    }\n\n\ndef format_report(summary):\n    return (\n        f\"Task Report\\n\"\n        f\"Done: {summary['done']}\\n\"\n        f\"Todo: {summary['todo']}/{summary['total']}\"\n    )\n\n\ndef run_project(input_path, output_path):\n    lines = load_task_lines(input_path)\n    tasks = []\n    for line in lines:\n        tasks.append(parse_task_line(line))\n    summary = build_summary(tasks)\n    report = format_report(summary)\n    with open(output_path, \"w\") as file:\n        file.write(report)\n    return report",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "class Task:\n    def __init__(self, name, status):\n        self.name = name\n        self.status = status\n\n    def is_done(self):\n        return self.status == \"done\"\n\n\ndef parse_task_line(line):\n    cleaned = line.strip()\n    if \",\" in cleaned:\n        name, status = cleaned.split(\",\", 1)\n        return Task(name.strip(), status.strip())\n    return Task(cleaned, \"todo\")\n\n\ndef build_summary(tasks):\n    done_count = 0\n    for task in tasks:\n        if task.is_done():\n            done_count += 1\n    total = len(tasks)\n    todo_count = total - done_count\n    return {\n        \"total\": total,\n        \"done\": done_count,\n        \"todo\": todo_count,\n    }\n\n\ndef format_report(summary):\n    return (\n        f\"Task Report\\n\"\n        f\"Done: {summary['done']}\\n\"\n        f\"Todo: {summary['todo']}/{summary['total']}\"\n    )\n# Capstone step 5: Run the full project workflow and save the report\n# Keep the working code above from the previous step.\n# Next, Finish the capstone workflow\n# Add only the focused change for this step below or inside the existing work.",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "class Task:\n    def __init__(self, name, status):\n        self.name = name\n        self.status = status\n\n    def is_done(self):\n        return self.status == \"done\"\n\n\ndef parse_task_line(line):\n    cleaned = line.strip()\n    if \",\" in cleaned:\n        name, status = cleaned.split(\",\", 1)\n        return Task(name.strip(), status.strip())\n    return Task(cleaned, \"todo\")\n\n\ndef build_summary(tasks):\n    done_count = 0\n    for task in tasks:\n        if task.is_done():\n            done_count += 1\n    total = len(tasks)\n    todo_count = total - done_count\n    return {\n        \"total\": total,\n        \"done\": done_count,\n        \"todo\": todo_count,\n    }\n\n\ndef format_report(summary):\n    return (\n        f\"Task Report\\n\"\n        f\"Done: {summary['done']}\\n\"\n        f\"Todo: {summary['todo']}/{summary['total']}\"\n    )\n# Capstone step 5: Run the full project workflow and save the report\n# Keep the working code above from the previous step.\n# Next, Finish the capstone workflow\n# Add only the focused change for this step below or inside the existing work.",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "files": [
+          {
+            "path": "data/tasks.txt",
+            "content": "Email client,done\nWrite report,todo\nCall supplier,done\nReview notes,todo\nCheck inventory,done"
+          },
+          {
+            "path": "reports/latest.txt",
+            "content": ""
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def load_task_lines(path):\n    lines = []\n    with open(path, \"r\") as file:\n        for line in file:\n            cleaned = line.strip()\n            if cleaned:\n                lines.append(cleaned)\n    return lines\n\n\nclass Task:\n    def __init__(self, name, status):\n        self.name = name\n        self.status = status\n\n    def is_done(self):\n        return self.status == \"done\"\n\n\ndef parse_task_line(line):\n    cleaned = line.strip()\n    if \",\" in cleaned:\n        name, status = cleaned.split(\",\", 1)\n        return Task(name.strip(), status.strip())\n    return Task(cleaned, \"todo\")\n\n\ndef build_summary(tasks):\n    done_count = 0\n    for task in tasks:\n        if task.is_done():\n            done_count += 1\n    total = len(tasks)\n    todo_count = total - done_count\n    return {\n        \"total\": total,\n        \"done\": done_count,\n        \"todo\": todo_count,\n    }\n\n\ndef format_report(summary):\n    return (\n        f\"Task Report\\n\"\n        f\"Done: {summary['done']}\\n\"\n        f\"Todo: {summary['todo']}/{summary['total']}\"\n    )\n\n\ndef run_project(input_path, output_path):\n    lines = load_task_lines(input_path)\n    tasks = []\n    for line in lines:\n        tasks.append(parse_task_line(line))\n    summary = build_summary(tasks)\n    report = format_report(summary)\n    with open(output_path, \"w\") as file:\n        file.write(report)\n    return report",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def load_task_lines(path):\n    lines = []\n    with open(path, \"r\") as file:\n        for line in file:\n            cleaned = line.strip()\n            if cleaned:\n                lines.append(cleaned)\n    return lines\n\n\nclass Task:\n    def __init__(self, name, status):\n        self.name = name\n        self.status = status\n\n    def is_done(self):\n        return self.status == \"done\"\n\n\ndef parse_task_line(line):\n    cleaned = line.strip()\n    if \",\" in cleaned:\n        name, status = cleaned.split(\",\", 1)\n        return Task(name.strip(), status.strip())\n    return Task(cleaned, \"todo\")\n\n\ndef build_summary(tasks):\n    done_count = 0\n    for task in tasks:\n        if task.is_done():\n            done_count += 1\n    total = len(tasks)\n    todo_count = total - done_count\n    return {\n        \"total\": total,\n        \"done\": done_count,\n        \"todo\": todo_count,\n    }\n\n\ndef format_report(summary):\n    return (\n        f\"Task Report\\n\"\n        f\"Done: {summary['done']}\\n\"\n        f\"Todo: {summary['todo']}/{summary['total']}\"\n    )\n\n\ndef run_project(input_path, output_path):\n    lines = load_task_lines(input_path)\n    tasks = []\n    for line in lines:\n        tasks.append(parse_task_line(line))\n    summary = build_summary(tasks)\n    report = format_report(summary)\n    with open(output_path, \"w\") as file:\n        file.write(report)\n    return report",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "run_project",
+            "args": [
+              "data/tasks.txt",
+              "reports/latest.txt"
+            ],
+            "argKinds": [
+              "value",
+              "value"
+            ],
+            "expected": "Task Report\nDone: 3\nTodo: 2/5",
+            "expectedKind": "value",
+            "message": "run_project should return the final report text after processing the input file."
+          },
+          {
+            "type": "no_stdout"
+          }
+        ]
+      }
+    }
+  ]
+}

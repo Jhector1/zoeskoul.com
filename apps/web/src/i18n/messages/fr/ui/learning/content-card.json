@@ -1,0 +1,17 @@
+{
+  "cardUi": {
+    "kinds": {
+      "quiz": "quiz",
+      "project": "projet"
+    },
+    "gateBanner": "Terminez les éléments ci-dessus (lectures, vidéos, sketches) pour déverrouiller ce {kind}.",
+    "completed": "✓ Terminé",
+    "loadingSaved": "Chargement de l’état enregistré ({kind})…",
+    "actions": {
+      "read": "Marquer comme lu",
+      "readDone": "✓ Lu",
+      "watched": "Marquer comme vu",
+      "watchedDone": "✓ Vu"
+    }
+  }
+}

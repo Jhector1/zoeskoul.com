@@ -1,0 +1,44 @@
+{
+  "ide": {
+    "tools": {
+      "tabs": {
+        "run": "Run",
+        "notes": "Notes",
+        "disabledForSubject": "{label} disabled for this subject"
+      },
+      "header": {
+        "title": "Tools",
+        "boundTo": "Bound to:",
+        "unbind": "Unbind",
+        "loadingExercise": "Loading exercise…",
+        "notBound": "Not bound",
+        "moreOptions": "More tools options",
+        "more": "More",
+        "open": "Open",
+        "collapse": "Collapse tools"
+      },
+      "notes": {
+        "loading": "Loading…",
+        "saving": "Saving…",
+        "saved": "Saved",
+        "saveFailed": "Save failed",
+        "autosaveEnabled": "Autosave enabled",
+        "retry": "Retry",
+        "placeholder": "Quick template:\n- Key idea:\n- Example:\n- Common mistake:\n- Question:"
+      },
+      "pane": {
+        "exerciseLoadFailed": "This exercise could not load. Retry the exercise or refresh the page.",
+        "editorSlowTitle": "Editor is taking longer than expected.",
+        "editorSlowBody": "Your saved review progress is still safe. Retry the editor load, or refresh if the workspace does not appear.",
+        "retryEditor": "Retry editor",
+        "loadingExercise": "Loading exercise…",
+        "loadingSketchWorkspace": "Loading sketch workspace…",
+        "loadingEditor": "Loading editor…",
+        "noSketchEditorBound": "No sketch editor is bound",
+        "noExerciseEditorBound": "No exercise editor is bound",
+        "sketchWorkspaceNotReady": "This sketch does not have a ready workspace yet.",
+        "exerciseWorkspaceNotReady": "This exercise does not have a ready workspace yet."
+      }
+    }
+  }
+}

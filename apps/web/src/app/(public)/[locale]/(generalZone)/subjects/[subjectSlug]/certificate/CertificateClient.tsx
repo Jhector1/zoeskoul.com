@@ -2,6 +2,7 @@
 
 import React, { useEffect, useMemo, useState } from "react";
 import { useParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 import { ArrowLeft, Award, CheckCircle2, Download, Lock, Sparkles } from "lucide-react";
 import { cn } from "@/lib/cn";
@@ -95,6 +96,7 @@ function SectionHeader({
 export default function CertificateClient() {
     const params = useParams<{ locale: string; subjectSlug: string }>();
     const router = useRouter();
+    const t = useTranslations("certificatePage");
 
     const locale = params?.locale ?? "en";
     const subjectSlug = params?.subjectSlug ?? "";
@@ -120,7 +122,7 @@ export default function CertificateClient() {
             if (!alive) return;
 
             if (!r.ok) {
-                setErr(data?.message ?? "Unable to load certificate status.");
+                setErr(data?.message ?? t("loadFailed"));
                 setStatus(null);
             } else {
                 setStatus(data);
@@ -134,24 +136,24 @@ export default function CertificateClient() {
         return () => {
             alive = false;
         };
-    }, [subjectSlug, locale]);
+    }, [subjectSlug, locale, t]);
 
     const nextSteps = useMemo(
         () => [
             {
-                title: "Start the next course",
-                body: "Keep momentum and continue learning with your next subject.",
+                title: t("nextSteps.course.title"),
+                body: t("nextSteps.course.body"),
             },
             {
-                title: "Practice regularly",
-                body: "A short daily practice routine will help the material stick.",
+                title: t("nextSteps.practice.title"),
+                body: t("nextSteps.practice.body"),
             },
             {
-                title: "Build a small project",
-                body: "Use what you learned in something real and finish it.",
+                title: t("nextSteps.project.title"),
+                body: t("nextSteps.project.body"),
             },
         ],
-        [],
+        [t],
     );
 
     async function downloadPdf() {
@@ -167,7 +169,7 @@ export default function CertificateClient() {
 
             if (!r.ok) {
                 const data = await r.json().catch(() => null);
-                throw new Error(data?.message ?? "Download failed.");
+                throw new Error(data?.message ?? t("downloadFailed"));
             }
 
             const blob = await r.blob();
@@ -189,7 +191,7 @@ export default function CertificateClient() {
             const dd = await rr.json().catch(() => null);
             if (rr.ok) setStatus(dd);
         } catch (e: any) {
-            alert(e?.message ?? "Unable to download certificate.");
+            alert(e?.message ?? t("downloadFailed"));
         } finally {
             setDownloading(false);
         }
@@ -201,9 +203,9 @@ export default function CertificateClient() {
                 <div className="ui-container py-4 sm:py-5 md:py-6">
                     <div className="mx-auto max-w-4xl">
                         <Surface className="p-4 sm:p-5">
-                            <div className="ui-kicker">Certificate</div>
+                            <div className="ui-kicker">{t("title")}</div>
                             <div className="mt-2 text-sm text-[rgb(var(--ui-text-muted)/0.9)]">
-                                Loading…
+                                {t("loading")}
                             </div>
                         </Surface>
                     </div>
@@ -218,13 +220,13 @@ export default function CertificateClient() {
                 <div className="ui-container py-4 sm:py-5 md:py-6">
                     <div className="mx-auto max-w-4xl">
                         <Surface className="p-4 sm:p-5">
-                            <SectionHeader title="Certificate" />
+                            <SectionHeader title={t("title")} />
                             <div className="mt-3 text-sm text-[rgb(var(--ui-danger)/1)]">{err}</div>
                             <div className="mt-4">
                                 <button className="ui-btn-secondary" onClick={() => router.back()}>
                                     <span className="inline-flex items-center gap-1.5">
                                         <ArrowLeft className="h-3.5 w-3.5" />
-                                        Back
+                                        {t("back")}
                                     </span>
                                 </button>
                             </div>
@@ -238,24 +240,24 @@ export default function CertificateClient() {
     const eligible = Boolean(status?.eligible);
 
     const completionDateStr = status?.completedAt
-        ? new Date(status.completedAt).toLocaleDateString("en-US", {
+        ? new Date(status.completedAt).toLocaleDateString(locale, {
             year: "numeric",
             month: "long",
             day: "numeric",
         })
-        : "—";
+        : t("fallbacks.emptyDate");
 
     const issuedDateStr = status?.certificate?.issuedAt
-        ? new Date(status.certificate.issuedAt).toLocaleDateString("en-US", {
+        ? new Date(status.certificate.issuedAt).toLocaleDateString(locale, {
             year: "numeric",
             month: "long",
             day: "numeric",
         })
-        : "—";
+        : t("fallbacks.emptyDate");
 
     const previewName = eligible
-        ? (status?.displayName ?? "Learner")
-        : (status?.actor?.isGuest ? "Guest Learner" : "Learner");
+        ? (status?.displayName ?? t("fallbacks.learner"))
+        : (status?.actor?.isGuest ? t("fallbacks.guestLearner") : t("fallbacks.learner"));
 
     return (
         <div className="min-h-screen bg-[rgb(var(--ui-bg)/1)] text-[rgb(var(--ui-text)/1)]">
@@ -264,45 +266,46 @@ export default function CertificateClient() {
                     <Surface className="p-4 sm:p-5">
                         <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                             <div className="min-w-0">
-                                <div className="ui-kicker">Course Certificate</div>
+                                <div className="ui-kicker">{t("courseCertificate")}</div>
 
                                 <div className="mt-2 flex flex-wrap items-center gap-2">
                                     <Pill tone={eligible ? "good" : "warn"}>
-                                        {eligible ? "Unlocked" : "In progress"}
+                                        {eligible ? t("status.unlocked") : t("status.inProgress")}
                                     </Pill>
 
-                                    {status?.certificate ? <Pill tone="info">Issued</Pill> : null}
+                                    {status?.certificate ? <Pill tone="info">{t("status.issued")}</Pill> : null}
                                 </div>
 
                                 <h1 className="ui-title-lg mt-3 text-xl sm:text-2xl">
-                                    {eligible ? "Congratulations" : "Almost there"}
+                                    {eligible ? t("hero.congratulations") : t("hero.almostThere")}
                                 </h1>
 
                                 <p className="mt-2 max-w-2xl text-sm leading-6 text-[rgb(var(--ui-text-muted)/0.9)]">
                                     {eligible ? (
-                                        <>
-                                            You completed{" "}
-                                            <span className="font-medium text-[rgb(var(--ui-text)/0.96)]">
-                                                {status?.subject.title}
-                                            </span>
-                                            . Your certificate is ready.
-                                        </>
+                                        t.rich("hero.eligible", {
+                                            subjectName: status?.subject.title ?? t("fallbacks.course"),
+                                            subject: () => (
+                                                <span className="font-medium text-[rgb(var(--ui-text)/0.96)]">
+                                                    {status?.subject.title}
+                                                </span>
+                                            ),
+                                        })
                                     ) : (
-                                        <>
-                                            Finish all modules
-                                            {status?.requireAssignment ? " and required assignments" : ""}
-                                            {" "}to unlock the certificate for{" "}
-                                            <span className="font-medium text-[rgb(var(--ui-text)/0.96)]">
-                                                {status?.subject.title}
-                                            </span>
-                                            .
-                                        </>
+                                        t.rich("hero.locked", {
+                                            assignmentSuffix: status?.requireAssignment ? t("hero.assignmentSuffix") : "",
+                                            subjectName: status?.subject.title ?? t("fallbacks.course"),
+                                            subject: () => (
+                                                <span className="font-medium text-[rgb(var(--ui-text)/0.96)]">
+                                                    {status?.subject.title}
+                                                </span>
+                                            ),
+                                        })
                                     )}
                                 </p>
 
                                 {status?.certificate ? (
                                     <div className="mt-2 text-xs text-[rgb(var(--ui-text-muted)/0.84)]">
-                                        Certificate ID:{" "}
+                                        {t("certificateId")}{" "}
                                         <span className="font-medium text-[rgb(var(--ui-text)/0.96)]">
                                             {status.certificate.id}
                                         </span>
@@ -314,7 +317,7 @@ export default function CertificateClient() {
                                 <button className="ui-btn-secondary" onClick={() => router.back()}>
                                     <span className="inline-flex items-center gap-1.5">
                                         <ArrowLeft className="h-3.5 w-3.5" />
-                                        Back
+                                        {t("back")}
                                     </span>
                                 </button>
 
@@ -329,7 +332,7 @@ export default function CertificateClient() {
                                 >
                                     <span className="inline-flex items-center gap-1.5">
                                         <Download className="h-3.5 w-3.5" />
-                                        {downloading ? "Preparing…" : "Download PDF"}
+                                        {downloading ? t("downloadPreparing") : t("downloadPdf")}
                                     </span>
                                 </button>
                             </div>
@@ -338,16 +341,16 @@ export default function CertificateClient() {
 
                     <Surface className="p-4 sm:p-5">
                         <SectionHeader
-                            title="Certificate Preview"
+                            title={t("previewTitle")}
                             icon={<Award className="h-4 w-4" />}
-                            meta={eligible ? "Unlocked" : "Locked"}
+                            meta={eligible ? t("status.unlocked") : t("status.locked")}
                         />
 
                         <div className="mt-4">
                             <CertificatePreviewCard
                                 eligible={eligible}
                                 previewName={previewName}
-                                subjectTitle={status?.subject.title ?? "Course"}
+                                subjectTitle={status?.subject.title ?? t("fallbacks.course")}
                                 completionDateStr={completionDateStr}
                                 issuedDateStr={issuedDateStr}
                                 certificateId={status?.certificate?.id ?? null}
@@ -358,7 +361,7 @@ export default function CertificateClient() {
                     <div className="grid gap-3 lg:grid-cols-[minmax(0,1.12fr)_minmax(240px,0.88fr)]">
                         <Surface className="p-4 sm:p-5">
                             <SectionHeader
-                                title="Checklist"
+                                title={t("checklistTitle")}
                                 icon={
                                     eligible ? (
                                         <CheckCircle2 className="h-4 w-4" />
@@ -366,7 +369,7 @@ export default function CertificateClient() {
                                         <Lock className="h-4 w-4" />
                                     )
                                 }
-                                meta={`${status?.modules?.length ?? 0} modules`}
+                                meta={t("modulesCount", { count: status?.modules?.length ?? 0 })}
                             />
 
                             <div className="mt-4 grid gap-2">
@@ -389,15 +392,21 @@ export default function CertificateClient() {
 
                                                     {status.requireAssignment ? (
                                                         <div className="mt-1 text-[11px] leading-5 text-[rgb(var(--ui-text-muted)/0.84)]">
-                                                            Topics: {m.moduleCompleted ? "done" : "not done"} • Assignment:{" "}
-                                                            {m.assignmentCompleted ? "done" : "not done"}
+                                                            {t("checklistDetails", {
+                                                                topics: m.moduleCompleted
+                                                                    ? t("checklistValue.done")
+                                                                    : t("checklistValue.notDone"),
+                                                                assignment: m.assignmentCompleted
+                                                                    ? t("checklistValue.done")
+                                                                    : t("checklistValue.notDone"),
+                                                            })}
                                                         </div>
                                                     ) : null}
                                                 </div>
 
                                                 <div className="shrink-0">
                                                     <Pill tone={ok ? "good" : "neutral"}>
-                                                        {ok ? "Complete" : "In progress"}
+                                                        {ok ? t("status.complete") : t("status.inProgress")}
                                                     </Pill>
                                                 </div>
                                             </div>
@@ -409,7 +418,7 @@ export default function CertificateClient() {
 
                         <Surface className="p-4 sm:p-5">
                             <SectionHeader
-                                title="Next steps"
+                                title={t("nextStepsTitle")}
                                 icon={<Sparkles className="h-4 w-4" />}
                             />
 

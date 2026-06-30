@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useMemo, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 import { createPortal } from "react-dom";
 import type { FSNode, NodeId } from "../types";
 
@@ -10,6 +11,7 @@ export default function DeleteModal(props: {
     onCancel: () => void;
     onDelete: () => void;
 }) {
+    const t = useTranslations("ide.fullIde.deleteModal");
     const n = useMemo(
         () => props.nodes.find((x) => x.id === props.pendingDeleteId),
         [props.nodes, props.pendingDeleteId],
@@ -90,18 +92,16 @@ export default function DeleteModal(props: {
                     id="delete-modal-title"
                     className="text-sm font-black text-neutral-900 dark:text-white/90"
                 >
-                    Delete
+                    {t("title")}
                 </div>
 
                 <div
                     id="delete-modal-description"
                     className="mt-2 text-xs font-semibold text-neutral-600 dark:text-white/70"
                 >
-                    Delete{" "}
-                    <span className="font-extrabold text-neutral-900 dark:text-white/85">
-                        {n?.name ?? "this item"}
-                    </span>
-                    ?
+                    {t("description", {
+                        name: n?.name ?? t("fallbackItem"),
+                    })}
                 </div>
 
                 <div className="mt-4 flex items-center justify-end gap-2">
@@ -111,7 +111,7 @@ export default function DeleteModal(props: {
                         onClick={props.onCancel}
                         className="ui-quiz-action ui-quiz-action--ghost"
                     >
-                        Cancel
+                        {t("cancel")}
                     </button>
 
                     <button
@@ -120,7 +120,7 @@ export default function DeleteModal(props: {
                         onClick={props.onDelete}
                         className="rounded-xl border border-rose-300/25 bg-rose-300/10 px-3 py-2 text-xs font-extrabold text-rose-900 hover:bg-rose-300/15 dark:text-white/90"
                     >
-                        Delete
+                        {t("confirm")}
                     </button>
                 </div>
             </div>

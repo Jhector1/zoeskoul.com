@@ -5,6 +5,7 @@
 "use client";
 
 import React, { useCallback, useEffect, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 import type {
     CodeExpectedExample,
     Exercise,
@@ -46,24 +47,25 @@ function ExpectedExampleCard({
                              }: {
     example: CodeExpectedExample;
 }) {
+    const t = useTranslations("practice.codeInput");
     if (example.kind === "terminal") {
         const blocks: Array<{ type: "label" | "body"; text: string }> = [];
 
         if (example.stdin && example.stdin.trim().length > 0) {
-            blocks.push({ type: "label", text: "> input" });
+            blocks.push({ type: "label", text: t("inputLabel") });
             blocks.push({ type: "body", text: example.stdin.replace(/\n$/, "") });
         }
 
-        blocks.push({ type: "label", text: "output" });
+        blocks.push({ type: "label", text: t("outputLabel") });
         blocks.push({ type: "body", text: example.stdout.replace(/\n$/, "") });
 
         return (
             <div className="ui-surface p-3">
                 <div className="flex items-center justify-between gap-3">
-                    <div className="ui-title-sm">Example</div>
+                    <div className="ui-title-sm">{t("exampleTitle")}</div>
                     <div className="ui-meta">{
                         // example.meta ??
-                        "Expected example"}</div>
+                        t("expectedExampleMeta")}</div>
                 </div>
 
                 <div className="mt-2 whitespace-pre-wrap break-words px-2 font-mono text-xs leading-5">
@@ -87,10 +89,10 @@ function ExpectedExampleCard({
         return (
             <div className="ui-page-surface p-3">
                 <div className="flex items-center justify-between gap-3">
-                    <div className="ui-title-sm">Expected result</div>
+                    <div className="ui-title-sm">{t("expectedResultTitle")}</div>
                     <div className="ui-meta">{
                         // example.meta ??
-                        "Result preview"}</div>
+                        t("resultPreviewMeta")}</div>
                 </div>
 
                 <div className="mt-2 overflow-auto">
@@ -113,7 +115,7 @@ function ExpectedExampleCard({
                             >
                                 {row.map((cell, j) => (
                                     <td key={j} className="px-2 py-1 ui-text">
-                                        {cell == null ? "NULL" : String(cell)}
+                                        {cell == null ? t("nullValue") : String(cell)}
                                     </td>
                                 ))}
                             </tr>

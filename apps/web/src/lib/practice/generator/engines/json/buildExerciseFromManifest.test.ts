@@ -362,6 +362,58 @@ describe("buildExerciseFromManifest runtime IDE mapping", () => {
     });
   });
 
+  it("preserves authored ideConfig terminalCwd on manifest shell tasks", () => {
+    const result = buildExerciseFromManifest(
+      makeCodeInputDef({
+        ...LINUX_COURSE1_TERMINAL_FIXTURE,
+        ideConfig: {
+          runnerBackend: "pty",
+          layoutMode: "terminal_workspace",
+          terminalSessionScope: "exercise",
+          terminalCwd: "/workspace/park-terminal-map",
+          requires: {
+            files: true,
+            multiFile: true,
+            terminal: true,
+          },
+        },
+      } as any),
+      makeArgs(),
+      {
+        serviceDefaults: {
+          runnerBackend: "pty",
+          layoutMode: "terminal_workspace",
+          terminalSessionScope: "exercise",
+          terminalCwd: "/workspace",
+          requires: {
+            files: true,
+            multiFile: true,
+            terminal: true,
+          },
+        },
+        runtimeDefaults: {
+          kind: "code",
+          language: "bash",
+          supportsTerminal: true,
+          supportsFileSystem: true,
+          supportsMultiFile: true,
+        },
+      } as any,
+    );
+
+    expect((result.exercise as any).ideConfig).toMatchObject({
+      runnerBackend: "pty",
+      layoutMode: "terminal_workspace",
+      terminalSessionScope: "exercise",
+      terminalCwd: "/workspace/park-terminal-map",
+      requires: {
+        files: true,
+        multiFile: true,
+        terminal: true,
+      },
+    });
+  });
+
   it("preserves an authored terminalSessionScope override for terminal shell tasks", () => {
     const result = buildExerciseFromManifest(
       makeCodeInputDef({

@@ -1,0 +1,244 @@
+{
+  "topics": {
+    "python--applied-python-projects--draft": {
+      "python-8-object-oriented-programming": {
+        "attributes-and-init": {
+          "label": "Attributes and __init__",
+          "summary": "Initialize object state with constructor parameters.",
+          "cards": {
+            "sketch0": {
+              "title": "What __init__ does"
+            },
+            "sketch1": {
+              "title": "Attributes belong to each instance"
+            },
+            "sketch2": {
+              "title": "Why we use self.attribute = parameter"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Practice initialized attributes"
+            }
+          },
+          "projectSteps": {
+            "ex12": {
+              "title": "Combine __init__ with a reporting method"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_attributes_and_init_sketch0": {
+              "title": "Try it yourself",
+              "prompt": "Start small: create a `Car` class that remembers two basic details, `brand` and `year`, as soon as the object is created."
+            },
+            "try_attributes_and_init_sketch1": {
+              "title": "Try it yourself",
+              "prompt": "Now make the object hold a little more related data. Define `Player` so it stores `username`, `score`, and `level` on each new instance."
+            },
+            "try_attributes_and_init_sketch2": {
+              "title": "Try it yourself",
+              "prompt": "Finish the ladder by using stored attributes in behavior. Create `Rectangle`, save `width` and `height`, and add `area()` so the object can calculate its own area."
+            }
+          },
+          "quiz": {
+            "ex1": {
+              "title": "Create a Car class with attributes",
+              "prompt": "Start small: create a `Car` class that remembers two basic details, `brand` and `year`, as soon as the object is created.",
+              "hint": "Give `Car` a constructor, then save each incoming value onto the instance.",
+              "help": {
+                "concept": "A constructor is where a new object picks up its starting state. Two inputs should become two attributes on `self`.",
+                "hint_1": "The method header needs `self`, `brand`, and `year`.",
+                "hint_2": "Use one assignment for the brand and one for the year."
+              },
+              "starterCode": "class Car:\n    def __init__(self, brand, year):\n        # store the values on the object\n        pass"
+            },
+            "ex2": {
+              "title": "What __init__ is for",
+              "prompt": "What is the main purpose of `__init__` in a Python class?",
+              "hint": "Think about what happens right when a new object is created.",
+              "help": {
+                "concept": "`__init__` runs when an instance is created and is commonly used to give that object its starting attribute values.",
+                "hint_1": "It is not used to import modules or print automatically.",
+                "hint_2": "Choose the option about setting up a new object's starting data."
+              },
+              "options": {
+                "a": "To set up an object's initial attributes",
+                "b": "To rename the class after creation",
+                "c": "To import code from another file",
+                "d": "To make every attribute global"
+              }
+            },
+            "ex3": {
+              "title": "Complete an attribute assignment",
+              "prompt": "Choose the missing code that stores the incoming `name` parameter on the object.",
+              "hint": "The left side should be the object's attribute, not just the parameter name.",
+              "help": {
+                "concept": "To save constructor input on an object, assign the parameter to an attribute on `self`. The `self.` part means the value belongs to that instance.",
+                "hint_1": "You want the object to remember `name` later as an attribute.",
+                "hint_2": "The missing code should be the attribute target on the left side of `=`."
+              },
+              "template": "[blank1] = name",
+              "choices": [
+                "self.name",
+                "name",
+                "__init__",
+                "print(name)"
+              ]
+            },
+            "ex4": {
+              "title": "Order the constructor steps",
+              "prompt": "Put these steps in the order that matches creating an object with stored attributes.",
+              "hint": "Start with the class definition, then the constructor, then the assignments, then object creation.",
+              "help": {
+                "concept": "A class is defined first, then `__init__` describes how new instances store data, and finally an instance is created using constructor arguments.",
+                "hint_1": "The assignments inside `__init__` happen before you can use the created object.",
+                "hint_2": "The object creation call comes after the class and constructor code are written."
+              },
+              "tokens": {
+                "t1": "Write `class Student:`",
+                "t2": "Define `__init__(self, name)`",
+                "t3": "Assign `self.name = name`",
+                "t4": "Create `Student(\"Lina\")`"
+              }
+            },
+            "ex5": {
+              "title": "Pick the real attributes",
+              "prompt": "A class `Movie` uses `__init__(self, title, year)` and assigns `self.title = title` and `self.year = year`. Which names are attributes on each `Movie` instance? Choose all that apply.",
+              "hint": "Look for the names attached to `self.` inside the assignments.",
+              "help": {
+                "concept": "Attributes are the names stored on the object with `self.attribute_name`. Constructor parameter names by themselves are not automatically attributes unless assigned to `self`.",
+                "hint_1": "Check the left side of each assignment in `__init__`.",
+                "hint_2": "The correct choices are the names that would work in expressions like `movie.name_here`."
+              },
+              "options": {
+                "a": "title",
+                "b": "year",
+                "c": "self",
+                "d": "__init__"
+              }
+            },
+            "ex6": {
+              "title": "Store three values in a Player class",
+              "prompt": "Now make the object hold a little more related data. Define `Player` so it stores `username`, `score`, and `level` on each new instance.",
+              "hint": "This is the same pattern as before, just with one more attribute to save.",
+              "help": {
+                "concept": "Once you know how to save one or two constructor values, the next step is repeating that pattern for a larger group of related data.",
+                "hint_1": "Each parameter should have a matching attribute on `self`.",
+                "hint_2": "If you count three incoming values, you should also have three attribute assignments."
+              },
+              "starterCode": "class Player:\n    def __init__(self, username, score, level):\n        # save all three values on the object\n        pass"
+            },
+            "ex7": {
+              "title": "Which line creates an attribute",
+              "prompt": "Inside `__init__(self, color)`, which line creates an attribute named `color` on the object?",
+              "hint": "An attribute belongs to the object, so the line must use `self.`.",
+              "help": {
+                "concept": "Attributes are stored on the instance using `self.attribute_name = value`. A plain variable assignment does not attach data to the object.",
+                "hint_1": "Look for the option that puts `color` after `self.` on the left side.",
+                "hint_2": "The correct line stores the parameter value inside the object so `obj.color` will work later."
+              },
+              "options": {
+                "a": "self.color = color",
+                "b": "color = self.color",
+                "c": "__init__ = color",
+                "d": "print(color)"
+              }
+            },
+            "ex8": {
+              "title": "Build a class from parameters to attributes",
+              "prompt": "Arrange the code pieces into a correct class definition that stores `title` on a `Song` object.",
+              "hint": "Start with the class line, then the constructor line, then the indented assignment.",
+              "help": {
+                "concept": "A valid class definition needs the class header first, then the `__init__` method, then the attribute assignment inside that method.",
+                "hint_1": "The assignment must be nested inside `__init__`, not above it.",
+                "hint_2": "The constructor line should come right after the class line."
+              },
+              "tokens": {
+                "t1": "class Song:",
+                "t2": "def __init__(self, title):",
+                "t3": "self.title = title"
+              }
+            },
+            "ex9": {
+              "title": "Choose the missing constructor parameter use",
+              "prompt": "Fill the blank so the object stores the incoming `pages` value in its `pages` attribute.",
+              "hint": "The right side should be the parameter value being passed into `__init__`.",
+              "help": {
+                "concept": "In `self.the missing term = the missing term`, the left side is the object's attribute and the right side is the constructor parameter value being copied into that attribute.",
+                "hint_1": "You are choosing the value that should go on the right side of `=`.",
+                "hint_2": "Pick the parameter name, not `self.the missing term` again and not a print call."
+              },
+              "template": "self.pages = [blank1]",
+              "choices": [
+                "pages",
+                "self.pages",
+                "__init__",
+                "print(pages)"
+              ]
+            },
+            "ex10": {
+              "title": "Find the true statements about __init__",
+              "prompt": "Which statements about `__init__` are true? Choose all that apply.",
+              "hint": "Look for the two statements about when `__init__` runs and what `self` refers to.",
+              "help": {
+                "concept": "`__init__` runs when Python creates a new object, and `self` refers to that specific object while its attributes are being set up.",
+                "hint_1": "Choose the option about `__init__` running during instance creation.",
+                "hint_2": "Choose the option where `self` means the current object, not the class itself."
+              },
+              "options": {
+                "a": "`__init__` runs when a new instance is created",
+                "b": "`self` refers to the specific object being initialized",
+                "c": "`__init__` is only used to print text",
+                "d": "`self` is another name for the class itself in every case"
+              }
+            },
+            "ex11": {
+              "title": "Add a method that uses initialized attributes",
+              "prompt": "Finish the ladder by using stored attributes in behavior. Create `Rectangle`, save `width` and `height`, and add `area()` so the object can calculate its own area.",
+              "hint": "Store the two dimensions first, then use those stored values inside the method.",
+              "help": {
+                "concept": "This step combines constructor setup with object behavior. The method should not use unrelated variables; it should read the rectangle's own saved dimensions.",
+                "hint_1": "Inside `area`, read the width and height from `self`.",
+                "hint_2": "Return their product instead of printing it."
+              },
+              "starterCode": "class Rectangle:\n    def __init__(self, width, height):\n        # store width and height\n        pass\n\n    def area(self):\n        # return the area\n        pass"
+            },
+            "ex12": {
+              "title": "Combine __init__ with a reporting method",
+              "prompt": "Use one more constructor practice task that combines stored data with object behavior. Define `Course` with `name` and `lessons`. Store both on the instance, then add `summary()` so it returns text in this exact format: `Python Lab (6 lessons)`.",
+              "hint": "Store both incoming values first, then build the final string from `self.name` and `self.lessons`.",
+              "help": {
+                "concept": "This step combines the two core constructor ideas: save the incoming values as attributes, then let a method read those saved attributes later.",
+                "hint_1": "The constructor needs one assignment for `name` and one for `lessons`.",
+                "hint_2": "Inside `summary()`, return one formatted string instead of printing it."
+              },
+              "starterCode": "class Course:\n    def __init__(self, name, lessons):\n        # store both values on the object\n        pass\n\n    def summary(self):\n        # return text like \"Python Lab (6 lessons)\"\n        pass"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python--applied-python-projects--draft": {
+      "python-8-object-oriented-programming": {
+        "attributes-and-init": {
+          "sb1": {
+            "title": "What __init__ does",
+            "bodyMarkdown": "When you create an object, Python can run a special method named `__init__`. Its job is to set up the new object's starting data, called **attributes**.\n\nHere is a simple example:\n\n```python\nclass Dog:\n    def __init__(self, name, age):\n        self.name = name\n        self.age = age\n\nmy_dog = Dog(\"Milo\", 3)\nprint(my_dog.name)\nprint(my_dog.age)\n```\n\nStep by step:\n\n- `class Dog:` starts a new class.\n- `def __init__(self, name, age):` defines the constructor.\n- `self.name = name` stores the given `name` inside the object.\n- `self.age = age` stores the given `age` inside the object.\n- `Dog(\"Milo\", 3)` creates one `Dog` object.\n- `my_dog.name` reads the object's `name` attribute.\n\nSo after creation, this object remembers its own data.\n\n**Try it yourself:** Change `\"Milo\"` to another name and `3` to another age. Click Run and check the output panel. Then try adding `print(type(my_dog))` to see that Python created a `Dog` object."
+          },
+          "sb2": {
+            "title": "Attributes belong to each instance",
+            "bodyMarkdown": "An **instance** is one object made from a class. Each instance can have different attribute values, even when they come from the same class.\n\n```python\nclass Book:\n    def __init__(self, title, pages):\n        self.title = title\n        self.pages = pages\n\nbook1 = Book(\"Python Basics\", 120)\nbook2 = Book(\"Space Stories\", 200)\n\nprint(book1.title)\nprint(book2.title)\n```\n\nThis works because:\n\n- `book1` and `book2` are different instances.\n- Both have a `title` attribute.\n- The values are different because each object got different constructor arguments.\n\nA helpful way to think about it: the class is the blueprint, and each instance is a separate thing built from that blueprint.\n\n**Your turn:** Add `print(book1.pages)` and `print(book2.pages)`. Then change one book's values and run again.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          },
+          "sb3": {
+            "title": "Why we use self.attribute = parameter",
+            "bodyMarkdown": "Inside `__init__`, you usually copy incoming parameter values into attributes on `self`.\n\n```python\nclass Player:\n    def __init__(self, username, score):\n        self.username = username\n        self.score = score\n```\n\nLine by line:\n\n- `username` is a parameter passed into the constructor.\n- `self.username` is an attribute stored on the object.\n- `self.username = username` means “save the given username inside this object.”\n\nIf you only use `username = username`, nothing gets stored on the object. The object needs `self.` to keep that data for later.\n\nFor example, this lets you do:\n\n```python\np = Player(\"Ava\", 10)\nprint(p.username)\n```\n\nWithout `self.username`, `p.username` would not exist.\n\n**Try this:** Add a third attribute such as `level`, pass it into `__init__`, and print it from an instance."
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useMemo, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import { ListIcon, MoreHorizontal } from "lucide-react";
 
@@ -26,6 +27,12 @@ const PANE_TRANSITION = {
 
 const CODE_SPEC = TOOL_SPECS.find((t) => t.id === "code");
 const NOTES_SPEC = TOOL_SPECS.find((t) => t.id === "notes");
+
+function getToolLabel(id: ToolId, t: ReturnType<typeof useTranslations>) {
+    if (id === "code") return t("run");
+    if (id === "notes") return t("notes");
+    return id;
+}
 
 export type ToolsPanelProps = {
     onCollapse: () => void;
@@ -79,6 +86,7 @@ export type ToolsPanelProps = {
 };
 
 function ToolsPanelInner(props: ToolsPanelProps) {
+    const t = useTranslations("ide.tools.header");
     const ctx: ToolsCtx = useMemo(
         () => ({
             subjectSlug: props.subjectSlug,
@@ -179,6 +187,8 @@ function ToolsHeader({
     onUnbind?: () => void;
     onCollapse: () => void;
 }) {
+    const t = useTranslations("ide.tools.header");
+    const tabsT = useTranslations("ide.tools.tabs");
     const showDebugLearningUi = learnerUiFlags.showDebugLearningUi;
     const compactToolsHeader =
         learnerUiFlags.compactLearnerUi && !learnerUiFlags.showDebugLearningUi;
@@ -225,29 +235,29 @@ function ToolsHeader({
             <div className="flex items-center justify-between gap-2">
                 <div className="min-w-0">
                     <div className="text-sm font-black text-neutral-800 dark:text-white/80">
-                        Tools
+                        {t("title")}
                     </div>
 
                     {showDebugLearningUi && boundId ? (
                         <div className="mt-1 text-[6px] font-extrabold text-neutral-600 dark:text-white/60">
-                            Bound to: <span className="font-black text-e">{boundId}</span>
+                            {t("boundTo")} <span className="font-black text-e">{boundId}</span>
                             {onUnbind ? (
                                 <button
                                     type="button"
                                     onClick={onUnbind}
                                     className="ml-2 underline underline-offset-2"
                                 >
-                                    Unbind
+                                    {t("unbind")}
                                 </button>
                             ) : null}
                         </div>
                     ) : pendingExerciseBinding ? (
                         <div className="mt-1 text-[11px] font-extrabold text-neutral-600 dark:text-white/60">
-                            Loading exercise…
+                            {t("loadingExercise")}
                         </div>
                     ) : showDebugLearningUi ? (
                         <div className="mt-1 text-[11px] font-extrabold text-neutral-600 dark:text-white/60">
-                            Not bound
+                            {t("notBound")}
                         </div>
                     ) : null}
                 </div>
@@ -261,11 +271,11 @@ function ToolsHeader({
                                     onClick={() => activateTool(primarySpec.id)}
                                     className="ui-btn ui-btn-secondary px-3 py-2 text-[11px] font-extrabold"
                                     aria-pressed={active === primarySpec.id}
-                                    title={primarySpec.label}
+                                    title={getToolLabel(primarySpec.id, tabsT)}
                                 >
                                     <span className="inline-flex items-center gap-1.5">
                                         <primarySpec.Icon className="h-4 w-4" />
-                                        {primarySpec.label}
+                                        {getToolLabel(primarySpec.id, tabsT)}
                                     </span>
                                 </button>
                             ) : null}
@@ -274,21 +284,21 @@ function ToolsHeader({
                                 <button
                                     type="button"
                                     className="ui-btn ui-btn-secondary px-3 py-2 text-[11px] font-extrabold"
-                                    aria-label="More tools options"
+                                    aria-label={t("moreOptions")}
                                     aria-haspopup="menu"
                                     aria-expanded={menuOpen}
                                     onClick={() => setMenuOpen((open) => !open)}
                                 >
                                     <span className="inline-flex items-center gap-1.5">
                                         <MoreHorizontal className="h-4 w-4" />
-                                        More
+                                        {t("more")}
                                     </span>
                                 </button>
 
                                 {menuOpen ? (
                                     <div
                                         role="menu"
-                                        aria-label="More tools options"
+                                        aria-label={t("moreOptions")}
                                         className="absolute right-0 top-full z-20 mt-2 min-w-[12rem] overflow-hidden rounded-xl border border-neutral-200 bg-white shadow-lg dark:border-white/10 dark:bg-neutral-950"
                                     >
                                         {secondarySpecs.map((spec) => (
@@ -301,11 +311,11 @@ function ToolsHeader({
                                             >
                                                 <span className="inline-flex items-center gap-2">
                                                     <spec.Icon className="h-4 w-4" />
-                                                    {spec.label}
+                                                    {getToolLabel(spec.id, tabsT)}
                                                 </span>
                                                 {active === spec.id ? (
                                                     <span className="text-neutral-500 dark:text-white/45">
-                                                        Open
+                                                        {t("open")}
                                                     </span>
                                                 ) : null}
                                             </button>
@@ -321,7 +331,7 @@ function ToolsHeader({
                                             className="flex w-full items-center gap-2 border-t border-neutral-200 px-3 py-2 text-left text-[11px] font-extrabold text-neutral-800 hover:bg-neutral-100 dark:border-white/10 dark:text-white/80 dark:hover:bg-white/10"
                                         >
                                             <ListIcon className="h-4 w-4" />
-                                            Collapse tools
+                                            {t("collapse")}
                                         </button>
                                     </div>
                                 ) : null}
@@ -343,7 +353,7 @@ function ToolsHeader({
                             <button
                                 type="button"
                                 className="ui-btn ui-btn-secondary px-3 py-2 text-[11px] font-extrabold"
-                                title="Collapse tools"
+                                title={t("collapse")}
                                 onClick={onCollapse}
                             >
                                 <ListIcon />

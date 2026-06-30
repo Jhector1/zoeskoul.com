@@ -1,0 +1,18 @@
+{
+  "moduleSidebarUi": {
+    "topicsLabel": "Sijè",
+    "unlockEnabled": "DEBLOKE AKTIVE",
+    "collapseTitle": "Retresi ba bò a",
+    "resetTitle": "Reyinisyalize tout pwogrè nan modil sa a",
+    "reset": "Reyinisyalize",
+    "current": "KOUNYE A",
+    "nextModule": {
+      "title": "Pwochen modil",
+      "loading": "Ap chaje…",
+      "error": "Nou pa t kapab chaje navigasyon an.",
+      "unlocked": "Debloke.",
+      "unlockedAfterAssignment": "Debloke apre devwa a.",
+      "locked": "Fini sijè yo + devwa a pou debloke."
+    }
+  }
+}

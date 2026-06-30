@@ -1,0 +1,379 @@
+{
+  "title": "Readable Python Style",
+  "summary": "Use naming, spacing, and small functions to make code easier to understand.",
+  "minutes": 20,
+  "sketchBlocks": [
+    {
+      "id": "readable-style-basics",
+      "title": "Readable code is easier to debug",
+      "bodyMarkdown": "Readable Python style means writing code so another person can understand it quickly — including future you.\n\nThree simple habits help a lot:\n\n1. **Use clear names** for variables and functions.\n2. **Add spacing** so code is easy to scan.\n3. **Break long code into small functions** with one job each.\n\nHere is a hard-to-read example:\n\n```python\ndef p(a,b):\n    c=a*b\n    d=c*0.1\n    return c-d\n```\n\nThis code works, but the names do not explain much.\n\nA more readable version is:\n\n```python\ndef discounted_total(price, quantity):\n    subtotal = price * quantity\n    discount = subtotal * 0.1\n    return subtotal - discount\n```\n\nLine by line:\n\n- `def discounted_total(price, quantity):` gives the function a clear name and clear parameter names.\n- `subtotal = price * quantity` stores an intermediate result with a meaningful name.\n- `discount = subtotal * 0.1` shows what the second calculation means.\n- `return subtotal - discount` makes the final step easy to follow.\n\n**Try it yourself:** In the code editor, rename a short variable like `c` to `subtotal`, then click Run and check that the output panel still shows the same result."
+    },
+    {
+      "id": "spacing-and-layout",
+      "title": "Spacing helps your eyes follow the code",
+      "bodyMarkdown": "Python style also includes layout choices that make code easier to read.\n\nFor example:\n\n```python\ndef area(width, height):\n    result = width * height\n    return result\n```\n\nThis is easier to read than squeezing everything together.\n\nA few useful style habits:\n\n- Put spaces around operators like `=` and `*`.\n- Use blank lines to separate different parts of a program.\n- Keep related lines together.\n- Avoid cramming many steps into one line.\n\nCompare these two versions:\n\n```python\nscore=8+2\nif score>5:\n    print(\"pass\")\n```\n\n```python\nscore = 8 + 2\n\nif score > 5:\n    print(\"pass\")\n```\n\nBoth run, but the second version is easier to scan.\n\n**Your turn:** Take a short piece of code and add spaces around operators. Then click Run and confirm the behavior stays the same.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+    },
+    {
+      "id": "small-functions",
+      "title": "Small functions make programs easier to understand",
+      "bodyMarkdown": "When one block of code does too many things, it becomes harder to test and debug. A small function should usually do one clear job.\n\nHere is a readable example:\n\n```python\ndef format_name(name):\n    return name.strip().title()\n\n\ndef greet(name):\n    clean_name = format_name(name)\n    return f\"Hello, {clean_name}!\"\n```\n\nStep by step:\n\n- `format_name(name)` cleans the text.\n- `greet(name)` uses that helper instead of repeating the cleanup logic.\n- Each function has one main responsibility.\n\nThis style helps because:\n\n- you can test each function separately,\n- bugs are easier to locate,\n- names explain the program structure.\n\n**Try this:** Change `greet` so it returns `Welcome, ...!` instead, and run the code again. Notice how easy it is to update one small function without changing everything else."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "style-fix-function",
+      "kind": "code_input",
+      "title": "Refactor a hard-to-read function",
+      "prompt": "Rewrite the function so it keeps the same behavior but uses clearer names and intermediate variables. Define a function named `discounted_total(price, quantity)` that returns the total after a 10% discount on `price * quantity`. Return the value; do not print it.",
+      "starterCode": "def discounted_total(price, quantity):\n    # Return the total after a 10% discount.\n    # Use readable variable names.\n    pass",
+      "solutionCode": "def discounted_total(price, quantity):\n    subtotal = price * quantity\n    discount = subtotal * 0.1\n    final_total = subtotal - discount\n    return final_total",
+      "recipeType": "semantic",
+      "semanticChecks": [
+        {
+          "type": "function_returns",
+          "functionName": "discounted_total",
+          "args": [
+            10,
+            3
+          ],
+          "argKinds": [
+            "value",
+            "value"
+          ],
+          "expected": 27,
+          "expectedKind": "value",
+          "message": "Returns the discounted total for a basic case."
+        },
+        {
+          "type": "function_returns",
+          "functionName": "discounted_total",
+          "args": [
+            7.5,
+            4
+          ],
+          "argKinds": [
+            "value",
+            "value"
+          ],
+          "expected": 27,
+          "expectedKind": "value",
+          "message": "Handles decimal prices correctly."
+        },
+        {
+          "type": "no_stdout",
+          "message": "This exercise should return a value instead of printing."
+        }
+      ],
+      "hint": "Read the task \"Refactor a hard-to-read function\" and identify the required result.",
+      "help": {
+        "concept": "This coding exercise checks whether your code produces the requested result for: \"Refactor a hard-to-read function\".",
+        "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+        "hint_2": "Click Run and compare the output panel with the expected result."
+      }
+    },
+    {
+      "id": "sc-clear-name",
+      "kind": "single_choice",
+      "title": "Choose the clearest variable name",
+      "prompt": "Which variable name is the clearest for storing the total number of items in a cart?",
+      "options": [
+        "x",
+        "num",
+        "cart_item_count",
+        "thing"
+      ],
+      "correctOptionIds": [
+        "c"
+      ],
+      "hint": "Pick the name that explains both what is counted and where it belongs.",
+      "help": {
+        "concept": "Good names describe the meaning of the data, not just its type or a short abbreviation.",
+        "hint_1": "Compare a one-letter name, a vague abbreviation, and a descriptive phrase.",
+        "hint_2": "The best choice should tell you this value is a count and that it belongs to a cart."
+      }
+    },
+    {
+      "id": "mc-readable-changes",
+      "kind": "multi_choice",
+      "title": "Pick the readability improvements",
+      "prompt": "Which changes would usually make Python code more readable? Choose all that apply.",
+      "options": [
+        "Rename `x` to `total_price`",
+        "Remove spaces around `=` and `+`",
+        "Split one long function into smaller helper functions",
+        "Replace descriptive names with shorter abbreviations"
+      ],
+      "correctOptionIds": [
+        "a",
+        "c"
+      ],
+      "hint": "Look for changes that make meaning clearer without changing behavior.",
+      "help": {
+        "concept": "Readable style improves understanding through naming, spacing, and simpler structure.",
+        "hint_1": "Think about whether each option helps a reader understand purpose or scan the code more easily.",
+        "hint_2": "Clear names, spaces around operators, and splitting long logic into smaller functions are all common readability improvements."
+      }
+    },
+    {
+      "id": "dr-function-order",
+      "kind": "drag_reorder",
+      "title": "Order the steps in a small helper function",
+      "prompt": "Put these lines in the best order to create a readable function that cleans a name and returns a greeting.",
+      "tokens": [
+        "def greet(name):",
+        "clean_name = name.strip().title()",
+        "return f\"Hello, {clean_name}!\""
+      ],
+      "correctOrder": [
+        "def greet(name):",
+        "clean_name = name.strip().title()",
+        "return f\"Hello, {clean_name}!\""
+      ],
+      "hint": "Start with the function header, then clean the input, then return the final string.",
+      "help": {
+        "concept": "Readable functions usually follow a simple flow: define the function, do one or two clear steps, then return the result.",
+        "hint_1": "The line with `def` must come first, and the `return` line should come after the cleaned name is created.",
+        "hint_2": "Create the function, assign `clean_name`, then build the greeting from that variable."
+      }
+    },
+    {
+      "id": "fb-operator-spacing",
+      "kind": "fill_blank_choice",
+      "title": "Fill the readable operator spacing",
+      "prompt": "Choose the missing text that follows common readable spacing style.",
+      "template": "total = price[blank1]quantity",
+      "choices": [
+        "*"
+      ],
+      "correctValue": "*",
+      "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+      "help": {
+        "concept": "The blank should be filled with the term that makes the statement accurate.",
+        "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+        "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+      }
+    },
+    {
+      "id": "style-score-label",
+      "kind": "code_input",
+      "title": "Extract a small helper function",
+      "prompt": "Define a function named `score_label(score)` that returns `'high'` if the score is 80 or more, otherwise returns `'low'`. Keep the function short and readable. Return the value; do not print it.",
+      "starterCode": "def score_label(score):\n    # Return 'high' for scores 80 or more, otherwise 'low'.\n    pass",
+      "solutionCode": "def score_label(score):\n    if score >= 80:\n        return \"high\"\n    return \"low\"",
+      "recipeType": "semantic",
+      "semanticChecks": [
+        {
+          "type": "function_returns",
+          "functionName": "score_label",
+          "args": [
+            95
+          ],
+          "argKinds": [
+            "value"
+          ],
+          "expected": "high",
+          "expectedKind": "value",
+          "message": "Returns high for a score above the cutoff."
+        },
+        {
+          "type": "function_returns",
+          "functionName": "score_label",
+          "args": [
+            80
+          ],
+          "argKinds": [
+            "value"
+          ],
+          "expected": "high",
+          "expectedKind": "value",
+          "message": "Includes the boundary value in high."
+        },
+        {
+          "type": "function_returns",
+          "functionName": "score_label",
+          "args": [
+            62
+          ],
+          "argKinds": [
+            "value"
+          ],
+          "expected": "low",
+          "expectedKind": "value",
+          "message": "Returns low below the cutoff."
+        },
+        {
+          "type": "no_stdout",
+          "message": "This exercise should return a value instead of printing."
+        }
+      ],
+      "hint": "Read the task \"Extract a small helper function\" and identify the required result.",
+      "help": {
+        "concept": "This coding exercise checks whether your code produces the requested result for: \"Extract a small helper function\".",
+        "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+        "hint_2": "Click Run and compare the output panel with the expected result."
+      }
+    },
+    {
+      "id": "sc-small-functions",
+      "kind": "single_choice",
+      "title": "Why split code into small functions?",
+      "prompt": "What is the best reason to split a long block of code into small functions?",
+      "options": [
+        "It always makes the program run faster",
+        "It makes code easier to understand, test, and debug",
+        "It removes the need for variable names",
+        "It guarantees there will be no bugs"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Think about testing, debugging, and understanding one job at a time.",
+      "help": {
+        "concept": "Small functions improve readability because each function can focus on one responsibility.",
+        "hint_1": "Choose the option that makes code easier to understand and check in smaller pieces.",
+        "hint_2": "The strongest reason is not speed or fewer lines, but clearer structure and easier debugging."
+      }
+    },
+    {
+      "id": "mc-style-checklist",
+      "kind": "multi_choice",
+      "title": "Identify style-friendly code habits",
+      "prompt": "Which habits match readable Python style? Choose all that apply.",
+      "options": [
+        "Use descriptive function names",
+        "Put unrelated steps into one giant function",
+        "Use blank lines to separate sections",
+        "Write several statements on one crowded line when possible"
+      ],
+      "correctOptionIds": [
+        "a",
+        "c"
+      ],
+      "hint": "Look for habits that help a reader follow the code quickly.",
+      "help": {
+        "concept": "Readable style uses consistent formatting and meaningful structure so code is easier to scan and maintain.",
+        "hint_1": "Think about blank lines, descriptive names, and avoiding crowded one-line logic.",
+        "hint_2": "Good style usually includes meaningful names and visual separation between parts of the program."
+      }
+    },
+    {
+      "id": "dr-refactor-order",
+      "kind": "drag_reorder",
+      "title": "Order a simple refactor process",
+      "prompt": "Arrange these steps in a sensible order when improving readability without changing behavior.",
+      "tokens": [
+        "Read the current code and identify what each part does",
+        "Rename unclear variables and functions",
+        "Split repeated or long logic into smaller functions",
+        "Run the code again to confirm behavior still matches"
+      ],
+      "correctOrder": [
+        "Read the current code and identify what each part does",
+        "Rename unclear variables and functions",
+        "Split repeated or long logic into smaller functions",
+        "Run the code again to confirm behavior still matches"
+      ],
+      "hint": "First understand the code, then rename and reorganize, then check that it still works.",
+      "help": {
+        "concept": "Refactoring for readability should preserve behavior while making the code easier to understand.",
+        "hint_1": "You should not start by changing names blindly before understanding what the code does.",
+        "hint_2": "Read the code first, improve names and structure next, and verify behavior at the end."
+      }
+    },
+    {
+      "id": "fb-function-name",
+      "kind": "fill_blank_choice",
+      "title": "Fill the descriptive function name",
+      "prompt": "Choose the best function name for code that formats a user's full name.",
+      "template": "def [blank1](name):",
+      "choices": [
+        "f",
+        "do_name",
+        "format_full_name",
+        "value"
+      ],
+      "correctValue": "format_full_name",
+      "hint": "Pick the name that says what the function does.",
+      "help": {
+        "concept": "Function names should describe the action or result clearly enough that a reader can guess the purpose.",
+        "hint_1": "Look for a verb-based name that mentions formatting a name.",
+        "hint_2": "The best choice should tell you this function formats a full name, not just that it exists."
+      }
+    },
+    {
+      "id": "style-clean-total",
+      "kind": "code_input",
+      "title": "Write a readable total function",
+      "prompt": "Define a function named `clean_total(prices)` that takes a list of numbers and returns their sum. Use a readable loop with clear variable names. Return the total; do not print it.",
+      "starterCode": "def clean_total(prices):\n    # Return the sum of all numbers in prices.\n    # Use readable variable names.\n    pass",
+      "solutionCode": "def clean_total(prices):\n    total = 0\n\n    for price in prices:\n        total += price\n\n    return total",
+      "recipeType": "semantic",
+      "semanticChecks": [
+        {
+          "type": "function_returns",
+          "functionName": "clean_total",
+          "args": [
+            [
+              5,
+              10,
+              15
+            ]
+          ],
+          "argKinds": [
+            "value"
+          ],
+          "expected": 30,
+          "expectedKind": "value",
+          "message": "Sums several values correctly."
+        },
+        {
+          "type": "function_returns",
+          "functionName": "clean_total",
+          "args": [
+            [
+              2.5,
+              3.5
+            ]
+          ],
+          "argKinds": [
+            "value"
+          ],
+          "expected": 6,
+          "expectedKind": "value",
+          "message": "Handles decimal values correctly."
+        },
+        {
+          "type": "function_returns",
+          "functionName": "clean_total",
+          "args": [
+            []
+          ],
+          "argKinds": [
+            "value"
+          ],
+          "expected": 0,
+          "expectedKind": "value",
+          "message": "Returns zero for an empty list."
+        },
+        {
+          "type": "no_stdout",
+          "message": "This exercise should return a value instead of printing."
+        }
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Readable Style Refactor Practice",
+    "stepIds": [
+      "style-fix-function",
+      "style-score-label",
+      "style-clean-total"
+    ]
+  }
+}

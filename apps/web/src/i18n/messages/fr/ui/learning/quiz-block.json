@@ -1,0 +1,52 @@
+{
+  "reviewQuizUi": {
+    "unlockHint": "Répondez correctement à la question précédente pour déverrouiller celle-ci.",
+    "noQuestions": "Aucune question.",
+    "autoAdvance": "Avancement automatique",
+    "buttons": {
+      "next": "Suivant →",
+      "finish": "Terminer →",
+      "checkQuestion": "Vérifier cette question",
+      "checkAnswer": "Vérifier cette réponse",
+      "reveal": "Révéler",
+      "resetQuiz": "Réinitialiser le quiz",
+      "skip": "Passer",
+      "skipped": "Passée",
+      "continue": "Continuer",
+      "excused": "Excusée"
+    },
+    "placeholders": {
+      "enterNumber": "Entrez un nombre"
+    },
+    "status": {
+      "notChecked": "Pas encore vérifiée",
+      "correct": "✓ Correct",
+      "notCorrect": "✕ Incorrect",
+      "skipped": "↷ Passée",
+      "locked": "Verrouillé",
+      "completed": "✓ Terminé",
+      "passed": "✓ Réussi"
+    },
+    "practice": {
+      "loadingExercise": "Chargement de l’exercice…",
+      "noExercise": "Aucun exercice.",
+      "checking": "Vérification…",
+      "attempts": "Tentatives : {n}/{max}"
+    },
+    "footer": {
+      "summary": "Vérifiées : {checked}/{total} • Correctes : {correct}/{total} • Score : {score}%",
+      "progressAria": "Progression du quiz",
+      "sequentialHint": "Vérifiez chaque question dans l’ordre pour réussir",
+      "nonSequentialHint": "Vérifiez toutes les questions pour réussir"
+    },
+    "resetDialog": {
+      "title": "Réinitialiser ce quiz ?",
+      "confirm": "Réinitialiser le quiz",
+      "intro": "Cela va :",
+      "b1": "Effacer vos réponses sélectionnées et l’état de vérification.",
+      "b2": "Effacer les tentatives d’exercice et l’état local de ce quiz.",
+      "b3": "Recharger le même ensemble de questions (cela ne génère pas un nouvel ensemble).",
+      "cannotUndo": "Ceci est irréversible."
+    }
+  }
+}

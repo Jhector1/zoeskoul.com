@@ -1,0 +1,19 @@
+{
+  "topicId": "breaking-projects-into-functions",
+  "repairs": [
+    {
+      "code": "PYTHON_FUNCTION_RETURN_FIXED_TESTS_CONVERTED_TO_SEMANTIC",
+      "category": "recipe",
+      "severity": "high",
+      "field": "project-step-4",
+      "message": "Converted a function-return fixed stdout exercise into semantic function_returns checks so learner code does not expose stdin parsing harnesses."
+    },
+    {
+      "code": "PYTHON_FUNCTION_RETURN_FIXED_TESTS_CONVERTED_TO_SEMANTIC",
+      "category": "recipe",
+      "severity": "high",
+      "field": "project-step-5",
+      "message": "Converted a function-return fixed stdout exercise into semantic function_returns checks so learner code does not expose stdin parsing harnesses."
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "topicId": "breaking-projects-into-functions",
+  "ok": false,
+  "issues": [
+    {
+      "code": "PYTHON_FILE_FIXTURE_MISSING",
+      "category": "runtime",
+      "severity": "error",
+      "exerciseId": "project-step-4",
+      "message": "Exercise \"project-step-4\" reads data/report.txt but does not provide matching fixture files for golden validation."
+    },
+    {
+      "code": "CODE_PROFILE_SOLUTION_SEMANTIC_MISMATCH",
+      "category": "tests",
+      "severity": "error",
+      "exerciseId": "project-step-1",
+      "message": "Exercise \"project-step-1\" solutionCode does not satisfy its semantic checks."
+    },
+    {
+      "code": "CODE_PROFILE_SOLUTION_SEMANTIC_MISMATCH",
+      "category": "tests",
+      "severity": "error",
+      "exerciseId": "project-step-2",
+      "message": "Exercise \"project-step-2\" solutionCode does not satisfy its semantic checks."
+    },
+    {
+      "code": "CODE_PROFILE_SOLUTION_SEMANTIC_MISMATCH",
+      "category": "tests",
+      "severity": "error",
+      "exerciseId": "project-step-3",
+      "message": "Exercise \"project-step-3\" solutionCode does not satisfy its semantic checks."
+    },
+    {
+      "code": "CODE_PROFILE_SOLUTION_EXECUTION_FAILED",
+      "category": "tests",
+      "severity": "error",
+      "exerciseId": "project-step-5",
+      "message": "Exercise \"project-step-5\" solutionCode could not be validated against its published tests: Solution code failed to execute for test #1."
+    }
+  ]
+}

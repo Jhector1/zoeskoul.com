@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 import { cn } from "@/components/ide/utils";
 
 const MODAL_BTN =
@@ -26,6 +27,7 @@ export default function ProjectNameModal(props: {
     onConfirm: (value: string) => void;
     onCancel: () => void;
 }) {
+    const t = useTranslations("ide.projects.modals");
     const {
         open,
         busy = false,
@@ -33,7 +35,7 @@ export default function ProjectNameModal(props: {
         description,
         confirmLabel,
         initialValue = "",
-        placeholder = "Enter project name",
+        placeholder = t("defaultPlaceholder"),
         onConfirm,
         onCancel,
     } = props;
@@ -88,7 +90,7 @@ export default function ProjectNameModal(props: {
                         disabled={busy}
                         className={cn(MODAL_BTN, MODAL_BTN_GHOST)}
                     >
-                        Cancel
+                        {t("cancel")}
                     </button>
 
                     <button
@@ -97,7 +99,7 @@ export default function ProjectNameModal(props: {
                         onClick={() => onConfirm(value.trim())}
                         className={cn(MODAL_BTN, MODAL_BTN_PRIMARY)}
                     >
-                        {busy ? "Working…" : confirmLabel}
+                        {busy ? t("working") : confirmLabel}
                     </button>
                 </div>
             </div>

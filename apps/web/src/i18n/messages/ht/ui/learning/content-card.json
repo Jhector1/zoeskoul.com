@@ -1,0 +1,17 @@
+{
+  "cardUi": {
+    "kinds": {
+      "quiz": "quiz",
+      "project": "pwojè"
+    },
+    "gateBanner": "Fini atik yo anwo a (lektiti, videyo, sketch) pou debloke {kind} sa a.",
+    "completed": "✓ Fini",
+    "loadingSaved": "N ap chaje eta {kind} ou te sove a…",
+    "actions": {
+      "read": "Make kòm li",
+      "readDone": "✓ Li",
+      "watched": "Make kòm gade",
+      "watchedDone": "✓ Gade"
+    }
+  }
+}

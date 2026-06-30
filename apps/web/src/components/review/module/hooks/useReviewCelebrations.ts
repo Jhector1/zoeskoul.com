@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 import type { ReviewModule } from "@/lib/subjects/types";
 import { moduleCompleteFromProgress } from "../selectors";
 import { isTopicComplete } from "../utils";
@@ -44,12 +45,15 @@ type UseReviewCelebrationsArgs = {
     mod: ReviewModule;
 };
 
-function getStreakMilestoneMessage(streak: number | null | undefined): string | null {
+function getStreakMilestoneMessage(
+    streak: number | null | undefined,
+    t: ReturnType<typeof useTranslations>,
+): string | null {
     if (!streak) return null;
-    if (streak === 3) return "You’re building consistency.";
-    if (streak === 7) return "A full week — strong work.";
-    if (streak === 14) return "Two weeks in a row. Keep it alive.";
-    if (streak === 30) return "30 days — that’s real discipline.";
+    if (streak === 3) return t("streakMilestones.3");
+    if (streak === 7) return t("streakMilestones.7");
+    if (streak === 14) return t("streakMilestones.14");
+    if (streak === 30) return t("streakMilestones.30");
     return null;
 }
 
@@ -61,6 +65,7 @@ export function useReviewCelebrations({
                                           subjectFinish,
                                           mod,
                                       }: UseReviewCelebrationsArgs) {
+    const t = useTranslations("review.celebration.copy");
     const [topicToast, setTopicToast] = useState<TopicCelebrateToast | null>(null);
     const [topicToastPaused, setTopicToastPaused] = useState(false);
 
@@ -78,34 +83,36 @@ export function useReviewCelebrations({
     const safeTopics = Array.isArray(topics) ? topics : [];
 
     const moduleCelebrateCopy = useMemo<CelebrateCopy>(() => {
-        const title = "Module complete";
-        const moduleLabel = String((mod as any)?.label ?? (mod as any)?.title ?? "this module");
+        const title = t("module.title");
+        const moduleLabel = String((mod as any)?.label ?? (mod as any)?.title ?? t("module.fallbackLabel"));
         const streak = gamificationSummary?.currentStreak ?? null;
-        const streakMilestone = getStreakMilestoneMessage(streak);
+        const streakMilestone = getStreakMilestoneMessage(streak, t);
 
         return {
             title,
-            body: `Great job — you finished ${moduleLabel}.`,
+            body: t("module.body", { moduleLabel }),
             streak,
             totalXp: gamificationSummary?.totalXp ?? null,
             streakMilestone,
         };
-    }, [mod, gamificationSummary]);
+    }, [gamificationSummary, mod, t]);
 
     const courseCelebrateCopy = useMemo<CourseCelebrateCopy>(() => {
         const streak = gamificationSummary?.currentStreak ?? null;
         const totalXp = gamificationSummary?.totalXp ?? null;
-        const streakMilestone = getStreakMilestoneMessage(streak);
+        const streakMilestone = getStreakMilestoneMessage(streak, t);
 
         return {
-            title: "Course complete",
-            body: "You finished the full course. Nice work — this is a real milestone.",
+            title: t("course.title"),
+            body: t("course.body"),
             streak,
             totalXp,
             streakMilestone,
-            ctaLabel: subjectFinish?.certificateIssued ? "View certificate" : "Get certificate",
+            ctaLabel: subjectFinish?.certificateIssued
+                ? t("course.cta.viewCertificate")
+                : t("course.cta.getCertificate"),
         };
-    }, [gamificationSummary, subjectFinish]);
+    }, [gamificationSummary, subjectFinish, t]);
 
     useEffect(() => {
         const courseComplete =
@@ -150,24 +157,24 @@ export function useReviewCelebrations({
         const prevCompleted = prevCompletedTopicsRef.current;
         const prevStreak = prevStreakRef.current;
 
-        for (const t of safeTopics) {
-            if (!currentCompletedTopics.has(t.id)) continue;
-            if (prevCompleted.has(t.id)) continue;
+        for (const topic of safeTopics) {
+            if (!currentCompletedTopics.has(topic.id)) continue;
+            if (prevCompleted.has(topic.id)) continue;
 
             const streakIncreased =
                 currentStreak != null &&
                 (prevStreak == null || currentStreak > prevStreak);
 
             const milestoneMessage = streakIncreased
-                ? getStreakMilestoneMessage(currentStreak)
+                ? getStreakMilestoneMessage(currentStreak, t)
                 : null;
 
             newestToast = {
-                id: `${t.id}:${Date.now()}`,
-                title: "Nice — topic complete",
+                id: `${topic.id}:${Date.now()}`,
+                title: t("module.topicCompleteTitle"),
                 message: streakIncreased
-                    ? milestoneMessage ?? `Your streak is now ${currentStreak}.`
-                    : "You finished this topic. Keep the momentum going.",
+                    ? milestoneMessage ?? t("module.streakNow", { count: currentStreak })
+                    : t("module.keepMomentum"),
                 streak: streakIncreased ? currentStreak : null,
                 xp: null,
             };
@@ -190,7 +197,7 @@ export function useReviewCelebrations({
         prevCompletedTopicsRef.current = currentCompletedTopics;
         prevModuleCompleteRef.current = currentModuleComplete;
         prevStreakRef.current = currentStreak;
-    }, [progressHydrated, progress, safeTopics, gamificationSummary, subjectFinish]);
+    }, [gamificationSummary, progress, progressHydrated, safeTopics, subjectFinish, t]);
 
     useEffect(() => {
         if (!topicToast || topicToastPaused) return;

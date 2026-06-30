@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 import ProjectSwitcherButton from "@/components/code/projects/ProjectSwitcherButton";
 import type { WorkspaceLanguage, SqlDialect } from "@/lib/practice/types";
@@ -33,22 +34,23 @@ function StatusChip({
                         conflict,
                         dirty,
                         saveBusy,
-                        lastSavedAt,
-                    }: {
+    lastSavedAt,
+}: {
     conflict: boolean;
     dirty: boolean;
     saveBusy: boolean;
     lastSavedAt: string | null;
 }) {
+    const t = useTranslations("ide.fullIde.status");
     const label = conflict
-        ? "Conflict"
+        ? t("conflict")
         : saveBusy
-            ? "Saving…"
+            ? t("saving")
             : dirty
-                ? "Unsaved"
+                ? t("unsaved")
                 : lastSavedAt
-                    ? "Saved"
-                    : "Not saved";
+                    ? t("saved")
+                    : t("notSaved");
 
     const tone = conflict
         ? "text-amber-700 dark:text-amber-200"
@@ -59,14 +61,14 @@ function StatusChip({
                 : "text-emerald-700 dark:text-emerald-200";
 
     const title = conflict
-        ? "Conflict"
+        ? t("conflict")
         : saveBusy
-            ? "Saving…"
+            ? t("saving")
             : dirty
-                ? "Unsaved changes"
+                ? t("unsavedTitle")
                 : lastSavedAt
-                    ? `Saved ${new Date(lastSavedAt).toLocaleString()}`
-                    : "Not saved yet";
+                    ? t("savedAt", { time: new Date(lastSavedAt).toLocaleString() })
+                    : t("notSavedYet");
 
     return (
         <div
@@ -147,6 +149,7 @@ export default function IdeHeader({
     onSave: () => void;
     onSaveAs: () => void;
 }) {
+    const t = useTranslations("ide.fullIde.header");
     const languageScroller = showTopLanguageButtons ? (
         <div className="min-w-0 flex-1 overflow-x-auto">
             <div className="flex min-w-max items-center gap-1 pr-1">
@@ -173,7 +176,7 @@ export default function IdeHeader({
                         value={sqlDialect}
                         onChange={(e) => onChangeSqlDialect(e.target.value as SqlDialect)}
                         className="ml-1 h-8 shrink-0 rounded-md border border-neutral-200 bg-white px-2 text-[11px] font-medium text-neutral-700 outline-none dark:border-white/10 dark:bg-white/[0.04] dark:text-white/75"
-                        aria-label="SQL dialect"
+                        aria-label={t("sqlDialect")}
                     >
                         {Object.entries(SQL_DIALECT_LABEL).map(([value, label]) => (
                             <option key={value} value={value}>
@@ -189,14 +192,14 @@ export default function IdeHeader({
     );
 
     const saveButtonLabel = conflict
-        ? "Resolve"
+        ? t("resolve")
         : saveBusy
-            ? "Saving…"
+            ? t("saving")
             : canSaveCloud
-                ? "Save"
+                ? t("save")
                 : hasUser
-                    ? "Upgrade"
-                    : "Log in";
+                    ? t("upgrade")
+                    : t("logIn");
 
     return (
         <div className="border-b border-neutral-200 bg-white/92 backdrop-blur dark:border-white/10 dark:bg-neutral-950/92">
@@ -206,11 +209,11 @@ export default function IdeHeader({
                         type="button"
                         onClick={onBack}
                         className={IDE_TOOL_BTN}
-                        aria-label="Go back"
-                        title="Go back"
+                        aria-label={t("goBack")}
+                        title={t("goBack")}
                     >
                         <span aria-hidden="true" className="text-sm leading-none">←</span>
-                        <span className="hidden sm:inline">Back</span>
+                        <span className="hidden sm:inline">{t("back")}</span>
                     </button>
                 ) : null}
 
@@ -220,7 +223,7 @@ export default function IdeHeader({
                         onClick={onOpenFiles}
                         className={IDE_TOOL_BTN}
                     >
-                        Files
+                        {t("files")}
                     </button>
                 ) : null}
 
@@ -266,7 +269,7 @@ export default function IdeHeader({
                             disabled={saveAsDisabled}
                             className={IDE_PRIMARY_BTN}
                         >
-                            {conflict ? "Save Copy" : "Save As"}
+                            {conflict ? t("saveCopy") : t("saveAs")}
                         </button>
                     ) : null}
 

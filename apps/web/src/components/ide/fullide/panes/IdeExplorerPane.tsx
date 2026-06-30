@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useMemo, useRef } from "react";
+import { useTranslations } from "next-intl";
 import ExplorerTree from "../ExplorerTree";
 import { SQL_DIALECT_LABEL } from "../../constants";
 import type { SqlDialect } from "@/lib/practice/types";
@@ -140,7 +141,8 @@ export default function IdeExplorerPane({
                                             onRedo,
                                             onToggleExplorer,
                                             services,
-                                        }: Props) {
+}: Props) {
+    const t = useTranslations("ide.explorer.pane");
     const fileInputRef = useRef<HTMLInputElement | null>(null);
     const folderInputRef = useRef<HTMLInputElement | null>(null);
 
@@ -159,14 +161,18 @@ export default function IdeExplorerPane({
     const uploadHint = useMemo(() => {
         if (!policy.canUploadFiles) {
             return access.hasUser
-                ? "Uploads are disabled for this workspace."
-                : "Log in to upload files.";
+                ? t("uploadDisabled")
+                : t("logInToUpload");
         }
 
         const perFile = formatMb(policy.maxUploadFileBytes);
         const atOnce = policy.maxImportFiles;
-        return `Upload limit: ${perFile} per file, ${atOnce} file${atOnce === 1 ? "" : "s"} at a time.`;
-    }, [policy, access]);
+        return t("uploadLimit", {
+            perFile,
+            count: atOnce,
+            fileWord: atOnce === 1 ? "file" : "files",
+        });
+    }, [policy, access, t]);
 
     useEffect(() => {
         const folderInput = folderInputRef.current;
@@ -183,8 +189,8 @@ export default function IdeExplorerPane({
             actions.setToast({
                 kind: "error",
                 text: access.hasUser
-                    ? "Uploading files is not available in this workspace."
-                    : "Log in to upload files.",
+                    ? t("uploadUnavailable")
+                    : t("logInToUpload"),
             });
             return;
         }
@@ -222,7 +228,7 @@ export default function IdeExplorerPane({
         if (!policy.canUploadFiles || !policy.canCreateFolders) {
             actions.setToast({
                 kind: "error",
-                text: "Folder import is not available in this workspace.",
+                text: t("folderImportUnavailable"),
             });
             return;
         }
@@ -251,19 +257,19 @@ export default function IdeExplorerPane({
         >
             <div className="flex items-center justify-between gap-2 border-b border-neutral-200 px-3 py-3 dark:border-white/10">
                 <div className="text-[11px] font-extrabold uppercase tracking-[0.14em] text-neutral-600 dark:text-white/60">
-                    {isSql ? "SQL Workspace" : "Explorer"}
+                    {isSql ? t("sqlWorkspace") : t("title")}
                 </div>
 
                 <div className="flex items-center gap-2">
                     {services.explorer.showHistoryControls ? (
                         <div className="flex items-center gap-1">
-                            <Tooltip tip="Undo (Ctrl/Cmd+Z)" side="bottom">
+                            <Tooltip tip={t("undoTip")} side="bottom">
                                 <span className="inline-flex">
                                     <button
                                         type="button"
                                         onClick={onUndo}
                                         disabled={!canUndo}
-                                        aria-label="Undo"
+                                        aria-label={t("undo")}
                                         className={cn(
                                             "grid h-8 w-8 place-items-center rounded-lg border transition-colors",
                                             canUndo
@@ -276,13 +282,13 @@ export default function IdeExplorerPane({
                                 </span>
                             </Tooltip>
 
-                            <Tooltip tip="Redo (Ctrl/Cmd+Shift+Z / Ctrl/Cmd+Y)" side="bottom">
+                            <Tooltip tip={t("redoTip")} side="bottom">
                                 <span className="inline-flex">
                                     <button
                                         type="button"
                                         onClick={onRedo}
                                         disabled={!canRedo}
-                                        aria-label="Redo"
+                                        aria-label={t("redo")}
                                         className={cn(
                                             "grid h-8 w-8 place-items-center rounded-lg border transition-colors",
                                             canRedo
@@ -305,11 +311,11 @@ export default function IdeExplorerPane({
                         ) : null}
                     </div>
                     {onToggleExplorer ? (
-                        <Tooltip tip="Collapse explorer" side="bottom">
+                        <Tooltip tip={t("collapseExplorer")} side="bottom">
                             <button
                                 type="button"
                                 onClick={onToggleExplorer}
-                                aria-label="Collapse explorer"
+                                aria-label={t("collapseExplorer")}
                                 className="grid h-8 w-8 place-items-center rounded-lg border border-neutral-200 bg-white text-neutral-700 transition-colors hover:bg-neutral-50 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/75 dark:hover:bg-white/[0.08]"
                             >
                                 <IconChevronRight className="h-4 w-4 rotate-180" />
@@ -325,7 +331,7 @@ export default function IdeExplorerPane({
                     <input
                         value={filter}
                         onChange={(e) => onChangeFilter(e.target.value)}
-                        placeholder={isSql ? "Filter SQL files…" : "Filter files…"}
+                        placeholder={isSql ? t("filterSqlFiles") : t("filterFiles")}
                         className="h-10 w-full rounded-lg border border-neutral-200 bg-white px-3 text-sm font-semibold text-neutral-900 outline-none transition placeholder:text-neutral-400 focus:border-emerald-400 dark:border-white/10 dark:bg-black/30 dark:text-white/80"
                     />
                 </div>
@@ -341,7 +347,7 @@ export default function IdeExplorerPane({
                                 className="flex h-9 items-center justify-center gap-1.5 rounded-lg border border-neutral-200/80 bg-white px-2.5 text-xs font-medium text-neutral-700 transition-colors hover:bg-neutral-50 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/75 dark:hover:bg-white/[0.08]"
                             >
                                 <PlusIcon className="h-3.5 w-3.5" />
-                                New file
+                                {t("newFile")}
                             </button>
                         ) : null}
 
@@ -352,7 +358,7 @@ export default function IdeExplorerPane({
                                 className="flex h-9 items-center justify-center gap-1.5 rounded-lg border border-neutral-200/80 bg-white px-2.5 text-xs font-medium text-neutral-700 transition-colors hover:bg-neutral-50 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/75 dark:hover:bg-white/[0.08]"
                             >
                                 <PlusIcon className="h-3.5 w-3.5" />
-                                New folder
+                                {t("newFolder")}
                             </button>
                         ) : null}
 
@@ -363,7 +369,7 @@ export default function IdeExplorerPane({
                                 className="flex h-9 items-center justify-center gap-1.5 rounded-lg border border-neutral-200/80 bg-white px-2.5 text-xs font-medium text-neutral-700 transition-colors hover:bg-neutral-50 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/75 dark:hover:bg-white/[0.08]"
                             >
                                 <IconFile className="h-3.5 w-3.5" />
-                                Open file
+                                {t("openFile")}
                             </button>
                         ) : null}
 
@@ -374,7 +380,7 @@ export default function IdeExplorerPane({
                                 className="flex h-9 items-center justify-center gap-1.5 rounded-lg border border-neutral-200/80 bg-white px-2.5 text-xs font-medium text-neutral-700 transition-colors hover:bg-neutral-50 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/75 dark:hover:bg-white/[0.08]"
                             >
                                 <IconFolder className="h-3.5 w-3.5" />
-                                Open folder
+                                {t("openFolder")}
                             </button>
                         ) : null}
                     </div>
@@ -421,7 +427,7 @@ export default function IdeExplorerPane({
                         {upgradeText}
                         <div className="mt-2">
                             <button type="button" onClick={onUpgrade} className="ui-btn ui-btn-secondary">
-                                Upgrade
+                                {t("upgrade")}
                             </button>
                         </div>
                     </div>
@@ -456,46 +462,43 @@ export default function IdeExplorerPane({
             {services.explorer.showFooter && isSql ? (
                 <div className="border-t border-neutral-200 p-3 dark:border-white/10">
                     <div className="text-[11px] font-extrabold uppercase tracking-[0.14em] text-neutral-600 dark:text-white/60">
-                        SQL Mode
+                        {t("sqlMode")}
                     </div>
                     <div className="mt-2 space-y-2 text-xs font-semibold text-neutral-600 dark:text-white/60">
                         <div className="rounded-lg border border-neutral-200 bg-white p-3 dark:border-white/10 dark:bg-black/30">
-                            Active dialect:{" "}
+                            {t("activeDialect")}{" "}
                             <span className="font-black text-neutral-900 dark:text-white/85">
                 {SQL_DIALECT_LABEL[sqlDialect]}
               </span>
                         </div>
                         <div className="rounded-lg border border-neutral-200 bg-white p-3 dark:border-white/10 dark:bg-black/30">
-                            SQL runs use the current editor file as the query source and show structured query
-                            results in the output pane.
+                            {t("sqlModeHelp")}
                         </div>
                     </div>
                 </div>
             ) : services.explorer.showFooter && language === "web" ? (
                 <div className="border-t border-neutral-200 p-3 dark:border-white/10">
                     <div className="text-[11px] font-extrabold uppercase tracking-[0.14em] text-neutral-600 dark:text-white/60">
-                        Web Preview
+                        {t("webPreview")}
                     </div>
                     <div className="mt-2 space-y-2 text-xs font-semibold text-neutral-600 dark:text-white/60">
                         <div className="rounded-lg border border-neutral-200 bg-white p-3 dark:border-white/10 dark:bg-black/30">
-                            Use <span className="font-black text-neutral-900 dark:text-white/85">index.html</span>,
-                            <span className="font-black text-neutral-900 dark:text-white/85"> styles.css</span>, and
-                            <span className="font-black text-neutral-900 dark:text-white/85"> script.js</span>.
+                            {t("webPreviewFiles")}
                         </div>
                         <div className="rounded-lg border border-neutral-200 bg-white p-3 dark:border-white/10 dark:bg-black/30">
-                            The right pane is a live browser preview. Changes refresh automatically.
+                            {t("webPreviewHelp")}
                         </div>
                     </div>
                 </div>
             ) : services.explorer.showFooter && services.explorer.showStdin ? (
                 <div className="border-t border-neutral-200 p-3 dark:border-white/10">
                     <div className="text-[11px] font-extrabold uppercase tracking-[0.14em] text-neutral-600 dark:text-white/60">
-                        Shared stdin
+                        {t("sharedStdin")}
                     </div>
                     <textarea
                         value={stdin}
                         onChange={(e) => onChangeStdin(e.target.value)}
-                        placeholder="Shared input…"
+                        placeholder={t("sharedInputPlaceholder")}
                         className="mt-2 h-28 w-full resize-none rounded-lg border border-neutral-200 bg-white p-3 text-sm text-neutral-900 outline-none transition placeholder:text-neutral-400 focus:border-emerald-400 dark:border-white/10 dark:bg-black/30 dark:text-white/80"
                     />
                 </div>

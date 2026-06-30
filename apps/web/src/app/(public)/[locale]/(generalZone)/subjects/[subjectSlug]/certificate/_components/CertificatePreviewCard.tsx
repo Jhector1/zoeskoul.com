@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { useTranslations } from "next-intl";
 import { cn } from "@/lib/cn";
 import {CERT_DISCLAIMER, ISSUER_NAME, ISSUER_TITLE} from "@/lib/certificates/policy";
 
@@ -34,7 +35,9 @@ export default function CertificatePreviewCard({
                                                    certificateId,
                                                    appName = process.env.NEXT_PUBLIC_APP_NAME ?? "ZoeSkoul",
                                                }: CertificatePreviewCardProps) {
+    const t = useTranslations("certificatePreview");
     const app = String(appName).toUpperCase();
+    const certificateIdLabel = certificateId ? t("certificateId", { id: certificateId }) : "";
 
     return (
         <div className="mx-auto w-full max-w-[820px]">
@@ -60,7 +63,7 @@ export default function CertificatePreviewCard({
                                 boxShadow: "0 6px 20px rgba(11,18,32,0.08)",
                             }}
                         >
-                            Finish the checklist to unlock
+                            {t("lockedOverlay")}
                         </div>
                     </div>
                 ) : null}
@@ -145,7 +148,7 @@ export default function CertificatePreviewCard({
                                 fontWeight: 700,
                             }}
                         >
-                            CERTIFICATE
+                            {t("title")}
                         </div>
                         <div
                             className="mt-2 text-[clamp(1.05rem,2vw,1.4rem)] leading-none"
@@ -155,7 +158,7 @@ export default function CertificatePreviewCard({
                                 fontWeight: 700,
                             }}
                         >
-                            OF COMPLETION
+                            {t("subtitle")}
                         </div>
                     </div>
 
@@ -173,7 +176,7 @@ export default function CertificatePreviewCard({
                         className="absolute left-1/2 top-[38.6%] w-[76%] -translate-x-1/2 text-center text-[13px]"
                         style={{ color: SUB }}
                     >
-                        This certificate is proudly presented to
+                        {t("presentedTo")}
                     </div>
 
                     {/* student name */}
@@ -203,7 +206,7 @@ export default function CertificatePreviewCard({
                         className="absolute left-1/2 top-[59.3%] w-[76%] -translate-x-1/2 text-center text-[13px]"
                         style={{ color: SUB }}
                     >
-                        for the successful completion of
+                        {t("completionOf")}
                     </div>
 
                     {/* course title */}
@@ -230,7 +233,7 @@ export default function CertificatePreviewCard({
                             className="mt-2 text-left text-[10px]"
                             style={{ color: MUTED }}
                         >
-                            Date awarded
+                            {t("dateAwarded")}
                         </div>
                     </div>
 
@@ -270,7 +273,7 @@ export default function CertificatePreviewCard({
                                     className="text-[9px] font-extrabold"
                                     style={{ color: GOLD_DARK }}
                                 >
-                                    ISSUED
+                                    {t("issuedBadge")}
                                 </div>
                                 <div
                                     className="mt-1 text-[7px]"
@@ -301,15 +304,15 @@ export default function CertificatePreviewCard({
                         className="absolute bottom-[5.4%] left-[6.6%] text-[9px]"
                         style={{ color: MUTED }}
                     >
-                        Issued: {issuedDateStr}
+                        {t("issuedOn", { date: issuedDateStr })}
                     </div>
 
                     <div
                         className="absolute bottom-[5.4%] right-[6.6%] max-w-[42%] truncate text-right text-[9px]"
                         style={{ color: MUTED }}
-                        title={certificateId ? `Certificate ID: ${certificateId}` : undefined}
+                        title={certificateIdLabel || undefined}
                     >
-                        {certificateId ? `Certificate ID: ${certificateId}` : ""}
+                        {certificateIdLabel}
                     </div>
                 </div>
             </div>

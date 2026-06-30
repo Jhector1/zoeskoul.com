@@ -119,7 +119,7 @@ const localProjectQuestions = useMemo(
     const timeoutId = window.setTimeout(() => {
       didTimeout = true;
       ctrl.abort();
-    }, 20000);
+    }, 90000);
 
     setQuizLoading(true);
     setQuizError(null);
@@ -140,7 +140,7 @@ const localProjectQuestions = useMemo(
 
         if (didTimeout) {
           setQuizError(
-            "The quiz/exercise took too long to load. Please refresh this card, and check the /api/review/quiz server log if it happens again.",
+            "The quiz/exercise request did not finish. Retry this card after the server is ready.",
           );
           setQuestions([]);
           return;

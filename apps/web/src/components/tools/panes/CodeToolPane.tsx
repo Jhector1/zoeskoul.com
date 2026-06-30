@@ -2,6 +2,7 @@
 
 import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import dynamic from "next/dynamic";
+import { useTranslations } from "next-intl";
 import type { WorkspaceStateV2 } from "@/components/ide/types";
 import type { SqlPaneOptions } from "@/components/code/runner/components/sql/results-pane";
 import type {
@@ -197,28 +198,38 @@ export function resolveEffectiveCodeToolPaneIdeConfig(args: {
 
     const merged = mergeLearningIdeConfigs(args.propIdeConfig ?? null, runtimeIdeConfig);
 
-    /**
-     * In review routes, the currently bound exercise/tool prop is the
-     * authoritative source for step-local terminal start settings. Runtime
-     * state can legitimately lag one step behind during navigation or restore
-     * from an older saved item, which would otherwise reopen the shell in the
-     * previous step's cwd.
-     */
-    if (
-        args.isReviewRouteMode &&
-        typeof args.propIdeConfig?.terminalCwd === "string" &&
-        args.propIdeConfig.terminalCwd.trim()
-    ) {
-        return {
-            ...(merged ?? {}),
-            terminalCwd: args.propIdeConfig.terminalCwd.trim(),
-            terminalSessionScope:
-                args.propIdeConfig.terminalSessionScope ??
-                merged?.terminalSessionScope,
-        };
+    if (!args.isReviewRouteMode) {
+        return merged;
     }
 
-    return merged;
+    const runtimeTerminalCwd =
+        typeof runtimeIdeConfig?.terminalCwd === "string" && runtimeIdeConfig.terminalCwd.trim()
+            ? runtimeIdeConfig.terminalCwd.trim()
+            : null;
+    const propTerminalCwd =
+        typeof args.propIdeConfig?.terminalCwd === "string" && args.propIdeConfig.terminalCwd.trim()
+            ? args.propIdeConfig.terminalCwd.trim()
+            : null;
+
+    /**
+     * In review routes, the bound runtime exercise/card is the canonical source
+     * for step-local terminal cwd. The Tools-pane prop can be sticky during
+     * project-step navigation, so letting it override runtime can keep task 2/3
+     * at /workspace even though the manifest authored a deeper cwd.
+     */
+    const terminalCwd = runtimeTerminalCwd ?? propTerminalCwd;
+    if (!terminalCwd) {
+        return merged;
+    }
+
+    return {
+        ...(merged ?? {}),
+        terminalCwd,
+        terminalSessionScope:
+            runtimeIdeConfig?.terminalSessionScope ??
+            args.propIdeConfig?.terminalSessionScope ??
+            merged?.terminalSessionScope,
+    };
 }
 
 export function shouldUseLocalReviewDraft(args: {
@@ -1081,6 +1092,7 @@ export default function CodeToolPane(props: {
     sqlSetupSql?: string;
     sqlInitialTableSnapshots?: SqlTableSnapshots;
 }) {
+    const t = useTranslations("ide.tools.pane");
     const {
         toolScopeKey,
         editorOwnerKey,
@@ -1522,7 +1534,7 @@ export default function CodeToolPane(props: {
             (canonicalReviewRuntime as any)?.error,
             (editorRuntime as any)?.workspaceError,
             (editorRuntime as any)?.error,
-        ) || "This exercise could not load. Retry the exercise or refresh the page.";
+        ) || t("exerciseLoadFailed");
 
     const directRuntimeWorkspace = useMemo(() => {
         if (isReviewRouteMode) {
@@ -1630,12 +1642,26 @@ export default function CodeToolPane(props: {
         ),
     );
 
+    const isUnboundGeneralToolScope = Boolean(
+        !hasBindableEditorTarget &&
+        !pendingExerciseBinding &&
+        !sqlDatasetId &&
+        sqlResultShape !== "table" &&
+        (
+            editorExerciseStateKey === "general" ||
+            editorExerciseStateKey.endsWith(":general")
+        )
+    );
+
     const shouldMountFullIde = Boolean(
-        hasBindableEditorTarget ||
-        pendingExerciseBinding ||
-        sqlDatasetId ||
-        sqlResultShape === "table" ||
-        !isReviewRouteMode
+        !isUnboundGeneralToolScope &&
+        (
+            hasBindableEditorTarget ||
+            pendingExerciseBinding ||
+            sqlDatasetId ||
+            sqlResultShape === "table" ||
+            !isReviewRouteMode
+        )
     );
 
     useEffect(() => {
@@ -2443,6 +2469,17 @@ export default function CodeToolPane(props: {
             resolvedEditorOwnerKey,
             exerciseKey,
             cardRuntimeKey,
+            terminalCwd: effectiveTerminalCwd ?? null,
+            propTerminalCwd:
+                typeof ideConfig?.terminalCwd === "string" ? ideConfig.terminalCwd : null,
+            exerciseRuntimeTerminalCwd:
+                typeof exerciseRuntime?.ideConfig?.terminalCwd === "string"
+                    ? exerciseRuntime.ideConfig.terminalCwd
+                    : null,
+            cardRuntimeTerminalCwd:
+                typeof cardRuntimeIdeConfig?.terminalCwd === "string"
+                    ? cardRuntimeIdeConfig.terminalCwd
+                    : null,
         };
     }, [
         canonicalReviewRuntime?.workspace,
@@ -2557,26 +2594,26 @@ export default function CodeToolPane(props: {
                     <div className="absolute inset-0 z-20 flex items-center justify-center bg-neutral-950/70 backdrop-blur-sm">
                         {loadingTimedOut ? (
                             <div className="max-w-md rounded-2xl border border-white/10 bg-black/50 p-5 text-center text-white shadow-2xl">
-                                <div className="text-sm font-semibold">Editor is taking longer than expected.</div>
+                                <div className="text-sm font-semibold">{t("editorSlowTitle")}</div>
                                 <div className="mt-2 text-xs text-white/65">
-                                    Your saved review progress is still safe. Retry the editor load, or refresh if the workspace does not appear.
+                                    {t("editorSlowBody")}
                                 </div>
                                 <button
                                     type="button"
                                     onClick={retryEditorLoad}
                                     className="mt-4 rounded-full bg-white px-4 py-2 text-xs font-bold text-neutral-950 hover:bg-white/90"
                                 >
-                                    Retry editor
+                                    {t("retryEditor")}
                                 </button>
                             </div>
                         ) : (
                             <div className="flex items-center gap-3 rounded-full border border-white/10 bg-black/40 px-4 py-2 text-sm font-semibold text-white/80">
                                 <span className="inline-block h-2.5 w-2.5 animate-pulse rounded-full bg-emerald-400" />
                                 {pendingExerciseBinding
-                                    ? "Loading exercise..."
+                                    ? t("loadingExercise")
                                     : cardRuntimeKey
-                                        ? "Loading sketch workspace..."
-                                        : "Loading editor..."}
+                                        ? t("loadingSketchWorkspace")
+                                        : t("loadingEditor")}
                             </div>
                         )}
                     </div>
@@ -2584,13 +2621,13 @@ export default function CodeToolPane(props: {
                     <div className="absolute inset-0 z-10 flex items-center justify-center bg-neutral-950/20">
                         <div className="max-w-sm rounded-2xl border border-white/10 bg-black/35 p-5 text-center text-white/80 shadow-xl">
                             <div className="text-sm font-semibold text-white">
-                                {isSketchEditorMode ? "No sketch editor is bound" : "No exercise editor is bound"}
+                                {isSketchEditorMode ? t("noSketchEditorBound") : t("noExerciseEditorBound")}
                             </div>
 
                             <div className="mt-2 text-xs leading-5 text-white/60">
                                 {isSketchEditorMode
-                                    ? "This sketch does not have a ready workspace yet."
-                                    : "This exercise does not have a ready workspace yet."}
+                                    ? t("sketchWorkspaceNotReady")
+                                    : t("exerciseWorkspaceNotReady")}
                             </div>
                         </div>
                     </div>

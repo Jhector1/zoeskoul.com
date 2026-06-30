@@ -37,7 +37,7 @@ export default function QuizLocalCard(props: {
 
             {!unlocked ? (
                 <div className="ui-quiz-hint">
-                    {ui.t("unlockHint", {}, "Answer the previous question correctly to unlock this one.")}
+                    {ui.t("unlockHint")}
                 </div>
             ) : null}
 
@@ -71,14 +71,14 @@ export default function QuizLocalCard(props: {
                     <input
                         disabled={disabled}
                         className={cn("ui-quiz-input", disabled && "cursor-not-allowed opacity-60")}
-                        placeholder={ui.t("placeholders.enterNumber", {}, "Enter a number")}
+                        placeholder={ui.t("placeholders.enterNumber")}
                         value={props.value ?? ""}
                         onChange={(e) => !disabled && props.onPick(e.target.value)}
                     />
 
                     {(q as any).tolerance ? (
                         <div className="ui-quiz-status-soft">
-                            {ui.t("tolerance", { n: (q as any).tolerance }, `± ${(q as any).tolerance}`)}
+                            {ui.t("tolerance", { n: (q as any).tolerance })}
                         </div>
                     ) : null}
                 </div>
@@ -92,7 +92,7 @@ export default function QuizLocalCard(props: {
                     onClick={() => !disabled && props.onCheck()}
                     className={cn("ui-quiz-action", disabled ? "ui-quiz-action--disabled" : "ui-quiz-action--primary")}
                 >
-                    {ui.t("buttons.checkQuestion", {}, "Check this question")}
+                    {ui.t("buttons.checkQuestion")}
                 </button>
 
                 {onSkip ? (
@@ -107,28 +107,28 @@ export default function QuizLocalCard(props: {
                                 : "ui-quiz-action--ghost",
                         )}
                     >
-                        {props.skipped ? ui.t("buttons.skipped", {}, "Skipped") : ui.t("buttons.skip", {}, "Skip")}
+                        {props.skipped ? ui.t("buttons.skipped") : ui.t("buttons.skip")}
                     </button>
                 ) : null}
 
                 <div className="ui-quiz-checkrow-status">
                     {props.skipped ? (
                         <span className="ui-quiz-status-warn">
-              {ui.t("status.skipped", {}, "↷ Skipped")}
+              {ui.t("status.skipped")}
             </span>
                     ) : props.checked ? (
                         props.ok === true ? (
                             <span className="ui-quiz-status-good">
-                {ui.t("status.correct", {}, "✓ Correct")}
+                {ui.t("status.correct")}
               </span>
                         ) : (
                             <span className="ui-quiz-status-danger">
-                {ui.t("status.notCorrect", {}, "✕ Not correct")}
+                {ui.t("status.notCorrect")}
               </span>
                         )
                     ) : (
                         <span className="ui-quiz-status-soft">
-              {ui.t("status.notChecked", {}, "Not checked yet")}
+              {ui.t("status.notChecked")}
             </span>
                     )}
                 </div>

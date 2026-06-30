@@ -19,8 +19,8 @@ export function resolveRightRailIdeConfig(args: {
     return (
         args.rightRailExerciseIdeConfig ??
         args.boundExerciseIdeConfig ??
-        args.toolIdeConfig ??
         args.runtimeEffectiveIdeConfig ??
+        args.toolIdeConfig ??
         null
     );
 }

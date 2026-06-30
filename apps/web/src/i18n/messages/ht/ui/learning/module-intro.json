@@ -1,0 +1,45 @@
+{
+  "moduleIntroUi": {
+    "kicker": "{subject} • Modil {n}",
+    "introVideoKicker": "Videyo entwodiksyon",
+    "introVideoHint": "Gade li an premye si ou vle gwo foto a anvan pratik la.",
+    "openLink": "Ouvri ↗",
+    "labels": {
+      "sections": "Seksyon",
+      "topics": "Tèm",
+      "weeks": "Semèn",
+      "est": "Tan",
+      "status": "Estati"
+    },
+    "status": {
+      "syncing": "Ap senkronize…",
+      "completed": "Fini",
+      "inProgress": "An kou",
+      "new": "Nouvo"
+    },
+    "cta": {
+      "review": "Revize modil la →",
+      "continue": "Kontinye →",
+      "start": "Kòmanse →"
+    },
+    "actions": {
+      "back": "← Tounen",
+      "practice": "Pratik →"
+    },
+    "sections": {
+      "prereqs": "Sa ou dwe konnen",
+      "whatLearn": "Sa w ap aprann",
+      "whyMatters": "Poukisa sa enpòtan"
+    },
+    "defaults": {
+      "outcome1": "Aprann lide kle yo ak egzanp klè, gid",
+      "outcome2": "Pratike ak kestyon entèaktif ak fidbak touswit",
+      "outcome3": "Pran konfyans pou sèvi ak sa nan pwochen modil yo",
+      "why1": "Modil sa a debloke konpetans w ap re-itilize souvan",
+      "why2": "Li ede w fè pi vit epi pi byen sou pwoblèm reyèl",
+      "why3": "Se yon baz pou entèvyou ak pwojè nan lavi reyèl"
+    },
+    "videoTitle": "{module} — Entwodiksyon",
+    "minutesShort": "{n} min"
+  }
+}

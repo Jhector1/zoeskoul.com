@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useId, useMemo, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 import { createPortal } from "react-dom";
 import { cn } from "../utils";
 import { IconDots } from "./icons";
@@ -35,6 +36,7 @@ type NodeMenuProps = {
 };
 
 export default function NodeMenu(props: NodeMenuProps) {
+    const t = useTranslations("ide.explorer.menu");
     const {
         actions,
         trigger = "button",
@@ -289,14 +291,14 @@ export default function NodeMenu(props: NodeMenuProps) {
                     aria-haspopup="menu"
                     aria-expanded={open}
                     aria-controls={open ? menuId : undefined}
-                    aria-label="Open node actions"
+                        aria-label={t("openNodeActions")}
                     onClick={(e) => {
                         e.preventDefault();
                         e.stopPropagation();
                         setOpen((v) => !v);
                     }}
                     className="ui-ide-menubtn"
-                    title="Actions"
+                    title={t("actionsTitle")}
                 >
                     <IconDots className="h-4 w-4" />
                 </button>

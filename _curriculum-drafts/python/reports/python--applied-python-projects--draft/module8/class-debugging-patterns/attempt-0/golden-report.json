@@ -1,0 +1,13 @@
+{
+  "topicId": "class-debugging-patterns",
+  "ok": false,
+  "issues": [
+    {
+      "code": "CODE_PROFILE_SOLUTION_SEMANTIC_MISMATCH",
+      "category": "tests",
+      "severity": "error",
+      "exerciseId": "ex6",
+      "message": "Exercise \"ex6\" solutionCode does not satisfy its semantic checks."
+    }
+  ]
+}

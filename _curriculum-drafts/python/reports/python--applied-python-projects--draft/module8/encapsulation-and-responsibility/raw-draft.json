@@ -1,0 +1,390 @@
+{
+  "title": "Encapsulation and Responsibility",
+  "summary": "Keep related data and behavior together in a class.",
+  "minutes": 22,
+  "sketchBlocks": [
+    {
+      "id": "sketch-1",
+      "title": "Why put data and behavior in the same class?",
+      "bodyMarkdown": "Encapsulation means a class keeps **related data** and the **actions that use that data** together.\n\nFor example, a bank account has a balance, and it also has actions like deposit and withdraw. Instead of storing the balance in one place and writing unrelated functions somewhere else, we can keep them together in one class.\n\n```python\nclass BankAccount:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n        return self.balance\n```\n\nStep by step:\n- `class BankAccount:` starts a blueprint for account objects.\n- `__init__` sets up each new account with an `owner` and `balance`.\n- `self.owner` and `self.balance` are attributes stored on that specific object.\n- `deposit` is a method that changes the object's own balance.\n- `self.balance += amount` updates the stored data inside the same object.\n\nWorked example:\n- If you create `BankAccount(\"Ava\", 100)`, that object starts with balance `100`.\n- Calling `deposit(25)` changes that same object's balance to `125`.\n\nThis is useful because the object is responsible for managing its own state.\n\nTry it yourself:\nCreate a class with one attribute and one method. Then change the attribute through the method and click Run to inspect the result."
+    },
+    {
+      "id": "sketch-2",
+      "title": "A class should have a clear responsibility",
+      "bodyMarkdown": "A well-designed class usually has **one main job**.\n\nImagine a `Book` class. Its responsibility might be to store information about one book and answer questions about that book.\n\n```python\nclass Book:\n    def __init__(self, title, pages):\n        self.title = title\n        self.pages = pages\n\n    def is_long(self):\n        return self.pages > 300\n```\n\nLine by line:\n- `title` and `pages` belong to one book object.\n- `is_long()` uses the book's own data to answer a question.\n- The method does not need outside variables because the object already has what it needs.\n\nWorked example:\n- A `Book(\"Python Basics\", 180)` object would return `False` for `is_long()`.\n- A `Book(\"Big Stories\", 420)` object would return `True`.\n\nIf a class starts doing unrelated jobs, it becomes harder to understand and test. For example, a `Book` class should not also manage student grades or weather data.\n\nYour turn:\nThink of a real object like a game character, timer, or playlist. What data belongs to it, and what actions should it handle itself?"
+    },
+    {
+      "id": "sketch-3",
+      "title": "Methods use self to work with one object",
+      "bodyMarkdown": "Inside a class, `self` refers to the current object.\n\nThat is how methods read or change that object's attributes.\n\n```python\nclass GameCharacter:\n    def __init__(self, name, health):\n        self.name = name\n        self.health = health\n\n    def take_damage(self, amount):\n        self.health -= amount\n        return self.health\n```\n\nStep by step:\n- `self.name` stores the character's name.\n- `self.health` stores the character's current health.\n- `take_damage` receives an `amount`.\n- `self.health -= amount` changes the health of the current character only.\n\nWorked example:\n- If `hero = GameCharacter(\"Mina\", 50)`, then `hero.take_damage(8)` returns `42`.\n- Another object, like `boss = GameCharacter(\"Dragon\", 200)`, keeps its own separate health.\n\nThis separation is a big reason classes are helpful: each instance manages its own data.\n\nTry this:\nMake two objects from the same class with different starting values. Call the same method on both and compare the results."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "ex-1",
+      "kind": "code_input",
+      "title": "Build a counter class",
+      "prompt": "Define a class named `Counter`.\n\nRequirements:\n- Its constructor should take one argument named `start`.\n- Store that value in an attribute named `value`.\n- Add a method `increment(self)` that increases `value` by 1 and returns the new value.\n\nWrite the class in the code editor.",
+      "hint": "The object needs one stored attribute and one method that updates it.",
+      "help": {
+        "concept": "Encapsulation means the object stores its own state in an attribute and changes that state through a method.",
+        "hint_1": "Use `__init__` to save `start` into `self.value`.",
+        "hint_2": "Inside `increment`, update `self.value` and return the updated attribute."
+      },
+      "starterCode": "class Counter:\n    def __init__(self, start):\n        # store the starting value\n        pass\n\n    def increment(self):\n        # add 1 to the stored value and return it\n        pass\n",
+      "solutionCode": "class Counter:\n    def __init__(self, start):\n        self.value = start\n\n    def increment(self):\n        self.value += 1\n        return self.value\n",
+      "semanticChecks": [
+        {
+          "type": "defines_class",
+          "className": "Counter",
+          "message": "Define a class named Counter."
+        },
+        {
+          "type": "constructible",
+          "className": "Counter",
+          "constructorArgs": [
+            5
+          ],
+          "message": "Counter should be constructible with one starting value."
+        },
+        {
+          "type": "instance_attributes",
+          "className": "Counter",
+          "constructorArgs": [
+            5
+          ],
+          "attributes": [
+            "value"
+          ],
+          "message": "Store the starting value in self.value."
+        },
+        {
+          "type": "method_returns",
+          "className": "Counter",
+          "constructorArgs": [
+            5
+          ],
+          "methodName": "increment",
+          "methodArgs": [],
+          "expected": 6,
+          "expectedKind": "value",
+          "message": "increment() should add 1 and return the new value."
+        }
+      ],
+      "recipeType": "semantic"
+    },
+    {
+      "id": "ex-2",
+      "kind": "single_choice",
+      "title": "Pick the best class responsibility",
+      "prompt": "Which class design shows a clear single responsibility?",
+      "hint": "Look for the class whose data and methods belong to the same kind of object.",
+      "help": {
+        "concept": "A class has clear responsibility when its attributes and methods all support one main purpose.",
+        "hint_1": "Compare whether each option mixes unrelated jobs or stays focused on one object.",
+        "hint_2": "The best answer keeps book-related data with book-related behavior only."
+      },
+      "options": [
+        "A `Book` class that stores title and pages, and has a method to check whether the book is long",
+        "A `Book` class that stores title, tracks weather, and calculates employee pay",
+        "A `Book` class that stores title but sends game attacks to enemies",
+        "A `Book` class that stores title and randomly changes bank balances"
+      ],
+      "correctOptionIds": [
+        "a"
+      ]
+    },
+    {
+      "id": "ex-3",
+      "kind": "multi_choice",
+      "title": "Choose examples of encapsulation",
+      "prompt": "Which examples show encapsulation? Choose all that apply.",
+      "hint": "Look for cases where an object stores data and methods use that same object's data.",
+      "help": {
+        "concept": "Encapsulation groups related state and behavior inside the same class so the object manages itself.",
+        "hint_1": "A good example has attributes on `self` and methods that read or change those attributes.",
+        "hint_2": "Pick the options where the method belongs naturally to the object's own data."
+      },
+      "options": [
+        "A `Timer` class stores `seconds` and has a `tick()` method that decreases `seconds`",
+        "A `Student` class stores `name` and has a `rename()` method that updates `name`",
+        "A random function changes a global variable while no object stores the data",
+        "A `Car` class stores `fuel` and has a `drive()` method that reduces `fuel`"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ]
+    },
+    {
+      "id": "ex-4",
+      "kind": "drag_reorder",
+      "title": "Order the object setup steps",
+      "prompt": "Put these steps in the usual order for creating an object with stored data.",
+      "hint": "Start with the class blueprint, then create an instance, then use its data.",
+      "help": {
+        "concept": "Objects are created from classes, initialized with `__init__`, and then used through attributes or methods.",
+        "hint_1": "The class must exist before you can make an instance from it.",
+        "hint_2": "Initialization happens when the instance is created, before later attribute access or method calls."
+      },
+      "tokens": [
+        "Define the class",
+        "Write `__init__` to store attributes",
+        "Create an instance",
+        "Call a method or read an attribute"
+      ],
+      "correctOrder": [
+        "Define the class",
+        "Write `__init__` to store attributes",
+        "Create an instance",
+        "Call a method or read an attribute"
+      ]
+    },
+    {
+      "id": "ex-5",
+      "kind": "fill_blank_choice",
+      "title": "Complete the attribute assignment",
+      "prompt": "Choose the missing code that stores the constructor value on the object.",
+      "hint": "Inside `__init__`, attributes are usually stored on `self`.",
+      "help": {
+        "concept": "An instance attribute is created by assigning a value to `self.attribute_name` inside `__init__` or another method.",
+        "hint_1": "The blank should be the left side of an assignment that creates an attribute on the current object.",
+        "hint_2": "Use dot notation with `self` and the attribute name `score`."
+      },
+      "template": "[blank1] = score",
+      "choices": [
+        "self.score",
+        "score.self",
+        "self = score",
+        "score"
+      ],
+      "correctValue": "self.score"
+    },
+    {
+      "id": "ex-6",
+      "kind": "code_input",
+      "title": "Create a bank account method",
+      "prompt": "Define a class named `BankAccount`.\n\nRequirements:\n- The constructor takes `owner` and `balance`.\n- Store them as attributes with the same names.\n- Add a method `deposit(self, amount)` that adds `amount` to the balance and returns the updated balance.\n\nWrite the class in the code editor.",
+      "hint": "The method should change the object's own `balance` attribute.",
+      "help": {
+        "concept": "A method should use `self` to read and update the current object's stored data.",
+        "hint_1": "In `__init__`, save both incoming values on `self`.",
+        "hint_2": "Inside `deposit`, increase `self.balance` by `amount`, then return `self.balance`."
+      },
+      "starterCode": "class BankAccount:\n    def __init__(self, owner, balance):\n        # store owner and balance\n        pass\n\n    def deposit(self, amount):\n        # update the balance and return it\n        pass\n",
+      "solutionCode": "class BankAccount:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n        return self.balance\n",
+      "semanticChecks": [
+        {
+          "type": "defines_class",
+          "className": "BankAccount",
+          "message": "Define a class named BankAccount."
+        },
+        {
+          "type": "constructible",
+          "className": "BankAccount",
+          "constructorArgs": [
+            "Ava",
+            100
+          ],
+          "message": "BankAccount should accept owner and balance."
+        },
+        {
+          "type": "instance_attributes",
+          "className": "BankAccount",
+          "constructorArgs": [
+            "Ava",
+            100
+          ],
+          "attributes": [
+            "owner",
+            "balance"
+          ],
+          "message": "Store owner and balance as instance attributes."
+        },
+        {
+          "type": "method_returns",
+          "className": "BankAccount",
+          "constructorArgs": [
+            "Ava",
+            100
+          ],
+          "methodName": "deposit",
+          "methodArgs": [
+            25
+          ],
+          "expected": 125,
+          "expectedKind": "value",
+          "message": "deposit() should add the amount and return the new balance."
+        }
+      ],
+      "recipeType": "semantic"
+    },
+    {
+      "id": "ex-7",
+      "kind": "single_choice",
+      "title": "Why use a method here?",
+      "prompt": "Why is `deposit()` a good method on a `BankAccount` object?",
+      "hint": "Think about which code should control changes to the account's own balance.",
+      "help": {
+        "concept": "Methods belong on a class when they operate on that object's own attributes and support its responsibility.",
+        "hint_1": "Ask which option describes behavior that naturally uses `owner` and `balance` together.",
+        "hint_2": "The best answer is about letting the account manage its own state, not about unrelated convenience."
+      },
+      "options": [
+        "Because changing a balance is part of the account object's own job",
+        "Because every class must have at least one method even if it is unrelated",
+        "Because methods are only for printing text to the output panel",
+        "Because attributes cannot store numbers"
+      ],
+      "correctOptionIds": [
+        "a"
+      ]
+    },
+    {
+      "id": "ex-8",
+      "kind": "multi_choice",
+      "title": "Find methods that fit the object",
+      "prompt": "A `GameCharacter` class stores `name`, `health`, and `level`. Which methods fit this class's responsibility? Choose all that apply.",
+      "hint": "Pick actions that naturally use or change a game character's own attributes.",
+      "help": {
+        "concept": "A method fits a class when it works with that object's own state and purpose.",
+        "hint_1": "Look for actions that read or update `name`, `health`, or `level`.",
+        "hint_2": "Avoid options that belong to unrelated systems like weather or payroll."
+      },
+      "options": [
+        "`take_damage(amount)`",
+        "`level_up()`",
+        "`forecast_rain()`",
+        "`rename(new_name)`"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ]
+    },
+    {
+      "id": "ex-9",
+      "kind": "drag_reorder",
+      "title": "Order the method logic",
+      "prompt": "Arrange the steps for a method that updates an object's attribute and returns the result.",
+      "hint": "A method usually reads the current object, changes its stored value, then returns something.",
+      "help": {
+        "concept": "Methods use `self` to access the current object's attributes, update them, and optionally return the new value.",
+        "hint_1": "First identify the current object's attribute, then change it, then return the updated result.",
+        "hint_2": "The return should come after the attribute has been updated."
+      },
+      "tokens": [
+        "Receive `self` and another argument",
+        "Use `self.attribute` inside the method",
+        "Update the attribute",
+        "Return the updated value"
+      ],
+      "correctOrder": [
+        "Receive `self` and another argument",
+        "Use `self.attribute` inside the method",
+        "Update the attribute",
+        "Return the updated value"
+      ]
+    },
+    {
+      "id": "ex-10",
+      "kind": "fill_blank_choice",
+      "title": "Complete the method call",
+      "prompt": "Choose the missing word that refers to the current object inside a method.",
+      "hint": "Inside class methods, Python uses one conventional first parameter name.",
+      "help": {
+        "concept": "Inside instance methods, `self` refers to the specific object the method is working with.",
+        "hint_1": "The blank is the name used before `.balance`, `.name`, or other attributes in instance methods.",
+        "hint_2": "It is the usual first parameter in methods like `def deposit([blank1], amount):`."
+      },
+      "template": "def deposit([blank1], amount):",
+      "choices": [
+        "self",
+        "this",
+        "object",
+        "me"
+      ],
+      "correctValue": "self"
+    },
+    {
+      "id": "ex-11",
+      "kind": "code_input",
+      "title": "Model a book with a question method",
+      "prompt": "Define a class named `Book`.\n\nRequirements:\n- The constructor takes `title` and `pages`.\n- Store them as attributes.\n- Add a method `is_long(self)` that returns `True` if `pages` is greater than 300, otherwise `False`.\n\nWrite the class in the code editor.",
+      "hint": "The method should return a boolean based on the object's own `pages` value.",
+      "help": {
+        "concept": "A method can answer a question about an object's stored attributes by returning a computed result.",
+        "hint_1": "Save `title` and `pages` in `__init__` first.",
+        "hint_2": "In `is_long`, compare `self.pages` to `300` and return the result of that comparison."
+      },
+      "starterCode": "class Book:\n    def __init__(self, title, pages):\n        # store title and pages\n        pass\n\n    def is_long(self):\n        # return True when pages is greater than 300\n        pass\n",
+      "solutionCode": "class Book:\n    def __init__(self, title, pages):\n        self.title = title\n        self.pages = pages\n\n    def is_long(self):\n        return self.pages > 300\n",
+      "semanticChecks": [
+        {
+          "type": "defines_class",
+          "className": "Book",
+          "message": "Define a class named Book."
+        },
+        {
+          "type": "constructible",
+          "className": "Book",
+          "constructorArgs": [
+            "Big Stories",
+            420
+          ],
+          "message": "Book should accept title and pages."
+        },
+        {
+          "type": "instance_attributes",
+          "className": "Book",
+          "constructorArgs": [
+            "Big Stories",
+            420
+          ],
+          "attributes": [
+            "title",
+            "pages"
+          ],
+          "message": "Store title and pages as instance attributes."
+        },
+        {
+          "type": "method_returns",
+          "className": "Book",
+          "constructorArgs": [
+            "Big Stories",
+            420
+          ],
+          "methodName": "is_long",
+          "methodArgs": [],
+          "expected": true,
+          "expectedKind": "value",
+          "message": "is_long() should return True for books over 300 pages."
+        },
+        {
+          "type": "method_returns",
+          "className": "Book",
+          "constructorArgs": [
+            "Python Basics",
+            180
+          ],
+          "methodName": "is_long",
+          "methodArgs": [],
+          "expected": false,
+          "expectedKind": "value",
+          "message": "is_long() should return False for shorter books."
+        }
+      ],
+      "recipeType": "semantic"
+    }
+  ],
+  "projectDraft": {
+    "title": "Encapsulation mini models",
+    "stepIds": [
+      "ex-1",
+      "ex-6",
+      "ex-11"
+    ]
+  }
+}

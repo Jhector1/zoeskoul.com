@@ -1,0 +1,9 @@
+{
+  "UserMenu": {
+    "ariaLabel": "Menu utilisateur",
+    "avatarAlt": "Avatar de {name}",
+    "profile": "Profil",
+    "progress": "Progrès",
+    "logout": "Se déconnecter"
+  }
+}

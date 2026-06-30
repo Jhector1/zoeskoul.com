@@ -1,6 +1,7 @@
 "use client";
 
 import type React from "react";
+import { useTranslations } from "next-intl";
 
 import { IconChevronRight } from "../icons";
 
@@ -25,6 +26,8 @@ export default function IdeMobileLayout({
   editor: React.ReactNode;
   showExplorerRail?: boolean;
 }) {
+  const t = useTranslations("ide.explorer.layout");
+
   return (
       <div className="relative flex h-full min-h-0 w-full overflow-hidden">
         {showExplorerRail ? (
@@ -35,8 +38,8 @@ export default function IdeMobileLayout({
               <button
                   type="button"
                   onClick={onOpen}
-                  aria-label="Open file explorer"
-                  title="Open file explorer"
+                  aria-label={t("openFileExplorer")}
+                  title={t("openFileExplorer")}
                   className={EXPLORER_RAIL_BTN}
               >
                 <IconChevronRight className="h-4 w-4" />
@@ -51,11 +54,11 @@ export default function IdeMobileLayout({
               <div className="flex h-full min-h-0 w-[85%] max-w-sm flex-col border-r border-neutral-200 bg-white/96 shadow-xl dark:border-white/10 dark:bg-neutral-950/96">
                 <div className="flex items-center justify-between border-b border-neutral-200 px-3 py-2.5 dark:border-white/10">
                   <div className="text-[11px] font-medium uppercase tracking-[0.14em] text-neutral-500 dark:text-white/45">
-                    Files
+                    {t("files")}
                   </div>
 
                   <button type="button" onClick={onClose} className={MOBILE_BTN}>
-                    Close
+                    {t("close")}
                   </button>
                 </div>
 
@@ -66,7 +69,7 @@ export default function IdeMobileLayout({
                   type="button"
                   className="flex-1"
                   onClick={onClose}
-                  aria-label="Close files panel"
+                  aria-label={t("closeFilesPanel")}
               />
             </div>
         ) : null}

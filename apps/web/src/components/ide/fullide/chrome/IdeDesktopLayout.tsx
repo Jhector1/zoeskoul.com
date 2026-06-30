@@ -2,6 +2,7 @@
 
 import type React from "react";
 import { Redo2, Undo2 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { IconChevronRight } from "../icons";
 
 export default function IdeDesktopLayout({
@@ -37,6 +38,9 @@ export default function IdeDesktopLayout({
   onUndo?: () => void;
   onRedo?: () => void;
 }) {
+  const t = useTranslations("ide.explorer.layout");
+  const paneT = useTranslations("ide.explorer.pane");
+
   return (
       <div
           ref={splitRef}
@@ -52,8 +56,8 @@ export default function IdeDesktopLayout({
               <button
                   type="button"
                   onClick={onToggleExplorer}
-                  aria-label="Open file explorer"
-                  title="Open file explorer"
+                  aria-label={t("openFileExplorer")}
+                  title={t("openFileExplorer")}
                   className="grid h-8 w-8 place-items-center rounded-lg border border-neutral-200 bg-white text-neutral-700 transition-colors hover:bg-neutral-50 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/75 dark:hover:bg-white/[0.08]"
               >
                 <IconChevronRight className="h-4 w-4" />
@@ -65,8 +69,8 @@ export default function IdeDesktopLayout({
                         type="button"
                         onClick={onUndo}
                         disabled={!canUndo || !onUndo}
-                        aria-label="Undo"
-                        title="Undo (Ctrl/Cmd+Z)"
+                        aria-label={paneT("undo")}
+                        title={paneT("undoTip")}
                         className={
                           canUndo && onUndo
                               ? "grid h-8 w-8 place-items-center rounded-lg border border-neutral-200 bg-white text-neutral-700 transition-colors hover:bg-neutral-50 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/75 dark:hover:bg-white/[0.08]"
@@ -80,8 +84,8 @@ export default function IdeDesktopLayout({
                         type="button"
                         onClick={onRedo}
                         disabled={!canRedo || !onRedo}
-                        aria-label="Redo"
-                        title="Redo (Ctrl/Cmd+Shift+Z / Ctrl/Cmd+Y)"
+                        aria-label={paneT("redo")}
+                        title={paneT("redoTip")}
                         className={
                           canRedo && onRedo
                               ? "grid h-8 w-8 place-items-center rounded-lg border border-neutral-200 bg-white text-neutral-700 transition-colors hover:bg-neutral-50 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/75 dark:hover:bg-white/[0.08]"
@@ -103,7 +107,7 @@ export default function IdeDesktopLayout({
                   role="separator"
                   tabIndex={0}
                   aria-orientation="vertical"
-                  aria-label="Resize explorer"
+                  aria-label={t("resizeExplorer")}
                   aria-valuemin={16}
                   aria-valuemax={40}
                   aria-valuenow={Math.round(dividerValue)}
@@ -111,7 +115,7 @@ export default function IdeDesktopLayout({
                   onPointerDown={onPointerDownDivider}
                   onKeyDown={onKeyDownDivider}
                   className="w-[6px] shrink-0 cursor-col-resize bg-neutral-200/45 outline-none transition-colors hover:bg-neutral-300/60 focus:bg-neutral-300/60 dark:bg-white/[0.04] dark:hover:bg-white/[0.09] dark:focus:bg-white/[0.09]"
-                  title="Drag or use arrow keys to resize explorer"
+                  title={t("resizeExplorerHelp")}
               />
             </>
         )}

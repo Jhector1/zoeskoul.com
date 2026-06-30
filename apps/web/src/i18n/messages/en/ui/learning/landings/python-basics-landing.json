@@ -1,0 +1,34 @@
+{
+  "PythonBasicsLanding": {
+    "pageTitle": "Python — Basics",
+    "pageIntro": "Start here: printing, input, variables, strings, math, and common errors.",
+    "quickStartEasy": "Quick start (Easy)",
+    "jumpStringsEasy": "Jump to Strings (Easy)",
+    "whatYouLearn": "What you’ll learn",
+    "readMaterial": "Read material",
+    "practiceNow": "Practice now",
+    "practiceNowHint": "Tip: repeat easy until it feels automatic.",
+    "recommendedPathTitle": "Recommended path",
+    "recommended": {
+      "0": "Finish Part 1 basics (print, input, strings).",
+      "1": "Do 10 easy problems, then move to medium.",
+      "2": "Come back and retry quizzes after a day."
+    },
+    "routeHint": "Tip: You can always change subject from the top.",
+    "parts": {
+      "part1": {
+        "badge": "FOUNDATIONS",
+        "title": "Python — Part 1",
+        "subtitle": "print/input, variables, strings, math, comments, common errors",
+        "bullets": {
+          "0": "Use print() with sep/end to format output",
+          "1": "Read user input and store values in variables",
+          "2": "Work with strings and len()",
+          "3": "Do arithmetic and understand precedence",
+          "4": "Write comments/docstrings for readability",
+          "5": "Recognize common beginner error messages"
+        }
+      }
+    }
+  }
+}

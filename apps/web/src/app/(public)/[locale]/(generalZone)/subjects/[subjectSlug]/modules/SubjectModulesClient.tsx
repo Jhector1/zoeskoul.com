@@ -329,7 +329,12 @@ export default function SubjectModulesClient(props: Props) {
                                 <div className="ui-meta-strong tabular-nums">
                                     {progressLoading
                                         ? t("syncing")
-                                        : `${subjectStats.doneTopics}/${subjectStats.totalTopics} • ${subjectStats.completedModules}/${subjectStats.totalModules} modules`}
+                                        : t("overallSummary", {
+                                              doneTopics: subjectStats.doneTopics,
+                                              totalTopics: subjectStats.totalTopics,
+                                              doneModules: subjectStats.completedModules,
+                                              totalModules: subjectStats.totalModules,
+                                          })}
                                 </div>
                             </div>
 
@@ -439,16 +444,22 @@ export default function SubjectModulesClient(props: Props) {
                                                         </div>
 
                                                         <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] text-[rgb(var(--ui-text-muted)/0.88)]">
-                                                            <span>{modSections.length} sections</span>
+                                                            <span>{t("sectionsCount", { count: modSections.length })}</span>
                                                             <span>
                                                                 {totalTopics
-                                                                    ? `${doneTopics}/${totalTopics} topics`
+                                                                    ? t("topicsRatio", {
+                                                                          done: doneTopics,
+                                                                          total: totalTopics,
+                                                                      })
                                                                     : t("noTopics")}
                                                             </span>
 
                                                             {(m.weekStart != null || m.weekEnd != null) && (
                                                                 <span className="tabular-nums">
-                                                                    Weeks {m.weekStart ?? "?"}–{m.weekEnd ?? "?"}
+                                                                    {t("weeksRange", {
+                                                                        start: m.weekStart ?? "?",
+                                                                        end: m.weekEnd ?? "?",
+                                                                    })}
                                                                 </span>
                                                             )}
                                                         </div>

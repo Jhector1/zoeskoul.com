@@ -1,0 +1,40 @@
+{
+  "auth": {
+    "brand": {
+      "name": "{appName}",
+      "tagline": "Connexion sécurisée"
+    },
+    "card": {
+      "title": "Se connecter",
+      "subtitle": "Choisissez une méthode de connexion pour continuer."
+    },
+    "providers": {
+      "sso": "Continuer avec le SSO",
+      "google": "Continuer avec Google",
+      "recommended": "Recommandé"
+    },
+    "status": {
+      "redirecting": "Redirection..."
+    },
+    "notes": {
+      "redirect": "Vous serez redirigé(e) après la connexion.",
+      "trouble": "Un problème ?",
+      "support": "Contacter l’assistance."
+    },
+    "legal": {
+      "prefix": "En continuant, vous acceptez nos",
+      "terms": "Conditions",
+      "and": "et",
+      "privacy": "Politique de confidentialité"
+    },
+    "errors": {
+      "title": "Problème de connexion",
+      "OAuthSignin": "Impossible de démarrer la connexion. Veuillez réessayer.",
+      "OAuthCallback": "Échec de la connexion lors de la validation. Veuillez réessayer.",
+      "OAuthAccountNotLinked": "Ce compte est déjà lié à une autre méthode de connexion. Utilisez la méthode initialement liée.",
+      "CredentialsSignin": "Identifiants invalides. Veuillez réessayer.",
+      "SessionRequired": "Veuillez vous connecter pour continuer.",
+      "Default": "Une erreur s’est produite. Veuillez réessayer."
+    }
+  }
+}

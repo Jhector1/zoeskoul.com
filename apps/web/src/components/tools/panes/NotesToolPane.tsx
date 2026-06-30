@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useMemo } from "react";
+import { useTranslations } from "next-intl";
 import { cx } from "../utils/cx";
 import { useToolDoc } from "../hooks/useToolDoc";
 
@@ -14,16 +15,17 @@ export default function NotesToolPane(props: {
     };
     format?: "markdown" | "plain";
 }) {
+    const t = useTranslations("ide.tools.notes");
     const format = props.format ?? "markdown";
     const { body, setBody, state, flush } = useToolDoc(props.noteKey, { format, debounceMs: 450 });
 
     const statusText = useMemo(() => {
-        if (state === "loading") return "Loading…";
-        if (state === "saving") return "Saving…";
-        if (state === "saved") return "Saved";
-        if (state === "error") return "Save failed";
-        return "Autosave enabled";
-    }, [state]);
+        if (state === "loading") return t("loading");
+        if (state === "saving") return t("saving");
+        if (state === "saved") return t("saved");
+        if (state === "error") return t("saveFailed");
+        return t("autosaveEnabled");
+    }, [state, t]);
 
     return (
         <div className="h-full flex flex-col gap-2">
@@ -38,7 +40,7 @@ export default function NotesToolPane(props: {
                         onClick={flush}
                         className="text-[11px] font-extrabold underline underline-offset-2 text-neutral-700 dark:text-white/70"
                     >
-                        Retry
+                        {t("retry")}
                     </button>
                 ) : null}
             </div>
@@ -47,11 +49,7 @@ export default function NotesToolPane(props: {
                 value={body}
                 onChange={(e) => setBody(e.target.value)}
                 onBlur={flush}
-                placeholder={`Quick template:
-- Key idea:
-- Example:
-- Common mistake:
-- Question:`}
+                placeholder={t("placeholder")}
                 className={cx(
                     "flex-1 min-h-0 w-full rounded-xl border px-3 py-2",
                     "border-neutral-200 bg-white text-sm text-neutral-900",

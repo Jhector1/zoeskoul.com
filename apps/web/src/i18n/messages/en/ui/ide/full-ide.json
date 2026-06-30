@@ -1,0 +1,118 @@
+{
+  "ide": {
+    "fullIde": {
+      "status": {
+        "conflict": "Conflict",
+        "saving": "Saving…",
+        "unsaved": "Unsaved",
+        "saved": "Saved",
+        "notSaved": "Not saved",
+        "unsavedTitle": "Unsaved changes",
+        "savedAt": "Saved {time}",
+        "notSavedYet": "Not saved yet"
+      },
+      "header": {
+        "sqlDialect": "SQL dialect",
+        "goBack": "Go back",
+        "back": "Back",
+        "files": "Files",
+        "saveCopy": "Save Copy",
+        "saveAs": "Save As",
+        "resolve": "Resolve",
+        "saving": "Saving…",
+        "save": "Save",
+        "upgrade": "Upgrade",
+        "logIn": "Log in"
+      },
+      "deleteModal": {
+        "title": "Delete",
+        "description": "Delete {name}?",
+        "fallbackItem": "this item",
+        "cancel": "Cancel",
+        "confirm": "Delete"
+      }
+    },
+    "explorer": {
+      "layout": {
+        "openFileExplorer": "Open file explorer",
+        "resizeExplorer": "Resize explorer",
+        "resizeExplorerHelp": "Drag or use arrow keys to resize explorer",
+        "files": "Files",
+        "close": "Close",
+        "closeFilesPanel": "Close files panel"
+      },
+      "menu": {
+        "openNodeActions": "Open node actions",
+        "actionsTitle": "Actions"
+      },
+      "tabs": {
+        "openFiles": "Open files",
+        "closeFile": "Close {name}"
+      },
+      "tree": {
+        "save": "Save",
+        "cancel": "Cancel",
+        "setAsEntry": "Set as Entry",
+        "entryFile": "Entry file",
+        "rename": "Rename",
+        "delete": "Delete",
+        "newFile": "New file",
+        "newFolder": "New folder",
+        "moveTo": "Move to…",
+        "moveUsingMenu": "Use Move to… from the menu",
+        "dragToMove": "Drag to move",
+        "moveDisabled": "Move disabled",
+        "useMoveAction": "Use Move to action",
+        "dragHandle": "Drag handle",
+        "collapse": "Collapse",
+        "expand": "Expand",
+        "entryRunsOnClick": "Runs when you click Run",
+        "entryBadge": "ENTRY",
+        "moveItem": "Move {name}",
+        "moveFallback": "item",
+        "moveHint": "Tap a folder to move into it, or move it back to root.",
+        "moveToRoot": "Move to root"
+      },
+      "pane": {
+        "title": "Explorer",
+        "sqlWorkspace": "SQL Workspace",
+        "undoTip": "Undo (Ctrl/Cmd+Z)",
+        "undo": "Undo",
+        "redoTip": "Redo (Ctrl/Cmd+Shift+Z / Ctrl/Cmd+Y)",
+        "redo": "Redo",
+        "collapseExplorer": "Collapse explorer",
+        "filterFiles": "Filter files…",
+        "filterSqlFiles": "Filter SQL files…",
+        "newFile": "New file",
+        "newFolder": "New folder",
+        "openFile": "Open file",
+        "openFolder": "Open folder",
+        "uploadDisabled": "Uploads are disabled for this workspace.",
+        "logInToUpload": "Log in to upload files.",
+        "uploadUnavailable": "Uploading files is not available in this workspace.",
+        "folderImportUnavailable": "Folder import is not available in this workspace.",
+        "uploadLimit": "Upload limit: {perFile} per file, {count} {fileWord} at a time.",
+        "upgrade": "Upgrade",
+        "sqlMode": "SQL Mode",
+        "activeDialect": "Active dialect:",
+        "sqlModeHelp": "SQL runs use the current editor file as the query source and show structured query results in the output pane.",
+        "webPreview": "Web Preview",
+        "webPreviewFiles": "Use index.html, styles.css, and script.js.",
+        "webPreviewHelp": "The right pane is a live browser preview. Changes refresh automatically.",
+        "sharedStdin": "Shared stdin",
+        "sharedInputPlaceholder": "Shared input…"
+      }
+    },
+    "editor": {
+      "e2eInputLabel": "E2E full IDE editor input",
+      "emptyState": {
+        "noSqlFile": "No SQL file selected.",
+        "noWebFile": "No web file selected.",
+        "noFile": "No file selected."
+      }
+    },
+    "terminal": {
+      "title": "Terminal"
+    }
+  }
+}

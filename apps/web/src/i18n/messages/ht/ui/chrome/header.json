@@ -1,0 +1,27 @@
+{
+  "Header": {
+    "language": "Lang",
+    "openSettings": "Louvri reglaj yo",
+    "settings": "Reglaj",
+    "settingsSubtitle": "Aparans ak lang",
+    "theme": "Tèm",
+    "themeHint": "Klè / Fènwa",
+    "sound": "Son",
+    "home": "Akèy",
+    "billing": "Pri",
+    "catalogs": "Katalòg",
+    "practice": "Aprann & Pratik",
+    "assignments": "Devwa",
+    "subjects": "Matyè",
+    "tagline": "Vizyèl • Pratik • Pwogrè",
+    "startSession": "Kòmanse",
+    "signIn": "Konekte",
+    "profile": "Pwofil",
+    "logout": "Dekonekte",
+    "menu": "Meni",
+    "close": "Fèmen",
+    "tip": "Konsèy: itilize Pratik pou swiv tantativ ou yo, repons ou jwenn kòrèk, ak kestyon ou rate yo.",
+    "toggleMenu": "Louvri/fèmen meni an",
+    "soundHint": "Limen oswa etenn son entèfas la"
+  }
+}

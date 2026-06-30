@@ -1,0 +1,602 @@
+{
+  "topicId": "breaking-projects-into-functions",
+  "subjectSlug": "python--applied-python-projects--draft",
+  "moduleSlug": "python-10-capstone-automation-project",
+  "sectionSlug": "python--applied-python-projects--draft-python-10-project-planning",
+  "prefix": "py10",
+  "minutes": 25,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "python",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "topic": {
+    "labelKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.breaking-projects-into-functions.label",
+    "summaryKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.breaking-projects-into-functions.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.breaking-projects-into-functions.cards.sketch0.title",
+      "sketchId": "functions-plan-overview",
+      "height": 420,
+      "tryIt": {
+        "id": "try-breaking-projects-into-functions-sketch0",
+        "titleKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.breaking-projects-into-functions.tryIt.try_breaking_projects_into_functions_sketch0.title",
+        "promptKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.breaking-projects-into-functions.tryIt.try_breaking_projects_into_functions_sketch0.prompt",
+        "exerciseKey": "project-step-1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.breaking-projects-into-functions.cards.sketch1.title",
+      "sketchId": "data-flow-between-functions",
+      "height": 420
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.breaking-projects-into-functions.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "displayKind": "capstone",
+        "uiKind": "capstone",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "project_step_2",
+            "titleKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.breaking-projects-into-functions.projectSteps.project_step_2.title",
+            "exerciseKey": "project-step-2",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "project_step_3",
+            "titleKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.breaking-projects-into-functions.projectSteps.project_step_3.title",
+            "exerciseKey": "project-step-3",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "project_step_4",
+            "titleKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.breaking-projects-into-functions.projectSteps.project_step_4.title",
+            "exerciseKey": "project-step-4",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "project_step_5",
+            "titleKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.breaking-projects-into-functions.projectSteps.project_step_5.title",
+            "exerciseKey": "project-step-5",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "functions-plan-overview",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--applied-python-projects--draft.python-10-capstone-automation-project.breaking-projects-into-functions.functions-plan-overview.title",
+      "bodyKey": "sketches.python--applied-python-projects--draft.python-10-capstone-automation-project.breaking-projects-into-functions.functions-plan-overview.bodyMarkdown"
+    },
+    {
+      "id": "data-flow-between-functions",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--applied-python-projects--draft.python-10-capstone-automation-project.breaking-projects-into-functions.data-flow-between-functions.title",
+      "bodyKey": "sketches.python--applied-python-projects--draft.python-10-capstone-automation-project.breaking-projects-into-functions.data-flow-between-functions.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "project-step-1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.breaking-projects-into-functions.quiz.project-step-1",
+      "language": "python",
+      "starterCode": "def parse_minutes(text):\n    # Convert a comma-separated string into a list of integers.\n    # Example: \"15, 20, 10\" -> [15, 20, 10]\n    pass",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def parse_minutes(text):\n    # Convert a comma-separated string into a list of integers.\n    # Example: \"15, 20, 10\" -> [15, 20, 10]\n    pass",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def parse_minutes(text):\n    parts = text.split(\",\")\n    minutes = []\n\n    for part in parts:\n        minutes.append(int(part.strip()))\n\n    return minutes",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def parse_minutes(text):\n    # Convert a comma-separated string into a list of integers.\n    # Example: \"15, 20, 10\" -> [15, 20, 10]\n    pass",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def parse_minutes(text):\n    # Convert a comma-separated string into a list of integers.\n    # Example: \"15, 20, 10\" -> [15, 20, 10]\n    pass",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def parse_minutes(text):\n    parts = text.split(\",\")\n    minutes = []\n\n    for part in parts:\n        minutes.append(int(part.strip()))\n\n    return minutes",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def parse_minutes(text):\n    parts = text.split(\",\")\n    minutes = []\n\n    for part in parts:\n        minutes.append(int(part.strip()))\n\n    return minutes",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "parse_minutes",
+            "args": [
+              "15, 20, 10"
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": [
+              15,
+              20,
+              10
+            ],
+            "expectedKind": "value"
+          },
+          {
+            "type": "function_returns",
+            "functionName": "parse_minutes",
+            "args": [
+              "5,30, 45"
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": [
+              5,
+              30,
+              45
+            ],
+            "expectedKind": "value"
+          },
+          {
+            "type": "no_stdout"
+          }
+        ]
+      }
+    },
+    {
+      "id": "project-step-2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.breaking-projects-into-functions.quiz.project-step-2",
+      "language": "python",
+      "starterCode": "def parse_minutes(text):\n    parts = text.split(\",\")\n    minutes = []\n\n    for part in parts:\n        minutes.append(int(part.strip()))\n\n    return minutes\n# Capstone step 2: Add a total function\n# Keep the working code above from the previous step.\n# Next, Continue the study-session capstone\n# Add only the focused change for this step below or inside the existing work.",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def parse_minutes(text):\n    parts = text.split(\",\")\n    minutes = []\n\n    for part in parts:\n        minutes.append(int(part.strip()))\n\n    return minutes\n# Capstone step 2: Add a total function\n# Keep the working code above from the previous step.\n# Next, Continue the study-session capstone\n# Add only the focused change for this step below or inside the existing work.",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def total_minutes(minutes_list):\n    return sum(minutes_list)",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def parse_minutes(text):\n    parts = text.split(\",\")\n    minutes = []\n\n    for part in parts:\n        minutes.append(int(part.strip()))\n\n    return minutes\n# Capstone step 2: Add a total function\n# Keep the working code above from the previous step.\n# Next, Continue the study-session capstone\n# Add only the focused change for this step below or inside the existing work.",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def parse_minutes(text):\n    parts = text.split(\",\")\n    minutes = []\n\n    for part in parts:\n        minutes.append(int(part.strip()))\n\n    return minutes\n# Capstone step 2: Add a total function\n# Keep the working code above from the previous step.\n# Next, Continue the study-session capstone\n# Add only the focused change for this step below or inside the existing work.",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def total_minutes(minutes_list):\n    return sum(minutes_list)",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def total_minutes(minutes_list):\n    return sum(minutes_list)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "total_minutes",
+            "args": [
+              [
+                15,
+                20,
+                10
+              ]
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": 45,
+            "expectedKind": "value"
+          },
+          {
+            "type": "function_returns",
+            "functionName": "total_minutes",
+            "args": [
+              [
+                5,
+                30,
+                45
+              ]
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": 80,
+            "expectedKind": "value"
+          },
+          {
+            "type": "no_stdout"
+          }
+        ]
+      }
+    },
+    {
+      "id": "project-step-3",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.breaking-projects-into-functions.quiz.project-step-3",
+      "language": "python",
+      "starterCode": "def total_minutes(minutes_list):\n    return sum(minutes_list)\n# Capstone step 3: Add an average function\n# Keep the working code above from the previous step.\n# Next, Build the next helper for the same capstone project\n# Add only the focused change for this step below or inside the existing work.",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def total_minutes(minutes_list):\n    return sum(minutes_list)\n# Capstone step 3: Add an average function\n# Keep the working code above from the previous step.\n# Next, Build the next helper for the same capstone project\n# Add only the focused change for this step below or inside the existing work.",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def average_minutes(minutes_list):\n    return sum(minutes_list) / len(minutes_list)",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def total_minutes(minutes_list):\n    return sum(minutes_list)\n# Capstone step 3: Add an average function\n# Keep the working code above from the previous step.\n# Next, Build the next helper for the same capstone project\n# Add only the focused change for this step below or inside the existing work.",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def total_minutes(minutes_list):\n    return sum(minutes_list)\n# Capstone step 3: Add an average function\n# Keep the working code above from the previous step.\n# Next, Build the next helper for the same capstone project\n# Add only the focused change for this step below or inside the existing work.",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def average_minutes(minutes_list):\n    return sum(minutes_list) / len(minutes_list)",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def average_minutes(minutes_list):\n    return sum(minutes_list) / len(minutes_list)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "average_minutes",
+            "args": [
+              [
+                15,
+                20,
+                10
+              ]
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": 15,
+            "expectedKind": "value"
+          },
+          {
+            "type": "function_returns",
+            "functionName": "average_minutes",
+            "args": [
+              [
+                5,
+                30,
+                45
+              ]
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": 26.666666666666668,
+            "expectedKind": "value"
+          },
+          {
+            "type": "no_stdout"
+          }
+        ]
+      }
+    },
+    {
+      "id": "project-step-4",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.breaking-projects-into-functions.quiz.project-step-4",
+      "language": "python",
+      "starterCode": "def average_minutes(minutes_list):\n    return sum(minutes_list) / len(minutes_list)\n# Capstone step 4: Build the report line\n# Keep the working code above from the previous step.\n# Next, Now connect the project pieces\n# Add only the focused change for this step below or inside the existing work.",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def average_minutes(minutes_list):\n    return sum(minutes_list) / len(minutes_list)\n# Capstone step 4: Build the report line\n# Keep the working code above from the previous step.\n# Next, Now connect the project pieces\n# Add only the focused change for this step below or inside the existing work.",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def parse_minutes(text):\n    parts = text.split(\",\")\n    minutes = []\n\n    for part in parts:\n        minutes.append(int(part.strip()))\n\n    return minutes\n\n\ndef total_minutes(minutes_list):\n    return sum(minutes_list)\n\n\ndef average_minutes(minutes_list):\n    return sum(minutes_list) / len(minutes_list)\n\n\ndef build_report(title, minutes_text):\n    minutes_list = parse_minutes(minutes_text)\n    total = total_minutes(minutes_list)\n    average = average_minutes(minutes_list)\n    return f\"{title} | total: {total} | average: {average}\"",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def average_minutes(minutes_list):\n    return sum(minutes_list) / len(minutes_list)\n# Capstone step 4: Build the report line\n# Keep the working code above from the previous step.\n# Next, Now connect the project pieces\n# Add only the focused change for this step below or inside the existing work.",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def average_minutes(minutes_list):\n    return sum(minutes_list) / len(minutes_list)\n# Capstone step 4: Build the report line\n# Keep the working code above from the previous step.\n# Next, Now connect the project pieces\n# Add only the focused change for this step below or inside the existing work.",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def parse_minutes(text):\n    parts = text.split(\",\")\n    minutes = []\n\n    for part in parts:\n        minutes.append(int(part.strip()))\n\n    return minutes\n\n\ndef total_minutes(minutes_list):\n    return sum(minutes_list)\n\n\ndef average_minutes(minutes_list):\n    return sum(minutes_list) / len(minutes_list)\n\n\ndef build_report(title, minutes_text):\n    minutes_list = parse_minutes(minutes_text)\n    total = total_minutes(minutes_list)\n    average = average_minutes(minutes_list)\n    return f\"{title} | total: {total} | average: {average}\"",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def parse_minutes(text):\n    parts = text.split(\",\")\n    minutes = []\n\n    for part in parts:\n        minutes.append(int(part.strip()))\n\n    return minutes\n\n\ndef total_minutes(minutes_list):\n    return sum(minutes_list)\n\n\ndef average_minutes(minutes_list):\n    return sum(minutes_list) / len(minutes_list)\n\n\ndef build_report(title, minutes_text):\n    minutes_list = parse_minutes(minutes_text)\n    total = total_minutes(minutes_list)\n    average = average_minutes(minutes_list)\n    return f\"{title} | total: {total} | average: {average}\"",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "build_report",
+            "args": [
+              "Study Plan",
+              "15, 20, 10"
+            ],
+            "argKinds": [
+              "value",
+              "value"
+            ],
+            "expected": "Study Plan | total: 45 | average: 15.0",
+            "expectedKind": "value"
+          },
+          {
+            "type": "function_returns",
+            "functionName": "build_report",
+            "args": [
+              "Weekend Review",
+              "5,30, 45"
+            ],
+            "argKinds": [
+              "value",
+              "value"
+            ],
+            "expected": "Weekend Review | total: 80 | average: 26.666666666666668",
+            "expectedKind": "value"
+          },
+          {
+            "type": "no_stdout"
+          }
+        ]
+      }
+    },
+    {
+      "id": "project-step-5",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.breaking-projects-into-functions.quiz.project-step-5",
+      "language": "python",
+      "starterCode": "def parse_minutes(text):\n    parts = text.split(\",\")\n    minutes = []\n\n    for part in parts:\n        minutes.append(int(part.strip()))\n\n    return minutes\n\n\ndef total_minutes(minutes_list):\n    return sum(minutes_list)\n\n\ndef average_minutes(minutes_list):\n    return sum(minutes_list) / len(minutes_list)\n\n\ndef build_report(title, minutes_text):\n    minutes_list = parse_minutes(minutes_text)\n    total = total_minutes(minutes_list)\n    average = average_minutes(minutes_list)\n    return f\"{title} | total: {total} | average: {average}\"\n# Capstone step 5: Finish the capstone summary function\n# Keep the working code above from the previous step.\n# Next, Complete the polished capstone step\n# Add only the focused change for this step below or inside the existing work.",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def parse_minutes(text):\n    parts = text.split(\",\")\n    minutes = []\n\n    for part in parts:\n        minutes.append(int(part.strip()))\n\n    return minutes\n\n\ndef total_minutes(minutes_list):\n    return sum(minutes_list)\n\n\ndef average_minutes(minutes_list):\n    return sum(minutes_list) / len(minutes_list)\n\n\ndef build_report(title, minutes_text):\n    minutes_list = parse_minutes(minutes_text)\n    total = total_minutes(minutes_list)\n    average = average_minutes(minutes_list)\n    return f\"{title} | total: {total} | average: {average}\"\n# Capstone step 5: Finish the capstone summary function\n# Keep the working code above from the previous step.\n# Next, Complete the polished capstone step\n# Add only the focused change for this step below or inside the existing work.",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def parse_minutes(text):\n    parts = text.split(\",\")\n    minutes = []\n\n    for part in parts:\n        minutes.append(int(part.strip()))\n\n    return minutes\n\n\ndef total_minutes(minutes_list):\n    return sum(minutes_list)\n\n\ndef average_minutes(minutes_list):\n    return sum(minutes_list) / len(minutes_list)\n\n\ndef build_report(title, minutes_text):\n    minutes_list = parse_minutes(minutes_text)\n    total = total_minutes(minutes_list)\n    average = average_minutes(minutes_list)\n    return f\"{title} | total: {total} | average: {average}\"\n\n\ndef project_summary(title, minutes_text):\n    minutes_list = parse_minutes(minutes_text)\n    total = total_minutes(minutes_list)\n    report = build_report(title, minutes_text)\n    return {\n        \"title\": title,\n        \"total\": total,\n        \"report\": report,\n    }",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def parse_minutes(text):\n    parts = text.split(\",\")\n    minutes = []\n\n    for part in parts:\n        minutes.append(int(part.strip()))\n\n    return minutes\n\n\ndef total_minutes(minutes_list):\n    return sum(minutes_list)\n\n\ndef average_minutes(minutes_list):\n    return sum(minutes_list) / len(minutes_list)\n\n\ndef build_report(title, minutes_text):\n    minutes_list = parse_minutes(minutes_text)\n    total = total_minutes(minutes_list)\n    average = average_minutes(minutes_list)\n    return f\"{title} | total: {total} | average: {average}\"\n# Capstone step 5: Finish the capstone summary function\n# Keep the working code above from the previous step.\n# Next, Complete the polished capstone step\n# Add only the focused change for this step below or inside the existing work.",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def parse_minutes(text):\n    parts = text.split(\",\")\n    minutes = []\n\n    for part in parts:\n        minutes.append(int(part.strip()))\n\n    return minutes\n\n\ndef total_minutes(minutes_list):\n    return sum(minutes_list)\n\n\ndef average_minutes(minutes_list):\n    return sum(minutes_list) / len(minutes_list)\n\n\ndef build_report(title, minutes_text):\n    minutes_list = parse_minutes(minutes_text)\n    total = total_minutes(minutes_list)\n    average = average_minutes(minutes_list)\n    return f\"{title} | total: {total} | average: {average}\"\n# Capstone step 5: Finish the capstone summary function\n# Keep the working code above from the previous step.\n# Next, Complete the polished capstone step\n# Add only the focused change for this step below or inside the existing work.",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def parse_minutes(text):\n    parts = text.split(\",\")\n    minutes = []\n\n    for part in parts:\n        minutes.append(int(part.strip()))\n\n    return minutes\n\n\ndef total_minutes(minutes_list):\n    return sum(minutes_list)\n\n\ndef average_minutes(minutes_list):\n    return sum(minutes_list) / len(minutes_list)\n\n\ndef build_report(title, minutes_text):\n    minutes_list = parse_minutes(minutes_text)\n    total = total_minutes(minutes_list)\n    average = average_minutes(minutes_list)\n    return f\"{title} | total: {total} | average: {average}\"\n\n\ndef project_summary(title, minutes_text):\n    minutes_list = parse_minutes(minutes_text)\n    total = total_minutes(minutes_list)\n    report = build_report(title, minutes_text)\n    return {\n        \"title\": title,\n        \"total\": total,\n        \"report\": report,\n    }",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def parse_minutes(text):\n    parts = text.split(\",\")\n    minutes = []\n\n    for part in parts:\n        minutes.append(int(part.strip()))\n\n    return minutes\n\n\ndef total_minutes(minutes_list):\n    return sum(minutes_list)\n\n\ndef average_minutes(minutes_list):\n    return sum(minutes_list) / len(minutes_list)\n\n\ndef build_report(title, minutes_text):\n    minutes_list = parse_minutes(minutes_text)\n    total = total_minutes(minutes_list)\n    average = average_minutes(minutes_list)\n    return f\"{title} | total: {total} | average: {average}\"\n\n\ndef project_summary(title, minutes_text):\n    minutes_list = parse_minutes(minutes_text)\n    total = total_minutes(minutes_list)\n    report = build_report(title, minutes_text)\n    return {\n        \"title\": title,\n        \"total\": total,\n        \"report\": report,\n    }",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "project_summary",
+            "args": [
+              "Study Plan",
+              "15, 20, 10"
+            ],
+            "argKinds": [
+              "value",
+              "value"
+            ],
+            "expected": [
+              [
+                "title",
+                "Study Plan"
+              ],
+              [
+                "total",
+                45
+              ],
+              [
+                "report",
+                "Study Plan | total: 45 | average: 15.0"
+              ]
+            ],
+            "expectedKind": "dict_entries"
+          },
+          {
+            "type": "function_returns",
+            "functionName": "project_summary",
+            "args": [
+              "Weekend Review",
+              "5,30, 45"
+            ],
+            "argKinds": [
+              "value",
+              "value"
+            ],
+            "expected": [
+              [
+                "title",
+                "Weekend Review"
+              ],
+              [
+                "total",
+                80
+              ],
+              [
+                "report",
+                "Weekend Review | total: 80 | average: 26.666666666666668"
+              ]
+            ],
+            "expectedKind": "dict_entries"
+          },
+          {
+            "type": "no_stdout"
+          }
+        ]
+      }
+    }
+  ]
+}

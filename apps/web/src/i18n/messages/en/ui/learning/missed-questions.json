@@ -1,0 +1,27 @@
+{
+  "PracticeReviewList": {
+    "questionLabel": "Question {n}",
+    "attemptsLabel": "Attempts:",
+    "hiddenCorrect": "Correct answer is hidden for this run.",
+    "status": {
+      "revealed": "Revealed",
+      "correct": "✓ Correct",
+      "incorrect": "✕ Not correct",
+      "unchecked": "Not checked"
+    },
+    "mini": {
+      "correct": "✓ Correct",
+      "incorrect": "✕ Not correct",
+      "unchecked": "Not checked yet"
+    },
+    "details": {
+      "summary": "Show expected / explanation",
+      "expected": "Expected",
+      "explanation": "Explanation"
+    },
+    "empty": {
+      "incorrect": "No incorrect questions.",
+      "all": "No questions yet."
+    }
+  }
+}

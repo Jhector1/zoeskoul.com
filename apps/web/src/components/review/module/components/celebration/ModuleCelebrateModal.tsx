@@ -2,6 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { cn } from "@/lib/cn";
 import type { CelebrateCopy } from "../../hooks/useReviewCelebrations";
 
@@ -44,6 +45,8 @@ export default function ModuleCelebrateModal({
                                                  onContinue,
                                                  onClose,
                                              }: Props) {
+    const t = useTranslations("review.celebration.module");
+
     return (
         <motion.div
             key="module-celebrate-backdrop"
@@ -73,7 +76,7 @@ export default function ModuleCelebrateModal({
                         </div>
 
                         <div className="min-w-0 flex-1">
-                            <div className="ui-celebrate-kicker">Milestone reached</div>
+                            <div className="ui-celebrate-kicker">{t("kicker")}</div>
 
                             <div className="mt-1 text-xl font-semibold tracking-tight text-[rgb(var(--ui-text)/0.98)]">
                                 {copy.title}
@@ -92,7 +95,7 @@ export default function ModuleCelebrateModal({
                             <div className="mt-4 flex flex-wrap gap-2">
                                 {copy.streak ? (
                                     <span className="ui-celebrate-badge ui-celebrate-badge-warn">
-                                        🔥 {copy.streak} streak
+                                        🔥 {t("streak", { count: copy.streak })}
                                     </span>
                                 ) : null}
 
@@ -103,7 +106,10 @@ export default function ModuleCelebrateModal({
                                 ) : null}
 
                                 <span className="ui-celebrate-badge ui-celebrate-badge-warn">
-                                    {moduleProgress.done}/{moduleProgress.total} topics
+                                    {t("progress", {
+                                        done: moduleProgress.done,
+                                        total: moduleProgress.total,
+                                    })}
                                 </span>
                             </div>
 
@@ -121,7 +127,7 @@ export default function ModuleCelebrateModal({
                                     {isPending ? (
                                         <span className="inline-flex items-center gap-2">
                                             <span className="ui-quiz-spinner" />
-                                            Continuing…
+                                            {t("continuing")}
                                         </span>
                                     ) : (
                                         <>
@@ -139,7 +145,7 @@ export default function ModuleCelebrateModal({
                                         isPending && "cursor-not-allowed opacity-60",
                                     )}
                                 >
-                                    Review module
+                                    {t("reviewModule")}
                                 </button>
                             </div>
                         </div>

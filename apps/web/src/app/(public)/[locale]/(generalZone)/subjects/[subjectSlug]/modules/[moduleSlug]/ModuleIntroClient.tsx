@@ -333,9 +333,13 @@ export default function ModuleIntroClient({ locale, subject, module, stats }: Pr
                         <div className="mt-4 grid gap-4 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-end">
                             <div className="space-y-2">
                                 <div className="flex flex-wrap items-center justify-between gap-2">
-                                    <div className="ui-meta">Progress</div>
+                                    <div className="ui-meta">{t("progress.title")}</div>
                                     <div className="ui-meta-strong tabular-nums">
-                                        {completedCount}/{stats.topicsCount} • {progressPct}%
+                                        {t("progress.summary", {
+                                            done: completedCount,
+                                            total: stats.topicsCount,
+                                            pct: progressPct,
+                                        })}
                                     </div>
                                 </div>
 
@@ -360,12 +364,12 @@ export default function ModuleIntroClient({ locale, subject, module, stats }: Pr
                                 value={
                                     module.weekStart != null || module.weekEnd != null
                                         ? `${module.weekStart ?? "?"}–${module.weekEnd ?? "?"}`
-                                        : "—"
+                                        : t("emptyValue")
                                 }
                             />
                             <CompactMeta
                                 label={t("labels.est")}
-                                value={est != null ? t("minutesShort", { n: est }) : "—"}
+                                value={est != null ? t("minutesShort", { n: est }) : t("emptyValue")}
                             />
                         </div>
                     </Surface>
@@ -373,14 +377,14 @@ export default function ModuleIntroClient({ locale, subject, module, stats }: Pr
                     <div className="grid gap-3 lg:grid-cols-[minmax(0,1.35fr)_minmax(260px,0.8fr)]">
                         <InfoSection
                             kicker={t("sections.prereqs")}
-                            title={prereqs.length ? "Before you start" : "Ready to begin"}
+                            title={prereqs.length ? t("sections.beforeStart") : t("sections.readyToBegin")}
                         >
                             {prereqs.length ? (
                                 <BulletList items={prereqs} marker="arrow" />
                             ) : (
                                 <Surface tone="muted" className="rounded-xl p-4">
                                     <p className="text-sm leading-6 text-[rgb(var(--ui-text-muted)/0.9)]">
-                                        This module is ready to start with no required prerequisites listed.
+                                        {t("sections.noPrereqs")}
                                     </p>
                                 </Surface>
                             )}
@@ -415,7 +419,7 @@ export default function ModuleIntroClient({ locale, subject, module, stats }: Pr
                                             {statusText}
                                         </div>
                                         <div className="mt-1 text-xs text-[rgb(var(--ui-text-muted)/0.84)]">
-                                            Module #{module.order + 1}
+                                            {t("progress.moduleNumber", { n: module.order + 1 })}
                                         </div>
                                     </div>
                                 </div>
@@ -423,7 +427,7 @@ export default function ModuleIntroClient({ locale, subject, module, stats }: Pr
                                 <Surface tone="muted" className="rounded-xl p-3">
                                     <div className="flex items-center justify-between gap-2">
                                         <span className="text-xs text-[rgb(var(--ui-text-muted)/0.84)]">
-                                            Topics completed
+                                            {t("progress.topicsCompleted")}
                                         </span>
                                         <span className="text-sm font-medium tabular-nums text-[rgb(var(--ui-text)/0.96)]">
                                             {completedCount}/{stats.topicsCount}

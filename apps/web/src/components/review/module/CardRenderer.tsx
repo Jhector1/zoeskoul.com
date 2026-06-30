@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { useTranslations } from "next-intl";
 import type { ReviewCard, ReviewEmbeddedTryIt } from "@/lib/subjects/types";
 import type {
     ReviewTopicProgress,
@@ -73,6 +74,7 @@ export default function CardRenderer(props: {
     defaultToolLanguage?: string;
     onNavigateToExerciseRoute?: (args: { cardId: string; exerciseId: string }) => Promise<void> | void;
 }) {
+    const reviewT = useTranslations("review.cardRenderer");
     const ui = useTaggedT("cardUi");
     const tt = useTaggedT();
 
@@ -154,7 +156,7 @@ export default function CardRenderer(props: {
                 buttonText: done
                     ? ui.t("actions.readDone", {}, "✓ Read")
                     : ui.t("actions.read", {}, "Mark as read"),
-                disabledReason: "Complete the Try it yourself task to mark this lesson as read.",
+                disabledReason: reviewT("completeTryItToRead"),
                 title: ui.t("actions.readTitle", {}, "Mark this lesson as read"),
             };
         }
@@ -163,7 +165,7 @@ export default function CardRenderer(props: {
             buttonText: done
                 ? ui.t("actions.doneDone", {}, "✓ Done")
                 : ui.t("actions.done", {}, "Mark as done"),
-            disabledReason: "Complete the Try it yourself task to mark this lesson as done.",
+            disabledReason: reviewT("completeTryItToDone"),
             title: ui.t("actions.doneTitle", {}, "Mark this lesson as done"),
         };
     };
@@ -190,7 +192,7 @@ export default function CardRenderer(props: {
         const title = tt.resolve(
             tryIt.title ?? null,
             {},
-            tryIt.title ?? "Try it yourself",
+            tryIt.title ?? reviewT("tryItYourself"),
         );
 
         const resolvedTryItSpec = resolveDeepTagged(
@@ -210,7 +212,7 @@ export default function CardRenderer(props: {
 
         return (
             <div className="mt-4 rounded-xl border border-emerald-200 bg-emerald-50/40 p-3 dark:border-emerald-400/20 dark:bg-emerald-950/20">
-                <div className="ui-title-sm">{title || "Try it yourself"}</div>
+                <div className="ui-title-sm">{title || reviewT("tryItYourself")}</div>
 
                 {process.env.NODE_ENV !== "production" ? (
                     <textarea
@@ -235,7 +237,7 @@ export default function CardRenderer(props: {
 
                 {!progressHydrated ? (
                     <div className="mt-2 ui-meta">
-                        Loading saved try it yourself state…
+                        {reviewT("loadingSavedState")}
                     </div>
                 ) : (
                     <QuizBlock

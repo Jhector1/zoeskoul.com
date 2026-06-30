@@ -6,6 +6,8 @@
     "dev": "next dev --port 3000",
     "build": "next build",
     "i18n:generate": "node scripts/generate-i18n-manifest.mjs",
+    "i18n:audit-ui": "node scripts/audit-hardcoded-ui-text.mjs",
+    "i18n:check": "pnpm i18n:generate && pnpm i18n:audit-ui",
     "gen:topic-manifests": "tsx scripts/generate-topic-manifests.ts",
     "gen:subject-manifests": "tsx scripts/generate-subject-manifests.ts",
     "gen:catalog-manifests": "tsx scripts/generate-catalog-manifests.ts",

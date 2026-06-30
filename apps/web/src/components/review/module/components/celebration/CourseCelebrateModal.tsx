@@ -2,6 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import type { CourseCelebrateCopy } from "../../hooks/useReviewCelebrations";
 
 const MODULE_MODAL_BACKDROP_TRANSITION = {
@@ -35,6 +36,8 @@ export default function CourseCelebrateModal({
                                                  onPrimary,
                                                  onClose,
                                              }: Props) {
+    const t = useTranslations("review.celebration.course");
+
     return (
         <motion.div
             key="course-celebrate-backdrop"
@@ -65,7 +68,7 @@ export default function CourseCelebrateModal({
                         </div>
 
                         <div className="min-w-0 flex-1">
-                            <div className="ui-celebrate-kicker">Course finished</div>
+                            <div className="ui-celebrate-kicker">{t("kicker")}</div>
 
                             <div className="mt-1 text-xl font-semibold tracking-tight text-[rgb(var(--ui-text)/0.98)]">
                                 {copy.title}
@@ -84,18 +87,18 @@ export default function CourseCelebrateModal({
                             <div className="mt-4 flex flex-wrap gap-2">
                                 {copy.streak ? (
                                     <span className="ui-celebrate-badge ui-celebrate-badge-success">
-                                        🔥 {copy.streak} streak
+                                        🔥 {t("streak", { count: copy.streak })}
                                     </span>
                                 ) : null}
 
                                 {copy.totalXp != null ? (
                                     <span className="ui-celebrate-badge ui-celebrate-badge-success">
-                                        {copy.totalXp.toLocaleString()} XP
+                                        {t("xp", { count: copy.totalXp.toLocaleString() })}
                                     </span>
                                 ) : null}
 
                                 <span className="ui-celebrate-badge ui-celebrate-badge-success">
-                                    Course complete
+                                    {t("complete")}
                                 </span>
                             </div>
 
@@ -113,7 +116,7 @@ export default function CourseCelebrateModal({
                                     onClick={onClose}
                                     className="ui-btn ui-btn-secondary"
                                 >
-                                    Stay here
+                                    {t("stayHere")}
                                 </button>
                             </div>
                         </div>

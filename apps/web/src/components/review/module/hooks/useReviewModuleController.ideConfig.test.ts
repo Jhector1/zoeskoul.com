@@ -22,7 +22,24 @@ describe("resolveRightRailIdeConfig", () => {
         expect(resolved?.terminalCwd).toBe("/workspace/park-terminal-map/requests");
     });
 
-    it("falls back to sticky tool state only when no current exercise config exists", () => {
+    it("prefers current route runtime config over stale sticky tool state", () => {
+        const resolved = resolveRightRailIdeConfig({
+            toolIdeConfig: {
+                terminalSessionScope: "exercise",
+                terminalCwd: "/workspace",
+            },
+            rightRailExerciseIdeConfig: null,
+            boundExerciseIdeConfig: null,
+            runtimeEffectiveIdeConfig: {
+                terminalSessionScope: "exercise",
+                terminalCwd: "/workspace/park-terminal-map",
+            },
+        });
+
+        expect(resolved?.terminalCwd).toBe("/workspace/park-terminal-map");
+    });
+
+    it("falls back to sticky tool state only when no current route or exercise config exists", () => {
         const resolved = resolveRightRailIdeConfig({
             toolIdeConfig: {
                 terminalSessionScope: "exercise",
@@ -30,10 +47,7 @@ describe("resolveRightRailIdeConfig", () => {
             },
             rightRailExerciseIdeConfig: null,
             boundExerciseIdeConfig: null,
-            runtimeEffectiveIdeConfig: {
-                terminalSessionScope: "exercise",
-                terminalCwd: "/workspace",
-            },
+            runtimeEffectiveIdeConfig: null,
         });
 
         expect(resolved?.terminalCwd).toBe("/workspace/park-terminal-map");

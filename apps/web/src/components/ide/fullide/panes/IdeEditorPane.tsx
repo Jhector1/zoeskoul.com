@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { useTranslations } from "next-intl";
 import CodeRunner from "@/components/code/CodeRunner";
 import { learnerUiFlags } from "@/lib/config/learnerUiFlags";
 import {
@@ -118,8 +119,10 @@ export default function IdeEditorPane({
                                           sqlSetupSql,
                                           sqlInitialTableSnapshots,
                                           onTerminalEvidenceChange,
-                                          onTerminalSyncReady
+                                      onTerminalSyncReady
                                       }: Props) {
+    const t = useTranslations("ide.editor");
+    const terminalT = useTranslations("ide.terminal");
     const isWeb = language === "web";
     const terminalWorkspaceOnly =
         services.editor.showEditor === false &&
@@ -199,7 +202,7 @@ export default function IdeEditorPane({
                 {process.env.NODE_ENV !== "production" && activeFile ? (
                     <textarea
                         data-testid="fullide-editor-e2e-input"
-                        aria-label="E2E full IDE editor input"
+                        aria-label={t("e2eInputLabel")}
                         value={activeFile.content ?? ""}
                         onChange={(e) => handleBoundCodeChange(e.target.value)}
                         style={{
@@ -278,7 +281,7 @@ export default function IdeEditorPane({
                                         getWorkspaceFiles: () => workspaceEntries,
                                         onTerminalSnapshotFiles: onApplyTerminalSnapshotFiles,
                                         lazy: true,
-                                        title: "Terminal",
+                                        title: terminalT("title"),
                                         historyScopeKey: terminalHistoryScopeKey,
                                     }
                                     : undefined
@@ -290,7 +293,7 @@ export default function IdeEditorPane({
                     </div>
                 ) : (
                     <div className="flex h-full min-h-[280px] items-center justify-center rounded-none border border-dashed border-neutral-300 bg-white p-6 text-sm font-extrabold text-neutral-600 sm:rounded-xl dark:border-white/10 dark:bg-black/30 dark:text-white/70">
-                        {isSql ? "No SQL file selected." : isWeb ? "No web file selected." : "No file selected."}
+                        {isSql ? t("emptyState.noSqlFile") : isWeb ? t("emptyState.noWebFile") : t("emptyState.noFile")}
                     </div>
                 )}
             </div>

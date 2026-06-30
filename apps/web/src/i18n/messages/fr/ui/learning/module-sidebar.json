@@ -1,0 +1,18 @@
+{
+  "moduleSidebarUi": {
+    "topicsLabel": "Sujets",
+    "unlockEnabled": "DÉVERROUILLAGE ACTIVÉ",
+    "collapseTitle": "Réduire la barre latérale",
+    "resetTitle": "Réinitialiser toute la progression de ce module",
+    "reset": "Réinitialiser",
+    "current": "EN COURS",
+    "nextModule": {
+      "title": "Module suivant",
+      "loading": "Chargement…",
+      "error": "Impossible de charger la navigation.",
+      "unlocked": "Déverrouillé.",
+      "unlockedAfterAssignment": "Déverrouillé après le devoir.",
+      "locked": "Terminez les sujets + le devoir pour déverrouiller."
+    }
+  }
+}

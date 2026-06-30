@@ -1,0 +1,46 @@
+{
+  "Footer": {
+    "tagline": "Apprentissage interactif pour la programmation, les mathématiques, l’IA, les langues, et bien plus encore.",
+    "badge": "Apprendre • Pratiquer • Progresser",
+    "highlights": {
+      "practiceFirst": "Apprentissage axé sur la pratique",
+      "multilingual": "Expérience multilingue",
+      "legal": "Pages claires sur le droit et la confidentialité",
+      "paths": "Parcours d’apprentissage structurés"
+    },
+    "sections": {
+      "explore": "Explorer",
+      "subjects": "Sujets",
+      "company": "Entreprise",
+      "legal": "Mentions légales"
+    },
+    "links": {
+      "home": "Accueil",
+      "subjects": "Sujets",
+      "pricing": "Tarifs",
+      "sandbox": "Bac à sable",
+      "python": "Python",
+      "linearAlgebra": "Algèbre linéaire",
+      "aiChatgpt": "IA et ChatGPT",
+      "cybersecurity": "Cybersécurité",
+      "haitianCreole": "Créole haïtien",
+      "contact": "Contact",
+      "support": "Support",
+      "legalCenter": "Centre juridique",
+      "terms": "Conditions",
+      "privacy": "Confidentialité",
+      "cookies": "Cookies",
+      "refunds": "Remboursements",
+      "acceptableUse": "Utilisation acceptable"
+    },
+    "actions": {
+      "browseSubjects": "Voir les sujets",
+      "legalCenter": "Centre juridique"
+    },
+    "bottom": {
+      "rights": "Tous droits réservés.",
+      "locale": "Langue",
+      "builtFor": "Conçu pour un apprentissage guidé et accessible"
+    }
+  }
+}

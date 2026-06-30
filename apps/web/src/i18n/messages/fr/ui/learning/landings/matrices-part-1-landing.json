@@ -1,0 +1,35 @@
+{
+  "MatricesPart1Landing": {
+    "pageTitle": "Matrices — Partie 1",
+    "pageIntro": "Apprends ce qu’est une matrice, comment lire sa forme, l’indexer/la découper comme en NumPy, et développe l’intuition pour la multiplication, la transposée et la symétrie.",
+    "quickStartEasy": "Démarrage rapide (Facile)",
+    "whatYouLearn": "Ce que tu vas apprendre",
+    "readMaterial": "Lire le cours",
+    "practiceNow": "S’entraîner",
+    "practiceNowHint": "Astuce : choisis une difficulté et répète jusqu’à ce que ça devienne automatique.",
+    "parts": {
+      "part1": {
+        "badge": "BASES",
+        "title": "Matrices : sens, forme et opérations de base",
+        "subtitle": "Des tableaux de données aux transformations : indexation, matrices spéciales, multiplication, transposée, symétrie",
+        "bullets": {
+          "0": "Lire la forme (lignes × colonnes) et compter le nombre total d’éléments",
+          "1": "Voir une matrice comme un tableau de données ou des vecteurs-colonnes empilés",
+          "2": "Passer de l’indexation mathématique à l’indexation NumPy (base 0)",
+          "3": "Déterminer la forme d’un slice avec les intervalles semi-ouverts de Python",
+          "4": "Reconnaître les matrices identité, diagonale et triangulaire",
+          "5": "Distinguer produit élément par élément et produit matriciel (* vs @), et le “shift” A + λI",
+          "6": "Trouver la forme de AB, vérifier si le produit est défini, et calculer une entrée via un produit scalaire",
+          "7": "Utiliser les règles de transposée (LIVE EVIL), les formes après transposée, et reconnaître les matrices symétriques"
+        }
+      }
+    },
+    "recommendedPathTitle": "Parcours recommandé",
+    "recommended": {
+      "0": "Commence par la forme + l’indexation jusqu’à répondre rapidement.",
+      "1": "Passe à la forme/validité de la multiplication, puis calcule des entrées.",
+      "2": "Termine avec les motifs transposée + symétrie."
+    },
+    "routeHint": "Routes : /practice/review/matrices_part1 (cours) • /practice?section=module-2-matrices (pratique)"
+  }
+}

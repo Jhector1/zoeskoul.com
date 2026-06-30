@@ -1,0 +1,35 @@
+{
+  "MatricesPart2Landing": {
+    "pageTitle": "Matrices — Partie 2",
+    "pageIntro": "Développe l’intuition sur les normes, le rang, la tolérance numérique et la stabilité. Comprends pourquoi un tout petit bruit peut changer les résultats et comment comparer des matrices correctement en pratique.",
+    "quickStartEasy": "Démarrage rapide (Facile)",
+    "whatYouLearn": "Ce que tu vas apprendre",
+    "readMaterial": "Lire le cours",
+    "practiceNow": "S’entraîner maintenant",
+    "practiceNowHint": "Astuce : commence avec de petites matrices, puis augmente la taille quand le schéma devient automatique.",
+    "parts": {
+      "part2": {
+        "badge": "INTUITION NUMÉRIQUE",
+        "title": "Matrices : normes, rang, tolérance et stabilité",
+        "subtitle": "Mesurer la taille, détecter la structure et gérer la réalité des nombres flottants avec ε",
+        "bullets": {
+          "0": "Calculer la norme de Frobenius à partir des entrées et interpréter ce qu’elle mesure",
+          "1": "Comprendre la norme 2 (norme spectrale) comme le facteur d’étirement maximal",
+          "2": "Comparer les normes et savoir quand chacune est utile (rapide vs sens géométrique)",
+          "3": "Calculer le rang via pivots / RREF et relier le rang à l’indépendance linéaire",
+          "4": "Utiliser une tolérance ε pour définir un rang effectif (rangε) avec du bruit",
+          "5": "Voir comment une petite perturbation peut changer le rang et pourquoi « presque dépendant » compte",
+          "6": "Reconnaître les matrices presque singulières / mal conditionnées et la sensibilité des solutions",
+          "7": "Pratiquer des workflows robustes : tolérances, arrondis et tests d’égalité sûrs"
+        }
+      }
+    },
+    "recommendedPathTitle": "Parcours recommandé",
+    "recommended": {
+      "0": "Commence par des exercices de norme de Frobenius jusqu’à calculer vite.",
+      "1": "Passe ensuite au rang et aux pivots, puis compare rang vs rangε sous bruit.",
+      "2": "Termine par l’intuition de stabilité/conditionnement avec des exemples presque singuliers."
+    },
+    "routeHint": "Routes : /practice/review/matrices_part2 (lire) • /practice?section=module-3-matrices (pratiquer)"
+  }
+}

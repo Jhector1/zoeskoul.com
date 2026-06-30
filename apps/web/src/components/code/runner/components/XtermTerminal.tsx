@@ -156,6 +156,7 @@ export default function XtermTerminal(props: {
     onSendData: (data: string) => void;
     onResize: (cols: number, rows: number) => void;
     optimisticLocalEcho?: boolean;
+    cwdLabel?: string | null;
     onBeforeSubmitEnter?: () => Promise<void>;
     onAfterSubmitEnter?: () => Promise<void>;
     recoverState?: TerminalRecoverState;
@@ -178,6 +179,9 @@ export default function XtermTerminal(props: {
     const recoverState = props.recoverState ?? "none";
     const recoverMessage = props.recoverMessage ?? null;
     const restarting = props.restarting === true;
+    const cwdLabel = typeof props.cwdLabel === "string" && props.cwdLabel.trim()
+        ? props.cwdLabel.trim()
+        : null;
     const interactiveReady = props.interactiveReady ?? (inputEnabled && !disabled);
     const captureInactiveInput = props.captureInactiveInput === true;
     const onRestart = props.onRestart;
@@ -357,6 +361,8 @@ export default function XtermTerminal(props: {
             }`,
         [busy, inputEnabled, interactiveReady, lastResult],
     );
+
+    const normalizedCwdLabel = cwdLabel;
 
     const scrollTerminalToBottom = useCallback(() => {
         const term = termRef.current;
@@ -751,8 +757,17 @@ export default function XtermTerminal(props: {
                     Terminal
                 </div>
 
-                <div className="text-[10px] sm:text-[11px] font-extrabold text-neutral-500 dark:text-white/50">
-                    {statusText}
+                <div className="flex min-w-0 items-center justify-end gap-2 text-[10px] font-extrabold text-neutral-500 dark:text-white/50 sm:text-[11px]">
+                    {normalizedCwdLabel ? (
+                        <span
+                            className="max-w-[18rem] truncate rounded-full border border-neutral-200 bg-white/70 px-2 py-0.5 font-mono text-[10px] text-neutral-600 dark:border-white/10 dark:bg-white/[0.06] dark:text-white/60"
+                            title={`Working directory: ${normalizedCwdLabel}`}
+                            data-testid="interactive-terminal-cwd"
+                        >
+                            cwd {normalizedCwdLabel}
+                        </span>
+                    ) : null}
+                    <span>{statusText}</span>
                 </div>
             </div>
 

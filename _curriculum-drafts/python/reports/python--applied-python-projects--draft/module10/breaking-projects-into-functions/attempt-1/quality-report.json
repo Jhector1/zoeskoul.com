@@ -1,0 +1,50 @@
+{
+  "ok": true,
+  "profileId": "python",
+  "subjectSlug": "python--applied-python-projects--draft",
+  "courseSlug": "applied-python-projects",
+  "topicId": "breaking-projects-into-functions",
+  "summary": {
+    "modules": 1,
+    "topicsTotal": 1,
+    "exercises": 5,
+    "exerciseKinds": {
+      "code_input": 5
+    },
+    "codeInputs": 5,
+    "projects": 5,
+    "capstones": 5,
+    "thinFixedTestCount": 0,
+    "blockers": 0,
+    "errors": 0,
+    "warnings": 2,
+    "infos": 0
+  },
+  "severityCounts": {
+    "blocker": 0,
+    "error": 0,
+    "warning": 2,
+    "info": 0
+  },
+  "issues": [
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "python-10-capstone-automation-project/python-10-project-planning/breaking-projects-into-functions",
+      "profileId": "python",
+      "moduleId": "python-10-capstone-automation-project",
+      "topicId": "breaking-projects-into-functions",
+      "message": "Topic \"breaking-projects-into-functions\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "STARTER_MAY_REVEAL_SOLUTION_STRUCTURE",
+      "severity": "warning",
+      "path": "python-10-capstone-automation-project/python-10-project-planning/breaking-projects-into-functions",
+      "profileId": "python",
+      "moduleId": "python-10-capstone-automation-project",
+      "topicId": "breaking-projects-into-functions",
+      "exerciseId": "project-step-4",
+      "message": "Exercise \"project-step-4\" starterCode appears to contain most of the final solution structure."
+    }
+  ]
+}

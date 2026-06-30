@@ -1,0 +1,572 @@
+{
+  "topicId": "breaking-projects-into-functions",
+  "subjectSlug": "python--applied-python-projects--draft",
+  "moduleSlug": "python-10-capstone-automation-project",
+  "sectionSlug": "python--applied-python-projects--draft-python-10-project-planning",
+  "prefix": "py10",
+  "minutes": 25,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "python",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "topic": {
+    "labelKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.breaking-projects-into-functions.label",
+    "summaryKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.breaking-projects-into-functions.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.breaking-projects-into-functions.cards.sketch0.title",
+      "sketchId": "plan-functions",
+      "height": 420,
+      "tryIt": {
+        "id": "try-breaking-projects-into-functions-sketch0",
+        "titleKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.breaking-projects-into-functions.tryIt.try_breaking_projects_into_functions_sketch0.title",
+        "promptKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.breaking-projects-into-functions.tryIt.try_breaking_projects_into_functions_sketch0.prompt",
+        "exerciseKey": "project-step-1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.breaking-projects-into-functions.cards.sketch1.title",
+      "sketchId": "inputs-outputs-flow",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.breaking-projects-into-functions.cards.sketch2.title",
+      "sketchId": "test-small-parts",
+      "height": 420
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.breaking-projects-into-functions.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "displayKind": "capstone",
+        "uiKind": "capstone",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "project_step_1",
+            "titleKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.breaking-projects-into-functions.projectSteps.project_step_1.title",
+            "exerciseKey": "project-step-1",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "project_step_2",
+            "titleKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.breaking-projects-into-functions.projectSteps.project_step_2.title",
+            "exerciseKey": "project-step-2",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "project_step_3",
+            "titleKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.breaking-projects-into-functions.projectSteps.project_step_3.title",
+            "exerciseKey": "project-step-3",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "project_step_4",
+            "titleKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.breaking-projects-into-functions.projectSteps.project_step_4.title",
+            "exerciseKey": "project-step-4",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "project_step_5",
+            "titleKey": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.breaking-projects-into-functions.projectSteps.project_step_5.title",
+            "exerciseKey": "project-step-5",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "plan-functions",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--applied-python-projects--draft.python-10-capstone-automation-project.breaking-projects-into-functions.plan-functions.title",
+      "bodyKey": "sketches.python--applied-python-projects--draft.python-10-capstone-automation-project.breaking-projects-into-functions.plan-functions.bodyMarkdown"
+    },
+    {
+      "id": "inputs-outputs-flow",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--applied-python-projects--draft.python-10-capstone-automation-project.breaking-projects-into-functions.inputs-outputs-flow.title",
+      "bodyKey": "sketches.python--applied-python-projects--draft.python-10-capstone-automation-project.breaking-projects-into-functions.inputs-outputs-flow.bodyMarkdown"
+    },
+    {
+      "id": "test-small-parts",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--applied-python-projects--draft.python-10-capstone-automation-project.breaking-projects-into-functions.test-small-parts.title",
+      "bodyKey": "sketches.python--applied-python-projects--draft.python-10-capstone-automation-project.breaking-projects-into-functions.test-small-parts.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "project-step-1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.breaking-projects-into-functions.quiz.project-step-1",
+      "language": "python",
+      "starterCode": "def build_plan():\n    # TODO: return the project stages as a list\n    pass\n\n\nstages = build_plan()\n\n# TODO: print each stage on its own line",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def build_plan():\n    # TODO: return the project stages as a list\n    pass\n\n\nstages = build_plan()\n\n# TODO: print each stage on its own line",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def build_plan():\n    return ['load data', 'clean data', 'summarize data', 'save report']\n\n\nstages = build_plan()\n\nfor stage in stages:\n    print(stage)",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def build_plan():\n    # TODO: return the project stages as a list\n    pass\n\n\nstages = build_plan()\n\n# TODO: print each stage on its own line",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def build_plan():\n    # TODO: return the project stages as a list\n    pass\n\n\nstages = build_plan()\n\n# TODO: print each stage on its own line",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def build_plan():\n    return ['load data', 'clean data', 'summarize data', 'save report']\n\n\nstages = build_plan()\n\nfor stage in stages:\n    print(stage)",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def build_plan():\n    return ['load data', 'clean data', 'summarize data', 'save report']\n\n\nstages = build_plan()\n\nfor stage in stages:\n    print(stage)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "build_plan",
+            "args": [],
+            "argKinds": [],
+            "expected": "load data\nclean data\nsummarize data\nsave report",
+            "message": "Return the expected result for build_plan()."
+          },
+          {
+            "type": "function_returns",
+            "functionName": "build_plan",
+            "args": [],
+            "argKinds": [],
+            "expected": "load data\nclean data\nsummarize data\nsave report",
+            "message": "Return the expected result for build_plan()."
+          },
+          {
+            "type": "no_stdout",
+            "message": "This task should return a value instead of printing output."
+          }
+        ]
+      }
+    },
+    {
+      "id": "project-step-2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.breaking-projects-into-functions.quiz.project-step-2",
+      "language": "python",
+      "starterCode": "def build_plan():\n    return ['load data', 'clean data', 'summarize data', 'save report']\n\n\nstages = build_plan()\n\nfor stage in stages:\n    print(stage)\n# Capstone step 2: Read and clean report lines\n# Keep the working code above from the previous step.\n# Next, Build on the project by organizing file input and cleaning into functions\n# Add only the focused change for this step below or inside the existing work.",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def build_plan():\n    return ['load data', 'clean data', 'summarize data', 'save report']\n\n\nstages = build_plan()\n\nfor stage in stages:\n    print(stage)\n# Capstone step 2: Read and clean report lines\n# Keep the working code above from the previous step.\n# Next, Build on the project by organizing file input and cleaning into functions\n# Add only the focused change for this step below or inside the existing work.",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def build_plan():\n    return ['load data', 'clean data', 'summarize data', 'save report']\n\n\ndef load_lines(path):\n    with open(path, 'r') as file:\n        return file.readlines()\n\n\ndef clean_lines(lines):\n    cleaned = []\n    for line in lines:\n        stripped = line.strip()\n        if stripped != '':\n            cleaned.append(stripped)\n    return cleaned\n\n\nraw_lines = load_lines('data/raw_notes.txt')\ncleaned_lines = clean_lines(raw_lines)\n\nfor line in cleaned_lines:\n    print(line)",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def build_plan():\n    return ['load data', 'clean data', 'summarize data', 'save report']\n\n\nstages = build_plan()\n\nfor stage in stages:\n    print(stage)\n# Capstone step 2: Read and clean report lines\n# Keep the working code above from the previous step.\n# Next, Build on the project by organizing file input and cleaning into functions\n# Add only the focused change for this step below or inside the existing work.",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def build_plan():\n    return ['load data', 'clean data', 'summarize data', 'save report']\n\n\nstages = build_plan()\n\nfor stage in stages:\n    print(stage)\n# Capstone step 2: Read and clean report lines\n# Keep the working code above from the previous step.\n# Next, Build on the project by organizing file input and cleaning into functions\n# Add only the focused change for this step below or inside the existing work.",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "files": [
+          {
+            "path": "data/raw_notes.txt",
+            "content": "  Buy milk  \n\nCall Sam\n   \nFinish report   "
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def build_plan():\n    return ['load data', 'clean data', 'summarize data', 'save report']\n\n\ndef load_lines(path):\n    with open(path, 'r') as file:\n        return file.readlines()\n\n\ndef clean_lines(lines):\n    cleaned = []\n    for line in lines:\n        stripped = line.strip()\n        if stripped != '':\n            cleaned.append(stripped)\n    return cleaned\n\n\nraw_lines = load_lines('data/raw_notes.txt')\ncleaned_lines = clean_lines(raw_lines)\n\nfor line in cleaned_lines:\n    print(line)",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def build_plan():\n    return ['load data', 'clean data', 'summarize data', 'save report']\n\n\ndef load_lines(path):\n    with open(path, 'r') as file:\n        return file.readlines()\n\n\ndef clean_lines(lines):\n    cleaned = []\n    for line in lines:\n        stripped = line.strip()\n        if stripped != '':\n            cleaned.append(stripped)\n    return cleaned\n\n\nraw_lines = load_lines('data/raw_notes.txt')\ncleaned_lines = clean_lines(raw_lines)\n\nfor line in cleaned_lines:\n    print(line)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "build_plan",
+            "args": [],
+            "argKinds": [],
+            "expected": "Buy milk\nCall Sam\nFinish report",
+            "message": "Return the expected result for build_plan()."
+          },
+          {
+            "type": "function_returns",
+            "functionName": "build_plan",
+            "args": [],
+            "argKinds": [],
+            "expected": "Plan trip\nPack bag",
+            "message": "Return the expected result for build_plan()."
+          },
+          {
+            "type": "no_stdout",
+            "message": "This task should return a value instead of printing output."
+          }
+        ]
+      }
+    },
+    {
+      "id": "project-step-3",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.breaking-projects-into-functions.quiz.project-step-3",
+      "language": "python",
+      "starterCode": "def build_plan():\n    return ['load data', 'clean data', 'summarize data', 'save report']\n\n\ndef load_lines(path):\n    with open(path, 'r') as file:\n        return file.readlines()\n\n\ndef clean_lines(lines):\n    cleaned = []\n    for line in lines:\n        stripped = line.strip()\n        if stripped != '':\n            cleaned.append(stripped)\n    return cleaned\n\n\nraw_lines = load_lines('data/raw_notes.txt')\ncleaned_lines = clean_lines(raw_lines)\n\nfor line in cleaned_lines:\n    print(line)\n# Capstone step 3: Summarize the cleaned notes\n# Keep the working code above from the previous step.\n# Next, Continue the same project\n# Add only the focused change for this step below or inside the existing work.",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def build_plan():\n    return ['load data', 'clean data', 'summarize data', 'save report']\n\n\ndef load_lines(path):\n    with open(path, 'r') as file:\n        return file.readlines()\n\n\ndef clean_lines(lines):\n    cleaned = []\n    for line in lines:\n        stripped = line.strip()\n        if stripped != '':\n            cleaned.append(stripped)\n    return cleaned\n\n\nraw_lines = load_lines('data/raw_notes.txt')\ncleaned_lines = clean_lines(raw_lines)\n\nfor line in cleaned_lines:\n    print(line)\n# Capstone step 3: Summarize the cleaned notes\n# Keep the working code above from the previous step.\n# Next, Continue the same project\n# Add only the focused change for this step below or inside the existing work.",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def build_plan():\n    return ['load data', 'clean data', 'summarize data', 'save report']\n\n\ndef load_lines(path):\n    with open(path, 'r') as file:\n        return file.readlines()\n\n\ndef clean_lines(lines):\n    cleaned = []\n    for line in lines:\n        stripped = line.strip()\n        if stripped != '':\n            cleaned.append(stripped)\n    return cleaned\n\n\ndef summarize_lines(lines):\n    summary = {'count': len(lines), 'longest': ''}\n    for line in lines:\n        if len(line) > len(summary['longest']):\n            summary['longest'] = line\n    return summary\n\n\nraw_lines = load_lines('data/raw_notes.txt')\ncleaned_lines = clean_lines(raw_lines)\nsummary = summarize_lines(cleaned_lines)\n\nprint(f\"Count: {summary['count']}\")\nprint(f\"Longest: {summary['longest']}\")",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def build_plan():\n    return ['load data', 'clean data', 'summarize data', 'save report']\n\n\ndef load_lines(path):\n    with open(path, 'r') as file:\n        return file.readlines()\n\n\ndef clean_lines(lines):\n    cleaned = []\n    for line in lines:\n        stripped = line.strip()\n        if stripped != '':\n            cleaned.append(stripped)\n    return cleaned\n\n\nraw_lines = load_lines('data/raw_notes.txt')\ncleaned_lines = clean_lines(raw_lines)\n\nfor line in cleaned_lines:\n    print(line)\n# Capstone step 3: Summarize the cleaned notes\n# Keep the working code above from the previous step.\n# Next, Continue the same project\n# Add only the focused change for this step below or inside the existing work.",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def build_plan():\n    return ['load data', 'clean data', 'summarize data', 'save report']\n\n\ndef load_lines(path):\n    with open(path, 'r') as file:\n        return file.readlines()\n\n\ndef clean_lines(lines):\n    cleaned = []\n    for line in lines:\n        stripped = line.strip()\n        if stripped != '':\n            cleaned.append(stripped)\n    return cleaned\n\n\nraw_lines = load_lines('data/raw_notes.txt')\ncleaned_lines = clean_lines(raw_lines)\n\nfor line in cleaned_lines:\n    print(line)\n# Capstone step 3: Summarize the cleaned notes\n# Keep the working code above from the previous step.\n# Next, Continue the same project\n# Add only the focused change for this step below or inside the existing work.",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "files": [
+          {
+            "path": "data/raw_notes.txt",
+            "content": " Buy milk \n\nFinish report draft\nCall Sam"
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def build_plan():\n    return ['load data', 'clean data', 'summarize data', 'save report']\n\n\ndef load_lines(path):\n    with open(path, 'r') as file:\n        return file.readlines()\n\n\ndef clean_lines(lines):\n    cleaned = []\n    for line in lines:\n        stripped = line.strip()\n        if stripped != '':\n            cleaned.append(stripped)\n    return cleaned\n\n\ndef summarize_lines(lines):\n    summary = {'count': len(lines), 'longest': ''}\n    for line in lines:\n        if len(line) > len(summary['longest']):\n            summary['longest'] = line\n    return summary\n\n\nraw_lines = load_lines('data/raw_notes.txt')\ncleaned_lines = clean_lines(raw_lines)\nsummary = summarize_lines(cleaned_lines)\n\nprint(f\"Count: {summary['count']}\")\nprint(f\"Longest: {summary['longest']}\")",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def build_plan():\n    return ['load data', 'clean data', 'summarize data', 'save report']\n\n\ndef load_lines(path):\n    with open(path, 'r') as file:\n        return file.readlines()\n\n\ndef clean_lines(lines):\n    cleaned = []\n    for line in lines:\n        stripped = line.strip()\n        if stripped != '':\n            cleaned.append(stripped)\n    return cleaned\n\n\ndef summarize_lines(lines):\n    summary = {'count': len(lines), 'longest': ''}\n    for line in lines:\n        if len(line) > len(summary['longest']):\n            summary['longest'] = line\n    return summary\n\n\nraw_lines = load_lines('data/raw_notes.txt')\ncleaned_lines = clean_lines(raw_lines)\nsummary = summarize_lines(cleaned_lines)\n\nprint(f\"Count: {summary['count']}\")\nprint(f\"Longest: {summary['longest']}\")",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "build_plan",
+            "args": [],
+            "argKinds": [],
+            "expected": "Count: 3\nLongest: Finish report draft",
+            "message": "Return the expected result for build_plan()."
+          },
+          {
+            "type": "function_returns",
+            "functionName": "build_plan",
+            "args": [],
+            "argKinds": [],
+            "expected": "Count: 2\nLongest: Water plants",
+            "message": "Return the expected result for build_plan()."
+          },
+          {
+            "type": "no_stdout",
+            "message": "This task should return a value instead of printing output."
+          }
+        ]
+      }
+    },
+    {
+      "id": "project-step-4",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.breaking-projects-into-functions.quiz.project-step-4",
+      "language": "python",
+      "starterCode": "def build_plan():\n    return ['load data', 'clean data', 'summarize data', 'save report']\n\n\ndef load_lines(path):\n    with open(path, 'r') as file:\n        return file.readlines()\n\n\ndef clean_lines(lines):\n    cleaned = []\n    for line in lines:\n        stripped = line.strip()\n        if stripped != '':\n            cleaned.append(stripped)\n    return cleaned\n\n\ndef summarize_lines(lines):\n    summary = {'count': len(lines), 'longest': ''}\n    for line in lines:\n        if len(line) > len(summary['longest']):\n            summary['longest'] = line\n    return summary\n\n\nraw_lines = load_lines('data/raw_notes.txt')\ncleaned_lines = clean_lines(raw_lines)\nsummary = summarize_lines(cleaned_lines)\n\nprint(f\"Count: {summary['count']}\")\nprint(f\"Longest: {summary['longest']}\")\n# Capstone step 4: Format and save the final report\n# Keep the working code above from the previous step.\n# Next, Now finish the reporting part of the same project\n# Add only the focused change for this step below or inside the existing work.",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def build_plan():\n    return ['load data', 'clean data', 'summarize data', 'save report']\n\n\ndef load_lines(path):\n    with open(path, 'r') as file:\n        return file.readlines()\n\n\ndef clean_lines(lines):\n    cleaned = []\n    for line in lines:\n        stripped = line.strip()\n        if stripped != '':\n            cleaned.append(stripped)\n    return cleaned\n\n\ndef summarize_lines(lines):\n    summary = {'count': len(lines), 'longest': ''}\n    for line in lines:\n        if len(line) > len(summary['longest']):\n            summary['longest'] = line\n    return summary\n\n\nraw_lines = load_lines('data/raw_notes.txt')\ncleaned_lines = clean_lines(raw_lines)\nsummary = summarize_lines(cleaned_lines)\n\nprint(f\"Count: {summary['count']}\")\nprint(f\"Longest: {summary['longest']}\")\n# Capstone step 4: Format and save the final report\n# Keep the working code above from the previous step.\n# Next, Now finish the reporting part of the same project\n# Add only the focused change for this step below or inside the existing work.",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def build_plan():\n    return ['load data', 'clean data', 'summarize data', 'save report']\n\n\ndef load_lines(path):\n    with open(path, 'r') as file:\n        return file.readlines()\n\n\ndef clean_lines(lines):\n    cleaned = []\n    for line in lines:\n        stripped = line.strip()\n        if stripped != '':\n            cleaned.append(stripped)\n    return cleaned\n\n\ndef summarize_lines(lines):\n    summary = {'count': len(lines), 'longest': ''}\n    for line in lines:\n        if len(line) > len(summary['longest']):\n            summary['longest'] = line\n    return summary\n\n\ndef format_report(summary):\n    return f\"Project Notes Report\\nCount: {summary['count']}\\nLongest: {summary['longest']}\"\n\n\ndef save_report(path, text):\n    with open(path, 'w') as file:\n        file.write(text)\n\n\nraw_lines = load_lines('data/raw_notes.txt')\ncleaned_lines = clean_lines(raw_lines)\nsummary = summarize_lines(cleaned_lines)\nreport_text = format_report(summary)\nsave_report('data/report.txt', report_text)\n\nwith open('data/report.txt', 'r') as file:\n    print(file.read())",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def build_plan():\n    return ['load data', 'clean data', 'summarize data', 'save report']\n\n\ndef load_lines(path):\n    with open(path, 'r') as file:\n        return file.readlines()\n\n\ndef clean_lines(lines):\n    cleaned = []\n    for line in lines:\n        stripped = line.strip()\n        if stripped != '':\n            cleaned.append(stripped)\n    return cleaned\n\n\ndef summarize_lines(lines):\n    summary = {'count': len(lines), 'longest': ''}\n    for line in lines:\n        if len(line) > len(summary['longest']):\n            summary['longest'] = line\n    return summary\n\n\nraw_lines = load_lines('data/raw_notes.txt')\ncleaned_lines = clean_lines(raw_lines)\nsummary = summarize_lines(cleaned_lines)\n\nprint(f\"Count: {summary['count']}\")\nprint(f\"Longest: {summary['longest']}\")\n# Capstone step 4: Format and save the final report\n# Keep the working code above from the previous step.\n# Next, Now finish the reporting part of the same project\n# Add only the focused change for this step below or inside the existing work.",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def build_plan():\n    return ['load data', 'clean data', 'summarize data', 'save report']\n\n\ndef load_lines(path):\n    with open(path, 'r') as file:\n        return file.readlines()\n\n\ndef clean_lines(lines):\n    cleaned = []\n    for line in lines:\n        stripped = line.strip()\n        if stripped != '':\n            cleaned.append(stripped)\n    return cleaned\n\n\ndef summarize_lines(lines):\n    summary = {'count': len(lines), 'longest': ''}\n    for line in lines:\n        if len(line) > len(summary['longest']):\n            summary['longest'] = line\n    return summary\n\n\nraw_lines = load_lines('data/raw_notes.txt')\ncleaned_lines = clean_lines(raw_lines)\nsummary = summarize_lines(cleaned_lines)\n\nprint(f\"Count: {summary['count']}\")\nprint(f\"Longest: {summary['longest']}\")\n# Capstone step 4: Format and save the final report\n# Keep the working code above from the previous step.\n# Next, Now finish the reporting part of the same project\n# Add only the focused change for this step below or inside the existing work.",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "files": [
+          {
+            "path": "data/raw_notes.txt",
+            "content": " Buy milk \n\nFinish report draft\nCall Sam"
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def build_plan():\n    return ['load data', 'clean data', 'summarize data', 'save report']\n\n\ndef load_lines(path):\n    with open(path, 'r') as file:\n        return file.readlines()\n\n\ndef clean_lines(lines):\n    cleaned = []\n    for line in lines:\n        stripped = line.strip()\n        if stripped != '':\n            cleaned.append(stripped)\n    return cleaned\n\n\ndef summarize_lines(lines):\n    summary = {'count': len(lines), 'longest': ''}\n    for line in lines:\n        if len(line) > len(summary['longest']):\n            summary['longest'] = line\n    return summary\n\n\ndef format_report(summary):\n    return f\"Project Notes Report\\nCount: {summary['count']}\\nLongest: {summary['longest']}\"\n\n\ndef save_report(path, text):\n    with open(path, 'w') as file:\n        file.write(text)\n\n\nraw_lines = load_lines('data/raw_notes.txt')\ncleaned_lines = clean_lines(raw_lines)\nsummary = summarize_lines(cleaned_lines)\nreport_text = format_report(summary)\nsave_report('data/report.txt', report_text)\n\nwith open('data/report.txt', 'r') as file:\n    print(file.read())",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def build_plan():\n    return ['load data', 'clean data', 'summarize data', 'save report']\n\n\ndef load_lines(path):\n    with open(path, 'r') as file:\n        return file.readlines()\n\n\ndef clean_lines(lines):\n    cleaned = []\n    for line in lines:\n        stripped = line.strip()\n        if stripped != '':\n            cleaned.append(stripped)\n    return cleaned\n\n\ndef summarize_lines(lines):\n    summary = {'count': len(lines), 'longest': ''}\n    for line in lines:\n        if len(line) > len(summary['longest']):\n            summary['longest'] = line\n    return summary\n\n\ndef format_report(summary):\n    return f\"Project Notes Report\\nCount: {summary['count']}\\nLongest: {summary['longest']}\"\n\n\ndef save_report(path, text):\n    with open(path, 'w') as file:\n        file.write(text)\n\n\nraw_lines = load_lines('data/raw_notes.txt')\ncleaned_lines = clean_lines(raw_lines)\nsummary = summarize_lines(cleaned_lines)\nreport_text = format_report(summary)\nsave_report('data/report.txt', report_text)\n\nwith open('data/report.txt', 'r') as file:\n    print(file.read())",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "build_plan",
+            "args": [],
+            "argKinds": [],
+            "expected": "Project Notes Report\nCount: 3\nLongest: Finish report draft",
+            "message": "Return the expected result for build_plan()."
+          },
+          {
+            "type": "function_returns",
+            "functionName": "build_plan",
+            "args": [],
+            "argKinds": [],
+            "expected": "Project Notes Report\nCount: 2\nLongest: Water plants",
+            "message": "Return the expected result for build_plan()."
+          },
+          {
+            "type": "no_stdout",
+            "message": "This task should return a value instead of printing output."
+          }
+        ]
+      }
+    },
+    {
+      "id": "project-step-5",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-10-capstone-automation-project.breaking-projects-into-functions.quiz.project-step-5",
+      "language": "python",
+      "starterCode": "def build_plan():\n    return ['load data', 'clean data', 'summarize data', 'save report']\n\n\ndef load_lines(path):\n    with open(path, 'r') as file:\n        return file.readlines()\n\n\ndef clean_lines(lines):\n    cleaned = []\n    for line in lines:\n        stripped = line.strip()\n        if stripped != '':\n            cleaned.append(stripped)\n    return cleaned\n\n\ndef summarize_lines(lines):\n    summary = {'count': len(lines), 'longest': ''}\n    for line in lines:\n        if len(line) > len(summary['longest']):\n            summary['longest'] = line\n    return summary\n\n\ndef format_report(summary):\n    return f\"Project Notes Report\\nCount: {summary['count']}\\nLongest: {summary['longest']}\"\n\n\ndef save_report(path, text):\n    with open(path, 'w') as file:\n        file.write(text)\n\n\nraw_lines = load_lines('data/raw_notes.txt')\ncleaned_lines = clean_lines(raw_lines)\nsummary = summarize_lines(cleaned_lines)\nreport_text = format_report(summary)\nsave_report('data/report.txt', report_text)\n\nwith open('data/report.txt', 'r') as file:\n    print(file.read())\n# Capstone step 5: Refactor into helper files and add checks\n# Keep the working code above from the previous step.\n# Next, Polish the capstone by splitting the project into helper files\n# Add only the focused change for this step below or inside the existing work.",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def build_plan():\n    return ['load data', 'clean data', 'summarize data', 'save report']\n\n\ndef load_lines(path):\n    with open(path, 'r') as file:\n        return file.readlines()\n\n\ndef clean_lines(lines):\n    cleaned = []\n    for line in lines:\n        stripped = line.strip()\n        if stripped != '':\n            cleaned.append(stripped)\n    return cleaned\n\n\ndef summarize_lines(lines):\n    summary = {'count': len(lines), 'longest': ''}\n    for line in lines:\n        if len(line) > len(summary['longest']):\n            summary['longest'] = line\n    return summary\n\n\ndef format_report(summary):\n    return f\"Project Notes Report\\nCount: {summary['count']}\\nLongest: {summary['longest']}\"\n\n\ndef save_report(path, text):\n    with open(path, 'w') as file:\n        file.write(text)\n\n\nraw_lines = load_lines('data/raw_notes.txt')\ncleaned_lines = clean_lines(raw_lines)\nsummary = summarize_lines(cleaned_lines)\nreport_text = format_report(summary)\nsave_report('data/report.txt', report_text)\n\nwith open('data/report.txt', 'r') as file:\n    print(file.read())\n# Capstone step 5: Refactor into helper files and add checks\n# Keep the working code above from the previous step.\n# Next, Polish the capstone by splitting the project into helper files\n# Add only the focused change for this step below or inside the existing work.",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "# main.py\nfrom helpers.processing import clean_lines, summarize_lines\nfrom helpers.reporting import format_report\n\nassert clean_lines(['  A  ', '', ' B ']) == ['A', 'B']\nassert summarize_lines(['A', 'Long line']) == {'count': 2, 'longest': 'Long line'}\nassert format_report({'count': 2, 'longest': 'Long line'}) == 'Project Notes Report\\nCount: 2\\nLongest: Long line'\n\nwith open('data/raw_notes.txt', 'r') as file:\n    raw_lines = file.readlines()\n\ncleaned_lines = clean_lines(raw_lines)\nsummary = summarize_lines(cleaned_lines)\nreport_text = format_report(summary)\n\nwith open('data/report.txt', 'w') as file:\n    file.write(report_text)\n\nwith open('data/report.txt', 'r') as file:\n    print(file.read())",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def build_plan():\n    return ['load data', 'clean data', 'summarize data', 'save report']\n\n\ndef load_lines(path):\n    with open(path, 'r') as file:\n        return file.readlines()\n\n\ndef clean_lines(lines):\n    cleaned = []\n    for line in lines:\n        stripped = line.strip()\n        if stripped != '':\n            cleaned.append(stripped)\n    return cleaned\n\n\ndef summarize_lines(lines):\n    summary = {'count': len(lines), 'longest': ''}\n    for line in lines:\n        if len(line) > len(summary['longest']):\n            summary['longest'] = line\n    return summary\n\n\ndef format_report(summary):\n    return f\"Project Notes Report\\nCount: {summary['count']}\\nLongest: {summary['longest']}\"\n\n\ndef save_report(path, text):\n    with open(path, 'w') as file:\n        file.write(text)\n\n\nraw_lines = load_lines('data/raw_notes.txt')\ncleaned_lines = clean_lines(raw_lines)\nsummary = summarize_lines(cleaned_lines)\nreport_text = format_report(summary)\nsave_report('data/report.txt', report_text)\n\nwith open('data/report.txt', 'r') as file:\n    print(file.read())\n# Capstone step 5: Refactor into helper files and add checks\n# Keep the working code above from the previous step.\n# Next, Polish the capstone by splitting the project into helper files\n# Add only the focused change for this step below or inside the existing work.",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def build_plan():\n    return ['load data', 'clean data', 'summarize data', 'save report']\n\n\ndef load_lines(path):\n    with open(path, 'r') as file:\n        return file.readlines()\n\n\ndef clean_lines(lines):\n    cleaned = []\n    for line in lines:\n        stripped = line.strip()\n        if stripped != '':\n            cleaned.append(stripped)\n    return cleaned\n\n\ndef summarize_lines(lines):\n    summary = {'count': len(lines), 'longest': ''}\n    for line in lines:\n        if len(line) > len(summary['longest']):\n            summary['longest'] = line\n    return summary\n\n\ndef format_report(summary):\n    return f\"Project Notes Report\\nCount: {summary['count']}\\nLongest: {summary['longest']}\"\n\n\ndef save_report(path, text):\n    with open(path, 'w') as file:\n        file.write(text)\n\n\nraw_lines = load_lines('data/raw_notes.txt')\ncleaned_lines = clean_lines(raw_lines)\nsummary = summarize_lines(cleaned_lines)\nreport_text = format_report(summary)\nsave_report('data/report.txt', report_text)\n\nwith open('data/report.txt', 'r') as file:\n    print(file.read())\n# Capstone step 5: Refactor into helper files and add checks\n# Keep the working code above from the previous step.\n# Next, Polish the capstone by splitting the project into helper files\n# Add only the focused change for this step below or inside the existing work.",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "files": [
+          {
+            "path": "data/raw_notes.txt",
+            "content": " Buy milk \n\nFinish report draft\nCall Sam"
+          },
+          {
+            "path": "data/report.txt",
+            "content": "Project Notes Report\nCount: 3\nLongest: Finish report draft",
+            "readOnly": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Project Notes Report\nCount: 3\nLongest: Finish report draft\n",
+            "match": "exact",
+            "files": [
+              {
+                "path": "data/raw_notes.txt",
+                "content": " Buy milk \n\nFinish report draft\nCall Sam"
+              },
+              {
+                "path": "data/report.txt",
+                "content": "Project Notes Report\nCount: 3\nLongest: Finish report draft",
+                "readOnly": true
+              }
+            ]
+          },
+          {
+            "stdin": "",
+            "stdout": "Project Notes Report\nCount: 2\nLongest: Water plants\n",
+            "match": "exact",
+            "files": [
+              {
+                "path": "data/raw_notes.txt",
+                "content": "Water plants\nRead"
+              },
+              {
+                "path": "data/report.txt",
+                "content": "Project Notes Report\nCount: 2\nLongest: Water plants",
+                "readOnly": true
+              }
+            ]
+          }
+        ],
+        "solutionCode": "# main.py\nfrom helpers.processing import clean_lines, summarize_lines\nfrom helpers.reporting import format_report\n\nassert clean_lines(['  A  ', '', ' B ']) == ['A', 'B']\nassert summarize_lines(['A', 'Long line']) == {'count': 2, 'longest': 'Long line'}\nassert format_report({'count': 2, 'longest': 'Long line'}) == 'Project Notes Report\\nCount: 2\\nLongest: Long line'\n\nwith open('data/raw_notes.txt', 'r') as file:\n    raw_lines = file.readlines()\n\ncleaned_lines = clean_lines(raw_lines)\nsummary = summarize_lines(cleaned_lines)\nreport_text = format_report(summary)\n\nwith open('data/report.txt', 'w') as file:\n    file.write(report_text)\n\nwith open('data/report.txt', 'r') as file:\n    print(file.read())",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "# main.py\nfrom helpers.processing import clean_lines, summarize_lines\nfrom helpers.reporting import format_report\n\nassert clean_lines(['  A  ', '', ' B ']) == ['A', 'B']\nassert summarize_lines(['A', 'Long line']) == {'count': 2, 'longest': 'Long line'}\nassert format_report({'count': 2, 'longest': 'Long line'}) == 'Project Notes Report\\nCount: 2\\nLongest: Long line'\n\nwith open('data/raw_notes.txt', 'r') as file:\n    raw_lines = file.readlines()\n\ncleaned_lines = clean_lines(raw_lines)\nsummary = summarize_lines(cleaned_lines)\nreport_text = format_report(summary)\n\nwith open('data/report.txt', 'w') as file:\n    file.write(report_text)\n\nwith open('data/report.txt', 'r') as file:\n    print(file.read())",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    }
+  ]
+}

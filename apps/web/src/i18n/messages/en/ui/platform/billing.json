@@ -1,0 +1,166 @@
+{
+  "billing": {
+    "header": {
+      "kicker": "Pricing",
+      "title": "Unlock assignments + premium practice",
+      "subtitle": "Choose a plan that matches your learning pace. Cancel anytime from the portal.",
+      "manageBilling": "Manage billing",
+      "signIn": "Sign in",
+      "signedIn": "Signed in",
+      "signInRequired": "Sign in required"
+    },
+    "paywall": {
+      "titleModule": "This module requires payment",
+      "titleAssignment": "This assignment requires payment",
+      "titleGeneric": "This requires payment",
+      "goBack": "← Go back",
+      "body": "Subscribe to unlock access and continue.",
+      "afterCheckout": "After checkout, you’ll be returned automatically.",
+      "subjectLabel": "subject",
+      "moduleLabel": "module"
+    },
+    "plans": {
+      "sectionTitle": "Plans",
+      "trialInfo": "Trial available if eligible.",
+      "trialInfoWithDays": "{days}-day free trial if eligible.",
+      "loading": "Loading plans…",
+      "monthly": {
+        "title": "Monthly",
+        "subtitle": "Flexible month-to-month. Cancel anytime.",
+        "features": [
+          "Unlimited practice sessions",
+          "Assignments access",
+          "Progress tracking",
+          "Premium review modules"
+        ],
+        "subscribe": "Subscribe monthly"
+      },
+      "yearly": {
+        "title": "Yearly",
+        "subtitle": "Best value for consistent learners.",
+        "features": [
+          "Everything in Monthly",
+          "Lower effective monthly cost",
+          "Fewer billing interruptions",
+          "Best for cohorts & schools"
+        ],
+        "subscribe": "Subscribe yearly"
+      },
+      "currentPlan": "Current plan",
+      "priceKicker": "Price",
+      "recommended": "Recommended",
+      "startTrial": "Start {days}-day trial",
+      "trialActive": "Trial active",
+      "trialUnavailable": "Trial unavailable",
+      "trialNoteUsed": "Trial already used on this account.",
+      "trialNoteEnded": "Trial period has ended.",
+      "trialNoteDefault": "No charge today. Cancel before trial ends."
+    },
+    "sidebar": {
+      "title": "What you get",
+      "subtitle": "Premium features included with any plan.",
+      "items": {
+        "assignments": {
+          "title": "Assignments",
+          "desc": "Teacher/admin assignments with session tracking and completion flow."
+        },
+        "unlimitedPractice": {
+          "title": "Unlimited practice",
+          "desc": "Generate questions across topics and difficulty with instant feedback."
+        },
+        "progressHistory": {
+          "title": "Progress history",
+          "desc": "Track accuracy, missed items, and review progress by subject."
+        },
+        "multilanguage": {
+          "title": "Multi-language",
+          "desc": "Use Learnoir in English, French, and Haitian Creole."
+        }
+      },
+      "tip": "Tip: If an assignment is locked, subscribing here will unlock it immediately."
+    },
+    "statusPanel": {
+      "statusPrefix": "Status: {label}",
+      "planPrefix": "Plan: {label}",
+      "trialEnds": "Trial ends: {when}",
+      "renews": "Renews: {when}",
+      "cancelAtPeriodEnd": "Canceling at period end",
+      "planMonthly": "Monthly",
+      "planYearly": "Yearly",
+      "planUnknown": "Subscription",
+      "statuses": {
+        "trialing": "Trialing",
+        "active": "Active",
+        "past_due": "Past due",
+        "unpaid": "Unpaid",
+        "canceled": "Canceled",
+        "incomplete": "Incomplete",
+        "incomplete_expired": "Incomplete expired",
+        "paused": "Paused",
+        "none": "No subscription"
+      },
+      "ids": {
+        "priceId": "Price ID",
+        "subscriptionId": "Subscription ID"
+      }
+    },
+    "errors": {
+      "title": "⚠️ Something went wrong"
+    },
+    "footer": {
+      "disclaimer": "Payments are handled by Stripe. Manage or cancel anytime from the billing portal."
+    },
+    "success": {
+      "kicker": "Billing",
+      "title": {
+        "busy": "Finalizing subscription…",
+        "ok": "✅ Subscription active",
+        "fail": "⚠️ Subscription not confirmed"
+      },
+      "subtitle": {
+        "busy": "One moment — we’re syncing your plan.",
+        "ok": "All set. We’ll take you back in a moment.",
+        "fail": "We couldn’t confirm the subscription yet."
+      },
+      "pills": {
+        "plan": "Plan: {plan}",
+        "status": "Status: {status}",
+        "trialEnds": "Trial ends: {when}",
+        "renews": "Renews: {when}"
+      },
+      "errors": {
+        "missingSession": "Missing/invalid session_id in URL.",
+        "confirmFailed": "Confirm failed.",
+        "unknown": "Unknown error."
+      },
+      "errorPanel": {
+        "title": "Error",
+        "retry": "Retry",
+        "goBilling": "Go to Billing"
+      },
+      "unlocked": {
+        "kicker": "What’s now unlocked",
+        "practiceTitle": "Practice + Feedback",
+        "practiceDesc": "Interactive exercises, instant checks, and targeted review.",
+        "assignTitle": "Assignments + Progress",
+        "assignDesc": "Track progress by subject and keep learning consistent."
+      },
+      "next": {
+        "kicker": "Next",
+        "auto": "Continuing in {s}s…",
+        "manual": "Choose what to do next."
+      },
+      "actions": {
+        "continue": "Continue",
+        "stayHere": "Stay here",
+        "manageBilling": "Manage billing"
+      },
+      "sync": {
+        "title": "Syncing your plan…",
+        "desc": "We’re confirming your Stripe subscription and enabling premium features.",
+        "note": "This usually takes a few seconds."
+      },
+      "tip": "Tip: If you’re still seeing a lock, refresh once — subscription sync may have just finished."
+    }
+  }
+}

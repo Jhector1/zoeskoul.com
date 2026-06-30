@@ -2,6 +2,7 @@
 
 import React, { useEffect, useMemo, useState } from "react";
 import { useParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 import {
     ArrowLeft,
@@ -83,10 +84,10 @@ type Payload = {
     items: AchievementItem[];
 };
 
-function fmt(iso: string | null | undefined) {
-    if (!iso) return "—";
+function fmt(iso: string | null | undefined, locale: string, emptyLabel: string) {
+    if (!iso) return emptyLabel;
     const d = new Date(iso);
-    return d.toLocaleDateString("en-US", {
+    return d.toLocaleDateString(locale, {
         year: "numeric",
         month: "short",
         day: "numeric",
@@ -169,7 +170,7 @@ function EmptyBlock({ children }: { children: React.ReactNode }) {
     );
 }
 
-function ProgressMeter({ pct }: { pct: number }) {
+function ProgressMeter({ pct, label }: { pct: number; label: string }) {
     const safePct = Math.max(0, Math.min(100, pct));
 
     return (
@@ -177,7 +178,7 @@ function ProgressMeter({ pct }: { pct: number }) {
             <div className="ui-progress-track h-2">
                 <div className="ui-progress-fill" style={{ width: `${safePct}%` }} />
             </div>
-            <div className="ui-meta">{safePct}% complete</div>
+            <div className="ui-meta">{label}</div>
         </div>
     );
 }
@@ -209,6 +210,7 @@ function isMoreComing(it: AchievementItem) {
 export default function AchievementsClient() {
     const params = useParams<{ locale: string }>();
     const router = useRouter();
+    const t = useTranslations("achievements");
     const locale = params?.locale ?? "en";
 
     const [loading, setLoading] = useState(true);
@@ -231,7 +233,7 @@ export default function AchievementsClient() {
             if (!alive) return;
 
             if (!r.ok) {
-                setErr(j?.message ?? "Unable to load achievements.");
+                setErr(j?.message ?? t("loadFailed"));
                 setData(null);
             } else {
                 setData(j);
@@ -245,7 +247,7 @@ export default function AchievementsClient() {
         return () => {
             alive = false;
         };
-    }, [locale]);
+    }, [locale, t]);
 
     const buckets = useMemo(() => {
         const items = data?.items ?? [];
@@ -282,7 +284,7 @@ export default function AchievementsClient() {
 
             if (!r.ok) {
                 const j = await r.json().catch(() => null);
-                throw new Error(j?.message ?? "Download failed.");
+                throw new Error(j?.message ?? t("downloadFailed"));
             }
 
             const blob = await r.blob();
@@ -303,7 +305,7 @@ export default function AchievementsClient() {
             const jj = await rr.json().catch(() => null);
             if (rr.ok) setData(jj);
         } catch (e: any) {
-            alert(e?.message ?? "Unable to download certificate.");
+            alert(e?.message ?? t("downloadFailed"));
         } finally {
             setDownloadingSlug(null);
         }
@@ -314,9 +316,9 @@ export default function AchievementsClient() {
             <div className="min-h-screen bg-[rgb(var(--ui-bg)/1)]">
                 <div className="ui-container py-6">
                     <Surface className="p-5">
-                        <div className="ui-kicker">Achievements</div>
+                        <div className="ui-kicker">{t("title")}</div>
                         <div className="mt-2 text-sm text-[rgb(var(--ui-text-muted)/0.9)]">
-                            Loading…
+                            {t("loading")}
                         </div>
                     </Surface>
                 </div>
@@ -329,13 +331,13 @@ export default function AchievementsClient() {
             <div className="min-h-screen bg-[rgb(var(--ui-bg)/1)]">
                 <div className="ui-container py-6">
                     <Surface className="p-5">
-                        <SectionHeader title="Achievements" />
+                        <SectionHeader title={t("title")} />
                         <div className="mt-3 text-sm text-[rgb(var(--ui-danger)/1)]">{err}</div>
                         <div className="mt-4">
                             <button className="ui-btn-secondary" onClick={() => router.back()}>
                                 <span className="inline-flex items-center gap-1.5">
                                     <ArrowLeft className="h-3.5 w-3.5" />
-                                    Back
+                                    {t("back")}
                                 </span>
                             </button>
                         </div>
@@ -354,17 +356,17 @@ export default function AchievementsClient() {
                     <Surface className="p-4 sm:p-5">
                         <div className="flex items-start justify-between gap-3">
                             <div className="min-w-0">
-                                <div className="ui-kicker">Your learning</div>
-                                <h1 className="ui-title-lg mt-2 text-xl sm:text-2xl">Achievements</h1>
+                                <div className="ui-kicker">{t("kicker")}</div>
+                                <h1 className="ui-title-lg mt-2 text-xl sm:text-2xl">{t("title")}</h1>
                                 <p className="mt-2 max-w-2xl text-sm leading-6 text-[rgb(var(--ui-text-muted)/0.9)]">
-                                    Rewards, badges, capstones, and certificates appear here as you finish each subject path.
+                                    {t("descriptions.hero")}
                                 </p>
                             </div>
 
                             <button className="ui-btn-secondary shrink-0" onClick={() => router.back()}>
                                 <span className="inline-flex items-center gap-1.5">
                                     <ArrowLeft className="h-3.5 w-3.5" />
-                                    Back
+                                    {t("back")}
                                 </span>
                             </button>
                         </div>
@@ -373,49 +375,49 @@ export default function AchievementsClient() {
                     <div className="grid gap-3 md:grid-cols-3">
                         <Surface className="p-4">
                             <SectionHeader
-                                title="Badges"
+                                title={t("sections.badges")}
                                 meta={`${buckets.badges.length}`}
                                 icon={<Medal className="h-4 w-4" />}
                             />
                             <div className="mt-2 text-sm text-[rgb(var(--ui-text-muted)/0.9)]">
-                                Earned for finishing subject milestones and final rewards.
+                                {t("descriptions.badges")}
                             </div>
                         </Surface>
 
                         <Surface className="p-4">
                             <SectionHeader
-                                title="Rewards"
+                                title={t("sections.rewards")}
                                 meta={`${buckets.rewards.length}`}
                                 icon={<Sparkles className="h-4 w-4" />}
                             />
                             <div className="mt-2 text-sm text-[rgb(var(--ui-text-muted)/0.9)]">
-                                Final unlocks before certificate issuance.
+                                {t("descriptions.rewards")}
                             </div>
                         </Surface>
 
                         <Surface className="p-4">
                             <SectionHeader
-                                title="Certificates"
+                                title={t("sections.certificates")}
                                 meta={`${buckets.certificates.length}`}
                                 icon={<Award className="h-4 w-4" />}
                             />
                             <div className="mt-2 text-sm text-[rgb(var(--ui-text-muted)/0.9)]">
-                                Official completions you can open or download.
+                                {t("descriptions.certificates")}
                             </div>
                         </Surface>
                     </div>
 
                     <Surface className="p-4 sm:p-5">
                         <SectionHeader
-                            title="Learner badges"
-                            meta={`${buckets.badges.length} earned`}
+                            title={t("sections.learnerBadges")}
+                            meta={t("counts.earned", { count: buckets.badges.length })}
                             icon={<Medal className="h-4 w-4" />}
                         />
 
                         {buckets.badges.length === 0 ? (
                             <div className="mt-4">
                                 <EmptyBlock>
-                                    No badges yet. Finish a subject path to unlock your first badge.
+                                    {t("descriptions.noBadges")}
                                 </EmptyBlock>
                             </div>
                         ) : (
@@ -434,16 +436,16 @@ export default function AchievementsClient() {
                                                     </div>
                                                     <div>
                                                         <div className="text-sm font-semibold text-[rgb(var(--ui-text)/0.96)]">
-                                                            {it.reward?.badgeLabel ?? `${it.subject.title} Finisher`}
+                                                            {it.reward?.badgeLabel ?? t("fallbacks.badgeLabel", { subject: it.subject.title })}
                                                         </div>
                                                         <div className="text-xs text-[rgb(var(--ui-text-muted)/0.84)]">
-                                                            {it.reward?.badgeDescription ?? "Final path milestone earned"}
+                                                            {it.reward?.badgeDescription ?? t("descriptions.badgeFallback")}
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
 
-                                            <StatePill tone="good">Earned</StatePill>
+                                            <StatePill tone="good">{t("state.earned")}</StatePill>
                                         </div>
 
                                         <div className="mt-4 flex flex-wrap gap-2">
@@ -456,7 +458,7 @@ export default function AchievementsClient() {
                                                     )
                                                 }
                                             >
-                                                Open subject
+                                                {t("actions.openSubject")}
                                             </button>
                                         </div>
                                     </Surface>
@@ -467,15 +469,15 @@ export default function AchievementsClient() {
 
                     <Surface className="p-4 sm:p-5">
                         <SectionHeader
-                            title="Unlocked rewards"
-                            meta={`${buckets.rewards.length} ready`}
+                            title={t("sections.unlockedRewards")}
+                            meta={t("counts.ready", { count: buckets.rewards.length })}
                             icon={<Sparkles className="h-4 w-4" />}
                         />
 
                         {buckets.rewards.length === 0 ? (
                             <div className="mt-4">
                                 <EmptyBlock>
-                                    No standalone rewards are waiting right now.
+                                    {t("descriptions.noRewards")}
                                 </EmptyBlock>
                             </div>
                         ) : (
@@ -492,11 +494,11 @@ export default function AchievementsClient() {
                                                     <div className="truncate text-sm font-semibold text-[rgb(var(--ui-text)/0.96)] sm:text-base">
                                                         {it.subject.title}
                                                     </div>
-                                                    <StatePill tone="good">Unlocked</StatePill>
+                                                    <StatePill tone="good">{t("state.unlocked")}</StatePill>
                                                 </div>
 
                                                 <div className="mt-2 text-xs leading-5 text-[rgb(var(--ui-text-muted)/0.88)]">
-                                                    {it.finishState?.message ?? "You unlocked the final reward for this subject."}
+                                                    {it.finishState?.message ?? t("descriptions.rewardFallback")}
                                                 </div>
                                             </div>
 
@@ -515,7 +517,7 @@ export default function AchievementsClient() {
                                                     )
                                                 }
                                             >
-                                                Continue
+                                                {t("actions.continue")}
                                             </button>
 
                                             <button
@@ -529,7 +531,7 @@ export default function AchievementsClient() {
                                             >
                                                 <span className="inline-flex items-center gap-1.5">
                                                     <Rocket className="h-3.5 w-3.5" />
-                                                    Capstone
+                                                    {t("actions.capstone")}
                                                 </span>
                                             </button>
                                         </div>
@@ -541,15 +543,15 @@ export default function AchievementsClient() {
 
                     <Surface className="p-4 sm:p-5">
                         <SectionHeader
-                            title="Certificates"
-                            meta={`${buckets.certificates.length} unlocked`}
+                            title={t("sections.certificates")}
+                            meta={t("counts.unlocked", { count: buckets.certificates.length })}
                             icon={<Award className="h-4 w-4" />}
                         />
 
                         {buckets.certificates.length === 0 ? (
                             <div className="mt-4">
                                 <EmptyBlock>
-                                    No certificates yet. Keep going — your unlocked certificates will appear here.
+                                    {t("descriptions.noCertificates")}
                                 </EmptyBlock>
                             </div>
                         ) : (
@@ -570,22 +572,22 @@ export default function AchievementsClient() {
                                                             {it.subject.title}
                                                         </div>
                                                         <StatePill tone="good">
-                                                            {issued ? "Issued" : "Ready"}
+                                                            {issued ? t("state.issued") : t("state.ready")}
                                                         </StatePill>
                                                     </div>
 
                                                     <div className="mt-2 text-xs leading-5 text-[rgb(var(--ui-text-muted)/0.88)]">
-                                                        Completed: {fmt(it.completedAt)}
+                                                        {t("meta.completed", { date: fmt(it.completedAt, locale, t("value.emptyDate")) })}
                                                         {issued ? (
-                                                            <> • Issued: {fmt(it.certificate?.issuedAt)}</>
+                                                            <> {t("meta.issued", { date: fmt(it.certificate?.issuedAt, locale, t("value.emptyDate")) })}</>
                                                         ) : (
-                                                            <> • Not issued yet</>
+                                                            <> {t("meta.notIssued")}</>
                                                         )}
                                                     </div>
 
                                                     {issued ? (
                                                         <div className="mt-1 text-xs text-[rgb(var(--ui-text-muted)/0.84)]">
-                                                            Certificate ID:{" "}
+                                                            {t("meta.certificateId")}{" "}
                                                             <span className="font-medium text-[rgb(var(--ui-text)/0.96)]">
                                                                 {it.certificate?.id}
                                                             </span>
@@ -611,8 +613,8 @@ export default function AchievementsClient() {
                                                     <span className="inline-flex items-center gap-1.5">
                                                         <Download className="h-3.5 w-3.5" />
                                                         {downloadingSlug === it.subject.slug
-                                                            ? "Preparing…"
-                                                            : "Download PDF"}
+                                                            ? t("downloadPreparing")
+                                                            : t("downloadPdf")}
                                                     </span>
                                                 </button>
 
@@ -625,7 +627,7 @@ export default function AchievementsClient() {
                                                         )
                                                     }
                                                 >
-                                                    View
+                                                    {t("actions.view")}
                                                 </button>
                                             </div>
                                         </Surface>
@@ -637,7 +639,7 @@ export default function AchievementsClient() {
 
                     <Surface className="p-4 sm:p-5">
                         <SectionHeader
-                            title="More coming soon"
+                            title={t("sections.moreComing")}
                             meta={`${buckets.moreComing.length}`}
                             icon={<BookOpen className="h-4 w-4" />}
                         />
@@ -645,7 +647,7 @@ export default function AchievementsClient() {
                         {buckets.moreComing.length === 0 ? (
                             <div className="mt-4">
                                 <EmptyBlock>
-                                    Nothing is waiting in the “more coming soon” state right now.
+                                    {t("descriptions.noMoreComing")}
                                 </EmptyBlock>
                             </div>
                         ) : (
@@ -662,12 +664,12 @@ export default function AchievementsClient() {
                                                     <div className="truncate text-sm font-semibold text-[rgb(var(--ui-text)/0.96)] sm:text-base">
                                                         {it.subject.title}
                                                     </div>
-                                                    <StatePill tone="info">More coming</StatePill>
+                                                    <StatePill tone="info">{t("state.moreComing")}</StatePill>
                                                 </div>
 
                                                 <div className="mt-2 text-xs leading-5 text-[rgb(var(--ui-text-muted)/0.88)]">
                                                     {it.finishState?.message ??
-                                                        "You completed everything published so far."}
+                                                        t("descriptions.completedPublished")}
                                                 </div>
                                             </div>
 
@@ -683,7 +685,7 @@ export default function AchievementsClient() {
                                                     router.push(`/subjects/${it.subject.slug}/modules`)
                                                 }
                                             >
-                                                View subject
+                                                {t("actions.viewSubject")}
                                             </button>
                                         </div>
                                     </Surface>
@@ -694,14 +696,14 @@ export default function AchievementsClient() {
 
                     <Surface className="p-4 sm:p-5">
                         <SectionHeader
-                            title="In progress"
+                            title={t("sections.inProgress")}
                             meta={`${buckets.inProgress.length}`}
                             icon={<Clock3 className="h-4 w-4" />}
                         />
 
                         {buckets.inProgress.length === 0 ? (
                             <div className="mt-4">
-                                <EmptyBlock>Nothing in progress right now.</EmptyBlock>
+                                <EmptyBlock>{t("descriptions.noProgress")}</EmptyBlock>
                             </div>
                         ) : (
                             <div className="mt-4 grid gap-3">
@@ -720,19 +722,22 @@ export default function AchievementsClient() {
                                                         <div className="truncate text-sm font-semibold text-[rgb(var(--ui-text)/0.96)] sm:text-base">
                                                             {it.subject.title}
                                                         </div>
-                                                        <StatePill tone="warn">In progress</StatePill>
+                                                        <StatePill tone="warn">{t("state.inProgress")}</StatePill>
                                                     </div>
 
                                                     <div className="mt-2 text-xs leading-5 text-[rgb(var(--ui-text-muted)/0.88)]">
-                                                        Modules: {it.progress.modulesDone}/{it.progress.modulesTotal}
+                                                        {t("meta.modules", {
+                                                            done: it.progress.modulesDone,
+                                                            total: it.progress.modulesTotal,
+                                                        })}
                                                         {it.requireAssignment ? (
-                                                            <> • Assignments done: {it.progress.assignmentsDone}</>
+                                                            <> {t("meta.assignmentsDone", { count: it.progress.assignmentsDone })}</>
                                                         ) : null}
-                                                        <> • Last activity: {fmt(it.enrollment.lastSeenAt)}</>
+                                                        <> {t("meta.lastActivity", { date: fmt(it.enrollment.lastSeenAt, locale, t("value.emptyDate")) })}</>
                                                     </div>
 
                                                     <div className="mt-4">
-                                                        <ProgressMeter pct={pct} />
+                                                        <ProgressMeter pct={pct} label={t("counts.completePct", { pct })} />
                                                     </div>
                                                 </div>
 
@@ -743,7 +748,7 @@ export default function AchievementsClient() {
                                                             router.push(`/subjects/${it.subject.slug}/modules`)
                                                         }
                                                     >
-                                                        Continue
+                                                        {t("actions.continue")}
                                                     </button>
                                                     <button
                                                         className="ui-btn-secondary"
@@ -751,7 +756,7 @@ export default function AchievementsClient() {
                                                             router.push(`/subjects/${it.subject.slug}/certificate`)
                                                         }
                                                     >
-                                                        Checklist
+                                                        {t("actions.checklist")}
                                                     </button>
                                                 </div>
                                             </div>
@@ -777,12 +782,10 @@ export default function AchievementsClient() {
 
                                                                         {it.requireAssignment ? (
                                                                             <div className="mt-1 text-[11px] text-[rgb(var(--ui-text-muted)/0.84)]">
-                                                                                Topics:{" "}
-                                                                                {m.moduleCompleted ? "done" : "not done"} •
-                                                                                Assignment:{" "}
-                                                                                {m.assignmentCompleted
-                                                                                    ? "done"
-                                                                                    : "not done"}
+                                                                                {t("meta.topicsAssignment", {
+                                                                                    topics: m.moduleCompleted ? t("value.done") : t("value.notDone"),
+                                                                                    assignment: m.assignmentCompleted ? t("value.done") : t("value.notDone"),
+                                                                                })}
                                                                             </div>
                                                                         ) : null}
                                                                     </div>
@@ -812,9 +815,9 @@ export default function AchievementsClient() {
 
                     {items.length === 0 ? (
                         <Surface className="p-4 sm:p-5">
-                            <SectionHeader title="No enrollments yet" />
+                            <SectionHeader title={t("sections.noEnrollments")} />
                             <div className="mt-2 text-sm text-[rgb(var(--ui-text-muted)/0.9)]">
-                                Enroll in a subject to start tracking progress and earning rewards, badges, and certificates.
+                                {t("descriptions.noEnrollments")}
                             </div>
                         </Surface>
                     ) : null}
